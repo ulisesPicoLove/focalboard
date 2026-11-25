@@ -10,7 +10,7 @@ RUN CPPFLAGS="-DPNG_ARM_NEON_OPT=0" npm install --no-optional && \
     npm run pack
 
 ### Go build
-FROM golang:1.21.8 AS gobuild
+FROM golang:1.26-bookworm AS gobuild
 
 WORKDIR /go/src/focalboard
 ADD . /go/src/focalboard
