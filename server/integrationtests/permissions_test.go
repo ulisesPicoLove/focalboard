@@ -9,7 +9,6 @@ import (
 	"net/http"
 	"strings"
 	"testing"
-	"time"
 
 	"github.com/mattermost/focalboard/server/client"
 	"github.com/mattermost/focalboard/server/model"
@@ -286,14 +285,6 @@ func runTestCases(t *testing.T, ttCases []TestCase, testData TestData, clients C
 
 			if strings.Contains(url, "{") || strings.Contains(url, "}") {
 				require.Fail(t, "Unreplaced tokens in url", url, tc.identifier())
-			}
-
-			// boards_history has a primary key of (id, insert_at) and on SQLite
-			// insert_at has 1ms resolution, so two writes to the same board within
-			// the same millisecond fail with a UNIQUE constraint error (HTTP 500).
-			// Pause between write requests to keep the test from being flaky.
-			if tc.method != methodGet {
-				time.Sleep(2 * time.Millisecond)
 			}
 
 			var response *http.Response
