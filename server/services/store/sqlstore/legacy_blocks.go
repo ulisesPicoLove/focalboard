@@ -197,7 +197,7 @@ func (s *SQLStore) insertLegacyBlock(db sq.BaseRunner, workspaceID string, block
 
 	// writing block history
 	query := insertQuery.SetMap(insertQueryValues).Into(s.tablePrefix + "blocks_history")
-	if _, err := query.Exec(); err != nil {
+	if _, err := s.execHistoryInsert(query); err != nil {
 		return err
 	}
 

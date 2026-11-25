@@ -393,7 +393,7 @@ func (s *SQLStore) insertBoard(db sq.BaseRunner, board *model.Board, userID stri
 
 	// writing board history
 	query := insertQuery.SetMap(insertQueryValues).Into(s.tablePrefix + "boards_history")
-	if _, err := query.Exec(); err != nil {
+	if _, err := s.execHistoryInsert(query); err != nil {
 		s.logger.Error("failed to insert board history", mlog.String("board_id", board.ID), mlog.Err(err))
 		return nil, fmt.Errorf("failed to insert board %s history: %w", board.ID, err)
 	}
@@ -458,7 +458,7 @@ func (s *SQLStore) deleteBoardAndChildren(db sq.BaseRunner, boardID, userID stri
 		Columns(boardHistoryFields()...)
 
 	query := insertQuery.SetMap(insertQueryValues).Into(s.tablePrefix + "boards_history")
-	if _, err := query.Exec(); err != nil {
+	if _, err := s.execHistoryInsert(query); err != nil {
 		return err
 	}
 
@@ -541,7 +541,7 @@ func (s *SQLStore) saveMember(db sq.BaseRunner, bm *model.BoardMember) (*model.B
 			Columns("board_id", "user_id", "action").
 			Values(bm.BoardID, bm.UserID, "created")
 
-		if _, err := addToMembersHistory.Exec(); err != nil {
+		if _, err := s.execHistoryInsert(addToMembersHistory); err != nil {
 			return nil, err
 		}
 	}
@@ -571,7 +571,7 @@ func (s *SQLStore) deleteMember(db sq.BaseRunner, boardID, userID string) error 
 			Columns("board_id", "user_id", "action").
 			Values(boardID, userID, "deleted")
 
-		if _, err := addToMembersHistory.Exec(); err != nil {
+		if _, err := s.execHistoryInsert(addToMembersHistory); err != nil {
 			return err
 		}
 	}
@@ -862,7 +862,7 @@ func (s *SQLStore) undeleteBoard(db sq.BaseRunner, boardID string, modifiedBy st
 		Columns(columns...).
 		Values(values...)
 
-	if _, err := insertHistoryQuery.Exec(); err != nil {
+	if _, err := s.execHistoryInsert(insertHistoryQuery); err != nil {
 		return err
 	}
 

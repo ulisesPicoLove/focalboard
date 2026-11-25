@@ -307,7 +307,7 @@ func (s *SQLStore) insertBlock(db sq.BaseRunner, block *model.Block, userID stri
 
 	// writing block history
 	query := insertQuery.SetMap(insertQueryValues).Into(s.tablePrefix + "blocks_history")
-	if _, err := query.Exec(); err != nil {
+	if _, err := s.execHistoryInsert(query); err != nil {
 		return err
 	}
 
@@ -407,7 +407,7 @@ func (s *SQLStore) deleteBlockAndChildren(db sq.BaseRunner, blockID string, modi
 			block.CreatedBy,
 		)
 
-	if _, err := insertQuery.Exec(); err != nil {
+	if _, err := s.execHistoryInsert(insertQuery); err != nil {
 		return err
 	}
 
@@ -511,7 +511,7 @@ func (s *SQLStore) undeleteBlock(db sq.BaseRunner, blockID string, modifiedBy st
 		Columns(columns...).
 		Values(values...)
 
-	if _, err := insertHistoryQuery.Exec(); err != nil {
+	if _, err := s.execHistoryInsert(insertHistoryQuery); err != nil {
 		return err
 	}
 
@@ -947,7 +947,7 @@ func (s *SQLStore) deleteBlockChildren(db sq.BaseRunner, boardID string, parentI
 			"created_by",
 		).Select(selectQuery)
 
-	if _, err := insertQuery.Exec(); err != nil {
+	if _, err := s.execHistoryInsert(insertQuery); err != nil {
 		return err
 	}
 
@@ -1089,7 +1089,7 @@ func (s *SQLStore) undeleteBlockChildren(db sq.BaseRunner, boardID string, paren
 	rowsAffected, _ := result.RowsAffected()
 	s.logger.Debug("undeleteBlockChildren - insertQuery", mlog.Int("rows_affected", rowsAffected))
 
-	result, err = insertHistoryQuery.Exec()
+	result, err = s.execHistoryInsert(insertHistoryQuery)
 	if err != nil {
 		return err
 	}
