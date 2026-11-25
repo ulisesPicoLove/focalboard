@@ -4,9 +4,7 @@ FROM node:24-bookworm AS nodebuild
 WORKDIR /webapp
 ADD webapp/ /webapp
 
-### 'CPPFLAGS="-DPNG_ARM_NEON_OPT=0"' Needed To Avoid Bug Described in: https://github.com/imagemin/optipng-bin/issues/118#issuecomment-1019838562
-### Can be Removed when Ticket will be Closed
-RUN CPPFLAGS="-DPNG_ARM_NEON_OPT=0" npm install --no-optional && \
+RUN npm install --no-optional && \
     npm run pack
 
 ### Go build
