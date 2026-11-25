@@ -38,6 +38,11 @@ func GetMillis() int64 {
 }
 
 // GetMillisForTime is a convenience method to get milliseconds since epoch for provided Time.
+// TimeFromMillis converts a Unix timestamp in milliseconds to a time.Time.
+func TimeFromMillis(millis int64) time.Time {
+	return time.Unix(0, millis*int64(time.Millisecond))
+}
+
 func GetMillisForTime(thisTime time.Time) int64 {
 	return mmModel.GetMillisForTime(thisTime)
 }

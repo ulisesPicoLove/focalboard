@@ -33,8 +33,8 @@ import (
 	"github.com/mattermost/focalboard/server/ws"
 	"github.com/oklog/run"
 
+	"github.com/mattermost/focalboard/server/services/filestore"
 	"github.com/mattermost/mattermost/server/public/shared/mlog"
-	"github.com/mattermost/mattermost/server/v8/platform/shared/filestore"
 )
 
 const (
@@ -81,10 +81,10 @@ func New(params Params) (*Server, error) {
 		wsAdapter = ws.NewServer(authenticator, params.SingleUserToken, params.Cfg.AuthMode == MattermostAuthMod, params.Logger, params.DBStore)
 	}
 
-	filesBackendSettings := filestore.FileBackendSettings{}
+	filesBackendSettings := filestore.Settings{}
 	filesBackendSettings.DriverName = params.Cfg.FilesDriver
 	filesBackendSettings.Directory = params.Cfg.FilesPath
-	filesBackendSettings.AmazonS3AccessKeyId = params.Cfg.FilesS3Config.AccessKeyID
+	filesBackendSettings.AmazonS3AccessKeyID = params.Cfg.FilesS3Config.AccessKeyID
 	filesBackendSettings.AmazonS3SecretAccessKey = params.Cfg.FilesS3Config.SecretAccessKey
 	filesBackendSettings.AmazonS3Bucket = params.Cfg.FilesS3Config.Bucket
 	filesBackendSettings.AmazonS3PathPrefix = params.Cfg.FilesS3Config.PathPrefix
@@ -96,7 +96,7 @@ func New(params Params) (*Server, error) {
 	filesBackendSettings.AmazonS3Trace = params.Cfg.FilesS3Config.Trace
 	filesBackendSettings.AmazonS3RequestTimeoutMilliseconds = params.Cfg.FilesS3Config.Timeout
 
-	filesBackend, appErr := filestore.NewFileBackend(filesBackendSettings)
+	filesBackend, appErr := filestore.New(filesBackendSettings)
 	if appErr != nil {
 		params.Logger.Error("Unable to initialize the files storage", mlog.Err(appErr))
 
