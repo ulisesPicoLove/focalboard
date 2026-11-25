@@ -2,9 +2,9 @@
 // See LICENSE.txt for license information.
 
 describe('Login actions', () => {
-    const username = Cypress.env('username')
-    const email = Cypress.env('email')
-    const password = Cypress.env('password')
+    const username = Cypress.expose('username')
+    const email = Cypress.expose('email')
+    const password = Cypress.expose('password')
 
     beforeEach(() => {
         localStorage.setItem('language', 'en')

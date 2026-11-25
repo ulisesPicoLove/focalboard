@@ -35,7 +35,7 @@ describe('Manage groups', () => {
 
         cy.get('.KanbanColumnHeader').last().within(() => {
             cy.get('.icon-dots-horizontal').click({force: true})
-            cy.get('.menu-options').should('exist').within(() => {
+            cy.get('.menu-options').should('exist').first().within(() => {
                 cy.contains('Hide').should('exist')
                 cy.contains('Delete').should('exist')
 
@@ -72,7 +72,7 @@ describe('Manage groups', () => {
         // Step 2: Click on the three dots next to "Group 1"
         cy.get('.KanbanColumnHeader').last().within(() => {
             cy.get('.icon-dots-horizontal').click({force: true})
-            cy.get('.menu-options').should('exist').within(() => {
+            cy.get('.menu-options').should('exist').first().within(() => {
                 cy.contains('Hide').should('exist')
                 cy.contains('Delete').should('exist')
 
@@ -91,7 +91,7 @@ describe('Manage groups', () => {
         // Step 4: Click "Group 1", then click "Show" in the dropdown
         cy.contains('Group 1').click({force: true})
         cy.contains('Show').click({force: true})
-        cy.get('.octo-board-hidden-item').contains('Group 1').should('not.exist')
+        cy.contains('.octo-board-hidden-item', 'Group 1').should('not.exist')
         cy.get('.KanbanColumnHeader .Editable[value=\'Group 1\']').should('exist')
     })
 })

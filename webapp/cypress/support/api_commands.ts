@@ -46,9 +46,9 @@ const headers = () => ({
 
 Cypress.Commands.add('apiInitServer', () => {
     const data: Cypress.UserData = {
-        username: Cypress.env('username'),
-        password: Cypress.env('password'),
-        email: Cypress.env('email'),
+        username: Cypress.expose('username'),
+        password: Cypress.expose('password'),
+        email: Cypress.expose('email'),
     }
     return cy.apiRegisterUser(data, '', false).apiLoginUser(data)
 })
@@ -148,6 +148,10 @@ Cypress.Commands.add('uiAddNewCard', (title?: string, columnIndex?: number) => {
     cy.log('**Add a new card**')
     cy.findByRole('button', {name: '+ New'}).eq(columnIndex || 0).click()
     cy.findByRole('dialog').should('exist')
+
+    // CardDetail focuses the title of a new card after a 300ms timeout. Wait
+    // for it so that the delayed focus does not steal focus from later steps.
+    cy.findByPlaceholderText('Untitled').should('have.focus')
 
     if (title) {
         cy.log('**Change card title**')
