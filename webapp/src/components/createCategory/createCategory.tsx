@@ -29,10 +29,10 @@ type Props = {
     renameModal?: boolean
     initialValue?: string
     onClose: () => void
-    title: JSX.Element
+    title: React.JSX.Element
 }
 
-const CreateCategory = (props: Props): JSX.Element => {
+const CreateCategory = (props: Props): React.JSX.Element => {
     const intl = useIntl()
     const me = useAppSelector<IUser|null>(getMe)
     const team = useAppSelector(getCurrentTeam)

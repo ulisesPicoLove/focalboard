@@ -3,6 +3,8 @@
 import React from 'react'
 import {useDrop} from 'react-dnd'
 
+import {useConnectorRef} from '../../hooks/connectorRef'
+
 import {Card} from '../../blocks/card'
 import './kanbanColumn.scss'
 
@@ -24,13 +26,15 @@ const KanbanColumn = (props: Props) => {
         },
     }), [props.onDrop])
 
+    const dropRef = useConnectorRef<HTMLDivElement>(drop)
+
     let className = 'octo-board-column'
     if (isOver) {
         className += ' dragover'
     }
     return (
         <div
-            ref={drop}
+            ref={dropRef}
             className={className}
         >
             {props.children}

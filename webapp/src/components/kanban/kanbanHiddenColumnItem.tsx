@@ -5,6 +5,8 @@ import React from 'react'
 import {IntlShape} from 'react-intl'
 import {useDrop} from 'react-dnd'
 
+import {useConnectorRef} from '../../hooks/connectorRef'
+
 import mutator from '../../mutator'
 import Menu from '../../widgets/menu'
 import MenuWrapper from '../../widgets/menuWrapper'
@@ -24,7 +26,7 @@ type Props = {
     onDrop: (card: Card) => void
 }
 
-export default function KanbanHiddenColumnItem(props: Props): JSX.Element {
+export default function KanbanHiddenColumnItem(props: Props): React.JSX.Element {
     const {activeView, intl, group} = props
     const hiddenCardGroupId = 'hidden-card-group-id'
 
@@ -38,6 +40,8 @@ export default function KanbanHiddenColumnItem(props: Props): JSX.Element {
         },
     }), [props.onDrop])
 
+    const dropRef = useConnectorRef<HTMLDivElement>(drop)
+
     let className = 'octo-board-hidden-item'
     if (isOver) {
         className += ' dragover'
@@ -45,7 +49,7 @@ export default function KanbanHiddenColumnItem(props: Props): JSX.Element {
 
     return (
         <div
-            ref={drop}
+            ref={dropRef}
             key={group.option.id || 'empty'}
             className={className}
         >

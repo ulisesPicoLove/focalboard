@@ -4,7 +4,7 @@
 import React from 'react'
 
 // The Google "G" mark, in its brand colours.
-export default function GoogleLogo(): JSX.Element {
+export default function GoogleLogo(): React.JSX.Element {
     return (
         <svg
             className='GoogleLogo Icon'

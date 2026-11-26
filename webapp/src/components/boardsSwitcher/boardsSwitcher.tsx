@@ -24,7 +24,7 @@ import {TOUR_SIDEBAR, SidebarTourSteps} from '../../components/onboardingTour'
 
 import SearchForBoardsTourStep from '../../components/onboardingTour/searchForBoards/searchForBoards'
 
-const BoardsSwitcher = (): JSX.Element => {
+const BoardsSwitcher = (): React.JSX.Element => {
     const intl = useIntl()
 
     const [showSwitcher, setShowSwitcher] = useState<boolean>(false)

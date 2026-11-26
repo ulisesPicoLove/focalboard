@@ -2,10 +2,8 @@
 // See LICENSE.txt for license information.
 
 import React from 'react'
-import {render, screen, fireEvent} from '@testing-library/react'
+import {render, screen, fireEvent, act} from '@testing-library/react'
 import '@testing-library/jest-dom'
-
-import {act} from 'react-dom/test-utils'
 
 import {mocked} from 'jest-mock'
 

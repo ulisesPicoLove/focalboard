@@ -42,7 +42,7 @@ export type ElementProps = {
 export function useEditable(
     props: EditableProps,
     focusableRef: React.Ref<Focusable>,
-    elementRef: React.RefObject<ElementType>): ElementProps {
+    elementRef: React.RefObject<ElementType | null>): ElementProps {
     const saveOnBlur = useRef<boolean>(true)
 
     const save = (saveType: 'onEnter'|'onEsc'|'onBlur'): void => {
@@ -116,7 +116,7 @@ export function useEditable(
     }
 }
 
-const Editable = (props: EditableProps, ref: React.Ref<Focusable>): JSX.Element => {
+const Editable = (props: EditableProps, ref: React.Ref<Focusable>): React.JSX.Element => {
     const elementRef = useRef<HTMLInputElement>(null)
     const elementProps = useEditable(props, ref, elementRef)
 

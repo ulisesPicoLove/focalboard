@@ -2,12 +2,10 @@
 // See LICENSE.txt for license information.
 
 import React from 'react'
-import {fireEvent, render} from '@testing-library/react'
+import {fireEvent, render, act} from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 import 'isomorphic-fetch'
-
-import {act} from 'react-dom/test-utils'
 
 import userEvent from '@testing-library/user-event'
 

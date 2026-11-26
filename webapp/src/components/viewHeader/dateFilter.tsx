@@ -34,7 +34,7 @@ type Props = {
     filter: FilterClause
 }
 
-function DateFilter(props: Props): JSX.Element {
+function DateFilter(props: Props): React.JSX.Element {
     const {filter, view} = props
     const [showDialog, setShowDialog] = useState(false)
 

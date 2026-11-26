@@ -45,7 +45,7 @@ type LabelProps = {
     isMulti?: boolean
 }
 
-const ValueSelectorLabel = (props: LabelProps): JSX.Element => {
+const ValueSelectorLabel = (props: LabelProps): React.JSX.Element => {
     const {option, onDeleteValue, meta, isMulti} = props
     const intl = useIntl()
     if (meta.context === 'value') {
@@ -156,7 +156,7 @@ const valueSelectorStyle = {
     }),
 }
 
-function ValueSelector(props: Props): JSX.Element {
+function ValueSelector(props: Props): React.JSX.Element {
     const intl = useIntl()
     return (
         <CreatableSelect

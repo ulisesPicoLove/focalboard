@@ -23,7 +23,7 @@ type Props = {
 const BlockTitleMaxBytes = 65535 // Maximum size of a TEXT column in MySQL
 const BlockTitleMaxRunes = BlockTitleMaxBytes / 4 // Assume a worst-case representation
 
-const TextElement = ({block, readonly}: Props): JSX.Element => {
+const TextElement = ({block, readonly}: Props): React.JSX.Element => {
     const intl = useIntl()
 
     const [isError, setIsError] = useState<boolean>(false)

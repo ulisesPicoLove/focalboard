@@ -13,7 +13,7 @@ import changeViews from '../../../../static/changeViews.gif'
 import {BoardTourSteps, TOUR_BOARD} from '../index'
 import TourTipRenderer from '../tourTipRenderer/tourTipRenderer'
 
-const AddViewTourStep = (): JSX.Element => {
+const AddViewTourStep = (): React.JSX.Element => {
     const title = (
         <FormattedMessage
             id='OnboardingTour.AddView.Title'

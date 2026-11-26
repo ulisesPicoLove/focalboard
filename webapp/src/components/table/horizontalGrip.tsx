@@ -50,7 +50,7 @@ function useResizable(liveOffset: OffsetCallback, finalOffset: OffsetCallback) {
     }, [updateOffset, stopResizing])
 }
 
-const HorizontalGrip = (props: Props): JSX.Element => {
+const HorizontalGrip = (props: Props): React.JSX.Element => {
     const {templateId, onAutoSizeColumn} = props
     const columnResize = useColumnResize()
 

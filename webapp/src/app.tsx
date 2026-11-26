@@ -20,7 +20,7 @@ type Props = {
     history?: History<unknown>
 }
 
-const App = (props: Props): JSX.Element => {
+const App = (props: Props): React.JSX.Element => {
     const language = useAppSelector<string>(getLanguage)
     const dispatch = useAppDispatch()
     const [messages, setMessages] = useState<{[key: string]: string}|null>(null)

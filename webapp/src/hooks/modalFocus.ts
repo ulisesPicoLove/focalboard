@@ -15,7 +15,7 @@ const focusableSelector = [
 // - moves focus into the overlay when it opens (unless something inside already took it)
 // - gives focus back to the element that opened it when it closes
 // Returns a keydown handler for the overlay that keeps Tab and Shift+Tab inside it.
-export function useModalFocus(containerRef: React.RefObject<HTMLElement>): (e: React.KeyboardEvent) => void {
+export function useModalFocus(containerRef: React.RefObject<HTMLElement | null>): (e: React.KeyboardEvent) => void {
     useLayoutEffect(() => {
         const opener = document.activeElement as HTMLElement | null
         const container = containerRef.current

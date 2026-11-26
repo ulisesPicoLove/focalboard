@@ -26,7 +26,7 @@ type Props = {
     filter: FilterClause
 }
 
-const FilterEntry = (props: Props): JSX.Element => {
+const FilterEntry = (props: Props): React.JSX.Element => {
     const {board, view, filter} = props
     const intl = useIntl()
 

@@ -5,6 +5,8 @@ import React from 'react'
 
 import {useDrop} from 'react-dnd'
 
+import {useConnectorRef} from '../../hooks/connectorRef'
+
 import {ActivationEvent} from '../../keyboardActivation'
 
 import {Board, IPropertyOption, IPropertyTemplate, BoardGroup} from '../../blocks/board'
@@ -32,7 +34,7 @@ type Props = {
     onDropToGroup: (srcCard: Card, groupID: string, dstCardID: string) => void
 }
 
-const TableGroup = (props: Props): JSX.Element => {
+const TableGroup = (props: Props): React.JSX.Element => {
     const {board, activeView, group, onDropToGroup, groupByProperty} = props
     const groupId = group.option.id
 
@@ -48,6 +50,8 @@ const TableGroup = (props: Props): JSX.Element => {
         },
     }), [onDropToGroup, groupId])
 
+    const dropRef = useConnectorRef<HTMLDivElement>(drop)
+
     let className = 'octo-table-group'
     if (isOver) {
         className += ' dragover'
@@ -55,7 +59,7 @@ const TableGroup = (props: Props): JSX.Element => {
 
     return (
         <div
-            ref={drop}
+            ref={dropRef}
             className={className}
             key={group.option.id}
         >

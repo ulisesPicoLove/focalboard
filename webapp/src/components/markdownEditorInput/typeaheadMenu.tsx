@@ -17,7 +17,7 @@ type Props<T extends MenuOption> = {
 }
 
 // The suggestion list that opens under the text cursor for @mentions and :emojis
-export default function TypeaheadMenu<T extends MenuOption>(props: Props<T>): JSX.Element | null {
+export default function TypeaheadMenu<T extends MenuOption>(props: Props<T>): React.JSX.Element | null {
     const {anchorRef, options, selectedIndex, label, onSelect, onHover, renderOption} = props
     if (!anchorRef.current || options.length === 0) {
         return null

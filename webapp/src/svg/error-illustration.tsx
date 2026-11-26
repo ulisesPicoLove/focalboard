@@ -3,7 +3,7 @@
 
 import React from 'react'
 
-export default function ErrorIllustration(): JSX.Element {
+export default function ErrorIllustration(): React.JSX.Element {
     return (
         <span>
             <svg

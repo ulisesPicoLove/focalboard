@@ -21,7 +21,7 @@ type Props = {
     onClose: () => void
 }
 
-const ConfirmAddUserForNotifications = (props: Props): JSX.Element => {
+const ConfirmAddUserForNotifications = (props: Props): React.JSX.Element => {
     const {user, allowManageBoardRoles} = props
     const [newUserRole, setNewUserRole] = useState<MemberRole>(props.minimumRole || MemberRole.Viewer)
     const userRole = useRef<string>(newUserRole)

@@ -25,7 +25,7 @@ type Props = {
     onDrop: (srcCard: Card, dstCard: Card) => void
 }
 
-const TableRows = (props: Props): JSX.Element => {
+const TableRows = (props: Props): React.JSX.Element => {
     const {board, cards, activeView} = props
 
     const {onCardClicked} = props

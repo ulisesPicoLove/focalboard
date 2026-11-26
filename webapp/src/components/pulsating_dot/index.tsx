@@ -12,7 +12,7 @@ type Props = {
     coords?: Coords
 }
 
-const PulsatingDot = (props: Props): JSX.Element => {
+const PulsatingDot = (props: Props): React.JSX.Element => {
     let customStyles = {}
     if (props?.coords) {
         customStyles = {

@@ -16,7 +16,7 @@ import {ClassForManageCategoriesTourStep} from '../../../components/sidebar/side
 
 import './manageCategories.scss'
 
-const ManageCategoriesTourStep = (): JSX.Element | null => {
+const ManageCategoriesTourStep = (): React.JSX.Element | null => {
     const title = (
         <FormattedMessage
             id='SidebarTour.ManageCategories.Title'

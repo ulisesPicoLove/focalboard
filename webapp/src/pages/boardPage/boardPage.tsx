@@ -63,7 +63,7 @@ type Props = {
     readonly?: boolean
 }
 
-const BoardPage = (props: Props): JSX.Element => {
+const BoardPage = (props: Props): React.JSX.Element => {
     const intl = useIntl()
     const activeBoardId = useAppSelector(getCurrentBoardId)
     const dispatch = useAppDispatch()

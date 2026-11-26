@@ -26,7 +26,7 @@ import mutator from '../../../mutator'
 import {getCurrentBoard} from '../../../store/boards'
 import {getCurrentCard} from '../../../store/cards'
 
-const AddPropertiesTourStep = (): JSX.Element | null => {
+const AddPropertiesTourStep = (): React.JSX.Element | null => {
     const title = (
         <FormattedMessage
             id='OnboardingTour.AddProperties.Title'

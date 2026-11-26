@@ -25,7 +25,7 @@ type Props = {
     saveOnEnter?: boolean
 }
 
-const MarkdownEditor = (props: Props): JSX.Element => {
+const MarkdownEditor = (props: Props): React.JSX.Element => {
     const {placeholderText, onFocus, onEditorCancel, onBlur, onChange, text, id, saveOnEnter} = props
     const [isEditing, setIsEditing] = useState(Boolean(props.autofocus))
     const html: string = Utils.htmlFromMarkdown(text || placeholderText || '')

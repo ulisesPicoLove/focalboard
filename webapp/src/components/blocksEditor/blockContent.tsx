@@ -3,6 +3,8 @@
 import React from 'react'
 import {useDrag, useDrop} from 'react-dnd'
 
+import {useConnectorRef} from '../../hooks/connectorRef'
+
 import GripIcon from '../../widgets/icons/grip'
 
 import AddIcon from '../../widgets/icons/add'
@@ -54,6 +56,10 @@ function BlockContent(props: Props) {
         [block, props.onMove, contentOrder],
     )
 
+    const dropRef = useConnectorRef<HTMLDivElement>(drop)
+    const dragRef = useConnectorRef<HTMLSpanElement>(drag)
+    const previewRef = useConnectorRef<HTMLDivElement>(preview)
+
     if (editing && editing.id === block.id) {
         return (
             <Editor
@@ -75,7 +81,7 @@ function BlockContent(props: Props) {
         const DisplayContent = contentType.Display
         return (
             <div
-                ref={drop}
+                ref={dropRef}
                 data-testid='block-content'
                 className={`BlockContent ${isOver && draggingUp ? 'over-up' : ''}  ${isOver && !draggingUp ? 'over-down' : ''}`}
                 key={block.id}
@@ -99,13 +105,13 @@ function BlockContent(props: Props) {
                 </span>
                 <span
                     className='action'
-                    ref={drag}
+                    ref={dragRef}
                 >
                     <GripIcon/>
                 </span>
                 <div
                     className='content'
-                    ref={preview}
+                    ref={previewRef}
                 >
                     <DisplayContent
                         value={block.value}

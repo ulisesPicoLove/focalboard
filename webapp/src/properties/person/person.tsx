@@ -7,7 +7,7 @@ import {PropertyProps} from '../types'
 
 import ConfirmPerson from './confirmPerson'
 
-const Person = (props: PropertyProps): JSX.Element => {
+const Person = (props: PropertyProps): React.JSX.Element => {
     return (
         <ConfirmPerson
             {...props}

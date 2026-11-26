@@ -9,7 +9,7 @@ import './picoboardLogo.scss'
 
 // The Pico.Love mark has cream letterforms, so it always sits on a dark tile
 // to stay legible on every theme (including light sidebars).
-export default function PicoboardLogo(): JSX.Element {
+export default function PicoboardLogo(): React.JSX.Element {
     return (
         <span className='PicoboardLogo Icon'>
             <img

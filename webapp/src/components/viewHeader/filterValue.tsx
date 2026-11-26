@@ -28,7 +28,7 @@ type Props = {
     propertyType: PropertyType
 }
 
-const FilterValue = (props: Props): JSX.Element|null => {
+const FilterValue = (props: Props): React.JSX.Element|null => {
     const {filter, template, view, propertyType} = props
     const [value, setValue] = useState(filter.values.length > 0 ? filter.values[0] : '')
     const intl = useIntl()

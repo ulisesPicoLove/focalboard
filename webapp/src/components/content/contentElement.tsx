@@ -1,7 +1,7 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 
-import {useCallback} from 'react'
+import {useCallback, type JSX} from 'react'
 
 import {ContentBlock} from '../../blocks/contentBlock'
 import {Utils} from '../../utils'

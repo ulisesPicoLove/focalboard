@@ -9,7 +9,7 @@ type LabelOptionProps = {
     children: React.ReactNode
 }
 
-function LabelOption(props: LabelOptionProps): JSX.Element {
+function LabelOption(props: LabelOptionProps): React.JSX.Element {
     return (
         <div className='MenuOption LabelOption menu-option'>
             {props.icon ?? <div className='noicon'/>}

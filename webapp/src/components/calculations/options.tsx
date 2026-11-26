@@ -164,7 +164,7 @@ export type CommonCalculationOptionProps = {
     value: string
     menuOpen: boolean
     onClose?: () => void
-    components?: {[key: string]: (props: any) => JSX.Element}
+    components?: {[key: string]: (props: any) => React.JSX.Element}
     onChange: (data: any) => void
     property?: IPropertyTemplate
 }
@@ -174,7 +174,7 @@ type BaseCalculationOptionProps = CommonCalculationOptionProps & {
     options: Option[]
 }
 
-export const CalculationOptions = (props: BaseCalculationOptionProps): JSX.Element => {
+export const CalculationOptions = (props: BaseCalculationOptionProps): React.JSX.Element => {
     const intl = useIntl()
 
     return (

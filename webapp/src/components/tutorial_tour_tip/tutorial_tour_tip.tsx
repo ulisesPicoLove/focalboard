@@ -41,8 +41,8 @@ const TourTipOverlay = ({
     ) : null)
 
 type Props = {
-    screen: JSX.Element
-    title: JSX.Element
+    screen: React.JSX.Element
+    title: React.JSX.Element
     imageURL?: string
     punchOut?: TutorialTourTipPunchout | null
     step: number
@@ -89,7 +89,7 @@ const TutorialTourTip = ({
     hideBackdrop = false,
     onPunchholeClick,
     skipCategoryFromBackdrop,
-}: Props): JSX.Element => {
+}: Props): React.JSX.Element => {
     const managerProps: TutorialTourTipManagerProps = {
         step,
         autoTour,
@@ -102,7 +102,7 @@ const TutorialTourTip = ({
     }
 
     const intl = useIntl()
-    const triggerRef = useRef(null)
+    const triggerRef = useRef<HTMLDivElement>(null)
     const {
         show,
         tourSteps,
@@ -118,7 +118,7 @@ const TutorialTourTip = ({
         handleSendToNextTour,
     } = useTutorialTourTipManager(managerProps)
 
-    const getButtonText = (): JSX.Element => {
+    const getButtonText = (): React.JSX.Element => {
         let buttonText = (
             <FormattedMessage
                 id={'tutorial_tip.ok'}
@@ -322,7 +322,7 @@ const TutorialTourTip = ({
                     aria={{content: 'labelledby'}}
                     allowHTML={true}
                     zIndex={9999}
-                    reference={triggerRef}
+                    reference={triggerRef as React.RefObject<HTMLDivElement>}
                     interactive={true}
                     appendTo={document.body}
                     className={`tutorial-tour-tip__box ${className || ''}`}

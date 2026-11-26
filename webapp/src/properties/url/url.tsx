@@ -17,7 +17,7 @@ import {PropertyProps} from '../types'
 
 import './url.scss'
 
-const URLProperty = (props: PropertyProps): JSX.Element => {
+const URLProperty = (props: PropertyProps): React.JSX.Element => {
     const [value, setValue] = useState(props.card.fields.properties[props.propertyTemplate?.id || ''] || '')
     const [isEditing, setIsEditing] = useState(false)
     const isEmpty = !(props.propertyValue as string)?.trim()

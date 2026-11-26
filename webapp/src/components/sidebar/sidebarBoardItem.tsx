@@ -44,7 +44,7 @@ import {getCurrentBoardId} from '../../store/boards'
 import {UserSettings} from '../../userSettings'
 import {Archiver} from '../../archiver'
 
-const iconForViewType = (viewType: IViewType): JSX.Element => {
+const iconForViewType = (viewType: IViewType): React.JSX.Element => {
     switch (viewType) {
     case 'board': return <BoardIcon/>
     case 'table': return <TableIcon/>
