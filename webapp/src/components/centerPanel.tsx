@@ -1,7 +1,7 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 /* eslint-disable max-lines */
-import React, {useState, useCallback, useEffect, useMemo} from 'react'
+import React, {useState, useCallback, useEffect, useMemo, Suspense} from 'react'
 import {useIntl} from 'react-intl'
 import {useHotkeys} from 'react-hotkeys-hook'
 
@@ -51,8 +51,6 @@ import Kanban from './kanban/kanban'
 
 import Table from './table/table'
 
-import CalendarFullView from './calendar/fullCalendar'
-
 import Gallery from './gallery/gallery'
 import {BoardTourSteps, FINISHED, TOUR_BOARD, TOUR_CARD} from './onboardingTour'
 import ShareBoardTourStep from './onboardingTour/shareBoard/shareBoard'
@@ -69,6 +67,9 @@ type Props = {
     shownCardId?: string
     showCard: (cardId?: string) => void
 }
+
+// FullCalendar is only needed by the calendar view
+const CalendarFullView = React.lazy(() => import('./calendar/fullCalendar'))
 
 const CenterPanel = (props: Props) => {
     const intl = useIntl()
@@ -465,17 +466,19 @@ const CenterPanel = (props: Props) => {
                     onCardClicked={cardClicked}
                 />}
             {activeView.fields.viewType === 'calendar' &&
-                <CalendarFullView
-                    board={props.board}
-                    cards={props.cards}
-                    activeView={props.activeView}
-                    readonly={props.readonly}
-                    dateDisplayProperty={props.dateDisplayProperty}
-                    showCard={showCard}
-                    addCard={(properties: Record<string, string>) => {
-                        addCard('', true, properties)
-                    }}
-                />}
+                <Suspense fallback={null}>
+                    <CalendarFullView
+                        board={props.board}
+                        cards={props.cards}
+                        activeView={props.activeView}
+                        readonly={props.readonly}
+                        dateDisplayProperty={props.dateDisplayProperty}
+                        showCard={showCard}
+                        addCard={(properties: Record<string, string>) => {
+                            addCard('', true, properties)
+                        }}
+                    />
+                </Suspense>}
 
             {activeView.fields.viewType === 'gallery' &&
                 <Gallery

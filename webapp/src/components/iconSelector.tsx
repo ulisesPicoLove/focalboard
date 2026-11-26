@@ -1,15 +1,17 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
-import React from 'react'
+import React, {Suspense} from 'react'
 import {useIntl} from 'react-intl'
 
 import RandomIcon from '../widgets/icons/random'
-import EmojiPicker from '../widgets/emojiPicker'
 import DeleteIcon from '../widgets/icons/delete'
 import EmojiIcon from '../widgets/icons/emoji'
 import Menu from '../widgets/menu'
 import MenuWrapper from '../widgets/menuWrapper'
 import './iconSelector.scss'
+
+// The emoji picker (emoji-mart and its data) is only needed when the menu is opened
+const EmojiPicker = React.lazy(() => import('../widgets/emojiPicker'))
 
 type Props = {
     readonly?: boolean
@@ -40,7 +42,9 @@ const IconSelector = React.memo((props: Props) => {
                             icon={<EmojiIcon/>}
                             name={intl.formatMessage({id: 'ViewTitle.pick-icon', defaultMessage: 'Pick icon'})}
                         >
-                            <EmojiPicker onSelect={props.onSelectEmoji}/>
+                            <Suspense fallback={null}>
+                                <EmojiPicker onSelect={props.onSelectEmoji}/>
+                            </Suspense>
                         </Menu.SubMenu>
                         <Menu.Text
                             id='remove'

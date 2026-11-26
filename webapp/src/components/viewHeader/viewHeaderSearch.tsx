@@ -4,7 +4,7 @@ import React, {useState, useRef, useEffect, useMemo} from 'react'
 import {useRouteMatch} from 'react-router-dom'
 import {useIntl} from 'react-intl'
 import {useHotkeys} from 'react-hotkeys-hook'
-import {debounce} from 'lodash'
+import debounce from 'lodash/debounce'
 
 import CompassIcon from '../../widgets/icons/compassIcon'
 import Editable from '../../widgets/editable'

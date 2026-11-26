@@ -5,7 +5,7 @@ import React, {ReactNode, useEffect, useMemo, useState} from 'react'
 import './searchDialog.scss'
 import {FormattedMessage} from 'react-intl'
 
-import {debounce} from 'lodash'
+import debounce from 'lodash/debounce'
 
 import Dialog from '../dialog'
 import {Utils} from '../../utils'

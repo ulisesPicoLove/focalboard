@@ -5,6 +5,7 @@ const path = require('path');
 const tsTransformer = require('@formatjs/ts-transformer');
 const CopyPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 const outpath = path.resolve(__dirname, 'pack');
 
@@ -29,6 +30,8 @@ function makeCommonConfig() {
                     use: {
                         loader: 'ts-loader',
                         options: {
+                            // ES modules let webpack tree-shake and keep import() as a real split point
+                            compilerOptions: {module: 'esnext'},
                             getCustomTransformers: {
                                 before: [
                                     tsTransformer.transform({
@@ -85,6 +88,12 @@ function makeCommonConfig() {
             extensions: ['.js', '.jsx', '.ts', '.tsx'],
         },
         plugins: [
+            // moment would otherwise bundle every locale because of the dynamic
+            // require in the date components; keep only the app languages
+            new webpack.ContextReplacementPlugin(
+                /moment[/\\]locale$/,
+                /^\.\/(ca|de|el|es|fr|id|it|ja|nl|pt-br|ru|sv|tr|zh-cn|zh-tw)$/,
+            ),
             new CopyPlugin({
                 patterns: [
                     {from: path.resolve(__dirname, 'static'), to: 'static'},

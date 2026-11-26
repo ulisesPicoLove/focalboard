@@ -12,7 +12,7 @@ import React, {
     useState,
 } from 'react'
 
-import {debounce} from 'lodash'
+import debounce from 'lodash/debounce'
 
 import {useAppSelector} from '../../store/hooks'
 import {IUser} from '../../user'

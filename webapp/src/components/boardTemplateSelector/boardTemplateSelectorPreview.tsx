@@ -1,6 +1,6 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
-import React, {useEffect, useState, useMemo} from 'react'
+import React, {useEffect, useState, useMemo, Suspense} from 'react'
 
 import {Board} from '../../blocks/board'
 import {Card} from '../../blocks/card'
@@ -12,7 +12,6 @@ import ViewHeader from '../viewHeader/viewHeader'
 import ViewTitle from '../viewTitle'
 import Kanban from '../kanban/kanban'
 import Table from '../table/table'
-import CalendarFullView from '../calendar/fullCalendar'
 import Gallery from '../gallery/gallery'
 
 import './boardTemplateSelectorPreview.scss'
@@ -20,6 +19,9 @@ import './boardTemplateSelectorPreview.scss'
 type Props = {
     activeTemplate: Board|null
 }
+
+// FullCalendar is only needed by the calendar view
+const CalendarFullView = React.lazy(() => import('../calendar/fullCalendar'))
 
 const BoardTemplateSelectorPreview = (props: Props) => {
     const {activeTemplate} = props
@@ -133,15 +135,17 @@ const BoardTemplateSelectorPreview = (props: Props) => {
                 addCard={() => Promise.resolve()}
             />}
             {activeView?.fields.viewType === 'calendar' &&
-            <CalendarFullView
-                board={activeTemplate}
-                cards={activeTemplateCards}
-                activeView={activeView}
-                readonly={false}
-                dateDisplayProperty={dateDisplayProperty}
-                showCard={() => null}
-                addCard={() => Promise.resolve()}
-            />}
+            <Suspense fallback={null}>
+                <CalendarFullView
+                    board={activeTemplate}
+                    cards={activeTemplateCards}
+                    activeView={activeView}
+                    readonly={false}
+                    dateDisplayProperty={dateDisplayProperty}
+                    showCard={() => null}
+                    addCard={() => Promise.resolve()}
+                />
+            </Suspense>}
         </div>
     )
 }

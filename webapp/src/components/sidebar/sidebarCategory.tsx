@@ -4,7 +4,7 @@ import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import {FormattedMessage, useIntl} from 'react-intl'
 import {generatePath, useHistory, useRouteMatch} from 'react-router-dom'
 
-import {debounce} from 'lodash'
+import debounce from 'lodash/debounce'
 
 import {Draggable, Droppable} from 'react-beautiful-dnd'
 
