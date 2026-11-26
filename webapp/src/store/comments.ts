@@ -80,9 +80,12 @@ const commentsSlice = createSlice({
 export const {updateComments} = commentsSlice.actions
 export const {reducer} = commentsSlice
 
+// Shared empty value: returning a new [] from a selector re-renders its subscribers on every store change
+const noComments: CommentBlock[] = []
+
 export function getCardComments(cardId: string): (state: RootState) => CommentBlock[] {
     return (state: RootState): CommentBlock[] => {
-        return (state.comments?.commentsByCard && state.comments.commentsByCard[cardId]) || []
+        return (state.comments?.commentsByCard && state.comments.commentsByCard[cardId]) || noComments
     }
 }
 

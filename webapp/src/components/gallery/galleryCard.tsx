@@ -39,7 +39,8 @@ const GalleryCard = (props: Props) => {
     const intl = useIntl()
     const {card, board} = props
     const [isDragging, isOver, cardRef] = useSortable('card', card, props.isManualSort && !props.readonly, props.onDrop)
-    const contents = useAppSelector(getCardContents(card.id))
+    const selectContents = useMemo(() => getCardContents(card.id), [card.id])
+    const contents = useAppSelector(selectContents)
     const [showConfirmationDialogBox, setShowConfirmationDialogBox] = useState<boolean>(false)
 
     const visiblePropertyTemplates = props.visiblePropertyTemplates || []

@@ -1,6 +1,6 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
-import React, {useCallback, useState} from 'react'
+import React, {useCallback, useMemo, useState} from 'react'
 import {FormattedMessage, useIntl} from 'react-intl'
 
 import {Board} from '../blocks/board'
@@ -48,8 +48,10 @@ type Props = {
 const CardDialog = (props: Props): JSX.Element => {
     const {board, activeView, cards, views} = props
     const card = useAppSelector(getCard(props.cardId))
-    const contents = useAppSelector(getCardContents(props.cardId))
-    const comments = useAppSelector(getCardComments(props.cardId))
+    const selectContents = useMemo(() => getCardContents(props.cardId), [props.cardId])
+    const selectComments = useMemo(() => getCardComments(props.cardId), [props.cardId])
+    const contents = useAppSelector(selectContents)
+    const comments = useAppSelector(selectComments)
     const attachments = useAppSelector(getCardAttachments(props.cardId))
     const intl = useIntl()
     const dispatch = useAppDispatch()

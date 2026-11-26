@@ -1,10 +1,11 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 
-import React from 'react'
+import React, {Profiler} from 'react'
 import {Provider as ReduxProvider} from 'react-redux'
+import {createStore} from 'redux'
 
-import {render, screen} from '@testing-library/react'
+import {act, render, screen} from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 import {TestBlockFactory} from '../test/testBlockFactory'
@@ -84,5 +85,35 @@ describe('components/cardBadges', () => {
         expect(screen.getByTitle(/card has a description/)).toBeInTheDocument()
         expect(screen.getByTitle('Comments')).toHaveTextContent('3')
         expect(screen.getByTitle('Checkboxes')).toHaveTextContent('3/7')
+    })
+
+    it('should not render again when unrelated store state changes', () => {
+        // a plain store whose state we can change, unlike the mocked one
+        const liveStore = createStore((current: any = state, action: {type: string, value?: number}) => {
+            return action.type === 'unrelated' ? {...current, unrelated: action.value} : current
+        })
+        let commits = 0
+        render(wrapDNDIntl(
+            <ReduxProvider store={liveStore}>
+                <Profiler
+                    id='badges'
+                    onRender={() => {
+                        commits++
+                    }}
+                >
+                    <CardBadges card={card}/>
+                    <CardBadges card={emptyCard}/>
+                </Profiler>
+            </ReduxProvider>,
+        ))
+        const initialCommits = commits
+        expect(initialCommits).toBeGreaterThan(0)
+
+        act(() => {
+            liveStore.dispatch({type: 'unrelated', value: 1})
+            liveStore.dispatch({type: 'unrelated', value: 2})
+        })
+
+        expect(commits).toBe(initialCommits)
     })
 })

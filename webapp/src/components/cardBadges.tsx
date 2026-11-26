@@ -76,8 +76,12 @@ const calculateBadges = (contents: ContentsType, comments: CommentBlock[]): Badg
 
 const CardBadges = (props: Props) => {
     const {card, className} = props
-    const contents = useAppSelector(getCardContents(card.id))
-    const comments = useAppSelector(getCardComments(card.id))
+
+    // one memoized selector per card, so the badges only render when this card's data changes
+    const selectContents = useMemo(() => getCardContents(card.id), [card.id])
+    const selectComments = useMemo(() => getCardComments(card.id), [card.id])
+    const contents = useAppSelector(selectContents)
+    const comments = useAppSelector(selectComments)
     const badges = useMemo(() => calculateBadges(contents, comments), [contents, comments])
     const intl = useIntl()
     if (!hasBadges(badges)) {
