@@ -15,7 +15,7 @@ require (
 	github.com/mattermost/mattermost/server/public v0.1.3
 	github.com/mattermost/mattermost/server/v8 v8.0.0-20240529104128-9d30a62c9471
 	github.com/mattermost/morph v1.1.0
-	github.com/mattn/go-sqlite3 v2.0.3+incompatible
+	github.com/mattn/go-sqlite3 v1.14.22
 	github.com/mgdelacroix/foundation v0.0.0-20230510073833-0660207768ef
 	github.com/minio/minio-go/v7 v7.4.1
 	github.com/oklog/run v1.2.0
@@ -111,3 +111,5 @@ require (
 	modernc.org/strutil v1.2.0 // indirect
 	modernc.org/token v1.1.0 // indirect
 )
+
+exclude github.com/mattn/go-sqlite3 v2.0.3+incompatible
