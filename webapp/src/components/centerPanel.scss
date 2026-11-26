@@ -91,3 +91,39 @@
         }
     }
 }
+
+// Pico.Love OS theme: overrides of this component (design tokens live in styles/pico.scss)
+.focalboard-body {
+    // Board header: lots of air, light title, quiet toolbar
+    .BoardComponent > * {
+        padding-left: 48px;
+        padding-right: 48px;
+    }
+
+    @media (max-width: 1100px) {
+        .BoardComponent .top-head .ViewTitle {
+            min-width: 0;
+
+            > div {
+                min-width: 0;
+            }
+        }
+
+        .BoardComponent > * {
+            padding-left: 32px;
+            padding-right: 32px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .BoardComponent > * {
+            padding-left: 20px;
+            padding-right: 20px;
+
+            &:first-child {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+        }
+    }
+}

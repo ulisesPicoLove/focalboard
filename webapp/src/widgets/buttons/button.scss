@@ -208,3 +208,37 @@
         }
     }
 }
+
+// Pico.Love OS theme: overrides of this component (design tokens live in styles/pico.scss)
+.focalboard-body {
+    // Buttons: pill shaped, mint primary with dark text
+    .Button {
+        font-family: var(--pico-font-sans);
+        font-weight: 500;
+        border-radius: var(--pico-rad-pill);
+        padding: 0 14px;
+
+        &.filled,
+        &.emphasis--primary {
+            color: rgb(var(--button-color-rgb));
+            padding: 6px 16px;
+
+            &:hover {
+                background-color: rgb(var(--button-bg-rgb));
+                filter: brightness(0.92);
+            }
+
+            &.danger {
+                color: #fff;
+            }
+        }
+
+        &.emphasis--secondary {
+            border-color: rgba(var(--button-bg-rgb), 0.5);
+        }
+    }
+
+    .Button {
+        --danger-button-bg-rgb: 205, 32, 40;
+    }
+}

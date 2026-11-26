@@ -173,3 +173,134 @@
         }
     }
 }
+
+// Pico.Love OS theme: overrides of this component (design tokens live in styles/pico.scss)
+.focalboard-body {
+    .BoardTemplateSelector__backdrop {
+        background: var(--pico-scrim);
+        backdrop-filter: blur(4px);
+    }
+
+    .BoardTemplateSelector {
+        border: 1px solid var(--pico-glass-line);
+        border-radius: var(--pico-rad-lg);
+        box-shadow: var(--pico-shadow-lg);
+
+        .header {
+            height: auto;
+            min-height: 88px;
+            padding: 24px 40px;
+            gap: 24px;
+            border-bottom: 1px solid var(--pico-line);
+
+            .title {
+                font-size: 28px;
+                font-weight: 300;
+                letter-spacing: -0.01em;
+                white-space: nowrap;
+            }
+
+            .description {
+                max-width: 560px;
+                text-align: left;
+                font-size: 13px;
+                line-height: 20px;
+                color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
+                border-left: 1px solid var(--pico-line);
+                padding-left: 24px;
+                margin: 0;
+            }
+        }
+
+        .templates-sidebar {
+            flex-basis: 320px;
+            background: var(--pico-surface);
+            border-right: 1px solid var(--pico-line);
+        }
+
+        .templates .templates-list {
+            padding: 20px 16px;
+
+            .new-template {
+                margin-bottom: 20px;
+                padding-left: 12px;
+                color: rgb(var(--button-bg-rgb));
+                font-family: var(--pico-font-mono);
+                font-size: 11px;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+            }
+        }
+
+        .BoardTemplateSelectorItem {
+            height: 36px;
+            margin-bottom: 2px;
+            padding: 0 12px;
+            font-size: 13px;
+            font-weight: 400;
+            border-radius: var(--pico-rad-md);
+            color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
+
+            &:hover {
+                background: rgba(var(--center-channel-color-rgb), 0.05);
+                color: rgb(var(--center-channel-color-rgb));
+            }
+
+            &.active {
+                background: rgba(var(--button-bg-rgb), 0.08);
+                color: rgb(var(--button-bg-rgb));
+            }
+
+            .template-icon {
+                opacity: 0.8;
+            }
+        }
+
+        .templates-sidebar__footer,
+        .buttons {
+            height: 88px;
+            padding: 20px 24px;
+            border-top: 1px solid var(--pico-line);
+        }
+
+        .buttons {
+            background: transparent;
+            padding-right: 40px;
+        }
+
+        .template-preview-box {
+            padding: 32px 40px 0;
+            background: transparent;
+        }
+
+        .templates__empty-board {
+            font-family: var(--pico-font-sans);
+            font-weight: 500;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .BoardTemplateSelector__container {
+            padding: 0;
+        }
+
+        .BoardTemplateSelector {
+            border-radius: 0;
+
+            .header {
+                flex-wrap: wrap;
+                gap: 8px;
+                padding: 20px;
+
+                .description {
+                    border-left: 0;
+                    padding-left: 0;
+                }
+            }
+
+            .templates-sidebar {
+                flex-basis: 220px;
+            }
+        }
+    }
+}

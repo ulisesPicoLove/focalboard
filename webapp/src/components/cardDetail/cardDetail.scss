@@ -111,10 +111,6 @@
                 }
             }
         }
-
-        .Label {
-            margin: 0 4px 0 0;
-        }
     }
 
     .Person {
@@ -177,5 +173,49 @@
 
     .BlocksEditor {
         width: 100%;
+    }
+}
+
+// Pico.Love OS theme: overrides of this component (design tokens live in styles/pico.scss)
+.focalboard-body {
+    .CardDetail {
+        .octo-propertyrow {
+            margin: 4px 0;
+        }
+
+        .octo-propertyname,
+        .octo-propertyname .Button {
+            font-family: var(--pico-font-mono);
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
+        }
+
+        .octo-propertyvalue {
+            font-size: 13px;
+        }
+
+        .CommentsList,
+        .comment-container {
+            border-color: var(--pico-line);
+        }
+    }
+
+    // Property-type / option menus open inside mono property labels: reset the type
+    .CardDetail .Menu,
+    .CardDetail .Menu * {
+        font-family: var(--pico-font-sans);
+        font-size: 13px;
+        letter-spacing: normal;
+        text-transform: none;
+        color: rgb(var(--center-channel-color-rgb));
+    }
+
+    .CardDetail .Menu .menu-title,
+    .CardDetail .Menu .menu-header {
+        font-weight: 500;
+        color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
     }
 }

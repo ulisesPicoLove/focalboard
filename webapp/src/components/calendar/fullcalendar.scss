@@ -293,3 +293,85 @@
         }
     }
 }
+
+// Pico.Love OS theme: overrides of this component (design tokens live in styles/pico.scss)
+.focalboard-body {
+    .CalendarContainer {
+        .fc-theme-standard td,
+        .fc-theme-standard th,
+        .fc-theme-standard .fc-scrollgrid {
+            border-color: var(--pico-line);
+        }
+
+        .fc-col-header-cell {
+            border-bottom: 1px solid var(--pico-line);
+        }
+
+        .fc-col-header-cell-cushion {
+            padding: 12px 0;
+            font-family: var(--pico-font-mono);
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
+        }
+
+        .fc-toolbar-title {
+            font-size: 28px;
+            font-weight: 300;
+            letter-spacing: -0.01em;
+        }
+
+        .fc .fc-toolbar.fc-header-toolbar .fc-button {
+            border-radius: var(--pico-rad-pill);
+            padding: 4px 14px;
+            font-family: var(--pico-font-mono);
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .dateDisplay {
+            font-weight: 400;
+            font-size: 12px;
+            color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
+        }
+
+        .fc-day-other .dateDisplay {
+            opacity: 0.4;
+        }
+
+        .fc-day-sat,
+        .fc-day-sun {
+            &:not(.fc-popover) {
+                background: transparent;
+            }
+        }
+
+        .fc-daygrid-day.fc-day-today .dateDisplay {
+            font-weight: 500;
+            color: rgb(var(--button-color-rgb));
+        }
+
+        .fc-event {
+            border-radius: var(--pico-rad-md);
+            background: var(--pico-surface);
+            border-color: var(--pico-line);
+            padding: 2px 4px;
+        }
+
+        .fc-event-title,
+        .octo-icontitle {
+            font-size: 12px;
+            font-weight: 400;
+        }
+
+        .fc-more-link {
+            border-radius: var(--pico-rad-pill);
+            font-family: var(--pico-font-mono);
+            font-weight: 400;
+        }
+    }
+}

@@ -232,3 +232,63 @@
         }
     }
 }
+
+// Pico.Love OS theme: overrides of this component (design tokens live in styles/pico.scss)
+.focalboard-body {
+    // Menus, popups and dialogs: glass-like panels with hairline borders
+    .Menu,
+    .Menu.noselect {
+        border: 1px solid var(--pico-glass-line);
+        border-radius: var(--pico-rad-md);
+    }
+
+    .Menu.noselect {
+        background: rgba(var(--center-channel-bg-rgb), 0.96);
+        backdrop-filter: blur(16px);
+        box-shadow: var(--pico-shadow-lg);
+
+        .menu-contents {
+            padding: 8px;
+            min-width: 260px;
+        }
+
+        .menu-options .menu-option {
+            gap: 12px;
+            height: 34px;
+            padding: 4px 12px;
+            font-size: 13px;
+            border-radius: var(--pico-rad-md);
+
+            &:hover,
+            &-active {
+                background: rgba(var(--center-channel-color-rgb), 0.06);
+            }
+
+            .menu-name {
+                flex: 1;
+                font-size: 13px;
+            }
+        }
+
+        .menu-options .menu-separator,
+        .menu-options hr {
+            border-color: var(--pico-line);
+            margin: 6px 0;
+        }
+    }
+
+    // Colour swatches in the option-colour menu: round dots using the same
+    // colours as the column status dots
+    .Menu .menu-colorbox {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background-color: var(--pico-dot, rgba(var(--center-channel-color-rgb), 0.4));
+    }
+
+    @media (max-width: 768px) {
+        .Menu.noselect .menu-contents {
+            min-width: 220px;
+        }
+    }
+}

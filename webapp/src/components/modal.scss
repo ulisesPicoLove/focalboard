@@ -46,3 +46,35 @@
         margin-bottom: 10px;
     }
 }
+
+// Pico.Love OS theme: overrides of this component (design tokens live in styles/pico.scss)
+.focalboard-body {
+    .Modal {
+        padding: 16px;
+        border: 1px solid var(--pico-glass-line);
+        border-radius: var(--pico-rad-lg);
+        background: rgba(var(--center-channel-bg-rgb), 0.96);
+        backdrop-filter: blur(16px);
+        box-shadow: var(--pico-shadow-lg);
+
+        .FilterComponent {
+            min-width: 460px;
+            font-size: 13px;
+
+            // the component adds a blank line before the button even with no filters
+            > br {
+                display: none;
+            }
+
+            .FilterEntry ~ .Button {
+                margin-top: 12px;
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        .Modal .FilterComponent {
+            min-width: 0;
+        }
+    }
+}

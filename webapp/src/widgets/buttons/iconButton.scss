@@ -70,3 +70,10 @@
         margin-left: 5px;
     }
 }
+
+// Pico.Love OS theme: overrides of this component (design tokens live in styles/pico.scss)
+.focalboard-body {
+    .IconButton {
+        border-radius: var(--pico-rad-pill);
+    }
+}

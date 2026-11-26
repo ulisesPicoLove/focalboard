@@ -56,3 +56,31 @@
         flex-grow: 1;
     }
 }
+
+// Pico.Love OS theme: overrides of this component (design tokens live in styles/pico.scss)
+.focalboard-body {
+    .ViewTitle {
+        margin-top: 24px;
+
+        .title input,
+        .title .Editable {
+            font-weight: 300;
+            font-size: 36px;
+            line-height: 44px;
+            letter-spacing: -0.01em;
+        }
+
+        .description {
+            color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
+            font-size: 14px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .ViewTitle .title input,
+        .ViewTitle .title .Editable {
+            font-size: 28px;
+            line-height: 36px;
+        }
+    }
+}

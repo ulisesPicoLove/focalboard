@@ -1,0 +1,18 @@
+// Pico.Love OS kanban/gallery card: flat surface, hairline border, radius-lg
+@mixin pico-card {
+    border-radius: var(--pico-rad-lg);
+    background: var(--pico-surface);
+    box-shadow: none;
+    border: 1px solid var(--pico-line);
+    transition: border-color 300ms ease, background 300ms ease;
+
+    &:hover {
+        background: var(--pico-surface);
+        border-color: rgba(var(--button-bg-rgb), 0.5);
+    }
+
+    &.selected {
+        background: rgba(var(--button-bg-rgb), 0.08);
+        border-color: rgb(var(--button-bg-rgb));
+    }
+}

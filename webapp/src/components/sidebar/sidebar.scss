@@ -167,3 +167,92 @@
         }
     }
 }
+
+// Pico.Love OS theme: overrides of this component (design tokens live in styles/pico.scss)
+.focalboard-body {
+    // Sidebar: calm surface, sentence-case items, mint dot for the active one
+    .Sidebar {
+        padding: 20px 0 12px;
+        border-right: 1px solid var(--pico-line);
+        font-size: 13px;
+
+        .octo-sidebar-header {
+            height: 40px;
+            margin-bottom: 8px;
+            padding: 0 20px;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+
+            &:hover {
+                background: transparent;
+            }
+        }
+
+        .octo-sidebar-list {
+            padding: 0 8px;
+        }
+
+        .SidebarCategory {
+            margin-top: 20px;
+
+            .octo-sidebar-item.category {
+                .octo-sidebar-title {
+                    font-family: var(--pico-font-mono);
+                    font-size: 10px;
+                    font-weight: 400;
+                    letter-spacing: 0.14em;
+                    text-transform: uppercase;
+                    color: rgba(var(--sidebar-text-rgb), var(--text-muted-alpha));
+                }
+            }
+        }
+
+        .SidebarBoardItem,
+        .SidebarCategory .octo-sidebar-item {
+            border-radius: var(--pico-rad-md);
+            height: 34px;
+            font-weight: 400;
+            margin: 1px 0;
+
+            &:hover {
+                background: rgba(var(--sidebar-text-rgb), 0.05);
+            }
+
+            &.active {
+                background: rgba(var(--sidebar-text-active-border-rgb), 0.08);
+
+                &:not(.subitem)::before {
+                    display: none;
+                }
+            }
+
+            &.sidebar-view-item {
+                padding-left: 40px;
+                font-size: 12px;
+                color: rgba(var(--sidebar-text-rgb), var(--text-muted-alpha));
+
+                &.active {
+                    background: transparent;
+                    color: rgb(var(--sidebar-text-rgb));
+                    font-weight: 500;
+                }
+            }
+        }
+
+        .SidebarBoardItem.category {
+            padding-left: 8px;
+        }
+
+        .add-board,
+        .SidebarSettingsMenu .menu-entry {
+            font-size: 12px;
+            color: rgba(var(--sidebar-text-rgb), var(--text-muted-alpha));
+        }
+
+        input[type='text'],
+        .SearchBar,
+        .octo-sidebar-search {
+            border-radius: var(--pico-rad-pill);
+        }
+    }
+}

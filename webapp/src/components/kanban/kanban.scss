@@ -110,3 +110,71 @@
         margin-left: 4px;
     }
 }
+
+// Pico.Love OS theme: overrides of this component (design tokens live in styles/pico.scss)
+.focalboard-body {
+    // Kanban: columns are a dot + name + count, no solid colour bars
+    .Kanban {
+        .octo-board-header {
+            padding: 24px 0 12px;
+            color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
+        }
+
+        .octo-board-header-cell {
+            width: 280px;
+            margin-right: 20px;
+
+            .Label,
+            .Label .Editable,
+            .Label input {
+                font-family: var(--pico-font-mono);
+                font-size: 11px;
+                font-weight: 400;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+            }
+
+            .KanbanCalculation,
+            .KanbanCalculation .Button {
+                font-family: var(--pico-font-mono);
+                font-size: 11px;
+                color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
+            }
+
+            .Label {
+                background: transparent;
+                padding: 0;
+                margin: 0 8px 0 0;
+                color: rgb(var(--center-channel-color-rgb));
+
+                &::before {
+                    content: '';
+                    flex: 0 0 8px;
+                    width: 8px;
+                    height: 8px;
+                    margin-right: 10px;
+                    border-radius: 50%;
+                    background: var(--pico-dot, rgba(var(--center-channel-color-rgb), 0.4));
+                }
+            }
+        }
+
+        .octo-board-column {
+            width: 280px;
+            margin-right: 20px;
+        }
+
+        .KanbanCard {
+            margin-bottom: 12px;
+            padding: 16px 18px;
+            gap: 6px;
+        }
+    }
+
+    @media (max-width: 1100px) {
+        .Kanban .octo-board-header-cell,
+        .Kanban .octo-board-column {
+            width: 260px;
+        }
+    }
+}

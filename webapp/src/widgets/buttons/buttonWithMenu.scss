@@ -38,3 +38,20 @@
         }
     }
 }
+
+// Pico.Love OS theme: overrides of this component (design tokens live in styles/pico.scss)
+.focalboard-body {
+    // Split "New" button: one pill
+    .ButtonWithMenu {
+        .button-text {
+            padding: 4px 14px;
+            font-weight: 500;
+            border-radius: var(--pico-rad-pill) 0 0 var(--pico-rad-pill);
+        }
+
+        .button-dropdown {
+            padding: 0 8px 0 6px;
+            border-radius: 0 var(--pico-rad-pill) var(--pico-rad-pill) 0;
+        }
+    }
+}

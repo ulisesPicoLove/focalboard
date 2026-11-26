@@ -79,3 +79,46 @@
         height: 100%;
     }
 }
+
+// Pico.Love OS theme: overrides of this component (design tokens live in styles/pico.scss)
+.focalboard-body {
+    .ViewHeader {
+        margin-top: 24px;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--pico-line);
+        font-size: 13px;
+
+        .Button:not(.filled):not(.emphasis--primary) {
+            color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
+            font-weight: 400;
+
+            &:hover {
+                color: rgb(var(--center-channel-color-rgb));
+                background: rgba(var(--center-channel-color-rgb), 0.06);
+            }
+        }
+
+        .board-search-field input {
+            border-radius: var(--pico-rad-pill);
+            border: 1px solid var(--pico-line);
+            background: var(--pico-glass);
+        }
+    }
+
+    // Filter popup: open just below its button, right-aligned, instead of
+    // overlapping the toolbar (the phone layout keeps its full-screen modal)
+    @media (min-width: 431px) {
+        .ViewHeader .ModalWrapper > .Modal {
+            top: calc(100% + 8px);
+            left: auto;
+            right: 0;
+            max-width: calc(100vw - 32px);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .ViewHeader {
+            margin-top: 16px;
+        }
+    }
+}

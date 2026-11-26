@@ -34,3 +34,23 @@
     grid-template-columns: repeat(2, 1fr);
     margin-top: 32px;
 }
+
+// Pico.Love OS theme: overrides of this component (design tokens live in styles/pico.scss)
+.focalboard-body {
+    .confirmation-dialog-box .box-area {
+        padding: 56px 48px 48px;
+
+        .text-heading5 {
+            margin-bottom: 12px;
+            font-size: 22px;
+            font-weight: 300;
+        }
+
+        .sub-text {
+            max-width: 360px;
+            font-size: 13px;
+            line-height: 20px;
+            color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
+        }
+    }
+}

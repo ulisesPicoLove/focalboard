@@ -251,3 +251,29 @@
     }
 
 }
+
+// Pico.Love OS theme: overrides of this component (design tokens live in styles/pico.scss)
+.focalboard-body {
+    .ShareBoardDialog .dialog {
+        .user-items,
+        .tabs-content,
+        .share-input__container {
+            border-color: var(--pico-line);
+        }
+
+        .user-item .user-item__title {
+            font-weight: 400;
+        }
+
+        .share-input {
+            border-radius: var(--pico-rad-pill);
+            border-color: var(--pico-glass-line);
+            background: var(--pico-glass);
+        }
+
+        .tabs-content input {
+            border-radius: var(--pico-rad-pill);
+            border-color: var(--pico-glass-line);
+        }
+    }
+}
