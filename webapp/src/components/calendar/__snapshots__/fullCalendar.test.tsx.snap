@@ -54,6 +54,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
             >
               <span
                 class="fc-icon fc-icon-chevron-left"
+                role="img"
               />
             </button>
             <button
@@ -72,6 +73,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
             >
               <span
                 class="fc-icon fc-icon-chevron-right"
+                role="img"
               />
             </button>
           </div>
@@ -83,7 +85,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
         style="padding-bottom: 74.07407407407408%; height: 0px;"
       >
         <div
-          class="fc-daygrid fc-dayGridMonth-view fc-view"
+          class="fc-dayGridMonth-view fc-view fc-daygrid"
         >
           <table
             class="fc-scrollgrid  fc-scrollgrid-liquid"
@@ -127,7 +129,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               >
                                 <a
                                   aria-label="Sunday"
-                                  class="fc-col-header-cell-cushion "
+                                  class="fc-col-header-cell-cushion"
                                 >
                                   Sun
                                 </a>
@@ -142,7 +144,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               >
                                 <a
                                   aria-label="Monday"
-                                  class="fc-col-header-cell-cushion "
+                                  class="fc-col-header-cell-cushion"
                                 >
                                   Mon
                                 </a>
@@ -157,7 +159,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               >
                                 <a
                                   aria-label="Tuesday"
-                                  class="fc-col-header-cell-cushion "
+                                  class="fc-col-header-cell-cushion"
                                 >
                                   Tue
                                 </a>
@@ -172,7 +174,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               >
                                 <a
                                   aria-label="Wednesday"
-                                  class="fc-col-header-cell-cushion "
+                                  class="fc-col-header-cell-cushion"
                                 >
                                   Wed
                                 </a>
@@ -187,7 +189,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               >
                                 <a
                                   aria-label="Thursday"
-                                  class="fc-col-header-cell-cushion "
+                                  class="fc-col-header-cell-cushion"
                                 >
                                   Thu
                                 </a>
@@ -202,7 +204,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               >
                                 <a
                                   aria-label="Friday"
-                                  class="fc-col-header-cell-cushion "
+                                  class="fc-col-header-cell-cushion"
                                 >
                                   Fri
                                 </a>
@@ -217,7 +219,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               >
                                 <a
                                   aria-label="Saturday"
-                                  class="fc-col-header-cell-cushion "
+                                  class="fc-col-header-cell-cushion"
                                 >
                                   Sat
                                 </a>
@@ -262,7 +264,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                             >
                               <td
                                 aria-labelledby="fc-dom-2"
-                                class="fc-daygrid-day fc-day fc-day-sun fc-day-past fc-day-other"
+                                class="fc-day fc-day-sun fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-09-26"
                                 role="gridcell"
                               >
@@ -311,7 +313,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-4"
-                                class="fc-daygrid-day fc-day fc-day-mon fc-day-past fc-day-other"
+                                class="fc-day fc-day-mon fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-09-27"
                                 role="gridcell"
                               >
@@ -360,7 +362,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-6"
-                                class="fc-daygrid-day fc-day fc-day-tue fc-day-past fc-day-other"
+                                class="fc-day fc-day-tue fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-09-28"
                                 role="gridcell"
                               >
@@ -409,7 +411,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-8"
-                                class="fc-daygrid-day fc-day fc-day-wed fc-day-past fc-day-other"
+                                class="fc-day fc-day-wed fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-09-29"
                                 role="gridcell"
                               >
@@ -458,7 +460,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-10"
-                                class="fc-daygrid-day fc-day fc-day-thu fc-day-past fc-day-other"
+                                class="fc-day fc-day-thu fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-09-30"
                                 role="gridcell"
                               >
@@ -507,7 +509,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-12"
-                                class="fc-daygrid-day fc-day fc-day-fri fc-day-past"
+                                class="fc-day fc-day-fri fc-day-past fc-daygrid-day"
                                 data-date="2021-10-01"
                                 role="gridcell"
                               >
@@ -556,7 +558,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-14"
-                                class="fc-daygrid-day fc-day fc-day-sat fc-day-past"
+                                class="fc-day fc-day-sat fc-day-past fc-daygrid-day"
                                 data-date="2021-10-02"
                                 role="gridcell"
                               >
@@ -609,7 +611,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                             >
                               <td
                                 aria-labelledby="fc-dom-16"
-                                class="fc-daygrid-day fc-day fc-day-sun fc-day-past"
+                                class="fc-day fc-day-sun fc-day-past fc-daygrid-day"
                                 data-date="2021-10-03"
                                 role="gridcell"
                               >
@@ -658,7 +660,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-18"
-                                class="fc-daygrid-day fc-day fc-day-mon fc-day-past"
+                                class="fc-day fc-day-mon fc-day-past fc-daygrid-day"
                                 data-date="2021-10-04"
                                 role="gridcell"
                               >
@@ -707,7 +709,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-20"
-                                class="fc-daygrid-day fc-day fc-day-tue fc-day-past"
+                                class="fc-day fc-day-tue fc-day-past fc-daygrid-day"
                                 data-date="2021-10-05"
                                 role="gridcell"
                               >
@@ -749,7 +751,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                       style="margin-top: 0px;"
                                     >
                                       <a
-                                        class="fc-daygrid-event fc-daygrid-block-event fc-h-event fc-event fc-event-start fc-event-end fc-event-past"
+                                        class="fc-event fc-event-start fc-event-end fc-event-past fc-daygrid-event fc-daygrid-block-event fc-h-event"
                                       >
                                         <div
                                           class="fc-event-main"
@@ -804,7 +806,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-22"
-                                class="fc-daygrid-day fc-day fc-day-wed fc-day-past"
+                                class="fc-day fc-day-wed fc-day-past fc-daygrid-day"
                                 data-date="2021-10-06"
                                 role="gridcell"
                               >
@@ -853,7 +855,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-24"
-                                class="fc-daygrid-day fc-day fc-day-thu fc-day-past"
+                                class="fc-day fc-day-thu fc-day-past fc-daygrid-day"
                                 data-date="2021-10-07"
                                 role="gridcell"
                               >
@@ -902,7 +904,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-26"
-                                class="fc-daygrid-day fc-day fc-day-fri fc-day-past"
+                                class="fc-day fc-day-fri fc-day-past fc-daygrid-day"
                                 data-date="2021-10-08"
                                 role="gridcell"
                               >
@@ -951,7 +953,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-28"
-                                class="fc-daygrid-day fc-day fc-day-sat fc-day-past"
+                                class="fc-day fc-day-sat fc-day-past fc-daygrid-day"
                                 data-date="2021-10-09"
                                 role="gridcell"
                               >
@@ -1004,7 +1006,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                             >
                               <td
                                 aria-labelledby="fc-dom-30"
-                                class="fc-daygrid-day fc-day fc-day-sun fc-day-past"
+                                class="fc-day fc-day-sun fc-day-past fc-daygrid-day"
                                 data-date="2021-10-10"
                                 role="gridcell"
                               >
@@ -1053,7 +1055,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-32"
-                                class="fc-daygrid-day fc-day fc-day-mon fc-day-past"
+                                class="fc-day fc-day-mon fc-day-past fc-daygrid-day"
                                 data-date="2021-10-11"
                                 role="gridcell"
                               >
@@ -1102,7 +1104,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-34"
-                                class="fc-daygrid-day fc-day fc-day-tue fc-day-past"
+                                class="fc-day fc-day-tue fc-day-past fc-daygrid-day"
                                 data-date="2021-10-12"
                                 role="gridcell"
                               >
@@ -1151,7 +1153,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-36"
-                                class="fc-daygrid-day fc-day fc-day-wed fc-day-past"
+                                class="fc-day fc-day-wed fc-day-past fc-daygrid-day"
                                 data-date="2021-10-13"
                                 role="gridcell"
                               >
@@ -1200,7 +1202,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-38"
-                                class="fc-daygrid-day fc-day fc-day-thu fc-day-past"
+                                class="fc-day fc-day-thu fc-day-past fc-daygrid-day"
                                 data-date="2021-10-14"
                                 role="gridcell"
                               >
@@ -1249,7 +1251,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-40"
-                                class="fc-daygrid-day fc-day fc-day-fri fc-day-past"
+                                class="fc-day fc-day-fri fc-day-past fc-daygrid-day"
                                 data-date="2021-10-15"
                                 role="gridcell"
                               >
@@ -1298,7 +1300,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-42"
-                                class="fc-daygrid-day fc-day fc-day-sat fc-day-past"
+                                class="fc-day fc-day-sat fc-day-past fc-daygrid-day"
                                 data-date="2021-10-16"
                                 role="gridcell"
                               >
@@ -1351,7 +1353,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                             >
                               <td
                                 aria-labelledby="fc-dom-44"
-                                class="fc-daygrid-day fc-day fc-day-sun fc-day-past"
+                                class="fc-day fc-day-sun fc-day-past fc-daygrid-day"
                                 data-date="2021-10-17"
                                 role="gridcell"
                               >
@@ -1400,7 +1402,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-46"
-                                class="fc-daygrid-day fc-day fc-day-mon fc-day-past"
+                                class="fc-day fc-day-mon fc-day-past fc-daygrid-day"
                                 data-date="2021-10-18"
                                 role="gridcell"
                               >
@@ -1449,7 +1451,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-48"
-                                class="fc-daygrid-day fc-day fc-day-tue fc-day-past"
+                                class="fc-day fc-day-tue fc-day-past fc-daygrid-day"
                                 data-date="2021-10-19"
                                 role="gridcell"
                               >
@@ -1498,7 +1500,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-50"
-                                class="fc-daygrid-day fc-day fc-day-wed fc-day-past"
+                                class="fc-day fc-day-wed fc-day-past fc-daygrid-day"
                                 data-date="2021-10-20"
                                 role="gridcell"
                               >
@@ -1547,7 +1549,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-52"
-                                class="fc-daygrid-day fc-day fc-day-thu fc-day-past"
+                                class="fc-day fc-day-thu fc-day-past fc-daygrid-day"
                                 data-date="2021-10-21"
                                 role="gridcell"
                               >
@@ -1596,7 +1598,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-54"
-                                class="fc-daygrid-day fc-day fc-day-fri fc-day-past"
+                                class="fc-day fc-day-fri fc-day-past fc-daygrid-day"
                                 data-date="2021-10-22"
                                 role="gridcell"
                               >
@@ -1645,7 +1647,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-56"
-                                class="fc-daygrid-day fc-day fc-day-sat fc-day-past"
+                                class="fc-day fc-day-sat fc-day-past fc-daygrid-day"
                                 data-date="2021-10-23"
                                 role="gridcell"
                               >
@@ -1698,7 +1700,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                             >
                               <td
                                 aria-labelledby="fc-dom-58"
-                                class="fc-daygrid-day fc-day fc-day-sun fc-day-past"
+                                class="fc-day fc-day-sun fc-day-past fc-daygrid-day"
                                 data-date="2021-10-24"
                                 role="gridcell"
                               >
@@ -1747,7 +1749,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-60"
-                                class="fc-daygrid-day fc-day fc-day-mon fc-day-past"
+                                class="fc-day fc-day-mon fc-day-past fc-daygrid-day"
                                 data-date="2021-10-25"
                                 role="gridcell"
                               >
@@ -1796,7 +1798,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-62"
-                                class="fc-daygrid-day fc-day fc-day-tue fc-day-past"
+                                class="fc-day fc-day-tue fc-day-past fc-daygrid-day"
                                 data-date="2021-10-26"
                                 role="gridcell"
                               >
@@ -1845,7 +1847,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-64"
-                                class="fc-daygrid-day fc-day fc-day-wed fc-day-past"
+                                class="fc-day fc-day-wed fc-day-past fc-daygrid-day"
                                 data-date="2021-10-27"
                                 role="gridcell"
                               >
@@ -1894,7 +1896,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-66"
-                                class="fc-daygrid-day fc-day fc-day-thu fc-day-past"
+                                class="fc-day fc-day-thu fc-day-past fc-daygrid-day"
                                 data-date="2021-10-28"
                                 role="gridcell"
                               >
@@ -1943,7 +1945,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-68"
-                                class="fc-daygrid-day fc-day fc-day-fri fc-day-past"
+                                class="fc-day fc-day-fri fc-day-past fc-daygrid-day"
                                 data-date="2021-10-29"
                                 role="gridcell"
                               >
@@ -1992,7 +1994,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-70"
-                                class="fc-daygrid-day fc-day fc-day-sat fc-day-past"
+                                class="fc-day fc-day-sat fc-day-past fc-daygrid-day"
                                 data-date="2021-10-30"
                                 role="gridcell"
                               >
@@ -2045,7 +2047,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                             >
                               <td
                                 aria-labelledby="fc-dom-72"
-                                class="fc-daygrid-day fc-day fc-day-sun fc-day-past"
+                                class="fc-day fc-day-sun fc-day-past fc-daygrid-day"
                                 data-date="2021-10-31"
                                 role="gridcell"
                               >
@@ -2094,7 +2096,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-74"
-                                class="fc-daygrid-day fc-day fc-day-mon fc-day-past fc-day-other"
+                                class="fc-day fc-day-mon fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-11-01"
                                 role="gridcell"
                               >
@@ -2143,7 +2145,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-76"
-                                class="fc-daygrid-day fc-day fc-day-tue fc-day-past fc-day-other"
+                                class="fc-day fc-day-tue fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-11-02"
                                 role="gridcell"
                               >
@@ -2192,7 +2194,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-78"
-                                class="fc-daygrid-day fc-day fc-day-wed fc-day-past fc-day-other"
+                                class="fc-day fc-day-wed fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-11-03"
                                 role="gridcell"
                               >
@@ -2241,7 +2243,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-80"
-                                class="fc-daygrid-day fc-day fc-day-thu fc-day-past fc-day-other"
+                                class="fc-day fc-day-thu fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-11-04"
                                 role="gridcell"
                               >
@@ -2290,7 +2292,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-82"
-                                class="fc-daygrid-day fc-day fc-day-fri fc-day-past fc-day-other"
+                                class="fc-day fc-day-fri fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-11-05"
                                 role="gridcell"
                               >
@@ -2339,7 +2341,7 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                               </td>
                               <td
                                 aria-labelledby="fc-dom-84"
-                                class="fc-daygrid-day fc-day fc-day-sat fc-day-past fc-day-other"
+                                class="fc-day fc-day-sat fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-11-06"
                                 role="gridcell"
                               >
@@ -2457,6 +2459,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
             >
               <span
                 class="fc-icon fc-icon-chevron-left"
+                role="img"
               />
             </button>
             <button
@@ -2475,6 +2478,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
             >
               <span
                 class="fc-icon fc-icon-chevron-right"
+                role="img"
               />
             </button>
           </div>
@@ -2486,7 +2490,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
         style="padding-bottom: 74.07407407407408%; height: 0px;"
       >
         <div
-          class="fc-daygrid fc-dayGridMonth-view fc-view"
+          class="fc-dayGridMonth-view fc-view fc-daygrid"
         >
           <table
             class="fc-scrollgrid  fc-scrollgrid-liquid"
@@ -2530,7 +2534,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               >
                                 <a
                                   aria-label="Sunday"
-                                  class="fc-col-header-cell-cushion "
+                                  class="fc-col-header-cell-cushion"
                                 >
                                   Sun
                                 </a>
@@ -2545,7 +2549,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               >
                                 <a
                                   aria-label="Monday"
-                                  class="fc-col-header-cell-cushion "
+                                  class="fc-col-header-cell-cushion"
                                 >
                                   Mon
                                 </a>
@@ -2560,7 +2564,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               >
                                 <a
                                   aria-label="Tuesday"
-                                  class="fc-col-header-cell-cushion "
+                                  class="fc-col-header-cell-cushion"
                                 >
                                   Tue
                                 </a>
@@ -2575,7 +2579,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               >
                                 <a
                                   aria-label="Wednesday"
-                                  class="fc-col-header-cell-cushion "
+                                  class="fc-col-header-cell-cushion"
                                 >
                                   Wed
                                 </a>
@@ -2590,7 +2594,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               >
                                 <a
                                   aria-label="Thursday"
-                                  class="fc-col-header-cell-cushion "
+                                  class="fc-col-header-cell-cushion"
                                 >
                                   Thu
                                 </a>
@@ -2605,7 +2609,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               >
                                 <a
                                   aria-label="Friday"
-                                  class="fc-col-header-cell-cushion "
+                                  class="fc-col-header-cell-cushion"
                                 >
                                   Fri
                                 </a>
@@ -2620,7 +2624,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               >
                                 <a
                                   aria-label="Saturday"
-                                  class="fc-col-header-cell-cushion "
+                                  class="fc-col-header-cell-cushion"
                                 >
                                   Sat
                                 </a>
@@ -2665,7 +2669,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                             >
                               <td
                                 aria-labelledby="fc-dom-87"
-                                class="fc-daygrid-day fc-day fc-day-sun fc-day-past fc-day-other"
+                                class="fc-day fc-day-sun fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-09-26"
                                 role="gridcell"
                               >
@@ -2714,7 +2718,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-89"
-                                class="fc-daygrid-day fc-day fc-day-mon fc-day-past fc-day-other"
+                                class="fc-day fc-day-mon fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-09-27"
                                 role="gridcell"
                               >
@@ -2763,7 +2767,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-91"
-                                class="fc-daygrid-day fc-day fc-day-tue fc-day-past fc-day-other"
+                                class="fc-day fc-day-tue fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-09-28"
                                 role="gridcell"
                               >
@@ -2812,7 +2816,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-93"
-                                class="fc-daygrid-day fc-day fc-day-wed fc-day-past fc-day-other"
+                                class="fc-day fc-day-wed fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-09-29"
                                 role="gridcell"
                               >
@@ -2861,7 +2865,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-95"
-                                class="fc-daygrid-day fc-day fc-day-thu fc-day-past fc-day-other"
+                                class="fc-day fc-day-thu fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-09-30"
                                 role="gridcell"
                               >
@@ -2910,7 +2914,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-97"
-                                class="fc-daygrid-day fc-day fc-day-fri fc-day-past"
+                                class="fc-day fc-day-fri fc-day-past fc-daygrid-day"
                                 data-date="2021-10-01"
                                 role="gridcell"
                               >
@@ -2959,7 +2963,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-99"
-                                class="fc-daygrid-day fc-day fc-day-sat fc-day-past"
+                                class="fc-day fc-day-sat fc-day-past fc-daygrid-day"
                                 data-date="2021-10-02"
                                 role="gridcell"
                               >
@@ -3012,7 +3016,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                             >
                               <td
                                 aria-labelledby="fc-dom-101"
-                                class="fc-daygrid-day fc-day fc-day-sun fc-day-past"
+                                class="fc-day fc-day-sun fc-day-past fc-daygrid-day"
                                 data-date="2021-10-03"
                                 role="gridcell"
                               >
@@ -3061,7 +3065,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-103"
-                                class="fc-daygrid-day fc-day fc-day-mon fc-day-past"
+                                class="fc-day fc-day-mon fc-day-past fc-daygrid-day"
                                 data-date="2021-10-04"
                                 role="gridcell"
                               >
@@ -3110,7 +3114,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-105"
-                                class="fc-daygrid-day fc-day fc-day-tue fc-day-past"
+                                class="fc-day fc-day-tue fc-day-past fc-daygrid-day"
                                 data-date="2021-10-05"
                                 role="gridcell"
                               >
@@ -3152,7 +3156,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                       style="margin-top: 0px;"
                                     >
                                       <a
-                                        class="fc-daygrid-event fc-daygrid-block-event fc-h-event fc-event fc-event-start fc-event-end fc-event-past"
+                                        class="fc-event fc-event-start fc-event-end fc-event-past fc-daygrid-event fc-daygrid-block-event fc-h-event"
                                       >
                                         <div
                                           class="fc-event-main"
@@ -3207,7 +3211,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-107"
-                                class="fc-daygrid-day fc-day fc-day-wed fc-day-past"
+                                class="fc-day fc-day-wed fc-day-past fc-daygrid-day"
                                 data-date="2021-10-06"
                                 role="gridcell"
                               >
@@ -3256,7 +3260,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-109"
-                                class="fc-daygrid-day fc-day fc-day-thu fc-day-past"
+                                class="fc-day fc-day-thu fc-day-past fc-daygrid-day"
                                 data-date="2021-10-07"
                                 role="gridcell"
                               >
@@ -3305,7 +3309,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-111"
-                                class="fc-daygrid-day fc-day fc-day-fri fc-day-past"
+                                class="fc-day fc-day-fri fc-day-past fc-daygrid-day"
                                 data-date="2021-10-08"
                                 role="gridcell"
                               >
@@ -3354,7 +3358,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-113"
-                                class="fc-daygrid-day fc-day fc-day-sat fc-day-past"
+                                class="fc-day fc-day-sat fc-day-past fc-daygrid-day"
                                 data-date="2021-10-09"
                                 role="gridcell"
                               >
@@ -3407,7 +3411,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                             >
                               <td
                                 aria-labelledby="fc-dom-115"
-                                class="fc-daygrid-day fc-day fc-day-sun fc-day-past"
+                                class="fc-day fc-day-sun fc-day-past fc-daygrid-day"
                                 data-date="2021-10-10"
                                 role="gridcell"
                               >
@@ -3456,7 +3460,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-117"
-                                class="fc-daygrid-day fc-day fc-day-mon fc-day-past"
+                                class="fc-day fc-day-mon fc-day-past fc-daygrid-day"
                                 data-date="2021-10-11"
                                 role="gridcell"
                               >
@@ -3505,7 +3509,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-119"
-                                class="fc-daygrid-day fc-day fc-day-tue fc-day-past"
+                                class="fc-day fc-day-tue fc-day-past fc-daygrid-day"
                                 data-date="2021-10-12"
                                 role="gridcell"
                               >
@@ -3554,7 +3558,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-121"
-                                class="fc-daygrid-day fc-day fc-day-wed fc-day-past"
+                                class="fc-day fc-day-wed fc-day-past fc-daygrid-day"
                                 data-date="2021-10-13"
                                 role="gridcell"
                               >
@@ -3603,7 +3607,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-123"
-                                class="fc-daygrid-day fc-day fc-day-thu fc-day-past"
+                                class="fc-day fc-day-thu fc-day-past fc-daygrid-day"
                                 data-date="2021-10-14"
                                 role="gridcell"
                               >
@@ -3652,7 +3656,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-125"
-                                class="fc-daygrid-day fc-day fc-day-fri fc-day-past"
+                                class="fc-day fc-day-fri fc-day-past fc-daygrid-day"
                                 data-date="2021-10-15"
                                 role="gridcell"
                               >
@@ -3701,7 +3705,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-127"
-                                class="fc-daygrid-day fc-day fc-day-sat fc-day-past"
+                                class="fc-day fc-day-sat fc-day-past fc-daygrid-day"
                                 data-date="2021-10-16"
                                 role="gridcell"
                               >
@@ -3754,7 +3758,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                             >
                               <td
                                 aria-labelledby="fc-dom-129"
-                                class="fc-daygrid-day fc-day fc-day-sun fc-day-past"
+                                class="fc-day fc-day-sun fc-day-past fc-daygrid-day"
                                 data-date="2021-10-17"
                                 role="gridcell"
                               >
@@ -3803,7 +3807,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-131"
-                                class="fc-daygrid-day fc-day fc-day-mon fc-day-past"
+                                class="fc-day fc-day-mon fc-day-past fc-daygrid-day"
                                 data-date="2021-10-18"
                                 role="gridcell"
                               >
@@ -3852,7 +3856,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-133"
-                                class="fc-daygrid-day fc-day fc-day-tue fc-day-past"
+                                class="fc-day fc-day-tue fc-day-past fc-daygrid-day"
                                 data-date="2021-10-19"
                                 role="gridcell"
                               >
@@ -3901,7 +3905,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-135"
-                                class="fc-daygrid-day fc-day fc-day-wed fc-day-past"
+                                class="fc-day fc-day-wed fc-day-past fc-daygrid-day"
                                 data-date="2021-10-20"
                                 role="gridcell"
                               >
@@ -3950,7 +3954,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-137"
-                                class="fc-daygrid-day fc-day fc-day-thu fc-day-past"
+                                class="fc-day fc-day-thu fc-day-past fc-daygrid-day"
                                 data-date="2021-10-21"
                                 role="gridcell"
                               >
@@ -3999,7 +4003,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-139"
-                                class="fc-daygrid-day fc-day fc-day-fri fc-day-past"
+                                class="fc-day fc-day-fri fc-day-past fc-daygrid-day"
                                 data-date="2021-10-22"
                                 role="gridcell"
                               >
@@ -4048,7 +4052,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-141"
-                                class="fc-daygrid-day fc-day fc-day-sat fc-day-past"
+                                class="fc-day fc-day-sat fc-day-past fc-daygrid-day"
                                 data-date="2021-10-23"
                                 role="gridcell"
                               >
@@ -4101,7 +4105,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                             >
                               <td
                                 aria-labelledby="fc-dom-143"
-                                class="fc-daygrid-day fc-day fc-day-sun fc-day-past"
+                                class="fc-day fc-day-sun fc-day-past fc-daygrid-day"
                                 data-date="2021-10-24"
                                 role="gridcell"
                               >
@@ -4150,7 +4154,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-145"
-                                class="fc-daygrid-day fc-day fc-day-mon fc-day-past"
+                                class="fc-day fc-day-mon fc-day-past fc-daygrid-day"
                                 data-date="2021-10-25"
                                 role="gridcell"
                               >
@@ -4199,7 +4203,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-147"
-                                class="fc-daygrid-day fc-day fc-day-tue fc-day-past"
+                                class="fc-day fc-day-tue fc-day-past fc-daygrid-day"
                                 data-date="2021-10-26"
                                 role="gridcell"
                               >
@@ -4248,7 +4252,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-149"
-                                class="fc-daygrid-day fc-day fc-day-wed fc-day-past"
+                                class="fc-day fc-day-wed fc-day-past fc-daygrid-day"
                                 data-date="2021-10-27"
                                 role="gridcell"
                               >
@@ -4297,7 +4301,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-151"
-                                class="fc-daygrid-day fc-day fc-day-thu fc-day-past"
+                                class="fc-day fc-day-thu fc-day-past fc-daygrid-day"
                                 data-date="2021-10-28"
                                 role="gridcell"
                               >
@@ -4346,7 +4350,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-153"
-                                class="fc-daygrid-day fc-day fc-day-fri fc-day-past"
+                                class="fc-day fc-day-fri fc-day-past fc-daygrid-day"
                                 data-date="2021-10-29"
                                 role="gridcell"
                               >
@@ -4395,7 +4399,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-155"
-                                class="fc-daygrid-day fc-day fc-day-sat fc-day-past"
+                                class="fc-day fc-day-sat fc-day-past fc-daygrid-day"
                                 data-date="2021-10-30"
                                 role="gridcell"
                               >
@@ -4448,7 +4452,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                             >
                               <td
                                 aria-labelledby="fc-dom-157"
-                                class="fc-daygrid-day fc-day fc-day-sun fc-day-past"
+                                class="fc-day fc-day-sun fc-day-past fc-daygrid-day"
                                 data-date="2021-10-31"
                                 role="gridcell"
                               >
@@ -4497,7 +4501,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-159"
-                                class="fc-daygrid-day fc-day fc-day-mon fc-day-past fc-day-other"
+                                class="fc-day fc-day-mon fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-11-01"
                                 role="gridcell"
                               >
@@ -4546,7 +4550,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-161"
-                                class="fc-daygrid-day fc-day fc-day-tue fc-day-past fc-day-other"
+                                class="fc-day fc-day-tue fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-11-02"
                                 role="gridcell"
                               >
@@ -4595,7 +4599,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-163"
-                                class="fc-daygrid-day fc-day fc-day-wed fc-day-past fc-day-other"
+                                class="fc-day fc-day-wed fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-11-03"
                                 role="gridcell"
                               >
@@ -4644,7 +4648,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-165"
-                                class="fc-daygrid-day fc-day fc-day-thu fc-day-past fc-day-other"
+                                class="fc-day fc-day-thu fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-11-04"
                                 role="gridcell"
                               >
@@ -4693,7 +4697,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-167"
-                                class="fc-daygrid-day fc-day fc-day-fri fc-day-past fc-day-other"
+                                class="fc-day fc-day-fri fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-11-05"
                                 role="gridcell"
                               >
@@ -4742,7 +4746,7 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                               </td>
                               <td
                                 aria-labelledby="fc-dom-169"
-                                class="fc-daygrid-day fc-day fc-day-sat fc-day-past fc-day-other"
+                                class="fc-day fc-day-sat fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-11-06"
                                 role="gridcell"
                               >
@@ -4860,6 +4864,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
             >
               <span
                 class="fc-icon fc-icon-chevron-left"
+                role="img"
               />
             </button>
             <button
@@ -4878,6 +4883,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
             >
               <span
                 class="fc-icon fc-icon-chevron-right"
+                role="img"
               />
             </button>
           </div>
@@ -4889,7 +4895,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
         style="padding-bottom: 74.07407407407408%; height: 0px;"
       >
         <div
-          class="fc-daygrid fc-dayGridMonth-view fc-view"
+          class="fc-dayGridMonth-view fc-view fc-daygrid"
         >
           <table
             class="fc-scrollgrid  fc-scrollgrid-liquid"
@@ -4933,7 +4939,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               >
                                 <a
                                   aria-label="Sunday"
-                                  class="fc-col-header-cell-cushion "
+                                  class="fc-col-header-cell-cushion"
                                 >
                                   Sun
                                 </a>
@@ -4948,7 +4954,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               >
                                 <a
                                   aria-label="Monday"
-                                  class="fc-col-header-cell-cushion "
+                                  class="fc-col-header-cell-cushion"
                                 >
                                   Mon
                                 </a>
@@ -4963,7 +4969,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               >
                                 <a
                                   aria-label="Tuesday"
-                                  class="fc-col-header-cell-cushion "
+                                  class="fc-col-header-cell-cushion"
                                 >
                                   Tue
                                 </a>
@@ -4978,7 +4984,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               >
                                 <a
                                   aria-label="Wednesday"
-                                  class="fc-col-header-cell-cushion "
+                                  class="fc-col-header-cell-cushion"
                                 >
                                   Wed
                                 </a>
@@ -4993,7 +4999,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               >
                                 <a
                                   aria-label="Thursday"
-                                  class="fc-col-header-cell-cushion "
+                                  class="fc-col-header-cell-cushion"
                                 >
                                   Thu
                                 </a>
@@ -5008,7 +5014,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               >
                                 <a
                                   aria-label="Friday"
-                                  class="fc-col-header-cell-cushion "
+                                  class="fc-col-header-cell-cushion"
                                 >
                                   Fri
                                 </a>
@@ -5023,7 +5029,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               >
                                 <a
                                   aria-label="Saturday"
-                                  class="fc-col-header-cell-cushion "
+                                  class="fc-col-header-cell-cushion"
                                 >
                                   Sat
                                 </a>
@@ -5068,7 +5074,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                             >
                               <td
                                 aria-labelledby="fc-dom-172"
-                                class="fc-daygrid-day fc-day fc-day-sun fc-day-past fc-day-other"
+                                class="fc-day fc-day-sun fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-09-26"
                                 role="gridcell"
                               >
@@ -5117,7 +5123,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-174"
-                                class="fc-daygrid-day fc-day fc-day-mon fc-day-past fc-day-other"
+                                class="fc-day fc-day-mon fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-09-27"
                                 role="gridcell"
                               >
@@ -5166,7 +5172,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-176"
-                                class="fc-daygrid-day fc-day fc-day-tue fc-day-past fc-day-other"
+                                class="fc-day fc-day-tue fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-09-28"
                                 role="gridcell"
                               >
@@ -5215,7 +5221,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-178"
-                                class="fc-daygrid-day fc-day fc-day-wed fc-day-past fc-day-other"
+                                class="fc-day fc-day-wed fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-09-29"
                                 role="gridcell"
                               >
@@ -5264,7 +5270,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-180"
-                                class="fc-daygrid-day fc-day fc-day-thu fc-day-past fc-day-other"
+                                class="fc-day fc-day-thu fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-09-30"
                                 role="gridcell"
                               >
@@ -5313,7 +5319,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-182"
-                                class="fc-daygrid-day fc-day fc-day-fri fc-day-past"
+                                class="fc-day fc-day-fri fc-day-past fc-daygrid-day"
                                 data-date="2021-10-01"
                                 role="gridcell"
                               >
@@ -5362,7 +5368,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-184"
-                                class="fc-daygrid-day fc-day fc-day-sat fc-day-past"
+                                class="fc-day fc-day-sat fc-day-past fc-daygrid-day"
                                 data-date="2021-10-02"
                                 role="gridcell"
                               >
@@ -5415,7 +5421,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                             >
                               <td
                                 aria-labelledby="fc-dom-186"
-                                class="fc-daygrid-day fc-day fc-day-sun fc-day-past"
+                                class="fc-day fc-day-sun fc-day-past fc-daygrid-day"
                                 data-date="2021-10-03"
                                 role="gridcell"
                               >
@@ -5464,7 +5470,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-188"
-                                class="fc-daygrid-day fc-day fc-day-mon fc-day-past"
+                                class="fc-day fc-day-mon fc-day-past fc-daygrid-day"
                                 data-date="2021-10-04"
                                 role="gridcell"
                               >
@@ -5513,7 +5519,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-190"
-                                class="fc-daygrid-day fc-day fc-day-tue fc-day-past"
+                                class="fc-day fc-day-tue fc-day-past fc-daygrid-day"
                                 data-date="2021-10-05"
                                 role="gridcell"
                               >
@@ -5562,7 +5568,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-192"
-                                class="fc-daygrid-day fc-day fc-day-wed fc-day-past"
+                                class="fc-day fc-day-wed fc-day-past fc-daygrid-day"
                                 data-date="2021-10-06"
                                 role="gridcell"
                               >
@@ -5611,7 +5617,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-194"
-                                class="fc-daygrid-day fc-day fc-day-thu fc-day-past"
+                                class="fc-day fc-day-thu fc-day-past fc-daygrid-day"
                                 data-date="2021-10-07"
                                 role="gridcell"
                               >
@@ -5660,7 +5666,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-196"
-                                class="fc-daygrid-day fc-day fc-day-fri fc-day-past"
+                                class="fc-day fc-day-fri fc-day-past fc-daygrid-day"
                                 data-date="2021-10-08"
                                 role="gridcell"
                               >
@@ -5709,7 +5715,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-198"
-                                class="fc-daygrid-day fc-day fc-day-sat fc-day-past"
+                                class="fc-day fc-day-sat fc-day-past fc-daygrid-day"
                                 data-date="2021-10-09"
                                 role="gridcell"
                               >
@@ -5762,7 +5768,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                             >
                               <td
                                 aria-labelledby="fc-dom-200"
-                                class="fc-daygrid-day fc-day fc-day-sun fc-day-past"
+                                class="fc-day fc-day-sun fc-day-past fc-daygrid-day"
                                 data-date="2021-10-10"
                                 role="gridcell"
                               >
@@ -5811,7 +5817,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-202"
-                                class="fc-daygrid-day fc-day fc-day-mon fc-day-past"
+                                class="fc-day fc-day-mon fc-day-past fc-daygrid-day"
                                 data-date="2021-10-11"
                                 role="gridcell"
                               >
@@ -5860,7 +5866,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-204"
-                                class="fc-daygrid-day fc-day fc-day-tue fc-day-past"
+                                class="fc-day fc-day-tue fc-day-past fc-daygrid-day"
                                 data-date="2021-10-12"
                                 role="gridcell"
                               >
@@ -5909,7 +5915,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-206"
-                                class="fc-daygrid-day fc-day fc-day-wed fc-day-past"
+                                class="fc-day fc-day-wed fc-day-past fc-daygrid-day"
                                 data-date="2021-10-13"
                                 role="gridcell"
                               >
@@ -5958,7 +5964,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-208"
-                                class="fc-daygrid-day fc-day fc-day-thu fc-day-past"
+                                class="fc-day fc-day-thu fc-day-past fc-daygrid-day"
                                 data-date="2021-10-14"
                                 role="gridcell"
                               >
@@ -6007,7 +6013,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-210"
-                                class="fc-daygrid-day fc-day fc-day-fri fc-day-past"
+                                class="fc-day fc-day-fri fc-day-past fc-daygrid-day"
                                 data-date="2021-10-15"
                                 role="gridcell"
                               >
@@ -6056,7 +6062,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-212"
-                                class="fc-daygrid-day fc-day fc-day-sat fc-day-past"
+                                class="fc-day fc-day-sat fc-day-past fc-daygrid-day"
                                 data-date="2021-10-16"
                                 role="gridcell"
                               >
@@ -6109,7 +6115,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                             >
                               <td
                                 aria-labelledby="fc-dom-214"
-                                class="fc-daygrid-day fc-day fc-day-sun fc-day-past"
+                                class="fc-day fc-day-sun fc-day-past fc-daygrid-day"
                                 data-date="2021-10-17"
                                 role="gridcell"
                               >
@@ -6158,7 +6164,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-216"
-                                class="fc-daygrid-day fc-day fc-day-mon fc-day-past"
+                                class="fc-day fc-day-mon fc-day-past fc-daygrid-day"
                                 data-date="2021-10-18"
                                 role="gridcell"
                               >
@@ -6207,7 +6213,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-218"
-                                class="fc-daygrid-day fc-day fc-day-tue fc-day-past"
+                                class="fc-day fc-day-tue fc-day-past fc-daygrid-day"
                                 data-date="2021-10-19"
                                 role="gridcell"
                               >
@@ -6256,7 +6262,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-220"
-                                class="fc-daygrid-day fc-day fc-day-wed fc-day-past"
+                                class="fc-day fc-day-wed fc-day-past fc-daygrid-day"
                                 data-date="2021-10-20"
                                 role="gridcell"
                               >
@@ -6298,7 +6304,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                       style="margin-top: 0px;"
                                     >
                                       <a
-                                        class="fc-daygrid-event fc-daygrid-block-event fc-h-event fc-event fc-event-draggable fc-event-resizable fc-event-start fc-event-end fc-event-past"
+                                        class="fc-event fc-event-draggable fc-event-resizable fc-event-start fc-event-end fc-event-past fc-daygrid-event fc-daygrid-block-event fc-h-event"
                                       >
                                         <div
                                           class="fc-event-main"
@@ -6359,7 +6365,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-222"
-                                class="fc-daygrid-day fc-day fc-day-thu fc-day-past"
+                                class="fc-day fc-day-thu fc-day-past fc-daygrid-day"
                                 data-date="2021-10-21"
                                 role="gridcell"
                               >
@@ -6408,7 +6414,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-224"
-                                class="fc-daygrid-day fc-day fc-day-fri fc-day-past"
+                                class="fc-day fc-day-fri fc-day-past fc-daygrid-day"
                                 data-date="2021-10-22"
                                 role="gridcell"
                               >
@@ -6457,7 +6463,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-226"
-                                class="fc-daygrid-day fc-day fc-day-sat fc-day-past"
+                                class="fc-day fc-day-sat fc-day-past fc-daygrid-day"
                                 data-date="2021-10-23"
                                 role="gridcell"
                               >
@@ -6510,7 +6516,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                             >
                               <td
                                 aria-labelledby="fc-dom-228"
-                                class="fc-daygrid-day fc-day fc-day-sun fc-day-past"
+                                class="fc-day fc-day-sun fc-day-past fc-daygrid-day"
                                 data-date="2021-10-24"
                                 role="gridcell"
                               >
@@ -6559,7 +6565,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-230"
-                                class="fc-daygrid-day fc-day fc-day-mon fc-day-past"
+                                class="fc-day fc-day-mon fc-day-past fc-daygrid-day"
                                 data-date="2021-10-25"
                                 role="gridcell"
                               >
@@ -6608,7 +6614,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-232"
-                                class="fc-daygrid-day fc-day fc-day-tue fc-day-past"
+                                class="fc-day fc-day-tue fc-day-past fc-daygrid-day"
                                 data-date="2021-10-26"
                                 role="gridcell"
                               >
@@ -6657,7 +6663,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-234"
-                                class="fc-daygrid-day fc-day fc-day-wed fc-day-past"
+                                class="fc-day fc-day-wed fc-day-past fc-daygrid-day"
                                 data-date="2021-10-27"
                                 role="gridcell"
                               >
@@ -6706,7 +6712,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-236"
-                                class="fc-daygrid-day fc-day fc-day-thu fc-day-past"
+                                class="fc-day fc-day-thu fc-day-past fc-daygrid-day"
                                 data-date="2021-10-28"
                                 role="gridcell"
                               >
@@ -6755,7 +6761,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-238"
-                                class="fc-daygrid-day fc-day fc-day-fri fc-day-past"
+                                class="fc-day fc-day-fri fc-day-past fc-daygrid-day"
                                 data-date="2021-10-29"
                                 role="gridcell"
                               >
@@ -6804,7 +6810,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-240"
-                                class="fc-daygrid-day fc-day fc-day-sat fc-day-past"
+                                class="fc-day fc-day-sat fc-day-past fc-daygrid-day"
                                 data-date="2021-10-30"
                                 role="gridcell"
                               >
@@ -6857,7 +6863,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                             >
                               <td
                                 aria-labelledby="fc-dom-242"
-                                class="fc-daygrid-day fc-day fc-day-sun fc-day-past"
+                                class="fc-day fc-day-sun fc-day-past fc-daygrid-day"
                                 data-date="2021-10-31"
                                 role="gridcell"
                               >
@@ -6906,7 +6912,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-244"
-                                class="fc-daygrid-day fc-day fc-day-mon fc-day-past fc-day-other"
+                                class="fc-day fc-day-mon fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-11-01"
                                 role="gridcell"
                               >
@@ -6955,7 +6961,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-246"
-                                class="fc-daygrid-day fc-day fc-day-tue fc-day-past fc-day-other"
+                                class="fc-day fc-day-tue fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-11-02"
                                 role="gridcell"
                               >
@@ -7004,7 +7010,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-248"
-                                class="fc-daygrid-day fc-day fc-day-wed fc-day-past fc-day-other"
+                                class="fc-day fc-day-wed fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-11-03"
                                 role="gridcell"
                               >
@@ -7053,7 +7059,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-250"
-                                class="fc-daygrid-day fc-day fc-day-thu fc-day-past fc-day-other"
+                                class="fc-day fc-day-thu fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-11-04"
                                 role="gridcell"
                               >
@@ -7102,7 +7108,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-252"
-                                class="fc-daygrid-day fc-day fc-day-fri fc-day-past fc-day-other"
+                                class="fc-day fc-day-fri fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-11-05"
                                 role="gridcell"
                               >
@@ -7151,7 +7157,7 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                               </td>
                               <td
                                 aria-labelledby="fc-dom-254"
-                                class="fc-daygrid-day fc-day fc-day-sat fc-day-past fc-day-other"
+                                class="fc-day fc-day-sat fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-11-06"
                                 role="gridcell"
                               >
@@ -7269,6 +7275,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
             >
               <span
                 class="fc-icon fc-icon-chevron-left"
+                role="img"
               />
             </button>
             <button
@@ -7287,6 +7294,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
             >
               <span
                 class="fc-icon fc-icon-chevron-right"
+                role="img"
               />
             </button>
           </div>
@@ -7298,7 +7306,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
         style="padding-bottom: 74.07407407407408%; height: 0px;"
       >
         <div
-          class="fc-daygrid fc-dayGridMonth-view fc-view"
+          class="fc-dayGridMonth-view fc-view fc-daygrid"
         >
           <table
             class="fc-scrollgrid  fc-scrollgrid-liquid"
@@ -7342,7 +7350,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               >
                                 <a
                                   aria-label="Sunday"
-                                  class="fc-col-header-cell-cushion "
+                                  class="fc-col-header-cell-cushion"
                                 >
                                   Sun
                                 </a>
@@ -7357,7 +7365,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               >
                                 <a
                                   aria-label="Monday"
-                                  class="fc-col-header-cell-cushion "
+                                  class="fc-col-header-cell-cushion"
                                 >
                                   Mon
                                 </a>
@@ -7372,7 +7380,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               >
                                 <a
                                   aria-label="Tuesday"
-                                  class="fc-col-header-cell-cushion "
+                                  class="fc-col-header-cell-cushion"
                                 >
                                   Tue
                                 </a>
@@ -7387,7 +7395,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               >
                                 <a
                                   aria-label="Wednesday"
-                                  class="fc-col-header-cell-cushion "
+                                  class="fc-col-header-cell-cushion"
                                 >
                                   Wed
                                 </a>
@@ -7402,7 +7410,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               >
                                 <a
                                   aria-label="Thursday"
-                                  class="fc-col-header-cell-cushion "
+                                  class="fc-col-header-cell-cushion"
                                 >
                                   Thu
                                 </a>
@@ -7417,7 +7425,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               >
                                 <a
                                   aria-label="Friday"
-                                  class="fc-col-header-cell-cushion "
+                                  class="fc-col-header-cell-cushion"
                                 >
                                   Fri
                                 </a>
@@ -7432,7 +7440,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               >
                                 <a
                                   aria-label="Saturday"
-                                  class="fc-col-header-cell-cushion "
+                                  class="fc-col-header-cell-cushion"
                                 >
                                   Sat
                                 </a>
@@ -7477,7 +7485,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                             >
                               <td
                                 aria-labelledby="fc-dom-257"
-                                class="fc-daygrid-day fc-day fc-day-sun fc-day-past fc-day-other"
+                                class="fc-day fc-day-sun fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-09-26"
                                 role="gridcell"
                               >
@@ -7526,7 +7534,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-259"
-                                class="fc-daygrid-day fc-day fc-day-mon fc-day-past fc-day-other"
+                                class="fc-day fc-day-mon fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-09-27"
                                 role="gridcell"
                               >
@@ -7575,7 +7583,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-261"
-                                class="fc-daygrid-day fc-day fc-day-tue fc-day-past fc-day-other"
+                                class="fc-day fc-day-tue fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-09-28"
                                 role="gridcell"
                               >
@@ -7624,7 +7632,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-263"
-                                class="fc-daygrid-day fc-day fc-day-wed fc-day-past fc-day-other"
+                                class="fc-day fc-day-wed fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-09-29"
                                 role="gridcell"
                               >
@@ -7673,7 +7681,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-265"
-                                class="fc-daygrid-day fc-day fc-day-thu fc-day-past fc-day-other"
+                                class="fc-day fc-day-thu fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-09-30"
                                 role="gridcell"
                               >
@@ -7722,7 +7730,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-267"
-                                class="fc-daygrid-day fc-day fc-day-fri fc-day-past"
+                                class="fc-day fc-day-fri fc-day-past fc-daygrid-day"
                                 data-date="2021-10-01"
                                 role="gridcell"
                               >
@@ -7771,7 +7779,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-269"
-                                class="fc-daygrid-day fc-day fc-day-sat fc-day-past"
+                                class="fc-day fc-day-sat fc-day-past fc-daygrid-day"
                                 data-date="2021-10-02"
                                 role="gridcell"
                               >
@@ -7824,7 +7832,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                             >
                               <td
                                 aria-labelledby="fc-dom-271"
-                                class="fc-daygrid-day fc-day fc-day-sun fc-day-past"
+                                class="fc-day fc-day-sun fc-day-past fc-daygrid-day"
                                 data-date="2021-10-03"
                                 role="gridcell"
                               >
@@ -7873,7 +7881,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-273"
-                                class="fc-daygrid-day fc-day fc-day-mon fc-day-past"
+                                class="fc-day fc-day-mon fc-day-past fc-daygrid-day"
                                 data-date="2021-10-04"
                                 role="gridcell"
                               >
@@ -7922,7 +7930,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-275"
-                                class="fc-daygrid-day fc-day fc-day-tue fc-day-past"
+                                class="fc-day fc-day-tue fc-day-past fc-daygrid-day"
                                 data-date="2021-10-05"
                                 role="gridcell"
                               >
@@ -7964,7 +7972,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                       style="margin-top: 0px;"
                                     >
                                       <a
-                                        class="fc-daygrid-event fc-daygrid-block-event fc-h-event fc-event fc-event-start fc-event-end fc-event-past"
+                                        class="fc-event fc-event-start fc-event-end fc-event-past fc-daygrid-event fc-daygrid-block-event fc-h-event"
                                       >
                                         <div
                                           class="fc-event-main"
@@ -8019,7 +8027,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-277"
-                                class="fc-daygrid-day fc-day fc-day-wed fc-day-past"
+                                class="fc-day fc-day-wed fc-day-past fc-daygrid-day"
                                 data-date="2021-10-06"
                                 role="gridcell"
                               >
@@ -8068,7 +8076,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-279"
-                                class="fc-daygrid-day fc-day fc-day-thu fc-day-past"
+                                class="fc-day fc-day-thu fc-day-past fc-daygrid-day"
                                 data-date="2021-10-07"
                                 role="gridcell"
                               >
@@ -8117,7 +8125,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-281"
-                                class="fc-daygrid-day fc-day fc-day-fri fc-day-past"
+                                class="fc-day fc-day-fri fc-day-past fc-daygrid-day"
                                 data-date="2021-10-08"
                                 role="gridcell"
                               >
@@ -8166,7 +8174,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-283"
-                                class="fc-daygrid-day fc-day fc-day-sat fc-day-past"
+                                class="fc-day fc-day-sat fc-day-past fc-daygrid-day"
                                 data-date="2021-10-09"
                                 role="gridcell"
                               >
@@ -8219,7 +8227,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                             >
                               <td
                                 aria-labelledby="fc-dom-285"
-                                class="fc-daygrid-day fc-day fc-day-sun fc-day-past"
+                                class="fc-day fc-day-sun fc-day-past fc-daygrid-day"
                                 data-date="2021-10-10"
                                 role="gridcell"
                               >
@@ -8268,7 +8276,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-287"
-                                class="fc-daygrid-day fc-day fc-day-mon fc-day-past"
+                                class="fc-day fc-day-mon fc-day-past fc-daygrid-day"
                                 data-date="2021-10-11"
                                 role="gridcell"
                               >
@@ -8317,7 +8325,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-289"
-                                class="fc-daygrid-day fc-day fc-day-tue fc-day-past"
+                                class="fc-day fc-day-tue fc-day-past fc-daygrid-day"
                                 data-date="2021-10-12"
                                 role="gridcell"
                               >
@@ -8366,7 +8374,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-291"
-                                class="fc-daygrid-day fc-day fc-day-wed fc-day-past"
+                                class="fc-day fc-day-wed fc-day-past fc-daygrid-day"
                                 data-date="2021-10-13"
                                 role="gridcell"
                               >
@@ -8415,7 +8423,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-293"
-                                class="fc-daygrid-day fc-day fc-day-thu fc-day-past"
+                                class="fc-day fc-day-thu fc-day-past fc-daygrid-day"
                                 data-date="2021-10-14"
                                 role="gridcell"
                               >
@@ -8464,7 +8472,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-295"
-                                class="fc-daygrid-day fc-day fc-day-fri fc-day-past"
+                                class="fc-day fc-day-fri fc-day-past fc-daygrid-day"
                                 data-date="2021-10-15"
                                 role="gridcell"
                               >
@@ -8513,7 +8521,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-297"
-                                class="fc-daygrid-day fc-day fc-day-sat fc-day-past"
+                                class="fc-day fc-day-sat fc-day-past fc-daygrid-day"
                                 data-date="2021-10-16"
                                 role="gridcell"
                               >
@@ -8566,7 +8574,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                             >
                               <td
                                 aria-labelledby="fc-dom-299"
-                                class="fc-daygrid-day fc-day fc-day-sun fc-day-past"
+                                class="fc-day fc-day-sun fc-day-past fc-daygrid-day"
                                 data-date="2021-10-17"
                                 role="gridcell"
                               >
@@ -8615,7 +8623,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-301"
-                                class="fc-daygrid-day fc-day fc-day-mon fc-day-past"
+                                class="fc-day fc-day-mon fc-day-past fc-daygrid-day"
                                 data-date="2021-10-18"
                                 role="gridcell"
                               >
@@ -8664,7 +8672,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-303"
-                                class="fc-daygrid-day fc-day fc-day-tue fc-day-past"
+                                class="fc-day fc-day-tue fc-day-past fc-daygrid-day"
                                 data-date="2021-10-19"
                                 role="gridcell"
                               >
@@ -8713,7 +8721,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-305"
-                                class="fc-daygrid-day fc-day fc-day-wed fc-day-past"
+                                class="fc-day fc-day-wed fc-day-past fc-daygrid-day"
                                 data-date="2021-10-20"
                                 role="gridcell"
                               >
@@ -8762,7 +8770,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-307"
-                                class="fc-daygrid-day fc-day fc-day-thu fc-day-past"
+                                class="fc-day fc-day-thu fc-day-past fc-daygrid-day"
                                 data-date="2021-10-21"
                                 role="gridcell"
                               >
@@ -8811,7 +8819,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-309"
-                                class="fc-daygrid-day fc-day fc-day-fri fc-day-past"
+                                class="fc-day fc-day-fri fc-day-past fc-daygrid-day"
                                 data-date="2021-10-22"
                                 role="gridcell"
                               >
@@ -8860,7 +8868,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-311"
-                                class="fc-daygrid-day fc-day fc-day-sat fc-day-past"
+                                class="fc-day fc-day-sat fc-day-past fc-daygrid-day"
                                 data-date="2021-10-23"
                                 role="gridcell"
                               >
@@ -8913,7 +8921,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                             >
                               <td
                                 aria-labelledby="fc-dom-313"
-                                class="fc-daygrid-day fc-day fc-day-sun fc-day-past"
+                                class="fc-day fc-day-sun fc-day-past fc-daygrid-day"
                                 data-date="2021-10-24"
                                 role="gridcell"
                               >
@@ -8962,7 +8970,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-315"
-                                class="fc-daygrid-day fc-day fc-day-mon fc-day-past"
+                                class="fc-day fc-day-mon fc-day-past fc-daygrid-day"
                                 data-date="2021-10-25"
                                 role="gridcell"
                               >
@@ -9011,7 +9019,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-317"
-                                class="fc-daygrid-day fc-day fc-day-tue fc-day-past"
+                                class="fc-day fc-day-tue fc-day-past fc-daygrid-day"
                                 data-date="2021-10-26"
                                 role="gridcell"
                               >
@@ -9060,7 +9068,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-319"
-                                class="fc-daygrid-day fc-day fc-day-wed fc-day-past"
+                                class="fc-day fc-day-wed fc-day-past fc-daygrid-day"
                                 data-date="2021-10-27"
                                 role="gridcell"
                               >
@@ -9109,7 +9117,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-321"
-                                class="fc-daygrid-day fc-day fc-day-thu fc-day-past"
+                                class="fc-day fc-day-thu fc-day-past fc-daygrid-day"
                                 data-date="2021-10-28"
                                 role="gridcell"
                               >
@@ -9158,7 +9166,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-323"
-                                class="fc-daygrid-day fc-day fc-day-fri fc-day-past"
+                                class="fc-day fc-day-fri fc-day-past fc-daygrid-day"
                                 data-date="2021-10-29"
                                 role="gridcell"
                               >
@@ -9207,7 +9215,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-325"
-                                class="fc-daygrid-day fc-day fc-day-sat fc-day-past"
+                                class="fc-day fc-day-sat fc-day-past fc-daygrid-day"
                                 data-date="2021-10-30"
                                 role="gridcell"
                               >
@@ -9260,7 +9268,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                             >
                               <td
                                 aria-labelledby="fc-dom-327"
-                                class="fc-daygrid-day fc-day fc-day-sun fc-day-past"
+                                class="fc-day fc-day-sun fc-day-past fc-daygrid-day"
                                 data-date="2021-10-31"
                                 role="gridcell"
                               >
@@ -9309,7 +9317,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-329"
-                                class="fc-daygrid-day fc-day fc-day-mon fc-day-past fc-day-other"
+                                class="fc-day fc-day-mon fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-11-01"
                                 role="gridcell"
                               >
@@ -9358,7 +9366,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-331"
-                                class="fc-daygrid-day fc-day fc-day-tue fc-day-past fc-day-other"
+                                class="fc-day fc-day-tue fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-11-02"
                                 role="gridcell"
                               >
@@ -9407,7 +9415,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-333"
-                                class="fc-daygrid-day fc-day fc-day-wed fc-day-past fc-day-other"
+                                class="fc-day fc-day-wed fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-11-03"
                                 role="gridcell"
                               >
@@ -9456,7 +9464,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-335"
-                                class="fc-daygrid-day fc-day fc-day-thu fc-day-past fc-day-other"
+                                class="fc-day fc-day-thu fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-11-04"
                                 role="gridcell"
                               >
@@ -9505,7 +9513,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-337"
-                                class="fc-daygrid-day fc-day fc-day-fri fc-day-past fc-day-other"
+                                class="fc-day fc-day-fri fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-11-05"
                                 role="gridcell"
                               >
@@ -9554,7 +9562,7 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                               </td>
                               <td
                                 aria-labelledby="fc-dom-339"
-                                class="fc-daygrid-day fc-day fc-day-sat fc-day-past fc-day-other"
+                                class="fc-day fc-day-sat fc-day-past fc-day-other fc-daygrid-day"
                                 data-date="2021-11-06"
                                 role="gridcell"
                               >

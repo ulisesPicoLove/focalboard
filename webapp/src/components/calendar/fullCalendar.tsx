@@ -5,7 +5,8 @@ import React, {useCallback, useMemo, useState} from 'react'
 
 import {useIntl} from 'react-intl'
 
-import FullCalendar, {EventChangeArg, EventInput, EventContentArg, DayCellContentArg} from '@fullcalendar/react'
+import FullCalendar from '@fullcalendar/react'
+import type {EventChangeArg, EventInput, EventContentArg, DayCellContentArg} from '@fullcalendar/core'
 
 import interactionPlugin from '@fullcalendar/interaction'
 import dayGridPlugin from '@fullcalendar/daygrid'
