@@ -11,6 +11,8 @@ import {
     defaultThemeName,
     lightTheme,
     lightThemeName,
+    picoTheme,
+    picoThemeName,
     setTheme, systemThemeName,
     Theme,
 } from '../../theme'
@@ -53,6 +55,11 @@ const SidebarSettingsMenu = (props: Props) => {
     }
 
     const themes = [
+        {
+            id: picoThemeName,
+            displayName: 'Pico.Love OS',
+            theme: picoTheme,
+        },
         {
             id: defaultThemeName,
             displayName: 'Default theme',

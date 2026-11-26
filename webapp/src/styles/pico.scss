@@ -1,0 +1,618 @@
+// Pico.Love OS design system: global polish on top of the theme colours
+// (see `picoTheme` in theme.ts). Dark, flat, hairline-separated, mint accent.
+
+:root {
+    --pico-font-sans: 'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --pico-font-mono: 'Space Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+    --pico-line: rgba(var(--center-channel-color-rgb), 0.1);
+    --pico-glass: rgba(var(--center-channel-color-rgb), 0.04);
+    --pico-surface: rgba(var(--center-channel-color-rgb), 0.03);
+    --pico-scrim: rgba(0, 0, 0, 0.6);
+    --pico-shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.6);
+    --pico-glass-line: rgba(var(--center-channel-color-rgb), 0.14);
+
+    // Radii (radius-sm/md/lg/pill)
+    --default-rad: 8px;
+    --modal-rad: 16px;
+    --pico-rad-md: 12px;
+    --pico-rad-lg: 16px;
+    --pico-rad-pill: 999px;
+
+    // Flat elevation: separate with hairlines, not shadows
+    --elevation-1: 0 0 0 1px var(--pico-line);
+    --elevation-2: 0 0 0 1px var(--pico-line);
+    --elevation-3: 0 8px 24px rgba(0, 0, 0, 0.4);
+    --elevation-4: 0 12px 32px rgba(0, 0, 0, 0.5);
+    --elevation-5: 0 12px 32px rgba(0, 0, 0, 0.5);
+    --elevation-6: 0 16px 48px rgba(0, 0, 0, 0.6);
+}
+
+// Light themes: softer scrim and shadows
+:root[data-pico-mode='light'] {
+    --pico-scrim: rgba(20, 24, 33, 0.4);
+    --pico-shadow-lg: 0 24px 64px rgba(20, 24, 33, 0.18);
+    --elevation-3: 0 8px 24px rgba(20, 24, 33, 0.1);
+    --elevation-4: 0 12px 32px rgba(20, 24, 33, 0.12);
+    --elevation-5: 0 12px 32px rgba(20, 24, 33, 0.12);
+    --elevation-6: 0 16px 48px rgba(20, 24, 33, 0.16);
+}
+
+.focalboard-body {
+    font-family: var(--pico-font-sans);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+
+    h1,
+    h2,
+    h3,
+    .title {
+        font-family: var(--pico-font-sans);
+        font-weight: 300;
+    }
+
+    .text-heading8,
+    .text-heading7,
+    .text-heading6,
+    .text-heading5,
+    .text-heading4,
+    .text-heading3,
+    .text-heading2,
+    .text-heading1 {
+        font-weight: 300;
+    }
+
+    ::selection {
+        background: rgba(var(--button-bg-rgb), 0.3);
+    }
+
+    :focus-visible {
+        outline: 2px solid rgb(var(--button-bg-rgb));
+        outline-offset: 2px;
+    }
+
+    // Buttons: pill shaped, mint primary with dark text
+    .Button {
+        font-family: var(--pico-font-sans);
+        font-weight: 500;
+        border-radius: var(--pico-rad-pill);
+        padding: 0 14px;
+
+        &.filled,
+        &.emphasis--primary {
+            color: rgb(var(--button-color-rgb));
+            padding: 6px 16px;
+
+            &:hover {
+                background-color: rgb(var(--button-bg-rgb));
+                filter: brightness(0.92);
+            }
+
+            &.danger {
+                color: #fff;
+            }
+        }
+
+        &.emphasis--secondary {
+            border-color: rgba(var(--button-bg-rgb), 0.5);
+        }
+    }
+
+    .IconButton {
+        border-radius: var(--pico-rad-pill);
+    }
+
+    // Kanban cards and gallery cards: flat surface, hairline border, radius-lg
+    .KanbanCard,
+    .GalleryCard {
+        border-radius: var(--pico-rad-lg);
+        background: var(--pico-surface);
+        box-shadow: none;
+        border: 1px solid var(--pico-line);
+        transition: border-color 300ms ease, background 300ms ease;
+
+        &:hover {
+            background: var(--pico-surface);
+            border-color: rgba(var(--button-bg-rgb), 0.5);
+        }
+
+        &.selected {
+            background: rgba(var(--button-bg-rgb), 0.08);
+            border-color: rgb(var(--button-bg-rgb));
+        }
+    }
+
+    // Menus, popups and dialogs: glass-like panels with hairline borders
+    .Menu,
+    .Menu.noselect {
+        border: 1px solid var(--pico-glass-line);
+        border-radius: var(--pico-rad-md);
+    }
+
+    .Dialog .wrapper,
+    .Dialog > .wrapper {
+        border: 1px solid var(--pico-glass-line);
+        border-radius: var(--modal-rad);
+    }
+
+    // Inputs
+    input,
+    textarea {
+        font-family: var(--pico-font-sans);
+    }
+
+
+    // Thin dark scrollbars (standard props also hide the bright arrow buttons)
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(var(--center-channel-color-rgb), 0.2) transparent;
+    }
+
+    // ------------------------------------------------------------------
+    // Composition
+    // ------------------------------------------------------------------
+
+    // Announcement bar: quiet hairline strip instead of a full mint banner
+    .VersionMessage,
+    .NewVersionBanner {
+        background: transparent;
+        border-bottom: 1px solid var(--pico-line);
+
+        > .banner {
+            padding: 6px;
+            font-family: var(--pico-font-mono);
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgb(var(--button-bg-rgb));
+
+            .Button {
+                background: transparent;
+                border: 1px solid var(--pico-glass-line);
+                color: rgb(var(--center-channel-color-rgb));
+                font-family: var(--pico-font-mono);
+                font-size: 11px;
+                text-transform: uppercase;
+            }
+        }
+    }
+
+    // Sidebar: calm surface, sentence-case items, mint dot for the active one
+    .Sidebar {
+        padding: 20px 0 12px;
+        border-right: 1px solid var(--pico-line);
+        font-size: 13px;
+
+        .octo-sidebar-header {
+            height: 40px;
+            margin-bottom: 8px;
+            padding: 0 20px;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+
+            &:hover {
+                background: transparent;
+            }
+        }
+
+        .octo-sidebar-list {
+            padding: 0 8px;
+        }
+
+        .SidebarCategory {
+            margin-top: 20px;
+
+            .octo-sidebar-item.category {
+                .octo-sidebar-title {
+                    font-family: var(--pico-font-mono);
+                    font-size: 10px;
+                    font-weight: 400;
+                    letter-spacing: 0.14em;
+                    text-transform: uppercase;
+                    color: rgba(var(--sidebar-text-rgb), 0.5);
+                }
+            }
+        }
+
+        .SidebarBoardItem,
+        .SidebarCategory .octo-sidebar-item {
+            border-radius: var(--pico-rad-md);
+            height: 34px;
+            font-weight: 400;
+            margin: 1px 0;
+
+            &:hover {
+                background: rgba(var(--sidebar-text-rgb), 0.05);
+            }
+
+            &.active {
+                background: rgba(var(--sidebar-text-active-border-rgb), 0.08);
+
+                &:not(.subitem)::before {
+                    display: none;
+                }
+            }
+
+            &.sidebar-view-item {
+                padding-left: 40px;
+                font-size: 12px;
+                color: rgba(var(--sidebar-text-rgb), 0.56);
+
+                &.active {
+                    background: transparent;
+                    color: rgb(var(--sidebar-text-rgb));
+                    font-weight: 500;
+                }
+            }
+        }
+
+        .SidebarBoardItem.category {
+            padding-left: 8px;
+        }
+
+        .add-board,
+        .SidebarSettingsMenu .menu-entry {
+            font-size: 12px;
+            color: rgba(var(--sidebar-text-rgb), 0.56);
+        }
+
+        input[type='text'],
+        .SearchBar,
+        .octo-sidebar-search {
+            border-radius: var(--pico-rad-pill);
+        }
+    }
+
+    // Board header: lots of air, light title, quiet toolbar
+    .BoardComponent > * {
+        padding-left: 48px;
+        padding-right: 48px;
+    }
+
+    .ViewTitle {
+        margin-top: 24px;
+
+        .title input,
+        .title .Editable {
+            font-weight: 300;
+            font-size: 36px;
+            line-height: 44px;
+            letter-spacing: -0.01em;
+        }
+
+        .description {
+            color: rgba(var(--center-channel-color-rgb), 0.56);
+            font-size: 14px;
+        }
+    }
+
+    .TopBar a.link,
+    .TopBar .version {
+        font-family: var(--pico-font-mono);
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    .ViewHeader {
+        margin-top: 24px;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--pico-line);
+        font-size: 13px;
+
+        .Button:not(.filled):not(.emphasis--primary) {
+            color: rgba(var(--center-channel-color-rgb), 0.64);
+            font-weight: 400;
+
+            &:hover {
+                color: rgb(var(--center-channel-color-rgb));
+                background: rgba(var(--center-channel-color-rgb), 0.06);
+            }
+        }
+
+        .board-search-field input {
+            border-radius: var(--pico-rad-pill);
+            border: 1px solid var(--pico-line);
+            background: var(--pico-glass);
+        }
+    }
+
+    // Kanban: columns are a dot + name + count, no solid colour bars
+    .Kanban {
+        .octo-board-header {
+            padding: 24px 0 12px;
+            color: rgba(var(--center-channel-color-rgb), 0.56);
+        }
+
+        .octo-board-header-cell {
+            width: 280px;
+            margin-right: 20px;
+
+            .Label,
+            .Label .Editable,
+            .Label input {
+                font-family: var(--pico-font-mono);
+                font-size: 11px;
+                font-weight: 400;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+            }
+
+            .KanbanCalculation,
+            .KanbanCalculation .Button {
+                font-family: var(--pico-font-mono);
+                font-size: 11px;
+                color: rgba(var(--center-channel-color-rgb), 0.48);
+            }
+
+            .Label {
+                background: transparent;
+                padding: 0;
+                margin: 0 8px 0 0;
+                color: rgb(var(--center-channel-color-rgb));
+
+                &::before {
+                    content: '';
+                    flex: 0 0 8px;
+                    width: 8px;
+                    height: 8px;
+                    margin-right: 10px;
+                    border-radius: 50%;
+                    background: var(--pico-dot, rgba(var(--center-channel-color-rgb), 0.4));
+                }
+            }
+        }
+
+        .octo-board-column {
+            width: 280px;
+            margin-right: 20px;
+        }
+
+        .KanbanCard {
+            margin-bottom: 12px;
+            padding: 16px 18px;
+            gap: 6px;
+        }
+    }
+
+    // Select-option chips on cards and properties: outlined, light and small
+    .KanbanCard .Label,
+    .GalleryCard .Label,
+    .TableRow .Label,
+    .octo-propertyvalue .Label,
+    .ValueSelector .Label {
+        border-radius: var(--pico-rad-pill);
+        padding: 1px 10px;
+        margin: 2px 6px 2px 0;
+        font-size: 10px;
+        font-weight: 400;
+        letter-spacing: 0.06em;
+        line-height: 18px;
+        background: transparent;
+        border: 1px solid var(--pico-glass-line);
+        color: rgba(var(--center-channel-color-rgb), 0.8);
+        font-family: var(--pico-font-mono);
+    }
+
+    .KanbanCard .octo-icontitle,
+    .KanbanCard .octo-titletext {
+        font-weight: 400;
+        font-size: 14px;
+    }
+
+    // Table view: horizontal hairlines only, mono column headers
+    .Table {
+        .octo-table-header {
+            border-bottom: 1px solid var(--pico-line);
+        }
+
+        .octo-table-cell {
+            border-right: 0;
+            border-left: 0;
+            border-bottom: 1px solid var(--pico-line);
+            font-size: 13px;
+        }
+
+        .octo-table-cell.header-cell,
+        .octo-table-cell.header-cell * {
+            font-family: var(--pico-font-mono);
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: rgba(var(--center-channel-color-rgb), 0.56);
+        }
+    }
+
+    // Split "New" button: one pill
+    .ButtonWithMenu {
+        .button-text {
+            padding: 4px 14px;
+            font-weight: 500;
+            border-radius: var(--pico-rad-pill) 0 0 var(--pico-rad-pill);
+        }
+
+        .button-dropdown {
+            padding: 0 8px 0 6px;
+            border-radius: 0 var(--pico-rad-pill) var(--pico-rad-pill) 0;
+        }
+    }
+
+    // Card dialog: glass panel, light title, mono property labels
+    .Dialog .toolbar {
+        font-size: 13px;
+    }
+
+    .CardDetail {
+        .octo-propertyrow {
+            margin: 4px 0;
+        }
+
+        .octo-propertyname,
+        .octo-propertyname .Button {
+            font-family: var(--pico-font-mono);
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(var(--center-channel-color-rgb), 0.56);
+        }
+
+        .octo-propertyvalue {
+            font-size: 13px;
+        }
+
+        .CommentsList,
+        .comment-container {
+            border-color: var(--pico-line);
+        }
+    }
+
+    .Dialog .wrapper,
+    .Dialog > .wrapper {
+        background: rgba(var(--center-channel-bg-rgb), 0.92);
+        backdrop-filter: blur(16px);
+        box-shadow: var(--pico-shadow-lg);
+    }
+
+    .Dialog .backdrop {
+        background: var(--pico-scrim);
+        backdrop-filter: blur(4px);
+    }
+
+    // ------------------------------------------------------------------
+    // "Create a board" template picker
+    // ------------------------------------------------------------------
+    .BoardTemplateSelector__backdrop {
+        background: var(--pico-scrim);
+        backdrop-filter: blur(4px);
+    }
+
+    .BoardTemplateSelector {
+        border: 1px solid var(--pico-glass-line);
+        border-radius: var(--pico-rad-lg);
+        box-shadow: var(--pico-shadow-lg);
+
+        .header {
+            height: auto;
+            min-height: 88px;
+            padding: 24px 40px;
+            gap: 24px;
+            border-bottom: 1px solid var(--pico-line);
+
+            .title {
+                font-size: 28px;
+                font-weight: 300;
+                letter-spacing: -0.01em;
+                white-space: nowrap;
+            }
+
+            .description {
+                max-width: 560px;
+                text-align: left;
+                font-size: 13px;
+                line-height: 20px;
+                color: rgba(var(--center-channel-color-rgb), 0.56);
+                border-left: 1px solid var(--pico-line);
+                padding-left: 24px;
+                margin: 0;
+            }
+        }
+
+        .templates-sidebar {
+            flex-basis: 320px;
+            background: var(--pico-surface);
+            border-right: 1px solid var(--pico-line);
+        }
+
+        .templates .templates-list {
+            padding: 20px 16px;
+
+            .new-template {
+                margin-bottom: 20px;
+                padding-left: 12px;
+                color: rgb(var(--button-bg-rgb));
+                font-family: var(--pico-font-mono);
+                font-size: 11px;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+            }
+        }
+
+        .BoardTemplateSelectorItem {
+            height: 36px;
+            margin-bottom: 2px;
+            padding: 0 12px;
+            font-size: 13px;
+            font-weight: 400;
+            border-radius: var(--pico-rad-md);
+            color: rgba(var(--center-channel-color-rgb), 0.64);
+
+            &:hover {
+                background: rgba(var(--center-channel-color-rgb), 0.05);
+                color: rgb(var(--center-channel-color-rgb));
+            }
+
+            &.active {
+                background: rgba(var(--button-bg-rgb), 0.08);
+                color: rgb(var(--button-bg-rgb));
+            }
+
+            .template-icon {
+                opacity: 0.8;
+            }
+        }
+
+        .templates-sidebar__footer,
+        .buttons {
+            height: 88px;
+            padding: 20px 24px;
+            border-top: 1px solid var(--pico-line);
+        }
+
+        .buttons {
+            background: transparent;
+            padding-right: 40px;
+        }
+
+        .template-preview-box {
+            padding: 32px 40px 0;
+            background: transparent;
+        }
+
+        .templates__empty-board {
+            font-family: var(--pico-font-sans);
+            font-weight: 500;
+        }
+    }
+}
+
+// Status dots for the default column colours
+.propColorGray,
+.propColorDefault {
+    --pico-dot: rgba(var(--center-channel-color-rgb), 0.4);
+}
+
+.propColorBrown,
+.propColorOrange,
+.propColorYellow {
+    --pico-dot: #ffe4c5;
+}
+
+.propColorGreen {
+    --pico-dot: #acfbdd;
+}
+
+.propColorBlue,
+.propColorPurple {
+    --pico-dot: #a8d8f0;
+}
+
+.propColorPink {
+    --pico-dot: #f48fa1;
+}
+
+.propColorRed {
+    --pico-dot: #cd2028;
+}

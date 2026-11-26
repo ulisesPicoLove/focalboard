@@ -92,6 +92,25 @@ export const darkTheme = {
     propRed: 'hsla(4, 100%, 70%, 0.4)',
 }
 
+export const picoThemeName = 'pico-theme'
+
+// Pico.Love OS design system (dark only): void ground, mint accent.
+export const picoTheme = {
+    ...darkTheme,
+
+    mainBg: '10, 9, 12', // void
+    mainFg: '233, 235, 238', // ink
+    buttonBg: '172, 251, 221', // mint
+    buttonFg: '7, 7, 10', // on-mint
+    sidebarBg: '15, 18, 22', // surface
+    sidebarFg: '233, 235, 238', // ink
+    sidebarTextActiveBorder: '172, 251, 221', // mint
+    sidebarWhiteLogo: 'true',
+
+    link: '168, 216, 240', // sky
+    linkVisited: '#92d5bf', // mint-label
+}
+
 export const lightThemeName = 'light-theme'
 
 export const lightTheme = {
@@ -105,6 +124,12 @@ export const lightTheme = {
     sidebarFg: '55, 53, 47',
     sidebarTextActiveBorder: '87, 158, 255',
     sidebarWhiteLogo: 'false',
+}
+
+// True when an 'r, g, b' string is closer to black than to white.
+function isDarkRgb(rgb: string): boolean {
+    const [r, g, b] = rgb.split(',').map((v) => parseInt(v.trim(), 10))
+    return ((0.299 * r) + (0.587 * g) + (0.114 * b)) < 128
 }
 
 export function setTheme(theme: Theme | null): Theme {
@@ -124,6 +149,7 @@ export function setTheme(theme: Theme | null): Theme {
 
     // for personal server and desktop, Focalboard is responsible for managing the theme,
     // so we set all the color variables here.
+    document.documentElement.dataset.picoMode = isDarkRgb(consolidatedTheme.mainBg) ? 'dark' : 'light'
     document.documentElement.style.setProperty('--center-channel-bg-rgb', consolidatedTheme.mainBg)
     document.documentElement.style.setProperty('--center-channel-color-rgb', consolidatedTheme.mainFg)
     document.documentElement.style.setProperty('--button-bg-rgb', consolidatedTheme.buttonBg)
@@ -180,6 +206,8 @@ export function setMattermostTheme(theme: any): Theme {
 function setActiveThemeName(consolidatedTheme: Theme, theme: Theme | null) {
     if (theme === null) {
         activeThemeName = systemThemeName
+    } else if (isEqual(consolidatedTheme, picoTheme)) {
+        activeThemeName = picoThemeName
     } else if (isEqual(consolidatedTheme, darkTheme)) {
         activeThemeName = darkThemeName
     } else if (isEqual(consolidatedTheme, lightTheme)) {
@@ -201,7 +229,7 @@ export function loadTheme(): Theme {
             return setTheme(null)
         }
     } else {
-        return setTheme(null)
+        return setTheme(picoTheme)
     }
 }
 

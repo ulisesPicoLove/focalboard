@@ -1306,6 +1306,31 @@ exports[`components/sidebar/SidebarSettingsMenu theme menu open should match sna
                       class="menu-options"
                     >
                       <div
+                        aria-label="Pico.Love OS"
+                        class="MenuOption TextOption menu-option"
+                        role="button"
+                      >
+                        <div
+                          class="d-flex"
+                        >
+                          <div
+                            class="noicon"
+                          />
+                        </div>
+                        <div
+                          class="menu-option__content"
+                        >
+                          <div
+                            class="menu-name"
+                          >
+                            Pico.Love OS
+                          </div>
+                        </div>
+                        <div
+                          class="noicon"
+                        />
+                      </div>
+                      <div
                         aria-label="Default theme"
                         class="MenuOption TextOption menu-option"
                         role="button"

@@ -20,6 +20,7 @@ import './styles/variables.scss'
 import './styles/main.scss'
 import './styles/labels.scss'
 import './styles/_markdown.scss'
+import './styles/pico.scss'
 
 import store from './store'
 import WithWebSockets from './components/withWebSockets'
