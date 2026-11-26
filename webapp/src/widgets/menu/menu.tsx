@@ -12,6 +12,7 @@ import LabelOption from './labelOption'
 import './menu.scss'
 import textInputOption from './textInputOption'
 import MenuUtil from './menuUtil'
+import {menuKeyDown} from './menuNavigation'
 
 type Props = {
     children: React.ReactNode
@@ -56,6 +57,7 @@ export default class Menu extends React.PureComponent<Props> {
                 className={`Menu noselect ${position || 'bottom'} ${fixed ? ' fixed' : ''}`}
                 style={style}
                 ref={this.menuRef}
+                onKeyDown={menuKeyDown}
             >
                 <div className='menu-contents'>
                     <div className='menu-options'>

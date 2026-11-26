@@ -3,6 +3,8 @@
 
 import React, {useRef, useState, useEffect, useCallback} from 'react'
 
+import {focusFirstOption} from './menu/menuNavigation'
+
 import './menuWrapper.scss'
 
 type Props = {
@@ -18,6 +20,9 @@ type Props = {
 const MenuWrapper = (props: Props) => {
     const node = useRef<HTMLDivElement>(null)
     const [open, setOpen] = useState(Boolean(props.isOpen))
+
+    // A click with detail 0 comes from the keyboard (Enter or Space on a button)
+    const openedByKeyboard = useRef(false)
 
     if (!Array.isArray(props.children) || props.children.length !== 2) {
         throw new Error('MenuWrapper needs exactly 2 children')
@@ -42,6 +47,14 @@ const MenuWrapper = (props: Props) => {
     const keyboardClose = useCallback((e: KeyboardEvent) => {
         if (e.key === 'Escape') {
             close()
+
+            // Give the focus back to the control that opened the menu
+            const active = document.activeElement
+            if (node.current && (active === document.body || node.current.contains(active))) {
+                const trigger = node.current.firstElementChild as HTMLElement | null
+                const focusable = trigger?.matches('button, a, [tabindex]') ? trigger : trigger?.querySelector<HTMLElement>('button, a, [tabindex]')
+                focusable?.focus()
+            }
         }
 
         if (e.key === 'Tab') {
@@ -65,9 +78,17 @@ const MenuWrapper = (props: Props) => {
             e.preventDefault()
             e.stopPropagation()
         }
+        openedByKeyboard.current = !open && e.detail === 0
         setOpen(!open)
         onToggle && onToggle(!open)
     }, [disabled, onToggle, stopPropagationOnToggle, open])
+
+    useEffect(() => {
+        if (open && openedByKeyboard.current) {
+            openedByKeyboard.current = false
+            focusFirstOption(node.current)
+        }
+    }, [open])
 
     useEffect(() => {
         if (open) {
