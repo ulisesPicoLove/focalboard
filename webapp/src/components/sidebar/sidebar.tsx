@@ -3,7 +3,7 @@
 import React, {useCallback, useEffect, useState} from 'react'
 
 import {FormattedMessage, useIntl} from 'react-intl'
-import {DragDropContext, Droppable, DropResult} from 'react-beautiful-dnd'
+import {DragDropContext, Droppable, DropResult} from '@hello-pangea/dnd'
 
 import {keyboardActivation} from '../../keyboardActivation'
 

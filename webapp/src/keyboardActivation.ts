@@ -14,7 +14,7 @@ export type ActivationEvent = React.MouseEvent | React.KeyboardEvent
 // element itself reacts.
 //
 // Pass {space: false} when Space already means something else on the element,
-// as on a react-beautiful-dnd drag handle, where it lifts the item.
+// as on a @hello-pangea/dnd drag handle, where it lifts the item.
 export function keyboardActivation<T extends HTMLElement = HTMLElement>(
     onActivate: (e: React.KeyboardEvent<T>) => void,
     options: {space?: boolean} = {},

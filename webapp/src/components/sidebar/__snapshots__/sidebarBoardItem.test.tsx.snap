@@ -3,19 +3,19 @@
 exports[`components/sidebarBoardItem renders default icon if no custom icon set 1`] = `
 <div>
   <div
-    data-rbd-droppable-context-id="1"
-    data-rbd-droppable-id="droppable_id"
+    data-rfd-droppable-context-id="1"
+    data-rfd-droppable-id="droppable_id"
   >
     <div
-      data-rbd-draggable-context-id="1"
-      data-rbd-draggable-id="board_id_1"
+      data-rfd-draggable-context-id="1"
+      data-rfd-draggable-id="board_id_1"
     >
       <div
         aria-current="page"
-        aria-describedby="rbd-hidden-text-1-hidden-text-3"
+        aria-describedby="rfd-hidden-text-1-hidden-text-3"
         class="SidebarBoardItem subitem active"
-        data-rbd-drag-handle-context-id="1"
-        data-rbd-drag-handle-draggable-id="board_id_1"
+        data-rfd-drag-handle-context-id="1"
+        data-rfd-drag-handle-draggable-id="board_id_1"
         draggable="false"
         role="button"
         tabindex="0"
@@ -90,19 +90,19 @@ exports[`components/sidebarBoardItem renders default icon if no custom icon set 
 exports[`components/sidebarBoardItem sidebar board item 1`] = `
 <div>
   <div
-    data-rbd-droppable-context-id="0"
-    data-rbd-droppable-id="droppable_id"
+    data-rfd-droppable-context-id="0"
+    data-rfd-droppable-id="droppable_id"
   >
     <div
-      data-rbd-draggable-context-id="0"
-      data-rbd-draggable-id="board_id_1"
+      data-rfd-draggable-context-id="0"
+      data-rfd-draggable-id="board_id_1"
     >
       <div
         aria-current="page"
-        aria-describedby="rbd-hidden-text-0-hidden-text-0"
+        aria-describedby="rfd-hidden-text-0-hidden-text-0"
         class="SidebarBoardItem subitem active"
-        data-rbd-drag-handle-context-id="0"
-        data-rbd-drag-handle-draggable-id="board_id_1"
+        data-rfd-drag-handle-context-id="0"
+        data-rfd-drag-handle-draggable-id="board_id_1"
         draggable="false"
         role="button"
         tabindex="0"
@@ -407,19 +407,19 @@ exports[`components/sidebarBoardItem sidebar board item 1`] = `
 exports[`components/sidebarBoardItem sidebar board item for guest 1`] = `
 <div>
   <div
-    data-rbd-droppable-context-id="2"
-    data-rbd-droppable-id="droppable_id"
+    data-rfd-droppable-context-id="2"
+    data-rfd-droppable-id="droppable_id"
   >
     <div
-      data-rbd-draggable-context-id="2"
-      data-rbd-draggable-id="board_id_1"
+      data-rfd-draggable-context-id="2"
+      data-rfd-draggable-id="board_id_1"
     >
       <div
         aria-current="page"
-        aria-describedby="rbd-hidden-text-2-hidden-text-6"
+        aria-describedby="rfd-hidden-text-2-hidden-text-6"
         class="SidebarBoardItem subitem active"
-        data-rbd-drag-handle-context-id="2"
-        data-rbd-drag-handle-draggable-id="board_id_1"
+        data-rfd-drag-handle-context-id="2"
+        data-rfd-drag-handle-draggable-id="board_id_1"
         draggable="false"
         role="button"
         tabindex="0"
