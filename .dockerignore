@@ -1,7 +1,22 @@
 CHANGELOG.md
 README.md
 
-node_modules
+# Dependencies and build output. The patterns need "**/" because .dockerignore
+# only anchors a bare name to the root of the build context.
+**/node_modules
+webapp/pack
+webapp/coverage
+webapp/.eslintcache
+bin/
+
+# Local data and secrets: never send these to the build
+files/
+*.db
+.env
+.infisical.yaml
+AUDITORIA-*.md
+Analisis_report.md
+
 .github/
 mac/
 win-wpf/
