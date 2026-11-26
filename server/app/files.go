@@ -18,7 +18,11 @@ import (
 const emptyString = "empty"
 
 var errEmptyFilename = errors.New("IsFileArchived: empty filename not allowed")
-var ErrFileNotFound = errors.New("file not found")
+
+// ErrFileNotFound is returned when a file does not exist in the files backend.
+// It is a model.ErrNotFound so the API answers 404 and callers can detect it
+// with model.IsErrNotFound.
+var ErrFileNotFound = model.NewErrNotFound("file")
 
 func (a *App) SaveFile(reader io.Reader, teamID, boardID, filename string, asTemplate bool) (string, error) {
 	// NOTE: File extension includes the dot

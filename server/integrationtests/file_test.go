@@ -2,6 +2,8 @@ package integrationtests
 
 import (
 	"bytes"
+	"io"
+	"net/http"
 	"testing"
 
 	"github.com/mattermost/focalboard/server/model"
@@ -84,5 +86,47 @@ func TestFileInfo(t *testing.T) {
 		th.CheckOK(resp)
 		require.NotNil(t, fileInfo)
 		require.NotNil(t, fileInfo.Id)
+	})
+}
+
+func TestServeFile(t *testing.T) {
+	const testTeamID = "team-id"
+
+	t.Run("a file that does not exist should return not found", func(t *testing.T) {
+		th := SetupTestHelper(t).InitBasic()
+		defer th.TearDown()
+
+		testBoard := th.CreateBoard(testTeamID, model.BoardTypeOpen)
+
+		// the client returns an error together with the response for non 2xx statuses
+		resp, err := th.Client.DoAPIGet("/files/teams/"+testTeamID+"/"+testBoard.ID+"/missing.png", "")
+		require.Error(t, err)
+		require.NotNil(t, resp)
+
+		defer resp.Body.Close()
+
+		require.Equal(t, http.StatusNotFound, resp.StatusCode)
+	})
+
+	t.Run("an uploaded file should be served", func(t *testing.T) {
+		th := SetupTestHelper(t).InitBasic()
+		defer th.TearDown()
+
+		testBoard := th.CreateBoard(testTeamID, model.BoardTypeOpen)
+
+		file, uploadResp := th.Client.TeamUploadFile(testTeamID, testBoard.ID, bytes.NewBuffer([]byte("file content")))
+		th.CheckOK(uploadResp)
+		require.NotNil(t, file)
+
+		resp, err := th.Client.DoAPIGet("/files/teams/"+testTeamID+"/"+testBoard.ID+"/"+file.FileID, "")
+		require.NoError(t, err)
+
+		defer resp.Body.Close()
+
+		require.Equal(t, http.StatusOK, resp.StatusCode)
+
+		body, err := io.ReadAll(resp.Body)
+		require.NoError(t, err)
+		require.Equal(t, "file content", string(body))
 	})
 }
