@@ -4,6 +4,7 @@ import React, {useRef} from 'react'
 import {useIntl} from 'react-intl'
 import {useHotkeys} from 'react-hotkeys-hook'
 
+import {useModalFocus} from '../hooks/modalFocus'
 import IconButton from '../widgets/buttons/iconButton'
 import CloseIcon from '../widgets/icons/close'
 import OptionsIcon from '../widgets/icons/options'
@@ -22,9 +23,14 @@ type Props = {
     onClose: () => void
 }
 
+let dialogCount = 0
+
 const Dialog = (props: Props) => {
     const {toolsMenu, toolbar, title, subtitle, size} = props
     const intl = useIntl()
+    const dialogRef = useRef<HTMLDivElement>(null)
+    const onKeyDown = useModalFocus(dialogRef)
+    const titleId = useRef(`dialog-title-${++dialogCount}`).current
 
     const closeDialogText = intl.formatMessage({
         id: 'Dialog.closeDialog',
@@ -56,11 +62,21 @@ const Dialog = (props: Props) => {
             >
                 <div
                     role='dialog'
+                    aria-modal='true'
+                    aria-labelledby={titleId}
+                    tabIndex={-1}
+                    ref={dialogRef}
+                    onKeyDown={onKeyDown}
                     className='dialog'
                 >
                     <div className='toolbar'>
                         <div>
-                            {<h1 className='dialog-title'>{title || ''}</h1>}
+                            <h1
+                                id={titleId}
+                                className='dialog-title'
+                            >
+                                {title || ''}
+                            </h1>
                             {subtitle && <h5 className='dialog-subtitle'>{subtitle}</h5>}
                         </div>
                         <div className='toolbar--right'>

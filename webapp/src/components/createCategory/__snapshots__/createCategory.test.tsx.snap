@@ -12,8 +12,11 @@ exports[`components/createCategory/CreateCategory base case should match snapsho
       class="wrapper"
     >
       <div
+        aria-labelledby="dialog-title-1"
+        aria-modal="true"
         class="dialog"
         role="dialog"
+        tabindex="-1"
       >
         <div
           class="toolbar"
@@ -21,6 +24,7 @@ exports[`components/createCategory/CreateCategory base case should match snapsho
           <div>
             <h1
               class="dialog-title"
+              id="dialog-title-1"
             >
               <span>
                 title

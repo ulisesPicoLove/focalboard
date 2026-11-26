@@ -3,9 +3,14 @@
 exports[`components/flashMessages renders a flash message with high severity 1`] = `
 <div>
   <div
-    class="FlashMessages high flashIn"
+    aria-live="assertive"
+    role="alert"
   >
-    Mock Content
+    <div
+      class="FlashMessages high flashIn"
+    >
+      Mock Content
+    </div>
   </div>
 </div>
 `;
@@ -13,9 +18,14 @@ exports[`components/flashMessages renders a flash message with high severity 1`]
 exports[`components/flashMessages renders a flash message with low severity 1`] = `
 <div>
   <div
-    class="FlashMessages low flashIn"
+    aria-live="polite"
+    role="status"
   >
-    Mock Content
+    <div
+      class="FlashMessages low flashIn"
+    >
+      Mock Content
+    </div>
   </div>
 </div>
 `;
@@ -23,9 +33,14 @@ exports[`components/flashMessages renders a flash message with low severity 1`] 
 exports[`components/flashMessages renders a flash message with low severity and check onClick on flash works 1`] = `
 <div>
   <div
-    class="FlashMessages low flashOut"
+    aria-live="polite"
+    role="status"
   >
-    Mock Content
+    <div
+      class="FlashMessages low flashOut"
+    >
+      Mock Content
+    </div>
   </div>
 </div>
 `;
@@ -33,12 +48,17 @@ exports[`components/flashMessages renders a flash message with low severity and 
 exports[`components/flashMessages renders a flash message with low severity and custom HTML in flash message 1`] = `
 <div>
   <div
-    class="FlashMessages low flashIn"
+    aria-live="polite"
+    role="status"
   >
     <div
-      data-testid="mock-test-id"
+      class="FlashMessages low flashIn"
     >
-      Mock Content
+      <div
+        data-testid="mock-test-id"
+      >
+        Mock Content
+      </div>
     </div>
   </div>
 </div>
@@ -47,9 +67,14 @@ exports[`components/flashMessages renders a flash message with low severity and 
 exports[`components/flashMessages renders a flash message with normal severity 1`] = `
 <div>
   <div
-    class="FlashMessages normal flashIn"
+    aria-live="polite"
+    role="status"
   >
-    Mock Content
+    <div
+      class="FlashMessages normal flashIn"
+    >
+      Mock Content
+    </div>
   </div>
 </div>
 `;

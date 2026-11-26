@@ -12,8 +12,11 @@ exports[`src/components/shareBoard/shareBoard return shareBoard and click Copy l
       class="wrapper"
     >
       <div
+        aria-labelledby="dialog-title-5"
+        aria-modal="true"
         class="dialog"
         role="dialog"
+        tabindex="-1"
       >
         <div
           class="toolbar"
@@ -21,6 +24,7 @@ exports[`src/components/shareBoard/shareBoard return shareBoard and click Copy l
           <div>
             <h1
               class="dialog-title"
+              id="dialog-title-5"
             >
               Share Board
             </h1>
@@ -223,8 +227,11 @@ exports[`src/components/shareBoard/shareBoard return shareBoard and click Copy l
       class="wrapper"
     >
       <div
+        aria-labelledby="dialog-title-5"
+        aria-modal="true"
         class="dialog"
         role="dialog"
+        tabindex="-1"
       >
         <div
           class="toolbar"
@@ -232,6 +239,7 @@ exports[`src/components/shareBoard/shareBoard return shareBoard and click Copy l
           <div>
             <h1
               class="dialog-title"
+              id="dialog-title-5"
             >
               Share Board
             </h1>
@@ -434,8 +442,11 @@ exports[`src/components/shareBoard/shareBoard return shareBoard and click Regene
       class="wrapper"
     >
       <div
+        aria-labelledby="dialog-title-8"
+        aria-modal="true"
         class="dialog"
         role="dialog"
+        tabindex="-1"
       >
         <div
           class="toolbar"
@@ -443,6 +454,7 @@ exports[`src/components/shareBoard/shareBoard return shareBoard and click Regene
           <div>
             <h1
               class="dialog-title"
+              id="dialog-title-8"
             >
               Share Board
             </h1>
@@ -668,8 +680,11 @@ exports[`src/components/shareBoard/shareBoard return shareBoard and click Select
       class="wrapper"
     >
       <div
+        aria-labelledby="dialog-title-22"
+        aria-modal="true"
         class="dialog"
         role="dialog"
+        tabindex="-1"
       >
         <div
           class="toolbar"
@@ -677,6 +692,7 @@ exports[`src/components/shareBoard/shareBoard return shareBoard and click Select
           <div>
             <h1
               class="dialog-title"
+              id="dialog-title-22"
             >
               Share Board
             </h1>
@@ -865,8 +881,11 @@ exports[`src/components/shareBoard/shareBoard return shareBoard and click Select
       class="wrapper"
     >
       <div
+        aria-labelledby="dialog-title-22"
+        aria-modal="true"
         class="dialog"
         role="dialog"
+        tabindex="-1"
       >
         <div
           class="toolbar"
@@ -874,6 +893,7 @@ exports[`src/components/shareBoard/shareBoard return shareBoard and click Select
           <div>
             <h1
               class="dialog-title"
+              id="dialog-title-22"
             >
               Share Board
             </h1>
@@ -1191,8 +1211,11 @@ exports[`src/components/shareBoard/shareBoard return shareBoard and click Select
       class="wrapper"
     >
       <div
+        aria-labelledby="dialog-title-24"
+        aria-modal="true"
         class="dialog"
         role="dialog"
+        tabindex="-1"
       >
         <div
           class="toolbar"
@@ -1200,6 +1223,7 @@ exports[`src/components/shareBoard/shareBoard return shareBoard and click Select
           <div>
             <h1
               class="dialog-title"
+              id="dialog-title-24"
             >
               Share Board
             </h1>
@@ -1388,8 +1412,11 @@ exports[`src/components/shareBoard/shareBoard return shareBoard and click Select
       class="wrapper"
     >
       <div
+        aria-labelledby="dialog-title-24"
+        aria-modal="true"
         class="dialog"
         role="dialog"
+        tabindex="-1"
       >
         <div
           class="toolbar"
@@ -1397,6 +1424,7 @@ exports[`src/components/shareBoard/shareBoard return shareBoard and click Select
           <div>
             <h1
               class="dialog-title"
+              id="dialog-title-24"
             >
               Share Board
             </h1>
@@ -1732,8 +1760,11 @@ exports[`src/components/shareBoard/shareBoard return shareBoard template and cli
       class="wrapper"
     >
       <div
+        aria-labelledby="dialog-title-28"
+        aria-modal="true"
         class="dialog"
         role="dialog"
+        tabindex="-1"
       >
         <div
           class="toolbar"
@@ -1741,6 +1772,7 @@ exports[`src/components/shareBoard/shareBoard return shareBoard template and cli
           <div>
             <h1
               class="dialog-title"
+              id="dialog-title-28"
             >
               Share Template
             </h1>
@@ -1878,8 +1910,11 @@ exports[`src/components/shareBoard/shareBoard return shareBoard template and cli
       class="wrapper"
     >
       <div
+        aria-labelledby="dialog-title-28"
+        aria-modal="true"
         class="dialog"
         role="dialog"
+        tabindex="-1"
       >
         <div
           class="toolbar"
@@ -1887,6 +1922,7 @@ exports[`src/components/shareBoard/shareBoard return shareBoard template and cli
           <div>
             <h1
               class="dialog-title"
+              id="dialog-title-28"
             >
               Share Template
             </h1>
@@ -2153,8 +2189,11 @@ exports[`src/components/shareBoard/shareBoard return shareBoard, and click switc
       class="wrapper"
     >
       <div
+        aria-labelledby="dialog-title-11"
+        aria-modal="true"
         class="dialog"
         role="dialog"
+        tabindex="-1"
       >
         <div
           class="toolbar"
@@ -2162,6 +2201,7 @@ exports[`src/components/shareBoard/shareBoard return shareBoard, and click switc
           <div>
             <h1
               class="dialog-title"
+              id="dialog-title-11"
             >
               Share Board
             </h1>
@@ -2387,8 +2427,11 @@ exports[`src/components/shareBoard/shareBoard return shareBoardComponent and cli
       class="wrapper"
     >
       <div
+        aria-labelledby="dialog-title-14"
+        aria-modal="true"
         class="dialog"
         role="dialog"
+        tabindex="-1"
       >
         <div
           class="toolbar"
@@ -2396,6 +2439,7 @@ exports[`src/components/shareBoard/shareBoard return shareBoardComponent and cli
           <div>
             <h1
               class="dialog-title"
+              id="dialog-title-14"
             >
               Share Board
             </h1>
@@ -2621,8 +2665,11 @@ exports[`src/components/shareBoard/shareBoard should match snapshot 1`] = `
       class="wrapper"
     >
       <div
+        aria-labelledby="dialog-title-1"
+        aria-modal="true"
         class="dialog"
         role="dialog"
+        tabindex="-1"
       >
         <div
           class="toolbar"
@@ -2630,6 +2677,7 @@ exports[`src/components/shareBoard/shareBoard should match snapshot 1`] = `
           <div>
             <h1
               class="dialog-title"
+              id="dialog-title-1"
             >
               Share Board
             </h1>
@@ -2832,8 +2880,11 @@ exports[`src/components/shareBoard/shareBoard should match snapshot with sharing
       class="wrapper"
     >
       <div
+        aria-labelledby="dialog-title-3"
+        aria-modal="true"
         class="dialog"
         role="dialog"
+        tabindex="-1"
       >
         <div
           class="toolbar"
@@ -2841,6 +2892,7 @@ exports[`src/components/shareBoard/shareBoard should match snapshot with sharing
           <div>
             <h1
               class="dialog-title"
+              id="dialog-title-3"
             >
               Share Board
             </h1>
@@ -3043,8 +3095,11 @@ exports[`src/components/shareBoard/shareBoard should match snapshot with sharing
       class="wrapper"
     >
       <div
+        aria-labelledby="dialog-title-20"
+        aria-modal="true"
         class="dialog"
         role="dialog"
+        tabindex="-1"
       >
         <div
           class="toolbar"
@@ -3052,6 +3107,7 @@ exports[`src/components/shareBoard/shareBoard should match snapshot with sharing
           <div>
             <h1
               class="dialog-title"
+              id="dialog-title-20"
             >
               Share Board
             </h1>
@@ -3254,8 +3310,11 @@ exports[`src/components/shareBoard/shareBoard should match snapshot with sharing
       class="wrapper"
     >
       <div
+        aria-labelledby="dialog-title-18"
+        aria-modal="true"
         class="dialog"
         role="dialog"
+        tabindex="-1"
       >
         <div
           class="toolbar"
@@ -3263,6 +3322,7 @@ exports[`src/components/shareBoard/shareBoard should match snapshot with sharing
           <div>
             <h1
               class="dialog-title"
+              id="dialog-title-18"
             >
               Share Board
             </h1>
@@ -3465,8 +3525,11 @@ exports[`src/components/shareBoard/shareBoard should match snapshot, with templa
       class="wrapper"
     >
       <div
+        aria-labelledby="dialog-title-26"
+        aria-modal="true"
         class="dialog"
         role="dialog"
+        tabindex="-1"
       >
         <div
           class="toolbar"
@@ -3474,6 +3537,7 @@ exports[`src/components/shareBoard/shareBoard should match snapshot, with templa
           <div>
             <h1
               class="dialog-title"
+              id="dialog-title-26"
             >
               Share Template
             </h1>

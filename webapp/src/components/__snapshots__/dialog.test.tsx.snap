@@ -12,8 +12,11 @@ exports[`components/dialog should match snapshot 1`] = `
       class="wrapper"
     >
       <div
+        aria-labelledby="dialog-title-1"
+        aria-modal="true"
         class="dialog"
         role="dialog"
+        tabindex="-1"
       >
         <div
           class="toolbar"
@@ -21,6 +24,7 @@ exports[`components/dialog should match snapshot 1`] = `
           <div>
             <h1
               class="dialog-title"
+              id="dialog-title-1"
             />
           </div>
           <div
@@ -59,8 +63,11 @@ exports[`components/dialog should return dialog and click on cancel button 1`] =
       class="wrapper"
     >
       <div
+        aria-labelledby="dialog-title-5"
+        aria-modal="true"
         class="dialog"
         role="dialog"
+        tabindex="-1"
       >
         <div
           class="toolbar"
@@ -68,6 +75,7 @@ exports[`components/dialog should return dialog and click on cancel button 1`] =
           <div>
             <h1
               class="dialog-title"
+              id="dialog-title-5"
             />
           </div>
           <div

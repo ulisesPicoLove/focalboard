@@ -12,8 +12,11 @@ exports[`components/cardDialog already following card 1`] = `
       class="wrapper"
     >
       <div
+        aria-labelledby="dialog-title-24"
+        aria-modal="true"
         class="dialog"
         role="dialog"
+        tabindex="-1"
       >
         <div
           class="toolbar"
@@ -21,6 +24,7 @@ exports[`components/cardDialog already following card 1`] = `
           <div>
             <h1
               class="dialog-title"
+              id="dialog-title-24"
             >
               <div />
             </h1>
@@ -217,8 +221,11 @@ exports[`components/cardDialog return a cardDialog readonly 1`] = `
       class="wrapper"
     >
       <div
+        aria-labelledby="dialog-title-5"
+        aria-modal="true"
         class="dialog"
         role="dialog"
+        tabindex="-1"
       >
         <div
           class="toolbar"
@@ -226,6 +233,7 @@ exports[`components/cardDialog return a cardDialog readonly 1`] = `
           <div>
             <h1
               class="dialog-title"
+              id="dialog-title-5"
             >
               <div />
             </h1>
@@ -341,8 +349,11 @@ exports[`components/cardDialog return cardDialog menu content 1`] = `
       class="wrapper"
     >
       <div
+        aria-labelledby="dialog-title-9"
+        aria-modal="true"
         class="dialog"
         role="dialog"
+        tabindex="-1"
       >
         <div
           class="toolbar"
@@ -350,6 +361,7 @@ exports[`components/cardDialog return cardDialog menu content 1`] = `
           <div>
             <h1
               class="dialog-title"
+              id="dialog-title-9"
             >
               <div />
             </h1>
@@ -687,8 +699,11 @@ exports[`components/cardDialog return cardDialog menu content and cancel delete 
       class="wrapper"
     >
       <div
+        aria-labelledby="dialog-title-15"
+        aria-modal="true"
         class="dialog"
         role="dialog"
+        tabindex="-1"
       >
         <div
           class="toolbar"
@@ -696,6 +711,7 @@ exports[`components/cardDialog return cardDialog menu content and cancel delete 
           <div>
             <h1
               class="dialog-title"
+              id="dialog-title-15"
             >
               <div />
             </h1>
@@ -892,8 +908,11 @@ exports[`components/cardDialog should match snapshot 1`] = `
       class="wrapper"
     >
       <div
+        aria-labelledby="dialog-title-1"
+        aria-modal="true"
         class="dialog"
         role="dialog"
+        tabindex="-1"
       >
         <div
           class="toolbar"
@@ -901,6 +920,7 @@ exports[`components/cardDialog should match snapshot 1`] = `
           <div>
             <h1
               class="dialog-title"
+              id="dialog-title-1"
             >
               <div />
             </h1>
@@ -1097,8 +1117,11 @@ exports[`components/cardDialog should match snapshot without permissions 1`] = `
       class="wrapper"
     >
       <div
+        aria-labelledby="dialog-title-3"
+        aria-modal="true"
         class="dialog"
         role="dialog"
+        tabindex="-1"
       >
         <div
           class="toolbar"
@@ -1106,6 +1129,7 @@ exports[`components/cardDialog should match snapshot without permissions 1`] = `
           <div>
             <h1
               class="dialog-title"
+              id="dialog-title-3"
             >
               <div />
             </h1>

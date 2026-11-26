@@ -59,6 +59,11 @@
         overflow-x: hidden;
         overflow-y: auto;
 
+        // Focused by script when the dialog opens: it is a container, not a control
+        &:focus {
+            outline: none;
+        }
+
         @media not screen and (max-width: 975px) {
             margin: 72px auto;
             max-width: 975px;

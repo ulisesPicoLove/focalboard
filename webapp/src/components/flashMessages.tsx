@@ -60,16 +60,20 @@ export const FlashMessages = React.memo((props: Props) => {
         handleFadeOut()
     }
 
-    if (!message) {
-        return null
-    }
-
+    // The live region stays in the page so screen readers announce a message when it appears;
+    // errors interrupt (alert), the rest wait for a pause (status)
     return (
         <div
-            className={'FlashMessages ' + message.severity + (fadeOut ? ' flashOut' : ' flashIn')}
-            onClick={handleClick}
+            role={message?.severity === 'high' ? 'alert' : 'status'}
+            aria-live={message?.severity === 'high' ? 'assertive' : 'polite'}
         >
-            {message.content}
+            {message &&
+                <div
+                    className={'FlashMessages ' + message.severity + (fadeOut ? ' flashOut' : ' flashIn')}
+                    onClick={handleClick}
+                >
+                    {message.content}
+                </div>}
         </div>
     )
 })
