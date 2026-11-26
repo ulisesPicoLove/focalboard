@@ -56,6 +56,7 @@ type Services struct {
 
 type App struct {
 	config              *config.Configuration
+	ssoLoginMu          sync.Mutex
 	store               store.Store
 	auth                *auth.Auth
 	wsAdapter           ws.Adapter

@@ -21,7 +21,7 @@ func TestParseAuthTokenFromRequest(t *testing.T) {
 		{"token mytoken", "", "", "mytoken", TokenLocationHeader},
 		{"BEARER mytoken", "", "", "mytoken", TokenLocationHeader},
 		{"", "mytoken", "", "mytoken", TokenLocationCookie},
-		{"", "", "mytoken", "mytoken", TokenLocationQueryString},
+		{"", "", "mytoken", "", TokenLocationNotFound},
 	}
 
 	for testnum, tc := range cases {

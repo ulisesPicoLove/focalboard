@@ -41,15 +41,32 @@ func (a *App) LoginWithSSO(identity SSOIdentity) (string, error) {
 		return "", errors.New("incomplete single sign-on identity")
 	}
 
+	// Look up and create under one lock, so two simultaneous first sign-ins of the same
+	// person cannot both find "no user" and create it twice (the users table has no unique
+	// index on email). The server runs as a single instance.
+	a.ssoLoginMu.Lock()
+	defer a.ssoLoginMu.Unlock()
+
 	user, err := a.store.GetUserByEmail(email)
 	switch {
 	case err == nil:
-		// An account created by this provider is bound to its subject: if the email now
-		// belongs to a different provider account, do not hand over the old user.
+		// An account bound to this provider is tied to its subject: if the email now
+		// belongs to a different provider account (a recycled address), do not hand over
+		// the old user.
 		if user.AuthService == identity.Provider && user.AuthData != "" && user.AuthData != identity.Subject {
 			a.metrics.IncrementLoginFailCount(1)
 			a.logger.Warn("SSO subject does not match the stored user", mlog.String("userID", user.ID))
 			return "", errors.New("this email is linked to a different account")
+		}
+
+		// First sign-in of a user that existed before (for example a password account):
+		// bind it to the provider's subject so the same check protects it from now on.
+		if user.AuthService != identity.Provider || user.AuthData == "" {
+			if err = a.store.UpdateUserAuth(user.ID, identity.Provider, identity.Subject); err != nil {
+				a.metrics.IncrementLoginFailCount(1)
+				return "", errors.Wrap(err, "unable to link the user to the provider account")
+			}
+			a.logger.Info("User linked to single sign-on", mlog.String("userID", user.ID), mlog.String("provider", identity.Provider))
 		}
 	case model.IsErrNotFound(err):
 		user, err = a.createSSOUser(identity, email)

@@ -38,6 +38,11 @@ func (a *Auth) GetSession(token string) (*model.Session, error) {
 	if err != nil {
 		return nil, errors.Wrap(err, "unable to get the session for the token")
 	}
+	if max := a.config.SessionMaxLifetime; max > 0 && session.CreateAt > 0 &&
+		session.CreateAt < utils.GetMillis()-utils.SecondsToMillis(max) {
+		_ = a.store.DeleteSession(session.ID)
+		return nil, errors.New("the session has reached its maximum lifetime")
+	}
 	if session.UpdateAt < (utils.GetMillis() - utils.SecondsToMillis(a.config.SessionRefreshTime)) {
 		_ = a.store.RefreshSession(session)
 	}

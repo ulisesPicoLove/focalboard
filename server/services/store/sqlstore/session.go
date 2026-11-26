@@ -28,7 +28,7 @@ func (s *SQLStore) getActiveUserCount(db sq.BaseRunner, updatedSecondsAgo int64)
 
 func (s *SQLStore) getSession(db sq.BaseRunner, token string, expireTimeSeconds int64) (*model.Session, error) {
 	query := s.getQueryBuilder(db).
-		Select("id", "token", "user_id", "auth_service", "props").
+		Select("id", "token", "user_id", "auth_service", "props", "create_at").
 		From(s.tablePrefix + "sessions").
 		Where(sq.Eq{"token": token}).
 		Where(sq.Gt{"update_at": utils.GetMillis() - utils.SecondsToMillis(expireTimeSeconds)})
@@ -37,7 +37,7 @@ func (s *SQLStore) getSession(db sq.BaseRunner, token string, expireTimeSeconds 
 	session := model.Session{}
 
 	var propsBytes []byte
-	err := row.Scan(&session.ID, &session.Token, &session.UserID, &session.AuthService, &propsBytes)
+	err := row.Scan(&session.ID, &session.Token, &session.UserID, &session.AuthService, &propsBytes, &session.CreateAt)
 	if err != nil {
 		return nil, err
 	}
@@ -97,6 +97,17 @@ func (s *SQLStore) updateSession(db sq.BaseRunner, session *model.Session) error
 func (s *SQLStore) deleteSession(db sq.BaseRunner, sessionID string) error {
 	query := s.getQueryBuilder(db).Delete(s.tablePrefix + "sessions").
 		Where(sq.Eq{"id": sessionID})
+
+	_, err := query.Exec()
+	return err
+}
+
+func (s *SQLStore) deleteUserSessions(db sq.BaseRunner, userID, exceptSessionID string) error {
+	query := s.getQueryBuilder(db).Delete(s.tablePrefix + "sessions").
+		Where(sq.Eq{"user_id": userID})
+	if exceptSessionID != "" {
+		query = query.Where(sq.NotEq{"id": exceptSessionID})
+	}
 
 	_, err := query.Exec()
 	return err

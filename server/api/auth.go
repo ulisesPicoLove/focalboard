@@ -7,6 +7,7 @@ import (
 	"net"
 	"net/http"
 	"strings"
+	"time"
 
 	"github.com/gorilla/mux"
 	"github.com/mattermost/focalboard/server/model"
@@ -20,11 +21,13 @@ import (
 
 func (a *API) registerAuthRoutes(r *mux.Router) {
 	// personal-server specific routes. These are not needed in plugin mode.
-	r.HandleFunc("/login", a.handleLogin).Methods("POST")
+	// Endpoints that check credentials are rate limited per client address.
+	loginLimiter := newRateLimiter(20, time.Minute)
+	r.HandleFunc("/login", a.rateLimited(loginLimiter, a.handleLogin)).Methods("POST")
 	r.HandleFunc("/logout", a.sessionRequired(a.handleLogout)).Methods("POST")
-	r.HandleFunc("/register", a.handleRegister).Methods("POST")
+	r.HandleFunc("/register", a.rateLimited(loginLimiter, a.handleRegister)).Methods("POST")
 	r.HandleFunc("/teams/{teamID}/regenerate_signup_token", a.sessionRequired(a.handlePostTeamRegenerateSignupToken)).Methods("POST")
-	r.HandleFunc("/users/{userID}/changepassword", a.sessionRequired(a.handleChangePassword)).Methods("POST")
+	r.HandleFunc("/users/{userID}/changepassword", a.sessionRequired(a.rateLimited(loginLimiter, a.handleChangePassword))).Methods("POST")
 }
 
 func (a *API) handleLogin(w http.ResponseWriter, r *http.Request) {
@@ -307,6 +310,15 @@ func (a *API) handleChangePassword(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	userID := vars["userID"]
 
+	// Users can only change their own password. Without this check the endpoint lets any
+	// signed-in user guess another user's current password.
+	ctx := r.Context()
+	session := ctx.Value(sessionContextKey).(*model.Session)
+	if userID != session.UserID {
+		a.errorResponse(w, r, model.NewErrPermission("access denied to change another user's password"))
+		return
+	}
+
 	requestBody, err := io.ReadAll(r.Body)
 	if err != nil {
 		a.errorResponse(w, r, err)
@@ -330,6 +342,11 @@ func (a *API) handleChangePassword(w http.ResponseWriter, r *http.Request) {
 	if err = a.app.ChangePassword(userID, requestData.OldPassword, requestData.NewPassword); err != nil {
 		a.errorResponse(w, r, model.NewErrBadRequest(err.Error()))
 		return
+	}
+
+	// A new password must also end the sessions opened with the old one.
+	if err = a.app.RevokeOtherSessions(userID, session.ID); err != nil {
+		a.logger.Error("Unable to revoke the other sessions after a password change", mlog.Err(err))
 	}
 
 	jsonStringResponse(w, http.StatusOK, "{}")

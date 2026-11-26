@@ -1790,3 +1790,31 @@ func (mr *MockStoreMockRecorder) UpsertTeamSignupToken(arg0 interface{}) *gomock
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpsertTeamSignupToken", reflect.TypeOf((*MockStore)(nil).UpsertTeamSignupToken), arg0)
 }
+
+// DeleteUserSessions mocks base method.
+func (m *MockStore) DeleteUserSessions(arg0, arg1 string) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteUserSessions", arg0, arg1)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteUserSessions indicates an expected call of DeleteUserSessions.
+func (mr *MockStoreMockRecorder) DeleteUserSessions(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteUserSessions", reflect.TypeOf((*MockStore)(nil).DeleteUserSessions), arg0, arg1)
+}
+
+// UpdateUserAuth mocks base method.
+func (m *MockStore) UpdateUserAuth(arg0, arg1, arg2 string) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateUserAuth", arg0, arg1, arg2)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// UpdateUserAuth indicates an expected call of UpdateUserAuth.
+func (mr *MockStoreMockRecorder) UpdateUserAuth(arg0, arg1, arg2 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateUserAuth", reflect.TypeOf((*MockStore)(nil).UpdateUserAuth), arg0, arg1, arg2)
+}

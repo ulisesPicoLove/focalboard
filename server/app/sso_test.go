@@ -61,6 +61,8 @@ func TestLoginWithSSOUsesTheExistingUserByEmail(t *testing.T) {
 	var session *model.Session
 
 	th.Store.EXPECT().GetUserByEmail("ana.perez@example.com").Return(existing, nil)
+	// a pre-existing (password) account is bound to the Google subject on first sign-in
+	th.Store.EXPECT().UpdateUserAuth("user-1", "google", "sub-1").Return(nil)
 	// no CreateUser: the existing account is reused
 	th.Store.EXPECT().CreateSession(gomock.Any()).DoAndReturn(func(s *model.Session) error {
 		session = s
@@ -155,6 +157,7 @@ func TestLoginWithSSOFailsWhenTheStoreFails(t *testing.T) {
 		defer tearDown()
 
 		th.Store.EXPECT().GetUserByEmail(gomock.Any()).Return(&model.User{ID: "u"}, nil)
+		th.Store.EXPECT().UpdateUserAuth("u", "google", gomock.Any()).Return(nil)
 		th.Store.EXPECT().CreateSession(gomock.Any()).Return(errors.New("db down"))
 
 		token, err := th.App.LoginWithSSO(ssoIdentity())
@@ -217,4 +220,19 @@ func TestUsernameFromEmail(t *testing.T) {
 	for email, want := range cases {
 		require.Equal(t, want, usernameFromEmail(email), "email %q", email)
 	}
+}
+
+func TestLoginWithSSOFailsIfTheUserCannotBeLinked(t *testing.T) {
+	th, tearDown := SetupTestHelper(t)
+	defer tearDown()
+
+	existing := &model.User{ID: "user-1", Email: "ana.perez@example.com", AuthService: "native"}
+	th.Store.EXPECT().GetUserByEmail("ana.perez@example.com").Return(existing, nil)
+	th.Store.EXPECT().UpdateUserAuth("user-1", "google", "sub-1").Return(errors.New("db down"))
+	// no CreateSession
+
+	token, err := th.App.LoginWithSSO(ssoIdentity())
+
+	require.Error(t, err)
+	require.Empty(t, token)
 }

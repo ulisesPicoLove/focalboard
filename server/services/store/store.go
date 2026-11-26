@@ -64,6 +64,8 @@ type Store interface {
 	UpdateUser(user *model.User) (*model.User, error)
 	UpdateUserPassword(username, password string) error
 	UpdateUserPasswordByID(userID, password string) error
+	// UpdateUserAuth sets the auth service and the provider's id for the user.
+	UpdateUserAuth(userID, authService, authData string) error
 	GetUsersByTeam(teamID string, asGuestID string, showEmail, showName bool) ([]*model.User, error)
 	SearchUsersByTeam(teamID string, searchQuery string, asGuestID string, excludeBots bool, showEmail, showName bool) ([]*model.User, error)
 	PatchUserPreferences(userID string, patch model.UserPreferencesPatch) (mmModel.Preferences, error)
@@ -75,6 +77,8 @@ type Store interface {
 	RefreshSession(session *model.Session) error
 	UpdateSession(session *model.Session) error
 	DeleteSession(sessionID string) error
+	// DeleteUserSessions deletes every session of the user except exceptSessionID (which may be empty).
+	DeleteUserSessions(userID, exceptSessionID string) error
 	CleanUpSessions(expireTime int64) error
 
 	UpsertSharing(sharing model.Sharing) error

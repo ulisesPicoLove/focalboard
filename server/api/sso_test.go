@@ -187,6 +187,7 @@ func TestGoogleSignInNeverRedirectsOffsite(t *testing.T) {
 			cookie, q := h.startSignIn(t, "", evil)
 
 			h.store.EXPECT().GetUserByEmail(gomock.Any()).Return(&model.User{ID: "u1"}, nil)
+			h.store.EXPECT().UpdateUserAuth("u1", gomock.Any(), gomock.Any()).Return(nil)
 			h.store.EXPECT().CreateSession(gomock.Any()).Return(nil)
 
 			rec := h.callback("", cookie, goodCallback(q))
@@ -269,6 +270,7 @@ func TestGoogleSignInStateCookieIsSingleUse(t *testing.T) {
 	cookie, q := h.startSignIn(t, "", "")
 
 	h.store.EXPECT().GetUserByEmail(gomock.Any()).Return(&model.User{ID: "u1"}, nil)
+	h.store.EXPECT().UpdateUserAuth("u1", gomock.Any(), gomock.Any()).Return(nil)
 	h.store.EXPECT().CreateSession(gomock.Any()).Return(nil)
 	rec := h.callback("", cookie, goodCallback(q))
 	require.Equal(t, http.StatusFound, rec.Code)

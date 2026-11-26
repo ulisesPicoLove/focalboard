@@ -245,6 +245,16 @@ func (s *SQLStore) DeleteSession(sessionID string) error {
 
 }
 
+func (s *SQLStore) DeleteUserSessions(userID string, exceptSessionID string) error {
+	return s.deleteUserSessions(s.db, userID, exceptSessionID)
+
+}
+
+func (s *SQLStore) UpdateUserAuth(userID string, authService string, authData string) error {
+	return s.updateUserAuth(s.db, userID, authService, authData)
+
+}
+
 func (s *SQLStore) DeleteSubscription(blockID string, subscriberID string) error {
 	return s.deleteSubscription(s.db, blockID, subscriberID)
 

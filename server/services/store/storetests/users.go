@@ -23,6 +23,23 @@ func StoreTestUserStore(t *testing.T, setup func(t *testing.T) (store.Store, fun
 		testGetUsersByTeam(t, store)
 	})
 
+	t.Run("UpdateUserAuth", func(t *testing.T) {
+		store, tearDown := setup(t)
+		defer tearDown()
+
+		user, err := store.CreateUser(&model.User{ID: utils.NewID(utils.IDTypeUser), Username: "native-user", Email: "n@example.com", AuthService: "native"})
+		require.NoError(t, err)
+
+		require.NoError(t, store.UpdateUserAuth(user.ID, "google", "sub-123"))
+
+		got, err := store.GetUserByID(user.ID)
+		require.NoError(t, err)
+		require.Equal(t, "google", got.AuthService)
+		require.Equal(t, "sub-123", got.AuthData)
+
+		require.Error(t, store.UpdateUserAuth("does-not-exist", "google", "x"))
+	})
+
 	t.Run("CreateAndGetUser", func(t *testing.T) {
 		store, tearDown := setup(t)
 		defer tearDown()

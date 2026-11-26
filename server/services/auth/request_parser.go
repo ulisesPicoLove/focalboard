@@ -58,10 +58,7 @@ func ParseAuthTokenFromRequest(r *http.Request) (string, TokenLocation) {
 		return authHeader[6:], TokenLocationHeader
 	}
 
-	// Attempt to parse token out of the query string
-	if token := r.URL.Query().Get("access_token"); token != "" {
-		return token, TokenLocationQueryString
-	}
+	// Tokens in the query string are not accepted: they end up in access logs and Referer headers.
 
 	return "", TokenLocationNotFound
 }

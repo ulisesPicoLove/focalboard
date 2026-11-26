@@ -28,6 +28,37 @@ func StoreTestSessionStore(t *testing.T, setup func(t *testing.T) (store.Store, 
 		defer tearDown()
 		testUpdateSession(t, store)
 	})
+
+	t.Run("DeleteUserSessions", func(t *testing.T) {
+		store, tearDown := setup(t)
+		defer tearDown()
+		testDeleteUserSessions(t, store)
+	})
+}
+
+func testDeleteUserSessions(t *testing.T, store store.Store) {
+	mk := func(id, token, userID string) *model.Session {
+		s := &model.Session{ID: id, Token: token, UserID: userID, Props: map[string]interface{}{}}
+		require.NoError(t, store.CreateSession(s))
+		return s
+	}
+	mk("s1", "tok1", "alice")
+	mk("s2", "tok2", "alice")
+	mk("s3", "tok3", "bob")
+
+	// keep s1: only the other session of the same user goes away
+	require.NoError(t, store.DeleteUserSessions("alice", "s1"))
+	_, err := store.GetSession("tok1", 60)
+	require.NoError(t, err)
+	_, err = store.GetSession("tok2", 60)
+	require.Error(t, err)
+	_, err = store.GetSession("tok3", 60)
+	require.NoError(t, err, "other users are untouched")
+
+	// no session to keep: every session of the user is deleted
+	require.NoError(t, store.DeleteUserSessions("alice", ""))
+	_, err = store.GetSession("tok1", 60)
+	require.Error(t, err)
 }
 
 func testCreateAndGetAndDeleteSession(t *testing.T, store store.Store) {
@@ -42,6 +73,8 @@ func testCreateAndGetAndDeleteSession(t *testing.T, store store.Store) {
 
 		got, err := store.GetSession(session.Token, 60*60)
 		require.NoError(t, err)
+		require.NotZero(t, got.CreateAt)
+		got.CreateAt = session.CreateAt // set by the store
 		require.Equal(t, session, got)
 	})
 
@@ -103,5 +136,6 @@ func testUpdateSession(t *testing.T, store store.Store) {
 
 	got, err := store.GetSession(session.Token, 60)
 	require.NoError(t, err)
+	got.CreateAt = session.CreateAt // set by the store
 	require.Equal(t, session, got)
 }

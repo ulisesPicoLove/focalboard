@@ -163,6 +163,29 @@ func (s *SQLStore) updateUser(db sq.BaseRunner, user *model.User) (*model.User, 
 	return user, nil
 }
 
+func (s *SQLStore) updateUserAuth(db sq.BaseRunner, userID, authService, authData string) error {
+	query := s.getQueryBuilder(db).Update(s.tablePrefix+"users").
+		Set("auth_service", authService).
+		Set("auth_data", authData).
+		Set("update_at", utils.GetMillis()).
+		Where(sq.Eq{"id": userID})
+
+	result, err := query.Exec()
+	if err != nil {
+		return err
+	}
+
+	rowCount, err := result.RowsAffected()
+	if err != nil {
+		return err
+	}
+	if rowCount < 1 {
+		return UserNotFoundError{userID}
+	}
+
+	return nil
+}
+
 func (s *SQLStore) updateUserPassword(db sq.BaseRunner, username, password string) error {
 	now := utils.GetMillis()
 

@@ -142,3 +142,22 @@ func TestIsValidReadToken(t *testing.T) {
 	// 	})
 	// }
 }
+
+func TestGetSessionRejectsSessionsPastTheirMaximumLifetime(t *testing.T) {
+	th := setupTestHelper(t)
+	th.Auth.config.SessionMaxLifetime = 1000
+
+	old := &model.Session{
+		ID:       "old-session",
+		Token:    "oldToken",
+		UserID:   "12345",
+		CreateAt: utils.GetMillis() - utils.SecondsToMillis(2000), // older than the cap...
+		UpdateAt: utils.GetMillis(),                               // ...although it is used all the time
+	}
+	th.Store.EXPECT().GetSession("oldToken", gomock.Any()).Return(old, nil)
+	th.Store.EXPECT().DeleteSession("old-session").Return(nil)
+
+	session, err := th.Auth.GetSession("oldToken")
+	require.Error(t, err)
+	require.Nil(t, session)
+}

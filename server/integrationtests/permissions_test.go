@@ -3644,13 +3644,14 @@ func TestPermissionsBoardArchiveExport(t *testing.T) {
 
 func TestPermissionsBoardArchiveImport(t *testing.T) {
 	ttCases := []TestCase{
+		// Users allowed to import reach the form parsing; the empty body is a 400.
 		{"/teams/test-team/archive/import", methodPost, "", userAnon, http.StatusUnauthorized, 0},
 		{"/teams/test-team/archive/import", methodPost, "", userNoTeamMember, http.StatusForbidden, 1},
-		{"/teams/test-team/archive/import", methodPost, "", userTeamMember, http.StatusOK, 1},
-		{"/teams/test-team/archive/import", methodPost, "", userViewer, http.StatusOK, 1},
-		{"/teams/test-team/archive/import", methodPost, "", userCommenter, http.StatusOK, 1},
-		{"/teams/test-team/archive/import", methodPost, "", userEditor, http.StatusOK, 1},
-		{"/teams/test-team/archive/import", methodPost, "", userAdmin, http.StatusOK, 1},
+		{"/teams/test-team/archive/import", methodPost, "", userTeamMember, http.StatusBadRequest, 1},
+		{"/teams/test-team/archive/import", methodPost, "", userViewer, http.StatusBadRequest, 1},
+		{"/teams/test-team/archive/import", methodPost, "", userCommenter, http.StatusBadRequest, 1},
+		{"/teams/test-team/archive/import", methodPost, "", userEditor, http.StatusBadRequest, 1},
+		{"/teams/test-team/archive/import", methodPost, "", userAdmin, http.StatusBadRequest, 1},
 		{"/teams/test-team/archive/import", methodPost, "", userGuest, http.StatusForbidden, 0},
 	}
 
@@ -3666,7 +3667,7 @@ func TestPermissionsBoardArchiveImport(t *testing.T) {
 		defer th.TearDown()
 		clients := setupLocalClients(th)
 		testData := setupData(t, th)
-		ttCases[1].expectedStatusCode = http.StatusOK
+		ttCases[1].expectedStatusCode = http.StatusBadRequest
 		ttCases[1].totalResults = 1
 		runTestCases(t, ttCases, testData, clients)
 	})

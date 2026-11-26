@@ -203,6 +203,11 @@ func (a *App) UpdateUserPassword(username, password string) error {
 	return nil
 }
 
+// RevokeOtherSessions signs the user out everywhere except from the session in keepSessionID.
+func (a *App) RevokeOtherSessions(userID, keepSessionID string) error {
+	return a.store.DeleteUserSessions(userID, keepSessionID)
+}
+
 func (a *App) ChangePassword(userID, oldPassword, newPassword string) error {
 	var user *model.User
 	if userID != "" {
