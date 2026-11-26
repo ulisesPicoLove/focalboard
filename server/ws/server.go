@@ -165,7 +165,6 @@ func (ws *Server) handleWebSocket(w http.ResponseWriter, r *http.Request) {
 				ws.logger.Error(`Rejected invalid read token`,
 					mlog.Stringer("client", wsSession.conn.RemoteAddr()),
 					mlog.String("action", command.Action),
-					mlog.String("readToken", command.ReadToken),
 				)
 
 				continue
@@ -185,7 +184,6 @@ func (ws *Server) handleWebSocket(w http.ResponseWriter, r *http.Request) {
 				ws.logger.Error(`Rejected invalid read token`,
 					mlog.Stringer("client", wsSession.conn.RemoteAddr()),
 					mlog.String("action", command.Action),
-					mlog.String("readToken", command.ReadToken),
 				)
 
 				continue
@@ -434,7 +432,6 @@ func (ws *Server) getUserIDForToken(token string) string {
 
 func (ws *Server) authenticateListener(wsSession *websocketSession, token string) {
 	ws.logger.Debug("authenticateListener",
-		mlog.String("token", token),
 		mlog.String("wsSession.userID", wsSession.userID),
 	)
 	if wsSession.isAuthenticated() {
@@ -462,12 +459,19 @@ func (ws *Server) authenticateListener(wsSession *websocketSession, token string
 // getListenersForBlock returns the listeners subscribed to a
 // block changes.
 func (ws *Server) getListenersForBlock(blockID string) []*websocketSession {
-	return ws.listenersByBlock[blockID]
+	ws.mu.RLock()
+	defer ws.mu.RUnlock()
+
+	// Return a copy so callers can append to or iterate it without racing writers.
+	return append([]*websocketSession(nil), ws.listenersByBlock[blockID]...)
 }
 
 // getListenersForUser returns the listener for a user subscribed to a
 // team changes.
 func (ws *Server) getListenerForUser(teamID, userID string) *websocketSession {
+	ws.mu.RLock()
+	defer ws.mu.RUnlock()
+
 	for _, listener := range ws.listenersByTeam[teamID] {
 		if listener.userID == userID {
 			return listener
@@ -501,6 +505,9 @@ func (ws *Server) getListenersForTeamAndBoard(teamID, boardID string, ensureUser
 	for id := range memberMap {
 		memberIDs = append(memberIDs, id)
 	}
+
+	ws.mu.RLock()
+	defer ws.mu.RUnlock()
 
 	listeners := []*websocketSession{}
 	for _, memberID := range memberIDs {
@@ -664,12 +671,18 @@ func (ws *Server) BroadcastConfigChange(clientConfig model.ClientConfig) {
 		ClientConfig: clientConfig,
 	}
 
-	listeners := ws.listeners
+	ws.mu.RLock()
+	listeners := make([]*websocketSession, 0, len(ws.listeners))
+	for listener := range ws.listeners {
+		listeners = append(listeners, listener)
+	}
+	ws.mu.RUnlock()
+
 	ws.logger.Debug("broadcasting config change to listener(s)",
 		mlog.Int("listener_count", len(listeners)),
 	)
 
-	for listener := range listeners {
+	for _, listener := range listeners {
 		ws.logger.Debug("Broadcast Config change",
 			mlog.Stringer("remoteAddr", listener.conn.RemoteAddr()),
 		)
