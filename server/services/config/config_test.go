@@ -30,3 +30,24 @@ func TestRemoveSecurityDataHidesTheGoogleSecret(t *testing.T) {
 func TestRemoveSecurityDataLeavesAnEmptySecretEmpty(t *testing.T) {
 	require.Empty(t, removeSecurityData(Configuration{}).GoogleClientSecret)
 }
+
+func TestRemoveSecurityDataHidesDatabaseAndStorageSecrets(t *testing.T) {
+	cfg := Configuration{
+		DBConfigString: "postgres://user:db-password@host/db",
+		Secret:         "app-secret",
+		FilesS3Config:  AmazonS3Config{AccessKeyID: "AKIA-key", SecretAccessKey: "s3-secret"},
+	}
+
+	logged := fmt.Sprintf("%+v", removeSecurityData(cfg))
+
+	for _, secret := range []string{"db-password", "app-secret", "AKIA-key", "s3-secret"} {
+		require.NotContains(t, logged, secret)
+	}
+}
+
+func TestValidateAuthMode(t *testing.T) {
+	require.NoError(t, validateAuthMode("native"))
+	require.NoError(t, validateAuthMode("google"))
+	require.Error(t, validateAuthMode("mattermost"))
+	require.Error(t, validateAuthMode(""))
+}

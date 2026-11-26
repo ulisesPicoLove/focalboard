@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/spf13/viper"
@@ -133,10 +134,26 @@ func ReadConfigFile(configFilePath string) (*Configuration, error) {
 		return nil, err
 	}
 
+	if err = validateAuthMode(configuration.AuthMode); err != nil {
+		return nil, err
+	}
+
 	log.Println("readConfigFile")
 	log.Printf("%+v", removeSecurityData(configuration))
 
 	return &configuration, nil
+}
+
+// validateAuthMode rejects any auth mode this standalone server does not support. In
+// particular "mattermost" trusts the Mattermost-User-Id header sent by the client, so
+// accepting it here would let anyone impersonate any user.
+func validateAuthMode(mode string) error {
+	switch mode {
+	case "native", "google":
+		return nil
+	default:
+		return fmt.Errorf("unsupported authMode %q: must be \"native\" or \"google\"", mode)
+	}
 }
 
 // redacted replaces a secret in the copy of the configuration that is written to the log.
@@ -148,6 +165,19 @@ func removeSecurityData(config Configuration) Configuration {
 	clean := config
 	if clean.GoogleClientSecret != "" {
 		clean.GoogleClientSecret = redacted
+	}
+	if clean.Secret != "" {
+		clean.Secret = redacted
+	}
+	if clean.FilesS3Config.SecretAccessKey != "" {
+		clean.FilesS3Config.SecretAccessKey = redacted
+	}
+	if clean.FilesS3Config.AccessKeyID != "" {
+		clean.FilesS3Config.AccessKeyID = redacted
+	}
+	// The connection string usually embeds the database password.
+	if clean.DBConfigString != "" {
+		clean.DBConfigString = redacted
 	}
 	return clean
 }
