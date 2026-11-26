@@ -39,7 +39,9 @@ Layered, wired together in `server/server/server.go` (entry point is `server/mai
 - `model/` — shared types (Board, Block, Card, Member, ...). Core data model: a **Board** contains **Blocks** (cards, views, text/image/etc. content blocks); card properties are defined on the board.
 - `assets/` — default templates (`templates.boardarchive`, rebuilt with `make templates-archive`). Boards are imported/exported as archives (`app/import.go`, `app/export.go`).
 
-The same code runs in several modes (standalone server, desktop app, Mattermost plugin), so `server/` code often branches on config/`Edition` (set via `-ldflags` in the Makefile) and on single-user mode (`--single-user`).
+The server runs only as a standalone server (auth mode `native` or `google`). Some code still branches on `Edition` (set via `-ldflags` in the Makefile) and on single-user mode (`--single-user`), and the store/app layers keep stubs for Mattermost channels and the services API that are dead here and candidates for removal.
+
+Permissions: `services/permissions/localpermissions` is the only implementation. The API permission matrix lives in `server/integrationtests/permissions_test.go` (one run per case, on `localpermissions`); app tests that need team/system admin results use the `fakePermissions` helper in `server/app/helper_test.go`.
 
 ### Webapp (`webapp/src/`)
 
