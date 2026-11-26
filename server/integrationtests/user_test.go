@@ -5,6 +5,7 @@ import (
 	"crypto/rand"
 	"testing"
 
+	"github.com/mattermost/focalboard/server/client"
 	"github.com/mattermost/focalboard/server/model"
 	"github.com/mattermost/focalboard/server/utils"
 	"github.com/stretchr/testify/require"
@@ -165,76 +166,30 @@ func TestGetUser(t *testing.T) {
 }
 
 func TestGetUserList(t *testing.T) {
-	th := SetupTestHelperPluginMode(t)
+	th := SetupTestHelper(t).InitBasic()
 	defer th.TearDown()
-	clients := setupClients(th)
-	th.Client = clients.TeamMember
-	th.Client2 = clients.Editor
 
-	me, resp := th.Client.GetMe()
-	require.NoError(t, resp.Error)
-	require.NotNil(t, me)
+	user1 := th.GetUser1()
+	user2 := th.GetUser2()
 
-	userID1 := me.ID
-	userID2 := th.GetUser2().ID
+	t.Run("a signed-in user gets the users that were asked for", func(t *testing.T) {
+		users, resp := th.Client.GetUserList([]string{user1.ID, user2.ID})
+		require.NoError(t, resp.Error)
+		require.Len(t, users, 2)
+	})
 
-	// Admin user should return both
-	returnUsers, resp := clients.Admin.GetUserList([]string{userID1, userID2})
-	require.NoError(t, resp.Error)
-	require.NotNil(t, returnUsers)
-	require.Equal(t, 2, len(returnUsers))
+	t.Run("an unknown id makes the whole request fail with 404", func(t *testing.T) {
+		users, resp := th.Client.GetUserList([]string{user1.ID, "does-not-exist"})
+		require.Error(t, resp.Error)
+		require.Equal(t, 404, resp.StatusCode)
+		require.Nil(t, users)
+	})
 
-	// Guest user should return none
-	returnUsers2, resp := clients.Guest.GetUserList([]string{userID1, userID2})
-	require.NoError(t, resp.Error)
-	require.NotNil(t, returnUsers2)
-	require.Equal(t, 0, len(returnUsers2))
-
-	newBoard := &model.Board{
-		Title:  "title",
-		Type:   model.BoardTypeOpen,
-		TeamID: testTeamID,
-	}
-	board, err := th.Server.App().CreateBoard(newBoard, userID1, true)
-	require.NoError(t, err)
-
-	// add Guest as board member
-	newGuestMember := &model.BoardMember{
-		UserID:          userGuestID,
-		BoardID:         board.ID,
-		SchemeViewer:    true,
-		SchemeCommenter: true,
-		SchemeEditor:    true,
-		SchemeAdmin:     false,
-	}
-	guestMember, err := th.Server.App().AddMemberToBoard(newGuestMember)
-	require.NoError(t, err)
-	require.NotNil(t, guestMember)
-
-	// Guest user should now return one of members
-	guestUsers, resp := clients.Guest.GetUserList([]string{th.GetUser1().ID, th.GetUser2().ID})
-	require.NoError(t, resp.Error)
-	require.NotNil(t, guestUsers)
-	require.Equal(t, 1, len(guestUsers))
-
-	// add other user as board member
-	newBoardMember := &model.BoardMember{
-		UserID:          userID2,
-		BoardID:         board.ID,
-		SchemeViewer:    true,
-		SchemeCommenter: true,
-		SchemeEditor:    true,
-		SchemeAdmin:     false,
-	}
-	newMember, err := th.Server.App().AddMemberToBoard(newBoardMember)
-	require.NoError(t, err)
-	require.NotNil(t, newMember)
-
-	// Guest user should now return both
-	guestUsers, resp = clients.Guest.GetUserList([]string{th.GetUser1().ID, th.GetUser2().ID})
-	require.NoError(t, resp.Error)
-	require.NotNil(t, guestUsers)
-	require.Equal(t, 2, len(guestUsers))
+	t.Run("an anonymous caller is rejected", func(t *testing.T) {
+		anon := client.NewClient(th.Server.Config().ServerRoot, "")
+		_, resp := anon.GetUserList([]string{user1.ID})
+		require.Error(t, resp.Error)
+	})
 }
 
 func TestUserChangePassword(t *testing.T) {
