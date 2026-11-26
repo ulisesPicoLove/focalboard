@@ -2,6 +2,8 @@
 // See LICENSE.txt for license information.
 import React from 'react'
 
+import {keyboardActivation} from '../../keyboardActivation'
+
 import {MenuOptionProps} from './menuItem'
 
 type TextOptionProps = MenuOptionProps & {
@@ -26,16 +28,20 @@ function TextOption(props: TextOptionProps): JSX.Element {
         className += ' menu-option--disabled'
     }
 
+    const activate = (e: React.SyntheticEvent) => {
+        e.target.dispatchEvent(new Event('menuItemClicked'))
+        props.onClick(props.id)
+        e.stopPropagation()
+    }
+
     return (
         <div
             role='button'
             aria-label={name}
+            aria-disabled={disabled || undefined}
             className={className}
-            onClick={(e: React.MouseEvent) => {
-                e.target.dispatchEvent(new Event('menuItemClicked'))
-                props.onClick(props.id)
-                e.stopPropagation()
-            }}
+            onClick={activate}
+            {...keyboardActivation(activate)}
         >
             <div className={`${check ? 'd-flex menu-option__check' : 'd-flex'}`}>{icon ? <div className='menu-option__icon'>{icon}</div> : <div className='noicon'/>}</div>
             <div className='menu-option__content'>

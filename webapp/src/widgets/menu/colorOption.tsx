@@ -3,6 +3,8 @@
 import React from 'react'
 import {useIntl} from 'react-intl'
 
+import {keyboardActivation} from '../../keyboardActivation'
+
 import {MenuOptionProps} from './menuItem'
 
 import './colorOption.scss'
@@ -14,16 +16,19 @@ type ColorOptionProps = MenuOptionProps & {
 function ColorOption(props: ColorOptionProps): JSX.Element {
     const {id, name, icon} = props
     const intl = useIntl()
+    const activate = (e: React.SyntheticEvent) => {
+        e.target.dispatchEvent(new Event('menuItemClicked'))
+        props.onClick(props.id)
+        e.stopPropagation()
+    }
+
     return (
         <div
             role='button'
             aria-label={intl.formatMessage({id: 'ColorOption.selectColor', defaultMessage: 'Select {color} Color'}, {color: name})}
             className='MenuOption ColorOption menu-option'
-            onClick={(e: React.MouseEvent): void => {
-                e.target.dispatchEvent(new Event('menuItemClicked'))
-                props.onClick(props.id)
-                e.stopPropagation()
-            }}
+            onClick={activate}
+            {...keyboardActivation(activate)}
         >
             {icon ?? <div className='noicon'/>}
             <div className='menu-name'>{name}</div>

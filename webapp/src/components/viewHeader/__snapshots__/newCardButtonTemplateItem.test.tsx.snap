@@ -6,6 +6,7 @@ exports[`components/viewHeader/newCardButtonTemplateItem return NewCardButtonTem
     aria-label="title"
     class="MenuOption TextOption menu-option"
     role="button"
+    tabindex="0"
   >
     <div
       class="d-flex"
@@ -56,6 +57,7 @@ exports[`components/viewHeader/newCardButtonTemplateItem return NewCardButtonTem
                 aria-label="Set as default"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -93,6 +95,7 @@ exports[`components/viewHeader/newCardButtonTemplateItem return NewCardButtonTem
                 aria-label="Edit"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -124,6 +127,7 @@ exports[`components/viewHeader/newCardButtonTemplateItem return NewCardButtonTem
                 aria-label="Delete"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -161,6 +165,7 @@ exports[`components/viewHeader/newCardButtonTemplateItem return NewCardButtonTem
               aria-label="Cancel"
               class="MenuOption TextOption menu-option menu-cancel"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -196,6 +201,7 @@ exports[`components/viewHeader/newCardButtonTemplateItem return NewCardButtonTem
     aria-label="title"
     class="MenuOption TextOption menu-option"
     role="button"
+    tabindex="0"
   >
     <div
       class="d-flex"
@@ -246,6 +252,7 @@ exports[`components/viewHeader/newCardButtonTemplateItem return NewCardButtonTem
                 aria-label="Set as default"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -283,6 +290,7 @@ exports[`components/viewHeader/newCardButtonTemplateItem return NewCardButtonTem
                 aria-label="Edit"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -314,6 +322,7 @@ exports[`components/viewHeader/newCardButtonTemplateItem return NewCardButtonTem
                 aria-label="Delete"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -351,6 +360,7 @@ exports[`components/viewHeader/newCardButtonTemplateItem return NewCardButtonTem
               aria-label="Cancel"
               class="MenuOption TextOption menu-option menu-cancel"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -386,6 +396,7 @@ exports[`components/viewHeader/newCardButtonTemplateItem return NewCardButtonTem
     aria-label="title"
     class="MenuOption TextOption menu-option"
     role="button"
+    tabindex="0"
   >
     <div
       class="d-flex"
@@ -433,6 +444,7 @@ exports[`components/viewHeader/newCardButtonTemplateItem return NewCardButtonTem
     aria-label="title"
     class="MenuOption TextOption menu-option"
     role="button"
+    tabindex="0"
   >
     <div
       class="d-flex"
@@ -483,6 +495,7 @@ exports[`components/viewHeader/newCardButtonTemplateItem return NewCardButtonTem
                 aria-label="Set as default"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -520,6 +533,7 @@ exports[`components/viewHeader/newCardButtonTemplateItem return NewCardButtonTem
                 aria-label="Edit"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -551,6 +565,7 @@ exports[`components/viewHeader/newCardButtonTemplateItem return NewCardButtonTem
                 aria-label="Delete"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -588,6 +603,7 @@ exports[`components/viewHeader/newCardButtonTemplateItem return NewCardButtonTem
               aria-label="Cancel"
               class="MenuOption TextOption menu-option menu-cancel"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -623,6 +639,7 @@ exports[`components/viewHeader/newCardButtonTemplateItem return NewCardButtonTem
     aria-label="title"
     class="MenuOption TextOption menu-option"
     role="button"
+    tabindex="0"
   >
     <div
       class="d-flex"
@@ -673,6 +690,7 @@ exports[`components/viewHeader/newCardButtonTemplateItem return NewCardButtonTem
                 aria-label="Set as default"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -710,6 +728,7 @@ exports[`components/viewHeader/newCardButtonTemplateItem return NewCardButtonTem
                 aria-label="Edit"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -741,6 +760,7 @@ exports[`components/viewHeader/newCardButtonTemplateItem return NewCardButtonTem
                 aria-label="Delete"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -778,6 +798,7 @@ exports[`components/viewHeader/newCardButtonTemplateItem return NewCardButtonTem
               aria-label="Cancel"
               class="MenuOption TextOption menu-option menu-cancel"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"

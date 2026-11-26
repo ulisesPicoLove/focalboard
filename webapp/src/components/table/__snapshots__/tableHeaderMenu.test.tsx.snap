@@ -16,6 +16,7 @@ exports[`components/table/TableHeaderMenu should match snapshot, other column 1`
             aria-label="Sort ascending"
             class="MenuOption TextOption menu-option"
             role="button"
+            tabindex="0"
           >
             <div
               class="d-flex"
@@ -43,6 +44,7 @@ exports[`components/table/TableHeaderMenu should match snapshot, other column 1`
             aria-label="Sort descending"
             class="MenuOption TextOption menu-option"
             role="button"
+            tabindex="0"
           >
             <div
               class="d-flex"
@@ -70,6 +72,7 @@ exports[`components/table/TableHeaderMenu should match snapshot, other column 1`
             aria-label="Insert left"
             class="MenuOption TextOption menu-option"
             role="button"
+            tabindex="0"
           >
             <div
               class="d-flex"
@@ -97,6 +100,7 @@ exports[`components/table/TableHeaderMenu should match snapshot, other column 1`
             aria-label="Insert right"
             class="MenuOption TextOption menu-option"
             role="button"
+            tabindex="0"
           >
             <div
               class="d-flex"
@@ -124,6 +128,7 @@ exports[`components/table/TableHeaderMenu should match snapshot, other column 1`
             aria-label="Hide"
             class="MenuOption TextOption menu-option"
             role="button"
+            tabindex="0"
           >
             <div
               class="d-flex"
@@ -149,6 +154,7 @@ exports[`components/table/TableHeaderMenu should match snapshot, other column 1`
             aria-label="Duplicate"
             class="MenuOption TextOption menu-option"
             role="button"
+            tabindex="0"
           >
             <div
               class="d-flex"
@@ -174,6 +180,7 @@ exports[`components/table/TableHeaderMenu should match snapshot, other column 1`
             aria-label="Delete"
             class="MenuOption TextOption menu-option"
             role="button"
+            tabindex="0"
           >
             <div
               class="d-flex"
@@ -207,6 +214,7 @@ exports[`components/table/TableHeaderMenu should match snapshot, other column 1`
           aria-label="Cancel"
           class="MenuOption TextOption menu-option menu-cancel"
           role="button"
+          tabindex="0"
         >
           <div
             class="d-flex"
@@ -250,6 +258,7 @@ exports[`components/table/TableHeaderMenu should match snapshot, title column 1`
             aria-label="Sort ascending"
             class="MenuOption TextOption menu-option"
             role="button"
+            tabindex="0"
           >
             <div
               class="d-flex"
@@ -277,6 +286,7 @@ exports[`components/table/TableHeaderMenu should match snapshot, title column 1`
             aria-label="Sort descending"
             class="MenuOption TextOption menu-option"
             role="button"
+            tabindex="0"
           >
             <div
               class="d-flex"
@@ -304,6 +314,7 @@ exports[`components/table/TableHeaderMenu should match snapshot, title column 1`
             aria-label="Insert left"
             class="MenuOption TextOption menu-option"
             role="button"
+            tabindex="0"
           >
             <div
               class="d-flex"
@@ -331,6 +342,7 @@ exports[`components/table/TableHeaderMenu should match snapshot, title column 1`
             aria-label="Insert right"
             class="MenuOption TextOption menu-option"
             role="button"
+            tabindex="0"
           >
             <div
               class="d-flex"
@@ -365,6 +377,7 @@ exports[`components/table/TableHeaderMenu should match snapshot, title column 1`
           aria-label="Cancel"
           class="MenuOption TextOption menu-option menu-cancel"
           role="button"
+          tabindex="0"
         >
           <div
             class="d-flex"

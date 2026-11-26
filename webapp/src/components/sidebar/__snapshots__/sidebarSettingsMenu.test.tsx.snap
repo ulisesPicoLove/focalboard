@@ -26,8 +26,12 @@ exports[`components/sidebar/SidebarSettingsMenu imports menu open should match s
           >
             <div>
               <div
+                aria-expanded="true"
+                aria-haspopup="true"
                 class="MenuOption SubMenuOption menu-option menu-option-active"
                 id="import"
+                role="button"
+                tabindex="0"
               >
                 <div
                   class="noicon"
@@ -53,6 +57,7 @@ exports[`components/sidebar/SidebarSettingsMenu imports menu open should match s
                         aria-label="Import archive"
                         class="MenuOption TextOption menu-option"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -78,6 +83,7 @@ exports[`components/sidebar/SidebarSettingsMenu imports menu open should match s
                         aria-label="Trello"
                         class="MenuOption TextOption menu-option"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -103,6 +109,7 @@ exports[`components/sidebar/SidebarSettingsMenu imports menu open should match s
                         aria-label="Asana"
                         class="MenuOption TextOption menu-option"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -128,6 +135,7 @@ exports[`components/sidebar/SidebarSettingsMenu imports menu open should match s
                         aria-label="Notion"
                         class="MenuOption TextOption menu-option"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -153,6 +161,7 @@ exports[`components/sidebar/SidebarSettingsMenu imports menu open should match s
                         aria-label="Jira"
                         class="MenuOption TextOption menu-option"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -178,6 +187,7 @@ exports[`components/sidebar/SidebarSettingsMenu imports menu open should match s
                         aria-label="Todoist"
                         class="MenuOption TextOption menu-option"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -210,6 +220,7 @@ exports[`components/sidebar/SidebarSettingsMenu imports menu open should match s
                         aria-label="Cancel"
                         class="MenuOption TextOption menu-option menu-cancel"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -241,6 +252,7 @@ exports[`components/sidebar/SidebarSettingsMenu imports menu open should match s
                 aria-label="Export archive"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -265,8 +277,12 @@ exports[`components/sidebar/SidebarSettingsMenu imports menu open should match s
             </div>
             <div>
               <div
+                aria-expanded="false"
+                aria-haspopup="true"
                 class="MenuOption SubMenuOption menu-option"
                 id="lang"
+                role="button"
+                tabindex="0"
               >
                 <div
                   class="noicon"
@@ -283,8 +299,12 @@ exports[`components/sidebar/SidebarSettingsMenu imports menu open should match s
             </div>
             <div>
               <div
+                aria-expanded="false"
+                aria-haspopup="true"
                 class="MenuOption SubMenuOption menu-option"
                 id="theme"
+                role="button"
+                tabindex="0"
               >
                 <div
                   class="noicon"
@@ -302,8 +322,10 @@ exports[`components/sidebar/SidebarSettingsMenu imports menu open should match s
             <div>
               <div
                 aria-label="Random icons"
+                aria-pressed="true"
                 class="MenuOption SwitchOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="noicon"
@@ -333,6 +355,7 @@ exports[`components/sidebar/SidebarSettingsMenu imports menu open should match s
               aria-label="Cancel"
               class="MenuOption TextOption menu-option menu-cancel"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -388,8 +411,12 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
           >
             <div>
               <div
+                aria-expanded="false"
+                aria-haspopup="true"
                 class="MenuOption SubMenuOption menu-option"
                 id="import"
+                role="button"
+                tabindex="0"
               >
                 <div
                   class="noicon"
@@ -409,6 +436,7 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                 aria-label="Export archive"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -433,8 +461,12 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
             </div>
             <div>
               <div
+                aria-expanded="true"
+                aria-haspopup="true"
                 class="MenuOption SubMenuOption menu-option menu-option-active"
                 id="lang"
+                role="button"
+                tabindex="0"
               >
                 <div
                   class="noicon"
@@ -460,6 +492,7 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         aria-label="English"
                         class="MenuOption TextOption menu-option"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -491,6 +524,7 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         aria-label="Español"
                         class="MenuOption TextOption menu-option"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -516,6 +550,7 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         aria-label="Deutsch"
                         class="MenuOption TextOption menu-option"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -541,6 +576,7 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         aria-label="日本語"
                         class="MenuOption TextOption menu-option"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -566,6 +602,7 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         aria-label="Français"
                         class="MenuOption TextOption menu-option"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -591,6 +628,7 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         aria-label="Nederlands"
                         class="MenuOption TextOption menu-option"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -616,6 +654,7 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         aria-label="Pусский"
                         class="MenuOption TextOption menu-option"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -641,6 +680,7 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         aria-label="中文 (繁體)"
                         class="MenuOption TextOption menu-option"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -666,6 +706,7 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         aria-label="中文 (简体)"
                         class="MenuOption TextOption menu-option"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -691,6 +732,7 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         aria-label="Türkçe"
                         class="MenuOption TextOption menu-option"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -716,6 +758,7 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         aria-label="Occitan"
                         class="MenuOption TextOption menu-option"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -741,6 +784,7 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         aria-label="Português (Brasil)"
                         class="MenuOption TextOption menu-option"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -766,6 +810,7 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         aria-label="Català"
                         class="MenuOption TextOption menu-option"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -791,6 +836,7 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         aria-label="Ελληνικά"
                         class="MenuOption TextOption menu-option"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -816,6 +862,7 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         aria-label="bahasa Indonesia"
                         class="MenuOption TextOption menu-option"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -841,6 +888,7 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         aria-label="Italiano"
                         class="MenuOption TextOption menu-option"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -866,6 +914,7 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         aria-label="Svenska"
                         class="MenuOption TextOption menu-option"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -898,6 +947,7 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         aria-label="Cancel"
                         class="MenuOption TextOption menu-option menu-cancel"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -926,8 +976,12 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
             </div>
             <div>
               <div
+                aria-expanded="false"
+                aria-haspopup="true"
                 class="MenuOption SubMenuOption menu-option"
                 id="theme"
+                role="button"
+                tabindex="0"
               >
                 <div
                   class="noicon"
@@ -945,8 +999,10 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
             <div>
               <div
                 aria-label="Random icons"
+                aria-pressed="true"
                 class="MenuOption SwitchOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="noicon"
@@ -976,6 +1032,7 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
               aria-label="Cancel"
               class="MenuOption TextOption menu-option menu-cancel"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -1051,8 +1108,12 @@ exports[`components/sidebar/SidebarSettingsMenu settings menu open should match 
           >
             <div>
               <div
+                aria-expanded="false"
+                aria-haspopup="true"
                 class="MenuOption SubMenuOption menu-option"
                 id="import"
+                role="button"
+                tabindex="0"
               >
                 <div
                   class="noicon"
@@ -1072,6 +1133,7 @@ exports[`components/sidebar/SidebarSettingsMenu settings menu open should match 
                 aria-label="Export archive"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -1096,8 +1158,12 @@ exports[`components/sidebar/SidebarSettingsMenu settings menu open should match 
             </div>
             <div>
               <div
+                aria-expanded="false"
+                aria-haspopup="true"
                 class="MenuOption SubMenuOption menu-option"
                 id="lang"
+                role="button"
+                tabindex="0"
               >
                 <div
                   class="noicon"
@@ -1114,8 +1180,12 @@ exports[`components/sidebar/SidebarSettingsMenu settings menu open should match 
             </div>
             <div>
               <div
+                aria-expanded="false"
+                aria-haspopup="true"
                 class="MenuOption SubMenuOption menu-option"
                 id="theme"
+                role="button"
+                tabindex="0"
               >
                 <div
                   class="noicon"
@@ -1133,8 +1203,10 @@ exports[`components/sidebar/SidebarSettingsMenu settings menu open should match 
             <div>
               <div
                 aria-label="Random icons"
+                aria-pressed="true"
                 class="MenuOption SwitchOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="noicon"
@@ -1164,6 +1236,7 @@ exports[`components/sidebar/SidebarSettingsMenu settings menu open should match 
               aria-label="Cancel"
               class="MenuOption TextOption menu-option menu-cancel"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -1219,8 +1292,12 @@ exports[`components/sidebar/SidebarSettingsMenu theme menu open should match sna
           >
             <div>
               <div
+                aria-expanded="false"
+                aria-haspopup="true"
                 class="MenuOption SubMenuOption menu-option"
                 id="import"
+                role="button"
+                tabindex="0"
               >
                 <div
                   class="noicon"
@@ -1240,6 +1317,7 @@ exports[`components/sidebar/SidebarSettingsMenu theme menu open should match sna
                 aria-label="Export archive"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -1264,8 +1342,12 @@ exports[`components/sidebar/SidebarSettingsMenu theme menu open should match sna
             </div>
             <div>
               <div
+                aria-expanded="false"
+                aria-haspopup="true"
                 class="MenuOption SubMenuOption menu-option"
                 id="lang"
+                role="button"
+                tabindex="0"
               >
                 <div
                   class="noicon"
@@ -1282,8 +1364,12 @@ exports[`components/sidebar/SidebarSettingsMenu theme menu open should match sna
             </div>
             <div>
               <div
+                aria-expanded="true"
+                aria-haspopup="true"
                 class="MenuOption SubMenuOption menu-option menu-option-active"
                 id="theme"
+                role="button"
+                tabindex="0"
               >
                 <div
                   class="noicon"
@@ -1309,6 +1395,7 @@ exports[`components/sidebar/SidebarSettingsMenu theme menu open should match sna
                         aria-label="Pico.Love OS"
                         class="MenuOption TextOption menu-option"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -1334,6 +1421,7 @@ exports[`components/sidebar/SidebarSettingsMenu theme menu open should match sna
                         aria-label="Focal Theme"
                         class="MenuOption TextOption menu-option"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -1365,6 +1453,7 @@ exports[`components/sidebar/SidebarSettingsMenu theme menu open should match sna
                         aria-label="Dark theme"
                         class="MenuOption TextOption menu-option"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -1390,6 +1479,7 @@ exports[`components/sidebar/SidebarSettingsMenu theme menu open should match sna
                         aria-label="Light theme"
                         class="MenuOption TextOption menu-option"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -1415,6 +1505,7 @@ exports[`components/sidebar/SidebarSettingsMenu theme menu open should match sna
                         aria-label="System theme"
                         class="MenuOption TextOption menu-option"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -1447,6 +1538,7 @@ exports[`components/sidebar/SidebarSettingsMenu theme menu open should match sna
                         aria-label="Cancel"
                         class="MenuOption TextOption menu-option menu-cancel"
                         role="button"
+                        tabindex="0"
                       >
                         <div
                           class="d-flex"
@@ -1476,8 +1568,10 @@ exports[`components/sidebar/SidebarSettingsMenu theme menu open should match sna
             <div>
               <div
                 aria-label="Random icons"
+                aria-pressed="true"
                 class="MenuOption SwitchOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="noicon"
@@ -1507,6 +1601,7 @@ exports[`components/sidebar/SidebarSettingsMenu theme menu open should match sna
               aria-label="Cancel"
               class="MenuOption TextOption menu-option menu-cancel"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"

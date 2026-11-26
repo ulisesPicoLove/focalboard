@@ -22,8 +22,12 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
         </div>
         <div>
           <div
+            aria-expanded="true"
+            aria-haspopup="true"
             class="MenuOption SubMenuOption menu-option menu-option-active"
             id="type"
+            role="button"
+            tabindex="0"
           >
             <div
               class="noicon"
@@ -69,6 +73,7 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     aria-label="Text"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -94,6 +99,7 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     aria-label="Number"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -119,6 +125,7 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     aria-label="Email"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -144,6 +151,7 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     aria-label="Phone"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -169,6 +177,7 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     aria-label="URL"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -194,6 +203,7 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     aria-label="Select"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -219,6 +229,7 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     aria-label="Multi select"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -244,6 +255,7 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     aria-label="Date"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -269,6 +281,7 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     aria-label="Person"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -294,6 +307,7 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     aria-label="Multi person"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -319,6 +333,7 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     aria-label="Checkbox"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -344,6 +359,7 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     aria-label="Created time"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -369,6 +385,7 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     aria-label="Created by"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -394,6 +411,7 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     aria-label="Last updated time"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -419,6 +437,7 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     aria-label="Last updated by"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -451,6 +470,7 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     aria-label="Cancel"
                     class="MenuOption TextOption menu-option menu-cancel"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -482,6 +502,7 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
             aria-label="Delete"
             class="MenuOption TextOption menu-option"
             role="button"
+            tabindex="0"
           >
             <div
               class="d-flex"
@@ -515,6 +536,7 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
           aria-label="Cancel"
           class="MenuOption TextOption menu-option menu-cancel"
           role="button"
+          tabindex="0"
         >
           <div
             class="d-flex"

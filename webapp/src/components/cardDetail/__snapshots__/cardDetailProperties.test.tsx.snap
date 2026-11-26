@@ -307,6 +307,7 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   aria-label="Text"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -332,6 +333,7 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   aria-label="Number"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -357,6 +359,7 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   aria-label="Email"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -382,6 +385,7 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   aria-label="Phone"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -407,6 +411,7 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   aria-label="URL"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -432,6 +437,7 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   aria-label="Select"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -457,6 +463,7 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   aria-label="Multi select"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -482,6 +489,7 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   aria-label="Date"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -507,6 +515,7 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   aria-label="Person"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -532,6 +541,7 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   aria-label="Multi person"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -557,6 +567,7 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   aria-label="Checkbox"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -582,6 +593,7 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   aria-label="Created time"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -607,6 +619,7 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   aria-label="Created by"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -632,6 +645,7 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   aria-label="Last updated time"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -657,6 +671,7 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   aria-label="Last updated by"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -690,6 +705,7 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                 aria-label="Cancel"
                 class="MenuOption TextOption menu-option menu-cancel"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"

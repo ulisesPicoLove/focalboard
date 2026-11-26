@@ -16,6 +16,7 @@ exports[`components/cardActionsMenu should match snapshot 1`] = `
             aria-label="Delete"
             class="MenuOption TextOption menu-option"
             role="button"
+            tabindex="0"
           >
             <div
               class="d-flex"
@@ -47,6 +48,7 @@ exports[`components/cardActionsMenu should match snapshot 1`] = `
             aria-label="Copy link"
             class="MenuOption TextOption menu-option"
             role="button"
+            tabindex="0"
           >
             <div
               class="d-flex"
@@ -85,6 +87,7 @@ exports[`components/cardActionsMenu should match snapshot 1`] = `
           aria-label="Cancel"
           class="MenuOption TextOption menu-option menu-cancel"
           role="button"
+          tabindex="0"
         >
           <div
             class="d-flex"
@@ -128,6 +131,7 @@ exports[`components/cardActionsMenu should match snapshot w/ children prop 1`] =
             aria-label="Delete"
             class="MenuOption TextOption menu-option"
             role="button"
+            tabindex="0"
           >
             <div
               class="d-flex"
@@ -159,6 +163,7 @@ exports[`components/cardActionsMenu should match snapshot w/ children prop 1`] =
             aria-label="Copy link"
             class="MenuOption TextOption menu-option"
             role="button"
+            tabindex="0"
           >
             <div
               class="d-flex"
@@ -199,6 +204,7 @@ exports[`components/cardActionsMenu should match snapshot w/ children prop 1`] =
           aria-label="Cancel"
           class="MenuOption TextOption menu-option menu-cancel"
           role="button"
+          tabindex="0"
         >
           <div
             class="d-flex"
@@ -242,6 +248,7 @@ exports[`components/cardActionsMenu should match snapshot w/ onClickDuplicate pr
             aria-label="Delete"
             class="MenuOption TextOption menu-option"
             role="button"
+            tabindex="0"
           >
             <div
               class="d-flex"
@@ -271,6 +278,7 @@ exports[`components/cardActionsMenu should match snapshot w/ onClickDuplicate pr
             aria-label="Duplicate"
             class="MenuOption TextOption menu-option"
             role="button"
+            tabindex="0"
           >
             <div
               class="d-flex"
@@ -302,6 +310,7 @@ exports[`components/cardActionsMenu should match snapshot w/ onClickDuplicate pr
             aria-label="Copy link"
             class="MenuOption TextOption menu-option"
             role="button"
+            tabindex="0"
           >
             <div
               class="d-flex"
@@ -340,6 +349,7 @@ exports[`components/cardActionsMenu should match snapshot w/ onClickDuplicate pr
           aria-label="Cancel"
           class="MenuOption TextOption menu-option menu-cancel"
           role="button"
+          tabindex="0"
         >
           <div
             class="d-flex"

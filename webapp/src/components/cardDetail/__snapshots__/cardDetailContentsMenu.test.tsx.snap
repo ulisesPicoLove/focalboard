@@ -32,6 +32,7 @@ exports[`components/cardDetail/cardDetailContentsMenu return cardDetailContentsM
                 aria-label="text"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -69,6 +70,7 @@ exports[`components/cardDetail/cardDetailContentsMenu return cardDetailContentsM
                 aria-label="image"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -106,6 +108,7 @@ exports[`components/cardDetail/cardDetailContentsMenu return cardDetailContentsM
                 aria-label="divider"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -143,6 +146,7 @@ exports[`components/cardDetail/cardDetailContentsMenu return cardDetailContentsM
                 aria-label="checkbox"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -186,6 +190,7 @@ exports[`components/cardDetail/cardDetailContentsMenu return cardDetailContentsM
               aria-label="Cancel"
               class="MenuOption TextOption menu-option menu-cancel"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -247,6 +252,7 @@ exports[`components/cardDetail/cardDetailContentsMenu return cardDetailContentsM
                 aria-label="text"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -284,6 +290,7 @@ exports[`components/cardDetail/cardDetailContentsMenu return cardDetailContentsM
                 aria-label="image"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -321,6 +328,7 @@ exports[`components/cardDetail/cardDetailContentsMenu return cardDetailContentsM
                 aria-label="divider"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -358,6 +366,7 @@ exports[`components/cardDetail/cardDetailContentsMenu return cardDetailContentsM
                 aria-label="checkbox"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -401,6 +410,7 @@ exports[`components/cardDetail/cardDetailContentsMenu return cardDetailContentsM
               aria-label="Cancel"
               class="MenuOption TextOption menu-option menu-cancel"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -462,6 +472,7 @@ exports[`components/cardDetail/cardDetailContentsMenu return cardDetailContentsM
                 aria-label="text"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -499,6 +510,7 @@ exports[`components/cardDetail/cardDetailContentsMenu return cardDetailContentsM
                 aria-label="image"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -536,6 +548,7 @@ exports[`components/cardDetail/cardDetailContentsMenu return cardDetailContentsM
                 aria-label="divider"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -573,6 +586,7 @@ exports[`components/cardDetail/cardDetailContentsMenu return cardDetailContentsM
                 aria-label="checkbox"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -616,6 +630,7 @@ exports[`components/cardDetail/cardDetailContentsMenu return cardDetailContentsM
               aria-label="Cancel"
               class="MenuOption TextOption menu-option menu-cancel"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"

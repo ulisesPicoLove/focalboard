@@ -61,6 +61,7 @@ exports[`src/components/gallery/GalleryCard with a comment content should match 
                 aria-label="Delete"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -90,6 +91,7 @@ exports[`src/components/gallery/GalleryCard with a comment content should match 
                 aria-label="Duplicate"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -121,6 +123,7 @@ exports[`src/components/gallery/GalleryCard with a comment content should match 
                 aria-label="Copy link"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -159,6 +162,7 @@ exports[`src/components/gallery/GalleryCard with a comment content should match 
               aria-label="Cancel"
               class="MenuOption TextOption menu-option menu-cancel"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -238,6 +242,7 @@ exports[`src/components/gallery/GalleryCard with an image content should match s
                 aria-label="Delete"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -267,6 +272,7 @@ exports[`src/components/gallery/GalleryCard with an image content should match s
                 aria-label="Duplicate"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -298,6 +304,7 @@ exports[`src/components/gallery/GalleryCard with an image content should match s
                 aria-label="Copy link"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -336,6 +343,7 @@ exports[`src/components/gallery/GalleryCard with an image content should match s
               aria-label="Cancel"
               class="MenuOption TextOption menu-option menu-cancel"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -453,6 +461,7 @@ exports[`src/components/gallery/GalleryCard with many contents should match snap
                 aria-label="Delete"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -482,6 +491,7 @@ exports[`src/components/gallery/GalleryCard with many contents should match snap
                 aria-label="Duplicate"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -513,6 +523,7 @@ exports[`src/components/gallery/GalleryCard with many contents should match snap
                 aria-label="Copy link"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -551,6 +562,7 @@ exports[`src/components/gallery/GalleryCard with many contents should match snap
               aria-label="Cancel"
               class="MenuOption TextOption menu-option menu-cancel"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -634,6 +646,7 @@ exports[`src/components/gallery/GalleryCard with many images content should matc
                 aria-label="Delete"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -663,6 +676,7 @@ exports[`src/components/gallery/GalleryCard with many images content should matc
                 aria-label="Duplicate"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -694,6 +708,7 @@ exports[`src/components/gallery/GalleryCard with many images content should matc
                 aria-label="Copy link"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -732,6 +747,7 @@ exports[`src/components/gallery/GalleryCard with many images content should matc
               aria-label="Cancel"
               class="MenuOption TextOption menu-option menu-cancel"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -1052,6 +1068,7 @@ exports[`src/components/gallery/GalleryCard without block content should match s
                 aria-label="Delete"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -1081,6 +1098,7 @@ exports[`src/components/gallery/GalleryCard without block content should match s
                 aria-label="Duplicate"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -1112,6 +1130,7 @@ exports[`src/components/gallery/GalleryCard without block content should match s
                 aria-label="Copy link"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -1150,6 +1169,7 @@ exports[`src/components/gallery/GalleryCard without block content should match s
               aria-label="Cancel"
               class="MenuOption TextOption menu-option menu-cancel"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"

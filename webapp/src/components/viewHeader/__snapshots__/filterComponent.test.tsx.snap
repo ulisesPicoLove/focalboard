@@ -52,6 +52,7 @@ exports[`components/viewHeader/filterComponent return filterComponent 1`] = `
                     aria-label="Title"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -79,6 +80,7 @@ exports[`components/viewHeader/filterComponent return filterComponent 1`] = `
                     aria-label="Status"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -106,6 +108,7 @@ exports[`components/viewHeader/filterComponent return filterComponent 1`] = `
                     aria-label="Property 1"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -133,6 +136,7 @@ exports[`components/viewHeader/filterComponent return filterComponent 1`] = `
                     aria-label="Property 2"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -160,6 +164,7 @@ exports[`components/viewHeader/filterComponent return filterComponent 1`] = `
                     aria-label="Property 3"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -193,6 +198,7 @@ exports[`components/viewHeader/filterComponent return filterComponent 1`] = `
                   aria-label="Cancel"
                   class="MenuOption TextOption menu-option menu-cancel"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -324,6 +330,7 @@ exports[`components/viewHeader/filterComponent return filterComponent and add Fi
                     aria-label="Title"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -351,6 +358,7 @@ exports[`components/viewHeader/filterComponent return filterComponent and add Fi
                     aria-label="Status"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -378,6 +386,7 @@ exports[`components/viewHeader/filterComponent return filterComponent and add Fi
                     aria-label="Property 1"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -405,6 +414,7 @@ exports[`components/viewHeader/filterComponent return filterComponent and add Fi
                     aria-label="Property 2"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -432,6 +442,7 @@ exports[`components/viewHeader/filterComponent return filterComponent and add Fi
                     aria-label="Property 3"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -465,6 +476,7 @@ exports[`components/viewHeader/filterComponent return filterComponent and add Fi
                   aria-label="Cancel"
                   class="MenuOption TextOption menu-option menu-cancel"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -610,6 +622,7 @@ exports[`components/viewHeader/filterComponent return filterComponent and click 
                     aria-label="includes"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -635,6 +648,7 @@ exports[`components/viewHeader/filterComponent return filterComponent and click 
                     aria-label="doesn't include"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -660,6 +674,7 @@ exports[`components/viewHeader/filterComponent return filterComponent and click 
                     aria-label="is empty"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -685,6 +700,7 @@ exports[`components/viewHeader/filterComponent return filterComponent and click 
                     aria-label="is not empty"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -724,6 +740,7 @@ exports[`components/viewHeader/filterComponent return filterComponent and click 
                   aria-label="Cancel"
                   class="MenuOption TextOption menu-option menu-cancel"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -841,6 +858,7 @@ exports[`components/viewHeader/filterComponent return filterComponent and filter
                     aria-label="Title"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -868,6 +886,7 @@ exports[`components/viewHeader/filterComponent return filterComponent and filter
                     aria-label="Status"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -895,6 +914,7 @@ exports[`components/viewHeader/filterComponent return filterComponent and filter
                     aria-label="Property 1"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -922,6 +942,7 @@ exports[`components/viewHeader/filterComponent return filterComponent and filter
                     aria-label="Property 2"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -949,6 +970,7 @@ exports[`components/viewHeader/filterComponent return filterComponent and filter
                     aria-label="Property 3"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -982,6 +1004,7 @@ exports[`components/viewHeader/filterComponent return filterComponent and filter
                   aria-label="Cancel"
                   class="MenuOption TextOption menu-option menu-cancel"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"

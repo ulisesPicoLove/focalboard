@@ -2,6 +2,7 @@
 // See LICENSE.txt for license information.
 import React, {useEffect, useState, useContext, CSSProperties, useRef} from 'react'
 
+import {keyboardActivation} from '../../keyboardActivation'
 import CompassIcon from '../../widgets/icons/compassIcon'
 
 import MenuUtil from './menuUtil'
@@ -51,15 +52,21 @@ function SubMenuOption(props: SubMenuOptionProps): JSX.Element {
         styleRef.current = newStyle
     }, [ref.current])
 
+    const toggleOpen = (e: React.SyntheticEvent) => {
+        e.preventDefault()
+        e.stopPropagation()
+        setIsOpen((open) => !open)
+    }
+
     return (
         <div
             id={props.id}
+            role='button'
+            aria-haspopup='true'
+            aria-expanded={isOpen}
             className={`MenuOption SubMenuOption menu-option${openLeftClass}${isOpen ? ' menu-option-active' : ''}${props.className ? ' ' + props.className : ''}`}
-            onClick={(e: React.MouseEvent) => {
-                e.preventDefault()
-                e.stopPropagation()
-                setIsOpen((open) => !open)
-            }}
+            onClick={toggleOpen}
+            {...keyboardActivation(toggleOpen)}
             ref={ref}
         >
             {props.icon ? <div className='menu-option__icon'>{props.icon}</div> : <div className='noicon'/>}

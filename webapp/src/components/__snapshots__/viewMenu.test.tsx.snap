@@ -25,6 +25,7 @@ Object {
                     aria-label="view title"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -70,6 +71,7 @@ Object {
                     aria-label="view title"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -123,6 +125,7 @@ Object {
                   aria-label="Duplicate view"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -154,6 +157,7 @@ Object {
                   aria-label="Delete view"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -182,8 +186,12 @@ Object {
               </div>
               <div>
                 <div
+                  aria-expanded="false"
+                  aria-haspopup="true"
                   class="MenuOption SubMenuOption menu-option"
                   id="__addView"
+                  role="button"
+                  tabindex="0"
                 >
                   <div
                     class="menu-option__icon"
@@ -213,6 +221,7 @@ Object {
                 aria-label="Cancel"
                 class="MenuOption TextOption menu-option menu-cancel"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -261,6 +270,7 @@ Object {
                   aria-label="view title"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -306,6 +316,7 @@ Object {
                   aria-label="view title"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -359,6 +370,7 @@ Object {
                 aria-label="Duplicate view"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -390,6 +402,7 @@ Object {
                 aria-label="Delete view"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -418,8 +431,12 @@ Object {
             </div>
             <div>
               <div
+                aria-expanded="false"
+                aria-haspopup="true"
                 class="MenuOption SubMenuOption menu-option"
                 id="__addView"
+                role="button"
+                tabindex="0"
               >
                 <div
                   class="menu-option__icon"
@@ -449,6 +466,7 @@ Object {
               aria-label="Cancel"
               class="MenuOption TextOption menu-option menu-cancel"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -554,6 +572,7 @@ Object {
                     aria-label="view title"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -599,6 +618,7 @@ Object {
                     aria-label="view title"
                     class="MenuOption TextOption menu-option"
                     role="button"
+                    tabindex="0"
                   >
                     <div
                       class="d-flex"
@@ -661,6 +681,7 @@ Object {
                 aria-label="Cancel"
                 class="MenuOption TextOption menu-option menu-cancel"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -709,6 +730,7 @@ Object {
                   aria-label="view title"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -754,6 +776,7 @@ Object {
                   aria-label="view title"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -816,6 +839,7 @@ Object {
               aria-label="Cancel"
               class="MenuOption TextOption menu-option menu-cancel"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"

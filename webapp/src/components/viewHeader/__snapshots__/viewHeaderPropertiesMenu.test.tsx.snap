@@ -28,8 +28,10 @@ exports[`components/viewHeader/viewHeaderPropertiesMenu return properties menu 1
           <div>
             <div
               aria-label="Status"
+              aria-pressed="false"
               class="MenuOption SwitchOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="noicon"
@@ -51,8 +53,10 @@ exports[`components/viewHeader/viewHeaderPropertiesMenu return properties menu 1
           <div>
             <div
               aria-label="Property 1"
+              aria-pressed="false"
               class="MenuOption SwitchOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="noicon"
@@ -74,8 +78,10 @@ exports[`components/viewHeader/viewHeaderPropertiesMenu return properties menu 1
           <div>
             <div
               aria-label="Property 2"
+              aria-pressed="false"
               class="MenuOption SwitchOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="noicon"
@@ -97,8 +103,10 @@ exports[`components/viewHeader/viewHeaderPropertiesMenu return properties menu 1
           <div>
             <div
               aria-label="Property 3"
+              aria-pressed="false"
               class="MenuOption SwitchOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="noicon"
@@ -120,8 +128,10 @@ exports[`components/viewHeader/viewHeaderPropertiesMenu return properties menu 1
           <div>
             <div
               aria-label="Comments and description"
+              aria-pressed="false"
               class="MenuOption SwitchOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="noicon"
@@ -151,6 +161,7 @@ exports[`components/viewHeader/viewHeaderPropertiesMenu return properties menu 1
             aria-label="Cancel"
             class="MenuOption TextOption menu-option menu-cancel"
             role="button"
+            tabindex="0"
           >
             <div
               class="d-flex"
@@ -206,8 +217,10 @@ exports[`components/viewHeader/viewHeaderPropertiesMenu return properties menu w
           <div>
             <div
               aria-label="Title"
+              aria-pressed="false"
               class="MenuOption SwitchOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="noicon"
@@ -229,8 +242,10 @@ exports[`components/viewHeader/viewHeaderPropertiesMenu return properties menu w
           <div>
             <div
               aria-label="Status"
+              aria-pressed="false"
               class="MenuOption SwitchOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="noicon"
@@ -252,8 +267,10 @@ exports[`components/viewHeader/viewHeaderPropertiesMenu return properties menu w
           <div>
             <div
               aria-label="Property 1"
+              aria-pressed="false"
               class="MenuOption SwitchOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="noicon"
@@ -275,8 +292,10 @@ exports[`components/viewHeader/viewHeaderPropertiesMenu return properties menu w
           <div>
             <div
               aria-label="Property 2"
+              aria-pressed="false"
               class="MenuOption SwitchOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="noicon"
@@ -298,8 +317,10 @@ exports[`components/viewHeader/viewHeaderPropertiesMenu return properties menu w
           <div>
             <div
               aria-label="Property 3"
+              aria-pressed="false"
               class="MenuOption SwitchOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="noicon"
@@ -321,8 +342,10 @@ exports[`components/viewHeader/viewHeaderPropertiesMenu return properties menu w
           <div>
             <div
               aria-label="Comments and description"
+              aria-pressed="false"
               class="MenuOption SwitchOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="noicon"
@@ -352,6 +375,7 @@ exports[`components/viewHeader/viewHeaderPropertiesMenu return properties menu w
             aria-label="Cancel"
             class="MenuOption TextOption menu-option menu-cancel"
             role="button"
+            tabindex="0"
           >
             <div
               class="d-flex"

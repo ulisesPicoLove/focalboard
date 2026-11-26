@@ -29,6 +29,7 @@ exports[`src/components/kanban/kanbanHiddenColumnItem return kanbanHiddenColumnI
                 aria-label="Show"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -72,6 +73,7 @@ exports[`src/components/kanban/kanbanHiddenColumnItem return kanbanHiddenColumnI
               aria-label="Cancel"
               class="MenuOption TextOption menu-option menu-cancel"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -138,6 +140,7 @@ exports[`src/components/kanban/kanbanHiddenColumnItem return kanbanHiddenColumnI
                 aria-label="Show"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -181,6 +184,7 @@ exports[`src/components/kanban/kanbanHiddenColumnItem return kanbanHiddenColumnI
               aria-label="Cancel"
               class="MenuOption TextOption menu-option menu-cancel"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"

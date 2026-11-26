@@ -54,6 +54,7 @@ exports[`components/cardDetail/comment return comment 1`] = `
                   aria-label="Delete"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -91,6 +92,7 @@ exports[`components/cardDetail/comment return comment 1`] = `
                 aria-label="Cancel"
                 class="MenuOption TextOption menu-option menu-cancel"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -182,6 +184,7 @@ exports[`components/cardDetail/comment return comment and delete comment 1`] = `
                   aria-label="Delete"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -219,6 +222,7 @@ exports[`components/cardDetail/comment return comment and delete comment 1`] = `
                 aria-label="Cancel"
                 class="MenuOption TextOption menu-option menu-cancel"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -358,6 +362,7 @@ exports[`components/cardDetail/comment return guest comment 1`] = `
                   aria-label="Delete"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -395,6 +400,7 @@ exports[`components/cardDetail/comment return guest comment 1`] = `
                 aria-label="Cancel"
                 class="MenuOption TextOption menu-option menu-cancel"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -495,6 +501,7 @@ exports[`components/cardDetail/comment return guest comment and delete comment 1
                   aria-label="Delete"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -532,6 +539,7 @@ exports[`components/cardDetail/comment return guest comment and delete comment 1
                 aria-label="Cancel"
                 class="MenuOption TextOption menu-option menu-cancel"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"

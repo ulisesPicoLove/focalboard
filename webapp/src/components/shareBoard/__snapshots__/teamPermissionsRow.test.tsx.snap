@@ -44,6 +44,7 @@ exports[`src/components/shareBoard/teamPermissionsRow should match snapshot 1`] 
                   aria-label="Editor"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex menu-option__check"
@@ -75,6 +76,7 @@ exports[`src/components/shareBoard/teamPermissionsRow should match snapshot 1`] 
                   aria-label="Commenter"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -106,6 +108,7 @@ exports[`src/components/shareBoard/teamPermissionsRow should match snapshot 1`] 
                   aria-label="Viewer"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -137,6 +140,7 @@ exports[`src/components/shareBoard/teamPermissionsRow should match snapshot 1`] 
                   aria-label="None"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex menu-option__check"
@@ -180,6 +184,7 @@ exports[`src/components/shareBoard/teamPermissionsRow should match snapshot 1`] 
                 aria-label="Cancel"
                 class="MenuOption TextOption menu-option menu-cancel"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -254,6 +259,7 @@ exports[`src/components/shareBoard/teamPermissionsRow should match snapshot in p
                   aria-label="Editor"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex menu-option__check"
@@ -285,6 +291,7 @@ exports[`src/components/shareBoard/teamPermissionsRow should match snapshot in p
                   aria-label="Commenter"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -316,6 +323,7 @@ exports[`src/components/shareBoard/teamPermissionsRow should match snapshot in p
                   aria-label="Viewer"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -347,6 +355,7 @@ exports[`src/components/shareBoard/teamPermissionsRow should match snapshot in p
                   aria-label="None"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex menu-option__check"
@@ -390,6 +399,7 @@ exports[`src/components/shareBoard/teamPermissionsRow should match snapshot in p
                 aria-label="Cancel"
                 class="MenuOption TextOption menu-option menu-cancel"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -466,6 +476,7 @@ exports[`src/components/shareBoard/teamPermissionsRow should match snapshot in t
                   aria-label="Viewer"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex"
@@ -497,6 +508,7 @@ exports[`src/components/shareBoard/teamPermissionsRow should match snapshot in t
                   aria-label="None"
                   class="MenuOption TextOption menu-option"
                   role="button"
+                  tabindex="0"
                 >
                   <div
                     class="d-flex menu-option__check"
@@ -540,6 +552,7 @@ exports[`src/components/shareBoard/teamPermissionsRow should match snapshot in t
                 aria-label="Cancel"
                 class="MenuOption TextOption menu-option menu-cancel"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"

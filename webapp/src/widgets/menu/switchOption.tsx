@@ -2,6 +2,7 @@
 // See LICENSE.txt for license information.
 import React from 'react'
 
+import {keyboardActivation} from '../../keyboardActivation'
 import Switch from '../switch'
 
 import {MenuOptionProps} from './menuItem'
@@ -15,18 +16,22 @@ type SwitchOptionProps = MenuOptionProps & {
 function SwitchOption(props: SwitchOptionProps): JSX.Element {
     const {name, icon, isOn, suppressItemClicked} = props
 
+    const activate = (e: React.SyntheticEvent) => {
+        if (!suppressItemClicked) {
+            e.target.dispatchEvent(new Event('menuItemClicked'))
+        }
+        props.onClick(props.id)
+        e.stopPropagation()
+    }
+
     return (
         <div
             className='MenuOption SwitchOption menu-option'
             role='button'
             aria-label={name}
-            onClick={(e: React.MouseEvent) => {
-                if (!suppressItemClicked) {
-                    e.target.dispatchEvent(new Event('menuItemClicked'))
-                }
-                props.onClick(props.id)
-                e.stopPropagation()
-            }}
+            aria-pressed={isOn}
+            onClick={activate}
+            {...keyboardActivation(activate)}
         >
             {icon ? <div className='menu-option__icon'>{icon}</div> : <div className='noicon'/>}
             <div className='menu-name'>{name}</div>

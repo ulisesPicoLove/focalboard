@@ -6,6 +6,7 @@ exports[`components/viewHeader/emptyCardButton return EmptyCardButton 1`] = `
     aria-label="Empty card"
     class="MenuOption TextOption menu-option bold-menu-text"
     role="button"
+    tabindex="0"
   >
     <div
       class="d-flex"
@@ -62,6 +63,7 @@ exports[`components/viewHeader/emptyCardButton return EmptyCardButton and Set Te
     aria-label="Empty card"
     class="MenuOption TextOption menu-option bold-menu-text"
     role="button"
+    tabindex="0"
   >
     <div
       class="d-flex"
@@ -121,6 +123,7 @@ exports[`components/viewHeader/emptyCardButton return EmptyCardButton and Set Te
                 aria-label="Set as default"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -164,6 +167,7 @@ exports[`components/viewHeader/emptyCardButton return EmptyCardButton and Set Te
               aria-label="Cancel"
               class="MenuOption TextOption menu-option menu-cancel"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -199,6 +203,7 @@ exports[`components/viewHeader/emptyCardButton return EmptyCardButton and addCar
     aria-label="Empty card"
     class="MenuOption TextOption menu-option bold-menu-text"
     role="button"
+    tabindex="0"
   >
     <div
       class="d-flex"

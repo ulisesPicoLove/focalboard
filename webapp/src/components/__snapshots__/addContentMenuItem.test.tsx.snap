@@ -6,6 +6,7 @@ exports[`components/addContentMenuItem return a checkbox menu item 1`] = `
     aria-label="checkbox"
     class="MenuOption TextOption menu-option"
     role="button"
+    tabindex="0"
   >
     <div
       class="d-flex"
@@ -46,6 +47,7 @@ exports[`components/addContentMenuItem return a divider menu item 1`] = `
     aria-label="divider"
     class="MenuOption TextOption menu-option"
     role="button"
+    tabindex="0"
   >
     <div
       class="d-flex"
@@ -86,6 +88,7 @@ exports[`components/addContentMenuItem return a text menu item 1`] = `
     aria-label="text"
     class="MenuOption TextOption menu-option"
     role="button"
+    tabindex="0"
   >
     <div
       class="d-flex"
@@ -128,6 +131,7 @@ exports[`components/addContentMenuItem return an image menu item 1`] = `
     aria-label="image"
     class="MenuOption TextOption menu-option"
     role="button"
+    tabindex="0"
   >
     <div
       class="d-flex"

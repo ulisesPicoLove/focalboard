@@ -53,6 +53,7 @@ exports[`components/blockIconSelector return menu on click 1`] = `
                 aria-label="Random"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -81,8 +82,12 @@ exports[`components/blockIconSelector return menu on click 1`] = `
             </div>
             <div>
               <div
+                aria-expanded="false"
+                aria-haspopup="true"
                 class="MenuOption SubMenuOption menu-option"
                 id="pick"
+                role="button"
+                tabindex="0"
               >
                 <div
                   class="menu-option__icon"
@@ -112,6 +117,7 @@ exports[`components/blockIconSelector return menu on click 1`] = `
                 aria-label="Remove icon"
                 class="MenuOption TextOption menu-option"
                 role="button"
+                tabindex="0"
               >
                 <div
                   class="d-flex"
@@ -149,6 +155,7 @@ exports[`components/blockIconSelector return menu on click 1`] = `
               aria-label="Cancel"
               class="MenuOption TextOption menu-option menu-cancel"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"

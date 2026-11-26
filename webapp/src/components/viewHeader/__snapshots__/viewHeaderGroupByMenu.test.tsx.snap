@@ -34,6 +34,7 @@ exports[`components/viewHeader/viewHeaderGroupByMenu For viewType table render o
               aria-label="Hide 1 empty groups"
               class="MenuOption TextOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -65,6 +66,7 @@ exports[`components/viewHeader/viewHeaderGroupByMenu For viewType table render o
               aria-label="Ungroup"
               class="MenuOption TextOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -95,6 +97,7 @@ exports[`components/viewHeader/viewHeaderGroupByMenu For viewType table render o
               aria-label="Status"
               class="MenuOption TextOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -128,6 +131,7 @@ exports[`components/viewHeader/viewHeaderGroupByMenu For viewType table render o
               aria-label="Property 1"
               class="MenuOption TextOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -155,6 +159,7 @@ exports[`components/viewHeader/viewHeaderGroupByMenu For viewType table render o
               aria-label="Property 2"
               class="MenuOption TextOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -182,6 +187,7 @@ exports[`components/viewHeader/viewHeaderGroupByMenu For viewType table render o
               aria-label="Property 3"
               class="MenuOption TextOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -215,6 +221,7 @@ exports[`components/viewHeader/viewHeaderGroupByMenu For viewType table render o
             aria-label="Cancel"
             class="MenuOption TextOption menu-option menu-cancel"
             role="button"
+            tabindex="0"
           >
             <div
               class="d-flex"
@@ -277,6 +284,7 @@ exports[`components/viewHeader/viewHeaderGroupByMenu For viewType table render o
               aria-label="Show 1 hidden groups"
               class="MenuOption TextOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -308,6 +316,7 @@ exports[`components/viewHeader/viewHeaderGroupByMenu For viewType table render o
               aria-label="Ungroup"
               class="MenuOption TextOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -338,6 +347,7 @@ exports[`components/viewHeader/viewHeaderGroupByMenu For viewType table render o
               aria-label="Status"
               class="MenuOption TextOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -371,6 +381,7 @@ exports[`components/viewHeader/viewHeaderGroupByMenu For viewType table render o
               aria-label="Property 1"
               class="MenuOption TextOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -398,6 +409,7 @@ exports[`components/viewHeader/viewHeaderGroupByMenu For viewType table render o
               aria-label="Property 2"
               class="MenuOption TextOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -425,6 +437,7 @@ exports[`components/viewHeader/viewHeaderGroupByMenu For viewType table render o
               aria-label="Property 3"
               class="MenuOption TextOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -458,6 +471,7 @@ exports[`components/viewHeader/viewHeaderGroupByMenu For viewType table render o
             aria-label="Cancel"
             class="MenuOption TextOption menu-option menu-cancel"
             role="button"
+            tabindex="0"
           >
             <div
               class="d-flex"
@@ -521,6 +535,7 @@ exports[`components/viewHeader/viewHeaderGroupByMenu return groupBy menu 1`] = `
               aria-label="Status"
               class="MenuOption TextOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -554,6 +569,7 @@ exports[`components/viewHeader/viewHeaderGroupByMenu return groupBy menu 1`] = `
               aria-label="Property 1"
               class="MenuOption TextOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -581,6 +597,7 @@ exports[`components/viewHeader/viewHeaderGroupByMenu return groupBy menu 1`] = `
               aria-label="Property 2"
               class="MenuOption TextOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -608,6 +625,7 @@ exports[`components/viewHeader/viewHeaderGroupByMenu return groupBy menu 1`] = `
               aria-label="Property 3"
               class="MenuOption TextOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -641,6 +659,7 @@ exports[`components/viewHeader/viewHeaderGroupByMenu return groupBy menu 1`] = `
             aria-label="Cancel"
             class="MenuOption TextOption menu-option menu-cancel"
             role="button"
+            tabindex="0"
           >
             <div
               class="d-flex"
@@ -727,6 +746,7 @@ exports[`components/viewHeader/viewHeaderGroupByMenu return groupBy menu, hideEm
               aria-label="Hide 1 empty groups"
               class="MenuOption TextOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -758,6 +778,7 @@ exports[`components/viewHeader/viewHeaderGroupByMenu return groupBy menu, hideEm
               aria-label="Show 1 hidden groups"
               class="MenuOption TextOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -789,6 +810,7 @@ exports[`components/viewHeader/viewHeaderGroupByMenu return groupBy menu, hideEm
               aria-label="Ungroup"
               class="MenuOption TextOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -819,6 +841,7 @@ exports[`components/viewHeader/viewHeaderGroupByMenu return groupBy menu, hideEm
               aria-label="Status"
               class="MenuOption TextOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -852,6 +875,7 @@ exports[`components/viewHeader/viewHeaderGroupByMenu return groupBy menu, hideEm
               aria-label="Property 1"
               class="MenuOption TextOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -879,6 +903,7 @@ exports[`components/viewHeader/viewHeaderGroupByMenu return groupBy menu, hideEm
               aria-label="Property 2"
               class="MenuOption TextOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -906,6 +931,7 @@ exports[`components/viewHeader/viewHeaderGroupByMenu return groupBy menu, hideEm
               aria-label="Property 3"
               class="MenuOption TextOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="d-flex"
@@ -939,6 +965,7 @@ exports[`components/viewHeader/viewHeaderGroupByMenu return groupBy menu, hideEm
             aria-label="Cancel"
             class="MenuOption TextOption menu-option menu-cancel"
             role="button"
+            tabindex="0"
           >
             <div
               class="d-flex"

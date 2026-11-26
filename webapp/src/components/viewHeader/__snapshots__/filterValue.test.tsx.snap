@@ -44,8 +44,10 @@ exports[`components/viewHeader/filterValue return filterValue 1`] = `
           <div>
             <div
               aria-label="Status"
+              aria-pressed="true"
               class="MenuOption SwitchOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="noicon"
@@ -75,6 +77,7 @@ exports[`components/viewHeader/filterValue return filterValue 1`] = `
             aria-label="Cancel"
             class="MenuOption TextOption menu-option menu-cancel"
             role="button"
+            tabindex="0"
           >
             <div
               class="d-flex"
@@ -130,8 +133,10 @@ exports[`components/viewHeader/filterValue return filterValue and click Status 1
           <div>
             <div
               aria-label="Status"
+              aria-pressed="true"
               class="MenuOption SwitchOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="noicon"
@@ -161,6 +166,7 @@ exports[`components/viewHeader/filterValue return filterValue and click Status 1
             aria-label="Cancel"
             class="MenuOption TextOption menu-option menu-cancel"
             role="button"
+            tabindex="0"
           >
             <div
               class="d-flex"
@@ -216,8 +222,10 @@ exports[`components/viewHeader/filterValue return filterValue and click Status w
           <div>
             <div
               aria-label="Status"
+              aria-pressed="false"
               class="MenuOption SwitchOption menu-option"
               role="button"
+              tabindex="0"
             >
               <div
                 class="noicon"
@@ -247,6 +255,7 @@ exports[`components/viewHeader/filterValue return filterValue and click Status w
             aria-label="Cancel"
             class="MenuOption TextOption menu-option menu-cancel"
             role="button"
+            tabindex="0"
           >
             <div
               class="d-flex"
