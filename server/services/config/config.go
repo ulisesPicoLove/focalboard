@@ -61,6 +61,12 @@ type Configuration struct {
 
 	AuthMode string `json:"authMode" mapstructure:"authMode"`
 
+	// Google Workspace sign-in, used when authMode is "google". These can also be set with
+	// FOCALBOARD_GOOGLE_CLIENT_ID, FOCALBOARD_GOOGLE_CLIENT_SECRET and FOCALBOARD_GOOGLE_ALLOWED_DOMAIN.
+	GoogleClientID      string `json:"google_client_id" mapstructure:"google_client_id"`
+	GoogleClientSecret  string `json:"google_client_secret" mapstructure:"google_client_secret"`
+	GoogleAllowedDomain string `json:"google_allowed_domain" mapstructure:"google_allowed_domain"`
+
 	LoggingCfgFile string `json:"logging_cfg_file" mapstructure:"logging_cfg_file"`
 	LoggingCfgJSON string `json:"logging_cfg_json" mapstructure:"logging_cfg_json"`
 
@@ -101,6 +107,10 @@ func ReadConfigFile(configFilePath string) (*Configuration, error) {
 	viper.SetDefault("LocalModeSocketLocation", "/var/tmp/focalboard_local.socket")
 	viper.SetDefault("EnablePublicSharedBoards", false)
 	viper.SetDefault("AuthMode", "native")
+	// Defaults are needed so these can be read from the environment (see AutomaticEnv above).
+	viper.SetDefault("google_client_id", "")
+	viper.SetDefault("google_client_secret", "")
+	viper.SetDefault("google_allowed_domain", "")
 	viper.SetDefault("NotifyFreqCardSeconds", 120)    // 2 minutes after last card edit
 	viper.SetDefault("NotifyFreqBoardSeconds", 86400) // 1 day after last card edit
 	viper.SetDefault("EnableDataRetention", false)
@@ -129,7 +139,15 @@ func ReadConfigFile(configFilePath string) (*Configuration, error) {
 	return &configuration, nil
 }
 
+// redacted replaces a secret in the copy of the configuration that is written to the log.
+const redacted = "[redacted]"
+
+// removeSecurityData returns a copy of the configuration that is safe to log. The original
+// is not modified.
 func removeSecurityData(config Configuration) Configuration {
 	clean := config
+	if clean.GoogleClientSecret != "" {
+		clean.GoogleClientSecret = redacted
+	}
 	return clean
 }

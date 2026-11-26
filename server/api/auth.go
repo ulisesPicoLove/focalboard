@@ -12,6 +12,7 @@ import (
 	"github.com/mattermost/focalboard/server/model"
 	"github.com/mattermost/focalboard/server/services/audit"
 	"github.com/mattermost/focalboard/server/services/auth"
+	"github.com/mattermost/focalboard/server/services/auth/googlesso"
 	"github.com/mattermost/focalboard/server/utils"
 
 	"github.com/mattermost/mattermost/server/public/shared/mlog"
@@ -54,6 +55,11 @@ func (a *API) handleLogin(w http.ResponseWriter, r *http.Request) {
 	//     description: internal error
 	//     schema:
 	//       "$ref": "#/definitions/ErrorResponse"
+	if a.authService == googlesso.AuthService {
+		a.errorResponse(w, r, model.NewErrNotImplemented("password sign-in is disabled, use Google sign-in"))
+		return
+	}
+
 	if a.MattermostAuth {
 		a.errorResponse(w, r, model.NewErrNotImplemented("not permitted in plugin mode"))
 		return
@@ -174,6 +180,11 @@ func (a *API) handleRegister(w http.ResponseWriter, r *http.Request) {
 	//     description: internal error
 	//     schema:
 	//       "$ref": "#/definitions/ErrorResponse"
+	if a.authService == googlesso.AuthService {
+		a.errorResponse(w, r, model.NewErrNotImplemented("password sign-in is disabled, use Google sign-in"))
+		return
+	}
+
 	if a.MattermostAuth {
 		a.errorResponse(w, r, model.NewErrNotImplemented("not permitted in plugin mode"))
 		return
@@ -277,6 +288,11 @@ func (a *API) handleChangePassword(w http.ResponseWriter, r *http.Request) {
 	//     description: internal error
 	//     schema:
 	//       "$ref": "#/definitions/ErrorResponse"
+	if a.authService == googlesso.AuthService {
+		a.errorResponse(w, r, model.NewErrNotImplemented("password sign-in is disabled, use Google sign-in"))
+		return
+	}
+
 	if a.MattermostAuth {
 		a.errorResponse(w, r, model.NewErrNotImplemented("not permitted in plugin mode"))
 		return

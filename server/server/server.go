@@ -5,8 +5,10 @@ import (
 	"fmt"
 	"net"
 	"net/http"
+	"net/url"
 	"os"
 	"runtime"
+	"strings"
 	"sync"
 	"syscall"
 	"time"
@@ -19,6 +21,7 @@ import (
 	"github.com/mattermost/focalboard/server/auth"
 	appModel "github.com/mattermost/focalboard/server/model"
 	"github.com/mattermost/focalboard/server/services/audit"
+	"github.com/mattermost/focalboard/server/services/auth/googlesso"
 	"github.com/mattermost/focalboard/server/services/config"
 	"github.com/mattermost/focalboard/server/services/metrics"
 	"github.com/mattermost/focalboard/server/services/notify"
@@ -145,6 +148,15 @@ func New(params Params) (*Server, error) {
 
 	focalboardAPI := api.NewAPI(app, params.SingleUserToken, params.Cfg.AuthMode, params.PermissionsService, params.Logger, auditService)
 
+	if params.Cfg.AuthMode == googlesso.AuthService {
+		provider, basePath, err := newGoogleSSO(params.Cfg)
+		if err != nil {
+			params.Logger.Error("Invalid Google sign-in configuration", mlog.Err(err))
+			return nil, err
+		}
+		focalboardAPI.SetGoogleSSO(provider, basePath)
+	}
+
 	// Local router for admin APIs
 	localRouter := mux.NewRouter()
 	focalboardAPI.RegisterAdminRoutes(localRouter)
@@ -206,6 +218,32 @@ func New(params Params) (*Server, error) {
 	server.initHandlers()
 
 	return &server, nil
+}
+
+// newGoogleSSO builds the Google sign-in provider from the configuration. The callback URL
+// registered in Google Cloud must be <serverRoot>/oauth/google/callback.
+func newGoogleSSO(cfg *config.Configuration) (*googlesso.Provider, string, error) {
+	root, err := url.Parse(cfg.ServerRoot)
+	if err != nil || root.Scheme == "" || root.Host == "" {
+		return nil, "", fmt.Errorf("serverRoot %q must be an absolute URL for Google sign-in", cfg.ServerRoot)
+	}
+
+	basePath := strings.TrimRight(root.Path, "/")
+	callbackPath := basePath + "/oauth/google/callback"
+
+	provider, err := googlesso.New(googlesso.Config{
+		ClientID:      cfg.GoogleClientID,
+		ClientSecret:  cfg.GoogleClientSecret,
+		AllowedDomain: cfg.GoogleAllowedDomain,
+		RedirectURL:   strings.TrimRight(cfg.ServerRoot, "/") + "/oauth/google/callback",
+		CookiePath:    callbackPath,
+		SecureCookie:  root.Scheme == "https" || cfg.SecureCookie,
+	})
+	if err != nil {
+		return nil, "", err
+	}
+
+	return provider, basePath, nil
 }
 
 func NewStore(config *config.Configuration, isSingleUser bool, logger mlog.LoggerIFace) (store.Store, error) {

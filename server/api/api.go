@@ -6,11 +6,13 @@ import (
 	"fmt"
 	"net/http"
 	"runtime/debug"
+	"strings"
 
 	"github.com/gorilla/mux"
 	"github.com/mattermost/focalboard/server/app"
 	"github.com/mattermost/focalboard/server/model"
 	"github.com/mattermost/focalboard/server/services/audit"
+	"github.com/mattermost/focalboard/server/services/auth/googlesso"
 	"github.com/mattermost/focalboard/server/services/permissions"
 
 	"github.com/mattermost/mattermost/server/public/shared/mlog"
@@ -41,6 +43,10 @@ type API struct {
 	MattermostAuth  bool
 	logger          mlog.LoggerIFace
 	audit           *audit.Audit
+
+	// Google sign-in, only set when the auth mode is "google".
+	googleSSO   *googlesso.Provider
+	ssoBasePath string
 }
 
 func NewAPI(
@@ -61,7 +67,18 @@ func NewAPI(
 	}
 }
 
+// SetGoogleSSO enables the Google sign-in routes. basePath is the URL path prefix the
+// server is mounted on ("" when served from the root).
+func (a *API) SetGoogleSSO(provider *googlesso.Provider, basePath string) {
+	a.googleSSO = provider
+	a.ssoBasePath = strings.TrimRight(basePath, "/")
+}
+
 func (a *API) RegisterRoutes(r *mux.Router) {
+	// The sign-in routes are plain browser navigations, so they cannot send the
+	// X-Requested-With header that the /api/v2 routes require.
+	a.registerSSORoutes(r)
+
 	apiv2 := r.PathPrefix("/api/v2").Subrouter()
 	apiv2.Use(a.panicHandler)
 	apiv2.Use(a.requireCSRFToken)

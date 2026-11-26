@@ -26,4 +26,8 @@ type ClientConfig struct {
 	// Required for file upload to check the size of the file
 	// required: true
 	MaxFileSize int64 `json:"maxFileSize"`
+
+	// How users sign in: "native", "mattermost" or "google"
+	// required: true
+	AuthMode string `json:"authMode"`
 }
