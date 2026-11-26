@@ -9,7 +9,7 @@ import debounce from 'lodash/debounce'
 
 import {Draggable, Droppable} from '@hello-pangea/dnd'
 
-import {HandRightIcon} from '@mattermost/compass-icons/components'
+import HandRightIcon from '@mattermost/compass-icons/components/hand-right'
 
 import {keyboardActivation} from '../../keyboardActivation'
 

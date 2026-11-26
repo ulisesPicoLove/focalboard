@@ -3,12 +3,10 @@
 import React from 'react'
 import {createRoot} from 'react-dom/client'
 import {Provider as ReduxProvider} from 'react-redux'
-import {store as emojiMartStore} from 'emoji-mart'
 
 import App from './app'
 import {initThemes} from './theme'
 import {importNativeAppSettings} from './nativeApp'
-import {UserSettings} from './userSettings'
 
 import {IUser} from './user'
 import {getMe} from './store/users'
@@ -32,7 +30,6 @@ import './styles/pico.scss'
 import store from './store'
 import WithWebSockets from './components/withWebSockets'
 
-emojiMartStore.setHandlers({getter: UserSettings.getEmojiMartSetting, setter: UserSettings.setEmojiMartSetting})
 importNativeAppSettings()
 
 initThemes()

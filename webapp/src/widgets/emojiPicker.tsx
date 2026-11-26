@@ -3,12 +3,16 @@
 import React, {FC} from 'react'
 
 import 'emoji-mart/css/emoji-mart.css'
-import {Picker, BaseEmoji} from 'emoji-mart'
+import {Picker, BaseEmoji, store as emojiMartStore} from 'emoji-mart'
 
 import {Utils} from '../utils'
+import {UserSettings} from '../userSettings'
 import './emojiPicker.scss'
 
 import emojiSpirit from '../../static/emoji_spirit.png'
+
+// The picker is loaded on demand, so its storage hooks are set here and not at startup
+emojiMartStore.setHandlers({getter: UserSettings.getEmojiMartSetting, setter: UserSettings.setEmojiMartSetting})
 
 type Props = {
     onSelect: (emoji: string) => void

@@ -1,13 +1,13 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {IntlProvider} from 'react-intl'
 import {DndProvider} from 'react-dnd'
 import {HTML5Backend} from 'react-dnd-html5-backend'
 import {TouchBackend} from 'react-dnd-touch-backend'
 import {History} from 'history'
 
-import {getMessages} from './i18n'
+import {loadMessages} from './i18n'
 import {FlashMessages} from './components/flashMessages'
 import {Utils} from './utils'
 import {fetchMe} from './store/users'
@@ -23,6 +23,25 @@ type Props = {
 const App = (props: Props): JSX.Element => {
     const language = useAppSelector<string>(getLanguage)
     const dispatch = useAppDispatch()
+    const [messages, setMessages] = useState<{[key: string]: string}|null>(null)
+
+    // Download the language file before showing the interface, so it never flashes in English
+    useEffect(() => {
+        let cancelled = false
+        loadMessages(language).then((loaded) => {
+            if (!cancelled) {
+                setMessages(loaded)
+            }
+        }).catch(() => {
+            // without the file the interface falls back to the English defaults
+            if (!cancelled) {
+                setMessages({})
+            }
+        })
+        return () => {
+            cancelled = true
+        }
+    }, [language])
 
     // Tell browsers and screen readers the language of the interface (BCP 47 uses '-', not '_')
     useEffect(() => {
@@ -35,10 +54,14 @@ const App = (props: Props): JSX.Element => {
         dispatch(fetchClientConfig())
     }, [dispatch])
 
+    if (!messages) {
+        return <div id='frame'/>
+    }
+
     return (
         <IntlProvider
             locale={language.split(/[_]/)[0]}
-            messages={getMessages(language)}
+            messages={messages}
         >
             <DndProvider backend={Utils.isMobile() ? TouchBackend : HTML5Backend}>
                 <FlashMessages milliseconds={2000}/>

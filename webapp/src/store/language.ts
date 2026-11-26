@@ -22,7 +22,9 @@ export const storeLanguage = createAsyncThunk(
 
 const languageSlice = createSlice({
     name: 'language',
-    initialState: {value: 'en'} as {value: string},
+
+    // Read synchronously so the first render already knows which language file to download
+    initialState: {value: getCurrentLanguage()} as {value: string},
     reducers: {
         setLanguage: (state, action: PayloadAction<string>) => {
             state.value = action.payload

@@ -1,65 +1,41 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 
-import messages_ca from '../i18n/ca.json'
-import messages_de from '../i18n/de.json'
-import messages_el from '../i18n/el.json'
-import messages_en from '../i18n/en.json'
-import messages_es from '../i18n/es.json'
-import messages_fr from '../i18n/fr.json'
-import messages_id from '../i18n/id.json'
-import messages_it from '../i18n/it.json'
-import messages_ja from '../i18n/ja.json'
-import messages_nl from '../i18n/nl.json'
-import messages_oc from '../i18n/oc.json'
-import messages_ptBr from '../i18n/pt_BR.json'
-import messages_ru from '../i18n/ru.json'
-import messages_sv from '../i18n/sv.json'
-import messages_tr from '../i18n/tr.json'
-import messages_zhHans from '../i18n/zh_Hans.json'
-import messages_zhHant from '../i18n/zh_Hant.json'
-
 import {UserSettings} from './userSettings'
 
 const supportedLanguages = ['ca', 'de', 'el', 'en', 'es', 'fr', 'id', 'it', 'ja', 'nl', 'oc', 'pt-br', 'ru', 'sv', 'tr', 'zh-cn', 'zh-tw']
 
-export function getMessages(lang: string): {[key: string]: string} {
-    switch (lang) {
-    case 'ca':
-        return messages_ca
-    case 'de':
-        return messages_de
-    case 'el':
-        return messages_el
-    case 'es':
-        return messages_es
-    case 'fr':
-        return messages_fr
-    case 'id':
-        return messages_id
-    case 'it':
-        return messages_it
-    case 'ja':
-        return messages_ja
-    case 'nl':
-        return messages_nl
-    case 'oc':
-        return messages_oc
-    case 'pt-br':
-        return messages_ptBr
-    case 'ru':
-        return messages_ru
-    case 'sv':
-        return messages_sv
-    case 'tr':
-        return messages_tr
-    case 'zh-cn':
-        return messages_zhHans
-    case 'zh-tw':
-        return messages_zhHant
-    }
-    return messages_en
+type Messages = {[key: string]: string}
+
+// One chunk per language: only the active one is downloaded. English needs no file,
+// every message carries its English defaultMessage in the code.
+const loaders: Record<string, () => Promise<{default: Messages}>> = {
+    ca: () => import('../i18n/ca.json'),
+    de: () => import('../i18n/de.json'),
+    el: () => import('../i18n/el.json'),
+    es: () => import('../i18n/es.json'),
+    fr: () => import('../i18n/fr.json'),
+    id: () => import('../i18n/id.json'),
+    it: () => import('../i18n/it.json'),
+    ja: () => import('../i18n/ja.json'),
+    nl: () => import('../i18n/nl.json'),
+    oc: () => import('../i18n/oc.json'),
+    'pt-br': () => import('../i18n/pt_BR.json'),
+    ru: () => import('../i18n/ru.json'),
+    sv: () => import('../i18n/sv.json'),
+    tr: () => import('../i18n/tr.json'),
+    'zh-cn': () => import('../i18n/zh_Hans.json'),
+    'zh-tw': () => import('../i18n/zh_Hant.json'),
 }
+
+export async function loadMessages(lang: string): Promise<Messages> {
+    const load = loaders[lang]
+    if (!load) {
+        return {}
+    }
+    return (await load()).default
+}
+
 export function getCurrentLanguage(): string {
     let lang = UserSettings.language
     if (!lang) {
