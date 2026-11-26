@@ -71,7 +71,11 @@ func (a *API) handleGetUsersList(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if userIDs[0] == model.SingleUser {
-		ws, _ := a.app.GetRootTeam()
+		ws, rootErr := a.app.GetRootTeam()
+		if rootErr != nil {
+			a.errorResponse(w, r, rootErr)
+			return
+		}
 		now := utils.GetMillis()
 		user := &model.User{
 			ID:       model.SingleUser,
@@ -164,7 +168,11 @@ func (a *API) handleGetMe(w http.ResponseWriter, r *http.Request) {
 	defer a.audit.LogRecord(audit.LevelRead, auditRec)
 
 	if userID == model.SingleUser {
-		ws, _ := a.app.GetRootTeam()
+		ws, rootErr := a.app.GetRootTeam()
+		if rootErr != nil {
+			a.errorResponse(w, r, rootErr)
+			return
+		}
 		now := utils.GetMillis()
 		user = &model.User{
 			ID:       model.SingleUser,
@@ -357,6 +365,10 @@ func (a *API) handleUpdateUserConfig(w http.ResponseWriter, r *http.Request) {
 	err = json.Unmarshal(requestBody, &patch)
 	if err != nil {
 		a.errorResponse(w, r, err)
+		return
+	}
+	if patch == nil {
+		a.errorResponse(w, r, model.NewErrBadRequest("a preferences patch is required"))
 		return
 	}
 

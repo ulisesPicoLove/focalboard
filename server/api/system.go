@@ -51,6 +51,7 @@ func (a *API) handlePing(w http.ResponseWriter, r *http.Request) {
 	bytes, err := json.Marshal(serverMetadata)
 	if err != nil {
 		a.errorResponse(w, r, err)
+		return
 	}
 
 	jsonStringResponse(w, 200, string(bytes))

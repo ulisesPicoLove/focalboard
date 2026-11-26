@@ -89,6 +89,7 @@ func (a *API) handleArchiveExportBoard(w http.ResponseWriter, r *http.Request) {
 
 	if err := a.app.ExportArchive(w, opts); err != nil {
 		a.errorResponse(w, r, err)
+		return
 	}
 
 	auditRec.Success()
@@ -149,7 +150,7 @@ func (a *API) handleArchiveImport(w http.ResponseWriter, r *http.Request) {
 
 	file, handle, err := r.FormFile(UploadFormFileKey)
 	if err != nil {
-		fmt.Fprintf(w, "%v", err)
+		a.errorResponse(w, r, model.NewErrBadRequest(err.Error()))
 		return
 	}
 	defer file.Close()
@@ -248,6 +249,7 @@ func (a *API) handleArchiveExportTeam(w http.ResponseWriter, r *http.Request) {
 
 	if err := a.app.ExportArchive(w, opts); err != nil {
 		a.errorResponse(w, r, err)
+		return
 	}
 
 	auditRec.Success()

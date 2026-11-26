@@ -130,6 +130,9 @@ func getDestinationFilePath(isTemplate bool, teamID, boardID, filename string) s
 func getFileInfoID(fileName string) string {
 	// Boards ids are 27 characters long with a prefix character.
 	// removing the prefix, returns the 26 character uuid
+	if len(fileName) < 2 {
+		return ""
+	}
 	return fileName[1:]
 }
 

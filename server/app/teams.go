@@ -1,6 +1,9 @@
 package app
 
 import (
+	"database/sql"
+	"errors"
+
 	"github.com/mattermost/focalboard/server/model"
 	"github.com/mattermost/focalboard/server/utils"
 
@@ -9,13 +12,19 @@ import (
 
 func (a *App) GetRootTeam() (*model.Team, error) {
 	teamID := "0"
-	team, _ := a.store.GetTeam(teamID)
+	team, err := a.store.GetTeam(teamID)
+	if err != nil && !errors.Is(err, sql.ErrNoRows) && !model.IsErrNotFound(err) {
+		// A transient database error must not be taken for "team missing": that would
+		// regenerate the signup token and break every invitation link already sent.
+		a.logger.Error("Unable to get root team", mlog.Err(err))
+		return nil, err
+	}
 	if team == nil {
 		team = &model.Team{
 			ID:          teamID,
 			SignupToken: utils.NewID(utils.IDTypeToken),
 		}
-		err := a.store.UpsertTeamSignupToken(*team)
+		err = a.store.UpsertTeamSignupToken(*team)
 		if err != nil {
 			a.logger.Error("Unable to initialize team", mlog.Err(err))
 			return nil, err

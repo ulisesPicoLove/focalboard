@@ -91,7 +91,7 @@ func (a *App) Login(username, email, password, mfaToken string) (string, error) 
 	if user == nil && email != "" {
 		var err error
 		user, err = a.store.GetUserByEmail(email)
-		if err != nil && model.IsErrNotFound(err) {
+		if err != nil && !model.IsErrNotFound(err) {
 			a.metrics.IncrementLoginFailCount(1)
 			return "", errors.Wrap(err, "invalid username or password")
 		}

@@ -47,6 +47,7 @@ func (a *API) handleGetTeams(w http.ResponseWriter, r *http.Request) {
 	teams, err := a.app.GetTeamsForUser(userID)
 	if err != nil {
 		a.errorResponse(w, r, err)
+		return
 	}
 
 	auditRec := a.makeAuditRecord(r, "getTeams", audit.Fail)
@@ -156,6 +157,13 @@ func (a *API) handlePostTeamRegenerateSignupToken(w http.ResponseWriter, r *http
 	//       "$ref": "#/definitions/ErrorResponse"
 	if a.MattermostAuth {
 		a.errorResponse(w, r, model.NewErrNotImplemented("not permitted in plugin mode"))
+		return
+	}
+
+	// With Google sign-in nobody registers with a signup token, and there is no admin
+	// role here, so any user could otherwise invalidate the invitation links of everyone.
+	if a.authService != "native" {
+		a.errorResponse(w, r, model.NewErrNotImplemented("signup tokens are only used with the native auth mode"))
 		return
 	}
 
@@ -326,7 +334,11 @@ func (a *API) handleGetTeamUsersByID(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if userIDs[0] == model.SingleUser {
-		ws, _ := a.app.GetRootTeam()
+		ws, rootErr := a.app.GetRootTeam()
+		if rootErr != nil {
+			a.errorResponse(w, r, rootErr)
+			return
+		}
 		now := utils.GetMillis()
 		user := &model.User{
 			ID:       model.SingleUser,

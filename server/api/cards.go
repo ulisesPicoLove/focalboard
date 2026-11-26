@@ -187,12 +187,14 @@ func (a *API) handleGetCards(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		message := fmt.Sprintf("invalid `page` parameter: %s", err)
 		a.errorResponse(w, r, model.NewErrBadRequest(message))
+		return
 	}
 
 	perPage, err := strconv.Atoi(strPerPage)
 	if err != nil {
 		message := fmt.Sprintf("invalid `per_page` parameter: %s", err)
 		a.errorResponse(w, r, model.NewErrBadRequest(message))
+		return
 	}
 
 	auditRec := a.makeAuditRecord(r, "getCards", audit.Fail)

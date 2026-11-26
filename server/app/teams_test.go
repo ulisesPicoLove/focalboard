@@ -152,3 +152,16 @@ func TestTeamOperations(t *testing.T) {
 	assert.NoError(t, errGetTeamCount)
 	assert.Equal(t, int64(10), count)
 }
+
+func TestGetRootTeamDoesNotRegenerateTheTokenOnATransientError(t *testing.T) {
+	th, tearDown := SetupTestHelper(t)
+	defer tearDown()
+
+	dbDown := errors.New("connection refused")
+	th.Store.EXPECT().GetTeam("0").Return(nil, dbDown)
+	// UpsertTeamSignupToken must NOT be called: no expectation is registered for it.
+
+	team, err := th.App.GetRootTeam()
+	require.ErrorIs(t, err, dbDown)
+	require.Nil(t, team)
+}

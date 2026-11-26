@@ -11,6 +11,7 @@ import (
 
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 
 	"github.com/mattermost/focalboard/server/model"
 	"github.com/mattermost/focalboard/server/services/filestore"
@@ -553,4 +554,10 @@ func TestCopyAndUpdateCardFiles(t *testing.T) {
 
 		assert.NotEqual(t, testPath, imageBlock.Fields["fileId"])
 	})
+}
+
+func TestGetFileInfoIDDoesNotPanicOnShortNames(t *testing.T) {
+	require.Equal(t, "", getFileInfoID(""))
+	require.Equal(t, "", getFileInfoID("7"))
+	require.Equal(t, "abc", getFileInfoID("7abc"))
 }
