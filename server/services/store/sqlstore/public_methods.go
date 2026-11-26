@@ -353,11 +353,6 @@ func (s *SQLStore) GetBlocksByIDs(ids []string) ([]*model.Block, error) {
 
 }
 
-func (s *SQLStore) GetBlocksComplianceHistory(opts model.QueryBlocksComplianceHistoryOptions) ([]*model.BlockHistory, bool, error) {
-	return s.getBlocksComplianceHistory(s.db, opts)
-
-}
-
 func (s *SQLStore) GetBlocksForBoard(boardID string) ([]*model.Block, error) {
 	return s.getBlocksForBoard(s.db, boardID)
 
@@ -405,16 +400,6 @@ func (s *SQLStore) GetBoardHistory(boardID string, opts model.QueryBoardHistoryO
 
 func (s *SQLStore) GetBoardMemberHistory(boardID string, userID string, limit uint64) ([]*model.BoardMemberHistoryEntry, error) {
 	return s.getBoardMemberHistory(s.db, boardID, userID, limit)
-
-}
-
-func (s *SQLStore) GetBoardsComplianceHistory(opts model.QueryBoardsComplianceHistoryOptions) ([]*model.BoardHistory, bool, error) {
-	return s.getBoardsComplianceHistory(s.db, opts)
-
-}
-
-func (s *SQLStore) GetBoardsForCompliance(opts model.QueryBoardsForComplianceOptions) ([]*model.Board, bool, error) {
-	return s.getBoardsForCompliance(s.db, opts)
 
 }
 
@@ -798,30 +783,6 @@ func (s *SQLStore) ReorderCategories(userID string, teamID string, newCategoryOr
 
 func (s *SQLStore) ReorderCategoryBoards(categoryID string, newBoardsOrder []string) ([]string, error) {
 	return s.reorderCategoryBoards(s.db, categoryID, newBoardsOrder)
-
-}
-
-func (s *SQLStore) RunDataRetention(globalRetentionDate int64, batchSize int64) (int64, error) {
-	if s.dbType == model.SqliteDBType {
-		return s.runDataRetention(s.db, globalRetentionDate, batchSize)
-	}
-	tx, txErr := s.db.BeginTx(context.Background(), nil)
-	if txErr != nil {
-		return 0, txErr
-	}
-	result, err := s.runDataRetention(tx, globalRetentionDate, batchSize)
-	if err != nil {
-		if rollbackErr := tx.Rollback(); rollbackErr != nil {
-			s.logger.Error("transaction rollback error", mlog.Err(rollbackErr), mlog.String("methodName", "RunDataRetention"))
-		}
-		return 0, err
-	}
-
-	if err := tx.Commit(); err != nil {
-		return 0, err
-	}
-
-	return result, nil
 
 }
 

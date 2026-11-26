@@ -157,7 +157,6 @@ type Store interface {
 	GetTemplateBoards(teamID, userID string) ([]*model.Board, error)
 
 	// @withTransaction
-	RunDataRetention(globalRetentionDate int64, batchSize int64) (int64, error)
 
 	GetUsedCardsCount() (int, error)
 	GetCardLimitTimestamp() (int64, error)
@@ -175,9 +174,6 @@ type Store interface {
 	GetUserTimezone(userID string) (string, error)
 
 	// Compliance
-	GetBoardsForCompliance(opts model.QueryBoardsForComplianceOptions) ([]*model.Board, bool, error)
-	GetBoardsComplianceHistory(opts model.QueryBoardsComplianceHistoryOptions) ([]*model.BoardHistory, bool, error)
-	GetBlocksComplianceHistory(opts model.QueryBlocksComplianceHistoryOptions) ([]*model.BlockHistory, bool, error)
 
 	// For unit testing only
 	DeleteBoardRecord(boardID, modifiedBy string) error

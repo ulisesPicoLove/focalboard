@@ -20,7 +20,6 @@ func (a *API) registerBoardsRoutes(r *mux.Router) {
 	r.HandleFunc("/boards/{boardID}", a.sessionRequired(a.handleDeleteBoard)).Methods("DELETE")
 	r.HandleFunc("/boards/{boardID}/duplicate", a.sessionRequired(a.handleDuplicateBoard)).Methods("POST")
 	r.HandleFunc("/boards/{boardID}/undelete", a.sessionRequired(a.handleUndeleteBoard)).Methods("POST")
-	r.HandleFunc("/boards/{boardID}/metadata", a.sessionRequired(a.handleGetBoardMetadata)).Methods("GET")
 }
 
 func (a *API) handleGetBoards(w http.ResponseWriter, r *http.Request) {
@@ -599,77 +598,6 @@ func (a *API) handleUndeleteBoard(w http.ResponseWriter, r *http.Request) {
 
 	a.logger.Debug("UNDELETE Board", mlog.String("boardID", boardID))
 	jsonStringResponse(w, http.StatusOK, "{}")
-
-	auditRec.Success()
-}
-
-func (a *API) handleGetBoardMetadata(w http.ResponseWriter, r *http.Request) {
-	// swagger:operation GET /boards/{boardID}/metadata getBoardMetadata
-	//
-	// Returns a board's metadata
-	//
-	// ---
-	// produces:
-	// - application/json
-	// parameters:
-	// - name: boardID
-	//   in: path
-	//   description: Board ID
-	//   required: true
-	//   type: string
-	// security:
-	// - BearerAuth: []
-	// responses:
-	//   '200':
-	//     description: success
-	//     schema:
-	//       "$ref": "#/definitions/BoardMetadata"
-	//   '404':
-	//     description: board not found
-	//   '501':
-	//     description: required license not found
-	//   default:
-	//     description: internal error
-	//     schema:
-	//       "$ref": "#/definitions/ErrorResponse"
-
-	boardID := mux.Vars(r)["boardID"]
-	userID := getUserID(r)
-
-	board, boardMetadata, err := a.app.GetBoardMetadata(boardID)
-	if err != nil {
-		a.errorResponse(w, r, err)
-		return
-	}
-	if board == nil || boardMetadata == nil {
-		a.errorResponse(w, r, model.NewErrNotFound("board metadata BoardID="+boardID))
-		return
-	}
-
-	if board.Type == model.BoardTypePrivate {
-		if !a.permissions.HasPermissionToBoard(userID, boardID, model.PermissionViewBoard) {
-			a.errorResponse(w, r, model.NewErrPermission("access denied to board"))
-			return
-		}
-	} else {
-		if !a.permissions.HasPermissionToTeam(userID, board.TeamID, model.PermissionViewTeam) {
-			a.errorResponse(w, r, model.NewErrPermission("access denied to board"))
-			return
-		}
-	}
-
-	auditRec := a.makeAuditRecord(r, "getBoardMetadata", audit.Fail)
-	defer a.audit.LogRecord(audit.LevelRead, auditRec)
-	auditRec.AddMeta("boardID", boardID)
-
-	data, err := json.Marshal(boardMetadata)
-	if err != nil {
-		a.errorResponse(w, r, err)
-		return
-	}
-
-	// response
-	jsonBytesResponse(w, http.StatusOK, data)
 
 	auditRec.Success()
 }
