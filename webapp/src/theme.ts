@@ -219,6 +219,13 @@ function setActiveThemeName(consolidatedTheme: Theme, theme: Theme | null) {
 
 export function loadTheme(): Theme {
     const themeStr = UserSettings.theme
+    if (themeStr === null) {
+        // Never chosen: Pico.Love OS is the default theme. It is applied without
+        // being saved as a choice, so "System theme" (saved as '') still works.
+        const consolidatedTheme = setTheme(picoTheme)
+        UserSettings.theme = null
+        return consolidatedTheme
+    }
     if (themeStr) {
         try {
             const theme = JSON.parse(themeStr)
@@ -228,16 +235,17 @@ export function loadTheme(): Theme {
         } catch (e) {
             return setTheme(null)
         }
-    } else {
-        return setTheme(picoTheme)
     }
+
+    // Saved as '': follow the system theme
+    return setTheme(null)
 }
 
 export function initThemes(): void {
     const darkThemeMq = window.matchMedia('(prefers-color-scheme: dark)')
     const changeHandler = () => {
-        const themeStr = UserSettings.theme
-        if (!themeStr) {
+        // Only when "System theme" is chosen (saved as ''); never-chosen (null) stays Pico.Love OS
+        if (UserSettings.theme === '') {
             setTheme(null)
         }
     }
@@ -314,5 +322,5 @@ export function getSelectBaseStyle() {
 }
 
 export function getActiveThemeName(): string {
-    return activeThemeName || defaultThemeName
+    return activeThemeName || picoThemeName
 }

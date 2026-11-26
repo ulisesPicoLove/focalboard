@@ -62,7 +62,7 @@ const SidebarSettingsMenu = (props: Props) => {
         },
         {
             id: defaultThemeName,
-            displayName: 'Default theme',
+            displayName: 'Focal Theme',
             theme: defaultTheme,
         },
         {
