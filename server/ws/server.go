@@ -474,18 +474,20 @@ func (ws *Server) getListenersForBlock(blockID string) []*websocketSession {
 	return append([]*websocketSession(nil), ws.listenersByBlock[blockID]...)
 }
 
-// getListenersForUser returns the listener for a user subscribed to a
-// team changes.
-func (ws *Server) getListenerForUser(teamID, userID string) *websocketSession {
+// getListenersForUser returns every connection of a user that is subscribed to a
+// team. A person can have several (two tabs, a reload whose old socket has not
+// closed yet), and per-user messages must reach all of them.
+func (ws *Server) getListenersForUser(teamID, userID string) []*websocketSession {
 	ws.mu.RLock()
 	defer ws.mu.RUnlock()
 
+	var listeners []*websocketSession
 	for _, listener := range ws.listenersByTeam[teamID] {
 		if listener.userID == userID {
-			return listener
+			listeners = append(listeners, listener)
 		}
 	}
-	return nil
+	return listeners
 }
 
 // getListenersForTeamAndBoard returns the listeners subscribed to a
@@ -587,8 +589,7 @@ func (ws *Server) BroadcastCategoryChange(category model.Category) {
 		Category: &category,
 	}
 
-	listener := ws.getListenerForUser(category.TeamID, category.UserID)
-	if listener != nil {
+	for _, listener := range ws.getListenersForUser(category.TeamID, category.UserID) {
 		ws.logger.Debug("Broadcast category change",
 			mlog.String("userID", category.UserID),
 			mlog.String("teamID", category.TeamID),
@@ -610,8 +611,7 @@ func (ws *Server) BroadcastCategoryReorder(teamID, userID string, categoryOrder 
 		TeamID:        teamID,
 	}
 
-	listener := ws.getListenerForUser(teamID, userID)
-	if listener != nil {
+	for _, listener := range ws.getListenersForUser(teamID, userID) {
 		ws.logger.Debug("Broadcast category order change",
 			mlog.String("userID", userID),
 			mlog.String("teamID", teamID),
@@ -633,8 +633,7 @@ func (ws *Server) BroadcastCategoryBoardsReorder(teamID, userID, categoryID stri
 		TeamID:     teamID,
 	}
 
-	listener := ws.getListenerForUser(teamID, userID)
-	if listener != nil {
+	for _, listener := range ws.getListenersForUser(teamID, userID) {
 		ws.logger.Debug("Broadcast board category order change",
 			mlog.String("userID", userID),
 			mlog.String("teamID", teamID),
@@ -656,8 +655,7 @@ func (ws *Server) BroadcastCategoryBoardChange(teamID, userID string, boardCateg
 		BoardCategories: boardCategories,
 	}
 
-	listener := ws.getListenerForUser(teamID, userID)
-	if listener != nil {
+	for _, listener := range ws.getListenersForUser(teamID, userID) {
 		ws.logger.Debug("Broadcast category board change",
 			mlog.String("userID", userID),
 			mlog.String("teamID", teamID),

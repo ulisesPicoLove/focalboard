@@ -131,9 +131,9 @@ func TestTeamSubscription(t *testing.T) {
 		require.Len(t, server.listeners, 3)
 		require.Len(t, server.listenersByTeam[teamID], 3)
 
-		listener := server.getListenerForUser(teamID, userID1)
-		require.NotNil(t, listener)
-		require.Equal(t, listener.userID, userID1)
+		listeners := server.getListenersForUser(teamID, userID1)
+		require.Len(t, listeners, 1)
+		require.Equal(t, listeners[0].userID, userID1)
 
 		server.removeListener(session)
 		server.removeListener(userSession1)
@@ -141,7 +141,31 @@ func TestTeamSubscription(t *testing.T) {
 
 		require.Empty(t, server.listeners)
 		require.Empty(t, server.listenersByTeam[teamID])
-		require.Empty(t, server.getListenerForUser(teamID, userID1))
+		require.Empty(t, server.getListenersForUser(teamID, userID1))
+	})
+
+	t.Run("A user with several connections gets all of them", func(t *testing.T) {
+		// two tabs, or a reload whose old socket has not closed yet
+		first := &websocketSession{conn: &websocket.Conn{}, mu: sync.Mutex{}, userID: "tabs-user", teams: []string{}, blocks: []string{}}
+		second := &websocketSession{conn: &websocket.Conn{}, mu: sync.Mutex{}, userID: "tabs-user", teams: []string{}, blocks: []string{}}
+		other := &websocketSession{conn: &websocket.Conn{}, mu: sync.Mutex{}, userID: "someone-else", teams: []string{}, blocks: []string{}}
+		teamID := "tabs-team"
+
+		for _, l := range []*websocketSession{first, second, other} {
+			server.addListener(l)
+			server.subscribeListenerToTeam(l, teamID)
+		}
+
+		listeners := server.getListenersForUser(teamID, "tabs-user")
+		require.ElementsMatch(t, []*websocketSession{first, second}, listeners)
+		require.Empty(t, server.getListenersForUser("another-team", "tabs-user"))
+
+		// closing one tab leaves the other receiving
+		server.removeListener(first)
+		require.Equal(t, []*websocketSession{second}, server.getListenersForUser(teamID, "tabs-user"))
+
+		server.removeListener(second)
+		server.removeListener(other)
 	})
 }
 
