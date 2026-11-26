@@ -177,3 +177,56 @@ test('Grouped undo/redo', async () => {
     expect(undoManager.undoDescription).toBe(undefined)
     expect(undoManager.redoDescription).toBe(undefined)
 })
+
+describe('undomanager robustness', () => {
+    beforeEach(() => {
+        undoManager.clear()
+    })
+
+    test('a failing undo does not leave the manager stuck', async () => {
+        const state: number[] = []
+        await undoManager.perform(
+            async () => state.push(1),
+            async () => {
+                throw new Error('server rejected the undo')
+            },
+            'add',
+        )
+
+        await expect(undoManager.undo()).rejects.toThrow('server rejected the undo')
+
+        // isExecuting was reset: new commands can be registered and undone again
+        await undoManager.perform(async () => state.push(2), async () => {
+            state.pop()
+        }, 'add 2')
+        expect(undoManager.canUndo).toBe(true)
+        await undoManager.undo()
+        expect(state).toEqual([1])
+    })
+
+    test('keeps the most recent commands when the limit is reached', async () => {
+        const undone: number[] = []
+        for (let i = 0; i < 250; i++) {
+            // eslint-disable-next-line no-await-in-loop
+            await undoManager.perform(
+                async () => i,
+                async () => {
+                    undone.push(i)
+                },
+                `cmd ${i}`,
+            )
+        }
+
+        // the newest command is the first one undone
+        await undoManager.undo()
+        expect(undone).toEqual([249])
+        expect(undoManager.undoDescription).toBe('cmd 248')
+    })
+
+    test('clear drops the history', async () => {
+        await undoManager.perform(async () => 1, async () => undefined, 'x')
+        expect(undoManager.canUndo).toBe(true)
+        undoManager.clear()
+        expect(undoManager.canUndo).toBe(false)
+    })
+})

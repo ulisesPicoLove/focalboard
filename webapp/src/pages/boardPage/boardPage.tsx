@@ -28,6 +28,7 @@ import {
     addMyBoardMemberships,
 } from '../../store/boards'
 import {getCurrentViewId, setCurrent as setCurrentView, updateViews} from '../../store/views'
+import undoManager from '../../undomanager'
 import ConfirmationDialog from '../../components/confirmationDialogBox'
 import {initialLoad, initialReadOnlyLoad, loadBoardData} from '../../store/initialLoad'
 import {useAppSelector, useAppDispatch} from '../../store/hooks'
@@ -208,6 +209,12 @@ const BoardPage = (props: Props): JSX.Element => {
             boardId,
         }))
     }, [])
+
+    useEffect(() => {
+        // Undo history belongs to one board: Ctrl+Z after switching boards must not
+        // undo something on the previous one.
+        undoManager.clear()
+    }, [match.params.boardId])
 
     useEffect(() => {
         dispatch(loadAction(match.params.boardId))

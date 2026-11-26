@@ -14,7 +14,8 @@ import {ContentBlock} from './blocks/contentBlock'
 import {CommentBlock} from './blocks/commentBlock'
 import {AttachmentBlock} from './blocks/attachmentBlock'
 import {FilterGroup} from './blocks/filterGroup'
-import octoClient from './octoClient'
+import rawOctoClient from './octoClient'
+import {sendFlashMessage} from './components/flashMessages'
 import undoManager from './undomanager'
 import {Utils, IDType} from './utils'
 import {UserSettings} from './userSettings'
@@ -47,6 +48,34 @@ function updateAllBoardsAndBlocks(boards: Board[], blocks: Block[]) {
 // The Mutator is used to make all changes to server state
 // It also ensures that the Undo-manager is called for each action
 //
+// Methods of the client that change data on the server.
+const writeMethod = /^(patch|insert|delete|undelete|duplicate|create|update|import|set|move|reorder|add|remove)/
+
+// guardWrites wraps the client so that a write the server rejects is not silently treated as
+// done: the error reaches the caller and the user, and no undo step is registered for a
+// change that never happened.
+function guardWrites<T extends object>(client: T): T {
+    return new Proxy(client, {
+        get(target, prop, receiver) {
+            const value = Reflect.get(target, prop, receiver)
+            if (typeof value !== 'function' || typeof prop !== 'string' || !writeMethod.test(prop)) {
+                return value
+            }
+
+            return async (...args: unknown[]) => {
+                const result = await value.apply(target, args)
+                if (typeof Response !== 'undefined' && result instanceof Response && !result.ok) {
+                    sendFlashMessage({content: 'Your change could not be saved. Please try again.', severity: 'high'})
+                    throw new Error(`${prop} failed with status ${result.status}`)
+                }
+                return result
+            }
+        },
+    })
+}
+
+const octoClient = guardWrites(rawOctoClient)
+
 class Mutator {
     private undoGroupId?: string
     private undoDisplayId?: string

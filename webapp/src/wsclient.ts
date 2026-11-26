@@ -127,8 +127,13 @@ class WSClient {
     onUnfollowBlock: FollowChangeHandler = () => {}
     private notificationDelay = 100
     private reopenDelay = 3000
+    private reopenMaxDelay = 30000
     private reopenRetryCount = 0
-    private reopenMaxRetries = 10
+    private reopenTimer?: NodeJS.Timeout
+
+    // true after the connection dropped: once it is open again the clients must reload,
+    // because changes sent while it was down are lost.
+    private needsResync = false
     private updatedData: UpdatedData = {Blocks: [], Categories: [], BoardCategories: [], Boards: [], BoardMembers: [], CategoryOrder: []}
     private updateTimeout?: NodeJS.Timeout
     private errorPollId?: NodeJS.Timeout
@@ -156,6 +161,40 @@ class WSClient {
 
     constructor(serverUrl?: string) {
         this.serverUrl = serverUrl
+
+        if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+            // Laptops wake up and networks come back: do not wait for the next timer.
+            window.addEventListener('online', () => this.reopenNow())
+            document.addEventListener('visibilitychange', () => {
+                if (document.visibilityState === 'visible') {
+                    this.reopenNow()
+                }
+            })
+        }
+    }
+
+    // reopenNow reconnects right away if the connection was lost and a retry is pending.
+    private reopenNow() {
+        if (this.state !== 'close' || !this.ws || !this.reopenTimer) {
+            return
+        }
+
+        clearTimeout(this.reopenTimer)
+        this.reopenTimer = undefined
+        this.reopenRetryCount++
+        this.open()
+    }
+
+    // scheduleReopen retries forever with exponential backoff, so a long outage (VPN, sleep)
+    // does not leave the tab permanently without live updates.
+    private scheduleReopen() {
+        const delay = Math.min(this.reopenDelay * (2 ** this.reopenRetryCount), this.reopenMaxDelay)
+        this.reopenTimer = setTimeout(() => {
+            this.reopenTimer = undefined
+            this.reopenRetryCount++
+            Utils.log(`Reopening websocket connection, count: ${this.reopenRetryCount}`)
+            this.open()
+        }, delay)
     }
 
     initPlugin(pluginId: string, pluginVersion: string, client: MMWebSocketClient): void {
@@ -416,6 +455,14 @@ class WSClient {
             for (const handler of this.onStateChange) {
                 handler(this, 'open')
             }
+
+            // Reload the data now that the connection is really back (not when a retry starts).
+            if (this.needsResync) {
+                this.needsResync = false
+                for (const handler of this.onReconnect) {
+                    handler(this)
+                }
+            }
         }
 
         ws.onerror = (e) => {
@@ -435,19 +482,8 @@ class WSClient {
                 }
                 this.state = 'close'
 
-                if (this.reopenRetryCount < this.reopenMaxRetries) {
-                    setTimeout(() => {
-                        this.reopenRetryCount++
-                        Utils.log(`Reopening websocket connection, count: ${this.reopenRetryCount}`)
-
-                        this.open()
-                        for (const handler of this.onReconnect) {
-                            handler(this)
-                        }
-                    }, this.reopenDelay)
-                } else {
-                    Utils.logError('Reached max websocket re-opening attempts')
-                }
+                this.needsResync = true
+                this.scheduleReopen()
             }
         }
 
@@ -775,6 +811,11 @@ class WSClient {
         // Use this sequence so the onclose method doesn't try to re-open
         const ws = this.ws
         this.ws = null
+        if (this.reopenTimer) {
+            clearTimeout(this.reopenTimer)
+            this.reopenTimer = undefined
+        }
+        this.needsResync = false
         this.onChange = {Block: [], Category: [], BoardCategory: [], Board: [], BoardMember: [], CategoryReorder: []}
         this.onReconnect = []
         this.onStateChange = []

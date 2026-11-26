@@ -22,6 +22,48 @@ import {BoardSiteStatistics} from './statistics'
 //
 // OctoClient is the client interface to the server APIs
 //
+// Requests that do not finish in this time are aborted instead of hanging the UI forever.
+const requestTimeoutMs = 60 * 1000
+
+// File uploads and imports are allowed much longer.
+const uploadTimeoutMs = 10 * 60 * 1000
+
+// Endpoints where a 401 is part of normal operation (not being signed in yet).
+const unauthenticatedPaths = ['/api/v2/login', '/api/v2/logout', '/api/v2/register', '/api/v2/clientConfig', '/api/v2/users/me']
+
+function handleUnauthorized(url: string) {
+    const hadSession = Boolean(localStorage.getItem('focalboardSessionId'))
+    if (!hadSession || unauthenticatedPaths.some((path) => url.includes(path))) {
+        return
+    }
+
+    // The session expired or was revoked: every other request would fail the same way
+    // and the lists would just look empty. Go back to the login page and return here after.
+    localStorage.removeItem('focalboardSessionId')
+    const loginPath = Utils.buildURL('/login')
+    if (!window.location.pathname.endsWith('/login')) {
+        const returnTo = window.location.pathname + window.location.search
+        window.location.assign(`${loginPath}?r=${encodeURIComponent(returnTo)}`)
+    }
+}
+
+// apiFetch is fetch with a timeout and centralised handling of expired sessions.
+async function apiFetch(input: string, init?: RequestInit): Promise<Response> {
+    const controller = new AbortController()
+    const isUpload = typeof FormData !== 'undefined' && init?.body instanceof FormData
+    const timer = setTimeout(() => controller.abort(), isUpload ? uploadTimeoutMs : requestTimeoutMs)
+
+    try {
+        const response = await fetch(input, {signal: controller.signal, ...init})
+        if (response?.status === 401) {
+            handleUnauthorized(input)
+        }
+        return response
+    } finally {
+        clearTimeout(timer)
+    }
+}
+
 class OctoClient {
     readonly serverUrl: string | undefined
     private logged = false
@@ -68,7 +110,7 @@ class OctoClient {
     async login(username: string, password: string): Promise<boolean> {
         const path = '/api/v2/login'
         const body = JSON.stringify({username, password, type: 'normal'})
-        const response = await fetch(this.getBaseURL() + path, {
+        const response = await apiFetch(this.getBaseURL() + path, {
             method: 'POST',
             headers: this.headers(),
             body,
@@ -87,7 +129,7 @@ class OctoClient {
 
     async logout(): Promise<boolean> {
         const path = '/api/v2/logout'
-        const response = await fetch(this.getBaseURL() + path, {
+        const response = await apiFetch(this.getBaseURL() + path, {
             method: 'POST',
             headers: this.headers(),
         })
@@ -101,7 +143,7 @@ class OctoClient {
 
     async getClientConfig(): Promise<ClientConfig | null> {
         const path = '/api/v2/clientConfig'
-        const response = await fetch(this.getBaseURL() + path, {
+        const response = await apiFetch(this.getBaseURL() + path, {
             method: 'GET',
             headers: this.headers(),
         })
@@ -116,7 +158,7 @@ class OctoClient {
     async register(email: string, username: string, password: string, token?: string): Promise<{code: number, json: {error?: string}}> {
         const path = '/api/v2/register'
         const body = JSON.stringify({email, username, password, token})
-        const response = await fetch(this.getBaseURL() + path, {
+        const response = await apiFetch(this.getBaseURL() + path, {
             method: 'POST',
             headers: this.headers(),
             body,
@@ -128,7 +170,7 @@ class OctoClient {
     async changePassword(userId: string, oldPassword: string, newPassword: string): Promise<{code: number, json: {error?: string}}> {
         const path = `/api/v2/users/${encodeURIComponent(userId)}/changepassword`
         const body = JSON.stringify({oldPassword, newPassword})
-        const response = await fetch(this.getBaseURL() + path, {
+        const response = await apiFetch(this.getBaseURL() + path, {
             method: 'POST',
             headers: this.headers(),
             body,
@@ -176,7 +218,7 @@ class OctoClient {
         if (parameters) {
             path += '?' + parameters
         }
-        const response = await fetch(this.getBaseURL() + path, {headers: this.headers()})
+        const response = await apiFetch(this.getBaseURL() + path, {headers: this.headers()})
         if (response.status !== 200) {
             return undefined
         }
@@ -186,7 +228,7 @@ class OctoClient {
 
     async getMyBoardMemberships(): Promise<BoardMember[]> {
         const path = '/api/v2/users/me/memberships'
-        const response = await fetch(this.getBaseURL() + path, {headers: this.headers()})
+        const response = await apiFetch(this.getBaseURL() + path, {headers: this.headers()})
         if (response.status !== 200) {
             return []
         }
@@ -196,7 +238,7 @@ class OctoClient {
 
     async getUser(userId: string): Promise<IUser | undefined> {
         const path = `/api/v2/users/${encodeURIComponent(userId)}`
-        const response = await fetch(this.getBaseURL() + path, {headers: this.headers()})
+        const response = await apiFetch(this.getBaseURL() + path, {headers: this.headers()})
         if (response.status !== 200) {
             return undefined
         }
@@ -207,7 +249,7 @@ class OctoClient {
     async getUsersList(userIds: string[]): Promise<IUser[] | []> {
         const path = '/api/v2/users'
         const body = JSON.stringify(userIds)
-        const response = await fetch(this.getBaseURL() + path, {
+        const response = await apiFetch(this.getBaseURL() + path, {
             headers: this.headers(),
             method: 'POST',
             body,
@@ -222,7 +264,7 @@ class OctoClient {
 
     async getMyConfig(): Promise<UserPreference[] | undefined> {
         const path = '/api/v2/users/me/config'
-        const response = await fetch(this.getBaseURL() + path, {
+        const response = await apiFetch(this.getBaseURL() + path, {
             headers: this.headers(),
             method: 'GET',
         })
@@ -237,7 +279,7 @@ class OctoClient {
     async patchUserConfig(userID: string, patch: UserConfigPatch): Promise<UserPreference[] | undefined> {
         const path = `/api/v2/users/${encodeURIComponent(userID)}/config`
         const body = JSON.stringify(patch)
-        const response = await fetch(this.getBaseURL() + path, {
+        const response = await apiFetch(this.getBaseURL() + path, {
             headers: this.headers(),
             method: 'PUT',
             body,
@@ -252,12 +294,12 @@ class OctoClient {
 
     async exportBoardArchive(boardID: string): Promise<Response> {
         const path = `/api/v2/boards/${boardID}/archive/export`
-        return fetch(this.getBaseURL() + path, {headers: this.headers()})
+        return apiFetch(this.getBaseURL() + path, {headers: this.headers()})
     }
 
     async exportFullArchive(teamID: string): Promise<Response> {
         const path = `/api/v2/teams/${teamID}/archive/export`
-        return fetch(this.getBaseURL() + path, {headers: this.headers()})
+        return apiFetch(this.getBaseURL() + path, {headers: this.headers()})
     }
 
     async importFullArchive(file: File): Promise<Response> {
@@ -269,7 +311,7 @@ class OctoClient {
         // TIPTIP: Leave out Content-Type here, it will be automatically set by the browser
         delete headers['Content-Type']
 
-        return fetch(this.getBaseURL() + this.teamPath() + '/archive/import', {
+        return apiFetch(this.getBaseURL() + this.teamPath() + '/archive/import', {
             method: 'POST',
             headers,
             body: formData,
@@ -310,7 +352,7 @@ class OctoClient {
     }
 
     private async getBlocksWithPath(path: string): Promise<Block[]> {
-        const response = await fetch(this.getBaseURL() + path, {headers: this.headers()})
+        const response = await apiFetch(this.getBaseURL() + path, {headers: this.headers()})
         if (response.status !== 200) {
             return []
         }
@@ -319,7 +361,7 @@ class OctoClient {
     }
 
     private async getBoardsWithPath(path: string): Promise<Board[]> {
-        const response = await fetch(this.getBaseURL() + path, {headers: this.headers()})
+        const response = await apiFetch(this.getBaseURL() + path, {headers: this.headers()})
         if (response.status !== 200) {
             return []
         }
@@ -328,7 +370,7 @@ class OctoClient {
     }
 
     private async getBoardMembersWithPath(path: string): Promise<BoardMember[]> {
-        const response = await fetch(this.getBaseURL() + path, {headers: this.headers()})
+        const response = await apiFetch(this.getBaseURL() + path, {headers: this.headers()})
         if (response.status !== 200) {
             return []
         }
@@ -350,7 +392,7 @@ class OctoClient {
     async patchBlock(boardId: string, blockId: string, blockPatch: BlockPatch): Promise<Response> {
         Utils.log(`patchBlock: ${blockId} block`)
         const body = JSON.stringify(blockPatch)
-        return fetch(`${this.getBaseURL()}/api/v2/boards/${boardId}/blocks/${blockId}`, {
+        return apiFetch(`${this.getBaseURL()}/api/v2/boards/${boardId}/blocks/${blockId}`, {
             method: 'PATCH',
             headers: this.headers(),
             body,
@@ -363,7 +405,7 @@ class OctoClient {
         const body = JSON.stringify({block_ids: blockIds, block_patches: blockPatches})
 
         const path = this.getBaseURL() + this.teamPath() + '/blocks'
-        const response = fetch(path, {
+        const response = apiFetch(path, {
             method: 'PATCH',
             headers: this.headers(),
             body,
@@ -373,7 +415,7 @@ class OctoClient {
 
     async deleteBlock(boardId: string, blockId: string): Promise<Response> {
         Utils.log(`deleteBlock: ${blockId} on board ${boardId}`)
-        return fetch(`${this.getBaseURL()}/api/v2/boards/${boardId}/blocks/${encodeURIComponent(blockId)}`, {
+        return apiFetch(`${this.getBaseURL()}/api/v2/boards/${boardId}/blocks/${encodeURIComponent(blockId)}`, {
             method: 'DELETE',
             headers: this.headers(),
         })
@@ -381,7 +423,7 @@ class OctoClient {
 
     async undeleteBlock(boardId: string, blockId: string): Promise<Response> {
         Utils.log(`undeleteBlock: ${blockId}`)
-        return fetch(`${this.getBaseURL()}/api/v2/boards/${encodeURIComponent(boardId)}/blocks/${encodeURIComponent(blockId)}/undelete`, {
+        return apiFetch(`${this.getBaseURL()}/api/v2/boards/${encodeURIComponent(boardId)}/blocks/${encodeURIComponent(blockId)}/undelete`, {
             method: 'POST',
             headers: this.headers(),
         })
@@ -389,7 +431,7 @@ class OctoClient {
 
     async undeleteBoard(boardId: string): Promise<Response> {
         Utils.log(`undeleteBoard: ${boardId}`)
-        return fetch(`${this.getBaseURL()}/api/v2/boards/${boardId}/undelete`, {
+        return apiFetch(`${this.getBaseURL()}/api/v2/boards/${boardId}/undelete`, {
             method: 'POST',
             headers: this.headers(),
         })
@@ -403,7 +445,7 @@ class OctoClient {
             subscriberId: userId,
         }
 
-        return fetch(this.getBaseURL() + '/api/v2/subscriptions', {
+        return apiFetch(this.getBaseURL() + '/api/v2/subscriptions', {
             method: 'POST',
             headers: this.headers(),
             body: JSON.stringify(body),
@@ -411,7 +453,7 @@ class OctoClient {
     }
 
     async unfollowBlock(blockId: string, blockType: string, userId: string): Promise<Response> {
-        return fetch(this.getBaseURL() + `/api/v2/subscriptions/${blockId}/${userId}`, {
+        return apiFetch(this.getBaseURL() + `/api/v2/subscriptions/${blockId}/${userId}`, {
             method: 'DELETE',
             headers: this.headers(),
         })
@@ -427,7 +469,7 @@ class OctoClient {
             Utils.log(`\t ${block.type}, ${block.id}, ${block.title?.substr(0, 50) || ''}`)
         })
         const body = JSON.stringify(blocks)
-        return fetch(`${this.getBaseURL()}/api/v2/boards/${boardId}/blocks` + (sourceBoardID ? `?sourceBoardID=${encodeURIComponent(sourceBoardID)}` : ''), {
+        return apiFetch(`${this.getBaseURL()}/api/v2/boards/${boardId}/blocks` + (sourceBoardID ? `?sourceBoardID=${encodeURIComponent(sourceBoardID)}` : ''), {
             method: 'POST',
             headers: this.headers(),
             body,
@@ -444,7 +486,7 @@ class OctoClient {
         })
 
         const body = JSON.stringify(bab)
-        return fetch(this.getBaseURL() + '/api/v2/boards-and-blocks', {
+        return apiFetch(this.getBaseURL() + '/api/v2/boards-and-blocks', {
             method: 'POST',
             headers: this.headers(),
             body,
@@ -457,7 +499,7 @@ class OctoClient {
         Utils.log(`\t Blocks ${blockIds.join(', ')}`)
 
         const body = JSON.stringify({boards: boardIds, blocks: blockIds})
-        return fetch(this.getBaseURL() + '/api/v2/boards-and-blocks', {
+        return apiFetch(this.getBaseURL() + '/api/v2/boards-and-blocks', {
             method: 'DELETE',
             headers: this.headers(),
             body,
@@ -469,7 +511,7 @@ class OctoClient {
         Utils.log(`createBoardMember: user ${member.userId} and board ${member.boardId}`)
 
         const body = JSON.stringify(member)
-        const response = await fetch(this.getBaseURL() + `/api/v2/boards/${member.boardId}/members`, {
+        const response = await apiFetch(this.getBaseURL() + `/api/v2/boards/${member.boardId}/members`, {
             method: 'POST',
             headers: this.headers(),
             body,
@@ -488,7 +530,7 @@ class OctoClient {
         if (allowAdmin) {
             path += '?allow_admin'
         }
-        const response = await fetch(this.getBaseURL() + path, {
+        const response = await apiFetch(this.getBaseURL() + path, {
             headers: this.headers(),
             method: 'POST',
         })
@@ -504,7 +546,7 @@ class OctoClient {
         Utils.log(`udpateBoardMember: user ${member.userId} and board ${member.boardId}`)
 
         const body = JSON.stringify(member)
-        return fetch(this.getBaseURL() + `/api/v2/boards/${member.boardId}/members/${member.userId}`, {
+        return apiFetch(this.getBaseURL() + `/api/v2/boards/${member.boardId}/members/${member.userId}`, {
             method: 'PUT',
             headers: this.headers(),
             body,
@@ -514,7 +556,7 @@ class OctoClient {
     async deleteBoardMember(member: BoardMember): Promise<Response> {
         Utils.log(`deleteBoardMember: user ${member.userId} and board ${member.boardId}`)
 
-        return fetch(this.getBaseURL() + `/api/v2/boards/${member.boardId}/members/${member.userId}`, {
+        return apiFetch(this.getBaseURL() + `/api/v2/boards/${member.boardId}/members/${member.userId}`, {
             method: 'DELETE',
             headers: this.headers(),
         })
@@ -526,7 +568,7 @@ class OctoClient {
         Utils.log(`\t Blocks ${babp.blockIDs.join(', ')}`)
 
         const body = JSON.stringify(babp)
-        return fetch(this.getBaseURL() + '/api/v2/boards-and-blocks', {
+        return apiFetch(this.getBaseURL() + '/api/v2/boards-and-blocks', {
             method: 'PATCH',
             headers: this.headers(),
             body,
@@ -536,7 +578,7 @@ class OctoClient {
     // Sharing
     async getSharing(boardID: string): Promise<ISharing | undefined> {
         const path = `/api/v2/boards/${boardID}/sharing`
-        const response = await fetch(this.getBaseURL() + path, {headers: this.headers()})
+        const response = await apiFetch(this.getBaseURL() + path, {headers: this.headers()})
         if (response.status !== 200) {
             return undefined
         }
@@ -546,7 +588,7 @@ class OctoClient {
     async setSharing(boardID: string, sharing: ISharing): Promise<boolean> {
         const path = `/api/v2/boards/${boardID}/sharing`
         const body = JSON.stringify(sharing)
-        const response = await fetch(
+        const response = await apiFetch(
             this.getBaseURL() + path,
             {
                 method: 'POST',
@@ -563,7 +605,7 @@ class OctoClient {
 
     async regenerateTeamSignupToken(): Promise<void> {
         const path = this.teamPath() + '/regenerate_signup_token'
-        await fetch(this.getBaseURL() + path, {
+        await apiFetch(this.getBaseURL() + path, {
             method: 'POST',
             headers: this.headers(),
         })
@@ -583,7 +625,7 @@ class OctoClient {
             // TIPTIP: Leave out Content-Type here, it will be automatically set by the browser
             delete headers['Content-Type']
 
-            const response = await fetch(this.getBaseURL() + this.teamPath() + '/' + rootID + '/files', {
+            const response = await apiFetch(this.getBaseURL() + this.teamPath() + '/' + rootID + '/files', {
                 method: 'POST',
                 headers,
                 body: formData,
@@ -635,7 +677,7 @@ class OctoClient {
         if (readToken) {
             path += `?read_token=${readToken}`
         }
-        const response = await fetch(this.getBaseURL() + path, {headers: this.headers()})
+        const response = await apiFetch(this.getBaseURL() + path, {headers: this.headers()})
         let fileInfo: FileInfo = {}
 
         if (response.status === 200) {
@@ -653,7 +695,7 @@ class OctoClient {
         if (readToken) {
             path += `?read_token=${readToken}`
         }
-        const response = await fetch(this.getBaseURL() + path, {headers: this.headers()})
+        const response = await apiFetch(this.getBaseURL() + path, {headers: this.headers()})
         let fileInfo: FileInfo = {}
 
         if (response.status === 200) {
@@ -668,7 +710,7 @@ class OctoClient {
 
     async getTeam(): Promise<Team | null> {
         const path = this.teamPath()
-        const response = await fetch(this.getBaseURL() + path, {headers: this.headers()})
+        const response = await apiFetch(this.getBaseURL() + path, {headers: this.headers()})
         if (response.status !== 200) {
             return null
         }
@@ -678,7 +720,7 @@ class OctoClient {
 
     async getTeams(): Promise<Team[]> {
         const path = this.teamsPath()
-        const response = await fetch(this.getBaseURL() + path, {headers: this.headers()})
+        const response = await apiFetch(this.getBaseURL() + path, {headers: this.headers()})
         if (response.status !== 200) {
             return []
         }
@@ -691,7 +733,7 @@ class OctoClient {
         if (excludeBots) {
             path += '?exclude_bots=true'
         }
-        const response = await fetch(this.getBaseURL() + path, {headers: this.headers()})
+        const response = await apiFetch(this.getBaseURL() + path, {headers: this.headers()})
         if (response.status !== 200) {
             return []
         }
@@ -701,7 +743,7 @@ class OctoClient {
     async getTeamUsersList(userIds: string[], teamId: string): Promise<IUser[] | []> {
         const path = this.teamPath(teamId) + '/users'
         const body = JSON.stringify(userIds)
-        const response = await fetch(this.getBaseURL() + path, {
+        const response = await apiFetch(this.getBaseURL() + path, {
             headers: this.headers(),
             method: 'POST',
             body,
@@ -719,7 +761,7 @@ class OctoClient {
         if (excludeBots) {
             path += '&exclude_bots=true'
         }
-        const response = await fetch(this.getBaseURL() + path, {headers: this.headers()})
+        const response = await apiFetch(this.getBaseURL() + path, {headers: this.headers()})
         if (response.status !== 200) {
             return []
         }
@@ -742,7 +784,7 @@ class OctoClient {
         if (readToken) {
             path += `?read_token=${readToken}`
         }
-        const response = await fetch(this.getBaseURL() + path, {
+        const response = await apiFetch(this.getBaseURL() + path, {
             method: 'GET',
             headers: this.headers(),
         })
@@ -764,7 +806,7 @@ class OctoClient {
         }
 
         const path = `/api/v2/boards/${boardID}/duplicate${query}`
-        const response = await fetch(this.getBaseURL() + path, {
+        const response = await apiFetch(this.getBaseURL() + path, {
             method: 'POST',
             headers: this.headers(),
         })
@@ -782,7 +824,7 @@ class OctoClient {
             query = '?asTemplate=true'
         }
         const path = `/api/v2/boards/${boardID}/blocks/${blockID}/duplicate${query}`
-        const response = await fetch(this.getBaseURL() + path, {
+        const response = await apiFetch(this.getBaseURL() + path, {
             method: 'POST',
             headers: this.headers(),
         })
@@ -806,7 +848,7 @@ class OctoClient {
 
     async createBoard(board: Board): Promise<Response> {
         Utils.log(`createBoard: ${board.title} [${board.type}]`)
-        return fetch(this.getBaseURL() + this.teamPath(board.teamId) + '/boards', {
+        return apiFetch(this.getBaseURL() + this.teamPath(board.teamId) + '/boards', {
             method: 'POST',
             headers: this.headers(),
             body: JSON.stringify(board),
@@ -816,7 +858,7 @@ class OctoClient {
     async patchBoard(boardId: string, boardPatch: BoardPatch): Promise<Response> {
         Utils.log(`patchBoard: ${boardId} board`)
         const body = JSON.stringify(boardPatch)
-        return fetch(`${this.getBaseURL()}/api/v2/boards/${boardId}`, {
+        return apiFetch(`${this.getBaseURL()}/api/v2/boards/${boardId}`, {
             method: 'PATCH',
             headers: this.headers(),
             body,
@@ -825,7 +867,7 @@ class OctoClient {
 
     async deleteBoard(boardId: string): Promise<Response> {
         Utils.log(`deleteBoard: ${boardId}`)
-        return fetch(`${this.getBaseURL()}/api/v2/boards/${boardId}`, {
+        return apiFetch(`${this.getBaseURL()}/api/v2/boards/${boardId}`, {
             method: 'DELETE',
             headers: this.headers(),
         })
@@ -833,7 +875,7 @@ class OctoClient {
 
     async getSidebarCategories(teamID: string): Promise<CategoryBoards[]> {
         const path = `/api/v2/teams/${teamID}/categories`
-        const response = await fetch(this.getBaseURL() + path, {headers: this.headers()})
+        const response = await apiFetch(this.getBaseURL() + path, {headers: this.headers()})
         if (response.status !== 200) {
             return []
         }
@@ -844,7 +886,7 @@ class OctoClient {
     async createSidebarCategory(category: Category): Promise<Response> {
         const path = `/api/v2/teams/${category.teamID}/categories`
         const body = JSON.stringify(category)
-        return fetch(this.getBaseURL() + path, {
+        return apiFetch(this.getBaseURL() + path, {
             method: 'POST',
             headers: this.headers(),
             body,
@@ -853,7 +895,7 @@ class OctoClient {
 
     async deleteSidebarCategory(teamID: string, categoryID: string): Promise<Response> {
         const url = `/api/v2/teams/${teamID}/categories/${categoryID}`
-        return fetch(this.getBaseURL() + url, {
+        return apiFetch(this.getBaseURL() + url, {
             method: 'DELETE',
             headers: this.headers(),
         })
@@ -862,7 +904,7 @@ class OctoClient {
     async updateSidebarCategory(category: Category): Promise<Response> {
         const path = `/api/v2/teams/${category.teamID}/categories/${category.id}`
         const body = JSON.stringify(category)
-        return fetch(this.getBaseURL() + path, {
+        return apiFetch(this.getBaseURL() + path, {
             method: 'PUT',
             headers: this.headers(),
             body,
@@ -872,7 +914,7 @@ class OctoClient {
     async reorderSidebarCategories(teamID: string, newCategoryOrder: string[]): Promise<string[]> {
         const path = `/api/v2/teams/${teamID}/categories/reorder`
         const body = JSON.stringify(newCategoryOrder)
-        const response = await fetch(this.getBaseURL() + path, {
+        const response = await apiFetch(this.getBaseURL() + path, {
             method: 'PUT',
             headers: this.headers(),
             body,
@@ -888,7 +930,7 @@ class OctoClient {
     async reorderSidebarCategoryBoards(teamID: string, categoryID: string, newBoardsOrder: string[]): Promise<string[]> {
         const path = `/api/v2/teams/${teamID}/categories/${categoryID}/boards/reorder`
         const body = JSON.stringify(newBoardsOrder)
-        const response = await fetch(this.getBaseURL() + path, {
+        const response = await apiFetch(this.getBaseURL() + path, {
             method: 'PUT',
             headers: this.headers(),
             body,
@@ -908,7 +950,7 @@ class OctoClient {
         }
         const body = JSON.stringify(payload)
 
-        return fetch(this.getBaseURL() + url, {
+        return apiFetch(this.getBaseURL() + url, {
             method: 'POST',
             headers: this.headers(),
             body,
@@ -917,7 +959,7 @@ class OctoClient {
 
     async search(teamID: string, query: string): Promise<Board[]> {
         const url = `${this.teamPath(teamID)}/boards/search?q=${encodeURIComponent(query)}`
-        const response = await fetch(this.getBaseURL() + url, {
+        const response = await apiFetch(this.getBaseURL() + url, {
             method: 'GET',
             headers: this.headers(),
         })
@@ -931,7 +973,7 @@ class OctoClient {
 
     async searchLinkableBoards(teamID: string, query: string): Promise<Board[]> {
         const url = `${this.teamPath(teamID)}/boards/search/linkable?q=${encodeURIComponent(query)}`
-        const response = await fetch(this.getBaseURL() + url, {
+        const response = await apiFetch(this.getBaseURL() + url, {
             method: 'GET',
             headers: this.headers(),
         })
@@ -945,7 +987,7 @@ class OctoClient {
 
     async searchAll(query: string): Promise<Board[]> {
         const url = `/api/v2/boards/search?q=${encodeURIComponent(query)}`
-        const response = await fetch(this.getBaseURL() + url, {
+        const response = await apiFetch(this.getBaseURL() + url, {
             method: 'GET',
             headers: this.headers(),
         })
@@ -959,7 +1001,7 @@ class OctoClient {
 
     async getUserBlockSubscriptions(userId: string): Promise<Subscription[]> {
         const path = `/api/v2/subscriptions/${userId}`
-        const response = await fetch(this.getBaseURL() + path, {headers: this.headers()})
+        const response = await apiFetch(this.getBaseURL() + path, {headers: this.headers()})
         if (response.status !== 200) {
             return []
         }
@@ -969,7 +1011,7 @@ class OctoClient {
 
     async searchUserChannels(teamId: string, searchQuery: string): Promise<Channel[] | undefined> {
         const path = `/api/v2/teams/${teamId}/channels?search=${searchQuery}`
-        const response = await fetch(this.getBaseURL() + path, {
+        const response = await apiFetch(this.getBaseURL() + path, {
             headers: this.headers(),
             method: 'GET',
         })
@@ -982,7 +1024,7 @@ class OctoClient {
 
     async getChannel(teamId: string, channelId: string): Promise<Channel | undefined> {
         const path = `/api/v2/teams/${teamId}/channels/${channelId}`
-        const response = await fetch(this.getBaseURL() + path, {
+        const response = await apiFetch(this.getBaseURL() + path, {
             headers: this.headers(),
             method: 'GET',
         })
@@ -996,7 +1038,7 @@ class OctoClient {
     // onboarding
     async prepareOnboarding(teamId: string): Promise<PrepareOnboardingResponse | undefined> {
         const path = `/api/v2/teams/${teamId}/onboard`
-        const response = await fetch(this.getBaseURL() + path, {
+        const response = await apiFetch(this.getBaseURL() + path, {
             headers: this.headers(),
             method: 'POST',
         })
@@ -1009,7 +1051,7 @@ class OctoClient {
 
     async notifyAdminUpgrade(): Promise<void> {
         const path = `${this.teamPath()}/notifyadminupgrade`
-        await fetch(this.getBaseURL() + path, {
+        await apiFetch(this.getBaseURL() + path, {
             headers: this.headers(),
             method: 'POST',
         })
@@ -1017,7 +1059,7 @@ class OctoClient {
 
     async getBoardsCloudLimits(): Promise<BoardsCloudLimits | undefined> {
         const path = '/api/v2/limits'
-        const response = await fetch(this.getBaseURL() + path, {headers: this.headers()})
+        const response = await apiFetch(this.getBaseURL() + path, {headers: this.headers()})
         if (response.status !== 200) {
             return undefined
         }
@@ -1029,7 +1071,7 @@ class OctoClient {
 
     async getSiteStatistics(): Promise<BoardSiteStatistics | undefined> {
         const path = '/api/v2/statistics'
-        const response = await fetch(this.getBaseURL() + path, {headers: this.headers()})
+        const response = await apiFetch(this.getBaseURL() + path, {headers: this.headers()})
         if (response.status !== 200) {
             return undefined
         }
@@ -1042,7 +1084,7 @@ class OctoClient {
     // insights
     async getMyTopBoards(timeRange: string, page: number, perPage: number, teamId: string): Promise<TopBoardResponse | undefined> {
         const path = `/api/v2/users/me/boards/insights?time_range=${timeRange}&page=${page}&per_page=${perPage}&team_id=${teamId}`
-        const response = await fetch(this.getBaseURL() + path, {headers: this.headers()})
+        const response = await apiFetch(this.getBaseURL() + path, {headers: this.headers()})
         if (response.status !== 200) {
             return undefined
         }
@@ -1052,7 +1094,7 @@ class OctoClient {
 
     async getTeamTopBoards(timeRange: string, page: number, perPage: number, teamId: string): Promise<TopBoardResponse | undefined> {
         const path = `/api/v2/teams/${teamId}/boards/insights?time_range=${timeRange}&page=${page}&per_page=${perPage}`
-        const response = await fetch(this.getBaseURL() + path, {headers: this.headers()})
+        const response = await apiFetch(this.getBaseURL() + path, {headers: this.headers()})
         if (response.status !== 200) {
             return undefined
         }
@@ -1061,7 +1103,7 @@ class OctoClient {
     }
 
     async moveBlockTo(blockId: string, where: 'before'|'after', dstBlockId: string): Promise<Response> {
-        return fetch(`${this.getBaseURL()}/api/v2/content-blocks/${blockId}/moveto/${where}/${dstBlockId}`, {
+        return apiFetch(`${this.getBaseURL()}/api/v2/content-blocks/${blockId}/moveto/${where}/${dstBlockId}`, {
             method: 'POST',
             headers: this.headers(),
             body: '{}',
@@ -1070,7 +1112,7 @@ class OctoClient {
 
     async hideBoard(categoryID: string, boardID: string): Promise<Response> {
         const path = `${this.teamPath()}/categories/${categoryID}/boards/${boardID}/hide`
-        return fetch(this.getBaseURL() + path, {
+        return apiFetch(this.getBaseURL() + path, {
             method: 'PUT',
             headers: this.headers(),
         })
@@ -1078,7 +1120,7 @@ class OctoClient {
 
     async unhideBoard(categoryID: string, boardID: string): Promise<Response> {
         const path = `${this.teamPath()}/categories/${categoryID}/boards/${boardID}/unhide`
-        return fetch(this.getBaseURL() + path, {
+        return apiFetch(this.getBaseURL() + path, {
             method: 'PUT',
             headers: this.headers(),
         })

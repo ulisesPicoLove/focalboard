@@ -17,7 +17,7 @@ class UndoManager {
 
     private commands: UndoCommand[] = []
     private index = -1
-    private limit = 0
+    private limit = 200
     private isExecuting = false
 
     get currentCheckpoint() {
@@ -51,13 +51,18 @@ class UndoManager {
         }
         this.isExecuting = true
 
-        if (action === 'redo') {
-            command.value = await command[action]()
-        } else {
-            await command[action](command.value)
+        // A failing undo/redo must not leave isExecuting stuck on true, which would disable
+        // undo, redo and registering new commands until the page is reloaded.
+        try {
+            if (action === 'redo') {
+                command.value = await command[action]()
+            } else {
+                await command[action](command.value)
+            }
+        } finally {
+            this.isExecuting = false
         }
 
-        this.isExecuting = false
         return this
     }
 
@@ -108,12 +113,9 @@ class UndoManager {
         }
         this.commands.push(internalCommand)
 
-        // If limit is set, remove items from the start
+        // If limit is set, drop the oldest items and keep the most recent ones
         if (this.limit && this.commands.length > this.limit) {
-            this.commands = this.commands.splice(
-                0,
-                this.commands.length - this.limit,
-            )
+            this.commands = this.commands.slice(this.commands.length - this.limit)
         }
 
         // Set the current index to the end

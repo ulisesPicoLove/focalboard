@@ -6,6 +6,7 @@ import {TestBlockFactory} from './test/testBlockFactory'
 import 'isomorphic-fetch'
 import {FetchMock} from './test/fetchMock'
 import {mockDOM} from './testUtils'
+import undoManager from './undomanager'
 
 global.fetch = FetchMock.fn
 
@@ -50,5 +51,17 @@ describe('Mutator', () => {
         expect(duplicatedCard.fields.icon).toBe(card.fields.icon)
         expect(duplicatedCard.fields.contentOrder).toHaveLength(card.fields.contentOrder.length)
         expect(duplicatedCard.boardId).toBe(board.id)
+    })
+
+    test('a change the server rejects is reported and not added to the undo history', async () => {
+        const board = TestBlockFactory.createBoard()
+        const card = TestBlockFactory.createCard(board)
+        const edited = {...card, title: 'edited'}
+
+        undoManager.clear()
+        FetchMock.fn.mockReturnValueOnce(Promise.resolve(new Response('{}', {status: 403})))
+
+        await expect(mutator.updateBlock(board.id, edited, card, 'rename')).rejects.toThrow('403')
+        expect(undoManager.canUndo).toBe(false)
     })
 })
