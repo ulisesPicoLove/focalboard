@@ -4,7 +4,7 @@ import React, {useCallback} from 'react'
 
 import {FormattedMessage} from 'react-intl'
 
-import {ActivationEvent} from '../../keyboardActivation'
+import {ActivationEvent, keyboardActivation} from '../../keyboardActivation'
 
 import {IPropertyOption, IPropertyTemplate, Board, BoardGroup} from '../../blocks/board'
 import {createBoardView, BoardView} from '../../blocks/boardView'
@@ -231,9 +231,13 @@ const Table = (props: Props): JSX.Element => {
                         <BoardPermissionGate permissions={[Permission.ManageBoardCards]}>
                             <div
                                 className='octo-table-cell'
+                                role='button'
                                 onClick={() => {
                                     props.addCard('')
                                 }}
+                                {...keyboardActivation(() => {
+                                    props.addCard('')
+                                })}
                             >
                                 <FormattedMessage
                                     id='TableComponent.plus-new'

@@ -4,6 +4,8 @@ import React, {useEffect, useState} from 'react'
 
 import {FormattedMessage, useIntl} from 'react-intl'
 
+import {keyboardActivation} from '../../keyboardActivation'
+
 import Search from '../../widgets/icons/search'
 import CreateCategory from '../createCategory/createCategory'
 import {useAppSelector} from '../../store/hooks'
@@ -75,7 +77,10 @@ const BoardsSwitcher = (): JSX.Element => {
         <div className='BoardsSwitcherWrapper'>
             <div
                 className='BoardsSwitcher'
+                role='button'
+                aria-haspopup='dialog'
                 onClick={() => setShowSwitcher(true)}
+                {...keyboardActivation(() => setShowSwitcher(true))}
             >
                 <Search/>
                 <div>

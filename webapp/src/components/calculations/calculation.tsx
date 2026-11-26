@@ -1,7 +1,10 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 import React from 'react'
+
 import {useIntl} from 'react-intl'
+
+import {keyboardActivation} from '../../keyboardActivation'
 
 import {Card} from '../../blocks/card'
 
@@ -55,8 +58,11 @@ const Calculation = (props: Props): JSX.Element => {
         // https://stackoverflow.com/questions/47308081/onblur-event-is-not-firing
         <div
             className={`Calculation ${value} ${props.class} ${props.menuOpen ? 'menuOpen' : ''} ${props.hovered ? 'hovered' : ''}`}
+            role='button'
+            aria-haspopup='listbox'
+            aria-expanded={props.menuOpen}
             onClick={() => (props.menuOpen ? props.onMenuClose() : props.onMenuOpen())}
-            tabIndex={0}
+            {...keyboardActivation(() => (props.menuOpen ? props.onMenuClose() : props.onMenuOpen()))}
             onBlur={props.onMenuClose}
             style={{width: columnResize.width(props.property.id)}}
             ref={(ref) => columnResize.updateRef(Constants.tableCalculationId, props.property.id, ref)}

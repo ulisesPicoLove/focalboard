@@ -4,6 +4,8 @@ import React from 'react'
 
 import {useIntl} from 'react-intl'
 
+import {keyboardActivation} from '../../keyboardActivation'
+
 import AttachmentElement from '../../components/content/attachmentElement'
 import {AttachmentBlock} from '../../blocks/attachmentBlock'
 
@@ -30,7 +32,10 @@ const AttachmentList = (props: Props): JSX.Element => {
                 <BoardPermissionGate permissions={[Permission.ManageBoardCards]}>
                     <div
                         className='attachment-plus-btn'
+                        role='button'
+                        aria-label={intl.formatMessage({id: 'Attachment.add-attachment', defaultMessage: 'Add attachment'})}
                         onClick={addAttachment}
+                        {...keyboardActivation(addAttachment)}
                     >
                         <CompassIcon
                             icon='plus'

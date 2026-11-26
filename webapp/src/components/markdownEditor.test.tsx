@@ -2,6 +2,7 @@
 // See LICENSE.txt for license information.
 import {act, fireEvent, render, screen} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import '@testing-library/jest-dom'
 import React from 'react'
 import {Provider as ReduxProvider} from 'react-redux'
 
@@ -143,5 +144,46 @@ describe('components/markdownEditor', () => {
             })
         })
         expect(container).toMatchSnapshot()
+    })
+
+    test('the preview can be focused and opened for editing with the keyboard', async () => {
+        await act(async () => {
+            render(wrapDNDIntl(
+                <ReduxProvider store={store}>
+                    <MarkdownEditor
+                        text='some text'
+                        placeholderText='placeholder'
+                        onChange={jest.fn()}
+                        onFocus={jest.fn()}
+                        onBlur={jest.fn()}
+                    />
+                </ReduxProvider>,
+            ))
+        })
+        const previewElement = screen.getByTestId('preview-element')
+        expect(previewElement).toHaveAttribute('tabindex', '0')
+
+        await act(async () => {
+            fireEvent.keyDown(previewElement, {key: 'Enter'})
+        })
+        expect(screen.queryByTestId('preview-element')).toBeNull()
+    })
+
+    test('a read-only preview is not a tab stop', async () => {
+        await act(async () => {
+            render(wrapDNDIntl(
+                <ReduxProvider store={store}>
+                    <MarkdownEditor
+                        readonly={true}
+                        text='some text'
+                        placeholderText='placeholder'
+                        onChange={jest.fn()}
+                        onFocus={jest.fn()}
+                        onBlur={jest.fn()}
+                    />
+                </ReduxProvider>,
+            ))
+        })
+        expect(screen.getByTestId('preview-element')).not.toHaveAttribute('tabindex')
     })
 })

@@ -1,7 +1,10 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 import React, {useEffect, useState} from 'react'
+
 import {useIntl} from 'react-intl'
+
+import {keyboardActivation} from '../../keyboardActivation'
 
 import octoClient from '../../octoClient'
 
@@ -190,7 +193,10 @@ const AttachmentElement = (props: Props): JSX.Element|null => {
                 >
                     <div
                         className='fileElement-download-btn mt-3 mr-2'
+                        role='button'
+                        aria-label={intl.formatMessage({id: 'AttachmentElement.download', defaultMessage: 'Download'})}
                         onClick={attachmentDownloadHandler}
+                        {...keyboardActivation(attachmentDownloadHandler)}
                     >
                         <CompassIcon
                             icon='download-outline'

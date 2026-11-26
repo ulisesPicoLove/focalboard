@@ -58,7 +58,10 @@ exports[`components/boardTemplateSelector/boardTemplateSelector a focalboard Plu
               </span>
             </button>
             <div
+              aria-pressed="true"
               class="BoardTemplateSelectorItem active"
+              role="button"
+              tabindex="0"
             >
               <span
                 class="template-icon"
@@ -72,7 +75,10 @@ exports[`components/boardTemplateSelector/boardTemplateSelector a focalboard Plu
               </span>
             </div>
             <div
+              aria-pressed="false"
               class="BoardTemplateSelectorItem"
+              role="button"
+              tabindex="0"
             >
               <span
                 class="template-icon"
@@ -108,7 +114,10 @@ exports[`components/boardTemplateSelector/boardTemplateSelector a focalboard Plu
               </div>
             </div>
             <div
+              aria-pressed="false"
               class="BoardTemplateSelectorItem"
+              role="button"
+              tabindex="0"
             >
               <span
                 class="template-icon"
@@ -210,7 +219,10 @@ exports[`components/boardTemplateSelector/boardTemplateSelector a focalboard Plu
               </span>
             </button>
             <div
+              aria-pressed="true"
               class="BoardTemplateSelectorItem active"
+              role="button"
+              tabindex="0"
             >
               <span
                 class="template-icon"
@@ -224,7 +236,10 @@ exports[`components/boardTemplateSelector/boardTemplateSelector a focalboard Plu
               </span>
             </div>
             <div
+              aria-pressed="false"
               class="BoardTemplateSelectorItem"
+              role="button"
+              tabindex="0"
             >
               <span
                 class="template-icon"
@@ -260,7 +275,10 @@ exports[`components/boardTemplateSelector/boardTemplateSelector a focalboard Plu
               </div>
             </div>
             <div
+              aria-pressed="false"
               class="BoardTemplateSelectorItem"
+              role="button"
+              tabindex="0"
             >
               <span
                 class="template-icon"
@@ -362,7 +380,10 @@ exports[`components/boardTemplateSelector/boardTemplateSelector a focalboard Plu
               </span>
             </button>
             <div
+              aria-pressed="true"
               class="BoardTemplateSelectorItem active"
+              role="button"
+              tabindex="0"
             >
               <span
                 class="template-icon"
@@ -376,7 +397,10 @@ exports[`components/boardTemplateSelector/boardTemplateSelector a focalboard Plu
               </span>
             </div>
             <div
+              aria-pressed="false"
               class="BoardTemplateSelectorItem"
+              role="button"
+              tabindex="0"
             >
               <span
                 class="template-icon"
@@ -412,7 +436,10 @@ exports[`components/boardTemplateSelector/boardTemplateSelector a focalboard Plu
               </div>
             </div>
             <div
+              aria-pressed="false"
               class="BoardTemplateSelectorItem"
+              role="button"
+              tabindex="0"
             >
               <span
                 class="template-icon"
@@ -527,7 +554,10 @@ exports[`components/boardTemplateSelector/boardTemplateSelector not a focalboard
               </span>
             </button>
             <div
+              aria-pressed="true"
               class="BoardTemplateSelectorItem active"
+              role="button"
+              tabindex="0"
             >
               <span
                 class="template-icon"
@@ -541,7 +571,10 @@ exports[`components/boardTemplateSelector/boardTemplateSelector not a focalboard
               </span>
             </div>
             <div
+              aria-pressed="false"
               class="BoardTemplateSelectorItem"
+              role="button"
+              tabindex="0"
             >
               <span
                 class="template-icon"
@@ -577,7 +610,10 @@ exports[`components/boardTemplateSelector/boardTemplateSelector not a focalboard
               </div>
             </div>
             <div
+              aria-pressed="false"
               class="BoardTemplateSelectorItem"
+              role="button"
+              tabindex="0"
             >
               <span
                 class="template-icon"

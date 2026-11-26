@@ -3,7 +3,10 @@
 exports[`components/calculations/Calculation should match snapshot - count 1`] = `
 <div>
   <div
+    aria-expanded="false"
+    aria-haspopup="listbox"
     class="Calculation count fooClass  hovered"
+    role="button"
     style="width: 100px;"
     tabindex="0"
   >
@@ -24,7 +27,10 @@ exports[`components/calculations/Calculation should match snapshot - count 1`] =
 exports[`components/calculations/Calculation should match snapshot - countUniqueValue 1`] = `
 <div>
   <div
+    aria-expanded="false"
+    aria-haspopup="listbox"
     class="Calculation countUniqueValue fooClass  hovered"
+    role="button"
     style="width: 100px;"
     tabindex="0"
   >
@@ -45,7 +51,10 @@ exports[`components/calculations/Calculation should match snapshot - countUnique
 exports[`components/calculations/Calculation should match snapshot - countValue 1`] = `
 <div>
   <div
+    aria-expanded="false"
+    aria-haspopup="listbox"
     class="Calculation countValue fooClass  hovered"
+    role="button"
     style="width: 100px;"
     tabindex="0"
   >
@@ -66,7 +75,10 @@ exports[`components/calculations/Calculation should match snapshot - countValue 
 exports[`components/calculations/Calculation should match snapshot - none 1`] = `
 <div>
   <div
+    aria-expanded="false"
+    aria-haspopup="listbox"
     class="Calculation none fooClass  hovered"
+    role="button"
     style="width: 100px;"
     tabindex="0"
   >
@@ -85,7 +97,10 @@ exports[`components/calculations/Calculation should match snapshot - none 1`] = 
 exports[`components/calculations/Calculation should match snapshot - option change 1`] = `
 <div>
   <div
+    aria-expanded="true"
+    aria-haspopup="listbox"
     class="Calculation none fooClass menuOpen hovered"
+    role="button"
     style="width: 100px;"
     tabindex="0"
   >

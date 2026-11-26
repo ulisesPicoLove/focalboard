@@ -96,7 +96,10 @@ exports[`src/components/workspace return workspace and showcard 1`] = `
         class="BoardsSwitcherWrapper"
       >
         <div
+          aria-haspopup="dialog"
           class="BoardsSwitcher"
+          role="button"
+          tabindex="0"
         >
           <i
             class="CompassIcon icon-magnify MagnifyIcon"
@@ -355,6 +358,7 @@ exports[`src/components/workspace return workspace and showcard 1`] = `
                   <div
                     class="octo-editor-preview"
                     data-testid="preview-element"
+                    tabindex="0"
                   />
                 </div>
               </div>
@@ -1250,7 +1254,10 @@ exports[`src/components/workspace should match snapshot 1`] = `
         class="BoardsSwitcherWrapper"
       >
         <div
+          aria-haspopup="dialog"
           class="BoardsSwitcher"
+          role="button"
+          tabindex="0"
         >
           <i
             class="CompassIcon icon-magnify MagnifyIcon"
@@ -1509,6 +1516,7 @@ exports[`src/components/workspace should match snapshot 1`] = `
                   <div
                     class="octo-editor-preview"
                     data-testid="preview-element"
+                    tabindex="0"
                   />
                 </div>
               </div>

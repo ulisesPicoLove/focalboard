@@ -401,6 +401,8 @@ exports[`components/table/Table extended should have Duplicate Button 1`] = `
       >
         <div
           class="octo-table-cell"
+          role="button"
+          tabindex="0"
         >
           + New
         </div>
@@ -409,7 +411,10 @@ exports[`components/table/Table extended should have Duplicate Button 1`] = `
         class="CalculationRow octo-table-row"
       >
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation count octo-table-cell   "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -425,7 +430,10 @@ exports[`components/table/Table extended should have Duplicate Button 1`] = `
           </span>
         </div>
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation none octo-table-cell   "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -439,7 +447,10 @@ exports[`components/table/Table extended should have Duplicate Button 1`] = `
           />
         </div>
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation none octo-table-cell   "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -453,7 +464,10 @@ exports[`components/table/Table extended should have Duplicate Button 1`] = `
           />
         </div>
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation none octo-table-cell   "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -797,7 +811,10 @@ exports[`components/table/Table extended should match snapshot with CreatedAt 1`
         class="CalculationRow octo-table-row"
       >
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation count octo-table-cell disabled  "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -813,7 +830,10 @@ exports[`components/table/Table extended should match snapshot with CreatedAt 1`
           </span>
         </div>
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation none octo-table-cell disabled  "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -827,7 +847,10 @@ exports[`components/table/Table extended should match snapshot with CreatedAt 1`
           />
         </div>
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation none octo-table-cell disabled  "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -841,7 +864,10 @@ exports[`components/table/Table extended should match snapshot with CreatedAt 1`
           />
         </div>
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation none octo-table-cell disabled  "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -1261,6 +1287,8 @@ exports[`components/table/Table extended should match snapshot with CreatedBy 1`
       >
         <div
           class="octo-table-cell"
+          role="button"
+          tabindex="0"
         >
           + New
         </div>
@@ -1269,7 +1297,10 @@ exports[`components/table/Table extended should match snapshot with CreatedBy 1`
         class="CalculationRow octo-table-row"
       >
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation count octo-table-cell   "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -1285,7 +1316,10 @@ exports[`components/table/Table extended should match snapshot with CreatedBy 1`
           </span>
         </div>
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation none octo-table-cell   "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -1299,7 +1333,10 @@ exports[`components/table/Table extended should match snapshot with CreatedBy 1`
           />
         </div>
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation none octo-table-cell   "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -1313,7 +1350,10 @@ exports[`components/table/Table extended should match snapshot with CreatedBy 1`
           />
         </div>
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation none octo-table-cell   "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -1733,6 +1773,8 @@ exports[`components/table/Table extended should match snapshot with UpdatedAt 1`
       >
         <div
           class="octo-table-cell"
+          role="button"
+          tabindex="0"
         >
           + New
         </div>
@@ -1741,7 +1783,10 @@ exports[`components/table/Table extended should match snapshot with UpdatedAt 1`
         class="CalculationRow octo-table-row"
       >
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation count octo-table-cell   "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -1757,7 +1802,10 @@ exports[`components/table/Table extended should match snapshot with UpdatedAt 1`
           </span>
         </div>
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation none octo-table-cell   "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -1771,7 +1819,10 @@ exports[`components/table/Table extended should match snapshot with UpdatedAt 1`
           />
         </div>
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation none octo-table-cell   "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -1785,7 +1836,10 @@ exports[`components/table/Table extended should match snapshot with UpdatedAt 1`
           />
         </div>
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation none octo-table-cell   "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -2205,6 +2259,8 @@ exports[`components/table/Table extended should match snapshot with UpdatedBy 1`
       >
         <div
           class="octo-table-cell"
+          role="button"
+          tabindex="0"
         >
           + New
         </div>
@@ -2213,7 +2269,10 @@ exports[`components/table/Table extended should match snapshot with UpdatedBy 1`
         class="CalculationRow octo-table-row"
       >
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation count octo-table-cell   "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -2229,7 +2288,10 @@ exports[`components/table/Table extended should match snapshot with UpdatedBy 1`
           </span>
         </div>
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation none octo-table-cell   "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -2243,7 +2305,10 @@ exports[`components/table/Table extended should match snapshot with UpdatedBy 1`
           />
         </div>
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation none octo-table-cell   "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -2257,7 +2322,10 @@ exports[`components/table/Table extended should match snapshot with UpdatedBy 1`
           />
         </div>
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation none octo-table-cell   "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -2464,7 +2532,10 @@ exports[`components/table/Table should match snapshot 1`] = `
         class="CalculationRow octo-table-row"
       >
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation count octo-table-cell disabled  "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -2480,7 +2551,10 @@ exports[`components/table/Table should match snapshot 1`] = `
           </span>
         </div>
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation none octo-table-cell disabled  "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -2494,7 +2568,10 @@ exports[`components/table/Table should match snapshot 1`] = `
           />
         </div>
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation none octo-table-cell disabled  "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -2656,7 +2733,10 @@ exports[`components/table/Table should match snapshot with GroupBy 1`] = `
         class="CalculationRow octo-table-row"
       >
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation count octo-table-cell disabled  "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -2672,7 +2752,10 @@ exports[`components/table/Table should match snapshot with GroupBy 1`] = `
           </span>
         </div>
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation none octo-table-cell disabled  "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -2686,7 +2769,10 @@ exports[`components/table/Table should match snapshot with GroupBy 1`] = `
           />
         </div>
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation none octo-table-cell disabled  "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -2893,7 +2979,10 @@ exports[`components/table/Table should match snapshot without permissions 1`] = 
         class="CalculationRow octo-table-row"
       >
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation count octo-table-cell disabled  "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -2909,7 +2998,10 @@ exports[`components/table/Table should match snapshot without permissions 1`] = 
           </span>
         </div>
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation none octo-table-cell disabled  "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -2923,7 +3015,10 @@ exports[`components/table/Table should match snapshot without permissions 1`] = 
           />
         </div>
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation none octo-table-cell disabled  "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -3130,7 +3225,10 @@ exports[`components/table/Table should match snapshot, read-only 1`] = `
         class="CalculationRow octo-table-row"
       >
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation count octo-table-cell disabled  "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -3146,7 +3244,10 @@ exports[`components/table/Table should match snapshot, read-only 1`] = `
           </span>
         </div>
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation none octo-table-cell disabled  "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >
@@ -3160,7 +3261,10 @@ exports[`components/table/Table should match snapshot, read-only 1`] = `
           />
         </div>
         <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
           class="Calculation none octo-table-cell disabled  "
+          role="button"
           style="width: 100px;"
           tabindex="0"
         >

@@ -2,6 +2,8 @@
 // See LICENSE.txt for license information.
 import React, {useState, Suspense} from 'react'
 
+import {keyboardActivation} from '../keyboardActivation'
+
 import {Utils} from '../utils'
 import './markdownEditor.scss'
 
@@ -33,6 +35,7 @@ const MarkdownEditor = (props: Props): JSX.Element => {
             data-testid='preview-element'
             className={text ? 'octo-editor-preview' : 'octo-editor-preview octo-placeholder'}
             dangerouslySetInnerHTML={{__html: html}}
+            {...(props.readonly ? {} : keyboardActivation(() => setIsEditing(true)))}
             onClick={(e) => {
                 const LINK_TAG_NAME = 'a'
                 const element = e.target as Element

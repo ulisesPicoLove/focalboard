@@ -8,6 +8,7 @@ exports[`components/markdownEditor should match snapshot 1`] = `
     <div
       class="octo-editor-preview octo-placeholder"
       data-testid="preview-element"
+      tabindex="0"
     />
   </div>
 </div>
@@ -21,6 +22,7 @@ exports[`components/markdownEditor should match snapshot with initial text 1`] =
     <div
       class="octo-editor-preview"
       data-testid="preview-element"
+      tabindex="0"
     />
   </div>
 </div>

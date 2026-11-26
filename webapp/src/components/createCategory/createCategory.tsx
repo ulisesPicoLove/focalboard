@@ -5,6 +5,8 @@ import React, {useState, KeyboardEvent} from 'react'
 
 import {useIntl} from 'react-intl'
 
+import {keyboardActivation} from '../../keyboardActivation'
+
 import {IUser} from '../../user'
 import {Category} from '../../store/sidebar'
 import {getCurrentTeam} from '../../store/teams'
@@ -98,7 +100,10 @@ const CreateCategory = (props: Props): JSX.Element => {
                         Boolean(name) &&
                         <div
                             className='clearBtn inputWrapper__close-wrapper'
+                            role='button'
+                            aria-label={intl.formatMessage({id: 'CreateCategory.clear-name', defaultMessage: 'Clear name'})}
                             onClick={() => setName('')}
+                            {...keyboardActivation(() => setName(''))}
                         >
                             <CloseCircle/>
                         </div>

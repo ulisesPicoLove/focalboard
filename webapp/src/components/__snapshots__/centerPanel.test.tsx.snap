@@ -87,6 +87,7 @@ exports[`components/centerPanel return centerPanel and click on card to show car
               <div
                 class="octo-editor-preview"
                 data-testid="preview-element"
+                tabindex="0"
               />
             </div>
           </div>
@@ -646,6 +647,7 @@ exports[`components/centerPanel return centerPanel and click on new card to edit
               <div
                 class="octo-editor-preview"
                 data-testid="preview-element"
+                tabindex="0"
               />
             </div>
           </div>
@@ -1195,7 +1197,10 @@ exports[`components/centerPanel return centerPanel and click on new card to edit
           class="CalculationRow octo-table-row"
         >
           <div
+            aria-expanded="false"
+            aria-haspopup="listbox"
             class="Calculation count octo-table-cell   "
+            role="button"
             style="width: 100px;"
             tabindex="0"
           >
@@ -1594,7 +1599,10 @@ exports[`components/centerPanel return centerPanel and press touch 1 with readon
           class="CalculationRow octo-table-row"
         >
           <div
+            aria-expanded="false"
+            aria-haspopup="listbox"
             class="Calculation count octo-table-cell disabled  "
+            role="button"
             style="width: 100px;"
             tabindex="0"
           >
@@ -1703,6 +1711,7 @@ exports[`components/centerPanel return centerPanel and press touch ctrl+d for on
               <div
                 class="octo-editor-preview"
                 data-testid="preview-element"
+                tabindex="0"
               />
             </div>
           </div>
@@ -2252,7 +2261,10 @@ exports[`components/centerPanel return centerPanel and press touch ctrl+d for on
           class="CalculationRow octo-table-row"
         >
           <div
+            aria-expanded="false"
+            aria-haspopup="listbox"
             class="Calculation count octo-table-cell   "
+            role="button"
             style="width: 100px;"
             tabindex="0"
           >
@@ -2361,6 +2373,7 @@ exports[`components/centerPanel return centerPanel and press touch del for one c
               <div
                 class="octo-editor-preview"
                 data-testid="preview-element"
+                tabindex="0"
               />
             </div>
           </div>
@@ -2910,7 +2923,10 @@ exports[`components/centerPanel return centerPanel and press touch del for one c
           class="CalculationRow octo-table-row"
         >
           <div
+            aria-expanded="false"
+            aria-haspopup="listbox"
             class="Calculation count octo-table-cell   "
+            role="button"
             style="width: 100px;"
             tabindex="0"
           >
@@ -3019,6 +3035,7 @@ exports[`components/centerPanel return centerPanel and press touch esc for one c
               <div
                 class="octo-editor-preview"
                 data-testid="preview-element"
+                tabindex="0"
               />
             </div>
           </div>
@@ -3568,7 +3585,10 @@ exports[`components/centerPanel return centerPanel and press touch esc for one c
           class="CalculationRow octo-table-row"
         >
           <div
+            aria-expanded="false"
+            aria-haspopup="listbox"
             class="Calculation count octo-table-cell   "
+            role="button"
             style="width: 100px;"
             tabindex="0"
           >
@@ -3677,6 +3697,7 @@ exports[`components/centerPanel return centerPanel and press touch esc for one c
               <div
                 class="octo-editor-preview"
                 data-testid="preview-element"
+                tabindex="0"
               />
             </div>
           </div>
@@ -4226,7 +4247,10 @@ exports[`components/centerPanel return centerPanel and press touch esc for one c
           class="CalculationRow octo-table-row"
         >
           <div
+            aria-expanded="false"
+            aria-haspopup="listbox"
             class="Calculation count octo-table-cell   "
+            role="button"
             style="width: 100px;"
             tabindex="0"
           >
@@ -4335,6 +4359,7 @@ exports[`components/centerPanel return centerPanel and press touch esc for two c
               <div
                 class="octo-editor-preview"
                 data-testid="preview-element"
+                tabindex="0"
               />
             </div>
           </div>
@@ -4884,7 +4909,10 @@ exports[`components/centerPanel return centerPanel and press touch esc for two c
           class="CalculationRow octo-table-row"
         >
           <div
+            aria-expanded="false"
+            aria-haspopup="listbox"
             class="Calculation count octo-table-cell   "
+            role="button"
             style="width: 100px;"
             tabindex="0"
           >
@@ -4993,6 +5021,7 @@ exports[`components/centerPanel return centerPanel and press touch esc for two c
               <div
                 class="octo-editor-preview"
                 data-testid="preview-element"
+                tabindex="0"
               />
             </div>
           </div>
@@ -5542,7 +5571,10 @@ exports[`components/centerPanel return centerPanel and press touch esc for two c
           class="CalculationRow octo-table-row"
         >
           <div
+            aria-expanded="false"
+            aria-haspopup="listbox"
             class="Calculation count octo-table-cell   "
+            role="button"
             style="width: 100px;"
             tabindex="0"
           >
@@ -5651,6 +5683,7 @@ exports[`components/centerPanel return centerPanel and press touch esc for two c
               <div
                 class="octo-editor-preview"
                 data-testid="preview-element"
+                tabindex="0"
               />
             </div>
           </div>
@@ -6200,7 +6233,10 @@ exports[`components/centerPanel return centerPanel and press touch esc for two c
           class="CalculationRow octo-table-row"
         >
           <div
+            aria-expanded="false"
+            aria-haspopup="listbox"
             class="Calculation count octo-table-cell   "
+            role="button"
             style="width: 100px;"
             tabindex="0"
           >
@@ -6309,6 +6345,7 @@ exports[`components/centerPanel return centerPanel and select one card and click
               <div
                 class="octo-editor-preview"
                 data-testid="preview-element"
+                tabindex="0"
               />
             </div>
           </div>
@@ -6858,7 +6895,10 @@ exports[`components/centerPanel return centerPanel and select one card and click
           class="CalculationRow octo-table-row"
         >
           <div
+            aria-expanded="false"
+            aria-haspopup="listbox"
             class="Calculation count octo-table-cell   "
+            role="button"
             style="width: 100px;"
             tabindex="0"
           >
@@ -6967,6 +7007,7 @@ exports[`components/centerPanel return centerPanel and select one card and click
               <div
                 class="octo-editor-preview"
                 data-testid="preview-element"
+                tabindex="0"
               />
             </div>
           </div>
@@ -7516,7 +7557,10 @@ exports[`components/centerPanel return centerPanel and select one card and click
           class="CalculationRow octo-table-row"
         >
           <div
+            aria-expanded="false"
+            aria-haspopup="listbox"
             class="Calculation count octo-table-cell   "
+            role="button"
             style="width: 100px;"
             tabindex="0"
           >
@@ -7625,6 +7669,7 @@ exports[`components/centerPanel should match snapshot for Gallery 1`] = `
               <div
                 class="octo-editor-preview"
                 data-testid="preview-element"
+                tabindex="0"
               />
             </div>
           </div>
@@ -7808,6 +7853,8 @@ exports[`components/centerPanel should match snapshot for Gallery 1`] = `
       </div>
       <div
         class="octo-gallery-new"
+        role="button"
+        tabindex="0"
       >
         + New
       </div>
@@ -7903,6 +7950,7 @@ exports[`components/centerPanel should match snapshot for Kanban 1`] = `
               <div
                 class="octo-editor-preview"
                 data-testid="preview-element"
+                tabindex="0"
               />
             </div>
           </div>
@@ -8425,6 +8473,7 @@ exports[`components/centerPanel should match snapshot for Kanban, not shared 1`]
               <div
                 class="octo-editor-preview"
                 data-testid="preview-element"
+                tabindex="0"
               />
             </div>
           </div>
@@ -8947,6 +8996,7 @@ exports[`components/centerPanel should match snapshot for Table 1`] = `
               <div
                 class="octo-editor-preview"
                 data-testid="preview-element"
+                tabindex="0"
               />
             </div>
           </div>
@@ -9423,7 +9473,10 @@ exports[`components/centerPanel should match snapshot for Table 1`] = `
           class="CalculationRow octo-table-row"
         >
           <div
+            aria-expanded="false"
+            aria-haspopup="listbox"
             class="Calculation count octo-table-cell   "
+            role="button"
             style="width: 100px;"
             tabindex="0"
           >

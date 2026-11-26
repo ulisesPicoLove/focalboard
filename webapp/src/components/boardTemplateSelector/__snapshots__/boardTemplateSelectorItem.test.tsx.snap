@@ -3,7 +3,10 @@
 exports[`components/boardTemplateSelector/boardTemplateSelectorItem should match snapshot 1`] = `
 <div>
   <div
+    aria-pressed="false"
     class="BoardTemplateSelectorItem"
+    role="button"
+    tabindex="0"
   >
     <span
       class="template-icon"
@@ -44,7 +47,10 @@ exports[`components/boardTemplateSelector/boardTemplateSelectorItem should match
 exports[`components/boardTemplateSelector/boardTemplateSelectorItem should match snapshot when active 1`] = `
 <div>
   <div
+    aria-pressed="true"
     class="BoardTemplateSelectorItem active"
+    role="button"
+    tabindex="0"
   >
     <span
       class="template-icon"
@@ -85,7 +91,10 @@ exports[`components/boardTemplateSelector/boardTemplateSelectorItem should match
 exports[`components/boardTemplateSelector/boardTemplateSelectorItem should match snapshot with global template 1`] = `
 <div>
   <div
+    aria-pressed="false"
     class="BoardTemplateSelectorItem"
+    role="button"
+    tabindex="0"
   >
     <span
       class="template-icon"
@@ -106,7 +115,10 @@ exports[`components/boardTemplateSelector/boardTemplateSelectorItem should trigg
   id="focalboard-root-portal"
 >
   <div
+    aria-pressed="false"
     class="BoardTemplateSelectorItem"
+    role="button"
+    tabindex="0"
   >
     <span
       class="template-icon"

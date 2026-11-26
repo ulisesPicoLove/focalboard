@@ -6,7 +6,10 @@ exports[`components/table/calculation/CalculationRow should match snapshot 1`] =
     class="CalculationRow octo-table-row"
   >
     <div
+      aria-expanded="false"
+      aria-haspopup="listbox"
       class="Calculation count octo-table-cell   "
+      role="button"
       style="width: 100px;"
       tabindex="0"
     >
@@ -22,7 +25,10 @@ exports[`components/table/calculation/CalculationRow should match snapshot 1`] =
       </span>
     </div>
     <div
+      aria-expanded="false"
+      aria-haspopup="listbox"
       class="Calculation count octo-table-cell   "
+      role="button"
       style="width: 100px;"
       tabindex="0"
     >
@@ -38,7 +44,10 @@ exports[`components/table/calculation/CalculationRow should match snapshot 1`] =
       </span>
     </div>
     <div
+      aria-expanded="false"
+      aria-haspopup="listbox"
       class="Calculation countValue octo-table-cell   "
+      role="button"
       style="width: 100px;"
       tabindex="0"
     >
@@ -54,7 +63,10 @@ exports[`components/table/calculation/CalculationRow should match snapshot 1`] =
       </span>
     </div>
     <div
+      aria-expanded="false"
+      aria-haspopup="listbox"
       class="Calculation countUniqueValue octo-table-cell   "
+      role="button"
       style="width: 100px;"
       tabindex="0"
     >
@@ -79,7 +91,10 @@ exports[`components/table/calculation/CalculationRow should render three calcula
     class="CalculationRow octo-table-row"
   >
     <div
+      aria-expanded="false"
+      aria-haspopup="listbox"
       class="Calculation count octo-table-cell   "
+      role="button"
       style="width: 100px;"
       tabindex="0"
     >
@@ -95,7 +110,10 @@ exports[`components/table/calculation/CalculationRow should render three calcula
       </span>
     </div>
     <div
+      aria-expanded="false"
+      aria-haspopup="listbox"
       class="Calculation none octo-table-cell   "
+      role="button"
       style="width: 100px;"
       tabindex="0"
     >
@@ -109,7 +127,10 @@ exports[`components/table/calculation/CalculationRow should render three calcula
       />
     </div>
     <div
+      aria-expanded="false"
+      aria-haspopup="listbox"
       class="Calculation none octo-table-cell   "
+      role="button"
       style="width: 100px;"
       tabindex="0"
     >
@@ -123,7 +144,10 @@ exports[`components/table/calculation/CalculationRow should render three calcula
       />
     </div>
     <div
+      aria-expanded="false"
+      aria-haspopup="listbox"
       class="Calculation none octo-table-cell   "
+      role="button"
       style="width: 100px;"
       tabindex="0"
     >

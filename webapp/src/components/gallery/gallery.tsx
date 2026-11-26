@@ -4,7 +4,7 @@ import React, {useMemo, useCallback} from 'react'
 
 import {FormattedMessage} from 'react-intl'
 
-import {ActivationEvent} from '../../keyboardActivation'
+import {ActivationEvent, keyboardActivation} from '../../keyboardActivation'
 
 import {Constants, Permission} from '../../constants'
 
@@ -90,9 +90,13 @@ const Gallery = (props: Props): JSX.Element => {
                 <BoardPermissionGate permissions={[Permission.ManageBoardCards]}>
                     <div
                         className='octo-gallery-new'
+                        role='button'
                         onClick={() => {
                             props.addCard(true)
                         }}
+                        {...keyboardActivation(() => {
+                            props.addCard(true)
+                        })}
                     >
                         <FormattedMessage
                             id='TableComponent.plus-new'

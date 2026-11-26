@@ -1,7 +1,10 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 import React, {useCallback, useState} from 'react'
+
 import {useIntl} from 'react-intl'
+
+import {keyboardActivation} from '../../keyboardActivation'
 
 import {Board} from '../../blocks/board'
 import CompassIcon from '../../widgets/icons/compassIcon'
@@ -38,7 +41,10 @@ const BoardTemplateSelectorItem = (props: Props) => {
     return (
         <div
             className={isActive ? 'BoardTemplateSelectorItem active' : 'BoardTemplateSelectorItem'}
+            role='button'
+            aria-pressed={isActive}
             onClick={onClickHandler}
+            {...keyboardActivation(onClickHandler)}
         >
             <span className='template-icon'>{template.icon || <CompassIcon icon='product-boards'/>}</span>
             <span className='template-name'>{template.title || intl.formatMessage({id: 'View.NewTemplateTitle', defaultMessage: 'Untitled'})}</span>

@@ -19,6 +19,7 @@ exports[`components/cardDetail/CommentsList comments show up 1`] = `
         <div
           class="octo-editor-preview octo-placeholder"
           data-testid="preview-element"
+          tabindex="0"
         >
           <p>
             Add a comment...

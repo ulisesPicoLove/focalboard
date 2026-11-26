@@ -88,7 +88,10 @@ exports[`components/sidebarSidebar dont show hidden boards 1`] = `
       class="BoardsSwitcherWrapper"
     >
       <div
+        aria-haspopup="dialog"
         class="BoardsSwitcher"
+        role="button"
+        tabindex="0"
       >
         <i
           class="CompassIcon icon-magnify MagnifyIcon"
@@ -286,7 +289,10 @@ exports[`components/sidebarSidebar should assign default category if current boa
       class="BoardsSwitcherWrapper"
     >
       <div
+        aria-haspopup="dialog"
         class="BoardsSwitcher"
+        role="button"
+        tabindex="0"
       >
         <i
           class="CompassIcon icon-magnify MagnifyIcon"
@@ -540,7 +546,10 @@ exports[`components/sidebarSidebar shouldnt do any category assignment is board 
       class="BoardsSwitcherWrapper"
     >
       <div
+        aria-haspopup="dialog"
         class="BoardsSwitcher"
+        role="button"
+        tabindex="0"
       >
         <i
           class="CompassIcon icon-magnify MagnifyIcon"
@@ -950,7 +959,10 @@ exports[`components/sidebarSidebar sidebar hidden 1`] = `
       class="BoardsSwitcherWrapper"
     >
       <div
+        aria-haspopup="dialog"
         class="BoardsSwitcher"
+        role="button"
+        tabindex="0"
       >
         <i
           class="CompassIcon icon-magnify MagnifyIcon"
@@ -1241,7 +1253,10 @@ exports[`components/sidebarSidebar some categories hidden 1`] = `
       class="BoardsSwitcherWrapper"
     >
       <div
+        aria-haspopup="dialog"
         class="BoardsSwitcher"
+        role="button"
+        tabindex="0"
       >
         <i
           class="CompassIcon icon-magnify MagnifyIcon"

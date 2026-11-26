@@ -17,6 +17,7 @@ exports[`components/cardDetail/cardDetailContents should match snapshot 1`] = `
         <div
           class="octo-editor-preview octo-placeholder"
           data-testid="preview-element"
+          tabindex="0"
         >
           <p>
             Add a description...
