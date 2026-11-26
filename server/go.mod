@@ -4,6 +4,8 @@ go 1.26.0
 
 require (
 	github.com/Masterminds/squirrel v1.5.4
+	github.com/coreos/go-oidc/v3 v3.21.0
+	github.com/go-jose/go-jose/v4 v4.1.4
 	github.com/golang/mock v1.6.0
 	github.com/gorilla/mux v1.8.1
 	github.com/gorilla/websocket v1.5.4-0.20240701034025-d67f41855da4
@@ -26,6 +28,7 @@ require (
 	github.com/stretchr/testify v1.12.1
 	github.com/wiggin77/merror v1.0.5
 	golang.org/x/crypto v0.59.0
+	golang.org/x/oauth2 v0.38.0
 )
 
 require (
