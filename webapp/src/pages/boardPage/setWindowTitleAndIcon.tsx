@@ -23,7 +23,7 @@ const SetWindowTitleAndIcon = (): null => {
             }
             document.title = title
         } else {
-            document.title = 'Focalboard'
+            document.title = 'Picoboard'
         }
     }, [board?.title, activeView?.title])
 
