@@ -1,42 +1,36 @@
-# Deploy Focalboard with Docker
+# Picoboard con Docker
 
-## Docker
-
-The Dockerfile gives a quick and easy way to build the latest Focalboard server and deploy it locally. In the example below,
-the Focalboard database and files will be persisted in a named volumed called `fbdata`.
-
-From the Focalboard project root directory:
+`docker-compose.yml` levanta PostgreSQL y la aplicación. Las contraseñas y claves de Google
+no están en el repositorio: se inyectan desde Infisical.
 
 ```bash
-docker build -f docker/Dockerfile -t focalboard .
-docker run -it -v "fbdata:/opt/focalboard/data" -p 80:8000 focalboard
+cd docker
+infisical run --env=dev -- docker compose up -d --build
 ```
 
-Open a browser to [localhost](http://localhost) to start
+La aplicación queda en <http://localhost:8000> (cambia el puerto del host con `PICOBOARD_PORT`).
 
-## Alternative architectures
+## Variables
 
-From the Focalboard project root directory:
+| Variable | Obligatoria | Para qué |
+|---|---|---|
+| `POSTGRES_PASSWORD` | sí | Contraseña del usuario `picoboard` de la base de datos (va dentro de una URL: usa solo letras y números, o codifícala) |
+| `FOCALBOARD_GOOGLE_CLIENT_ID`, `FOCALBOARD_GOOGLE_CLIENT_SECRET`, `FOCALBOARD_GOOGLE_ALLOWED_DOMAIN` | sí con `authMode=google` | Inicio de sesión con Google ([guía](../docs/google-sso.md)) |
+| `FOCALBOARD_SERVERROOT` | en producción | URL pública (con `https://`); fija el callback de Google |
+| `FOCALBOARD_AUTHMODE` | no | `google` por defecto; `native` para usuario y contraseña |
+| `PICOBOARD_PORT` | no | Puerto del host (8000 por defecto) |
 
-```bash
-docker build -f docker/Dockerfile --platform linux/arm64 -t focalboard .
-docker run -it -v "fbdata:/opt/focalboard/data" -p 80:8000 focalboard
-```
+El resto de variables `FOCALBOARD_*` está documentado en [`../.env.example`](../.env.example).
 
-## Docker-Compose
+## Datos
 
-Docker-Compose provides the option to automate the build and run step, or even include some of the steps from the [personal server setup](https://www.focalboard.com/download/personal-edition/ubuntu/).
+- `pgdata`: base de datos PostgreSQL.
+- `fbdata`: archivos subidos (`/opt/focalboard/data/files`).
 
-To start the server, change directory to `focalboard/docker` and run:
+Respáldalos antes de actualizar. Para una copia de la base: `docker exec picoboard-db pg_dump -U picoboard picoboard > picoboard.sql`.
 
-```bash
-docker-compose up
-```
-
-This will automatically build the focalboard image and start it with the http port mapping. These examples also create a persistent named volume called `fbdata`.
-
-To run Focalboard with a nginx proxy and a postgres backend, change directory to `focalboard/docker` and run:
+## Construir sin Compose
 
 ```bash
-docker-compose -f docker-compose-db-nginx.yml up
+docker build -f docker/Dockerfile -t picoboard .
 ```

@@ -1,17 +1,51 @@
-version: "3"
+# Picoboard con PostgreSQL.
+#
+# Los secretos no se guardan aquí: Compose los toma del entorno del shell, así que se
+# arranca con Infisical:
+#
+#   infisical run --env=dev -- docker compose up -d --build
+#
+# Variables obligatorias (ver ../.env.example): POSTGRES_PASSWORD y las FOCALBOARD_GOOGLE_*.
+# El resto tiene un valor por defecto pensado para desarrollo local.
 services:
+  db:
+    image: postgres:16-alpine
+    container_name: picoboard-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: picoboard
+      POSTGRES_USER: picoboard
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?define POSTGRES_PASSWORD (por ejemplo con infisical run)}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U picoboard -d picoboard"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
   app:
     build:
       context: ../
       dockerfile: docker/Dockerfile
-    container_name: focalboard
+    container_name: picoboard
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "${PICOBOARD_PORT:-8000}:8000"
     volumes:
       - fbdata:/opt/focalboard/data
-    ports:
-      - 8000:8000
     environment:
-      - VIRTUAL_HOST=focalboard.local
-      - VIRTUAL_PORT=8000
+      FOCALBOARD_DBTYPE: postgres
+      FOCALBOARD_DBCONFIG: postgres://picoboard:${POSTGRES_PASSWORD}@db:5432/picoboard?sslmode=disable&connect_timeout=10
+      FOCALBOARD_SERVERROOT: ${FOCALBOARD_SERVERROOT:-http://localhost:8000}
+      FOCALBOARD_AUTHMODE: ${FOCALBOARD_AUTHMODE:-google}
+      FOCALBOARD_GOOGLE_CLIENT_ID: ${FOCALBOARD_GOOGLE_CLIENT_ID:-}
+      FOCALBOARD_GOOGLE_CLIENT_SECRET: ${FOCALBOARD_GOOGLE_CLIENT_SECRET:-}
+      FOCALBOARD_GOOGLE_ALLOWED_DOMAIN: ${FOCALBOARD_GOOGLE_ALLOWED_DOMAIN:-}
 
 volumes:
+  pgdata:
   fbdata:
