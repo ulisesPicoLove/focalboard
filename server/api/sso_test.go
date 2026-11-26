@@ -51,7 +51,7 @@ func newSSOHarness(t *testing.T, authService, basePath string) *ssoHarness {
 	logger := mlog.CreateConsoleTestLogger(t)
 	authSvc := auth.New(&cfg, store, nil)
 
-	application := app.New(&cfg, ws.NewServer(authSvc, "", false, logger, store), app.Services{
+	application := app.New(&cfg, ws.NewServer(authSvc, "", logger, store), app.Services{
 		Auth:             authSvc,
 		Store:            store,
 		FilesBackend:     &mocks.FileBackend{},

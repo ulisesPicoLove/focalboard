@@ -63,11 +63,6 @@ func (a *API) handleLogin(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if a.MattermostAuth {
-		a.errorResponse(w, r, model.NewErrNotImplemented("not permitted in plugin mode"))
-		return
-	}
-
 	if len(a.singleUserToken) > 0 {
 		// Not permitted in single-user mode
 		a.errorResponse(w, r, model.NewErrUnauthorized("not permitted in single-user mode"))
@@ -129,11 +124,6 @@ func (a *API) handleLogout(w http.ResponseWriter, r *http.Request) {
 	//     description: internal error
 	//     schema:
 	//       "$ref": "#/definitions/ErrorResponse"
-	if a.MattermostAuth {
-		a.errorResponse(w, r, model.NewErrNotImplemented("not permitted in plugin mode"))
-		return
-	}
-
 	if len(a.singleUserToken) > 0 {
 		// Not permitted in single-user mode
 		a.errorResponse(w, r, model.NewErrUnauthorized("not permitted in single-user mode"))
@@ -185,11 +175,6 @@ func (a *API) handleRegister(w http.ResponseWriter, r *http.Request) {
 	//       "$ref": "#/definitions/ErrorResponse"
 	if a.authService == googlesso.AuthService {
 		a.errorResponse(w, r, model.NewErrNotImplemented("password sign-in is disabled, use Google sign-in"))
-		return
-	}
-
-	if a.MattermostAuth {
-		a.errorResponse(w, r, model.NewErrNotImplemented("not permitted in plugin mode"))
 		return
 	}
 
@@ -296,11 +281,6 @@ func (a *API) handleChangePassword(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if a.MattermostAuth {
-		a.errorResponse(w, r, model.NewErrNotImplemented("not permitted in plugin mode"))
-		return
-	}
-
 	if len(a.singleUserToken) > 0 {
 		// Not permitted in single-user mode
 		a.errorResponse(w, r, model.NewErrUnauthorized("not permitted in single-user mode"))
@@ -378,24 +358,6 @@ func (a *API) attachSession(handler func(w http.ResponseWriter, r *http.Request)
 				CreateAt:    now,
 				UpdateAt:    now,
 			}
-			ctx := context.WithValue(r.Context(), sessionContextKey, session)
-			handler(w, r.WithContext(ctx))
-			return
-		}
-
-		if a.MattermostAuth && r.Header.Get("Mattermost-User-Id") != "" {
-			userID := r.Header.Get("Mattermost-User-Id")
-			now := utils.GetMillis()
-			session := &model.Session{
-				ID:          userID,
-				Token:       userID,
-				UserID:      userID,
-				AuthService: a.authService,
-				Props:       map[string]interface{}{},
-				CreateAt:    now,
-				UpdateAt:    now,
-			}
-
 			ctx := context.WithValue(r.Context(), sessionContextKey, session)
 			handler(w, r.WithContext(ctx))
 			return

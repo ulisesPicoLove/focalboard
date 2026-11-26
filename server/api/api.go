@@ -40,7 +40,6 @@ type API struct {
 	authService     string
 	permissions     permissions.PermissionsService
 	singleUserToken string
-	MattermostAuth  bool
 	logger          mlog.LoggerIFace
 	audit           *audit.Audit
 
@@ -104,7 +103,6 @@ func (a *API) RegisterRoutes(r *mux.Router) {
 	a.registerSearchRoutes(apiv2)
 	a.registerConfigRoutes(apiv2)
 	a.registerBoardsAndBlocksRoutes(apiv2)
-	a.registerChannelsRoutes(apiv2)
 	a.registerTemplatesRoutes(apiv2)
 	a.registerBoardsRoutes(apiv2)
 	a.registerBlocksRoutes(apiv2)

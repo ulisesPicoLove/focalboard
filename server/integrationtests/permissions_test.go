@@ -327,24 +327,6 @@ func TestPermissionsSearchTeamBoards(t *testing.T) {
 	runTestCases(t, ttCases, testData, clients)
 }
 
-func TestPermissionsSearchTeamLinkableBoards(t *testing.T) {
-	th := SetupTestHelperLocalMode(t)
-	defer th.TearDown()
-	clients := setupLocalClients(th)
-	testData := setupData(t, th)
-	ttCases := []TestCase{
-		// Search boards
-		{"/teams/test-team/boards/search/linkable?q=b", methodGet, "", userAnon, http.StatusUnauthorized, 0},
-		{"/teams/test-team/boards/search/linkable?q=b", methodGet, "", userNoTeamMember, http.StatusNotImplemented, 0},
-		{"/teams/test-team/boards/search/linkable?q=b", methodGet, "", userTeamMember, http.StatusNotImplemented, 0},
-		{"/teams/test-team/boards/search/linkable?q=b", methodGet, "", userViewer, http.StatusNotImplemented, 0},
-		{"/teams/test-team/boards/search/linkable?q=b", methodGet, "", userCommenter, http.StatusNotImplemented, 0},
-		{"/teams/test-team/boards/search/linkable?q=b", methodGet, "", userEditor, http.StatusNotImplemented, 0},
-		{"/teams/test-team/boards/search/linkable?q=b", methodGet, "", userAdmin, http.StatusNotImplemented, 0},
-	}
-	runTestCases(t, ttCases, testData, clients)
-}
-
 func TestPermissionsGetTeamTemplates(t *testing.T) {
 	extraSetup := func(t *testing.T, th *TestHelper) {
 		err := th.Server.App().InitTemplates()
@@ -2818,38 +2800,4 @@ func TestPermissionsMinimumRolesApplied(t *testing.T) {
 		ttCases := ttCasesF(t, th, "admin", testData)
 		runTestCases(t, ttCases, testData, clients)
 	})
-}
-
-func TestPermissionsChannels(t *testing.T) {
-	th := SetupTestHelperLocalMode(t)
-	defer th.TearDown()
-	clients := setupLocalClients(th)
-	testData := setupData(t, th)
-	ttCases := []TestCase{
-		{"/teams/test-team/channels", methodGet, "", userAnon, http.StatusUnauthorized, 0},
-		{"/teams/test-team/channels", methodGet, "", userNoTeamMember, http.StatusNotImplemented, 0},
-		{"/teams/test-team/channels", methodGet, "", userTeamMember, http.StatusNotImplemented, 0},
-		{"/teams/test-team/channels", methodGet, "", userViewer, http.StatusNotImplemented, 0},
-		{"/teams/test-team/channels", methodGet, "", userCommenter, http.StatusNotImplemented, 0},
-		{"/teams/test-team/channels", methodGet, "", userEditor, http.StatusNotImplemented, 0},
-		{"/teams/test-team/channels", methodGet, "", userAdmin, http.StatusNotImplemented, 0},
-	}
-	runTestCases(t, ttCases, testData, clients)
-}
-
-func TestPermissionsChannel(t *testing.T) {
-	th := SetupTestHelperLocalMode(t)
-	defer th.TearDown()
-	clients := setupLocalClients(th)
-	testData := setupData(t, th)
-	ttCases := []TestCase{
-		{"/teams/test-team/channels/valid-channel-id", methodGet, "", userAnon, http.StatusUnauthorized, 0},
-		{"/teams/test-team/channels/valid-channel-id", methodGet, "", userNoTeamMember, http.StatusNotImplemented, 0},
-		{"/teams/test-team/channels/valid-channel-id", methodGet, "", userTeamMember, http.StatusNotImplemented, 0},
-		{"/teams/test-team/channels/valid-channel-id", methodGet, "", userViewer, http.StatusNotImplemented, 0},
-		{"/teams/test-team/channels/valid-channel-id", methodGet, "", userCommenter, http.StatusNotImplemented, 0},
-		{"/teams/test-team/channels/valid-channel-id", methodGet, "", userEditor, http.StatusNotImplemented, 0},
-		{"/teams/test-team/channels/valid-channel-id", methodGet, "", userAdmin, http.StatusNotImplemented, 0},
-	}
-	runTestCases(t, ttCases, testData, clients)
 }

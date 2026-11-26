@@ -42,8 +42,6 @@ const (
 	updateMetricsTaskFrequency  = 15 * time.Minute
 
 	minSessionExpiryTime = int64(60 * 60 * 24 * 31) // 31 days
-
-	MattermostAuthMod = "mattermost"
 )
 
 type Server struct {
@@ -77,7 +75,7 @@ func New(params Params) (*Server, error) {
 	// if no ws adapter is provided, we spin up a websocket server
 	wsAdapter := params.WSAdapter
 	if wsAdapter == nil {
-		wsAdapter = ws.NewServer(authenticator, params.SingleUserToken, params.Cfg.AuthMode == MattermostAuthMod, params.Logger, params.DBStore)
+		wsAdapter = ws.NewServer(authenticator, params.SingleUserToken, params.Logger, params.DBStore)
 	}
 
 	filesBackendSettings := filestore.Settings{}
@@ -187,8 +185,6 @@ func New(params Params) (*Server, error) {
 		app:                 app,
 	}
 
-	server.initHandlers()
-
 	return &server, nil
 }
 
@@ -263,18 +259,16 @@ func (s *Server) Start() error {
 		}
 	}
 
-	if s.config.AuthMode != MattermostAuthMod {
-		s.cleanUpSessionsTask = scheduler.CreateRecurringTask("cleanUpSessions", func() {
-			secondsAgo := minSessionExpiryTime
-			if secondsAgo < s.config.SessionExpireTime {
-				secondsAgo = s.config.SessionExpireTime
-			}
+	s.cleanUpSessionsTask = scheduler.CreateRecurringTask("cleanUpSessions", func() {
+		secondsAgo := minSessionExpiryTime
+		if secondsAgo < s.config.SessionExpireTime {
+			secondsAgo = s.config.SessionExpireTime
+		}
 
-			if err := s.store.CleanUpSessions(secondsAgo); err != nil {
-				s.logger.Error("Unable to clean up the sessions", mlog.Err(err))
-			}
-		}, cleanupSessionTaskFrequency)
-	}
+		if err := s.store.CleanUpSessions(secondsAgo); err != nil {
+			s.logger.Error("Unable to clean up the sessions", mlog.Err(err))
+		}
+	}, cleanupSessionTaskFrequency)
 
 	metricsUpdater := func() {
 		blockCounts, err := s.store.GetBlockCountsByType()

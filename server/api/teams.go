@@ -102,20 +102,10 @@ func (a *API) handleGetTeam(w http.ResponseWriter, r *http.Request) {
 	var team *model.Team
 	var err error
 
-	if a.MattermostAuth {
-		team, err = a.app.GetTeam(teamID)
-		if model.IsErrNotFound(err) {
-			a.errorResponse(w, r, model.NewErrUnauthorized("invalid team"))
-		}
-		if err != nil {
-			a.errorResponse(w, r, err)
-		}
-	} else {
-		team, err = a.app.GetRootTeam()
-		if err != nil {
-			a.errorResponse(w, r, err)
-			return
-		}
+	team, err = a.app.GetRootTeam()
+	if err != nil {
+		a.errorResponse(w, r, err)
+		return
 	}
 
 	auditRec := a.makeAuditRecord(r, "getTeam", audit.Fail)
@@ -155,11 +145,6 @@ func (a *API) handlePostTeamRegenerateSignupToken(w http.ResponseWriter, r *http
 	//     description: internal error
 	//     schema:
 	//       "$ref": "#/definitions/ErrorResponse"
-	if a.MattermostAuth {
-		a.errorResponse(w, r, model.NewErrNotImplemented("not permitted in plugin mode"))
-		return
-	}
-
 	// With Google sign-in nobody registers with a signup token, and there is no admin
 	// role here, so any user could otherwise invalidate the invitation links of everyone.
 	if a.authService != "native" {
