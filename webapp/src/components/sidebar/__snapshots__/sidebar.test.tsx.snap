@@ -2,7 +2,8 @@
 
 exports[`components/sidebarSidebar dont show hidden boards 1`] = `
 <div>
-  <div
+  <nav
+    aria-label="Boards"
     class="Sidebar octo-sidebar"
   >
     <div
@@ -190,13 +191,14 @@ exports[`components/sidebarSidebar dont show hidden boards 1`] = `
         </div>
       </div>
     </div>
-  </div>
+  </nav>
 </div>
 `;
 
 exports[`components/sidebarSidebar should assign default category if current board doesnt have a category 1`] = `
 <div>
-  <div
+  <nav
+    aria-label="Boards"
     class="Sidebar octo-sidebar"
   >
     <div
@@ -439,13 +441,14 @@ exports[`components/sidebarSidebar should assign default category if current boa
         </div>
       </div>
     </div>
-  </div>
+  </nav>
 </div>
 `;
 
 exports[`components/sidebarSidebar shouldnt do any category assignment is board is in a category 1`] = `
 <div>
-  <div
+  <nav
+    aria-label="Boards"
     class="Sidebar octo-sidebar"
   >
     <div
@@ -785,7 +788,7 @@ exports[`components/sidebarSidebar shouldnt do any category assignment is board 
         </div>
       </div>
     </div>
-  </div>
+  </nav>
 </div>
 `;
 
@@ -849,7 +852,8 @@ exports[`components/sidebarSidebar sidebar expect hidden 1`] = `
 
 exports[`components/sidebarSidebar sidebar hidden 1`] = `
 <div>
-  <div
+  <nav
+    aria-label="Boards"
     class="Sidebar octo-sidebar"
   >
     <div
@@ -1072,7 +1076,7 @@ exports[`components/sidebarSidebar sidebar hidden 1`] = `
         </div>
       </div>
     </div>
-  </div>
+  </nav>
 </div>
 `;
 
@@ -1136,7 +1140,8 @@ exports[`components/sidebarSidebar sidebar hidden 2`] = `
 
 exports[`components/sidebarSidebar some categories hidden 1`] = `
 <div>
-  <div
+  <nav
+    aria-label="Boards"
     class="Sidebar octo-sidebar"
   >
     <div
@@ -1414,6 +1419,6 @@ exports[`components/sidebarSidebar some categories hidden 1`] = `
         </div>
       </div>
     </div>
-  </div>
+  </nav>
 </div>
 `;

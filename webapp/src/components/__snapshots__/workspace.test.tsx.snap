@@ -5,7 +5,14 @@ exports[`src/components/workspace return workspace and showcard 1`] = `
   <div
     class="Workspace"
   >
-    <div
+    <a
+      class="skip-link"
+      href="#main-content"
+    >
+      Skip to main content
+    </a>
+    <nav
+      aria-label="Boards"
       class="Sidebar octo-sidebar"
     >
       <div
@@ -251,9 +258,11 @@ exports[`src/components/workspace return workspace and showcard 1`] = `
           </div>
         </div>
       </div>
-    </div>
-    <div
+    </nav>
+    <main
       class="mainFrame"
+      id="main-content"
+      tabindex="-1"
     >
       <div
         class="BoardComponent"
@@ -780,7 +789,7 @@ exports[`src/components/workspace return workspace and showcard 1`] = `
           </div>
         </div>
       </div>
-    </div>
+    </main>
   </div>
 </div>
 `;
@@ -790,8 +799,16 @@ exports[`src/components/workspace return workspace readonly and showcard 1`] = `
   <div
     class="Workspace"
   >
-    <div
+    <a
+      class="skip-link"
+      href="#main-content"
+    >
+      Skip to main content
+    </a>
+    <main
       class="mainFrame"
+      id="main-content"
+      tabindex="-1"
     >
       <div
         class="BoardComponent"
@@ -1087,7 +1104,7 @@ exports[`src/components/workspace return workspace readonly and showcard 1`] = `
           </div>
         </div>
       </div>
-    </div>
+    </main>
   </div>
 </div>
 `;
@@ -1097,8 +1114,16 @@ exports[`src/components/workspace return workspace with BoardTemplateSelector co
   <div
     class="Workspace"
   >
-    <div
+    <a
+      class="skip-link"
+      href="#main-content"
+    >
+      Skip to main content
+    </a>
+    <main
       class="mainFrame"
+      id="main-content"
+      tabindex="-1"
     />
   </div>
 </div>
@@ -1109,7 +1134,14 @@ exports[`src/components/workspace should match snapshot 1`] = `
   <div
     class="Workspace"
   >
-    <div
+    <a
+      class="skip-link"
+      href="#main-content"
+    >
+      Skip to main content
+    </a>
+    <nav
+      aria-label="Boards"
       class="Sidebar octo-sidebar"
     >
       <div
@@ -1355,9 +1387,11 @@ exports[`src/components/workspace should match snapshot 1`] = `
           </div>
         </div>
       </div>
-    </div>
-    <div
+    </nav>
+    <main
       class="mainFrame"
+      id="main-content"
+      tabindex="-1"
     >
       <div
         class="BoardComponent"
@@ -1884,7 +1918,7 @@ exports[`src/components/workspace should match snapshot 1`] = `
           </div>
         </div>
       </div>
-    </div>
+    </main>
   </div>
 </div>
 `;
@@ -1894,8 +1928,16 @@ exports[`src/components/workspace should match snapshot with readonly 1`] = `
   <div
     class="Workspace"
   >
-    <div
+    <a
+      class="skip-link"
+      href="#main-content"
+    >
+      Skip to main content
+    </a>
+    <main
       class="mainFrame"
+      id="main-content"
+      tabindex="-1"
     >
       <div
         class="BoardComponent"
@@ -2191,7 +2233,7 @@ exports[`src/components/workspace should match snapshot with readonly 1`] = `
           </div>
         </div>
       </div>
-    </div>
+    </main>
   </div>
 </div>
 `;

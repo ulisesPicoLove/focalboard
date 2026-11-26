@@ -395,4 +395,23 @@ describe('src/components/workspace', () => {
         expect(elements.length).toBe(2)
         expect(elements[1]).toMatchSnapshot()
     })
+
+    test('skip link moves focus to the main content', async () => {
+        let container: HTMLElement | undefined
+        await act(async () => {
+            const result = render(wrapDNDIntl(
+                <ReduxProvider store={store}>
+                    <Workspace readonly={false}/>
+                </ReduxProvider>,
+            ), {wrapper: MemoryRouter})
+            container = result.container
+            jest.runOnlyPendingTimers()
+        })
+        const main = container!.querySelector('main#main-content') as HTMLElement
+        expect(main).not.toBeNull()
+        expect(container!.querySelector('nav[aria-label]')).not.toBeNull()
+
+        userEvent.click(container!.querySelector('a.skip-link') as HTMLElement)
+        expect(document.activeElement).toBe(main)
+    })
 })

@@ -24,6 +24,11 @@ const App = (props: Props): JSX.Element => {
     const language = useAppSelector<string>(getLanguage)
     const dispatch = useAppDispatch()
 
+    // Tell browsers and screen readers the language of the interface (BCP 47 uses '-', not '_')
+    useEffect(() => {
+        document.documentElement.lang = language.replace('_', '-')
+    }, [language])
+
     useEffect(() => {
         dispatch(fetchLanguage())
         dispatch(fetchMe())

@@ -243,3 +243,36 @@ html {
         flex-wrap: wrap;
     }
 }
+
+// Skip link: visible only while it has keyboard focus (WCAG 2.4.1)
+.skip-link {
+    &:not(:focus, :active) {
+        position: absolute;
+        clip-path: inset(50%);
+        overflow: hidden;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        border: 0;
+        white-space: nowrap;
+    }
+
+    &:focus,
+    &:active {
+        @include z-index(skip-link);
+        position: fixed;
+        top: 8px;
+        left: 8px;
+        padding: 8px 16px;
+        border-radius: var(--default-rad);
+        background: rgb(var(--center-channel-bg-rgb));
+        color: rgb(var(--center-channel-color-rgb));
+        text-decoration: none;
+    }
+}
+
+// The main landmark is focused by the skip link only; it is not an interactive control
+#main-content:focus {
+    outline: none;
+}

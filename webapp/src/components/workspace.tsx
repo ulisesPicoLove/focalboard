@@ -156,6 +156,20 @@ const Workspace = (props: Props) => {
 
     return (
         <div className='Workspace'>
+            <a
+                className='skip-link'
+                href='#main-content'
+                onClick={(e) => {
+                    // A hash link would change the URL the router owns: just move focus
+                    e.preventDefault()
+                    document.getElementById('main-content')?.focus()
+                }}
+            >
+                <FormattedMessage
+                    id='Workspace.skip-to-content'
+                    defaultMessage='Skip to main content'
+                />
+            </a>
             {!props.readonly &&
                 <Sidebar
                     onBoardTemplateSelectorOpen={openBoardTemplateSelector}
@@ -163,7 +177,11 @@ const Workspace = (props: Props) => {
                     activeBoardId={board?.id}
                 />
             }
-            <div className='mainFrame'>
+            <main
+                className='mainFrame'
+                id='main-content'
+                tabIndex={-1}
+            >
                 {boardTemplateSelectorOpen &&
                     <BoardTemplateSelector onClose={closeBoardTemplateSelector}/>}
                 {(board?.isTemplate) &&
@@ -176,7 +194,7 @@ const Workspace = (props: Props) => {
                 <CenterContent
                     readonly={props.readonly}
                 />
-            </div>
+            </main>
         </div>
     )
 }

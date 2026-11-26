@@ -1,7 +1,7 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 import React, {useCallback, useEffect, useState} from 'react'
-import {FormattedMessage} from 'react-intl'
+import {FormattedMessage, useIntl} from 'react-intl'
 import {DragDropContext, Droppable, DropResult} from 'react-beautiful-dnd'
 
 import {getActiveThemeName, loadTheme} from '../../theme'
@@ -66,6 +66,7 @@ function getWindowDimensions() {
 }
 
 const Sidebar = (props: Props) => {
+    const intl = useIntl()
     const [isHidden, setHidden] = useState(false)
     const [userHidden, setUserHidden] = useState(false)
     const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions())
@@ -340,7 +341,10 @@ const Sidebar = (props: Props) => {
     }
 
     return (
-        <div className='Sidebar octo-sidebar'>
+        <nav
+            className='Sidebar octo-sidebar'
+            aria-label={intl.formatMessage({id: 'Sidebar.navigation-label', defaultMessage: 'Boards'})}
+        >
             <div className='octo-sidebar-header'>
                 <div className='heading'>
                     <SidebarUserMenu/>
@@ -414,7 +418,7 @@ const Sidebar = (props: Props) => {
             </div>
 
             <SidebarSettingsMenu activeTheme={getActiveThemeName()}/>
-        </div>
+        </nav>
     )
 }
 
