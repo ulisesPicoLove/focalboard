@@ -331,13 +331,13 @@ exports[`properties/person select user - confirm 1`] = `
           class="react-select__indicator react-select__loading-indicator css-rbsrx3-loadingIndicator"
         >
           <span
-            class="css-1h1juvu-LoadingDot"
+            class="css-1icxkl9-LoadingDot"
           />
           <span
-            class="css-1swgd6a-LoadingDot"
+            class="css-1oazjx7-LoadingDot"
           />
           <span
-            class="css-41hts2-LoadingDot"
+            class="css-1wonz24-LoadingDot"
           />
         </div>
         <span
