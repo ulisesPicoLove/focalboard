@@ -30,7 +30,10 @@ func (a *App) ExportArchive(w io.Writer, opt model.ExportArchiveOptions) (errs e
 	// wrap the writer in a zip.
 	zw := zip.NewWriter(w)
 	defer func() {
-		merr.Append(zw.Close())
+		// merror keeps nil errors, which would make every export fail
+		if err := zw.Close(); err != nil {
+			merr.Append(err)
+		}
 	}()
 
 	if err := a.writeArchiveVersion(zw); err != nil {
