@@ -12,7 +12,7 @@ exports[`components/cardDialog already following card 1`] = `
       class="wrapper"
     >
       <div
-        aria-labelledby="dialog-title-24"
+        aria-labelledby="dialog-title-15"
         aria-modal="true"
         class="dialog"
         role="dialog"
@@ -24,7 +24,7 @@ exports[`components/cardDialog already following card 1`] = `
           <div>
             <h1
               class="dialog-title"
-              id="dialog-title-24"
+              id="dialog-title-15"
             >
               <div />
             </h1>
@@ -158,7 +158,6 @@ exports[`components/cardDialog already following card 1`] = `
                   tabindex="0"
                 />
               </div>
-              
             </div>
             <hr
               class="CommentsList__divider"
@@ -224,7 +223,7 @@ exports[`components/cardDialog return a cardDialog readonly 1`] = `
       class="wrapper"
     >
       <div
-        aria-labelledby="dialog-title-5"
+        aria-labelledby="dialog-title-3"
         aria-modal="true"
         class="dialog"
         role="dialog"
@@ -236,7 +235,7 @@ exports[`components/cardDialog return a cardDialog readonly 1`] = `
           <div>
             <h1
               class="dialog-title"
-              id="dialog-title-5"
+              id="dialog-title-3"
             >
               <div />
             </h1>
@@ -352,7 +351,7 @@ exports[`components/cardDialog return cardDialog menu content 1`] = `
       class="wrapper"
     >
       <div
-        aria-labelledby="dialog-title-9"
+        aria-labelledby="dialog-title-5"
         aria-modal="true"
         class="dialog"
         role="dialog"
@@ -364,7 +363,7 @@ exports[`components/cardDialog return cardDialog menu content 1`] = `
           <div>
             <h1
               class="dialog-title"
-              id="dialog-title-9"
+              id="dialog-title-5"
             >
               <div />
             </h1>
@@ -639,7 +638,6 @@ exports[`components/cardDialog return cardDialog menu content 1`] = `
                   tabindex="0"
                 />
               </div>
-              
             </div>
             <hr
               class="CommentsList__divider"
@@ -705,7 +703,7 @@ exports[`components/cardDialog return cardDialog menu content and cancel delete 
       class="wrapper"
     >
       <div
-        aria-labelledby="dialog-title-15"
+        aria-labelledby="dialog-title-9"
         aria-modal="true"
         class="dialog"
         role="dialog"
@@ -717,7 +715,7 @@ exports[`components/cardDialog return cardDialog menu content and cancel delete 
           <div>
             <h1
               class="dialog-title"
-              id="dialog-title-15"
+              id="dialog-title-9"
             >
               <div />
             </h1>
@@ -851,7 +849,6 @@ exports[`components/cardDialog return cardDialog menu content and cancel delete 
                   tabindex="0"
                 />
               </div>
-              
             </div>
             <hr
               class="CommentsList__divider"
@@ -1063,7 +1060,6 @@ exports[`components/cardDialog should match snapshot 1`] = `
                   tabindex="0"
                 />
               </div>
-              
             </div>
             <hr
               class="CommentsList__divider"
@@ -1129,7 +1125,7 @@ exports[`components/cardDialog should match snapshot without permissions 1`] = `
       class="wrapper"
     >
       <div
-        aria-labelledby="dialog-title-3"
+        aria-labelledby="dialog-title-2"
         aria-modal="true"
         class="dialog"
         role="dialog"
@@ -1141,7 +1137,7 @@ exports[`components/cardDialog should match snapshot without permissions 1`] = `
           <div>
             <h1
               class="dialog-title"
-              id="dialog-title-3"
+              id="dialog-title-2"
             >
               <div />
             </h1>

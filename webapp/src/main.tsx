@@ -1,7 +1,7 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 import React from 'react'
-import ReactDOM from 'react-dom'
+import {createRoot} from 'react-dom/client'
 import {Provider as ReduxProvider} from 'react-redux'
 import {store as emojiMartStore} from 'emoji-mart'
 
@@ -47,11 +47,8 @@ const MainApp = () => {
     )
 }
 
-ReactDOM.render(
-    (
-        <ReduxProvider store={store}>
-            <MainApp/>
-        </ReduxProvider>
-    ),
-    document.getElementById('focalboard-app'),
+createRoot(document.getElementById('focalboard-app')!).render(
+    <ReduxProvider store={store}>
+        <MainApp/>
+    </ReduxProvider>,
 )

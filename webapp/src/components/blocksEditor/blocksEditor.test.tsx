@@ -118,18 +118,18 @@ describe('components/blocksEditor/blocksEditor', () => {
 
     test('should call onBlockModified after introduce text and hit enter', async () => {
         const onBlockModified = jest.fn()
+        render(wrapDNDIntl(
+            <ReduxProvider store={store}>
+                <BlocksEditor
+                    boardId='test-board'
+                    onBlockCreated={jest.fn()}
+                    onBlockModified={onBlockModified}
+                    onBlockMoved={jest.fn()}
+                    blocks={blocks}
+                />
+            </ReduxProvider>,
+        ))
         await act(async () => {
-            render(wrapDNDIntl(
-                <ReduxProvider store={store}>
-                    <BlocksEditor
-                        boardId='test-board'
-                        onBlockCreated={jest.fn()}
-                        onBlockModified={onBlockModified}
-                        onBlockMoved={jest.fn()}
-                        blocks={blocks}
-                    />
-                </ReduxProvider>,
-            ))
             const input = screen.getByTestId('checkbox-check')
             expect(onBlockModified).not.toBeCalled()
             fireEvent.click(input)

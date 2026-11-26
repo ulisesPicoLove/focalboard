@@ -60,7 +60,7 @@ function DateRange(props: PropertyProps): JSX.Element {
         }
     }, [propertyValue, setValue])
 
-    const onChange = useCallback((newValue) => {
+    const onChange = useCallback((newValue: PropertyProps['propertyValue']) => {
         if (value !== newValue) {
             setValue(newValue)
         }

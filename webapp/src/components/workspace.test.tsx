@@ -203,14 +203,13 @@ describe('src/components/workspace', () => {
     })
 
     test('return workspace and showcard', async () => {
-        let container: Element | undefined
+        const result = render(wrapDNDIntl(
+            <ReduxProvider store={store}>
+                <Workspace readonly={false}/>
+            </ReduxProvider>,
+        ), {wrapper: MemoryRouter})
+        const {container} = result
         await act(async () => {
-            const result = render(wrapDNDIntl(
-                <ReduxProvider store={store}>
-                    <Workspace readonly={false}/>
-                </ReduxProvider>,
-            ), {wrapper: MemoryRouter})
-            container = result.container
             jest.runOnlyPendingTimers()
             const cardElements = container!.querySelectorAll('.KanbanCard')
             expect(cardElements).toBeDefined()
@@ -221,14 +220,13 @@ describe('src/components/workspace', () => {
     })
 
     test('return workspace readonly and showcard', async () => {
-        let container: Element | undefined
+        const result = render(wrapDNDIntl(
+            <ReduxProvider store={store}>
+                <Workspace readonly={true}/>
+            </ReduxProvider>,
+        ), {wrapper: MemoryRouter})
+        const {container} = result
         await act(async () => {
-            const result = render(wrapDNDIntl(
-                <ReduxProvider store={store}>
-                    <Workspace readonly={true}/>
-                </ReduxProvider>,
-            ), {wrapper: MemoryRouter})
-            container = result.container
             jest.runOnlyPendingTimers()
             const cardElements = container!.querySelectorAll('.KanbanCard')
             expect(cardElements).toBeDefined()
@@ -389,7 +387,7 @@ describe('src/components/workspace', () => {
 
         jest.runOnlyPendingTimers()
 
-        await waitFor(() => expect(document.querySelectorAll('.AddViewTourStep')).toBeDefined(), {timeout: 5000})
+        await waitFor(() => expect(document.querySelectorAll('.AddViewTourStep').length).toBe(2), {timeout: 5000})
 
         const elements = document.querySelectorAll('.AddViewTourStep')
         expect(elements.length).toBe(2)

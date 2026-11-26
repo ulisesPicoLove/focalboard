@@ -106,7 +106,7 @@ const SidebarCategory = (props: Props) => {
     }, [shouldViewManageCatergoriesTour])
 
     const {activeBoardID, hideSidebar, onBoardTemplateSelectorClose} = props
-    const showBoard = useCallback((boardId) => {
+    const showBoard = useCallback((boardId: string) => {
         if (boardId === activeBoardID && onBoardTemplateSelectorClose) {
             onBoardTemplateSelectorClose()
         }
@@ -115,7 +115,7 @@ const SidebarCategory = (props: Props) => {
     }, [activeBoardID, hideSidebar, onBoardTemplateSelectorClose, match, history])
 
     const {activeViewID} = props
-    const showView = useCallback((viewId, boardId) => {
+    const showView = useCallback((viewId: string, boardId: string) => {
         if (viewId === activeViewID && onBoardTemplateSelectorClose) {
             onBoardTemplateSelectorClose()
         }
@@ -170,7 +170,7 @@ const SidebarCategory = (props: Props) => {
             },
             {
                 categoryName: props.categoryBoards.name,
-                b: (...chunks) => <b>{chunks}</b>,
+                b: (...chunks: React.ReactNode[]) => <b>{chunks}</b>,
             },
         ),
         onConfirm: () => handleDeleteCategory(),

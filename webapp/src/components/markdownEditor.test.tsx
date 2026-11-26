@@ -91,57 +91,51 @@ describe('components/markdownEditor', () => {
     })
 
     test('should match snapshot with on click on preview element', async () => {
-        let container
-        await act(async () => {
-            const result = render(wrapDNDIntl(
-                <ReduxProvider store={store}>
-                    <MarkdownEditor
-                        id={'test-id'}
-                        text={'some initial text already set'}
-                        placeholderText={'placeholder'}
-                        className={'classname-test'}
-                        readonly={false}
-                        onChange={jest.fn()}
-                        onFocus={jest.fn()}
-                        onBlur={jest.fn()}
-                    />
-                </ReduxProvider>,
+        const result = render(wrapDNDIntl(
+            <ReduxProvider store={store}>
+                <MarkdownEditor
+                    id={'test-id'}
+                    text={'some initial text already set'}
+                    placeholderText={'placeholder'}
+                    className={'classname-test'}
+                    readonly={false}
+                    onChange={jest.fn()}
+                    onFocus={jest.fn()}
+                    onBlur={jest.fn()}
+                />
+            </ReduxProvider>,
 
-            ))
-            container = result.container
-            const previewElement = screen.getByTestId('preview-element')
-            userEvent.click(previewElement)
-        })
+        ))
+        const {container} = result
+        const previewElement = screen.getByTestId('preview-element')
+        userEvent.click(previewElement)
         expect(container).toMatchSnapshot()
     })
 
     test('should match snapshot with on click on preview element and then click out of it', async () => {
-        let container
-        await act(async () => {
-            const result = render(wrapDNDIntl(
-                <ReduxProvider store={store}>
-                    <MarkdownEditor
-                        id={'test-id'}
-                        text={'some initial text already set'}
-                        placeholderText={'placeholder'}
-                        className={'classname-test'}
-                        readonly={false}
-                        onChange={jest.fn()}
-                        onFocus={jest.fn()}
-                        onBlur={jest.fn()}
-                    />
-                </ReduxProvider>,
+        const result = render(wrapDNDIntl(
+            <ReduxProvider store={store}>
+                <MarkdownEditor
+                    id={'test-id'}
+                    text={'some initial text already set'}
+                    placeholderText={'placeholder'}
+                    className={'classname-test'}
+                    readonly={false}
+                    onChange={jest.fn()}
+                    onFocus={jest.fn()}
+                    onBlur={jest.fn()}
+                />
+            </ReduxProvider>,
 
-            ))
-            container = result.container
-            const previewElement = screen.getByTestId('preview-element')
-            userEvent.click(previewElement)
-            fireEvent.keyDown(container, {
-                key: 'Escape',
-                code: 'Escape',
-                keyCode: 27,
-                charCode: 27,
-            })
+        ))
+        const {container} = result
+        const previewElement = screen.getByTestId('preview-element')
+        userEvent.click(previewElement)
+        fireEvent.keyDown(container, {
+            key: 'Escape',
+            code: 'Escape',
+            keyCode: 27,
+            charCode: 27,
         })
         expect(container).toMatchSnapshot()
     })

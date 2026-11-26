@@ -98,7 +98,7 @@ describe('properties/link', () => {
             ),
         )
 
-        screen.getByRole('button', {name: 'Edit'}).click()
+        userEvent.click(screen.getByRole('button', {name: 'Edit'}))
         const newURL = 'https://github.com/mattermost'
         const input = screen.getByRole('textbox')
         userEvent.clear(input)
@@ -116,7 +116,7 @@ describe('properties/link', () => {
                 />,
             ),
         )
-        screen.getByRole('button', {name: 'Copy'}).click()
+        userEvent.click(screen.getByRole('button', {name: 'Copy'}))
         expect(mockedCopy).toHaveBeenCalledWith(url)
         expect(mockedSendFlashMessage).toHaveBeenCalledWith({content: 'Copied!', severity: 'high'})
     })

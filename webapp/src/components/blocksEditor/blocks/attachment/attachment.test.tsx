@@ -2,7 +2,7 @@
 // See LICENSE.txt for license information.
 
 import React from 'react'
-import {render, screen, fireEvent} from '@testing-library/react'
+import {render, screen, fireEvent, waitFor} from '@testing-library/react'
 import {mocked} from 'jest-mock'
 
 import octoClient from '../../../../octoClient'
@@ -25,6 +25,7 @@ describe('components/blocksEditor/blocks/attachment', () => {
             />,
         )
         await screen.findByTestId('attachment')
+        await waitFor(() => expect(container.querySelector('a')?.getAttribute('href')).toBe('test.jpg'))
         expect(container).toMatchSnapshot()
     })
 

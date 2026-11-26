@@ -73,7 +73,7 @@ const TableRow = (props: Props) => {
         }
     }, [addCard, isLastCard, groupById, card.fields.properties])
 
-    const onSave = useCallback((saveType) => {
+    const onSave = useCallback((saveType: string) => {
         if (card.title !== title) {
             mutator.changeBlockTitle(props.board.id, card.id, card.title, title)
             if (saveType === 'onEnter') {

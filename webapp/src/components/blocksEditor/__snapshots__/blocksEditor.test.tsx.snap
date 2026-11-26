@@ -14,7 +14,24 @@ exports[`components/blocksEditor/blocksEditor should match snapshot on empty 1`]
         <span
           class="css-1f43avz-a11yText-A11yText"
           id="react-select-2-live-region"
-        />
+        >
+          <span
+            id="aria-selection"
+          >
+            option , selected.
+          </span>
+          <span
+            id="aria-focused"
+          />
+          <span
+            id="aria-results"
+          />
+          <span
+            id="aria-guidance"
+          >
+            Select is focused ,type to refine list, press Down to open the menu, 
+          </span>
+        </span>
         <span
           aria-atomic="false"
           aria-live="polite"
@@ -23,19 +40,19 @@ exports[`components/blocksEditor/blocksEditor should match snapshot on empty 1`]
           role="log"
         />
         <div
-          class=" css-1haocjs-control"
+          class="css-a5687m-control"
         >
           <div
-            class=" css-b2z5qd-ValueContainer"
+            class="css-1neafsd"
           >
             <div
-              class=" css-1jqq78o-placeholder"
+              class="css-1jqq78o-placeholder"
               id="react-select-2-placeholder"
             >
               Introduce your text or your slash command
             </div>
             <div
-              class=" css-26cneq-Input"
+              class="css-x14nly"
               data-value=""
             >
               <input
@@ -59,7 +76,7 @@ exports[`components/blocksEditor/blocksEditor should match snapshot on empty 1`]
             </div>
           </div>
           <div
-            class=" css-1hb7zxy-IndicatorsContainer"
+            class="css-1wy0on6"
           />
         </div>
       </div>
@@ -396,7 +413,24 @@ exports[`components/blocksEditor/blocksEditor should match snapshot with blocks 
         <span
           class="css-1f43avz-a11yText-A11yText"
           id="react-select-3-live-region"
-        />
+        >
+          <span
+            id="aria-selection"
+          >
+            option , selected.
+          </span>
+          <span
+            id="aria-focused"
+          />
+          <span
+            id="aria-results"
+          />
+          <span
+            id="aria-guidance"
+          >
+            Select is focused ,type to refine list, press Down to open the menu, 
+          </span>
+        </span>
         <span
           aria-atomic="false"
           aria-live="polite"
@@ -405,19 +439,19 @@ exports[`components/blocksEditor/blocksEditor should match snapshot with blocks 
           role="log"
         />
         <div
-          class=" css-1haocjs-control"
+          class="css-a5687m-control"
         >
           <div
-            class=" css-b2z5qd-ValueContainer"
+            class="css-1neafsd"
           >
             <div
-              class=" css-1jqq78o-placeholder"
+              class="css-1jqq78o-placeholder"
               id="react-select-3-placeholder"
             >
               Introduce your text or your slash command
             </div>
             <div
-              class=" css-26cneq-Input"
+              class="css-x14nly"
               data-value=""
             >
               <input
@@ -441,7 +475,7 @@ exports[`components/blocksEditor/blocksEditor should match snapshot with blocks 
             </div>
           </div>
           <div
-            class=" css-1hb7zxy-IndicatorsContainer"
+            class="css-1wy0on6"
           />
         </div>
       </div>

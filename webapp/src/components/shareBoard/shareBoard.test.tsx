@@ -389,19 +389,18 @@ describe('src/components/shareBoard/shareBoard', () => {
         }
         mockedOctoClient.getSharing.mockResolvedValue(sharing)
         mockedUtils.createGuid.mockReturnValue('aToken')
-        let container: Element | undefined
+        const result = render(
+            wrapDNDIntl(
+                <ReduxProvider store={store}>
+                    <ShareBoard
+                        onClose={jest.fn()}
+                        enableSharedBoards={true}
+                    />
+                </ReduxProvider>),
+            {wrapper: MemoryRouter},
+        )
+        const {container} = result
         await act(async () => {
-            const result = render(
-                wrapDNDIntl(
-                    <ReduxProvider store={store}>
-                        <ShareBoard
-                            onClose={jest.fn()}
-                            enableSharedBoards={true}
-                        />
-                    </ReduxProvider>),
-                {wrapper: MemoryRouter},
-            )
-            container = result.container
             mockedOctoClient.getSharing.mockResolvedValue({
                 id: boardId,
                 enabled: true,
@@ -412,7 +411,9 @@ describe('src/components/shareBoard/shareBoard', () => {
             expect(publishButton).toBeDefined()
             userEvent.click(publishButton)
             jest.runOnlyPendingTimers()
+        })
 
+        await act(async () => {
             const switchElement = container?.querySelector('.Switch')
             expect(switchElement).toBeDefined()
             userEvent.click(switchElement!)
@@ -429,7 +430,9 @@ describe('src/components/shareBoard/shareBoard', () => {
 
         expect(mockedOctoClient.setSharing).toBeCalledTimes(1)
         expect(mockedOctoClient.getSharing).toBeCalledTimes(2)
-        expect(mockedUtils.createGuid).toBeCalledTimes(1)
+
+        // the sharing info already came from the server, so no new token is created
+        expect(mockedUtils.createGuid).not.toBeCalled()
         expect(container).toMatchSnapshot()
     })
 
