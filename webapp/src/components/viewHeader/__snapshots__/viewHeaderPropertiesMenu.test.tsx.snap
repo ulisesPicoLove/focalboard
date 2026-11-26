@@ -42,6 +42,7 @@ exports[`components/viewHeader/viewHeaderPropertiesMenu return properties menu 1
                 Status
               </div>
               <div
+                aria-hidden="true"
                 class="Switch override-main size--small"
               >
                 <div
@@ -67,6 +68,7 @@ exports[`components/viewHeader/viewHeaderPropertiesMenu return properties menu 1
                 Property 1
               </div>
               <div
+                aria-hidden="true"
                 class="Switch override-main size--small"
               >
                 <div
@@ -92,6 +94,7 @@ exports[`components/viewHeader/viewHeaderPropertiesMenu return properties menu 1
                 Property 2
               </div>
               <div
+                aria-hidden="true"
                 class="Switch override-main size--small"
               >
                 <div
@@ -117,6 +120,7 @@ exports[`components/viewHeader/viewHeaderPropertiesMenu return properties menu 1
                 Property 3
               </div>
               <div
+                aria-hidden="true"
                 class="Switch override-main size--small"
               >
                 <div
@@ -142,6 +146,7 @@ exports[`components/viewHeader/viewHeaderPropertiesMenu return properties menu 1
                 Comments and description
               </div>
               <div
+                aria-hidden="true"
                 class="Switch override-main size--small"
               >
                 <div
@@ -231,6 +236,7 @@ exports[`components/viewHeader/viewHeaderPropertiesMenu return properties menu w
                 Title
               </div>
               <div
+                aria-hidden="true"
                 class="Switch override-main size--small"
               >
                 <div
@@ -256,6 +262,7 @@ exports[`components/viewHeader/viewHeaderPropertiesMenu return properties menu w
                 Status
               </div>
               <div
+                aria-hidden="true"
                 class="Switch override-main size--small"
               >
                 <div
@@ -281,6 +288,7 @@ exports[`components/viewHeader/viewHeaderPropertiesMenu return properties menu w
                 Property 1
               </div>
               <div
+                aria-hidden="true"
                 class="Switch override-main size--small"
               >
                 <div
@@ -306,6 +314,7 @@ exports[`components/viewHeader/viewHeaderPropertiesMenu return properties menu w
                 Property 2
               </div>
               <div
+                aria-hidden="true"
                 class="Switch override-main size--small"
               >
                 <div
@@ -331,6 +340,7 @@ exports[`components/viewHeader/viewHeaderPropertiesMenu return properties menu w
                 Property 3
               </div>
               <div
+                aria-hidden="true"
                 class="Switch override-main size--small"
               >
                 <div
@@ -356,6 +366,7 @@ exports[`components/viewHeader/viewHeaderPropertiesMenu return properties menu w
                 Comments and description
               </div>
               <div
+                aria-hidden="true"
                 class="Switch override-main size--small"
               >
                 <div

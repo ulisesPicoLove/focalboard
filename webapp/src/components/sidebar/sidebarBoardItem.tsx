@@ -1,9 +1,12 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 import React, {useCallback, useRef, useState} from 'react'
+
 import {useIntl} from 'react-intl'
 import {generatePath, useHistory, useRouteMatch} from 'react-router-dom'
 import {Draggable} from 'react-beautiful-dnd'
+
+import {keyboardActivation} from '../../keyboardActivation'
 
 import {Board} from '../../blocks/board'
 import {BoardView, IViewType} from '../../blocks/boardView'
@@ -205,9 +208,11 @@ const SidebarBoardItem = (props: Props) => {
                     ref={provided.innerRef}
                 >
                     <div
-                        {...provided.dragHandleProps}
                         className={`SidebarBoardItem subitem ${props.isActive ? 'active' : ''}`}
+                        aria-current={props.isActive ? 'page' : undefined}
                         onClick={() => props.showBoard(board.id)}
+                        {...keyboardActivation(() => props.showBoard(board.id), {space: false})}
+                        {...provided.dragHandleProps}
                         ref={boardItemRef}
                     >
                         <div className='octo-sidebar-icon'>
@@ -296,7 +301,10 @@ const SidebarBoardItem = (props: Props) => {
                         <div
                             key={view.id}
                             className={`SidebarBoardItem sidebar-view-item ${view.id === currentViewId ? 'active' : ''}`}
+                            role='button'
+                            aria-current={view.id === currentViewId ? 'true' : undefined}
                             onClick={() => props.showView(view.id, board.id)}
+                            {...keyboardActivation(() => props.showView(view.id, board.id))}
                         >
                             {iconForViewType(view.fields.viewType)}
                             <div

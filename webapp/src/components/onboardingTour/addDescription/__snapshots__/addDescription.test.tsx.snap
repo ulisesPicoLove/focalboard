@@ -45,7 +45,7 @@ exports[`components/onboardingTour/addComments/AddDescriptionTourStep after hove
           class="tutorial-tour-tip__image"
         >
           <img
-            alt="tutorial tour tip product image"
+            alt=""
             src="http://localhost/test-file-stub"
           />
         </div>
@@ -62,6 +62,7 @@ exports[`components/onboardingTour/addComments/AddDescriptionTourStep after hove
                 class="tutorial-tour-tip__circular-ring"
               >
                 <a
+                  aria-label="Go to step 1"
                   class="tutorial-tour-tip__circle"
                   data-screen="0"
                   href="#"
@@ -71,6 +72,7 @@ exports[`components/onboardingTour/addComments/AddDescriptionTourStep after hove
                 class="tutorial-tour-tip__circular-ring"
               >
                 <a
+                  aria-label="Go to step 2"
                   class="tutorial-tour-tip__circle"
                   data-screen="1"
                   href="#"
@@ -80,6 +82,8 @@ exports[`components/onboardingTour/addComments/AddDescriptionTourStep after hove
                 class="tutorial-tour-tip__circular-ring tutorial-tour-tip__circular-ring-active"
               >
                 <a
+                  aria-current="step"
+                  aria-label="Go to step 3"
                   class="tutorial-tour-tip__circle active"
                   data-screen="2"
                   href="#"

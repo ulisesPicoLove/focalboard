@@ -70,8 +70,10 @@ exports[`components/propertyValueElement should match snapshot, date, array valu
 exports[`components/propertyValueElement should match snapshot, multi-select 1`] = `
 <div>
   <div
+    aria-haspopup="listbox"
     class="octo-propertyvalue"
     data-testid="multiselect-non-editable"
+    role="button"
     tabindex="0"
   >
     <span
@@ -104,8 +106,10 @@ exports[`components/propertyValueElement should match snapshot, person, array va
 exports[`components/propertyValueElement should match snapshot, select 1`] = `
 <div>
   <div
+    aria-haspopup="listbox"
     class="octo-propertyvalue"
     data-testid="select-non-editable"
+    role="button"
     tabindex="0"
   >
     <span

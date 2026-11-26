@@ -2,7 +2,10 @@
 // See LICENSE.txt for license information.
 
 import React, {useState, useCallback} from 'react'
+
 import {useIntl} from 'react-intl'
+
+import {keyboardActivation} from '../../keyboardActivation'
 
 import {IPropertyOption} from '../../blocks/board'
 
@@ -48,8 +51,8 @@ const SelectProperty = (props: PropertyProps) => {
             <div
                 className={props.property.valueClassName(!isEditable)}
                 data-testid='select-non-editable'
-                tabIndex={0}
                 onClick={() => setOpen(true)}
+                {...(isEditable ? {role: 'button', 'aria-haspopup': 'listbox' as const, ...keyboardActivation(() => setOpen(true))} : {tabIndex: 0})}
             >
                 <Label color={displayValue ? propertyColorCssClassName : 'empty'}>
                     <span className='Label-text'>{finalDisplayValue}</span>

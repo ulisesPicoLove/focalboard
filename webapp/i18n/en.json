@@ -382,6 +382,7 @@
   "shareBoard.confirm-change-team-role.title": "Change minimum board role",
   "shareBoard.lastAdmin": "Boards must have at least one Administrator",
   "tutorial_tip.finish_tour": "Done",
+  "tutorial_tip.go-to-step": "Go to step {step}",
   "tutorial_tip.got_it": "Got it",
   "tutorial_tip.ok": "Next",
   "tutorial_tip.out": "Opt out of these tips.",

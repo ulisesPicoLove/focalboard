@@ -27,6 +27,7 @@ const Entry = (props: EntryComponentProps): ReactElement => {
                         src={mention.avatar}
                         className={theme?.mentionSuggestionsEntryAvatar}
                         role='presentation'
+                        alt=''
                     />
                     <div className={theme?.mentionSuggestionsEntryText}>
                         {mention.name}

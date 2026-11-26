@@ -18,6 +18,7 @@ const Checkbox = (props: PropertyProps): JSX.Element => {
                 mutator.changePropertyValue(board.id, card, propertyTemplate?.id || '', newValue)
             }}
             readOnly={props.readOnly}
+            ariaLabel={propertyTemplate?.name}
         />
     )
 }

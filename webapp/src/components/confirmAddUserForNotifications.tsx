@@ -88,7 +88,7 @@ const ConfirmAddUserForNotifications = (props: Props): JSX.Element => {
                 />
             </p>
             <div className='permissions-title'>
-                <label>
+                <label htmlFor='add-user-permissions'>
                     <FormattedMessage
                         id='person.add-user-to-board-permissions'
                         defaultMessage='Permissions'
@@ -96,6 +96,7 @@ const ConfirmAddUserForNotifications = (props: Props): JSX.Element => {
                 </label>
             </div>
             <Select
+                inputId='add-user-permissions'
                 className='select'
                 getOptionLabel={(o: {id: MemberRole, label: string}) => o.label}
                 getOptionValue={(o: {id: MemberRole, label: string}) => o.id}

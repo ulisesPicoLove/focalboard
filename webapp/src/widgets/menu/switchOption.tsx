@@ -36,6 +36,7 @@ function SwitchOption(props: SwitchOptionProps): JSX.Element {
             {icon ? <div className='menu-option__icon'>{icon}</div> : <div className='noicon'/>}
             <div className='menu-name'>{name}</div>
             <Switch
+                decorative={true}
                 isOn={isOn}
                 onChanged={() => {}}
             />

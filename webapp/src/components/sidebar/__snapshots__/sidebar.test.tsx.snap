@@ -122,6 +122,7 @@ exports[`components/sidebarSidebar dont show hidden boards 1`] = `
             >
               <div
                 aria-describedby="rbd-hidden-text-2-hidden-text-10"
+                aria-expanded="true"
                 class="octo-sidebar-title category-title"
                 data-rbd-drag-handle-context-id="2"
                 data-rbd-drag-handle-draggable-id="category1"
@@ -173,6 +174,8 @@ exports[`components/sidebarSidebar dont show hidden boards 1`] = `
     />
     <div
       class="add-board"
+      role="button"
+      tabindex="0"
     >
       + Add board
     </div>
@@ -317,6 +320,7 @@ exports[`components/sidebarSidebar should assign default category if current boa
             >
               <div
                 aria-describedby="rbd-hidden-text-4-hidden-text-21"
+                aria-expanded="true"
                 class="octo-sidebar-title category-title"
                 data-rbd-drag-handle-context-id="4"
                 data-rbd-drag-handle-draggable-id="category1"
@@ -372,6 +376,7 @@ exports[`components/sidebarSidebar should assign default category if current boa
             >
               <div
                 aria-describedby="rbd-hidden-text-4-hidden-text-21"
+                aria-expanded="true"
                 class="octo-sidebar-title category-title"
                 data-rbd-drag-handle-context-id="4"
                 data-rbd-drag-handle-draggable-id="default_category"
@@ -423,6 +428,8 @@ exports[`components/sidebarSidebar should assign default category if current boa
     />
     <div
       class="add-board"
+      role="button"
+      tabindex="0"
     >
       + Add board
     </div>
@@ -567,6 +574,7 @@ exports[`components/sidebarSidebar shouldnt do any category assignment is board 
             >
               <div
                 aria-describedby="rbd-hidden-text-5-hidden-text-27"
+                aria-expanded="true"
                 class="octo-sidebar-title category-title"
                 data-rbd-drag-handle-context-id="5"
                 data-rbd-drag-handle-draggable-id="category1"
@@ -622,6 +630,7 @@ exports[`components/sidebarSidebar shouldnt do any category assignment is board 
             >
               <div
                 aria-describedby="rbd-hidden-text-5-hidden-text-27"
+                aria-expanded="true"
                 class="octo-sidebar-title category-title"
                 data-rbd-drag-handle-context-id="5"
                 data-rbd-drag-handle-draggable-id="category2"
@@ -719,6 +728,7 @@ exports[`components/sidebarSidebar shouldnt do any category assignment is board 
             >
               <div
                 aria-describedby="rbd-hidden-text-5-hidden-text-27"
+                aria-expanded="true"
                 class="octo-sidebar-title category-title"
                 data-rbd-drag-handle-context-id="5"
                 data-rbd-drag-handle-draggable-id="default_category"
@@ -770,6 +780,8 @@ exports[`components/sidebarSidebar shouldnt do any category assignment is board 
     />
     <div
       class="add-board"
+      role="button"
+      tabindex="0"
     >
       + Add board
     </div>
@@ -972,6 +984,7 @@ exports[`components/sidebarSidebar sidebar hidden 1`] = `
             >
               <div
                 aria-describedby="rbd-hidden-text-0-hidden-text-0"
+                aria-expanded="true"
                 class="octo-sidebar-title category-title"
                 data-rbd-drag-handle-context-id="0"
                 data-rbd-drag-handle-draggable-id="category1"
@@ -1058,6 +1071,8 @@ exports[`components/sidebarSidebar sidebar hidden 1`] = `
     />
     <div
       class="add-board"
+      role="button"
+      tabindex="0"
     >
       + Add board
     </div>
@@ -1260,6 +1275,7 @@ exports[`components/sidebarSidebar some categories hidden 1`] = `
             >
               <div
                 aria-describedby="rbd-hidden-text-3-hidden-text-14"
+                aria-expanded="true"
                 class="octo-sidebar-title category-title"
                 data-rbd-drag-handle-context-id="3"
                 data-rbd-drag-handle-draggable-id="category1"
@@ -1357,6 +1373,7 @@ exports[`components/sidebarSidebar some categories hidden 1`] = `
             >
               <div
                 aria-describedby="rbd-hidden-text-3-hidden-text-14"
+                aria-expanded="false"
                 class="octo-sidebar-title category-title"
                 data-rbd-drag-handle-context-id="3"
                 data-rbd-drag-handle-draggable-id="categoryCollapsed"
@@ -1401,6 +1418,8 @@ exports[`components/sidebarSidebar some categories hidden 1`] = `
     />
     <div
       class="add-board"
+      role="button"
+      tabindex="0"
     >
       + Add board
     </div>

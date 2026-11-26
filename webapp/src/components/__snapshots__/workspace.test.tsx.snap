@@ -128,6 +128,7 @@ exports[`src/components/workspace return workspace and showcard 1`] = `
               >
                 <div
                   aria-describedby="rbd-hidden-text-1-hidden-text-5"
+                  aria-expanded="true"
                   class="octo-sidebar-title category-title"
                   data-rbd-drag-handle-context-id="1"
                   draggable="false"
@@ -166,6 +167,7 @@ exports[`src/components/workspace return workspace and showcard 1`] = `
                 data-rbd-draggable-id="board1"
               >
                 <div
+                  aria-current="page"
                   aria-describedby="rbd-hidden-text-1-hidden-text-5"
                   class="SidebarBoardItem subitem active"
                   data-rbd-drag-handle-context-id="1"
@@ -202,7 +204,10 @@ exports[`src/components/workspace return workspace and showcard 1`] = `
                   </div>
                 </div>
                 <div
+                  aria-current="true"
                   class="SidebarBoardItem sidebar-view-item active"
+                  role="button"
+                  tabindex="0"
                 >
                   <svg
                     class="BoardIcon Icon"
@@ -240,6 +245,8 @@ exports[`src/components/workspace return workspace and showcard 1`] = `
       />
       <div
         class="add-board"
+        role="button"
+        tabindex="0"
       >
         + Add board
       </div>
@@ -1275,6 +1282,7 @@ exports[`src/components/workspace should match snapshot 1`] = `
               >
                 <div
                   aria-describedby="rbd-hidden-text-0-hidden-text-0"
+                  aria-expanded="true"
                   class="octo-sidebar-title category-title"
                   data-rbd-drag-handle-context-id="0"
                   draggable="false"
@@ -1313,6 +1321,7 @@ exports[`src/components/workspace should match snapshot 1`] = `
                 data-rbd-draggable-id="board1"
               >
                 <div
+                  aria-current="page"
                   aria-describedby="rbd-hidden-text-0-hidden-text-0"
                   class="SidebarBoardItem subitem active"
                   data-rbd-drag-handle-context-id="0"
@@ -1349,7 +1358,10 @@ exports[`src/components/workspace should match snapshot 1`] = `
                   </div>
                 </div>
                 <div
+                  aria-current="true"
                   class="SidebarBoardItem sidebar-view-item active"
+                  role="button"
+                  tabindex="0"
                 >
                   <svg
                     class="BoardIcon Icon"
@@ -1387,6 +1399,8 @@ exports[`src/components/workspace should match snapshot 1`] = `
       />
       <div
         class="add-board"
+        role="button"
+        tabindex="0"
       >
         + Add board
       </div>
@@ -2327,6 +2341,8 @@ exports[`src/components/workspace show add new view tooltip 1`] = `
                 class="tutorial-tour-tip__circular-ring tutorial-tour-tip__circular-ring-active"
               >
                 <a
+                  aria-current="step"
+                  aria-label="Go to step 1"
                   class="tutorial-tour-tip__circle active"
                   data-screen="0"
                   href="#"
@@ -2336,6 +2352,7 @@ exports[`src/components/workspace show add new view tooltip 1`] = `
                 class="tutorial-tour-tip__circular-ring"
               >
                 <a
+                  aria-label="Go to step 2"
                   class="tutorial-tour-tip__circle"
                   data-screen="1"
                   href="#"
@@ -2345,6 +2362,7 @@ exports[`src/components/workspace show add new view tooltip 1`] = `
                 class="tutorial-tour-tip__circular-ring"
               >
                 <a
+                  aria-label="Go to step 3"
                   class="tutorial-tour-tip__circle"
                   data-screen="2"
                   href="#"

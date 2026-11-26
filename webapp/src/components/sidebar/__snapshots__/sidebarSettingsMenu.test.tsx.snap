@@ -336,6 +336,7 @@ exports[`components/sidebar/SidebarSettingsMenu imports menu open should match s
                   Random icons
                 </div>
                 <div
+                  aria-hidden="true"
                   class="Switch override-main size--small on"
                 >
                   <div
@@ -1013,6 +1014,7 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                   Random icons
                 </div>
                 <div
+                  aria-hidden="true"
                   class="Switch override-main size--small on"
                 >
                   <div
@@ -1217,6 +1219,7 @@ exports[`components/sidebar/SidebarSettingsMenu settings menu open should match 
                   Random icons
                 </div>
                 <div
+                  aria-hidden="true"
                   class="Switch override-main size--small on"
                 >
                   <div
@@ -1582,6 +1585,7 @@ exports[`components/sidebar/SidebarSettingsMenu theme menu open should match sna
                   Random icons
                 </div>
                 <div
+                  aria-hidden="true"
                   class="Switch override-main size--small on"
                 >
                   <div

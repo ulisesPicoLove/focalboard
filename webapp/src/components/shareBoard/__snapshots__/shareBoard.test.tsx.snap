@@ -611,7 +611,11 @@ exports[`src/components/shareBoard/shareBoard return shareBoard and click Regene
               </div>
               <div>
                 <div
+                  aria-checked="true"
+                  aria-label="Publish to the web"
                   class="Switch override-main size--medium on"
+                  role="switch"
+                  tabindex="0"
                 >
                   <div
                     class="octo-switch-inner"
@@ -2358,7 +2362,11 @@ exports[`src/components/shareBoard/shareBoard return shareBoard, and click switc
               </div>
               <div>
                 <div
+                  aria-checked="true"
+                  aria-label="Publish to the web"
                   class="Switch override-main size--medium on"
+                  role="switch"
+                  tabindex="0"
                 >
                   <div
                     class="octo-switch-inner"
@@ -2596,7 +2604,11 @@ exports[`src/components/shareBoard/shareBoard return shareBoardComponent and cli
               </div>
               <div>
                 <div
+                  aria-checked="true"
+                  aria-label="Publish to the web"
                   class="Switch override-main size--medium on"
+                  role="switch"
+                  tabindex="0"
                 >
                   <div
                     class="octo-switch-inner"

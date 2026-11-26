@@ -2,6 +2,8 @@
 // See LICENSE.txt for license information.
 import React from 'react'
 
+import {keyboardActivation} from '../keyboardActivation'
+
 import './switch.scss'
 
 type Props = {
@@ -9,6 +11,12 @@ type Props = {
     isOn: boolean
     readOnly?: boolean
     size?: string
+
+    // Name for assistive technology; a switch without a visible label needs one
+    ariaLabel?: string
+
+    // The switch only shows a state that a parent control already exposes (a menu option)
+    decorative?: boolean
 }
 
 // Switch is an on-off style switch / checkbox
@@ -17,14 +25,32 @@ function Switch(props: Props): JSX.Element {
     const switchIsOn = props.isOn ? ' on' : ''
     const switchIsReadonly = props.readOnly ? ' readonly' : ''
     const className = `Switch override-main ${switchSize}${switchIsOn}${switchIsReadonly}`
+    const toggle = () => {
+        if (!props.readOnly) {
+            props.onChanged(!props.isOn)
+        }
+    }
+
+    if (props.decorative) {
+        return (
+            <div
+                className={className}
+                aria-hidden='true'
+            >
+                <div className='octo-switch-inner'/>
+            </div>
+        )
+    }
+
     return (
         <div
             className={className}
-            onClick={() => {
-                if (!props.readOnly) {
-                    props.onChanged(!props.isOn)
-                }
-            }}
+            role='switch'
+            aria-checked={props.isOn}
+            aria-readonly={props.readOnly || undefined}
+            aria-label={props.ariaLabel}
+            onClick={toggle}
+            {...keyboardActivation(toggle)}
         >
             <div className='octo-switch-inner'/>
         </div>

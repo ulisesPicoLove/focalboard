@@ -382,6 +382,7 @@
   "shareBoard.confirm-change-team-role.title": "Cambiar el rol mínimo del tablero",
   "shareBoard.lastAdmin": "Los tableros deben tener al menos un administrador",
   "tutorial_tip.finish_tour": "Listo",
+  "tutorial_tip.go-to-step": "Ir al paso {step}",
   "tutorial_tip.got_it": "Entendido",
   "tutorial_tip.ok": "Siguiente",
   "tutorial_tip.out": "No mostrar más estos consejos.",

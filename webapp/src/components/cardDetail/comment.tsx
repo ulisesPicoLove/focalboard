@@ -41,6 +41,7 @@ const Comment: FC<Props> = (props: Props) => {
                 <img
                     className='comment-avatar'
                     src={userImageUrl}
+                    alt=''
                 />
                 <div className='comment-username'>{user?.username}</div>
                 <GuestBadge show={user?.is_guest}/>

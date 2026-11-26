@@ -58,6 +58,7 @@ const CommentsList = (props: Props) => {
             <img
                 className='comment-avatar'
                 src={Utils.getProfilePicture(me?.id)}
+                alt=''
             />
             <MarkdownEditor
                 className='newcomment'

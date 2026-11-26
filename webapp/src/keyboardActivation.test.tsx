@@ -49,4 +49,23 @@ describe('keyboardActivation', () => {
         fireEvent.keyUp(inner, {key: ' '})
         expect(onActivate).not.toBeCalled()
     })
+
+    test('can leave Space alone for elements that use it for something else', () => {
+        const onActivate = jest.fn()
+        render(
+            <div
+                role='button'
+                aria-label='drag handle'
+                {...keyboardActivation(onActivate, {space: false})}
+            />,
+        )
+        const handle = screen.getByRole('button', {name: 'drag handle'})
+        const notPrevented = fireEvent.keyDown(handle, {key: ' '})
+        fireEvent.keyUp(handle, {key: ' '})
+        expect(notPrevented).toBe(true)
+        expect(onActivate).not.toBeCalled()
+
+        fireEvent.keyDown(handle, {key: 'Enter'})
+        expect(onActivate).toBeCalledTimes(1)
+    })
 })

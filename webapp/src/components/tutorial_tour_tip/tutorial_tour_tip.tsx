@@ -4,7 +4,7 @@
 import React, {useRef} from 'react'
 import Tippy from '@tippyjs/react'
 import ReactDOM from 'react-dom'
-import {FormattedMessage} from 'react-intl'
+import {FormattedMessage, useIntl} from 'react-intl'
 
 import './tutorial_tour_tip.scss'
 import 'tippy.js/dist/tippy.css'
@@ -101,6 +101,7 @@ const TutorialTourTip = ({
         preventDefault,
     }
 
+    const intl = useIntl()
     const triggerRef = useRef(null)
     const {
         show,
@@ -168,7 +169,12 @@ const TutorialTourTip = ({
                         href='#'
                         className={classname}
                         data-screen={i}
-                        onClick={() => handleSavePreferences(i)}
+                        aria-label={intl.formatMessage({id: 'tutorial_tip.go-to-step', defaultMessage: 'Go to step {step}'}, {step: i + 1})}
+                        aria-current={i === step ? 'step' : undefined}
+                        onClick={(e) => {
+                            e.preventDefault()
+                            handleSavePreferences(i)
+                        }}
                     />
                 </div>,
             )
@@ -204,7 +210,7 @@ const TutorialTourTip = ({
                 <div className='tutorial-tour-tip__image'>
                     <img
                         src={imageURL}
-                        alt={'tutorial tour tip product image'}
+                        alt=''
                     />
                 </div>
             )}

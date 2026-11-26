@@ -58,6 +58,7 @@ exports[`components/viewHeader/filterValue return filterValue 1`] = `
                 Status
               </div>
               <div
+                aria-hidden="true"
                 class="Switch override-main size--small on"
               >
                 <div
@@ -147,6 +148,7 @@ exports[`components/viewHeader/filterValue return filterValue and click Status 1
                 Status
               </div>
               <div
+                aria-hidden="true"
                 class="Switch override-main size--small on"
               >
                 <div
@@ -236,6 +238,7 @@ exports[`components/viewHeader/filterValue return filterValue and click Status w
                 Status
               </div>
               <div
+                aria-hidden="true"
                 class="Switch override-main size--small"
               >
                 <div

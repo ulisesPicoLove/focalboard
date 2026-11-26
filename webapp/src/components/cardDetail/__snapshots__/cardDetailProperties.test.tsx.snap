@@ -27,8 +27,10 @@ exports[`components/cardDetail/CardDetailProperties cancel on delete dialog shou
         </div>
       </div>
       <div
+        aria-haspopup="listbox"
         class="octo-propertyvalue"
         data-testid="select-non-editable"
+        role="button"
         tabindex="0"
       >
         <span
@@ -120,8 +122,10 @@ exports[`components/cardDetail/CardDetailProperties should match snapshot 1`] = 
         </div>
       </div>
       <div
+        aria-haspopup="listbox"
         class="octo-propertyvalue"
         data-testid="select-non-editable"
+        role="button"
         tabindex="0"
       >
         <span
@@ -213,8 +217,10 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
         </div>
       </div>
       <div
+        aria-haspopup="listbox"
         class="octo-propertyvalue"
         data-testid="select-non-editable"
+        role="button"
         tabindex="0"
       >
         <span

@@ -11,6 +11,7 @@ exports[`components/sidebarBoardItem renders default icon if no custom icon set 
       data-rbd-draggable-id="board_id_1"
     >
       <div
+        aria-current="page"
         aria-describedby="rbd-hidden-text-1-hidden-text-3"
         class="SidebarBoardItem subitem active"
         data-rbd-drag-handle-context-id="1"
@@ -50,7 +51,10 @@ exports[`components/sidebarBoardItem renders default icon if no custom icon set 
         </div>
       </div>
       <div
+        aria-current="true"
         class="SidebarBoardItem sidebar-view-item active"
+        role="button"
+        tabindex="0"
       >
         <svg
           class="BoardIcon Icon"
@@ -94,6 +98,7 @@ exports[`components/sidebarBoardItem sidebar board item 1`] = `
       data-rbd-draggable-id="board_id_1"
     >
       <div
+        aria-current="page"
         aria-describedby="rbd-hidden-text-0-hidden-text-0"
         class="SidebarBoardItem subitem active"
         data-rbd-drag-handle-context-id="0"
@@ -363,7 +368,10 @@ exports[`components/sidebarBoardItem sidebar board item 1`] = `
         </div>
       </div>
       <div
+        aria-current="true"
         class="SidebarBoardItem sidebar-view-item active"
+        role="button"
+        tabindex="0"
       >
         <svg
           class="BoardIcon Icon"
@@ -407,6 +415,7 @@ exports[`components/sidebarBoardItem sidebar board item for guest 1`] = `
       data-rbd-draggable-id="board_id_1"
     >
       <div
+        aria-current="page"
         aria-describedby="rbd-hidden-text-2-hidden-text-6"
         class="SidebarBoardItem subitem active"
         data-rbd-drag-handle-context-id="2"
@@ -614,7 +623,10 @@ exports[`components/sidebarBoardItem sidebar board item for guest 1`] = `
         </div>
       </div>
       <div
+        aria-current="true"
         class="SidebarBoardItem sidebar-view-item active"
+        role="button"
+        tabindex="0"
       >
         <svg
           class="BoardIcon Icon"

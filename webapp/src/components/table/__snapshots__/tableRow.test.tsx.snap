@@ -235,8 +235,10 @@ exports[`components/table/TableRow should match snapshot, display properties 1`]
       style="width: 100px;"
     >
       <div
+        aria-haspopup="listbox"
         class="octo-propertyvalue"
         data-testid="select-non-editable"
+        role="button"
         tabindex="0"
       >
         <span
@@ -255,8 +257,10 @@ exports[`components/table/TableRow should match snapshot, display properties 1`]
       style="width: 100px;"
     >
       <div
+        aria-haspopup="listbox"
         class="octo-propertyvalue"
         data-testid="select-non-editable"
+        role="button"
         tabindex="0"
       >
         <span
@@ -478,8 +482,10 @@ exports[`components/table/TableRow should match snapshot, resizing column 1`] = 
       style="width: 100px;"
     >
       <div
+        aria-haspopup="listbox"
         class="octo-propertyvalue"
         data-testid="select-non-editable"
+        role="button"
         tabindex="0"
       >
         <span
@@ -498,8 +504,10 @@ exports[`components/table/TableRow should match snapshot, resizing column 1`] = 
       style="width: 100px;"
     >
       <div
+        aria-haspopup="listbox"
         class="octo-propertyvalue"
         data-testid="select-non-editable"
+        role="button"
         tabindex="0"
       >
         <span

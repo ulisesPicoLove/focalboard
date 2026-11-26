@@ -2,7 +2,10 @@
 // See LICENSE.txt for license information.
 
 import React, {useState, useCallback} from 'react'
+
 import {useIntl} from 'react-intl'
+
+import {keyboardActivation} from '../../keyboardActivation'
 
 import {IPropertyOption} from '../../blocks/board'
 import {Utils, IDType} from '../../utils'
@@ -51,9 +54,9 @@ const MultiSelectProperty = (props: PropertyProps): JSX.Element => {
         return (
             <div
                 className={props.property.valueClassName(!isEditable)}
-                tabIndex={0}
                 data-testid='multiselect-non-editable'
                 onClick={() => setOpen(true)}
+                {...(isEditable ? {role: 'button', 'aria-haspopup': 'listbox' as const, ...keyboardActivation(() => setOpen(true))} : {tabIndex: 0})}
             >
                 {values.map((v) => (
                     <Label

@@ -1,8 +1,11 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 import React, {useCallback, useEffect, useState} from 'react'
+
 import {FormattedMessage, useIntl} from 'react-intl'
 import {DragDropContext, Droppable, DropResult} from 'react-beautiful-dnd'
+
+import {keyboardActivation} from '../../keyboardActivation'
 
 import {getActiveThemeName, loadTheme} from '../../theme'
 import IconButton from '../../widgets/buttons/iconButton'
@@ -409,7 +412,9 @@ const Sidebar = (props: Props) => {
 
             <div
                 className='add-board'
+                role='button'
                 onClick={props.onBoardTemplateSelectorOpen}
+                {...keyboardActivation(props.onBoardTemplateSelectorOpen)}
             >
                 <FormattedMessage
                     id='Sidebar.add-board'

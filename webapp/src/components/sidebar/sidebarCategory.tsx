@@ -1,6 +1,7 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react'
+
 import {FormattedMessage, useIntl} from 'react-intl'
 import {generatePath, useHistory, useRouteMatch} from 'react-router-dom'
 
@@ -9,6 +10,8 @@ import debounce from 'lodash/debounce'
 import {Draggable, Droppable} from 'react-beautiful-dnd'
 
 import {HandRightIcon} from '@mattermost/compass-icons/components'
+
+import {keyboardActivation} from '../../keyboardActivation'
 
 import {Board} from '../../blocks/board'
 import mutator from '../../mutator'
@@ -291,7 +294,9 @@ const SidebarCategory = (props: Props) => {
                                             <div
                                                 className='octo-sidebar-title category-title'
                                                 title={props.categoryBoards.name}
+                                                aria-expanded={!(collapsed || props.forceCollapse)}
                                                 onClick={toggleCollapse}
+                                                {...keyboardActivation(toggleCollapse, {space: false})}
                                                 {...provided.dragHandleProps}
                                             >
                                                 {collapsed || snapshot.isDragging || props.forceCollapse ? <ChevronRight/> : <ChevronDown/>}

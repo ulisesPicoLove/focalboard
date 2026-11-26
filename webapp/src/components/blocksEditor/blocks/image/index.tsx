@@ -41,6 +41,7 @@ const Image: ContentType<FileInfo> = {
                     data-testid='image'
                     className='ImageView'
                     src={imageDataUrl}
+                    alt=''
                 />
             )
         }
@@ -58,6 +59,7 @@ const Image: ContentType<FileInfo> = {
                     <img
                         className='ImageView'
                         src={props.value.file}
+                        alt=''
                         onClick={() => ref.current?.click()}
                     />
                 )}

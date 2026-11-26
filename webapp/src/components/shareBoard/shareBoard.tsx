@@ -395,6 +395,7 @@ export default function ShareBoardDialog(props: Props): JSX.Element {
                                 <Switch
                                     isOn={isSharing}
                                     size='medium'
+                                    ariaLabel={intl.formatMessage({id: 'ShareBoard.PublishTitle', defaultMessage: 'Publish to the web'})}
                                     onChanged={onShareChanged}
                                 />
                             </div>

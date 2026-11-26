@@ -5,8 +5,9 @@ import React from 'react'
 import {createMemoryHistory} from 'history'
 import {Router} from 'react-router-dom'
 
-import {render} from '@testing-library/react'
+import {render, fireEvent} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import '@testing-library/jest-dom'
 
 import {Provider as ReduxProvider} from 'react-redux'
 
@@ -147,5 +148,38 @@ describe('components/sidebarBoardItem', () => {
         expect(elementMenuWrapper).not.toBeNull()
         userEvent.click(elementMenuWrapper!)
         expect(container).toMatchSnapshot()
+    })
+
+    test('opens the board with Enter and leaves Space to the drag and drop', () => {
+        const mockStore = configureStore([])
+        const store = mockStore(state)
+        const showBoard = jest.fn()
+
+        const {container} = render(wrapRBDNDDroppable(wrapIntl(
+            <ReduxProvider store={store}>
+                <Router history={history}>
+                    <SidebarBoardItem
+                        index={0}
+                        categoryBoards={categoryBoards1}
+                        board={board}
+                        allCategories={allCategoryBoards}
+                        isActive={true}
+                        showBoard={showBoard}
+                        showView={jest.fn()}
+                        onDeleteRequest={jest.fn()}
+                    />
+                </Router>
+            </ReduxProvider>,
+        )))
+        const item = container.querySelector('.SidebarBoardItem.subitem') as HTMLElement
+        expect(item).toHaveAttribute('tabindex', '0')
+        expect(item).toHaveAttribute('aria-current', 'page')
+
+        fireEvent.keyDown(item, {key: ' '})
+        fireEvent.keyUp(item, {key: ' '})
+        expect(showBoard).not.toBeCalled()
+
+        fireEvent.keyDown(item, {key: 'Enter'})
+        expect(showBoard).toBeCalledWith(board.id)
     })
 })

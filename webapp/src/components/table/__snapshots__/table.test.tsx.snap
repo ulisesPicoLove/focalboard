@@ -205,8 +205,10 @@ exports[`components/table/Table extended should have Duplicate Button 1`] = `
             style="width: 100px;"
           >
             <div
+              aria-haspopup="listbox"
               class="octo-propertyvalue"
               data-testid="select-non-editable"
+              role="button"
               tabindex="0"
             >
               <span
@@ -225,8 +227,10 @@ exports[`components/table/Table extended should have Duplicate Button 1`] = `
             style="width: 100px;"
           >
             <div
+              aria-haspopup="listbox"
               class="octo-propertyvalue"
               data-testid="select-non-editable"
+              role="button"
               tabindex="0"
             >
               <span
@@ -243,8 +247,10 @@ exports[`components/table/Table extended should have Duplicate Button 1`] = `
             style="width: 100px;"
           >
             <div
+              aria-haspopup="listbox"
               class="octo-propertyvalue"
               data-testid="select-non-editable"
+              role="button"
               tabindex="0"
             >
               <span
@@ -331,8 +337,10 @@ exports[`components/table/Table extended should have Duplicate Button 1`] = `
             style="width: 100px;"
           >
             <div
+              aria-haspopup="listbox"
               class="octo-propertyvalue"
               data-testid="select-non-editable"
+              role="button"
               tabindex="0"
             >
               <span
@@ -351,8 +359,10 @@ exports[`components/table/Table extended should have Duplicate Button 1`] = `
             style="width: 100px;"
           >
             <div
+              aria-haspopup="listbox"
               class="octo-propertyvalue"
               data-testid="select-non-editable"
+              role="button"
               tabindex="0"
             >
               <span
@@ -369,8 +379,10 @@ exports[`components/table/Table extended should have Duplicate Button 1`] = `
             style="width: 100px;"
           >
             <div
+              aria-haspopup="listbox"
               class="octo-propertyvalue"
               data-testid="select-non-editable"
+              role="button"
               tabindex="0"
             >
               <span
@@ -1053,8 +1065,10 @@ exports[`components/table/Table extended should match snapshot with CreatedBy 1`
             style="width: 100px;"
           >
             <div
+              aria-haspopup="listbox"
               class="octo-propertyvalue"
               data-testid="select-non-editable"
+              role="button"
               tabindex="0"
             >
               <span
@@ -1073,8 +1087,10 @@ exports[`components/table/Table extended should match snapshot with CreatedBy 1`
             style="width: 100px;"
           >
             <div
+              aria-haspopup="listbox"
               class="octo-propertyvalue"
               data-testid="select-non-editable"
+              role="button"
               tabindex="0"
             >
               <span
@@ -1091,8 +1107,10 @@ exports[`components/table/Table extended should match snapshot with CreatedBy 1`
             style="width: 100px;"
           >
             <div
+              aria-haspopup="listbox"
               class="octo-propertyvalue"
               data-testid="select-non-editable"
+              role="button"
               tabindex="0"
             >
               <span
@@ -1179,8 +1197,10 @@ exports[`components/table/Table extended should match snapshot with CreatedBy 1`
             style="width: 100px;"
           >
             <div
+              aria-haspopup="listbox"
               class="octo-propertyvalue"
               data-testid="select-non-editable"
+              role="button"
               tabindex="0"
             >
               <span
@@ -1199,8 +1219,10 @@ exports[`components/table/Table extended should match snapshot with CreatedBy 1`
             style="width: 100px;"
           >
             <div
+              aria-haspopup="listbox"
               class="octo-propertyvalue"
               data-testid="select-non-editable"
+              role="button"
               tabindex="0"
             >
               <span
@@ -1217,8 +1239,10 @@ exports[`components/table/Table extended should match snapshot with CreatedBy 1`
             style="width: 100px;"
           >
             <div
+              aria-haspopup="listbox"
               class="octo-propertyvalue"
               data-testid="select-non-editable"
+              role="button"
               tabindex="0"
             >
               <span
@@ -1513,8 +1537,10 @@ exports[`components/table/Table extended should match snapshot with UpdatedAt 1`
             style="width: 100px;"
           >
             <div
+              aria-haspopup="listbox"
               class="octo-propertyvalue"
               data-testid="select-non-editable"
+              role="button"
               tabindex="0"
             >
               <span
@@ -1533,8 +1559,10 @@ exports[`components/table/Table extended should match snapshot with UpdatedAt 1`
             style="width: 100px;"
           >
             <div
+              aria-haspopup="listbox"
               class="octo-propertyvalue"
               data-testid="select-non-editable"
+              role="button"
               tabindex="0"
             >
               <span
@@ -1551,8 +1579,10 @@ exports[`components/table/Table extended should match snapshot with UpdatedAt 1`
             style="width: 100px;"
           >
             <div
+              aria-haspopup="listbox"
               class="octo-propertyvalue"
               data-testid="select-non-editable"
+              role="button"
               tabindex="0"
             >
               <span
@@ -1639,8 +1669,10 @@ exports[`components/table/Table extended should match snapshot with UpdatedAt 1`
             style="width: 100px;"
           >
             <div
+              aria-haspopup="listbox"
               class="octo-propertyvalue"
               data-testid="select-non-editable"
+              role="button"
               tabindex="0"
             >
               <span
@@ -1659,8 +1691,10 @@ exports[`components/table/Table extended should match snapshot with UpdatedAt 1`
             style="width: 100px;"
           >
             <div
+              aria-haspopup="listbox"
               class="octo-propertyvalue"
               data-testid="select-non-editable"
+              role="button"
               tabindex="0"
             >
               <span
@@ -1677,8 +1711,10 @@ exports[`components/table/Table extended should match snapshot with UpdatedAt 1`
             style="width: 100px;"
           >
             <div
+              aria-haspopup="listbox"
               class="octo-propertyvalue"
               data-testid="select-non-editable"
+              role="button"
               tabindex="0"
             >
               <span
@@ -1973,8 +2009,10 @@ exports[`components/table/Table extended should match snapshot with UpdatedBy 1`
             style="width: 100px;"
           >
             <div
+              aria-haspopup="listbox"
               class="octo-propertyvalue"
               data-testid="select-non-editable"
+              role="button"
               tabindex="0"
             >
               <span
@@ -1993,8 +2031,10 @@ exports[`components/table/Table extended should match snapshot with UpdatedBy 1`
             style="width: 100px;"
           >
             <div
+              aria-haspopup="listbox"
               class="octo-propertyvalue"
               data-testid="select-non-editable"
+              role="button"
               tabindex="0"
             >
               <span
@@ -2011,8 +2051,10 @@ exports[`components/table/Table extended should match snapshot with UpdatedBy 1`
             style="width: 100px;"
           >
             <div
+              aria-haspopup="listbox"
               class="octo-propertyvalue"
               data-testid="select-non-editable"
+              role="button"
               tabindex="0"
             >
               <span
@@ -2099,8 +2141,10 @@ exports[`components/table/Table extended should match snapshot with UpdatedBy 1`
             style="width: 100px;"
           >
             <div
+              aria-haspopup="listbox"
               class="octo-propertyvalue"
               data-testid="select-non-editable"
+              role="button"
               tabindex="0"
             >
               <span
@@ -2119,8 +2163,10 @@ exports[`components/table/Table extended should match snapshot with UpdatedBy 1`
             style="width: 100px;"
           >
             <div
+              aria-haspopup="listbox"
               class="octo-propertyvalue"
               data-testid="select-non-editable"
+              role="button"
               tabindex="0"
             >
               <span
@@ -2137,8 +2183,10 @@ exports[`components/table/Table extended should match snapshot with UpdatedBy 1`
             style="width: 100px;"
           >
             <div
+              aria-haspopup="listbox"
               class="octo-propertyvalue"
               data-testid="select-non-editable"
+              role="button"
               tabindex="0"
             >
               <span

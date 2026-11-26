@@ -3,6 +3,7 @@
 exports[`components/blocksEditor/blocks/image should match Display snapshot 1`] = `
 <div>
   <img
+    alt=""
     class="ImageView"
     data-testid="image"
     src="test.jpg"
@@ -16,6 +17,7 @@ exports[`components/blocksEditor/blocks/image should match Input snapshot 1`] = 
 <div>
   <div>
     <img
+      alt=""
       class="ImageView"
       src="test"
     />
