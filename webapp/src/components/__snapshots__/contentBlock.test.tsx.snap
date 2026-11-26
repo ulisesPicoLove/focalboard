@@ -423,11 +423,22 @@ exports[`components/contentBlock should match snapshot with imageBlock 1`] = `
         class="addToRow "
         style="flex: 0 0 auto; height: 100%;"
       />
-      <img
-        alt=""
-        class="ImageElement"
-        src="test.jpg"
-      />
+      <div
+        class="ImageElementWithAlt"
+      >
+        <img
+          alt=""
+          class="ImageElement"
+          src="test.jpg"
+        />
+        <input
+          aria-label="Alternative text for the image"
+          class="ImageElement-altText"
+          placeholder="Describe the image for people who cannot see it"
+          type="text"
+          value=""
+        />
+      </div>
     </div>
     <div
       class="addToRow "

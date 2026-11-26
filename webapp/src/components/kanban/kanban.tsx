@@ -164,6 +164,15 @@ const Kanban = (props: Props) => {
         }
     }, [selectedCardIds, cards, orderAfterMoveToColumn, activeView.id, activeView.fields.cardOrder, activeView.fields.visibleOptionIds, groupByProperty, visibleGroups, board.id])
 
+    // The "Move to" menu of a card: the visible columns, marking the one it is in
+    const moveTargets = useMemo(() => visibleGroups.map((group) => ({id: group.option.id, name: group.option.value})), [visibleGroups])
+    const onMoveCardToColumn = useCallback((card: Card, optionId: string) => {
+        const option = visibleGroups.find((group) => group.option.id === optionId)?.option
+        if (option) {
+            onDropToColumn(option, card)
+        }
+    }, [visibleGroups, onDropToColumn])
+
     const onDropToCard = useCallback(async (srcCard: Card, dstCard: Card) => {
         if (srcCard.id === dstCard.id || !groupByProperty) {
             return
@@ -301,6 +310,9 @@ const Kanban = (props: Props) => {
                                 onDrop={onDropToCard}
                                 showCard={props.showCard}
                                 isManualSort={isManualSort}
+                                columnId={group.option.id}
+                                moveTargets={moveTargets}
+                                onMoveToColumn={onMoveCardToColumn}
                             />
                         ))}
                         {!props.readonly &&

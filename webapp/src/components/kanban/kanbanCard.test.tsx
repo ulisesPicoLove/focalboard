@@ -228,4 +228,34 @@ describe('src/components/kanban/kanbanCard', () => {
         fireEvent.keyDown(within(cardElement).getAllByRole('button')[0], {key: 'Enter'})
         expect(onClick).toBeCalledTimes(1)
     })
+
+    test('the card menu can move the card to another column without dragging', () => {
+        const onMoveToColumn = jest.fn()
+        render(wrapDNDIntl(
+            <ReduxProvider store={store}>
+                <KanbanCard
+                    card={card}
+                    board={board}
+                    visiblePropertyTemplates={[propertyTemplate]}
+                    visibleBadges={false}
+                    isSelected={false}
+                    readonly={false}
+                    onDrop={jest.fn()}
+                    showCard={jest.fn()}
+                    isManualSort={false}
+                    columnId='col1'
+                    moveTargets={[{id: 'col1', name: 'To do'}, {id: 'col2', name: 'Doing'}]}
+                    onMoveToColumn={onMoveToColumn}
+                />
+            </ReduxProvider>,
+        ), {wrapper: MemoryRouter})
+
+        userEvent.click(screen.getAllByRole('button', {name: 'menuwrapper'})[0])
+        fireEvent.keyDown(screen.getByRole('button', {name: 'Move to'}), {key: 'Enter'})
+
+        // the column the card is already in cannot be chosen
+        expect(screen.getByRole('button', {name: 'To do'})).toHaveAttribute('aria-disabled', 'true')
+        userEvent.click(screen.getByRole('button', {name: 'Doing'}))
+        expect(onMoveToColumn).toBeCalledWith(card, 'col2')
+    })
 })

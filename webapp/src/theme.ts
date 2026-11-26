@@ -70,7 +70,9 @@ export const darkTheme = {
     mainBg: '55, 53, 47',
     mainFg: '220, 220, 220',
     buttonBg: '80, 170, 221',
-    buttonFg: '255, 255, 255',
+
+    // dark text: white on this light blue is only 2.6:1, this is 7.1:1
+    buttonFg: '20, 20, 25',
     sidebarBg: '75, 73, 67',
     sidebarFg: '255, 255, 255',
     sidebarTextActiveBorder: '102, 185, 167',
@@ -117,7 +119,9 @@ export const lightTheme = {
 
     mainBg: '255, 255, 255',
     mainFg: '55, 53, 47',
-    buttonBg: '80, 170, 221',
+
+    // 5.4:1 against white, both as a button background and as text on the white page (the old 80, 170, 221 was 2.6:1)
+    buttonBg: '0, 111, 170',
     buttonFg: '255, 255, 255',
     sidebarBg: '247, 246, 243',
     sidebarFg: '55, 53, 47',
