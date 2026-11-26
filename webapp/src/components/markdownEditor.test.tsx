@@ -14,8 +14,6 @@ import {MarkdownEditor} from './markdownEditor'
 
 jest.mock('../utils')
 jest.useFakeTimers()
-jest.mock('draft-js/lib/generateRandomKey', () => () => '123')
-
 describe('components/markdownEditor', () => {
     beforeAll(mockDOM)
     beforeEach(jest.clearAllMocks)
@@ -179,5 +177,49 @@ describe('components/markdownEditor', () => {
             ))
         })
         expect(screen.getByTestId('preview-element')).not.toHaveAttribute('tabindex')
+    })
+
+    describe('the editor', () => {
+        const renderEditing = async (text: string, onBlur = jest.fn(), onChange = jest.fn()) => {
+            await act(async () => {
+                render(wrapDNDIntl(
+                    <ReduxProvider store={store}>
+                        <MarkdownEditor
+                            text={text}
+                            autofocus={true}
+                            onChange={onChange}
+                            onFocus={jest.fn()}
+                            onBlur={onBlur}
+                        />
+                    </ReduxProvider>,
+                ))
+            })
+
+            // Lexical commits its updates in a microtask after the first render
+            await act(async () => {
+                jest.runOnlyPendingTimers()
+                for (let i = 0; i < 10; i++) {
+                    // eslint-disable-next-line no-await-in-loop
+                    await Promise.resolve()
+                }
+            })
+            return screen.getByRole('textbox', {name: 'Text editor'})
+        }
+
+        test('shows the text it was given, as a labelled text box', async () => {
+            const editor = await renderEditing('hello\nsecond line')
+            expect(editor).toHaveAttribute('contenteditable', 'true')
+            expect(editor).toHaveAttribute('aria-multiline', 'true')
+            expect(editor.textContent).toBe('hellosecond line')
+        })
+
+        test('styles the markdown without changing the text', async () => {
+            const editor = await renderEditing('a **bold** word')
+            const bold = Array.from(editor.querySelectorAll('span')).find((span) => span.textContent === 'bold')
+            expect(bold?.getAttribute('style')).toContain('font-weight: bold')
+            const delimiter = Array.from(editor.querySelectorAll('span')).find((span) => span.textContent === '**')
+            expect(delimiter?.getAttribute('style')).toContain('opacity: 0.4')
+            expect(editor.textContent).toBe('a **bold** word')
+        })
     })
 })

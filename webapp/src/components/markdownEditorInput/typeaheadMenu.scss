@@ -1,0 +1,50 @@
+@import '../../styles/z-index';
+
+.typeahead-popover {
+    @include z-index(typeahead-menu);
+    position: fixed;
+}
+
+.TypeaheadMenu {
+    min-width: 220px;
+    max-height: 260px;
+    margin: 0;
+    padding: 4px 0;
+    overflow-y: auto;
+    list-style: none;
+    background: rgba(var(--center-channel-bg-rgb), 1);
+    border: 1px solid rgba(var(--center-channel-color-rgb), 0.16);
+    border-radius: 4px;
+    box-shadow: var(--elevation-1);
+
+    .TypeaheadMenu__option {
+        display: flex;
+        align-items: center;
+        height: 40px;
+        padding: 0 20px;
+        cursor: pointer;
+
+        &.selected,
+        &:hover {
+            background: rgba(var(--center-channel-color-rgb), 0.08);
+        }
+
+        &:active {
+            background: rgba(var(--button-bg-rgb), 0.08);
+        }
+
+        .Badge {
+            margin-left: 12px;
+        }
+    }
+
+    .TypeaheadMenu__emoji {
+        display: inline-block;
+        width: 28px;
+        font-size: 20px;
+    }
+
+    .TypeaheadMenu__emoji-name {
+        font-size: 14px;
+    }
+}

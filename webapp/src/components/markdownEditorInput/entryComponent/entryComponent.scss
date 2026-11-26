@@ -7,9 +7,21 @@
     .EntryComponent__left {
         display: flex;
         align-items: center;
+        gap: 8px;
+    }
+
+    .EntryComponent__avatar {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+    }
+
+    .EntryComponent__display-name {
+        opacity: 0.56;
     }
 
     .EntryComponent__hint {
+        margin-left: 12px;
         opacity: 0.56;
     }
 }
