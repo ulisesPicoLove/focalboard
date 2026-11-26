@@ -336,6 +336,7 @@
   "boardPage.confirm-join-button": "Join",
   "boardPage.confirm-join-text": "You are about to join a private board without explicitly being added by the board admin. Are you sure you wish to join this private board?",
   "boardPage.confirm-join-title": "Join private board",
+  "calendar.add-event": "Add event",
   "calendar.month": "Month",
   "calendar.today": "TODAY",
   "calendar.week": "Week",

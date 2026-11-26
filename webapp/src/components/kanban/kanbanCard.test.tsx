@@ -1,7 +1,7 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 import React from 'react'
-import {render, screen, within} from '@testing-library/react'
+import {render, screen, within, fireEvent} from '@testing-library/react'
 import '@testing-library/jest-dom'
 import {MemoryRouter} from 'react-router-dom'
 
@@ -196,5 +196,36 @@ describe('src/components/kanban/kanbanCard', () => {
         expect(elementButtonCopyLink).not.toBeNull()
         userEvent.click(elementButtonCopyLink)
         expect(mockedUtils.copyTextToClipboard).toBeCalledTimes(1)
+    })
+
+    test('can be focused and opened with the keyboard', () => {
+        const onClick = jest.fn()
+        render(wrapDNDIntl(
+            <ReduxProvider store={store}>
+                <KanbanCard
+                    card={card}
+                    board={board}
+                    visiblePropertyTemplates={[propertyTemplate]}
+                    visibleBadges={false}
+                    isSelected={false}
+                    readonly={false}
+                    onClick={onClick}
+                    onDrop={jest.fn()}
+                    showCard={jest.fn()}
+                    isManualSort={false}
+                />
+            </ReduxProvider>,
+        ), {wrapper: MemoryRouter})
+
+        const cardElement = screen.getByRole('button', {name: card.title})
+        expect(cardElement).toHaveAttribute('tabindex', '0')
+
+        fireEvent.keyDown(cardElement, {key: 'Enter'})
+        expect(onClick).toBeCalledTimes(1)
+        expect(onClick.mock.calls[0][1]).toBe(card)
+
+        // keys pressed inside the card (for example in its menu) do not open it
+        fireEvent.keyDown(within(cardElement).getAllByRole('button')[0], {key: 'Enter'})
+        expect(onClick).toBeCalledTimes(1)
     })
 })

@@ -459,9 +459,12 @@ exports[`components/centerPanel return centerPanel and click on card to show car
           class="octo-board-column"
         >
           <div
+            aria-label="card1"
             class="KanbanCard"
             draggable="true"
+            role="button"
             style="opacity: 1;"
+            tabindex="0"
           >
             <div
               aria-label="menuwrapper"
@@ -493,9 +496,12 @@ exports[`components/centerPanel return centerPanel and click on card to show car
             </div>
           </div>
           <div
+            aria-label="card2"
             class="KanbanCard"
             draggable="true"
+            role="button"
             style="opacity: 1;"
+            tabindex="0"
           >
             <div
               aria-label="menuwrapper"
@@ -7775,9 +7781,12 @@ exports[`components/centerPanel should match snapshot for Gallery 1`] = `
       class="Gallery"
     >
       <div
+        aria-label="card1"
         class="GalleryCard"
         draggable="true"
+        role="button"
         style="opacity: 1;"
+        tabindex="0"
       >
         <div
           aria-label="menuwrapper"
@@ -8266,9 +8275,12 @@ exports[`components/centerPanel should match snapshot for Kanban 1`] = `
           class="octo-board-column"
         >
           <div
+            aria-label="card1"
             class="KanbanCard"
             draggable="true"
+            role="button"
             style="opacity: 1;"
+            tabindex="0"
           >
             <div
               aria-label="menuwrapper"
@@ -8785,9 +8797,12 @@ exports[`components/centerPanel should match snapshot for Kanban, not shared 1`]
           class="octo-board-column"
         >
           <div
+            aria-label="card1"
             class="KanbanCard"
             draggable="true"
+            role="button"
             style="opacity: 1;"
+            tabindex="0"
           >
             <div
               aria-label="menuwrapper"

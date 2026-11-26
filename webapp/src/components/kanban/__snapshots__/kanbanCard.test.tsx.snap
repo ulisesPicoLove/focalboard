@@ -3,9 +3,12 @@
 exports[`src/components/kanban/kanbanCard return kanbanCard and click on copy link menu  1`] = `
 <div>
   <div
+    aria-label="title"
     class="KanbanCard"
     draggable="true"
+    role="button"
     style="opacity: 1;"
+    tabindex="0"
   >
     <div
       aria-label="menuwrapper"
@@ -189,9 +192,12 @@ exports[`src/components/kanban/kanbanCard return kanbanCard and click on copy li
 exports[`src/components/kanban/kanbanCard return kanbanCard and click on delete menu  1`] = `
 <div>
   <div
+    aria-label="title"
     class="KanbanCard"
     draggable="true"
+    role="button"
     style="opacity: 1;"
+    tabindex="0"
   >
     <div
       aria-label="menuwrapper"
@@ -375,9 +381,12 @@ exports[`src/components/kanban/kanbanCard return kanbanCard and click on delete 
 exports[`src/components/kanban/kanbanCard return kanbanCard and click on duplicate menu  1`] = `
 <div>
   <div
+    aria-label="title"
     class="KanbanCard"
     draggable="true"
+    role="button"
     style="opacity: 1;"
+    tabindex="0"
   >
     <div
       aria-label="menuwrapper"
@@ -561,9 +570,12 @@ exports[`src/components/kanban/kanbanCard return kanbanCard and click on duplica
 exports[`src/components/kanban/kanbanCard should match snapshot 1`] = `
 <div>
   <div
+    aria-label="title"
     class="KanbanCard"
     draggable="true"
+    role="button"
     style="opacity: 1;"
+    tabindex="0"
   >
     <div
       aria-label="menuwrapper"
@@ -607,9 +619,12 @@ exports[`src/components/kanban/kanbanCard should match snapshot 1`] = `
 exports[`src/components/kanban/kanbanCard should match snapshot with readonly 1`] = `
 <div>
   <div
+    aria-label="title"
     class="KanbanCard"
     draggable="false"
+    role="button"
     style="opacity: 1;"
+    tabindex="0"
   >
     <div
       class="octo-icontitle"

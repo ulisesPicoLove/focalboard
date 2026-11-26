@@ -1,7 +1,10 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 import React, {useState, useCallback, useMemo} from 'react'
+
 import {useIntl} from 'react-intl'
+
+import {ActivationEvent, keyboardActivation} from '../../keyboardActivation'
 
 import {Board, IPropertyTemplate} from '../../blocks/board'
 import {Card} from '../../blocks/card'
@@ -25,7 +28,7 @@ type Props = {
     visiblePropertyTemplates: IPropertyTemplate[]
     isSelected: boolean
     visibleBadges: boolean
-    onClick?: (e: React.MouseEvent, card: Card) => void
+    onClick?: (e: ActivationEvent, card: Card) => void
     readonly: boolean
     onDrop: (srcCard: Card, dstCard: Card) => void
     showCard: (cardId?: string) => void
@@ -74,7 +77,7 @@ const KanbanCard = (props: Props) => {
     }, [handleDeleteCard, card.title, card?.fields?.contentOrder?.length])
 
     const {onClick} = props
-    const handleOnClick = useCallback((e: React.MouseEvent) => {
+    const handleOnClick = useCallback((e: ActivationEvent) => {
         if (onClick) {
             onClick(e, card)
         }
@@ -87,7 +90,10 @@ const KanbanCard = (props: Props) => {
                 className={`${className}`}
                 draggable={!props.readonly}
                 style={{opacity: isDragging ? 0.5 : 1}}
+                role='button'
+                aria-label={card.title || intl.formatMessage({id: 'KanbanCard.untitled', defaultMessage: 'Untitled'})}
                 onClick={handleOnClick}
+                {...keyboardActivation(handleOnClick)}
             >
                 {!props.readonly &&
                 <MenuWrapper

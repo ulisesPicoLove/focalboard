@@ -2,6 +2,9 @@
 // See LICENSE.txt for license information.
 import React from 'react'
 
+// An action started by a click or by Enter/Space on a focused element
+export type ActivationEvent = React.MouseEvent | React.KeyboardEvent
+
 // Props that let a non-native element (a div with an onClick) be reached and
 // operated with the keyboard, like a <button>: it becomes focusable, Enter runs
 // the action on keydown and Space runs it on keyup. Prefer a real <button>

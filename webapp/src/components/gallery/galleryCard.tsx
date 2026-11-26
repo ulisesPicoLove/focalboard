@@ -1,7 +1,10 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 import React, {useMemo, useState, useCallback} from 'react'
+
 import {useIntl, FormattedMessage} from 'react-intl'
+
+import {ActivationEvent, keyboardActivation} from '../../keyboardActivation'
 
 import {Board, IPropertyTemplate} from '../../blocks/board'
 import {Card} from '../../blocks/card'
@@ -25,7 +28,7 @@ import CardActionsMenuIcon from '../cardActionsMenu/cardActionsMenuIcon'
 type Props = {
     board: Board
     card: Card
-    onClick: (e: React.MouseEvent, card: Card) => void
+    onClick: (e: ActivationEvent, card: Card) => void
     visiblePropertyTemplates: IPropertyTemplate[]
     visibleTitle: boolean
     isSelected: boolean
@@ -80,7 +83,10 @@ const GalleryCard = (props: Props) => {
         <>
             <div
                 className={className}
+                role='button'
+                aria-label={card.title || intl.formatMessage({id: 'KanbanCard.untitled', defaultMessage: 'Untitled'})}
                 onClick={(e: React.MouseEvent) => props.onClick(e, card)}
+                {...keyboardActivation((e) => props.onClick(e, card))}
                 style={{opacity: isDragging ? 0.5 : 1}}
                 ref={cardRef}
             >

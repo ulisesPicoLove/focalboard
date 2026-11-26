@@ -2,9 +2,12 @@
 // See LICENSE.txt for license information.
 /* eslint-disable max-lines */
 import React, {useCallback, useState, useMemo, useEffect} from 'react'
+
 import {FormattedMessage, injectIntl, IntlShape} from 'react-intl'
 
 import withScrolling, {createHorizontalStrength, createVerticalStrength} from 'react-dnd-scrolling'
+
+import {ActivationEvent} from '../../keyboardActivation'
 
 import {useAppSelector} from '../../store/hooks'
 
@@ -40,7 +43,7 @@ type Props = {
     selectedCardIds: string[]
     intl: IntlShape
     readonly: boolean
-    onCardClicked: (e: React.MouseEvent, card: Card) => void
+    onCardClicked: (e: ActivationEvent, card: Card) => void
     addCard: (groupByOptionId?: string, show?: boolean) => Promise<void>
     addCardFromTemplate: (cardTemplateId: string, groupByOptionId?: string) => void
     showCard: (cardId?: string) => void

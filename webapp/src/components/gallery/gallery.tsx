@@ -1,7 +1,10 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 import React, {useMemo, useCallback} from 'react'
+
 import {FormattedMessage} from 'react-intl'
+
+import {ActivationEvent} from '../../keyboardActivation'
 
 import {Constants, Permission} from '../../constants'
 
@@ -23,7 +26,7 @@ type Props = {
     readonly: boolean
     addCard: (show: boolean) => Promise<void>
     selectedCardIds: string[]
-    onCardClicked: (e: React.MouseEvent, card: Card) => void
+    onCardClicked: (e: ActivationEvent, card: Card) => void
 }
 
 const Gallery = (props: Props): JSX.Element => {

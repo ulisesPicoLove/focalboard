@@ -2,12 +2,15 @@
 // See LICENSE.txt for license information.
 
 import React, {useCallback, useMemo, useState} from 'react'
+
 import {useIntl} from 'react-intl'
 
 import FullCalendar, {EventChangeArg, EventInput, EventContentArg, DayCellContentArg} from '@fullcalendar/react'
 
 import interactionPlugin from '@fullcalendar/interaction'
 import dayGridPlugin from '@fullcalendar/daygrid'
+
+import {keyboardActivation} from '../../keyboardActivation'
 
 import {DatePropertyType} from '../../properties/types'
 
@@ -158,7 +161,10 @@ const CalendarFullView = (props: Props): JSX.Element|null => {
             <>
                 <div
                     className='EventContent'
+                    role='button'
+                    aria-label={card.title || intl.formatMessage({id: 'CalendarCard.untitled', defaultMessage: 'Untitled'})}
                     onClick={() => props.showCard(event.id)}
+                    {...keyboardActivation(() => props.showCard(event.id))}
                 >
                     {!props.readonly &&
                     <MenuWrapper
@@ -258,7 +264,10 @@ const CalendarFullView = (props: Props): JSX.Element|null => {
             <div className={'dateContainer ' + (canAddCards ? 'with-plus' : '')}>
                 <div
                     className='addEvent'
+                    role='button'
+                    aria-label={intl.formatMessage({id: 'calendar.add-event', defaultMessage: 'Add event'})}
                     onClick={() => onNewEvent({start: args.date, end: args.date})}
+                    {...keyboardActivation(() => onNewEvent({start: args.date, end: args.date}))}
                 >
                     {'+'}
                 </div>
@@ -267,7 +276,7 @@ const CalendarFullView = (props: Props): JSX.Element|null => {
                 </div>
             </div>
         )
-    }, [canAddCards, onNewEvent])
+    }, [canAddCards, intl, onNewEvent])
 
     return (
         <div

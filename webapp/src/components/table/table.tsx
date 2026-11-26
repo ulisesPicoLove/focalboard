@@ -4,6 +4,8 @@ import React, {useCallback} from 'react'
 
 import {FormattedMessage} from 'react-intl'
 
+import {ActivationEvent} from '../../keyboardActivation'
+
 import {IPropertyOption, IPropertyTemplate, Board, BoardGroup} from '../../blocks/board'
 import {createBoardView, BoardView} from '../../blocks/boardView'
 import {Card} from '../../blocks/card'
@@ -36,7 +38,7 @@ type Props = {
     cardIdToFocusOnRender: string
     showCard: (cardId?: string) => void
     addCard: (groupByOptionId?: string) => Promise<void>
-    onCardClicked: (e: React.MouseEvent, card: Card) => void
+    onCardClicked: (e: ActivationEvent, card: Card) => void
 }
 
 const Table = (props: Props): JSX.Element => {

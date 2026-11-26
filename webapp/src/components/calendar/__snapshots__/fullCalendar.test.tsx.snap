@@ -281,7 +281,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -327,7 +330,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -373,7 +379,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -419,7 +428,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -465,7 +477,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -511,7 +526,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -557,7 +575,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -607,7 +628,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -653,7 +677,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -699,7 +726,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -725,7 +755,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                           class="fc-event-main"
                                         >
                                           <div
+                                            aria-label="title"
                                             class="EventContent"
+                                            role="button"
+                                            tabindex="0"
                                           >
                                             <div
                                               aria-label="menuwrapper"
@@ -790,7 +823,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -836,7 +872,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -882,7 +921,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -928,7 +970,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -978,7 +1023,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -1024,7 +1072,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -1070,7 +1121,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -1116,7 +1170,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -1162,7 +1219,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -1208,7 +1268,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -1254,7 +1317,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -1304,7 +1370,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -1350,7 +1419,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -1396,7 +1468,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -1442,7 +1517,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -1488,7 +1566,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -1534,7 +1615,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -1580,7 +1664,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -1630,7 +1717,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -1676,7 +1766,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -1722,7 +1815,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -1768,7 +1864,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -1814,7 +1913,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -1860,7 +1962,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -1906,7 +2011,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -1956,7 +2064,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -2002,7 +2113,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -2048,7 +2162,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -2094,7 +2211,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -2140,7 +2260,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -2186,7 +2309,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -2232,7 +2358,10 @@ exports[`components/calendar/toolbar return calendar, no date property 1`] = `
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -2555,7 +2684,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -2601,7 +2733,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -2647,7 +2782,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -2693,7 +2831,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -2739,7 +2880,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -2785,7 +2929,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -2831,7 +2978,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -2881,7 +3031,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -2927,7 +3080,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -2973,7 +3129,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -2999,7 +3158,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                           class="fc-event-main"
                                         >
                                           <div
+                                            aria-label="title"
                                             class="EventContent"
+                                            role="button"
+                                            tabindex="0"
                                           >
                                             <div
                                               aria-label="menuwrapper"
@@ -3064,7 +3226,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -3110,7 +3275,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -3156,7 +3324,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -3202,7 +3373,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -3252,7 +3426,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -3298,7 +3475,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -3344,7 +3524,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -3390,7 +3573,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -3436,7 +3622,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -3482,7 +3671,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -3528,7 +3720,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -3578,7 +3773,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -3624,7 +3822,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -3670,7 +3871,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -3716,7 +3920,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -3762,7 +3969,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -3808,7 +4018,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -3854,7 +4067,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -3904,7 +4120,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -3950,7 +4169,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -3996,7 +4218,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -4042,7 +4267,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -4088,7 +4316,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -4134,7 +4365,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -4180,7 +4414,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -4230,7 +4467,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -4276,7 +4516,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -4322,7 +4565,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -4368,7 +4614,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -4414,7 +4663,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -4460,7 +4712,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -4506,7 +4761,10 @@ exports[`components/calendar/toolbar return calendar, with date property not set
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -4829,7 +5087,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -4875,7 +5136,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -4921,7 +5185,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -4967,7 +5234,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -5013,7 +5283,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -5059,7 +5332,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -5105,7 +5381,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -5155,7 +5434,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -5201,7 +5483,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -5247,7 +5532,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -5293,7 +5581,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -5339,7 +5630,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -5385,7 +5679,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -5431,7 +5728,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -5481,7 +5781,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -5527,7 +5830,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -5573,7 +5879,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -5619,7 +5928,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -5665,7 +5977,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -5711,7 +6026,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -5757,7 +6075,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -5807,7 +6128,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -5853,7 +6177,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -5899,7 +6226,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -5945,7 +6275,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -5971,7 +6304,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                           class="fc-event-main"
                                         >
                                           <div
+                                            aria-label="title"
                                             class="EventContent"
+                                            role="button"
+                                            tabindex="0"
                                           >
                                             <div
                                               aria-label="menuwrapper"
@@ -6042,7 +6378,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -6088,7 +6427,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -6134,7 +6476,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -6184,7 +6529,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -6230,7 +6578,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -6276,7 +6627,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -6322,7 +6676,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -6368,7 +6725,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -6414,7 +6774,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -6460,7 +6823,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -6510,7 +6876,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -6556,7 +6925,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -6602,7 +6974,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -6648,7 +7023,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -6694,7 +7072,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -6740,7 +7121,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -6786,7 +7170,10 @@ exports[`components/calendar/toolbar return calendar, with date property set 1`]
                                         class="dateContainer with-plus"
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -7109,7 +7496,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -7155,7 +7545,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -7201,7 +7594,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -7247,7 +7643,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -7293,7 +7692,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -7339,7 +7741,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -7385,7 +7790,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -7435,7 +7843,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -7481,7 +7892,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -7527,7 +7941,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -7553,7 +7970,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                           class="fc-event-main"
                                         >
                                           <div
+                                            aria-label="title"
                                             class="EventContent"
+                                            role="button"
+                                            tabindex="0"
                                           >
                                             <div
                                               aria-label="menuwrapper"
@@ -7618,7 +8038,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -7664,7 +8087,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -7710,7 +8136,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -7756,7 +8185,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -7806,7 +8238,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -7852,7 +8287,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -7898,7 +8336,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -7944,7 +8385,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -7990,7 +8434,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -8036,7 +8483,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -8082,7 +8532,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -8132,7 +8585,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -8178,7 +8634,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -8224,7 +8683,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -8270,7 +8732,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -8316,7 +8781,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -8362,7 +8830,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -8408,7 +8879,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -8458,7 +8932,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -8504,7 +8981,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -8550,7 +9030,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -8596,7 +9079,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -8642,7 +9128,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -8688,7 +9177,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -8734,7 +9226,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -8784,7 +9279,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -8830,7 +9328,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -8876,7 +9377,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -8922,7 +9426,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -8968,7 +9475,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -9014,7 +9524,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>
@@ -9060,7 +9573,10 @@ exports[`components/calendar/toolbar return calendar, without permissions 1`] = 
                                         class="dateContainer "
                                       >
                                         <div
+                                          aria-label="Add event"
                                           class="addEvent"
+                                          role="button"
+                                          tabindex="0"
                                         >
                                           +
                                         </div>

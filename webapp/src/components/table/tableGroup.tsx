@@ -5,6 +5,8 @@ import React from 'react'
 
 import {useDrop} from 'react-dnd'
 
+import {ActivationEvent} from '../../keyboardActivation'
+
 import {Board, IPropertyOption, IPropertyTemplate, BoardGroup} from '../../blocks/board'
 import {BoardView} from '../../blocks/boardView'
 import {Card} from '../../blocks/card'
@@ -24,7 +26,7 @@ type Props = {
     addCard: (groupByOptionId?: string) => Promise<void>
     showCard: (cardId?: string) => void
     propertyNameChanged: (option: IPropertyOption, text: string) => Promise<void>
-    onCardClicked: (e: React.MouseEvent, card: Card) => void
+    onCardClicked: (e: ActivationEvent, card: Card) => void
     onDropToGroupHeader: (srcOption: IPropertyOption, dstOption?: IPropertyOption) => void
     onDropToCard: (srcCard: Card, dstCard: Card) => void
     onDropToGroup: (srcCard: Card, groupID: string, dstCardID: string) => void

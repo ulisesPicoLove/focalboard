@@ -2,6 +2,8 @@
 // See LICENSE.txt for license information.
 import React, {useCallback} from 'react'
 
+import {ActivationEvent} from '../../keyboardActivation'
+
 import {Card} from '../../blocks/card'
 import {Board} from '../../blocks/board'
 import {BoardView} from '../../blocks/boardView'
@@ -19,7 +21,7 @@ type Props = {
     cardIdToFocusOnRender: string
     showCard: (cardId?: string) => void
     addCard: (groupByOptionId?: string) => Promise<void>
-    onCardClicked: (e: React.MouseEvent, card: Card) => void
+    onCardClicked: (e: ActivationEvent, card: Card) => void
     onDrop: (srcCard: Card, dstCard: Card) => void
 }
 

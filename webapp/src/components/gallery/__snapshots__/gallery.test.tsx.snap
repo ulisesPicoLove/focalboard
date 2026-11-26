@@ -6,9 +6,12 @@ exports[`src/components/gallery/Gallery return Gallery and click new 1`] = `
     class="Gallery"
   >
     <div
+      aria-label="title"
       class="GalleryCard selected"
       draggable="true"
+      role="button"
       style="opacity: 1;"
+      tabindex="0"
     >
       <div
         aria-label="menuwrapper"
@@ -36,9 +39,12 @@ exports[`src/components/gallery/Gallery return Gallery and click new 1`] = `
       </div>
     </div>
     <div
+      aria-label="title"
       class="GalleryCard"
       draggable="true"
+      role="button"
       style="opacity: 1;"
+      tabindex="0"
     >
       <div
         aria-label="menuwrapper"
@@ -73,9 +79,12 @@ exports[`src/components/gallery/Gallery return Gallery readonly 1`] = `
     class="Gallery"
   >
     <div
+      aria-label="title"
       class="GalleryCard selected"
       draggable="true"
+      role="button"
       style="opacity: 1;"
+      tabindex="0"
     >
       <div
         class="gallery-item"
@@ -89,9 +98,12 @@ exports[`src/components/gallery/Gallery return Gallery readonly 1`] = `
       </div>
     </div>
     <div
+      aria-label="title"
       class="GalleryCard"
       draggable="true"
+      role="button"
       style="opacity: 1;"
+      tabindex="0"
     >
       <div
         class="gallery-item"
@@ -107,9 +119,12 @@ exports[`src/components/gallery/Gallery should match snapshot 1`] = `
     class="Gallery"
   >
     <div
+      aria-label="title"
       class="GalleryCard selected"
       draggable="true"
+      role="button"
       style="opacity: 1;"
+      tabindex="0"
     >
       <div
         aria-label="menuwrapper"
@@ -277,9 +292,12 @@ exports[`src/components/gallery/Gallery should match snapshot 1`] = `
       </div>
     </div>
     <div
+      aria-label="title"
       class="GalleryCard"
       draggable="true"
+      role="button"
       style="opacity: 1;"
+      tabindex="0"
     >
       <div
         aria-label="menuwrapper"
@@ -314,9 +332,12 @@ exports[`src/components/gallery/Gallery should match snapshot without permission
     class="Gallery"
   >
     <div
+      aria-label="title"
       class="GalleryCard selected"
       draggable="true"
+      role="button"
       style="opacity: 1;"
+      tabindex="0"
     >
       <div
         aria-label="menuwrapper"
@@ -423,9 +444,12 @@ exports[`src/components/gallery/Gallery should match snapshot without permission
       </div>
     </div>
     <div
+      aria-label="title"
       class="GalleryCard"
       draggable="true"
+      role="button"
       style="opacity: 1;"
+      tabindex="0"
     >
       <div
         aria-label="menuwrapper"

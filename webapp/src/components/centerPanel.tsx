@@ -2,8 +2,11 @@
 // See LICENSE.txt for license information.
 /* eslint-disable max-lines */
 import React, {useState, useCallback, useEffect, useMemo, Suspense} from 'react'
+
 import {useIntl} from 'react-intl'
 import {useHotkeys} from 'react-hotkeys-hook'
+
+import {ActivationEvent} from '../keyboardActivation'
 
 import {ClientConfig} from '../config/clientConfig'
 
@@ -308,7 +311,7 @@ const CenterPanel = (props: Props) => {
         showCard(cardTemplateId)
     }, [showCard])
 
-    const cardClicked = useCallback((e: React.MouseEvent, card: Card): void => {
+    const cardClicked = useCallback((e: ActivationEvent, card: Card): void => {
         if (e.shiftKey) {
             let newSelectedCardIds = [...selectedCardIds]
             if (newSelectedCardIds.length > 0 && (e.metaKey || e.ctrlKey)) {

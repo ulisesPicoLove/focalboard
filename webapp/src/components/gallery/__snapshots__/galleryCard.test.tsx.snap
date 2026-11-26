@@ -3,9 +3,12 @@
 exports[`src/components/gallery/GalleryCard with a comment content return GalleryCard with content readonly 1`] = `
 <div>
   <div
+    aria-label="title"
     class="GalleryCard selected"
     draggable="true"
+    role="button"
     style="opacity: 1;"
+    tabindex="0"
   >
     <div
       class="gallery-item"
@@ -31,9 +34,12 @@ exports[`src/components/gallery/GalleryCard with a comment content return Galler
 exports[`src/components/gallery/GalleryCard with a comment content should match snapshot 1`] = `
 <div>
   <div
+    aria-label="title"
     class="GalleryCard selected"
     draggable="true"
+    role="button"
     style="opacity: 1;"
+    tabindex="0"
   >
     <div
       aria-label="menuwrapper"
@@ -212,9 +218,12 @@ exports[`src/components/gallery/GalleryCard with a comment content should match 
 exports[`src/components/gallery/GalleryCard with an image content should match snapshot 1`] = `
 <div>
   <div
+    aria-label="title"
     class="GalleryCard selected"
     draggable="true"
+    role="button"
     style="opacity: 1;"
+    tabindex="0"
   >
     <div
       aria-label="menuwrapper"
@@ -399,9 +408,12 @@ exports[`src/components/gallery/GalleryCard with an image content should match s
 exports[`src/components/gallery/GalleryCard with many contents return GalleryCard with contents readonly 1`] = `
 <div>
   <div
+    aria-label="title"
     class="GalleryCard selected"
     draggable="true"
+    role="button"
     style="opacity: 1;"
+    tabindex="0"
   >
     <div
       class="gallery-item"
@@ -431,9 +443,12 @@ exports[`src/components/gallery/GalleryCard with many contents return GalleryCar
 exports[`src/components/gallery/GalleryCard with many contents should match snapshot 1`] = `
 <div>
   <div
+    aria-label="title"
     class="GalleryCard selected"
     draggable="true"
+    role="button"
     style="opacity: 1;"
+    tabindex="0"
   >
     <div
       aria-label="menuwrapper"
@@ -616,9 +631,12 @@ exports[`src/components/gallery/GalleryCard with many contents should match snap
 exports[`src/components/gallery/GalleryCard with many images content should match snapshot with only first image 1`] = `
 <div>
   <div
+    aria-label="title"
     class="GalleryCard selected"
     draggable="true"
+    role="button"
     style="opacity: 1;"
+    tabindex="0"
   >
     <div
       aria-label="menuwrapper"
@@ -803,9 +821,12 @@ exports[`src/components/gallery/GalleryCard with many images content should matc
 exports[`src/components/gallery/GalleryCard without block content return GalleryCard and cancel 1`] = `
 <div>
   <div
+    aria-label="title"
     class="GalleryCard selected"
     draggable="true"
+    role="button"
     style="opacity: 1;"
+    tabindex="0"
   >
     <div
       aria-label="menuwrapper"
@@ -844,9 +865,12 @@ exports[`src/components/gallery/GalleryCard without block content return Gallery
 exports[`src/components/gallery/GalleryCard without block content return GalleryCard and copy link 1`] = `
 <div>
   <div
+    aria-label="title"
     class="GalleryCard selected"
     draggable="true"
+    role="button"
     style="opacity: 1;"
+    tabindex="0"
   >
     <div
       aria-label="menuwrapper"
@@ -885,9 +909,12 @@ exports[`src/components/gallery/GalleryCard without block content return Gallery
 exports[`src/components/gallery/GalleryCard without block content return GalleryCard and delete card 1`] = `
 <div>
   <div
+    aria-label="title"
     class="GalleryCard selected"
     draggable="true"
+    role="button"
     style="opacity: 1;"
+    tabindex="0"
   >
     <div
       aria-label="menuwrapper"
@@ -997,9 +1024,12 @@ exports[`src/components/gallery/GalleryCard without block content return Gallery
 exports[`src/components/gallery/GalleryCard without block content return GalleryCard and duplicate card 1`] = `
 <div>
   <div
+    aria-label="title"
     class="GalleryCard selected"
     draggable="true"
+    role="button"
     style="opacity: 1;"
+    tabindex="0"
   >
     <div
       aria-label="menuwrapper"
@@ -1038,9 +1068,12 @@ exports[`src/components/gallery/GalleryCard without block content return Gallery
 exports[`src/components/gallery/GalleryCard without block content should match snapshot 1`] = `
 <div>
   <div
+    aria-label="title"
     class="GalleryCard selected"
     draggable="true"
+    role="button"
     style="opacity: 1;"
+    tabindex="0"
   >
     <div
       aria-label="menuwrapper"
