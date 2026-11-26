@@ -46,7 +46,7 @@ Balance acumulado de `main` a `chore/phase2-cleanup`: **596 archivos cambiados, 
 | S11 | SSO: vinculación y duplicados | **Corregido** (Fase 1) | Se enlaza el `sub` de Google en el primer login; alta SSO serializada con un mutex (no hay índice único en `users`, así que solo protege una instancia) |
 | S12 | Cualquiera regenera el token de invitación | **Corregido** (Fase 1) | Se rechaza fuera del modo `native` |
 | S13 | Prometheus bloquea `Start()` y escucha en todas las interfaces | **Corregido** (Fase 1) | Corre en goroutine, escucha en `localhost`, SIGINT apaga limpio (probado en vivo) |
-| S14 | Zoom deshabilitado y Google Fonts | **Pendiente** | Sin tocar |
+| S14 | Zoom deshabilitado y Google Fonts | **Hecho (Fase 3)** | Fuentes locales con `@fontsource` y zoom habilitado |
 
 ### 0.2 Calidad del servidor (sección 4)
 
