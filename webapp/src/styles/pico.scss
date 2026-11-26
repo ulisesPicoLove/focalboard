@@ -168,7 +168,6 @@
     // ------------------------------------------------------------------
 
     // Announcement bar: quiet hairline strip instead of a full mint banner
-    .VersionMessage,
     .NewVersionBanner {
         background: transparent;
         border-bottom: 1px solid var(--pico-line);
@@ -958,12 +957,6 @@
             color: rgba(var(--center-channel-color-rgb), 0.56);
         }
 
-        .VersionMessage > .banner {
-            flex-wrap: wrap;
-            gap: 4px 8px;
-            padding: 8px 12px;
-            font-size: 10px;
-        }
 
         .Menu.noselect .menu-contents {
             min-width: 220px;
