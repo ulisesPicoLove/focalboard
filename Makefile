@@ -176,6 +176,7 @@ webapp: ## Build webapp.
 	cd webapp; npm run pack
 
 webapp-ci: ## Webapp CI: linting & testing.
+	cd webapp; npm run typecheck
 	cd webapp; npm run check
 	cd webapp; npm run test
 	cd webapp; npm run cypress:ci

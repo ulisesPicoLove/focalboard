@@ -140,6 +140,8 @@ func TestPatchBoard(t *testing.T) {
 	defer tearDown()
 
 	t.Run("base case, title patch", func(t *testing.T) {
+		defer th.drainNotifier(t)
+
 		const boardID = "board_id_1"
 		const userID = "user_id_1"
 		const teamID = "team_id_1"
@@ -166,6 +168,8 @@ func TestPatchBoard(t *testing.T) {
 	})
 
 	t.Run("patch type open, no users", func(t *testing.T) {
+		defer th.drainNotifier(t)
+
 		const boardID = "board_id_1"
 		const userID = "user_id_2"
 		const teamID = "team_id_1"
@@ -205,6 +209,8 @@ func TestPatchBoard(t *testing.T) {
 	})
 
 	t.Run("patch type private, no users", func(t *testing.T) {
+		defer th.drainNotifier(t)
+
 		const boardID = "board_id_1"
 		const userID = "user_id_2"
 		const teamID = "team_id_1"
@@ -243,6 +249,8 @@ func TestPatchBoard(t *testing.T) {
 	})
 
 	t.Run("patch type open, single user", func(t *testing.T) {
+		defer th.drainNotifier(t)
+
 		const boardID = "board_id_1"
 		const userID = "user_id_2"
 		const teamID = "team_id_1"
@@ -281,6 +289,8 @@ func TestPatchBoard(t *testing.T) {
 	})
 
 	t.Run("patch type private, single user", func(t *testing.T) {
+		defer th.drainNotifier(t)
+
 		const boardID = "board_id_1"
 		const userID = "user_id_2"
 		const teamID = "team_id_1"
@@ -319,6 +329,8 @@ func TestPatchBoard(t *testing.T) {
 	})
 
 	t.Run("patch type open, user with member", func(t *testing.T) {
+		defer th.drainNotifier(t)
+
 		const boardID = "board_id_1"
 		const userID = "user_id_2"
 		const teamID = "team_id_1"
@@ -360,6 +372,8 @@ func TestPatchBoard(t *testing.T) {
 	})
 
 	t.Run("patch type private, user with member", func(t *testing.T) {
+		defer th.drainNotifier(t)
+
 		const boardID = "board_id_1"
 		const userID = "user_id_2"
 		const teamID = "team_id_1"
@@ -402,6 +416,8 @@ func TestPatchBoard(t *testing.T) {
 	})
 
 	t.Run("patch type channel, user without post permissions", func(t *testing.T) {
+		defer th.drainNotifier(t)
+
 		const boardID = "board_id_1"
 		const userID = "user_id_2"
 		const teamID = "team_id_1"
@@ -427,6 +443,8 @@ func TestPatchBoard(t *testing.T) {
 	})
 
 	t.Run("patch type channel, user with post permissions", func(t *testing.T) {
+		defer th.drainNotifier(t)
+
 		const boardID = "board_id_1"
 		const userID = "user_id_2"
 		const teamID = "team_id_1"
@@ -465,6 +483,8 @@ func TestPatchBoard(t *testing.T) {
 	})
 
 	t.Run("patch type remove channel, user without post permissions", func(t *testing.T) {
+		defer th.drainNotifier(t)
+
 		const boardID = "board_id_1"
 		const userID = "user_id_2"
 		const teamID = "team_id_1"

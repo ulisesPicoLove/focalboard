@@ -3,7 +3,9 @@
 package app
 
 import (
+	"sync"
 	"testing"
+	"time"
 
 	"github.com/golang/mock/gomock"
 
@@ -71,4 +73,38 @@ func SetupTestHelper(t *testing.T) (*TestHelper, func()) {
 		logger:       logger,
 		API:          mockAPI,
 	}, tearDown
+}
+
+// drainNotifier waits until every callback queued so far on the block change notifier has
+// finished. The callbacks call the store mocks asynchronously: without waiting, a callback
+// from one subtest can consume the expectations of the next one.
+func (th *TestHelper) drainNotifier(t *testing.T) {
+	t.Helper()
+
+	var started, release sync.WaitGroup
+	started.Add(blockChangeNotifierPoolSize)
+	release.Add(1)
+
+	// The queue is FIFO and has one worker per slot: when all of them are inside these
+	// barrier callbacks, every earlier callback has completed.
+	for i := 0; i < blockChangeNotifierPoolSize; i++ {
+		th.App.blockChangeNotifier.Enqueue(func() error {
+			started.Done()
+			release.Wait()
+			return nil
+		})
+	}
+
+	done := make(chan struct{})
+	go func() {
+		started.Wait()
+		close(done)
+	}()
+
+	select {
+	case <-done:
+	case <-time.After(5 * time.Second):
+		t.Error("timed out waiting for the block change notifier to drain")
+	}
+	release.Done()
 }
