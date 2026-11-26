@@ -111,6 +111,9 @@ const BoardSwitcherDialog = (props: Props): JSX.Element => {
         return () => {
             document.removeEventListener('keydown', handleEnterKeyPress)
         }
+
+    // The handler is recreated on every render; re-running would steal the focus each time
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selected, refs, IDs])
 
     return (

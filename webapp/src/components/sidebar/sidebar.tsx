@@ -101,11 +101,12 @@ const Sidebar = (props: Props) => {
     const teamId = useAppSelector(getCurrentTeamId)
     const team = useAppSelector(getCurrentTeam)
 
+    const currentTeamID = team?.id
     useEffect(() => {
-        if (team) {
-            dispatch(fetchSidebarCategories(team!.id))
+        if (currentTeamID) {
+            dispatch(fetchSidebarCategories(currentTeamID))
         }
-    }, [team?.id])
+    }, [currentTeamID, dispatch])
 
     useEffect(() => {
         loadTheme()
@@ -122,6 +123,9 @@ const Sidebar = (props: Props) => {
 
     useEffect(() => {
         hideSidebar()
+
+    // Close the sidebar when the window is resized; hideSidebar is recreated on every render
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [windowDimensions])
 
     // This handles the case when a user opens a linked board from Channels RHS

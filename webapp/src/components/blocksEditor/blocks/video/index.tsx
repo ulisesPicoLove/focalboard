@@ -34,7 +34,7 @@ const Video: ContentType<FileInfo> = {
                 }
                 loadVideo()
             }
-        }, [props.value, props.value.file, props.currentBoardId])
+        }, [props.value, props.value.file, props.currentBoardId, videoDataUrl])
 
         if (videoDataUrl) {
             return (

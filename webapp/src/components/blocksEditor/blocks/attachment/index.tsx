@@ -32,7 +32,7 @@ const Attachment: ContentType<FileInfo> = {
                 }
                 loadFile()
             }
-        }, [props.value, props.value.file, props.currentBoardId])
+        }, [props.value, props.value.file, props.currentBoardId, fileDataUrl])
 
         return (
             <div

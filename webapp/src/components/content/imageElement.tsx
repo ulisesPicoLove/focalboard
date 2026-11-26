@@ -34,7 +34,7 @@ const ImageElement = (props: Props): JSX.Element|null => {
             }
             loadImage()
         }
-    }, [])
+    }, [block.boardId, props.block.fields.fileId, imageDataUrl])
 
     if (fileInfo.archived) {
         return (

@@ -43,13 +43,16 @@ const ViewHeaderSearch = (): JSX.Element => {
             debouncedDispatchSearchText.cancel()
             dispatchSearchText('')
         }
+
+    // Reset the search only when the URL changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [match.url])
 
     useEffect(() => {
         return () => {
             debouncedDispatchSearchText.cancel()
         }
-    }, [])
+    }, [debouncedDispatchSearchText])
 
     useHotkeys('ctrl+shift+f,cmd+shift+f', () => {
         searchFieldRef.current?.focus(true)

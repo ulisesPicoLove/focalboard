@@ -55,10 +55,12 @@ const TableRow = (props: Props) => {
     const [showConfirmationDialogBox, setShowConfirmationDialogBox] = useState<boolean>(false)
     const columnResize = useColumnResize()
 
+    // Focus the title once, when the row is created
     useEffect(() => {
         if (props.focusOnMount) {
             setTimeout(() => titleRef.current?.focus(), 10)
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const {onClick: onCardClick} = props

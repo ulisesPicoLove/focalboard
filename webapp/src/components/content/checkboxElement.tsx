@@ -37,9 +37,10 @@ const CheckboxElement = (props: Props) => {
         }
     }, [block, addedBlockId, titleRef])
 
+    const checked = Boolean(block.fields.value)
     useEffect(() => {
-        setActive(Boolean(block.fields.value))
-    }, [Boolean(block.fields.value)])
+        setActive(checked)
+    }, [checked])
 
     return (
         <div className='CheckboxElement'>

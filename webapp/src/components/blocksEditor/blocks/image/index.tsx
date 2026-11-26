@@ -33,7 +33,7 @@ const Image: ContentType<FileInfo> = {
                 }
                 loadImage()
             }
-        }, [props.value, props.value.file, props.currentBoardId])
+        }, [props.value, props.value.file, props.currentBoardId, imageDataUrl])
 
         if (imageDataUrl) {
             return (

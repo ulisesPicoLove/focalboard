@@ -58,6 +58,9 @@ function DateRange(props: PropertyProps): JSX.Element {
         if (value !== propertyValue) {
             setValue(propertyValue)
         }
+
+    // Sync only when the stored value changes; depending on the local value would undo what the user is typing
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [propertyValue, setValue])
 
     const onChange = useCallback((newValue: PropertyProps['propertyValue']) => {

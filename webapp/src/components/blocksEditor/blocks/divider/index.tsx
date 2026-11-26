@@ -15,8 +15,10 @@ const Divider: ContentType = {
     editable: false,
     Display: () => <hr className='Divider'/>,
     Input: (props: BlockInputProps) => {
+        // Saves the (empty) divider once when it is created
         useEffect(() => {
             props.onSave(props.value)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [])
         return null
     },

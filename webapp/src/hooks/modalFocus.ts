@@ -27,7 +27,7 @@ export function useModalFocus(containerRef: React.RefObject<HTMLElement>): (e: R
                 opener.focus()
             }
         }
-    }, [])
+    }, [containerRef])
 
     return (e: React.KeyboardEvent) => {
         const container = containerRef.current

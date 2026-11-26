@@ -71,6 +71,8 @@ const MarkdownEditorInput = (props: Props): ReactElement => {
 
     const [suggestions, setSuggestions] = useState<MentionUser[]>([])
 
+    // Known: the debounce below is rebuilt on every render. Left as is because this draft-js editor is going to be replaced
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const loadSuggestions = async (term: string) => {
         let users: IUser[]
 
@@ -112,6 +114,9 @@ const MarkdownEditorInput = (props: Props): ReactElement => {
         // Get the ball rolling. Searching for empty string
         // returns first 10 users in alphabetical order.
         loadSuggestions('')
+
+    // Load the first suggestions once, when the editor mounts
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const generateEditorState = (text?: string) => {
@@ -160,6 +165,9 @@ const MarkdownEditorInput = (props: Props): ReactElement => {
             setInitialTextCache(initialText)
             setInitialTextUsed(true)
         }
+
+    // The initial text is applied once (see the comment above); the cache and flag must not retrigger it
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [initialText])
 
     const [isMentionPopoverOpen, setIsMentionPopoverOpen] = useState(false)

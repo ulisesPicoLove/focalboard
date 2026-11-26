@@ -72,6 +72,9 @@ const SidebarCategoriesTourStep = (): JSX.Element | null => {
 
         // this hack is needed to allow performing async task in useEffect
         task()
+
+    // Start the tour once; re-running on user or tour state changes would patch the user config again
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

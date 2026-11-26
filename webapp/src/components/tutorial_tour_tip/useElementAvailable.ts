@@ -26,6 +26,9 @@ export default function useElementAvailable(
                 }
             }
         }, 500)
+
+    // Start polling once, when the hook mounts
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return available

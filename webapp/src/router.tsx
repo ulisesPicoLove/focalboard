@@ -44,6 +44,9 @@ function WorkspaceToTeamRedirect() {
                 history.replace(newPath)
             }
         })
+
+    // Redirect once, when the route mounts
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return null
 }

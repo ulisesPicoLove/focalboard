@@ -103,7 +103,7 @@ const SidebarCategory = (props: Props) => {
         if (shouldViewManageCatergoriesTour && props.index === 0) {
             setCategoryMenuOpen(true)
         }
-    }, [shouldViewManageCatergoriesTour])
+    }, [shouldViewManageCatergoriesTour, props.index])
 
     const {activeBoardID, hideSidebar, onBoardTemplateSelectorClose} = props
     const showBoard = useCallback((boardId: string) => {

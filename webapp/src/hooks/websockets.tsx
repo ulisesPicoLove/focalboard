@@ -17,5 +17,8 @@ export const useWebsockets = (teamId: string, fn: (wsClient: WSClient) => () => 
             teardown()
             wsClient.unsubscribeToTeam(teamId)
         }
+
+    // `fn` is a new closure on every render: callers list in `deps` what should re-subscribe
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [teamId, ...deps])
 }

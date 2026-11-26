@@ -226,6 +226,9 @@ export default function ShareBoardDialog(props: Props): JSX.Element {
 
     useEffect(() => {
         loadData()
+
+    // Load the members and sharing info once, when the dialog opens
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const isSharing = Boolean(sharing && sharing.id === boardId && sharing.enabled)

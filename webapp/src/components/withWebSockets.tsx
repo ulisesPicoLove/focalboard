@@ -33,6 +33,9 @@ const WithWebSockets = (props: Props): React.ReactElement => {
             wsClient.authenticate(token)
         }
         wsClient.open()
+
+    // Open the connection once; the token is read from storage and the URL at that moment
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
@@ -44,6 +47,9 @@ const WithWebSockets = (props: Props): React.ReactElement => {
         if (wsClient.token !== token) {
             wsClient.authenticate(token)
         }
+
+    // Re-authenticate only when the user changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.userId])
 
     return (

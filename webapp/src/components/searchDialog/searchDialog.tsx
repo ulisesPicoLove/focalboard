@@ -103,6 +103,9 @@ const SearchDialog = (props: Props): JSX.Element => {
         return () => {
             document.removeEventListener('keydown', handleUpDownKeyPress)
         }
+
+    // The handler only depends on results and selected; it is recreated on every render
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [results, selected])
 
     return (

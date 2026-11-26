@@ -61,6 +61,9 @@ const BoardTemplateSelector = (props: Props) => {
         if (octoClient.teamId !== Constants.globalTeamId && globalTemplates.length === 0) {
             dispatch(fetchGlobalTemplates())
         }
+
+    // Fetch the global templates when the team changes (the client is a singleton, not state)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [octoClient.teamId])
 
     const onBoardTemplateDelete = useCallback((template: Board) => {
@@ -110,6 +113,9 @@ const BoardTemplateSelector = (props: Props) => {
         if (!activeTemplate) {
             setActiveTemplate(templates.concat(globalTemplates)[0])
         }
+
+    // Pick the first template once they load (globalTemplates is a new array on every render)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [templates, globalTemplates])
 
     if (!allTemplates) {

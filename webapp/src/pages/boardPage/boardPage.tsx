@@ -227,12 +227,18 @@ const BoardPage = (props: Props): JSX.Element => {
                 }
             }
         }
+
+    // Load when the team, board, view or user changes; loadAction and dispatch are not triggers
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [teamId, match.params.boardId, viewId, me?.id])
 
     useEffect(() => {
         if (match.params.boardId && !props.readonly && me) {
             loadOrJoinBoard(me, teamId, match.params.boardId)
         }
+
+    // Join when the team, board or user changes (not when other props change)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [teamId, match.params.boardId, me?.id])
 
     const handleUnhideBoard = async (boardID: string) => {
@@ -251,6 +257,9 @@ const BoardPage = (props: Props): JSX.Element => {
         if (hiddenBoardIDs.indexOf(match.params.boardId) >= 0) {
             handleUnhideBoard(match.params.boardId)
         }
+
+    // Unhide when the user, team or board changes, not every time the hidden list changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [me?.id, teamId, match.params.boardId])
 
     return (

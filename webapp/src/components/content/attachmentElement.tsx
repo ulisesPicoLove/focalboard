@@ -57,6 +57,9 @@ const AttachmentElement = (props: Props): JSX.Element|null => {
             setFileInfo(attachmentInfo)
         }
         loadFile()
+
+    // Load the file info once, when the block mounts
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
@@ -74,7 +77,7 @@ const AttachmentElement = (props: Props): JSX.Element|null => {
             }
             setFileName(generateFileName(fileInfo.name))
         }
-    }, [fileInfo.size, fileInfo.name])
+    }, [fileInfo.size, fileInfo.name, fileSize, fileName])
 
     useEffect(() => {
         if (fileInfo.extension) {

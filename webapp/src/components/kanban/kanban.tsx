@@ -64,6 +64,9 @@ const Kanban = (props: Props) => {
                 setDefaultTemplateID(activeView.fields.defaultTemplateId)
             }
         }
+
+    // Only re-check the default template when the view setting changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activeView.fields.defaultTemplateId])
 
     const propertyValues = groupByProperty?.options || []

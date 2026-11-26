@@ -12,9 +12,11 @@ function TextInputOption(props: TextInputOptionProps): JSX.Element {
     const nameTextbox = useRef<HTMLInputElement>(null)
     const [value, setValue] = useState(props.initialValue)
 
+    // Focus and select the text once, when the option appears
     useEffect(() => {
         nameTextbox.current?.focus()
         nameTextbox.current?.setSelectionRange(0, value.length)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

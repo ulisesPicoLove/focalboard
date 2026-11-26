@@ -15,17 +15,20 @@ const SetWindowTitleAndIcon = (): null => {
         Utils.setFavicon(board?.icon)
     }, [board?.icon])
 
+    const hasBoard = Boolean(board)
+    const boardTitle = board?.title
+    const viewTitle = activeView?.title
     useEffect(() => {
-        if (board) {
-            let title = `${board.title}`
-            if (activeView?.title) {
-                title += ` | ${activeView.title}`
+        if (hasBoard) {
+            let title = `${boardTitle}`
+            if (viewTitle) {
+                title += ` | ${viewTitle}`
             }
             document.title = title
         } else {
             document.title = 'Picoboard'
         }
-    }, [board?.title, activeView?.title])
+    }, [hasBoard, boardTitle, viewTitle])
 
     return null
 }

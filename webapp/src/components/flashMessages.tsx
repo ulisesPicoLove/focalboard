@@ -1,6 +1,6 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef, useCallback} from 'react'
 import {createNanoEvents} from 'nanoevents'
 
 import './flashMessages.scss'
@@ -23,41 +23,40 @@ type Props = {
 export const FlashMessages = React.memo((props: Props) => {
     const [message, setMessage] = useState<FlashMessage|null>(null)
     const [fadeOut, setFadeOut] = useState(false)
-    const [timeoutId, setTimeoutId] = useState<ReturnType<typeof setTimeout>|null>(null)
+    const timer = useRef<ReturnType<typeof setTimeout>|null>(null)
 
-    useEffect(() => {
-        let isSubscribed = true
-        emitter.on('message', (newMessage: FlashMessage) => {
-            if (isSubscribed) {
-                if (timeoutId) {
-                    clearTimeout(timeoutId)
-                    setTimeoutId(null)
-                }
-                setTimeoutId(setTimeout(handleFadeOut, props.milliseconds - 200))
-                setMessage(newMessage)
-            }
-        })
-        return () => {
-            isSubscribed = false
+    const clearTimer = useCallback((): void => {
+        if (timer.current) {
+            clearTimeout(timer.current)
+            timer.current = null
         }
     }, [])
 
-    const handleFadeOut = (): void => {
+    const fadeOutNow = useCallback((): void => {
         setFadeOut(true)
-        setTimeoutId(setTimeout(handleTimeout, 200))
-    }
+        timer.current = setTimeout(() => {
+            setMessage(null)
+            setFadeOut(false)
+        }, 200)
+    }, [])
 
-    const handleTimeout = (): void => {
-        setMessage(null)
-        setFadeOut(false)
-    }
+    const {milliseconds} = props
+    useEffect(() => {
+        const unsubscribe = emitter.on('message', (newMessage: FlashMessage) => {
+            clearTimer()
+            setFadeOut(false)
+            timer.current = setTimeout(fadeOutNow, milliseconds - 200)
+            setMessage(newMessage)
+        })
+        return () => {
+            unsubscribe()
+            clearTimer()
+        }
+    }, [milliseconds, clearTimer, fadeOutNow])
 
     const handleClick = (): void => {
-        if (timeoutId) {
-            clearTimeout(timeoutId)
-            setTimeoutId(null)
-        }
-        handleFadeOut()
+        clearTimer()
+        fadeOutNow()
     }
 
     // The live region stays in the page so screen readers announce a message when it appears;

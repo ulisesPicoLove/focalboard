@@ -50,7 +50,7 @@ function SubMenuOption(props: SubMenuOptionProps): JSX.Element {
         }
 
         styleRef.current = newStyle
-    }, [ref.current])
+    }, [props.position])
 
     const toggleOpen = (e: React.SyntheticEvent) => {
         e.preventDefault()

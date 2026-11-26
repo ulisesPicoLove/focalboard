@@ -121,6 +121,9 @@ const CardDetail = (props: Props): JSX.Element|null => {
         if (!title) {
             setTimeout(() => titleRef.current?.focus(), 300)
         }
+
+    // Focus the empty title once, when the card opens
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
@@ -128,6 +131,9 @@ const CardDetail = (props: Props): JSX.Element|null => {
             setTitle(card.title)
         }
         setServerTitle(card.title)
+
+    // Compares against the previous server title: re-running when it is updated here would overwrite what the user types
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [card.title, title])
 
     useEffect(() => {

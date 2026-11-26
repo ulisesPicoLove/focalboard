@@ -79,6 +79,9 @@ const TeamToBoardAndViewRedirect = (): null => {
                 history.replace(newPath)
             }
         }
+
+    // Redirect when the route or the number of boards and views changes, not on every update of those lists
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [teamId, match.params.boardId, match.params.viewId, categories.length, boardViews.length, boardId])
 
     return null
