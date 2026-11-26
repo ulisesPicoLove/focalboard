@@ -68,14 +68,10 @@ type Props = {
 }
 
 const FocalboardRouter = (props: Props): JSX.Element => {
-    let browserHistory: History<unknown>
-    if (props.history) {
-        browserHistory = props.history
-    } else {
-        browserHistory = useMemo(() => {
-            return createBrowserHistory({basename: Utils.getFrontendBaseURL()})
-        }, [])
-    }
+    const defaultHistory = useMemo(() => {
+        return props.history ? null : createBrowserHistory({basename: Utils.getFrontendBaseURL()})
+    }, [])
+    const browserHistory = (props.history || defaultHistory) as History<unknown>
 
     return (
         <Router history={browserHistory}>

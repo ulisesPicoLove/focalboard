@@ -8,12 +8,13 @@ import {Permission} from '../constants'
 import {MemberRole} from '../blocks/board'
 
 export const useHasPermissions = (teamId: string, boardId: string, permissions: Permission[]): boolean => {
+    // The hooks run on every render; the selectors skip the store when there is nothing to look up
+    const member = useAppSelector((state) => (boardId && teamId ? getMyBoardMembership(boardId)(state) : null))
+    const board = useAppSelector((state) => (boardId && teamId ? getBoard(boardId)(state) : undefined))
+
     if (!boardId || !teamId) {
         return false
     }
-
-    const member = useAppSelector(getMyBoardMembership(boardId))
-    const board = useAppSelector(getBoard(boardId))
 
     if (!board) {
         return false

@@ -146,10 +146,6 @@ const CardDetail = (props: Props): JSX.Element|null => {
         dispatch(setCurrentCard(card.id))
     }, [card.id])
 
-    if (!card) {
-        return null
-    }
-
     const blocks = useMemo(() => props.contents.flatMap((value: Block | Block[]): BlockData<any> => {
         const v: Block = Array.isArray(value) ? value[0] : value
 
@@ -187,6 +183,10 @@ const CardDetail = (props: Props): JSX.Element|null => {
             contentType: v?.type,
         }
     }), [props.contents])
+
+    if (!card) {
+        return null
+    }
 
     return (
         <>

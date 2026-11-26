@@ -163,10 +163,6 @@ const Sidebar = (props: Props) => {
         }
     }, [teamId])
 
-    if (!boards) {
-        return <div/>
-    }
-
     const hideSidebar = () => {
         if (!userHidden) {
             if (windowDimensions.width < 768) {

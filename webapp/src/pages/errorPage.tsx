@@ -9,13 +9,13 @@ import ErrorIllustration from '../svg/error-illustration'
 import Button from '../widgets/buttons/button'
 import './errorPage.scss'
 
-import {errorDefFromId, ErrorId} from '../errors'
+import {useErrorDefFromId, ErrorId} from '../errors'
 
 const ErrorPage = () => {
     const history = useHistory()
     const queryParams = new URLSearchParams(useLocation().search)
     const errid = queryParams.get('id')
-    const errorDef = errorDefFromId(errid as ErrorId)
+    const errorDef = useErrorDefFromId(errid as ErrorId)
 
     const handleButtonClick = useCallback((path: string | ((params: URLSearchParams) => string)) => {
         let url = '/'

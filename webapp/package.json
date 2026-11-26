@@ -125,6 +125,7 @@
 		"eslint-plugin-mattermost": "github:mattermost/eslint-plugin-mattermost#23abcf9988f7fa00d26929f11841aab7ccb16b2b",
 		"eslint-plugin-no-only-tests": "2.6.0",
 		"eslint-plugin-react": "7.29.4",
+		"eslint-plugin-react-hooks": "4.6.2",
 		"html-webpack-plugin": "^5.5.0",
 		"isomorphic-fetch": "^3.0.0",
 		"jest": "27.5.1",

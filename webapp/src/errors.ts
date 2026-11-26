@@ -28,7 +28,7 @@ type ErrorDef = {
     button2ClearHistory: boolean
 }
 
-function errorDefFromId(id: ErrorId | null): ErrorDef {
+function useErrorDefFromId(id: ErrorId | null): ErrorDef {
     const errDef: ErrorDef = {
         title: '',
         button1Enabled: false,
@@ -103,4 +103,4 @@ function errorDefFromId(id: ErrorId | null): ErrorDef {
     return errDef
 }
 
-export {ErrorId, ErrorDef, errorDefFromId}
+export {ErrorId, ErrorDef, useErrorDefFromId}

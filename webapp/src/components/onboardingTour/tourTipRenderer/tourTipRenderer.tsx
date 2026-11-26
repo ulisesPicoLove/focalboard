@@ -41,6 +41,7 @@ const TourTipRenderer = (props: Props): JSX.Element | null => {
     const onboardingTourCategory = useAppSelector(getOnboardingTourCategory)
     const onboardingTourStep = useAppSelector(getOnboardingTourStep)
     const disableTour = clientConfig?.featureFlags?.disableTour || false
+    const card = useAppSelector((state) => (props.requireCard ? getCurrentCard(state) : undefined))
 
     if (props.showForce) {
         isOnboardingBoard = true
@@ -50,7 +51,6 @@ const TourTipRenderer = (props: Props): JSX.Element | null => {
     let showTourTip = showTour && onboardingTourStep === props.step.toString()
 
     if (props.requireCard) {
-        const card = useAppSelector(getCurrentCard)
         const isOnboardingCard = card ? card.title === OnboardingCardTitle : false
 
         showTourTip = showTourTip && isOnboardingCard

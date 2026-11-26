@@ -6,6 +6,7 @@
   ],
   "plugins": [
     "react",
+    "react-hooks",
     "babel",
     "mattermost",
     "import",
@@ -26,6 +27,8 @@
     }
   },
   "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "max-lines": "off",
     "no-unused-expressions": 0,
     "babel/no-unused-expressions": [2, {"allowShortCircuit": true}],
