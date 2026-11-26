@@ -11,6 +11,9 @@ const (
 	DefaultServerRoot = "http://localhost:8000"
 	DefaultPort       = 8000
 	DBPingAttempts    = 5
+
+	// DefaultMaxFileSize is the upload limit in bytes (50 MiB) when none is configured.
+	DefaultMaxFileSize = 50 << 20
 )
 
 type AmazonS3Config struct {
@@ -118,6 +121,7 @@ func ReadConfigFile(configFilePath string) (*Configuration, error) {
 	viper.SetDefault("FeatureFlags", map[string]string{})
 	viper.SetDefault("DataRetentionDays", 365) // 1 year is default
 	viper.SetDefault("PrometheusAddress", "")
+	viper.SetDefault("MaxFileSize", DefaultMaxFileSize)
 	viper.SetDefault("TeammateNameDisplay", "username")
 	viper.SetDefault("ShowEmailAddress", false)
 	viper.SetDefault("ShowFullName", false)

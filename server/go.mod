@@ -18,7 +18,6 @@ require (
 	github.com/mattn/go-sqlite3 v1.14.22
 	github.com/mgdelacroix/foundation v0.0.0-20230510073833-0660207768ef
 	github.com/minio/minio-go/v7 v7.4.1
-	github.com/oklog/run v1.2.0
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.25.0
 	github.com/rivo/uniseg v0.4.7
@@ -67,6 +66,7 @@ require (
 	github.com/mitchellh/go-testing-interface v1.14.1 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/ncruces/go-strftime v0.1.9 // indirect
+	github.com/oklog/run v1.2.0 // indirect
 	github.com/pborman/uuid v1.2.1 // indirect
 	github.com/pelletier/go-toml v1.9.5 // indirect
 	github.com/pelletier/go-toml/v2 v2.4.3 // indirect

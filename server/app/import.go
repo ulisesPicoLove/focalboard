@@ -90,7 +90,7 @@ func (a *App) ImportArchive(r io.Reader, opt model.ImportArchiveOptions) error {
 				)
 				continue
 			}
-			newFileName, err := a.SaveFile(zr, opt.TeamID, board.ID, filename, board.IsTemplate)
+			newFileName, err := a.SaveFile(a.limitImportedFile(zr), opt.TeamID, board.ID, filename, board.IsTemplate)
 			if err != nil {
 				return fmt.Errorf("cannot import file %s for board %s: %w", filename, dir, err)
 			}
@@ -464,4 +464,30 @@ func parseVersionFile(r io.Reader) (int, error) {
 		return 0, fmt.Errorf("cannot parse version.json: %w", err)
 	}
 	return header.Version, nil
+}
+
+// errImportedFileTooLarge is returned when a file inside an imported archive is bigger than
+// the configured upload limit. Archives are compressed, so the size of the upload alone does
+// not bound what is written to disk.
+var errImportedFileTooLarge = errors.New("a file in the archive exceeds the maximum file size")
+
+type limitedReader struct {
+	r io.Reader
+	n int64
+}
+
+func (l *limitedReader) Read(p []byte) (int, error) {
+	n, err := l.r.Read(p)
+	l.n -= int64(n)
+	if l.n < 0 {
+		return n, errImportedFileTooLarge
+	}
+	return n, err
+}
+
+func (a *App) limitImportedFile(r io.Reader) io.Reader {
+	if max := a.config.MaxFileSize; max > 0 {
+		return &limitedReader{r: r, n: max}
+	}
+	return r
 }

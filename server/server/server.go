@@ -34,7 +34,6 @@ import (
 	"github.com/mattermost/focalboard/server/utils"
 	"github.com/mattermost/focalboard/server/web"
 	"github.com/mattermost/focalboard/server/ws"
-	"github.com/oklog/run"
 
 	"github.com/mattermost/focalboard/server/services/filestore"
 	"github.com/mattermost/mattermost/server/public/shared/mlog"
@@ -337,20 +336,14 @@ func (s *Server) Start() error {
 		s.telemetry.RunTelemetryJob(firstRun)
 	}
 
-	var group run.Group
 	if s.config.PrometheusAddress != "" {
-		group.Add(func() error {
-			if err := s.metricsServer.Run(); err != nil {
-				return errors.Wrap(err, "PromServer Run")
+		// The metrics server must not block Start: main installs its signal handler
+		// only after Start returns, and Shutdown needs the mutex held here.
+		go func() {
+			if err := s.metricsServer.Run(); err != nil && !errors.Is(err, http.ErrServerClosed) {
+				s.logger.Error("Prometheus server stopped", mlog.Err(err))
 			}
-			return nil
-		}, func(error) {
-			_ = s.metricsServer.Shutdown()
-		})
-
-		if err := group.Run(); err != nil {
-			return err
-		}
+		}()
 	}
 	return nil
 }
@@ -361,6 +354,12 @@ func (s *Server) Shutdown() error {
 	}
 
 	s.stopLocalModeServer()
+
+	if s.config.PrometheusAddress != "" {
+		if err := s.metricsServer.Shutdown(); err != nil {
+			s.logger.Warn("Error occurred when shutting down the metrics server", mlog.Err(err))
+		}
+	}
 
 	s.servicesStartStopMutex.Lock()
 	defer s.servicesStartStopMutex.Unlock()

@@ -2,6 +2,7 @@ package metrics
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/pkg/errors"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
@@ -18,7 +19,8 @@ type Service struct {
 func NewMetricsServer(address string, metricsService *Metrics, logger mlog.LoggerIFace) *Service {
 	return &Service{
 		&http.Server{ //nolint:gosec
-			Addr: address,
+			Addr:              address,
+			ReadHeaderTimeout: 10 * time.Second,
 			Handler: promhttp.HandlerFor(metricsService.registry, promhttp.HandlerOpts{
 				ErrorLog: logger.StdLogger(mlog.LvlError),
 			}),

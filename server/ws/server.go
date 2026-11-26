@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"sync"
+	"time"
 
 	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"
@@ -14,9 +15,19 @@ import (
 	"github.com/mattermost/mattermost/server/public/shared/mlog"
 )
 
+const (
+	// writeWait is how long a write to a client may take before the connection is dropped.
+	writeWait = 10 * time.Second
+	// maxMessageSize is the largest message accepted from a client.
+	maxMessageSize = 1 << 20
+)
+
 func (wss *websocketSession) WriteJSON(v interface{}) error {
 	wss.mu.Lock()
 	defer wss.mu.Unlock()
+
+	// A client that stopped reading must not block broadcasts to everyone else forever.
+	_ = wss.conn.SetWriteDeadline(time.Now().Add(writeWait))
 	err := wss.conn.WriteJSON(v)
 	return err
 }
@@ -98,6 +109,9 @@ func (ws *Server) handleWebSocket(w http.ResponseWriter, r *http.Request) {
 		ws.logger.Error("ERROR upgrading to websocket", mlog.Err(err))
 		return
 	}
+
+	// Client messages are small subscribe/auth commands.
+	client.SetReadLimit(maxMessageSize)
 
 	// create an empty session with websocket client
 	wsSession := &websocketSession{

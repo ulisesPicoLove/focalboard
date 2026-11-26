@@ -2,8 +2,11 @@ package app
 
 import (
 	"bytes"
+	"io"
+	"strings"
 	"testing"
 
+	"github.com/mattermost/focalboard/server/services/config"
 	"github.com/mattermost/focalboard/server/utils"
 
 	"github.com/golang/mock/gomock"
@@ -230,3 +233,17 @@ const boardArchive = `{"type":"board","data":{"id":"bfoi6yy6pa3yzika53spj7pq9ee"
 {"type":"boardMember","data":{"boardId":"bfoi6yy6pa3yzika53spj7pq9ee","userId":"hxxzooc3ff8cubsgtcmpn8733e","roles":"","minimumRole":"","schemeAdmin":false,"schemeEditor":false,"schemeCommenter":false,"schemeViewer":true,"synthetic":false}}
 {"type":"boardMember","data":{"boardId":"bfoi6yy6pa3yzika53spj7pq9ee","userId":"nto73edn5ir6ifimo5a53y1dwa","roles":"","minimumRole":"","schemeAdmin":true,"schemeEditor":false,"schemeCommenter":false,"schemeViewer":false,"synthetic":false}}
 `
+
+func TestLimitImportedFile(t *testing.T) {
+	a := &App{config: &config.Configuration{MaxFileSize: 4}}
+
+	_, err := io.ReadAll(a.limitImportedFile(strings.NewReader("1234")))
+	require.NoError(t, err)
+
+	_, err = io.ReadAll(a.limitImportedFile(strings.NewReader("12345")))
+	require.ErrorIs(t, err, errImportedFileTooLarge)
+
+	unlimited := &App{config: &config.Configuration{}}
+	_, err = io.ReadAll(unlimited.limitImportedFile(strings.NewReader("12345")))
+	require.NoError(t, err)
+}

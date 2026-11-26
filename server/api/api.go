@@ -82,6 +82,7 @@ func (a *API) RegisterRoutes(r *mux.Router) {
 	apiv2 := r.PathPrefix("/api/v2").Subrouter()
 	apiv2.Use(a.panicHandler)
 	apiv2.Use(a.requireCSRFToken)
+	apiv2.Use(a.limitRequestBody)
 
 	/* ToDo:
 	apiv3 := r.PathPrefix("/api/v3").Subrouter()
@@ -143,6 +144,28 @@ func (a *API) panicHandler(next http.Handler) http.Handler {
 				a.errorResponse(w, r, ErrHandlerPanic)
 			}
 		}()
+
+		next.ServeHTTP(w, r)
+	})
+}
+
+const (
+	// maxRequestBodySize caps the JSON bodies of regular API calls.
+	maxRequestBodySize = 10 << 20
+	// maxArchiveImportSize caps the (compressed) archive accepted by the import endpoint.
+	maxArchiveImportSize = 500 << 20
+)
+
+// limitRequestBody stops clients from sending unbounded bodies. File uploads and archive
+// imports are skipped because their handlers apply their own, larger limits.
+func (a *API) limitRequestBody(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		path := r.URL.Path
+		isUpload := r.Method == http.MethodPost && strings.HasSuffix(path, "/files")
+		isImport := r.Method == http.MethodPost && strings.HasSuffix(path, "/archive/import")
+		if !isUpload && !isImport && r.Body != nil {
+			r.Body = http.MaxBytesReader(w, r.Body, maxRequestBodySize)
+		}
 
 		next.ServeHTTP(w, r)
 	})

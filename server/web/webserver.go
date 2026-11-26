@@ -10,6 +10,7 @@ import (
 	"path/filepath"
 	"strings"
 	"text/template"
+	"time"
 
 	"github.com/gorilla/mux"
 
@@ -59,10 +60,13 @@ func NewServer(rootPath string, serverRoot string, port int, ssl, localOnly bool
 	baseURL = url.Path
 
 	ws := &Server{
-		// (TODO: Add ReadHeaderTimeout)
-		Server: http.Server{ //nolint:gosec
-			Addr:    addr,
-			Handler: r,
+		// No WriteTimeout: archive exports and file downloads are streamed and can be slow.
+		Server: http.Server{
+			Addr:              addr,
+			Handler:           r,
+			ReadHeaderTimeout: 10 * time.Second,
+			ReadTimeout:       10 * time.Minute,
+			IdleTimeout:       2 * time.Minute,
 		},
 		baseURL:    baseURL,
 		rootPath:   rootPath,

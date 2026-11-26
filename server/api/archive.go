@@ -3,6 +3,7 @@ package api
 import (
 	"fmt"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/gorilla/mux"
@@ -148,8 +149,14 @@ func (a *API) handleArchiveImport(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	r.Body = http.MaxBytesReader(w, r.Body, maxArchiveImportSize)
+
 	file, handle, err := r.FormFile(UploadFormFileKey)
 	if err != nil {
+		if strings.HasSuffix(err.Error(), "http: request body too large") {
+			a.errorResponse(w, r, model.ErrRequestEntityTooLarge)
+			return
+		}
 		a.errorResponse(w, r, model.NewErrBadRequest(err.Error()))
 		return
 	}
