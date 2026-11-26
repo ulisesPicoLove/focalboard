@@ -133,6 +133,13 @@
             }
         }
 
+        // keyboard users never hover: show the actions when something in the cell has focus
+        &:focus-within {
+            .optionsMenu {
+                display: block;
+            }
+        }
+
         &.title-cell {
             &:hover {
                 background: transparent;

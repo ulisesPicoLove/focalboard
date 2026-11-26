@@ -26,6 +26,13 @@
         }
     }
 
+    // keyboard users never hover: show the actions when the card or something inside it has focus
+    &:focus-within {
+        .optionsMenu {
+            display: block;
+        }
+    }
+
     .optionsMenu {
         @include z-index(gallery-options-menu);
         background-color: rgb(var(--center-channel-bg-rgb));

@@ -28,6 +28,11 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+
+        // keyboard users never hover: show the actions when the event or something inside it has focus
+        &:focus-within .optionsMenu {
+            display: block;
+        }
     }
 
     .optionsMenu {
