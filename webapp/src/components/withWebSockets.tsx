@@ -2,16 +2,11 @@
 // See LICENSE.txt for license information.
 import React, {useEffect} from 'react'
 
-import wsClient, {MMWebSocketClient} from '../wsclient'
+import wsClient from '../wsclient'
 import {Utils} from '../utils'
 
 type Props = {
     userId?: string
-    manifest?: {
-        id: string
-        version: string
-    }
-    webSocketClient?: MMWebSocketClient
     children: React.ReactNode
 }
 
@@ -38,7 +33,7 @@ const WithWebSockets = (props: Props): React.ReactElement => {
             wsClient.authenticate(token)
         }
         wsClient.open()
-    }, [props.webSocketClient])
+    }, [])
 
     useEffect(() => {
         if (!props.userId) {

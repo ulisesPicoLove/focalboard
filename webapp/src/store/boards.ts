@@ -22,7 +22,6 @@ import {RootState} from './index'
 type BoardsState = {
     current: string
     loadingBoard: boolean
-    linkToChannel: string
     boards: {[key: string]: Board}
     templates: {[key: string]: Board}
     membersInBoards: {[key: string]: {[key: string]: BoardMember}}
@@ -128,13 +127,10 @@ export const updateMembersHandler = (state: BoardsState, action: PayloadAction<B
 
 const boardsSlice = createSlice({
     name: 'boards',
-    initialState: {loadingBoard: false, linkToChannel: '', boards: {}, templates: {}, membersInBoards: {}, myBoardMemberships: {}} as BoardsState,
+    initialState: {loadingBoard: false, boards: {}, templates: {}, membersInBoards: {}, myBoardMemberships: {}} as BoardsState,
     reducers: {
         setCurrent: (state, action: PayloadAction<string>) => {
             state.current = action.payload
-        },
-        setLinkToChannel: (state, action: PayloadAction<string>) => {
-            state.linkToChannel = action.payload
         },
         updateBoards: (state, action: PayloadAction<Board[]>) => {
             for (const board of action.payload) {
@@ -225,7 +221,7 @@ const boardsSlice = createSlice({
     },
 })
 
-export const {updateBoards, setCurrent, setLinkToChannel, updateMembers, addMyBoardMemberships} = boardsSlice.actions
+export const {updateBoards, setCurrent, updateMembers, addMyBoardMemberships} = boardsSlice.actions
 export const {reducer} = boardsSlice
 
 export const getBoards = (state: RootState): {[key: string]: Board} => state.boards?.boards || {}
@@ -286,4 +282,3 @@ export function getMyBoardMembership(boardId: string): (state: RootState) => Boa
     }
 }
 
-export const getCurrentLinkToChannel = (state: RootState): string => state.boards.linkToChannel

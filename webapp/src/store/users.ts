@@ -23,7 +23,6 @@ export const fetchMe = createAsyncThunk(
     },
 )
 
-
 type UsersStatus = {
     me: IUser|null
     boardUsers: {[key: string]: IUser}

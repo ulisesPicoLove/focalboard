@@ -10,7 +10,6 @@ import {CSSObject} from '@emotion/serialize'
 
 import {useAppSelector} from '../../store/hooks'
 import {getCurrentBoard, getCurrentBoardMembers} from '../../store/boards'
-import {Channel} from '../../store/channels'
 import {getMe, getBoardUsersList} from '../../store/users'
 
 import {ClientConfig} from '../../config/clientConfig'
@@ -21,11 +20,10 @@ import Tooltip from '../../widgets/tooltip'
 import mutator from '../../mutator'
 
 import {ISharing} from '../../blocks/sharing'
-import {BoardMember, createBoard, MemberRole} from '../../blocks/board'
+import {BoardMember, MemberRole} from '../../blocks/board'
 
 import client from '../../octoClient'
 import Dialog from '../dialog'
-import ConfirmationDialog from '../confirmationDialogBox'
 import {IUser} from '../../user'
 import Switch from '../../widgets/switch'
 import Button from '../../widgets/buttons/button'
@@ -97,9 +95,8 @@ function isLastAdmin(members: BoardMember[]) {
 export default function ShareBoardDialog(props: Props): JSX.Element {
     const [wasCopiedPublic, setWasCopiedPublic] = useState(false)
     const [wasCopiedInternal, setWasCopiedInternal] = useState(false)
-    const [showLinkChannelConfirmation, setShowLinkChannelConfirmation] = useState<Channel|null>(null)
     const [sharing, setSharing] = useState<ISharing|undefined>(undefined)
-    const [selectedUser, setSelectedUser] = useState<IUser|Channel|null>(null)
+    const [selectedUser, setSelectedUser] = useState<IUser|null>(null)
     const clientConfig = useAppSelector<ClientConfig>(getClientConfig)
 
     // members of the current board
@@ -139,17 +136,6 @@ export default function ShareBoardDialog(props: Props): JSX.Element {
         newSharing.enabled = isOn
         await client.setSharing(boardId, newSharing)
         await loadData()
-    }
-
-    const onLinkBoard = async (channel: Channel, confirmed?: boolean) => {
-        if (!confirmed) {
-            setShowLinkChannelConfirmation(channel)
-            return
-        }
-        setShowLinkChannelConfirmation(null)
-        const newBoard = createBoard(board)
-        newBoard.channelId = channel.id // This is a channel ID hardcoded here as an example
-        mutator.updateBoard(newBoard, board, 'linked channel')
     }
 
     const onRegenerateToken = async () => {
@@ -290,33 +276,16 @@ export default function ShareBoardDialog(props: Props): JSX.Element {
         />
     )
 
-    const formatOptionLabel = (userOrChannel: IUser | Channel) => {
-        if ((userOrChannel as IUser).username) {
-            const user = userOrChannel as IUser
-            return (
-                <div className='user-item'>
-                    <div className='ml-3'>
-                        <strong>{Utils.getUserDisplayName(user, clientConfig.teammateNameDisplay)}</strong>
-                        <strong className='ml-2 text-light'>{`@${user.username}`}</strong>
-                        <GuestBadge show={Boolean(user?.is_guest)}/>
-                        <AdminBadge permissions={user.permissions}/>
-                    </div>
-                </div>
-            )
-        }
-
-        return null
-    }
-
-    let confirmSubtext
-    let confirmButtonText
-    if (board.channelId === '') {
-        confirmSubtext = intl.formatMessage({id: 'shareBoard.confirm-link-channel-subtext', defaultMessage: 'When you link a channel to a board, all members of the channel (existing and new) will be able to edit it. This excludes members who are guests.'})
-        confirmButtonText = intl.formatMessage({id: 'shareBoard.confirm-link-channel-button', defaultMessage: 'Link channel'})
-    } else {
-        confirmSubtext = intl.formatMessage({id: 'shareBoard.confirm-link-channel-subtext-with-other-channel', defaultMessage: 'When you link a channel to a board, all members of the channel (existing and new) will be able to edit it. This excludes members who are guests.{lineBreak}This board is currently linked to another channel.\nIt will be unlinked if you choose to link it here.'}, {lineBreak: <p/>})
-        confirmButtonText = intl.formatMessage({id: 'shareBoard.confirm-link-channel-button-with-other-channel', defaultMessage: 'Unlink and link here'})
-    }
+    const formatOptionLabel = (user: IUser) => (
+        <div className='user-item'>
+            <div className='ml-3'>
+                <strong>{Utils.getUserDisplayName(user, clientConfig.teammateNameDisplay)}</strong>
+                <strong className='ml-2 text-light'>{`@${user.username}`}</strong>
+                <GuestBadge show={Boolean(user?.is_guest)}/>
+                <AdminBadge permissions={user.permissions}/>
+            </div>
+        </div>
+    )
 
     return (
         <Dialog
@@ -324,17 +293,6 @@ export default function ShareBoardDialog(props: Props): JSX.Element {
             title={board.isTemplate ? shareTemplateTitle : shareBoardTitle}
             className='ShareBoardDialog'
         >
-            {showLinkChannelConfirmation &&
-                <ConfirmationDialog
-                    dialogBox={{
-                        heading: intl.formatMessage({id: 'shareBoard.confirm-link-channel', defaultMessage: 'Link board to channel'}),
-                        subText: confirmSubtext,
-                        confirmButtonText,
-                        destructive: board.channelId !== '',
-                        onConfirm: () => onLinkBoard(showLinkChannelConfirmation, true),
-                        onClose: () => setShowLinkChannelConfirmation(null),
-                    }}
-                />}
             <BoardPermissionGate permissions={[Permission.ManageBoardRoles]}>
                 <div className='share-input__container'>
                     <div className='share-input'>
@@ -363,16 +321,13 @@ export default function ShareBoardDialog(props: Props): JSX.Element {
                             defaultOptions={true}
                             formatOptionLabel={formatOptionLabel}
                             getOptionValue={(u) => u.id}
-                            getOptionLabel={(u: IUser|Channel) => (u as IUser).username || (u as Channel).display_name}
+                            getOptionLabel={(u: IUser) => u.username}
                             isMulti={false}
-                            placeholder={board.isTemplate ? intl.formatMessage({id: 'ShareTemplate.searchPlaceholder', defaultMessage: 'Search for people'}) : intl.formatMessage({id: 'ShareBoard.searchPlaceholder', defaultMessage: 'Search for people and channels'})
-                            }
+                            placeholder={board.isTemplate ? intl.formatMessage({id: 'ShareTemplate.searchPlaceholder', defaultMessage: 'Search for people'}) : intl.formatMessage({id: 'ShareBoard.searchPlaceholder', defaultMessage: 'Search for people'})}
                             onChange={(newValue) => {
-                                if (newValue && (newValue as IUser).username) {
+                                if (newValue) {
                                     addUser(newValue as IUser)
                                     setSelectedUser(null)
-                                } else if (newValue) {
-                                    onLinkBoard(newValue as Channel)
                                 }
                             }}
                         />

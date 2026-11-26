@@ -167,31 +167,6 @@
     // Composition
     // ------------------------------------------------------------------
 
-    // Announcement bar: quiet hairline strip instead of a full mint banner
-    .NewVersionBanner {
-        background: transparent;
-        border-bottom: 1px solid var(--pico-line);
-
-        > .banner {
-            padding: 6px;
-            font-family: var(--pico-font-mono);
-            font-size: 11px;
-            font-weight: 400;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: rgb(var(--button-bg-rgb));
-
-            .Button {
-                background: transparent;
-                border: 1px solid var(--pico-glass-line);
-                color: rgb(var(--center-channel-color-rgb));
-                font-family: var(--pico-font-mono);
-                font-size: 11px;
-                text-transform: uppercase;
-            }
-        }
-    }
-
     // Sidebar: calm surface, sentence-case items, mint dot for the active one
     .Sidebar {
         padding: 20px 0 12px;
