@@ -1,10 +1,10 @@
 # Traspaso de trabajo (Picoboard)
 
-Estado al **26 de noviembre de 2026**. Para el detalle completo y la justificación de cada decisión, lee la sección 0 de [`Analisis_report.md`](Analisis_report.md). Este archivo es la versión corta para retomar rápido en otra computadora o en otra sesión.
+Estado al **26 de noviembre de 2026**. Para el detalle completo y la justificación de cada decisión, lee la sección 0 de [`Analisis_report.md`](Analisis_report.md) (en esta misma carpeta) y, para la auditoría de dependencias de noviembre, [`AUDITORIA-DEPENDENCIAS.md`](AUDITORIA-DEPENDENCIAS.md). Este archivo es la versión corta para retomar rápido en otra computadora o en otra sesión.
 
 ## 1. Qué es esto
 
-Picoboard es un fork de Focalboard para uso **interno** de la empresa: servidor Go (`server/`) que sirve una SPA React/TypeScript (`webapp/`), con inicio de sesión de Google Workspace y PostgreSQL en producción. Solo funciona como servidor web standalone. La arquitectura y los comandos están en [`CLAUDE.md`](CLAUDE.md).
+Picoboard es un fork de Focalboard para uso **interno** de la empresa: servidor Go (`server/`) que sirve una SPA React/TypeScript (`webapp/`), con inicio de sesión de Google Workspace y PostgreSQL en producción. Solo funciona como servidor web standalone. La arquitectura y los comandos están en [`CLAUDE.md`](../CLAUDE.md).
 
 ## 2. Ramas (apiladas, hay que subirlas en este orden)
 
@@ -38,7 +38,7 @@ cd docker
 infisical run --env=dev -- docker compose up -d --build
 ```
 
-Variables obligatorias: `POSTGRES_PASSWORD` y `FOCALBOARD_GOOGLE_CLIENT_ID`, `FOCALBOARD_GOOGLE_CLIENT_SECRET`, `FOCALBOARD_GOOGLE_ALLOWED_DOMAIN`. Todas están documentadas en [`.env.example`](.env.example) y el flujo de Google en [`docs/google-sso.md`](docs/google-sso.md). Hoy **solo el entorno `dev` de Infisical tiene valores**; `staging` y `prod` están vacíos. Para el callback local, `FOCALBOARD_SERVERROOT=http://localhost:8000` ya está registrado en Google Cloud.
+Variables obligatorias: `POSTGRES_PASSWORD` y `FOCALBOARD_GOOGLE_CLIENT_ID`, `FOCALBOARD_GOOGLE_CLIENT_SECRET`, `FOCALBOARD_GOOGLE_ALLOWED_DOMAIN`. Todas están documentadas en [`.env.example`](../.env.example) y el flujo de Google en [`docs/google-sso.md`](../docs/google-sso.md). Hoy **solo el entorno `dev` de Infisical tiene valores**; `staging` y `prod` están vacíos. Para el callback local, `FOCALBOARD_SERVERROOT=http://localhost:8000` ya está registrado en Google Cloud.
 
 ## 4. Verificar que todo sigue bien
 
@@ -82,5 +82,5 @@ Resultado esperado al cierre de este traspaso: Go verde con `-race`, 18 de 18 pa
 
 - **Fallo intermitente sin explicar** en la suite de integración sobre SQLite (`TestGetBlocks` en una corrida y `TestPatchBoardsAndBlocks` en otra; 15 corridas posteriores pasaron). Sospecha, sin comprobar: colisión de `insert_at` en SQLite.
 - **No probado en navegador:** la redirección por 401, la reconexión del websocket, el bloqueo de enlaces `javascript:` y la ausencia del banner. Solo hay tests automáticos.
-- **Archivos que no viajan con git:** `AUDITORIA-DEPENDENCIAS.md` (excluido en `.git/info/exclude`) y `.infisical.yaml`. Cópialos a mano si los necesitas.
+- **Archivo que no viaja con git:** `.infisical.yaml` (ignorado). En una máquina nueva, `infisical login` e `infisical init`. Las notas de este directorio (`claude-notes/`) sí están en git.
 - **Al desplegar:** recrear el contenedor y reiniciar cualquier instancia local; `make server` antes si el binario es anterior.

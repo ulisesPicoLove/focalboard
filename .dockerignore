@@ -14,8 +14,7 @@ files/
 *.db
 .env
 .infisical.yaml
-AUDITORIA-*.md
-Analisis_report.md
+claude-notes/
 
 .github/
 go.work

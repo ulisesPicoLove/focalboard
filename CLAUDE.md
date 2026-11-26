@@ -6,6 +6,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Standalone Focalboard (open-source Trello/Notion/Asana alternative): a Go server (`server/`) that serves a React/TypeScript SPA (`webapp/`). The README notes this repo is unmaintained and does not contain the Mattermost plugin (that lives in `mattermost/mattermost-plugin-boards`).
 
+## Project notes
+
+`claude-notes/` holds the working notes for this fork (read `HANDOFF.md` first): the state of the work and what is pending, the code analysis report, and the dependency audit.
+
 ## Commands
 
 Setup: `make prebuild` (runs `npm install` in `webapp/`).
