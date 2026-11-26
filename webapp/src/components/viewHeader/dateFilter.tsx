@@ -3,10 +3,7 @@
 import React, {useState, useCallback} from 'react'
 import {useIntl} from 'react-intl'
 import {DateUtils} from 'react-day-picker'
-import MomentLocaleUtils from 'react-day-picker/moment'
 import DayPicker from 'react-day-picker/DayPicker'
-
-import moment from 'moment'
 
 import mutator from '../../mutator'
 
@@ -17,6 +14,7 @@ import {BoardView} from '../../blocks/boardView'
 import Modal from '../../components/modal'
 import ModalWrapper from '../../components/modalWrapper'
 import {Utils} from '../../utils'
+import {datePlaceholder, dayPickerLocaleUtils, parseInputDate} from '../../dateLocale'
 
 import 'react-day-picker/lib/style.css'
 import './dateFilter.scss'
@@ -35,8 +33,6 @@ type Props = {
     view: BoardView
     filter: FilterClause
 }
-
-const loadedLocales: Record<string, moment.Locale> = {}
 
 function DateFilter(props: Props): JSX.Element {
     const {filter, view} = props
@@ -91,11 +87,6 @@ function DateFilter(props: Props): JSX.Element {
     const [input, setInput] = useState<string>(getDisplayDate(offsetDate))
 
     const locale = intl.locale.toLowerCase()
-    if (locale && locale !== 'en' && !loadedLocales[locale]) {
-        // eslint-disable-next-line global-require
-        loadedLocales[locale] = require(`moment/locale/${locale}`)
-    }
-
     const handleTodayClick = (day: Date) => {
         day.setHours(12)
         saveValue(day)
@@ -149,7 +140,7 @@ function DateFilter(props: Props): JSX.Element {
                             <div className={'inputContainer'}>
                                 <Editable
                                     value={input}
-                                    placeholderText={moment.localeData(locale).longDateFormat('L')}
+                                    placeholderText={datePlaceholder(locale)}
                                     onFocus={() => {
                                         if (offsetDate) {
                                             return setInput(Utils.inputDate(offsetDate, intl))
@@ -158,7 +149,7 @@ function DateFilter(props: Props): JSX.Element {
                                     }}
                                     onChange={setInput}
                                     onSave={() => {
-                                        const newDate = MomentLocaleUtils.parseDate(input, 'L', intl.locale)
+                                        const newDate = parseInputDate(input, intl.locale)
                                         if (newDate && DateUtils.isDate(newDate)) {
                                             newDate.setHours(12)
                                             saveValue(newDate)
@@ -176,7 +167,7 @@ function DateFilter(props: Props): JSX.Element {
                                 initialMonth={offsetDate || new Date()}
                                 showOutsideDays={false}
                                 locale={locale}
-                                localeUtils={MomentLocaleUtils}
+                                localeUtils={dayPickerLocaleUtils}
                                 todayButton={intl.formatMessage({id: 'DateRange.today', defaultMessage: 'Today'})}
                                 onTodayButtonClick={handleTodayClick}
                                 month={offsetDate}

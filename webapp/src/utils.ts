@@ -2,7 +2,6 @@
 // See LICENSE.txt for license information.
 import {marked} from 'marked'
 import {IntlShape} from 'react-intl'
-import moment from 'moment'
 
 import {generatePath, match as routerMatch} from 'react-router-dom'
 
@@ -19,6 +18,7 @@ import {IAppWindow} from './types'
 import {ChangeHandlerType, WSMessage} from './wsclient'
 import {BoardCategoryWebsocketData, Category} from './store/sidebar'
 import {UserSettings} from './userSettings'
+import {relativeTime} from './dateLocale'
 
 declare let window: IAppWindow
 
@@ -382,7 +382,7 @@ class Utils {
     }
 
     static relativeDisplayDateTime(date: Date, intl: IntlShape): string {
-        return moment(date).locale(intl.locale.toLowerCase()).fromNow()
+        return relativeTime(date, intl.locale)
     }
 
     static sleep(miliseconds: number): Promise<void> {
