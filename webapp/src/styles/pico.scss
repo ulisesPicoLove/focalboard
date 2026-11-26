@@ -636,6 +636,26 @@
         .FilterComponent {
             min-width: 460px;
             font-size: 13px;
+
+            // the component adds a blank line before the button even with no filters
+            > br {
+                display: none;
+            }
+
+            .FilterEntry ~ .Button {
+                margin-top: 12px;
+            }
+        }
+    }
+
+    // Filter popup: open just below its button, right-aligned, instead of
+    // overlapping the toolbar (the phone layout keeps its full-screen modal)
+    @media (min-width: 431px) {
+        .ViewHeader .ModalWrapper > .Modal {
+            top: calc(100% + 8px);
+            left: auto;
+            right: 0;
+            max-width: calc(100vw - 32px);
         }
     }
 
@@ -841,6 +861,15 @@
         }
     }
 
+    // Colour swatches in the option-colour menu: round dots using the same
+    // colours as the column status dots
+    .Menu .menu-colorbox {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background-color: var(--pico-dot, rgba(var(--center-channel-color-rgb), 0.4));
+    }
+
     // Property-type / option menus open inside mono property labels: reset the type
     .CardDetail .Menu,
     .CardDetail .Menu * {
@@ -954,31 +983,46 @@
     }
 }
 
-// Status dots for the default column colours
+// Status dots for the ten option colours. Pico.Love only has about six hues,
+// so orange, yellow and violet are soft extensions (not design-system tokens)
+// kept so the ten options stay distinguishable in the colour picker.
 .propColorGray,
+.propColorDefault {
+    --pico-dot: #9ca3ad; // ink-muted
+}
+
 .propColorDefault {
     --pico-dot: rgba(var(--center-channel-color-rgb), 0.4);
 }
 
-.propColorBrown,
-.propColorOrange,
+.propColorBrown {
+    --pico-dot: #ffe4c5; // brand-cream
+}
+
+.propColorOrange {
+    --pico-dot: #f5b995; // extension
+}
+
 .propColorYellow {
-    --pico-dot: #ffe4c5;
+    --pico-dot: #f7e08a; // extension
 }
 
 .propColorGreen {
-    --pico-dot: #acfbdd;
+    --pico-dot: #acfbdd; // mint
 }
 
-.propColorBlue,
+.propColorBlue {
+    --pico-dot: #a8d8f0; // sky
+}
+
 .propColorPurple {
-    --pico-dot: #a8d8f0;
+    --pico-dot: #b4a7f5; // extension
 }
 
 .propColorPink {
-    --pico-dot: #f48fa1;
+    --pico-dot: #f48fa1; // brand-pink
 }
 
 .propColorRed {
-    --pico-dot: #cd2028;
+    --pico-dot: #cd2028; // brand-red
 }
