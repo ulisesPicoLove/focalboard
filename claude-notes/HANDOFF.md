@@ -52,12 +52,12 @@ make server-test-postgres                # suite completa contra Postgres en Doc
 npm run check && npm run typecheck && npx jest --coverage=false
 ```
 
-Resultado esperado al cierre de este traspaso: Go verde con `-race`, 18 de 18 paquetes verdes en Postgres, 838 tests de Jest, ESLint, stylelint y `typecheck` limpios.
+Resultado esperado al cierre de este traspaso: Go verde con `-race`, 18 de 18 paquetes verdes en Postgres, 832 tests de Jest, ESLint, stylelint y `typecheck` limpios.
 
 ## 5. Lo que ya está hecho (resumen)
 
 - **Seguridad (S1 a S13):** inyección SQL, carrera en websockets, driver SQLite retractado, enlaces `javascript:`, secretos en el log, `authMode` validado, límites de tamaño y de tiempo, rate limit, sesiones con tope de 14 días, archivos ligados a su tablero, vinculación de Google por `sub`, métricas en `localhost`.
-- **Servidor:** modo plugin de Mattermost eliminado, MySQL y MariaDB eliminados (solo Postgres y SQLite), telemetría, compliance, statistics y retención de datos eliminados, matriz de permisos reescrita sobre `localpermissions` (1.284 casos).
+- **Servidor:** vinculación de canales, `ServicesAPI` y límites de tarjetas de la nube eliminados (servidor y webapp), modo plugin de Mattermost eliminado, MySQL y MariaDB eliminados (solo Postgres y SQLite), telemetría, compliance, statistics y retención de datos eliminados, matriz de permisos reescrita sobre `localpermissions` (1.284 casos).
 - **Webapp:** `apiFetch` con timeout y 401, el `mutator` ya no registra deshacer de escrituras rechazadas, websocket que reconecta siempre, telemetría y banner "novedades" de Mattermost eliminados, 41 archivos muertos fuera.
 - **Repo y Docker:** apps de escritorio, sitio de marketing y archivos de CI de Mattermost eliminados; Docker ahora con Postgres y secretos desde el shell.
 
@@ -67,7 +67,7 @@ Resultado esperado al cierre de este traspaso: Go verde con `-race`, 18 de 18 pa
 2. **Infisical `staging` y `prod`:** copiar las variables. Producción necesita `FOCALBOARD_SERVERROOT` con `https://` y el callback `<SERVERROOT>/oauth/google/callback` registrado en Google Cloud.
 3. **`govulncheck ./...`** en `server/` (el arnés bloqueó descargarlo; tienes que correrlo tú) y una **revisión humana del código de autenticación** (`server/services/auth/googlesso`, `server/app/sso.go`, `server/api/sso.go`).
 4. **Decisión sobre DOMPurify y una Content-Security-Policy** en el webapp (S4 quedó a medias; añade una dependencia).
-5. **Fase 2, lo que queda:** restos de canales y `ServicesAPI` en `app` y `store` (`SearchUserChannels`, `GetChannel`, `PostMessage`, `SendMessage`, vinculación de canales en `PatchBoard`, `model/services_api.go`), límites de tarjetas de la nube (servidor y webapp), tour de onboarding con textos de Mattermost, rama de plugin de `wsclient`.
+5. **Fase 2: terminada** (26 de noviembre de 2026). Quedó fuera, por decisión, el tour de onboarding: solo se reescribieron sus dos textos de Mattermost. El resto del tour (pasos, endpoint `/onboard` y tablero "Welcome to Boards!") sigue ahí; decidir si se conserva o se elimina entero.
 6. **Fase 3, frontend:** bundle de 5,1 MB sin división de código, re-renders de `CardBadges`, `eslint-plugin-react-hooks`, React 17 a 19, reemplazar `draft-js` (7 vulnerabilidades altas), `moment` y `react-beautiful-dnd`, accesibilidad, completar `es.json` (48 %), mover las sobrescrituras de `pico.scss` a cada componente, fuentes locales en vez de Google Fonts, reactivar el zoom (S14).
 7. **Fase 4, funcionalidades:** notificaciones (hoy no se envía ninguna), recordatorios de fecha, historial de actividad, búsqueda global, poda de las tablas `*_history`. La lógica de menciones y suscripciones que se borró está en el historial de git, en el commit anterior a `chore(server): remove unlinked notify...`.
 

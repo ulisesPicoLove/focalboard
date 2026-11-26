@@ -53,7 +53,7 @@ Balance acumulado de `main` a `chore/phase2-cleanup`: **596 archivos cambiados, 
 - **Hecho:** `return` que faltaban tras `errorResponse` (exportar, tarjetas, equipos, sistema); `GetRootTeam` ya no regenera el token ante un error transitorio; corregida la comprobación invertida del login por correo; panics por body `null` y por nombre de archivo corto; índice en `sessions.token` (migración 41); `TestPatchBoard` determinista (se espera a que la cola asíncrona se vacíe).
 - **Hecho (Fase 2):** quitados `notifymentions`, `notifysubscriptions`, `plugindelivery`, `mattermostauthlayer`, el adaptador de websocket del plugin, la retención de datos, compliance, statistics, metadata de tablero, el servicio de telemetría y `mattermost/server/v8`; quitados `mmpermissions` y todo el modo `MattermostAuth`; **MySQL y MariaDB** eliminados (el `dbtype` mysql o mariadb falla al arrancar con un mensaje claro).
 - **Pendiente:** historial (`*_history`) sin poda; `execHistoryInsert` frágil en Postgres; N+1 y escrituras parciales (4.3); errores con `err.Error()` al cliente y 4 estilos de error (4.2); autorización repartida en ~70 handlers y `handleGetCard` que exige permiso de editor (4.1); eventos de websocket sin orden garantizado y websocket de una sola instancia; sin tests de `server/`, `main`, `metrics`, `config` (8 %) ni concurrencia en ws.
-- **Restos del modo plugin que siguen en `app` y `store`** (ya inalcanzables): `SearchUserChannels`, `GetChannel`, `PostMessage`, `SendMessage`, la vinculación de canales en `PatchBoard`, `ServicesAPI`/`model/services_api.go` y los límites de tarjetas de la nube. Quitarlos toca la interfaz `Store` y los mocks.
+- **Hecho (Fase 2, cierre):** quitados los restos del modo plugin en `app` y `store` (`SearchUserChannels`, `GetChannel`, `PostMessage`, `SendMessage`, la vinculación de canales en `PatchBoard` y `BoardPatch.ChannelID`), `ServicesAPI`/`model/services_api.go`, los límites de tarjetas de la nube (servidor y webapp), la rama de plugin de `wsclient` y `NewVersionBanner`. Verificado: Go con `-race` sobre SQLite, suite completa sobre Postgres y 832 tests de Jest.
 
 ### 0.3 Calidad del webapp (sección 5)
 
@@ -98,7 +98,7 @@ Los 65 `TestPermissions*` corrían dos veces: en modo plugin (`mmpermissions` co
 ### 0.9 Qué sigue
 
 1. **Tú:** subir las tres ramas en orden y abrir los PR; copiar variables a Infisical `staging` y `prod`; decidir sobre DOMPurify/CSP; ejecutar `govulncheck`; revisión humana del código de autenticación; licencia y repositorio privado.
-2. **Fase 2 (resto):** restos de canales y `ServicesAPI` en `app`/`store`, límites de nube y tour de onboarding.
+2. **Fase 2:** terminada; solo queda decidir si el tour de onboarding se conserva (sus textos ya no mencionan Mattermost) o se elimina.
 3. **Fase 3:** modernizar el frontend (rendimiento y bundle, React 19, `draft-js`, `moment`, `react-beautiful-dnd`, accesibilidad, `es.json`).
 4. **Fase 4:** funcionalidades, empezando por notificaciones (hoy no se envía ninguna), recordatorios, historial de actividad y búsqueda global; y la poda del historial (`*_history`).
 
