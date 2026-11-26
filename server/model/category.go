@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"regexp"
 	"strings"
 
 	"github.com/mattermost/focalboard/server/utils"
@@ -62,6 +63,9 @@ type Category struct {
 	Type string `json:"type"`
 }
 
+// categoryIDPattern restricts category IDs to the characters the server itself generates.
+var categoryIDPattern = regexp.MustCompile(`^[A-Za-z0-9_-]{1,36}$`)
+
 func (c *Category) Hydrate() {
 	if c.ID == "" {
 		c.ID = utils.NewID(utils.IDTypeNone)
@@ -87,6 +91,10 @@ func (c *Category) Hydrate() {
 func (c *Category) IsValid() error {
 	if strings.TrimSpace(c.ID) == "" {
 		return NewErrInvalidCategory("category ID cannot be empty")
+	}
+
+	if !categoryIDPattern.MatchString(c.ID) {
+		return NewErrInvalidCategory("category ID contains invalid characters")
 	}
 
 	if strings.TrimSpace(c.Name) == "" {
