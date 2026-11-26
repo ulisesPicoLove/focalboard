@@ -91,10 +91,11 @@ const BoardPage = (props: Props): JSX.Element => {
     }, [teamId, dispatch])
 
     const loadAction: (boardId: string) => any = useMemo(() => {
+        // initialLoad takes no argument, initialReadOnlyLoad takes the board id; both are dispatched with it
         if (props.readonly) {
-            return initialReadOnlyLoad
+            return initialReadOnlyLoad as unknown as (boardId: string) => any
         }
-        return initialLoad
+        return initialLoad as unknown as (boardId: string) => any
     }, [props.readonly])
 
     useWebsockets(teamId, (wsClient) => {

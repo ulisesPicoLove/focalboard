@@ -5,7 +5,7 @@ import {Provider as ReduxProvider} from 'react-redux'
 import {Router} from 'react-router-dom'
 import {createMemoryHistory, MemoryHistory} from 'history'
 import {render, waitFor} from '@testing-library/react'
-import thunk from 'redux-thunk'
+import {thunk} from 'redux-thunk'
 import {mocked} from 'jest-mock'
 
 import {mockStateStore} from '../testUtils'
