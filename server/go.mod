@@ -13,7 +13,6 @@ require (
 	github.com/lib/pq v1.12.3
 	github.com/mattermost/logr/v2 v2.0.26
 	github.com/mattermost/mattermost/server/public v0.1.3
-	github.com/mattermost/mattermost/server/v8 v8.0.0-20240529104128-9d30a62c9471
 	github.com/mattermost/morph v1.1.0
 	github.com/mattn/go-sqlite3 v1.14.22
 	github.com/mgdelacroix/foundation v0.0.0-20230510073833-0660207768ef
@@ -69,6 +68,7 @@ require (
 	github.com/pelletier/go-toml v1.9.5 // indirect
 	github.com/pelletier/go-toml/v2 v2.4.3 // indirect
 	github.com/philhofer/fwd v1.2.0 // indirect
+	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/prometheus/client_model v0.6.3 // indirect
 	github.com/prometheus/common v0.72.0 // indirect
 	github.com/prometheus/procfs v0.22.0 // indirect
@@ -104,5 +104,3 @@ require (
 	modernc.org/strutil v1.2.0 // indirect
 	modernc.org/token v1.1.0 // indirect
 )
-
-exclude github.com/mattn/go-sqlite3 v2.0.3+incompatible

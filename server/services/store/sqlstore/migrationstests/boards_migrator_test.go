@@ -5,7 +5,6 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-	"path/filepath"
 	"text/template"
 
 	"github.com/mattermost/mattermost/server/public/pluginapi/cluster"
@@ -18,7 +17,6 @@ import (
 
 	"github.com/mattermost/mattermost/server/public/shared/mlog"
 	mmSqlStore "github.com/mattermost/mattermost/server/public/utils/sql"
-	"github.com/mattermost/mattermost/server/v8/channels/db"
 
 	"github.com/mattermost/focalboard/server/model"
 	"github.com/mattermost/focalboard/server/services/store/sqlstore"
@@ -40,46 +38,6 @@ func NewBoardsMigrator(withMattermostMigrations bool) *BoardsMigrator {
 	return &BoardsMigrator{
 		withMattermostMigrations: withMattermostMigrations,
 	}
-}
-
-func (bm *BoardsMigrator) runMattermostMigrations() error {
-	assets := db.Assets()
-	assetsList, err := assets.ReadDir(filepath.Join("migrations", bm.driverName))
-	if err != nil {
-		return err
-	}
-
-	assetNames := make([]string, len(assetsList))
-	for i, entry := range assetsList {
-		assetNames[i] = entry.Name()
-	}
-
-	src, err := embedded.WithInstance(&embedded.AssetSource{
-		Names: assetNames,
-		AssetFunc: func(name string) ([]byte, error) {
-			return assets.ReadFile(filepath.Join("migrations", bm.driverName, name))
-		},
-	})
-	if err != nil {
-		return err
-	}
-
-	driver, err := bm.getDriver()
-	if err != nil {
-		return err
-	}
-
-	options := []morph.EngineOption{
-		morph.SetStatementTimeoutInSeconds(1000000),
-	}
-
-	engine, err := morph.New(context.Background(), driver, src, options...)
-	if err != nil {
-		return err
-	}
-	defer engine.Close()
-
-	return engine.ApplyAll()
 }
 
 func (bm *BoardsMigrator) getDriver() (drivers.Driver, error) {
@@ -193,12 +151,6 @@ func (bm *BoardsMigrator) Setup() error {
 
 	if err := bm.db.Ping(); err != nil {
 		return err
-	}
-
-	if bm.withMattermostMigrations {
-		if err := bm.runMattermostMigrations(); err != nil {
-			return err
-		}
 	}
 
 	logger, _ := mlog.NewLogger()
