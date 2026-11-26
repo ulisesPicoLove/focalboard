@@ -16,6 +16,13 @@ import {useAppSelector} from './store/hooks'
 
 import '@mattermost/compass-icons/css/compass-icons.css'
 
+// Self-hosted fonts (latin subset: covers English and Spanish)
+import '@fontsource/montserrat/latin-300.css'
+import '@fontsource/montserrat/latin-400.css'
+import '@fontsource/montserrat/latin-500.css'
+import '@fontsource/space-mono/latin-400.css'
+import '@fontsource/space-mono/latin-700.css'
+
 import './styles/variables.scss'
 import './styles/main.scss'
 import './styles/labels.scss'
