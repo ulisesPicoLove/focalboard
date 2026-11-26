@@ -24,6 +24,7 @@ func (s *SQLStore) saveFileInfo(db sq.BaseRunner, fileInfo *mmModel.FileInfo) er
 			"delete_at",
 			"path",
 			"archived",
+			"board_id",
 		).
 		Values(
 			fileInfo.Id,
@@ -34,6 +35,8 @@ func (s *SQLStore) saveFileInfo(db sq.BaseRunner, fileInfo *mmModel.FileInfo) er
 			fileInfo.DeleteAt,
 			fileInfo.Path,
 			false,
+			// Boards keeps the owning board in ChannelId, the only spare id on this type.
+			fileInfo.ChannelId,
 		)
 
 	if _, err := query.Exec(); err != nil {
@@ -60,6 +63,7 @@ func (s *SQLStore) getFileInfo(db sq.BaseRunner, id string) (*mmModel.FileInfo, 
 			"size",
 			"archived",
 			"path",
+			"COALESCE(board_id, '')",
 		).
 		From(s.tablePrefix + "file_info").
 		Where(sq.Eq{"Id": id})
@@ -77,6 +81,7 @@ func (s *SQLStore) getFileInfo(db sq.BaseRunner, id string) (*mmModel.FileInfo, 
 		&fileInfo.Size,
 		&fileInfo.Archived,
 		&fileInfo.Path,
+		&fileInfo.ChannelId,
 	)
 
 	if err != nil {

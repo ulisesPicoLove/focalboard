@@ -561,3 +561,26 @@ func TestGetFileInfoIDDoesNotPanicOnShortNames(t *testing.T) {
 	require.Equal(t, "", getFileInfoID("7"))
 	require.Equal(t, "abc", getFileInfoID("7abc"))
 }
+
+func TestGetFilePathRefusesAFileOfAnotherBoard(t *testing.T) {
+	th, tearDown := SetupTestHelper(t)
+	defer tearDown()
+
+	owned := &mm_model.FileInfo{Id: "abc", Path: "2026/11/25/7abc.png", ChannelId: "board-A"}
+	th.Store.EXPECT().GetFileInfo("abc").Return(owned, nil).Times(2)
+
+	// the board that owns the file can read it
+	_, path, err := th.App.GetFilePath("team", "board-A", "7abc.png")
+	require.NoError(t, err)
+	require.Equal(t, owned.Path, path)
+
+	// any other board (whose members may legitimately have access to it) cannot
+	_, path, err = th.App.GetFilePath("team", "board-B", "7abc.png")
+	require.ErrorIs(t, err, ErrFileNotFound)
+	require.Empty(t, path)
+
+	// files saved before the owner was recorded stay readable
+	th.Store.EXPECT().GetFileInfo("old").Return(&mm_model.FileInfo{Id: "old", Path: "2020/01/01/7old.png"}, nil)
+	_, _, err = th.App.GetFilePath("team", "board-B", "7old.png")
+	require.NoError(t, err)
+}

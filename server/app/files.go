@@ -47,6 +47,8 @@ func (a *App) SaveFile(reader io.Reader, teamID, boardID, filename string, asTem
 	fileInfo.Id = getFileInfoID(createdFilename)
 	fileInfo.Path = filePath
 	fileInfo.Size = fileSize
+	// Boards keeps the owning board in ChannelId: files can only be read through that board.
+	fileInfo.ChannelId = boardID
 
 	err := a.store.SaveFileInfo(fileInfo)
 	if err != nil {
@@ -104,6 +106,13 @@ func (a *App) GetFilePath(teamID, rootID, fileName string) (*mm_model.FileInfo, 
 	fileInfo, err := a.GetFileInfo(fileName)
 	if err != nil && !model.IsErrNotFound(err) {
 		return nil, "", err
+	}
+
+	// A file belongs to the board it was uploaded to. Anyone with access to another board
+	// must not be able to read it by putting their own board in the URL. Files uploaded
+	// before this was recorded have no owner and stay readable as before.
+	if fileInfo != nil && fileInfo.ChannelId != "" && fileInfo.ChannelId != rootID {
+		return nil, "", ErrFileNotFound
 	}
 
 	var filePath string

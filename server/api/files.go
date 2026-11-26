@@ -310,6 +310,11 @@ func (a *API) getFileInfo(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if fileInfo != nil && fileInfo.ChannelId != "" && fileInfo.ChannelId != boardID {
+		a.errorResponse(w, r, app.ErrFileNotFound)
+		return
+	}
+
 	data, err := json.Marshal(fileInfo)
 	if err != nil {
 		a.errorResponse(w, r, err)
