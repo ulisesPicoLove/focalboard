@@ -8,7 +8,7 @@ import './kanbanColumn.scss'
 
 type Props = {
     onDrop: (card: Card) => void
-    children: React.ReactNode
+    children?: React.ReactNode
 }
 
 const KanbanColumn = (props: Props) => {

@@ -12,7 +12,8 @@
     "import",
     "cypress",
     "jquery",
-    "no-only-tests"
+    "no-only-tests",
+    "@stylistic"
   ],
   "parser": "@typescript-eslint/parser",
   "env": {
@@ -103,16 +104,30 @@
           2,
           {
             "vars": "all",
-            "args": "after-used"
+            "args": "after-used",
+            "caughtErrors": "none"
           }
         ],
-        "@typescript-eslint/member-delimiter-style": [2, {"multiline": {"delimiter": "none"}, "singleline": {"delimiter": "comma"}}],
+
+        // typescript-eslint 8 moved the formatting rules to @stylistic
+        "@typescript-eslint/member-delimiter-style": "off",
+        "@typescript-eslint/semi": "off",
+        "@typescript-eslint/indent": "off",
+        "@typescript-eslint/type-annotation-spacing": "off",
+        "@stylistic/member-delimiter-style": [2, {"multiline": {"delimiter": "none"}, "singleline": {"delimiter": "comma"}}],
+        "@stylistic/type-annotation-spacing": 2,
+
+        // v8 made these errors; they were warnings or off before
+        "@typescript-eslint/no-explicit-any": 1,
+        "@typescript-eslint/no-unused-expressions": 0,
+        "@typescript-eslint/no-require-imports": 1,
+        "no-empty-function": 0,
         "@typescript-eslint/no-var-requires": 0,
         "@typescript-eslint/no-empty-function": 0,
         "@typescript-eslint/prefer-interface": 0,
         "@typescript-eslint/explicit-function-return-type": 0,
-        "@typescript-eslint/semi": [2, "never"],
-		"@typescript-eslint/indent": [
+        "@stylistic/semi": [2, "never"],
+        "@stylistic/indent": [
           2,
           4,
           {

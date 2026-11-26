@@ -1,5 +1,6 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
+/* eslint-disable react/prop-types -- the props are checked by TypeScript (Props); the rule cannot read them from a class component */
 import React, {CSSProperties} from 'react'
 
 import SeparatorOption from './separatorOption'
