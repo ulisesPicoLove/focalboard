@@ -227,7 +227,7 @@ const CardDialog = (props: Props): JSX.Element => {
                 title={<div/>}
                 className='cardDialog'
                 onClose={props.onClose}
-                toolsMenu={!props.readonly && !card?.limited && menu}
+                toolsMenu={!props.readonly && menu}
                 toolbar={attachBtn()}
             >
                 {isTemplate &&

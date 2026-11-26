@@ -12,7 +12,7 @@ import {RootState} from './index'
 export const initialLoad = createAsyncThunk(
     'initialLoad',
     async () => {
-        const [me, myConfig, team, teams, boards, boardsMemberships, boardTemplates, limits] = await Promise.all([
+        const [me, myConfig, team, teams, boards, boardsMemberships, boardTemplates] = await Promise.all([
             client.getMe(),
             client.getMyConfig(),
             client.getTeam(),
@@ -20,7 +20,6 @@ export const initialLoad = createAsyncThunk(
             client.getBoards(),
             client.getMyBoardMemberships(),
             client.getTeamTemplates(),
-            client.getBoardsCloudLimits(),
         ])
 
         // if no me, normally user not logged in
@@ -38,7 +37,6 @@ export const initialLoad = createAsyncThunk(
             boards,
             boardsMemberships,
             boardTemplates,
-            limits,
             myConfig,
         }
     },

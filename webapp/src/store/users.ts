@@ -161,30 +161,3 @@ export const getOnboardingTourCategory = createSelector(
     (myConfig): string => (myConfig.tourCategory ? myConfig.tourCategory.value : ''),
 )
 
-export const getCardLimitSnoozeUntil = createSelector(
-    getMyConfig,
-    (myConfig): number => {
-        if (!myConfig) {
-            return 0
-        }
-        try {
-            return parseInt(myConfig.cardLimitSnoozeUntil?.value || '0', 10)
-        } catch (_) {
-            return 0
-        }
-    },
-)
-
-export const getCardHiddenWarningSnoozeUntil = createSelector(
-    getMyConfig,
-    (myConfig): number => {
-        if (!myConfig) {
-            return 0
-        }
-        try {
-            return parseInt(myConfig.cardHiddenWarningSnoozeUntil?.value || 0, 10)
-        } catch (_) {
-            return 0
-        }
-    },
-)
