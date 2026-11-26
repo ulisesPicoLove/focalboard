@@ -175,9 +175,6 @@ func (s *SQLStore) boardMemberHistoryEntriesFromRows(rows *sql.Rows) ([]*model.B
 
 		// parse the insert_at timestamp which is different based on database type.
 		dateTemplate := "2006-01-02T15:04:05Z0700"
-		if s.dbType == model.MysqlDBType {
-			dateTemplate = "2006-01-02 15:04:05.000000"
-		}
 		ts, err := time.Parse(dateTemplate, insertAt.String)
 		if err != nil {
 			return nil, fmt.Errorf("cannot parse datetime '%s' for board_members_history scan: %w", insertAt.String, err)
@@ -519,17 +516,11 @@ func (s *SQLStore) saveMember(db sq.BaseRunner, bm *model.BoardMember) (*model.B
 		Insert(s.tablePrefix + "board_members").
 		SetMap(queryValues)
 
-	if s.dbType == model.MysqlDBType {
-		query = query.Suffix(
-			"ON DUPLICATE KEY UPDATE scheme_admin = ?, scheme_editor = ?, scheme_commenter = ?, scheme_viewer = ?",
-			bm.SchemeAdmin, bm.SchemeEditor, bm.SchemeCommenter, bm.SchemeViewer)
-	} else {
-		query = query.Suffix(
-			`ON CONFLICT (board_id, user_id)
+	query = query.Suffix(
+		`ON CONFLICT (board_id, user_id)
              DO UPDATE SET scheme_admin = EXCLUDED.scheme_admin, scheme_editor = EXCLUDED.scheme_editor,
-			   scheme_commenter = EXCLUDED.scheme_commenter, scheme_viewer = EXCLUDED.scheme_viewer`,
-		)
-	}
+		   scheme_commenter = EXCLUDED.scheme_commenter, scheme_viewer = EXCLUDED.scheme_viewer`,
+	)
 
 	if _, err := query.Exec(); err != nil {
 		return nil, err
@@ -675,7 +666,7 @@ func (s *SQLStore) searchBoardsForUser(db sq.BaseRunner, term string, searchFiel
 			case model.PostgresDBType:
 				where := "b.properties->? is not null"
 				query = query.Where(where, term)
-			case model.MysqlDBType, model.SqliteDBType:
+			case model.SqliteDBType:
 				where := "JSON_EXTRACT(b.properties, ?) IS NOT NULL"
 				query = query.Where(where, "$."+term)
 			default:

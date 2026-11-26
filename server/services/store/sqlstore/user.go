@@ -344,8 +344,6 @@ func (s *SQLStore) updateUserPreference(db sq.BaseRunner, preference mmModel.Pre
 		Values(preference.UserId, preference.Category, preference.Name, preference.Value)
 
 	switch s.dbType {
-	case model.MysqlDBType:
-		query = query.SuffixExpr(sq.Expr("ON DUPLICATE KEY UPDATE Value = ?", preference.Value))
 	case model.PostgresDBType:
 		query = query.SuffixExpr(sq.Expr("ON CONFLICT (userid, category, name) DO UPDATE SET Value = ?", preference.Value))
 	case model.SqliteDBType:

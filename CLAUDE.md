@@ -13,9 +13,9 @@ Setup: `make prebuild` (runs `npm install` in `webapp/`).
 - Build server: `make server` → `bin/focalboard-server` (build tags `json1 sqlite3`). Run `./bin/focalboard-server`; it reads `config.json` and serves on http://localhost:8000.
 - Build webapp: `make webapp` (`npm run pack` → `webapp/pack/`, which the server serves). Rebuilding only the webapp doesn't need a server restart; reload the browser.
 - Watch both (needs [modd](https://github.com/cortesi/modd)): `make watch` (or `make watch-single-user`).
-- Server tests (SQLite): `make server-test-sqlite`. Other DBs spin up Docker containers: `make server-test-mysql|mariadb|postgres`. `make server-test` runs all four.
+- Server tests (SQLite): `make server-test-sqlite`. Postgres spins up a Docker container: `make server-test-postgres`. `make server-test` runs both.
   - Single Go test: `cd server && FOCALBOARD_UNIT_TESTING=1 go test -tags 'json1 sqlite3' -run TestName ./path/to/pkg`
-  - Store tests run against a DB chosen by `FOCALBOARD_STORE_TEST_DB_TYPE` (sqlite default; mysql/mariadb/postgres otherwise).
+  - Store tests run against a DB chosen by `FOCALBOARD_STORE_TEST_DB_TYPE` (sqlite default; postgres otherwise).
 - Server lint: `make server-lint` (golangci-lint). Regenerate mocks: `make generate` (mockgen v1.6.0). Regenerate API spec/clients: `make swagger`.
 - Webapp (from `webapp/`): `npm run check` (eslint + stylelint), `npm run fix`, `npm run test` (jest; single test: `npx jest path/to/file.test.ts -t "name"`), `npm run updatesnapshot`, `npm run i18n-extract` after adding/changing `formatjs` messages (updates `i18n/en.json`).
 - Cypress: `npm run cypress:ci` (starts `bin/focalboard-server` from `webapp/cypress` on port 8088 — build the server first).
@@ -33,8 +33,8 @@ Layered, wired together in `server/server/server.go` (entry point is `server/mai
 
 - `api/` — HTTP handlers (gorilla/mux) under `/api/v2`; one file per resource (boards, blocks, cards, members, files, ...). Documented via swagger annotations.
 - `app/` — business logic; the `App` struct (`app.go`) coordinates store, permissions, websocket, notifications, webhooks. API handlers call into `app`, not the store directly.
-- `services/store/` — `Store` interface (`store.go`) with the SQL implementation in `sqlstore/` (SQLite, MySQL/MariaDB, Postgres; SQL migrations in `sqlstore/migrations/` as numbered `.up.sql`/`.down.sql`, plus Go-based data migrations), `mattermostauthlayer/` (wraps the store when running as a Mattermost plugin), `mockstore/` (generated mocks), and `storetests/` (shared test suite run against every DB driver).
-- `services/` — cross-cutting services: `config`, `auth`, `permissions`, `audit`, `notify`, `webhook`, `metrics`, `telemetry`, `scheduler`.
+- `services/store/` — `Store` interface (`store.go`) with the SQL implementation in `sqlstore/` (SQLite and Postgres; SQL migrations in `sqlstore/migrations/` as numbered `.up.sql`/`.down.sql`, plus Go-based data migrations), `mockstore/` (generated mocks), and `storetests/` (shared test suite run against every DB driver).
+- `services/` — cross-cutting services: `config`, `auth`, `permissions`, `audit`, `notify`, `webhook`, `metrics`, `scheduler`.
 - `ws/` — websocket server that pushes block/board changes to subscribed clients.
 - `model/` — shared types (Board, Block, Card, Member, ...). Core data model: a **Board** contains **Blocks** (cards, views, text/image/etc. content blocks); card properties are defined on the board.
 - `assets/` — default templates (`templates.boardarchive`, rebuilt with `make templates-archive`). Boards are imported/exported as archives (`app/import.go`, `app/export.go`).

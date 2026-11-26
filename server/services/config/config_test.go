@@ -51,3 +51,11 @@ func TestValidateAuthMode(t *testing.T) {
 	require.Error(t, validateAuthMode("mattermost"))
 	require.Error(t, validateAuthMode(""))
 }
+
+func TestValidateDBType(t *testing.T) {
+	require.NoError(t, validateDBType("postgres"))
+	require.NoError(t, validateDBType("sqlite3"))
+	require.ErrorContains(t, validateDBType("mysql"), "no longer supported")
+	require.ErrorContains(t, validateDBType("mariadb"), "no longer supported")
+	require.Error(t, validateDBType(""))
+}

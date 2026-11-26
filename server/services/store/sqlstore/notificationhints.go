@@ -69,11 +69,7 @@ func (s *SQLStore) upsertNotificationHint(db sq.BaseRunner, hint *model.Notifica
 		Columns(notificationHintFields...).
 		Values(valuesForNotificationHint(hint)...)
 
-	if s.dbType == model.MysqlDBType {
-		query = query.Suffix("ON DUPLICATE KEY UPDATE notify_at = ?", notifyAt)
-	} else {
-		query = query.Suffix("ON CONFLICT (block_id) DO UPDATE SET notify_at = ?", notifyAt)
-	}
+	query = query.Suffix("ON CONFLICT (block_id) DO UPDATE SET notify_at = ?", notifyAt)
 
 	if _, err := query.Exec(); err != nil {
 		s.logger.Error("Cannot upsert notification hint",

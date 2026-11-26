@@ -10,7 +10,6 @@ The following built-in variables are available:
 | prefix | {{ .prefix }}     | Returns the table name prefix (e.g. `focalbaord_`) |
 | postgres | {{if .postgres }} ... {{end}} | Returns true if the current database is Postgres. |
 | sqlite   | {{if .sqlite }} ... {{end}}   | Returns true if the current database is Sqlite3. |
-| mysql    | {{if .mysql }} ... {{end}}   | Returns true if the current database is MySQL. |
 | plugin   | {{if .plugin }} ... {{end}}   | Returns true if the server is currently running as a plugin (or product). In others words this is true if the server is not running as stand-alone or personal server. |
 | singleUser   | {{if .singleUser }} ... {{end}}   | Returns true if the server is currently running in single user mode. |
 

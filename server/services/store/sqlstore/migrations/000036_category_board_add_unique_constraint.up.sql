@@ -1,4 +1,4 @@
-{{if or .mysql .postgres}}
+{{if .postgres}}
 {{ addConstraintIfNeeded "category_boards" "unique_user_category_board" "UNIQUE" "UNIQUE(user_id, board_id)"}}
 {{end}}
 

@@ -17,7 +17,7 @@ func Test37MigrateHiddenBoardIDTest(t *testing.T) {
 		th, tearDown := SetupTestHelper(t)
 		defer tearDown()
 
-		if th.IsMySQL() || th.IsPostgres() {
+		if th.IsPostgres() {
 			return
 		}
 
@@ -48,7 +48,7 @@ func Test37MigrateHiddenBoardIDTest(t *testing.T) {
 		th, tearDown := SetupTestHelper(t)
 		defer tearDown()
 
-		if th.IsMySQL() || th.IsPostgres() {
+		if th.IsPostgres() {
 			return
 		}
 

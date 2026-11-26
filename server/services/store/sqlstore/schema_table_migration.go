@@ -124,8 +124,6 @@ func (s *SQLStore) isSchemaMigrationNeeded() (bool, error) {
 		})
 
 	switch s.dbType {
-	case model.MysqlDBType:
-		query = query.Where(sq.Eq{"TABLE_SCHEMA": s.schemaName})
 	case model.PostgresDBType:
 		query = query.Where("table_schema = current_schema()")
 	}
@@ -278,11 +276,7 @@ func (s *SQLStore) useNewSchemaTable() error {
 	// renaming old schema migration table. Will delete later once the migration is
 	// complete, just in case.
 	var query string
-	if s.dbType == model.MysqlDBType {
-		query = fmt.Sprintf("RENAME TABLE `%sschema_migrations` TO `%sschema_migrations_old_temp`", s.tablePrefix, s.tablePrefix)
-	} else {
-		query = fmt.Sprintf("ALTER TABLE %sschema_migrations RENAME TO %sschema_migrations_old_temp", s.tablePrefix, s.tablePrefix)
-	}
+	query = fmt.Sprintf("ALTER TABLE %sschema_migrations RENAME TO %sschema_migrations_old_temp", s.tablePrefix, s.tablePrefix)
 
 	if _, err := s.db.Exec(query); err != nil {
 		s.logger.Error("failed to rename old schema migration table", mlog.Err(err))
@@ -290,11 +284,7 @@ func (s *SQLStore) useNewSchemaTable() error {
 	}
 
 	// renaming new temp table to old table's name
-	if s.dbType == model.MysqlDBType {
-		query = fmt.Sprintf("RENAME TABLE `%s%s` TO `%sschema_migrations`", s.tablePrefix, tempSchemaMigrationTableName, s.tablePrefix)
-	} else {
-		query = fmt.Sprintf("ALTER TABLE %s%s RENAME TO %sschema_migrations", s.tablePrefix, tempSchemaMigrationTableName, s.tablePrefix)
-	}
+	query = fmt.Sprintf("ALTER TABLE %s%s RENAME TO %sschema_migrations", s.tablePrefix, tempSchemaMigrationTableName, s.tablePrefix)
 
 	if _, err := s.db.Exec(query); err != nil {
 		s.logger.Error("failed to rename temp schema table", mlog.Err(err))

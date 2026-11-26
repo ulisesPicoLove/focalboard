@@ -15,18 +15,7 @@
 
 {{- /* cleanup incorrect data format in column calculations */ -}}
 {{- /* then move from 'board' type to 'view' type*/ -}}
-{{if .mysql}}
-UPDATE {{.prefix}}blocks SET fields = JSON_SET(fields, '$.columnCalculations', JSON_OBJECT()) WHERE JSON_EXTRACT(fields, '$.columnCalculations') = JSON_ARRAY();
 
-UPDATE {{.prefix}}blocks b
-  JOIN (
-    SELECT id, JSON_EXTRACT(fields, '$.columnCalculations') as board_calculations from {{.prefix}}blocks
-    WHERE JSON_EXTRACT(fields, '$.columnCalculations') <> JSON_OBJECT()
-  ) AS s on s.id = b.root_id
-  SET fields = JSON_SET(fields, '$.columnCalculations', JSON_ARRAY(s.board_calculations))
-  WHERE JSON_EXTRACT(b.fields, '$.viewType') = 'table'
-  AND b.type = 'view';
-{{end}}
 
 {{if .postgres}}
 UPDATE {{.prefix}}blocks SET fields = fields::jsonb - 'columnCalculations' || '{"columnCalculations": {}}' WHERE fields->>'columnCalculations' = '[]';
@@ -63,7 +52,6 @@ CREATE TABLE IF NOT EXISTS {{.prefix}}boards (
 
     {{if .postgres}}insert_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),{{end}}
 	{{if .sqlite}}insert_at DATETIME NOT NULL DEFAULT(STRFTIME('%Y-%m-%d %H:%M:%f', 'NOW')),{{end}}
-	{{if .mysql}}insert_at DATETIME(6) NOT NULL DEFAULT NOW(6),{{end}}
 
     team_id VARCHAR(36) NOT NULL,
     channel_id VARCHAR(36),
@@ -76,10 +64,7 @@ CREATE TABLE IF NOT EXISTS {{.prefix}}boards (
     show_description BOOLEAN,
     is_template BOOLEAN,
     template_version INT DEFAULT 0,
-    {{if .mysql}}
-    properties JSON,
-    card_properties JSON,
-    {{end}}
+    
     {{if .postgres}}
     properties JSONB,
     card_properties JSONB,
@@ -91,7 +76,7 @@ CREATE TABLE IF NOT EXISTS {{.prefix}}boards (
     create_at BIGINT,
     update_at BIGINT,
     delete_at BIGINT
-) {{if .mysql}}DEFAULT CHARACTER SET utf8mb4{{end}};
+);
 
 {{- /* createIndexIfNeeded tableName columns */ -}}
 {{ createIndexIfNeeded "boards" "team_id, is_template" }}
@@ -102,7 +87,6 @@ CREATE TABLE IF NOT EXISTS {{.prefix}}boards_history (
 
     {{if .postgres}}insert_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),{{end}}
 	{{if .sqlite}}insert_at DATETIME NOT NULL DEFAULT(STRFTIME('%Y-%m-%d %H:%M:%f', 'NOW')),{{end}}
-	{{if .mysql}}insert_at DATETIME(6) NOT NULL DEFAULT NOW(6),{{end}}
 
     team_id VARCHAR(36) NOT NULL,
     channel_id VARCHAR(36),
@@ -115,10 +99,7 @@ CREATE TABLE IF NOT EXISTS {{.prefix}}boards_history (
     show_description BOOLEAN,
     is_template BOOLEAN,
     template_version INT DEFAULT 0,
-    {{if .mysql}}
-    properties JSON,
-    card_properties JSON,
-    {{end}}
+    
     {{if .postgres}}
     properties JSONB,
     card_properties JSONB,
@@ -132,7 +113,7 @@ CREATE TABLE IF NOT EXISTS {{.prefix}}boards_history (
     delete_at BIGINT,
 
     PRIMARY KEY (id, insert_at)
-) {{if .mysql}}DEFAULT CHARACTER SET utf8mb4{{end}};
+);
 
 
 {{- /* migrate board blocks to boards table */ -}}
@@ -167,36 +148,7 @@ CREATE TABLE IF NOT EXISTS {{.prefix}}boards_history (
           WHERE B.type='board'
   );
   {{end}}
-  {{if .mysql}}
-  INSERT INTO {{.prefix}}boards (
-      SELECT B.id, B.insert_at, C.TeamId, B.channel_id, B.created_by, B.modified_by, C.Type,
-                 COALESCE(B.title, ''),
-                 COALESCE(JSON_UNQUOTE(JSON_EXTRACT(B.fields,'$.description')), ''),
-                 JSON_UNQUOTE(JSON_EXTRACT(B.fields,'$.icon')),
-                 COALESCE(JSON_EXTRACT(B.fields, '$.showDescription'), 'false') = 'true',
-                 COALESCE(JSON_EXTRACT(B.fields, '$.isTemplate'), 'false') = 'true',
-                 COALESCE(JSON_EXTRACT(B.fields, '$.templateVer'), 0),
-                 '{}', JSON_EXTRACT(B.fields, '$.cardProperties'), B.create_at,
-                 B.update_at, B.delete_at {{if doesColumnExist "boards" "minimum_role"}} ,'' {{end}}
-          FROM {{.prefix}}blocks AS B
-          INNER JOIN Channels AS C ON C.Id=B.channel_id
-          WHERE B.type='board'
-  );
-  INSERT INTO {{.prefix}}boards_history (
-      SELECT B.id, B.insert_at, C.TeamId, B.channel_id, B.created_by, B.modified_by, C.Type,
-                 COALESCE(B.title, ''),
-                 COALESCE(JSON_UNQUOTE(JSON_EXTRACT(B.fields,'$.description')), ''),
-                 JSON_UNQUOTE(JSON_EXTRACT(B.fields,'$.icon')),
-                 COALESCE(JSON_EXTRACT(B.fields, '$.showDescription'), 'false') = 'true',
-                 COALESCE(JSON_EXTRACT(B.fields, '$.isTemplate'), 'false') = 'true',
-                 COALESCE(JSON_EXTRACT(B.fields, '$.templateVer'), 0),
-                 '{}', JSON_EXTRACT(B.fields, '$.cardProperties'), B.create_at,
-                 B.update_at, B.delete_at {{if doesColumnExist "boards_history" "minimum_role"}} ,'' {{end}}
-          FROM {{.prefix}}blocks_history AS B
-          INNER JOIN Channels AS C ON C.Id=B.channel_id
-          WHERE B.type='board'
-  );
-  {{end}}
+  
 {{else}}
   {{if .postgres}}
   INSERT INTO {{.prefix}}boards (
@@ -227,34 +179,7 @@ CREATE TABLE IF NOT EXISTS {{.prefix}}boards_history (
   );
   {{end}}
 
-  {{if .mysql}}
-  INSERT INTO {{.prefix}}boards (
-      SELECT id, insert_at, '0', channel_id, created_by, modified_by, 'O',
-                 COALESCE(B.title, ''),
-                 COALESCE(JSON_UNQUOTE(JSON_EXTRACT(B.fields,'$.description')), ''),
-                 JSON_UNQUOTE(JSON_EXTRACT(fields,'$.icon')),
-                 COALESCE(JSON_EXTRACT(B.fields, '$.showDescription'), 'false') = 'true',
-                 COALESCE(JSON_EXTRACT(B.fields, '$.isTemplate'), 'false') = 'true',
-                 COALESCE(JSON_EXTRACT(B.fields, '$.templateVer'), 0),
-                 '{}', JSON_EXTRACT(fields, '$.cardProperties'), create_at,
-                 update_at, delete_at {{if doesColumnExist "boards" "minimum_role"}} ,'editor' {{end}}
-          FROM {{.prefix}}blocks AS B
-          WHERE type='board'
-  );
-  INSERT INTO {{.prefix}}boards_history (
-      SELECT id, insert_at, '0', channel_id, created_by, modified_by, 'O',
-                 COALESCE(B.title, ''),
-                 COALESCE(JSON_UNQUOTE(JSON_EXTRACT(B.fields,'$.description')), ''),
-                 JSON_UNQUOTE(JSON_EXTRACT(fields,'$.icon')),
-                 COALESCE(JSON_EXTRACT(B.fields, '$.showDescription'), 'false') = 'true',
-                 COALESCE(JSON_EXTRACT(B.fields, '$.isTemplate'), 'false') = 'true',
-                 COALESCE(JSON_EXTRACT(B.fields, '$.templateVer'), 0),
-                 '{}', JSON_EXTRACT(fields, '$.cardProperties'), create_at,
-                 update_at, delete_at {{if doesColumnExist "boards_history" "minimum_role"}} ,'editor' {{end}}
-          FROM {{.prefix}}blocks_history AS B
-          WHERE type='board'
-  );
-  {{end}}
+  
   
   {{if .sqlite}}
   INSERT INTO {{.prefix}}boards
@@ -292,7 +217,7 @@ DELETE FROM {{.prefix}}blocks WHERE type = 'board';
 DELETE FROM {{.prefix}}blocks_history WHERE type = 'board';
 
 {{- /* add board_members (only if boards_members doesn't already exist) */ -}}
-{{if not (doesTableExist "board_members") }}
+{{if not (doesTableExist "board_members")}}
 CREATE TABLE IF NOT EXISTS {{.prefix}}board_members (
     board_id VARCHAR(36) NOT NULL,
     user_id VARCHAR(36) NOT NULL,
@@ -302,7 +227,7 @@ CREATE TABLE IF NOT EXISTS {{.prefix}}board_members (
     scheme_commenter BOOLEAN,
     scheme_viewer BOOLEAN,
     PRIMARY KEY (board_id, user_id)
-) {{if .mysql}}DEFAULT CHARACTER SET utf8mb4{{end}};
+);
 
 {{- /* if we're in plugin, migrate channel memberships to the board */ -}}
 {{if .plugin}}

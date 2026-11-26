@@ -23,8 +23,6 @@ const (
 
 func (s *SQLStore) timestampToCharField(name string, as string) string {
 	switch s.dbType {
-	case model.MysqlDBType:
-		return fmt.Sprintf("date_format(%s, '%%Y-%%m-%%d %%H:%%i:%%S') AS %s", name, as)
 	case model.PostgresDBType:
 		return fmt.Sprintf("to_char(%s, 'YYYY-MM-DD HH:MI:SS.MS') AS %s", name, as)
 	default:

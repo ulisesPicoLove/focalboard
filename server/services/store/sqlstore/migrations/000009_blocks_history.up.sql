@@ -1,7 +1,7 @@
 {{- /* Only perform this migration if the blocks_history table does not already exist */ -}}
 
 {{- /* doesTableExist tableName */ -}}
-{{if doesTableExist "blocks_history" }}
+{{if doesTableExist "blocks_history"}}
 
     SELECT 1;
 
@@ -14,9 +14,8 @@ CREATE TABLE IF NOT EXISTS {{.prefix}}blocks (
     id VARCHAR(36),
     {{if .postgres}}insert_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),{{end}}
     {{if .sqlite}}insert_at DATETIME NOT NULL DEFAULT(STRFTIME('%Y-%m-%d %H:%M:%f', 'NOW')),{{end}}
-    {{if .mysql}}insert_at DATETIME(6) NOT NULL DEFAULT NOW(6),{{end}}
     parent_id VARCHAR(36),
-    {{if .mysql}}`schema`{{else}}schema{{end}} BIGINT,
+    schema BIGINT,
     type TEXT,
     title TEXT,
     fields {{if .postgres}}JSON{{else}}TEXT{{end}},
@@ -27,11 +26,9 @@ CREATE TABLE IF NOT EXISTS {{.prefix}}blocks (
     modified_by VARCHAR(36),
     workspace_id VARCHAR(36),
     PRIMARY KEY (workspace_id,id)
-) {{if .mysql}}DEFAULT CHARACTER SET utf8mb4{{end}};
+);
 
-{{if .mysql}}
-INSERT IGNORE INTO {{.prefix}}blocks (SELECT * FROM {{.prefix}}blocks_history ORDER BY insert_at DESC);
-{{end}}
+
 {{if .postgres}}
 INSERT INTO {{.prefix}}blocks (SELECT * FROM {{.prefix}}blocks_history ORDER BY insert_at DESC) ON CONFLICT DO NOTHING;
 {{end}}

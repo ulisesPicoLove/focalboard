@@ -94,17 +94,10 @@ func (s *SQLStore) addUpdateCategoryBoard(db sq.BaseRunner, userID, categoryID s
 		)
 	}
 
-	if s.dbType == model.MysqlDBType {
-		query = query.Suffix(
-			"ON DUPLICATE KEY UPDATE category_id = ?",
-			categoryID,
-		)
-	} else {
-		query = query.Suffix(
-			`ON CONFLICT (user_id, board_id)
-			 DO UPDATE SET category_id = EXCLUDED.category_id, update_at = EXCLUDED.update_at`,
-		)
-	}
+	query = query.Suffix(
+		`ON CONFLICT (user_id, board_id)
+		 DO UPDATE SET category_id = EXCLUDED.category_id, update_at = EXCLUDED.update_at`,
+	)
 
 	if _, err := query.Exec(); err != nil {
 		return fmt.Errorf(

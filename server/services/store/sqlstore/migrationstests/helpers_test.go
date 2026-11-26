@@ -15,10 +15,6 @@ func (th *TestHelper) IsPostgres() bool {
 	return th.f.DB().DriverName() == "postgres"
 }
 
-func (th *TestHelper) IsMySQL() bool {
-	return th.f.DB().DriverName() == "mysql"
-}
-
 func (th *TestHelper) IsSQLite() bool {
 	return th.f.DB().DriverName() == "sqlite3"
 }

@@ -1,8 +1,5 @@
 {{- /* delete old blocks PK and add id as the new one */ -}}
-{{if .mysql}}
-ALTER TABLE {{.prefix}}blocks DROP PRIMARY KEY;
-ALTER TABLE {{.prefix}}blocks ADD PRIMARY KEY (id);
-{{end}}
+
 
 {{if .postgres}}
 ALTER TABLE {{.prefix}}blocks DROP CONSTRAINT {{.prefix}}blocks_pkey1;

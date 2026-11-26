@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS {{.prefix}}subscriptions (
 	create_at BIGINT,
 	delete_at BIGINT,
 	PRIMARY KEY (block_id, subscriber_id)
-) {{if .mysql}}DEFAULT CHARACTER SET utf8mb4{{end}};
+);
 
 CREATE TABLE IF NOT EXISTS {{.prefix}}notification_hints (
 	block_type VARCHAR(10),
@@ -18,5 +18,5 @@ CREATE TABLE IF NOT EXISTS {{.prefix}}notification_hints (
 	create_at BIGINT,
 	notify_at BIGINT,
 	PRIMARY KEY (block_id)
-) {{if .mysql}}DEFAULT CHARACTER SET utf8mb4{{end}};
+);
 

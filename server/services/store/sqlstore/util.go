@@ -42,9 +42,6 @@ func PrepareNewTestDatabase() (dbType string, connectionString string, err error
 	if dbType == "" {
 		dbType = model.SqliteDBType
 	}
-	if dbType == "mariadb" {
-		dbType = model.MysqlDBType
-	}
 
 	var dbName string
 	var rootUser string
@@ -60,9 +57,6 @@ func PrepareNewTestDatabase() (dbType string, connectionString string, err error
 		// docker unit tests take priority over any DSN env vars
 		var template string
 		switch dbType {
-		case model.MysqlDBType:
-			template = "%s:mostest@tcp(localhost:%s)/%s?charset=utf8mb4,utf8&writeTimeout=30s"
-			rootUser = "root"
 		case model.PostgresDBType:
 			template = "postgres://%s:mostest@localhost:%s/%s?sslmode=disable\u0026connect_timeout=10"
 			rootUser = "mmuser"
@@ -99,7 +93,7 @@ func PrepareNewTestDatabase() (dbType string, connectionString string, err error
 
 		connectionString = fmt.Sprintf(template, "mmuser", port, dbName)
 	} else {
-		// mysql or postgres need a DSN (connection string)
+		// postgres needs a DSN (connection string)
 		connectionString = strings.TrimSpace(os.Getenv("FOCALBOARD_STORE_TEST_CONN_STRING"))
 	}
 
@@ -133,9 +127,6 @@ func (s *SQLStore) deleteBlockRecord(db sq.BaseRunner, blockID, modifiedBy strin
 }
 
 func (s *SQLStore) castInt(val int64, as string) string {
-	if s.dbType == model.MysqlDBType {
-		return fmt.Sprintf("cast(%d as unsigned) AS %s", val, as)
-	}
 	return fmt.Sprintf("cast(%d as bigint) AS %s", val, as)
 }
 
@@ -143,8 +134,6 @@ func (s *SQLStore) GetSchemaName() (string, error) {
 	var query sq.SelectBuilder
 
 	switch s.dbType {
-	case model.MysqlDBType:
-		query = s.getQueryBuilder(s.db).Select("DATABASE()")
 	case model.PostgresDBType:
 		query = s.getQueryBuilder(s.db).Select("current_schema()")
 	case model.SqliteDBType:

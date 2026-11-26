@@ -6,4 +6,4 @@ CREATE TABLE IF NOT EXISTS {{.prefix}}file_info (
     extension VARCHAR(50) NOT NULL,
     size BIGINT NOT NULL,
     archived BOOLEAN
-) {{if .mysql}}DEFAULT CHARACTER SET utf8mb4{{end}};
+);

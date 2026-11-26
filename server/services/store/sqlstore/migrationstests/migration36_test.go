@@ -42,18 +42,14 @@ func Test36AddUniqueConstraintToCategoryBoards(t *testing.T) {
 
 		th.f.MigrateToStep(35)
 
-		if th.IsMySQL() {
-			th.f.DB().Exec("alter table focalboard_category_boards add constraint unique_user_category_board UNIQUE(user_id, board_id);")
-		} else if th.IsPostgres() {
+		if th.IsPostgres() {
 			th.f.DB().Exec("ALTER TABLE focalboard_category_boards ADD CONSTRAINT unique_user_category_board UNIQUE(user_id, board_id);")
 		}
 
 		th.f.MigrateToStep(36)
 
 		var schema string
-		if th.IsMySQL() {
-			schema = "DATABASE()"
-		} else if th.IsPostgres() {
+		if th.IsPostgres() {
 			schema = "'public'"
 		}
 

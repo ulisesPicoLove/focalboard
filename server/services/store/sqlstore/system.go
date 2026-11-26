@@ -50,11 +50,7 @@ func (s *SQLStore) getSystemSettings(db sq.BaseRunner) (map[string]string, error
 func (s *SQLStore) setSystemSetting(db sq.BaseRunner, id, value string) error {
 	query := s.getQueryBuilder(db).Insert(s.tablePrefix+"system_settings").Columns("id", "value").Values(id, value)
 
-	if s.dbType == model.MysqlDBType {
-		query = query.Suffix("ON DUPLICATE KEY UPDATE value = ?", value)
-	} else {
-		query = query.Suffix("ON CONFLICT (id) DO UPDATE SET value = EXCLUDED.value")
-	}
+	query = query.Suffix("ON CONFLICT (id) DO UPDATE SET value = EXCLUDED.value")
 
 	_, err := query.Exec()
 	if err != nil {

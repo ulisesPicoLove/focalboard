@@ -20,8 +20,6 @@ jobs:
       matrix:
         db:
           - sqlite
-          - mysql
-          - mariadb
           - postgres
 
     steps:

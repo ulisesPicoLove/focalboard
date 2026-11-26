@@ -141,6 +141,10 @@ func ReadConfigFile(configFilePath string) (*Configuration, error) {
 		return nil, err
 	}
 
+	if err = validateDBType(configuration.DBType); err != nil {
+		return nil, err
+	}
+
 	log.Println("readConfigFile")
 	log.Printf("%+v", removeSecurityData(configuration))
 
@@ -156,6 +160,19 @@ func validateAuthMode(mode string) error {
 		return nil
 	default:
 		return fmt.Errorf("unsupported authMode %q: must be \"native\" or \"google\"", mode)
+	}
+}
+
+// validateDBType rejects the databases this fork no longer supports, with a clear message
+// instead of a failure deep inside the migrations.
+func validateDBType(dbType string) error {
+	switch dbType {
+	case "postgres", "sqlite3":
+		return nil
+	case "mysql", "mariadb":
+		return fmt.Errorf("dbtype %q is no longer supported: use \"postgres\" (or \"sqlite3\" for development)", dbType)
+	default:
+		return fmt.Errorf("unsupported dbtype %q: must be \"postgres\" or \"sqlite3\"", dbType)
 	}
 }
 

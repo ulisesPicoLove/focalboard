@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"fmt"
 	"net/url"
-	"strings"
 
 	sq "github.com/Masterminds/squirrel"
 
@@ -76,22 +75,6 @@ func New(params Params) (*SQLStore, error) {
 	return store, nil
 }
 
-func (s *SQLStore) IsMariaDB() bool {
-	if s.dbType != model.MysqlDBType {
-		return false
-	}
-
-	row := s.db.QueryRow("SELECT Version()")
-
-	var version string
-	if err := row.Scan(&version); err != nil {
-		s.logger.Error("error checking database version", mlog.Err(err))
-		return false
-	}
-
-	return strings.Contains(strings.ToLower(version), "mariadb")
-}
-
 // computeBinaryParam returns whether the data source uses binary_parameters
 // when using Postgres.
 func (s *SQLStore) computeBinaryParam() (bool, error) {
@@ -133,9 +116,6 @@ func (s *SQLStore) getQueryBuilder(db sq.BaseRunner) sq.StatementBuilderType {
 }
 
 func (s *SQLStore) escapeField(fieldName string) string { //nolint:unparam
-	if s.dbType == model.MysqlDBType {
-		return "`" + fieldName + "`"
-	}
 	if s.dbType == model.PostgresDBType || s.dbType == model.SqliteDBType {
 		return "\"" + fieldName + "\""
 	}
@@ -149,14 +129,11 @@ func (s *SQLStore) concatenationSelector(field string, delimiter string) string 
 	if s.dbType == model.PostgresDBType {
 		return fmt.Sprintf("string_agg(%s, '%s')", field, delimiter)
 	}
-	if s.dbType == model.MysqlDBType {
-		return fmt.Sprintf("GROUP_CONCAT(%s SEPARATOR '%s')", field, delimiter)
-	}
 	return ""
 }
 
 func (s *SQLStore) elementInColumn(column string) string {
-	if s.dbType == model.SqliteDBType || s.dbType == model.MysqlDBType {
+	if s.dbType == model.SqliteDBType {
 		return fmt.Sprintf("instr(%s, ?) > 0", column)
 	}
 	if s.dbType == model.PostgresDBType {
@@ -182,8 +159,6 @@ func (s *SQLStore) DBVersion() string {
 	var row *sql.Row
 
 	switch s.dbType {
-	case model.MysqlDBType:
-		row = s.db.QueryRow("SELECT VERSION()")
 	case model.PostgresDBType:
 		row = s.db.QueryRow("SHOW server_version")
 	case model.SqliteDBType:

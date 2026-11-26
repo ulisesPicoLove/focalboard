@@ -18,7 +18,6 @@ import (
 
 	"github.com/mattermost/morph"
 	drivers "github.com/mattermost/morph/drivers"
-	mysql "github.com/mattermost/morph/drivers/mysql"
 	postgres "github.com/mattermost/morph/drivers/postgres"
 	sqlite "github.com/mattermost/morph/drivers/sqlite"
 	embedded "github.com/mattermost/morph/sources/embedded"
@@ -40,23 +39,9 @@ const (
 	tempSchemaMigrationTableName = "temp_schema_migration"
 )
 
-// migrations in MySQL need to run with the multiStatements flag
-// enabled, so this method creates a new connection ensuring that it's
-// enabled.
+// getMigrationConnection creates a dedicated connection for running migrations.
 func (s *SQLStore) getMigrationConnection() (*sql.DB, error) {
 	connectionString := s.connectionString
-	if s.dbType == model.MysqlDBType {
-		var err error
-		connectionString, err = sqlUtils.ResetReadTimeout(connectionString)
-		if err != nil {
-			return nil, err
-		}
-
-		connectionString, err = sqlUtils.AppendMultipleStatementsFlag(connectionString)
-		if err != nil {
-			return nil, err
-		}
-	}
 
 	var settings mmModel.SqlSettings
 	settings.SetDefaults(false)
@@ -114,13 +99,6 @@ func (s *SQLStore) Migrate() error {
 		}
 	}
 
-	if s.dbType == model.MysqlDBType {
-		driver, err = mysql.WithInstance(db)
-		if err != nil {
-			return err
-		}
-	}
-
 	assetsList, err := Assets.ReadDir("migrations")
 	if err != nil {
 		return err
@@ -134,7 +112,6 @@ func (s *SQLStore) Migrate() error {
 		"prefix":     s.tablePrefix,
 		"postgres":   s.dbType == model.PostgresDBType,
 		"sqlite":     s.dbType == model.SqliteDBType,
-		"mysql":      s.dbType == model.MysqlDBType,
 		"singleUser": s.isSingleUser,
 	}
 
@@ -240,10 +217,6 @@ func (s *SQLStore) runMigrationSequence(engine *morph.Morph, driver drivers.Driv
 		return err
 	}
 
-	// always run the collations & charset fix-ups
-	if mErr := s.RunFixCollationsAndCharsetsMigration(); mErr != nil {
-		return fmt.Errorf("error running fix collations and charsets migration: %w", mErr)
-	}
 	return nil
 }
 
@@ -299,30 +272,6 @@ func (s *SQLStore) genAddColumnIfNeeded(tableName, columnName, datatype, constra
 	case model.SqliteDBType:
 		// Sqlite does not support any conditionals that can contain DDL commands. No idempotent migrations for Sqlite :-(
 		return fmt.Sprintf("\nALTER TABLE %s ADD COLUMN %s %s %s;\n", normTableName, columnName, datatype, constraint), nil
-	case model.MysqlDBType:
-		vars := map[string]string{
-			"schema":          s.schemaName,
-			"table_name":      tableName,
-			"norm_table_name": normTableName,
-			"column_name":     columnName,
-			"data_type":       datatype,
-			"constraint":      constraint,
-		}
-		return replaceVars(`
-			SET @stmt = (SELECT IF(
-				(
-				  SELECT COUNT(column_name) FROM INFORMATION_SCHEMA.COLUMNS
-				  WHERE table_name = '[[table_name]]'
-				  AND table_schema = '[[schema]]'
-				  AND column_name = '[[column_name]]'
-				) > 0,
-				'SELECT 1;',
-				'ALTER TABLE [[norm_table_name]] ADD COLUMN [[column_name]] [[data_type]] [[constraint]];'
-			));
-			PREPARE addColumnIfNeeded FROM @stmt;
-			EXECUTE addColumnIfNeeded;
-			DEALLOCATE PREPARE addColumnIfNeeded;
-		`, vars), nil
 	case model.PostgresDBType:
 		return fmt.Sprintf("\nALTER TABLE %s ADD COLUMN IF NOT EXISTS %s %s %s;\n", normTableName, columnName, datatype, constraint), nil
 	default:
@@ -337,28 +286,6 @@ func (s *SQLStore) genDropColumnIfNeeded(tableName, columnName string) (string, 
 	switch s.dbType {
 	case model.SqliteDBType:
 		return fmt.Sprintf("\n-- Sqlite3 cannot drop columns for versions less than 3.35.0; drop column '%s' in table '%s' skipped\n", columnName, tableName), nil
-	case model.MysqlDBType:
-		vars := map[string]string{
-			"schema":          s.schemaName,
-			"table_name":      tableName,
-			"norm_table_name": normTableName,
-			"column_name":     columnName,
-		}
-		return replaceVars(`
-			SET @stmt = (SELECT IF(
-				(
-				  SELECT COUNT(column_name) FROM INFORMATION_SCHEMA.COLUMNS
-				  WHERE table_name = '[[table_name]]'
-				  AND table_schema = '[[schema]]'
-				  AND column_name = '[[column_name]]'
-				) > 0,
-				'ALTER TABLE [[norm_table_name]] DROP COLUMN [[column_name]];',
-				'SELECT 1;'
-			));
-			PREPARE dropColumnIfNeeded FROM @stmt;
-			EXECUTE dropColumnIfNeeded;
-			DEALLOCATE PREPARE dropColumnIfNeeded;
-		`, vars), nil
 	case model.PostgresDBType:
 		return fmt.Sprintf("\nALTER TABLE %s DROP COLUMN IF EXISTS %s;\n", normTableName, columnName), nil
 	default:
@@ -375,29 +302,6 @@ func (s *SQLStore) genCreateIndexIfNeeded(tableName, columns string) (string, er
 	case model.SqliteDBType:
 		// No support for idempotent index creation in Sqlite.
 		return fmt.Sprintf("\nCREATE INDEX %s ON %s (%s);\n", indexName, normTableName, columns), nil
-	case model.MysqlDBType:
-		vars := map[string]string{
-			"schema":          s.schemaName,
-			"table_name":      tableName,
-			"norm_table_name": normTableName,
-			"index_name":      indexName,
-			"columns":         columns,
-		}
-		return replaceVars(`
-			SET @stmt = (SELECT IF(
-				(
-				  SELECT COUNT(index_name) FROM INFORMATION_SCHEMA.STATISTICS
-				  WHERE table_name = '[[table_name]]'
-				  AND table_schema = '[[schema]]'
-				  AND index_name = '[[index_name]]'
-				) > 0,
-				'SELECT 1;',
-				'CREATE INDEX [[index_name]] ON [[norm_table_name]] ([[columns]]);'
-			));
-			PREPARE createIndexIfNeeded FROM @stmt;
-			EXECUTE createIndexIfNeeded;
-			DEALLOCATE PREPARE createIndexIfNeeded;
-		`, vars), nil
 	case model.PostgresDBType:
 		return fmt.Sprintf("\nCREATE INDEX IF NOT EXISTS %s ON %s (%s);\n", indexName, normTableName, columns), nil
 	default:
@@ -422,21 +326,6 @@ func (s *SQLStore) genRenameTableIfNeeded(oldTableName, newTableName string) (st
 	case model.SqliteDBType:
 		// No support for idempotent table renaming in Sqlite.
 		return fmt.Sprintf("\nALTER TABLE %s RENAME TO %s;\n", normOldTableName, newTableName), nil
-	case model.MysqlDBType:
-		return replaceVars(`
-			SET @stmt = (SELECT IF(
-				(
-				SELECT COUNT(table_name) FROM INFORMATION_SCHEMA.TABLES
-				WHERE table_name = '[[table_name]]'
-				AND table_schema = '[[schema]]'
-				) > 0,
-				'SELECT 1;',
-				'RENAME TABLE [[norm_old_table_name]] TO [[new_table_name]];'
-			));
-			PREPARE renameTableIfNeeded FROM @stmt;
-			EXECUTE renameTableIfNeeded;
-			DEALLOCATE PREPARE renameTableIfNeeded;
-		`, vars), nil
 	case model.PostgresDBType:
 		return replaceVars(`
 			do $$
@@ -471,22 +360,6 @@ func (s *SQLStore) genRenameColumnIfNeeded(tableName, oldColumnName, newColumnNa
 	case model.SqliteDBType:
 		// No support for idempotent column renaming in Sqlite.
 		return fmt.Sprintf("\nALTER TABLE %s RENAME COLUMN %s TO %s;\n", normTableName, oldColumnName, newColumnName), nil
-	case model.MysqlDBType:
-		return replaceVars(`
-			SET @stmt = (SELECT IF(
-				(
-				SELECT COUNT(column_name) FROM INFORMATION_SCHEMA.COLUMNS
-				WHERE table_name = '[[table_name]]'
-				AND table_schema = '[[schema]]'
-				AND column_name = '[[new_column_name]]'
-				) > 0,
-				'SELECT 1;',
-				'ALTER TABLE [[norm_table_name]] CHANGE [[old_column_name]] [[new_column_name]] [[data_type]];'
-			));
-			PREPARE renameColumnIfNeeded FROM @stmt;
-			EXECUTE renameColumnIfNeeded;
-			DEALLOCATE PREPARE renameColumnIfNeeded;
-		`, vars), nil
 	case model.PostgresDBType:
 		return replaceVars(`
 			do $$
@@ -510,7 +383,7 @@ func (s *SQLStore) doesTableExist(tableName string) (bool, error) {
 	var query sq.SelectBuilder
 
 	switch s.dbType {
-	case model.MysqlDBType, model.PostgresDBType:
+	case model.PostgresDBType:
 		query = s.getQueryBuilder(s.db).
 			Select("table_name").
 			From("INFORMATION_SCHEMA.TABLES").
@@ -553,7 +426,7 @@ func (s *SQLStore) doesColumnExist(tableName, columnName string) (bool, error) {
 	var query sq.SelectBuilder
 
 	switch s.dbType {
-	case model.MysqlDBType, model.PostgresDBType:
+	case model.PostgresDBType:
 		query = s.getQueryBuilder(s.db).
 			Select("table_name").
 			From("INFORMATION_SCHEMA.COLUMNS").
@@ -613,23 +486,6 @@ func (s *SQLStore) genAddConstraintIfNeeded(tableName, constraintName, constrain
 		// For other constraints, you need to re-build the table. So skipping here.
 		// Include SQLite specific migration in original migration file.
 		query = fmt.Sprintf("\n-- Sqlite3 cannot drop constraints; drop constraint '%s' in table '%s' skipped\n", constraintName, tableName)
-	case model.MysqlDBType:
-		query = replaceVars(`
-			SET @stmt = (SELECT IF(
-				(
-				SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
-				WHERE constraint_schema = '[[schema]]'
-				AND constraint_name = '[[constraint_name]]'
-				AND constraint_type = '[[constraint_type]]'
-				AND table_name = '[[table_name]]'
-				) > 0,
-				'SELECT 1;',
-				'ALTER TABLE [[norm_table_name]] ADD CONSTRAINT [[constraint_name]] [[constraint_definition]];'
-			));
-			PREPARE addConstraintIfNeeded FROM @stmt;
-			EXECUTE addConstraintIfNeeded;
-			DEALLOCATE PREPARE addConstraintIfNeeded;
-		`, vars)
 	case model.PostgresDBType:
 		query = replaceVars(`
 		DO
@@ -663,9 +519,6 @@ func addPrefixIfNeeded(s, prefix string) string {
 func (s *SQLStore) normalizeTablename(tableName string) string {
 	if s.schemaName != "" && !strings.HasPrefix(tableName, s.schemaName+".") {
 		schemaName := s.schemaName
-		if s.dbType == model.MysqlDBType {
-			schemaName = "`" + schemaName + "`"
-		}
 		tableName = schemaName + "." + tableName
 	}
 	return tableName

@@ -40,8 +40,6 @@ func TestConcatenationSelector(t *testing.T) {
 	switch sqlStore.dbType {
 	case model.SqliteDBType:
 		require.Equal(t, concatenationString, "group_concat(a)")
-	case model.MysqlDBType:
-		require.Equal(t, concatenationString, "GROUP_CONCAT(a SEPARATOR ',')")
 	case model.PostgresDBType:
 		require.Equal(t, concatenationString, "string_agg(a, ',')")
 	}
@@ -54,8 +52,6 @@ func TestElementInColumn(t *testing.T) {
 	inLiteral := sqlStore.elementInColumn("test_column")
 	switch sqlStore.dbType {
 	case model.SqliteDBType:
-		require.Equal(t, inLiteral, "instr(test_column, ?) > 0")
-	case model.MysqlDBType:
 		require.Equal(t, inLiteral, "instr(test_column, ?) > 0")
 	case model.PostgresDBType:
 		require.Equal(t, inLiteral, "position(? in test_column) > 0")

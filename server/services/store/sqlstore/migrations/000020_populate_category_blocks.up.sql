@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS {{.prefix}}category_boards (
     update_at BIGINT,
     delete_at BIGINT,
     PRIMARY KEY (id)
-) {{if .mysql}}DEFAULT CHARACTER SET utf8mb4{{end}};
+);
 
 {{- /* createIndexIfNeeded tableName columns */ -}}
 {{ createIndexIfNeeded "category_boards" "category_id" }}
