@@ -14,12 +14,9 @@ import (
 	"github.com/mattermost/focalboard/server/services/auth"
 	"github.com/mattermost/focalboard/server/services/config"
 	"github.com/mattermost/focalboard/server/services/permissions/localpermissions"
-	"github.com/mattermost/focalboard/server/services/permissions/mmpermissions"
-	"github.com/mattermost/focalboard/server/services/store"
 	"github.com/mattermost/focalboard/server/services/store/sqlstore"
 	"github.com/mattermost/focalboard/server/utils"
 
-	mmModel "github.com/mattermost/mattermost/server/public/model"
 	"github.com/mattermost/mattermost/server/public/shared/mlog"
 
 	"github.com/stretchr/testify/require"
@@ -40,7 +37,6 @@ const (
 	userCommenter    string = "commenter"
 	userEditor       string = "editor"
 	userAdmin        string = "admin"
-	userGuest        string = "guest"
 )
 
 var (
@@ -51,15 +47,6 @@ var (
 	userCommenterID    = userCommenter
 	userEditorID       = userEditor
 	userAdminID        = userAdmin
-	userGuestID        = userGuest
-)
-
-type LicenseType int
-
-const (
-	LicenseNone         LicenseType = iota // 0
-	LicenseProfessional                    // 1
-	LicenseEnterprise                      // 2
 )
 
 type TestHelper struct {
@@ -69,29 +56,6 @@ type TestHelper struct {
 	Client2 *client.Client
 
 	origEnvUnitTesting string
-}
-
-type FakePermissionPluginAPI struct{}
-
-func (*FakePermissionPluginAPI) HasPermissionTo(userID string, permission *mmModel.Permission) bool {
-	return userID == userAdmin
-}
-
-func (*FakePermissionPluginAPI) HasPermissionToTeam(userID string, teamID string, permission *mmModel.Permission) bool {
-	if permission.Id == model.PermissionManageTeam.Id {
-		return false
-	}
-	if userID == userNoTeamMember {
-		return false
-	}
-	if teamID == "empty-team" {
-		return false
-	}
-	return true
-}
-
-func (*FakePermissionPluginAPI) HasPermissionToChannel(userID string, channelID string, permission *mmModel.Permission) bool {
-	return channelID == "valid-channel-id" || channelID == "valid-channel-id-2"
 }
 
 func getTestConfig() (*config.Configuration, error) {
@@ -138,10 +102,6 @@ func getTestConfig() (*config.Configuration, error) {
 }
 
 func newTestServer(singleUserToken string) *server.Server {
-	return newTestServerWithLicense(singleUserToken, LicenseNone)
-}
-
-func newTestServerWithLicense(singleUserToken string, licenseType LicenseType) *server.Server {
 	cfg, err := getTestConfig()
 	if err != nil {
 		panic(err)
@@ -157,60 +117,13 @@ func newTestServerWithLicense(singleUserToken string, licenseType LicenseType) *
 		panic(err)
 	}
 
-	var db store.Store
-
-	switch licenseType {
-	case LicenseProfessional:
-		db = NewTestProfessionalStore(innerStore)
-	case LicenseEnterprise:
-		db = NewTestEnterpriseStore(innerStore)
-	case LicenseNone:
-		fallthrough
-	default:
-		db = innerStore
-	}
+	db := innerStore
 
 	permissionsService := localpermissions.New(db, logger)
 
 	params := server.Params{
 		Cfg:                cfg,
 		SingleUserToken:    singleUserToken,
-		DBStore:            db,
-		Logger:             logger,
-		PermissionsService: permissionsService,
-	}
-
-	srv, err := server.New(params)
-	if err != nil {
-		panic(err)
-	}
-
-	return srv
-}
-
-func NewTestServerPluginMode() *server.Server {
-	cfg, err := getTestConfig()
-	if err != nil {
-		panic(err)
-	}
-	cfg.AuthMode = "mattermost"
-	cfg.EnablePublicSharedBoards = true
-
-	logger, _ := mlog.NewLogger()
-	if err = logger.Configure("", cfg.LoggingCfgJSON, nil); err != nil {
-		panic(err)
-	}
-	innerStore, err := server.NewStore(cfg, false, logger)
-	if err != nil {
-		panic(err)
-	}
-
-	db := NewPluginTestStore(innerStore)
-
-	permissionsService := mmpermissions.New(db, &FakePermissionPluginAPI{}, logger)
-
-	params := server.Params{
-		Cfg:                cfg,
 		DBStore:            db,
 		Logger:             logger,
 		PermissionsService: permissionsService,
@@ -278,24 +191,6 @@ func SetupTestHelperWithToken(t *testing.T) *TestHelper {
 	return th
 }
 
-func SetupTestHelper(t *testing.T) *TestHelper {
-	return SetupTestHelperWithLicense(t, LicenseNone)
-}
-
-func SetupTestHelperPluginMode(t *testing.T) *TestHelper {
-	origUnitTesting := os.Getenv("FOCALBOARD_UNIT_TESTING")
-	os.Setenv("FOCALBOARD_UNIT_TESTING", "1")
-
-	th := &TestHelper{
-		T:                  t,
-		origEnvUnitTesting: origUnitTesting,
-	}
-
-	th.Server = NewTestServerPluginMode()
-	th.Start()
-	return th
-}
-
 func SetupTestHelperLocalMode(t *testing.T) *TestHelper {
 	origUnitTesting := os.Getenv("FOCALBOARD_UNIT_TESTING")
 	os.Setenv("FOCALBOARD_UNIT_TESTING", "1")
@@ -310,7 +205,7 @@ func SetupTestHelperLocalMode(t *testing.T) *TestHelper {
 	return th
 }
 
-func SetupTestHelperWithLicense(t *testing.T, licenseType LicenseType) *TestHelper {
+func SetupTestHelper(t *testing.T) *TestHelper {
 	origUnitTesting := os.Getenv("FOCALBOARD_UNIT_TESTING")
 	os.Setenv("FOCALBOARD_UNIT_TESTING", "1")
 
@@ -319,7 +214,7 @@ func SetupTestHelperWithLicense(t *testing.T, licenseType LicenseType) *TestHelp
 		origEnvUnitTesting: origUnitTesting,
 	}
 
-	th.Server = newTestServerWithLicense("", licenseType)
+	th.Server = newTestServer("")
 	th.Client = client.NewClient(th.Server.Config().ServerRoot, "")
 	th.Client2 = client.NewClient(th.Server.Config().ServerRoot, "")
 	return th
