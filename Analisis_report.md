@@ -4,7 +4,7 @@ Fecha: 25 de noviembre de 2026
 Rama analizada: `main` (commit `ec1aa31d`, ya incluye el rediseño Pico.Love OS y el login con Google)
 Alcance: servidor Go (`server/`), webapp React (`webapp/`), archivos del repositorio, comparación con la competencia y viabilidad.
 
-Cómo se hizo: lectura del código, mediciones con herramientas locales (`go test -cover`, `go vet`, `go list -deps`, `jest`, `tsc`, `npm outdated`, `npm audit`, un grafo de imports del webapp) y una búsqueda web sobre el estado de la competencia. No se modificó ningún archivo del proyecto salvo este reporte.
+Cómo se hizo: lectura del código, mediciones con herramientas locales (`go test -cover`, `go vet`, `go list -deps`, `jest`, `tsc`, `npm outdated`, `npm audit`, un grafo de imports del webapp) y una búsqueda web sobre el estado de la competencia. El diagnóstico (secciones 1 a 10) no modificó código; el avance posterior está resumido en la sección 0.
 
 Cada hallazgo lleva una etiqueta:
 - **[Verificado]**: lo comprobé leyendo el código o ejecutando algo.
@@ -12,6 +12,95 @@ Cada hallazgo lleva una etiqueta:
 - **[Sin verificar]**: sospecha razonable que falta confirmar.
 
 Esfuerzo: **S** = horas a 1 día, **M** = 2 a 5 días, **L** = 1 a 4 semanas, **XL** = más de un mes (para una persona).
+
+---
+
+## 0. Estado de avance (actualizado el 26 de noviembre de 2026)
+
+Las secciones 1 a 10 son el **diagnóstico original** del 25 de noviembre y se dejan tal cual como referencia. Esta sección dice qué se hizo desde entonces.
+
+**Ramas (apiladas, ninguna subida; el push lo haces tú):**
+
+| Rama | Base | Commits | Contenido |
+|---|---|---|---|
+| `fix/phase0-security` | `main` | 6 | Fase 0: correcciones de seguridad urgentes |
+| `fix/phase1-hardening` | `fix/phase0-security` | 6 | Fase 1: endurecimiento del servidor y del webapp |
+| `chore/phase2-cleanup` | `fix/phase1-hardening` | 16 | Fase 2: código muerto, MySQL, Docker/Postgres, modo plugin, matriz de roles |
+
+Balance acumulado de `main` a `chore/phase2-cleanup`: **596 archivos cambiados, +2.570 / −59.870 líneas.** El repositorio pasó a unos 1.333 archivos rastreados, con unas 52.800 líneas de Go y 56.100 de TS/TSX (incluidos tests y snapshots).
+
+### 0.1 Seguridad (sección 3): estado de cada hallazgo
+
+| # | Hallazgo | Estado | Dónde / cómo |
+|---|---|---|---|
+| S1 | Inyección SQL por ID de categoría | **Corregido** (Fase 0) | `CASE WHEN` parametrizado, ID validado en el modelo, IDs inlineados en `blocks.go` validados; tests de regresión |
+| S2 | Carrera de datos en websockets | **Corregido** (Fase 0) | `RLock` y copias en `ws/server.go`; pasa con `-race` |
+| S3 | `go-sqlite3` v2.0.3 retractado | **Corregido** (Fase 0 y 2) | Ahora v1.14.22; al salir `server/v8` ya no hace falta el `exclude` |
+| S4 | Enlaces `javascript:` en markdown | **Corregido** (Fase 0), con pendiente | Solo `http`, `https` y `mailto`; `decodeURI` seguro. **Pendiente:** DOMPurify y una Content-Security-Policy (añaden una dependencia: decisión tuya) |
+| S5 | Secretos en el log de arranque | **Corregido** (Fase 0) | Se ocultan cadena de BD, `secret` y claves S3; el websocket ya no registra tokens |
+| S6 | `authMode: mattermost` confía en una cabecera | **Corregido** (Fase 0 y 2) | `authMode` se valida al arrancar (solo `native` o `google`) y el modo plugin se borró del código |
+| S7 | Sin límites de tamaño ni de tiempo | **Corregido** (Fase 1) | JSON 10 MiB, zip 500 MiB, archivos dentro del zip y subidas a `maxfilesize` (50 MiB por defecto), timeouts HTTP, límite de lectura y deadline de escritura en websocket |
+| S8 | Cambio de contraseña y fuerza bruta | **Corregido** (Fase 1) | Rate limit (20/min por IP) en login, registro y cambio de contraseña; solo se cambia la propia contraseña y se cierran las otras sesiones |
+| S9 | Sesiones sin revocación | **Corregido en parte** (Fase 1) | Tope absoluto de 14 días (`session_max_lifetime`), sin token por query string. **Pendiente:** revocar al dar de baja a alguien en Google Workspace (solo lo cubre el tope de 14 días) |
+| S10 | Archivos accesibles por ID (IDOR) | **Corregido** (Fase 1) | `file_info.board_id` (migración 42); los archivos anteriores a la migración no tienen dueño y siguen accesibles |
+| S11 | SSO: vinculación y duplicados | **Corregido** (Fase 1) | Se enlaza el `sub` de Google en el primer login; alta SSO serializada con un mutex (no hay índice único en `users`, así que solo protege una instancia) |
+| S12 | Cualquiera regenera el token de invitación | **Corregido** (Fase 1) | Se rechaza fuera del modo `native` |
+| S13 | Prometheus bloquea `Start()` y escucha en todas las interfaces | **Corregido** (Fase 1) | Corre en goroutine, escucha en `localhost`, SIGINT apaga limpio (probado en vivo) |
+| S14 | Zoom deshabilitado y Google Fonts | **Pendiente** | Sin tocar |
+
+### 0.2 Calidad del servidor (sección 4)
+
+- **Hecho:** `return` que faltaban tras `errorResponse` (exportar, tarjetas, equipos, sistema); `GetRootTeam` ya no regenera el token ante un error transitorio; corregida la comprobación invertida del login por correo; panics por body `null` y por nombre de archivo corto; índice en `sessions.token` (migración 41); `TestPatchBoard` determinista (se espera a que la cola asíncrona se vacíe).
+- **Hecho (Fase 2):** quitados `notifymentions`, `notifysubscriptions`, `plugindelivery`, `mattermostauthlayer`, el adaptador de websocket del plugin, la retención de datos, compliance, statistics, metadata de tablero, el servicio de telemetría y `mattermost/server/v8`; quitados `mmpermissions` y todo el modo `MattermostAuth`; **MySQL y MariaDB** eliminados (el `dbtype` mysql o mariadb falla al arrancar con un mensaje claro).
+- **Pendiente:** historial (`*_history`) sin poda; `execHistoryInsert` frágil en Postgres; N+1 y escrituras parciales (4.3); errores con `err.Error()` al cliente y 4 estilos de error (4.2); autorización repartida en ~70 handlers y `handleGetCard` que exige permiso de editor (4.1); eventos de websocket sin orden garantizado y websocket de una sola instancia; sin tests de `server/`, `main`, `metrics`, `config` (8 %) ni concurrencia en ws.
+- **Restos del modo plugin que siguen en `app` y `store`** (ya inalcanzables): `SearchUserChannels`, `GetChannel`, `PostMessage`, `SendMessage`, la vinculación de canales en `PatchBoard`, `ServicesAPI`/`model/services_api.go` y los límites de tarjetas de la nube. Quitarlos toca la interfaz `Store` y los mocks.
+
+### 0.3 Calidad del webapp (sección 5)
+
+- **Hecho (Fase 1):** `apiFetch` con timeout y redirección a login si expira una sesión (401); el `mutator` lanza error y avisa si el servidor rechaza una escritura, así que ya no se registra deshacer de un cambio que no ocurrió; `undomanager` con `try/finally`, límite que conserva lo reciente (200) y limpieza al cambiar de tablero; el websocket reintenta sin límite con backoff, reconecta al volver la red o la pestaña y recarga solo cuando la conexión reabre; script `typecheck` (ya en `webapp-ci`).
+- **Hecho (Fase 2):** quitados 41 archivos inalcanzables (página de bienvenida, cabecera global, editor de desarrollo, iconos), 21 idiomas que nunca se cargaban, 7 imágenes, 5 paquetes npm sin uso, **el cliente de telemetría completo** (38 llamadas que no hacían nada) y el **banner "novedades" de Mattermost** (el stash pendiente ya se aplicó y se borró); `en.json` regenerado.
+- **Pendiente:** S4 (DOMPurify/CSP), re-renders de `CardBadges` (F16), bundle de 5,1 MB sin división de código (F15), `eslint-plugin-react-hooks`, actualización de React 17 a 19 y reemplazo de `draft-js`, `moment` y `react-beautiful-dnd`, snapshots de poco valor, accesibilidad y `es.json` al 48 %, `pico.scss` de 1.043 líneas, tour de onboarding con textos de Mattermost, código de límites de nube, canales en el cuadro de compartir y la rama de plugin de `wsclient`.
+
+### 0.4 Código y archivos muertos (sección 6)
+
+- **Eliminado:** `mac/`, `linux/`, `win-wpf/`, `website/`, `experiments/`, `noticegen/`, el `templates.boardarchive` huérfano de 6 MB, archivos de CI/Gitpod/GitLab de Mattermost, `docs/` salvo `google-sso.md`, `SECURITY.md`, la política de divulgación, las plantillas de PR, los workflows de release y scorecards, los jobs de Windows y macOS del CI, los targets de escritorio del Makefile, las variables `EXCLUDE_*`, `docker-testing` de MySQL/MariaDB y la configuración de Docker con contraseña escrita en claro.
+- **Corregido:** `.dockerignore` ya no manda `node_modules`, `files/`, `bin/` ni la base de datos local al build.
+- **Sigue en decisión:** `import/` (importadores), el HTML de swagger generado, la migración de datos de SQLite a Postgres.
+- **"Enterprise":** se confirmó que no hay código bajo licencia Enterprise en el repositorio; `server/v8` (el único vínculo posible) ya salió de `go.mod`.
+
+### 0.5 Matriz de roles (decisión de la Fase 2)
+
+Los 65 `TestPermissions*` corrían dos veces: en modo plugin (`mmpermissions` con una API falsa) y en modo estándar. Ahora corren **solo sobre `localpermissions`**, con los ajustes integrados en las tablas. Se comparó por nombre: los **1.284 casos que no son de guest** siguen ejecutándose y pasan; los de guest se saltaban en silencio en modo estándar y se eliminaron. Los tests de `app` que necesitan resultados de admin usan `fakePermissions` (`server/app/helper_test.go`). La suite de integración pasó de 66 s a 47 s.
+
+### 0.6 Docker y despliegue
+
+`docker/docker-compose.yml` ahora levanta **Postgres 16** con healthcheck y toma los secretos del shell (`infisical run --env=dev -- docker compose up -d --build`). Verificado construyendo y levantando el stack: migra 19 tablas y responde. Variables obligatorias: `POSTGRES_PASSWORD` y las `FOCALBOARD_GOOGLE_*`. Al desplegar: recrear el contenedor, los datos viejos de SQLite no se migran solos, y hay que copiar las variables a Infisical `staging` y `prod` (hoy solo `dev`).
+
+### 0.7 Verificación y cifras actuales
+
+| Comprobación | Resultado |
+|---|---|
+| Go con `-race` sobre SQLite | verde (con una excepción intermitente, ver abajo) |
+| Go sobre Postgres real (Docker) | 18 de 18 paquetes verdes |
+| `go vet` y `gofmt` | limpios |
+| Jest | 838 tests verdes |
+| ESLint, stylelint y `typecheck` | limpios |
+| Esquema final de las 40 migraciones, antes y después de quitar MySQL | idéntico en Postgres; en SQLite solo líneas en blanco |
+| Migraciones 41 y 42 sobre una copia de la base local | aplican sin errores |
+
+### 0.8 Correcciones y advertencias sobre este reporte
+
+- **Corrección:** el CI del servidor **ya corría con `-race`**; la sección 4.6 se equivoca al sugerir añadirlo.
+- **Fallo intermitente sin explicar:** en una corrida completa de Go fallaron `TestGetBlocks` y, en otra, `TestPatchBoardsAndBlocks`; pasaron 15 corridas posteriores. Sospecha (no comprobada): la colisión de `insert_at` en SQLite descrita en 4.3.
+- **No probado en navegador:** la redirección por 401, la reconexión del websocket, el enlace `javascript:` y la ausencia del banner. Solo hay tests automáticos.
+- **Recuperable de git:** la lógica de menciones y suscripciones de `notifymentions`/`notifysubscriptions` (útil para construir notificaciones, ver 7.3) está en el historial, en el commit anterior a `chore(server): remove unlinked notify...`.
+
+### 0.9 Qué sigue
+
+1. **Tú:** subir las tres ramas en orden y abrir los PR; copiar variables a Infisical `staging` y `prod`; decidir sobre DOMPurify/CSP; ejecutar `govulncheck`; revisión humana del código de autenticación; licencia y repositorio privado.
+2. **Fase 2 (resto):** restos de canales y `ServicesAPI` en `app`/`store`, límites de nube y tour de onboarding.
+3. **Fase 3:** modernizar el frontend (rendimiento y bundle, React 19, `draft-js`, `moment`, `react-beautiful-dnd`, accesibilidad, `es.json`).
+4. **Fase 4:** funcionalidades, empezando por notificaciones (hoy no se envía ninguna), recordatorios, historial de actividad y búsqueda global; y la poda del historial (`*_history`).
 
 ---
 
