@@ -288,6 +288,27 @@ class Utils {
 
     // Markdown
 
+    // Only these schemes may be used in a markdown link; anything else (javascript:, data:,
+    // vbscript:...) is replaced by an inert "#". Relative links and anchors have no scheme.
+    static safeLinkHref(href: string): string {
+        let decoded = href
+        try {
+            decoded = decodeURI(href)
+        } catch {
+            // malformed escape sequence (e.g. a lone "%"): use the text as written
+        }
+
+        // browsers ignore tabs, newlines and control characters inside the scheme
+        // eslint-disable-next-line no-control-regex
+        const normalized = decoded.replace(/[\u0000-\u001f\u007f\s]/g, '')
+        const scheme = (/^([a-z][a-z0-9+.-]*):/i).exec(normalized)
+        if (scheme && !['http', 'https', 'mailto'].includes(scheme[1].toLowerCase())) {
+            return '#'
+        }
+
+        return encodeURI(decoded)
+    }
+
     static htmlFromMarkdown(text: string): string {
         // HACKHACK: Somehow, marked doesn't encode angle brackets
         const renderer = new marked.Renderer()
@@ -295,7 +316,7 @@ class Utils {
             return '<a ' +
                 'target="_blank" ' +
                 'rel="noreferrer" ' +
-                `href="${encodeURI(decodeURI(href || ''))}" ` +
+                `href="${Utils.safeLinkHref(href || '')}" ` +
                 `title="${title || ''}" ` +
                 `onclick="${(window.openInNewBrowser ? ' openInNewBrowser && openInNewBrowser(event.target.href);' : '')}"` +
             '>' + contents + '</a>'
