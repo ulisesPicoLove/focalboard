@@ -10,7 +10,6 @@
 	"webpath": "./webapp/pack",
 	"filesdriver": "local",
 	"filespath": "./files",
-	"telemetry": true,
 	"prometheusaddress": "localhost:9092",
 	"webhook_update": [],
 	"session_expire_time": 2592000,
