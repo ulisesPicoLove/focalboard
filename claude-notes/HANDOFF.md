@@ -84,3 +84,50 @@ Resultado esperado al cierre de este traspaso: Go verde con `-race`, 18 de 18 pa
 - **No probado en navegador:** la redirección por 401, la reconexión del websocket, el bloqueo de enlaces `javascript:` y la ausencia del banner. Solo hay tests automáticos.
 - **Archivo que no viaja con git:** `.infisical.yaml` (ignorado). En una máquina nueva, `infisical login` e `infisical init`. Las notas de este directorio (`claude-notes/`) sí están en git.
 - **Al desplegar:** recrear el contenedor y reiniciar cualquier instancia local; `make server` antes si el binario es anterior.
+
+## 9. Preferencias del usuario y trampas conocidas
+
+Esta sección existe para que no haga falta copiar la memoria local de Claude a otra computadora. Un agente que retome el trabajo debe leerla y respetarla.
+
+### Reglas globales del usuario (están en su `~/.claude/CLAUDE.md`, que no viaja con git)
+
+- **Nunca hacer `git push`** (ni `--force`, ni a ninguna rama o remoto), aunque pida "guardarlo en GitHub". El usuario hace los push a mano; hay que hacer el commit y avisar que quedó listo para subir.
+- **Secretos con Infisical** salvo que se diga lo contrario: `infisical run --env=<entorno> -- <comando>` (por ejemplo `--env=prod`), en lugar de pedir valores o leerlos de un `.env`. No imprimir ni copiar los valores de los secretos.
+- Si la otra computadora no tiene ese archivo, hay que recrearlo con esas dos reglas.
+
+### Cómo trabajar con el usuario
+
+- **Responder en español.** Los commits van en inglés (Conventional Commits), los documentos del proyecto en español.
+- **ARM no es una preocupación**: no hay que cuidar compatibilidad con ARM.
+- Confirmar antes de cualquier acción de cara al exterior: push, cambiar la visibilidad del repositorio o tocar Infisical `staging` y `prod`.
+- Al comprobar Infisical, verificar presencia o forma de los valores con booleanos; nunca mostrar el valor.
+
+### Trampas técnicas
+
+- **`pkill -f "<patrón>"` puede matar el propio shell** si el patrón aparece en la línea de comandos. Usar un PID o `pkill -x`. El proceso del servidor se llama `focalboard-serv` (15 caracteres, el nombre se trunca).
+- **El modo automático bloquea `go run` de herramientas remotas** (por ejemplo `mockery`). Por eso los mocks de `filestore` están escritos a mano, y los de `mockstore` se editan a mano al cambiar la interfaz `Store` (`public_methods.go` y `mockstore.go`).
+- **Un servidor sin `authMode` (binario viejo) debe seguir mostrando el formulario de contraseña**: el webapp trata un `authMode` ausente como `native`.
+- **`authMode` solo acepta `native` o `google`**, y `dbtype` solo `postgres` o `sqlite3`; cualquier otro valor aborta el arranque.
+- **Un binario anterior no incluye los cambios nuevos**: tras traer las ramas hay que ejecutar `make server` y reiniciar, y recrear el contenedor (`docker compose up -d --build`).
+- **Descargar y ejecutar `govulncheck`** lo bloquea el arnés; el usuario debe correrlo él mismo.
+- Las notas de memoria dicen que el `.infisical.yaml` está ignorado por git; en una máquina nueva hay que hacer `infisical login` e `infisical init`.
+
+### Decisiones ya tomadas (no rehacer)
+
+- **Tema:** "Pico.Love OS" es el tema por defecto; el antiguo se llama "Focal Theme". El diálogo "Confirm card delete" conserva su botón Delete en menta (el usuario lo aceptó). Los colores de las opciones usan tres extensiones suaves (naranja `#f5b995`, amarillo `#f7e08a`, violeta `#b4a7f5`) para distinguir las diez opciones.
+- **Cypress:** el usuario eligió dejar `MM-T4433` en `it.skip` y revisarlo después. Ofrecer reactivarlo cuando se hable de e2e: averiguar por qué react-dnd ignora el `dragstart` sintético, o cubrir el scroll con un test de Jest sobre `Kanban`.
+- **Pendientes menores de la fase de rediseño** (sin urgencia): comprobar el contraste de las etiquetas mono de 10 px al 56 % de opacidad en los temas claros, y revisar el diálogo de importar archivo, el calendario con eventos con fecha, arrastrar y soltar, y la edición en línea tras el nuevo estilo.
+
+### Licencia (AGPL v3, sección 13) y repositorio privado: decisión abierta
+
+- Picoboard se usa solo dentro de la empresa y el usuario quiere hacer privado el repositorio en GitHub. **Esto no es asesoría legal; debe confirmarlo el área legal.**
+- `LICENSE.txt` es dual: MIT para binarios compilados por Mattermost, **AGPL v3** para el código fuente con el que se construyen versiones propias, o una licencia comercial de Mattermost (`commercial@mattermost.com`). Apache 2.0 aplica solo a `webapp/html-templates/`, `config.json`, `webapp/i18n/`, `server/model/` y `plugin/`.
+- Como el código está modificado, la AGPL aplica completa. Un repositorio privado está permitido.
+- **Sección 13:** si los empleados usan la versión modificada por red, hay que ofrecerles su código fuente. Es discutible que una audiencia solo interna lo active; se asume que sí. Un repositorio privado con lectura para esos empleados, o un enlace o zip de "Source code", lo cumple.
+- Se deben conservar los avisos de copyright de Mattermost (`LICENSE.txt`, `NOTICE.txt`). Renombrar a Picoboard es válido; la marca de Mattermost cubre el nombre "Mattermost", no "Focalboard".
+- `origin` es `github.love:ulisesPicoLove/focalboard`. Si es un fork de un repositorio público, GitHub no permite hacerlo privado: habría que crear un repositorio nuevo y hacer el push a mano.
+- **No añadir el enlace "Source code" al menú ni cambiar la visibilidad hasta que el usuario lo pida.** Cuando lo haga, recordarle este punto abierto.
+
+### Cuando el usuario regrese
+
+Ofrecer los pasos de la sección 6 en ese orden y preguntar cuál tomar, en vez de volver a investigar. Confirmar antes de lo que salga del repositorio (push, visibilidad, Infisical `staging`/`prod`).
