@@ -3,6 +3,7 @@
 package app
 
 import (
+	"strings"
 	"sync"
 	"testing"
 	"time"
@@ -12,23 +13,87 @@ import (
 	"github.com/mattermost/focalboard/server/auth"
 	"github.com/mattermost/focalboard/server/services/config"
 	"github.com/mattermost/focalboard/server/services/metrics"
-	"github.com/mattermost/focalboard/server/services/permissions/mmpermissions"
-	mmpermissionsMocks "github.com/mattermost/focalboard/server/services/permissions/mmpermissions/mocks"
+	"github.com/mattermost/focalboard/server/services/permissions/localpermissions"
 	permissionsMocks "github.com/mattermost/focalboard/server/services/permissions/mocks"
 	"github.com/mattermost/focalboard/server/services/store/mockstore"
 	"github.com/mattermost/focalboard/server/services/webhook"
 	"github.com/mattermost/focalboard/server/ws"
 
 	"github.com/mattermost/focalboard/server/services/filestore/mocks"
+	mmModel "github.com/mattermost/mattermost/server/public/model"
 	"github.com/mattermost/mattermost/server/public/shared/mlog"
 )
+
+// fakePermissions behaves like the standalone permissions service, except for the results a
+// test sets explicitly. Standalone mode never grants team or system admin rights, so tests
+// that cover the code paths for those rights need a way to turn them on.
+type fakePermissions struct {
+	*localpermissions.Service
+
+	mu      sync.Mutex
+	results map[string]bool
+}
+
+func newFakePermissions(base *localpermissions.Service) *fakePermissions {
+	return &fakePermissions{Service: base, results: map[string]bool{}}
+}
+
+func permKey(kind string, parts ...string) string {
+	return kind + "|" + strings.Join(parts, "|")
+}
+
+func (f *fakePermissions) set(key string, value bool) {
+	f.mu.Lock()
+	defer f.mu.Unlock()
+	f.results[key] = value
+}
+
+func (f *fakePermissions) get(key string) (value, ok bool) {
+	f.mu.Lock()
+	defer f.mu.Unlock()
+	value, ok = f.results[key]
+	return value, ok
+}
+
+func (f *fakePermissions) SetTeam(userID, teamID string, p *mmModel.Permission, v bool) {
+	f.set(permKey("team", userID, teamID, p.Id), v)
+}
+
+func (f *fakePermissions) SetSystem(userID string, p *mmModel.Permission, v bool) {
+	f.set(permKey("system", userID, p.Id), v)
+}
+
+func (f *fakePermissions) SetChannel(userID, channelID string, p *mmModel.Permission, v bool) {
+	f.set(permKey("channel", userID, channelID, p.Id), v)
+}
+
+func (f *fakePermissions) HasPermissionToTeam(userID, teamID string, p *mmModel.Permission) bool {
+	if v, ok := f.get(permKey("team", userID, teamID, p.Id)); ok {
+		return v
+	}
+	return f.Service.HasPermissionToTeam(userID, teamID, p)
+}
+
+func (f *fakePermissions) HasPermissionTo(userID string, p *mmModel.Permission) bool {
+	if v, ok := f.get(permKey("system", userID, p.Id)); ok {
+		return v
+	}
+	return f.Service.HasPermissionTo(userID, p)
+}
+
+func (f *fakePermissions) HasPermissionToChannel(userID, channelID string, p *mmModel.Permission) bool {
+	if v, ok := f.get(permKey("channel", userID, channelID, p.Id)); ok {
+		return v
+	}
+	return f.Service.HasPermissionToChannel(userID, channelID, p)
+}
 
 type TestHelper struct {
 	App          *App
 	Store        *mockstore.MockStore
 	FilesBackend *mocks.FileBackend
 	logger       mlog.LoggerIFace
-	API          *mmpermissionsMocks.MockAPI
+	Perms        *fakePermissions
 }
 
 func SetupTestHelper(t *testing.T) (*TestHelper, func()) {
@@ -44,8 +109,7 @@ func SetupTestHelper(t *testing.T) (*TestHelper, func()) {
 	metricsService := metrics.NewMetrics(metrics.InstanceInfo{})
 
 	mockStore := permissionsMocks.NewMockStore(ctrl)
-	mockAPI := mmpermissionsMocks.NewMockAPI(ctrl)
-	permissions := mmpermissions.New(mockStore, mockAPI, mlog.CreateConsoleTestLogger(t))
+	permissions := newFakePermissions(localpermissions.New(mockStore, mlog.CreateConsoleTestLogger(t)))
 
 	appServices := Services{
 		Auth:             auth,
@@ -71,7 +135,7 @@ func SetupTestHelper(t *testing.T) (*TestHelper, func()) {
 		Store:        store,
 		FilesBackend: filesBackend,
 		logger:       logger,
-		API:          mockAPI,
+		Perms:        permissions,
 	}, tearDown
 }
 

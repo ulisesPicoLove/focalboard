@@ -27,8 +27,8 @@ func TestSearchUsers(t *testing.T) {
 
 	t.Run("return user", func(t *testing.T) {
 		th.Store.EXPECT().SearchUsersByTeam(teamID, "", "", true, false, false).Return([]*model.User{{ID: userID}}, nil)
-		th.API.EXPECT().HasPermissionToTeam(userID, teamID, model.PermissionManageTeam).Return(false).Times(1)
-		th.API.EXPECT().HasPermissionTo(userID, model.PermissionManageSystem).Return(false).Times(1)
+		th.Perms.SetTeam(userID, teamID, model.PermissionManageTeam, false)
+		th.Perms.SetSystem(userID, model.PermissionManageSystem, false)
 
 		users, err := th.App.SearchTeamUsers(teamID, "", "", true)
 		assert.NoError(t, err)
@@ -40,8 +40,8 @@ func TestSearchUsers(t *testing.T) {
 		th.Store.EXPECT().SearchUsersByTeam(teamID, "", "", true, false, false).Return([]*model.User{{ID: userID}}, nil)
 		th.App.config.ShowEmailAddress = false
 		th.App.config.ShowFullName = false
-		th.API.EXPECT().HasPermissionToTeam(userID, teamID, model.PermissionManageTeam).Return(true).Times(1)
-		th.API.EXPECT().HasPermissionTo(userID, model.PermissionManageSystem).Return(false).Times(1)
+		th.Perms.SetTeam(userID, teamID, model.PermissionManageTeam, true)
+		th.Perms.SetSystem(userID, model.PermissionManageSystem, false)
 
 		users, err := th.App.SearchTeamUsers(teamID, "", "", true)
 		assert.NoError(t, err)
@@ -53,8 +53,8 @@ func TestSearchUsers(t *testing.T) {
 		th.Store.EXPECT().SearchUsersByTeam(teamID, "", "", true, false, false).Return([]*model.User{{ID: userID}}, nil)
 		th.App.config.ShowEmailAddress = false
 		th.App.config.ShowFullName = false
-		th.API.EXPECT().HasPermissionToTeam(userID, teamID, model.PermissionManageTeam).Return(true).Times(1)
-		th.API.EXPECT().HasPermissionTo(userID, model.PermissionManageSystem).Return(true).Times(1)
+		th.Perms.SetTeam(userID, teamID, model.PermissionManageTeam, true)
+		th.Perms.SetSystem(userID, model.PermissionManageSystem, true)
 
 		users, err := th.App.SearchTeamUsers(teamID, "", "", true)
 		assert.NoError(t, err)
@@ -66,7 +66,7 @@ func TestSearchUsers(t *testing.T) {
 	t.Run("test user channels", func(t *testing.T) {
 		channelID := "Channel1"
 		th.Store.EXPECT().SearchUserChannels(teamID, userID, "").Return([]*mmModel.Channel{{Id: channelID}}, nil)
-		th.API.EXPECT().HasPermissionToChannel(userID, channelID, model.PermissionCreatePost).Return(true).Times(1)
+		th.Perms.SetChannel(userID, channelID, model.PermissionCreatePost, true)
 
 		channels, err := th.App.SearchUserChannels(teamID, userID, "")
 		assert.NoError(t, err)
@@ -76,7 +76,7 @@ func TestSearchUsers(t *testing.T) {
 	t.Run("test user channels- no permissions", func(t *testing.T) {
 		channelID := "Channel1"
 		th.Store.EXPECT().SearchUserChannels(teamID, userID, "").Return([]*mmModel.Channel{{Id: channelID}}, nil)
-		th.API.EXPECT().HasPermissionToChannel(userID, channelID, model.PermissionCreatePost).Return(false).Times(1)
+		th.Perms.SetChannel(userID, channelID, model.PermissionCreatePost, false)
 
 		channels, err := th.App.SearchUserChannels(teamID, userID, "")
 		assert.NoError(t, err)

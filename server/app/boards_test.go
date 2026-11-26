@@ -127,7 +127,7 @@ func TestAddMemberToBoard(t *testing.T) {
 			},
 		}, nil).Times(2)
 		th.Store.EXPECT().AddUpdateCategoryBoard("user_id_1", "default_category_id", []string{"board_id_1"}).Return(nil)
-		th.API.EXPECT().HasPermissionToTeam("user_id_1", "team_id_1", model.PermissionManageTeam).Return(false).Times(1)
+		th.Perms.SetTeam("user_id_1", "team_id_1", model.PermissionManageTeam, false)
 
 		addedBoardMember, err := th.App.AddMemberToBoard(boardMember)
 		require.NoError(t, err)
@@ -348,7 +348,7 @@ func TestPatchBoard(t *testing.T) {
 			IsTemplate: true,
 		}, nil).Times(3)
 
-		th.API.EXPECT().HasPermissionToTeam(userID, teamID, model.PermissionManageTeam).Return(false).Times(1)
+		th.Perms.SetTeam(userID, teamID, model.PermissionManageTeam, false)
 
 		// Type not null will retrieve team members
 		th.Store.EXPECT().GetUsersByTeam(teamID, "", false, false).Return([]*model.User{{ID: userID}}, nil)
@@ -392,7 +392,7 @@ func TestPatchBoard(t *testing.T) {
 			ChannelID:  "",
 		}, nil).Times(1)
 
-		th.API.EXPECT().HasPermissionToTeam(userID, teamID, model.PermissionManageTeam).Return(false).Times(1)
+		th.Perms.SetTeam(userID, teamID, model.PermissionManageTeam, false)
 
 		// Type not null will retrieve team members
 		th.Store.EXPECT().GetUsersByTeam(teamID, "", false, false).Return([]*model.User{{ID: userID}}, nil)
@@ -437,7 +437,7 @@ func TestPatchBoard(t *testing.T) {
 			IsTemplate: true,
 		}, nil).Times(1)
 
-		th.API.EXPECT().HasPermissionToChannel(userID, channelID, model.PermissionCreatePost).Return(false).Times(1)
+		th.Perms.SetChannel(userID, channelID, model.PermissionCreatePost, false)
 		_, err := th.App.PatchBoard(patch, boardID, userID)
 		require.Error(t, err)
 	})
@@ -461,7 +461,7 @@ func TestPatchBoard(t *testing.T) {
 			TeamID: teamID,
 		}, nil).Times(2)
 
-		th.API.EXPECT().HasPermissionToChannel(userID, channelID, model.PermissionCreatePost).Return(true).Times(1)
+		th.Perms.SetChannel(userID, channelID, model.PermissionCreatePost, true)
 
 		th.Store.EXPECT().PatchBoard(boardID, patch, userID).Return(
 			&model.Board{
@@ -506,9 +506,9 @@ func TestPatchBoard(t *testing.T) {
 			ChannelID:  channelID,
 		}, nil).Times(2)
 
-		th.API.EXPECT().HasPermissionToChannel(userID, channelID, model.PermissionCreatePost).Return(false).Times(1)
+		th.Perms.SetChannel(userID, channelID, model.PermissionCreatePost, false)
 
-		th.API.EXPECT().HasPermissionToTeam(userID, teamID, model.PermissionManageTeam).Return(false).Times(1)
+		th.Perms.SetTeam(userID, teamID, model.PermissionManageTeam, false)
 		// Should call GetMembersForBoard 2 times
 		// for WS BroadcastBoardChange
 		// for AddTeamMembers check
@@ -722,7 +722,7 @@ func TestGetMembersForBoard(t *testing.T) {
 		TeamID: teamID,
 	}
 	th.Store.EXPECT().GetBoard(boardID).Return(board, nil).Times(2)
-	th.API.EXPECT().HasPermissionToTeam(userID, teamID, model.PermissionManageTeam).Return(false).Times(1)
+	th.Perms.SetTeam(userID, teamID, model.PermissionManageTeam, false)
 
 	t.Run("-team check false ", func(t *testing.T) {
 		members, err := th.App.GetMembersForBoard(boardID)
@@ -732,7 +732,7 @@ func TestGetMembersForBoard(t *testing.T) {
 		assert.False(t, members[0].SchemeAdmin)
 	})
 
-	th.API.EXPECT().HasPermissionToTeam(userID, teamID, model.PermissionManageTeam).Return(true).Times(1)
+	th.Perms.SetTeam(userID, teamID, model.PermissionManageTeam, true)
 	t.Run("-team check true", func(t *testing.T) {
 		members, err := th.App.GetMembersForBoard(boardID)
 		assert.NoError(t, err)
@@ -771,7 +771,7 @@ func TestGetMembersForUser(t *testing.T) {
 	}
 	th.Store.EXPECT().GetBoard(boardID).Return(board, nil).Times(2)
 
-	th.API.EXPECT().HasPermissionToTeam(userID, teamID, model.PermissionManageTeam).Return(false).Times(1)
+	th.Perms.SetTeam(userID, teamID, model.PermissionManageTeam, false)
 	t.Run("-team check false ", func(t *testing.T) {
 		members, err := th.App.GetMembersForUser(userID)
 		assert.NoError(t, err)
@@ -780,7 +780,7 @@ func TestGetMembersForUser(t *testing.T) {
 		assert.False(t, members[0].SchemeAdmin)
 	})
 
-	th.API.EXPECT().HasPermissionToTeam(userID, teamID, model.PermissionManageTeam).Return(true).Times(1)
+	th.Perms.SetTeam(userID, teamID, model.PermissionManageTeam, true)
 	t.Run("-team check true", func(t *testing.T) {
 		members, err := th.App.GetMembersForUser(userID)
 		assert.NoError(t, err)
