@@ -60,16 +60,6 @@ focalboard*.db
 *.boardarchive
 .eslintcache
 .vscode/settings.json
-# config.json is copied from app-config.json in the Makefile
-mac/resources/config.json
-mac/temp
-mac/dist
-mac/*.xcodeproj/**/xcuserdata
-linux/bin
-linux/dist
-linux/temp
-win/temp
-win/dist
 webapp/cypress/screenshots
 webapp/cypress/videos
 server/swagger/clients

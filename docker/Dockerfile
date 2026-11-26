@@ -17,7 +17,7 @@ ADD . /go/src/focalboard
 ARG TARGETOS
 ARG TARGETARCH  
 
-RUN EXCLUDE_PLUGIN=true EXCLUDE_SERVER=true EXCLUDE_ENTERPRISE=true make server-docker os=${TARGETOS} arch=${TARGETARCH}
+RUN make server-docker os=${TARGETOS} arch=${TARGETARCH}
 
 ## Final image
 FROM debian:bookworm-slim

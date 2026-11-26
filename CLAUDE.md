@@ -4,11 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-Standalone Focalboard (open-source Trello/Notion/Asana alternative): a Go server (`server/`) that serves a React/TypeScript SPA (`webapp/`). The README notes this repo is unmaintained and does not contain the Mattermost plugin (that lives in `mattermost/mattermost-plugin-boards`). Desktop apps (`mac/`, `linux/`, `win-wpf/`) wrap the same server + webapp running against SQLite.
+Standalone Focalboard (open-source Trello/Notion/Asana alternative): a Go server (`server/`) that serves a React/TypeScript SPA (`webapp/`). The README notes this repo is unmaintained and does not contain the Mattermost plugin (that lives in `mattermost/mattermost-plugin-boards`).
 
 ## Commands
 
-Setup: create a `.env` in the repo root with `EXCLUDE_ENTERPRISE="1"`, then `make prebuild` (runs `npm install` in `webapp/`).
+Setup: `make prebuild` (runs `npm install` in `webapp/`).
 
 - Build server: `make server` → `bin/focalboard-server` (build tags `json1 sqlite3`). Run `./bin/focalboard-server`; it reads `config.json` and serves on http://localhost:8000.
 - Build webapp: `make webapp` (`npm run pack` → `webapp/pack/`, which the server serves). Rebuilding only the webapp doesn't need a server restart; reload the browser.
@@ -47,4 +47,4 @@ React + Redux Toolkit (`store/` slices: boards, cards, views, users, ...). `octo
 
 ### Other directories
 
-`docker/` (image + compose for running), `docker-testing/` (compose files for DB-backed server tests), `website/` and `docs/` (docs site), `import/` (importer scripts for other tools), `noticegen/` (NOTICE generation), `experiments/`.
+`docker/` (image + compose for running), `docker-testing/` (compose files for DB-backed server tests), `docs/` (Google SSO guide), `import/` (importer scripts for other tools).

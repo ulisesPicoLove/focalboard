@@ -18,9 +18,5 @@ AUDITORIA-*.md
 Analisis_report.md
 
 .github/
-mac/
-win-wpf/
-website/
-linux/
 go.work
 go.work.sum
