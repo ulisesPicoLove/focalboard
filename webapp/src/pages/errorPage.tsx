@@ -1,6 +1,6 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
-import React, {useCallback} from 'react'
+import React, {useCallback, useMemo} from 'react'
 import {useHistory, useLocation} from 'react-router-dom'
 import {FormattedMessage} from 'react-intl'
 
@@ -13,7 +13,8 @@ import {useErrorDefFromId, ErrorId} from '../errors'
 
 const ErrorPage = () => {
     const history = useHistory()
-    const queryParams = new URLSearchParams(useLocation().search)
+    const {search} = useLocation()
+    const queryParams = useMemo(() => new URLSearchParams(search), [search])
     const errid = queryParams.get('id')
     const errorDef = useErrorDefFromId(errid as ErrorId)
 
@@ -29,7 +30,7 @@ const ErrorPage = () => {
         } else {
             history.push(url)
         }
-    }, [history])
+    }, [history, queryParams])
 
     const makeButton = ((path: string | ((params: URLSearchParams) => string), txt: string, fill: boolean) => {
         return (

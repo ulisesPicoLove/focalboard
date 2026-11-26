@@ -1,7 +1,7 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 
-import React, {ReactNode, useCallback} from 'react'
+import React, {ReactNode} from 'react'
 import {FormattedMessage} from 'react-intl'
 
 import Button from '../widgets/buttons/button'
@@ -23,8 +23,8 @@ type Props = {
 }
 
 export const ConfirmationDialogBox = (props: Props) => {
-    const handleOnClose = useCallback(props.dialogBox.onClose, [])
-    const handleOnConfirm = useCallback(props.dialogBox.onConfirm, [])
+    const handleOnClose = props.dialogBox.onClose
+    const handleOnConfirm = props.dialogBox.onConfirm
 
     return (
         <Dialog

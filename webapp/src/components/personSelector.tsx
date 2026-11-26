@@ -158,7 +158,7 @@ const PersonSelector = (props: Props): JSX.Element => {
             {label: intl.formatMessage({id: 'PersonProperty.board-members', defaultMessage: 'Board members'}), options: usersInsideBoard},
             {label: intl.formatMessage({id: 'PersonProperty.non-board-members', defaultMessage: 'Not board members'}), options: usersOutsideBoard},
         ]
-    }, [boardUsers, allowAddUsers, boardUsersById, me])
+    }, [allowAddUsers, intl, showMe, me, boardUsers, boardUsersById])
 
     let primaryClass = 'Person'
     if (isMulti) {

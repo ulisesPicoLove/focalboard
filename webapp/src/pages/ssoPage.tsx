@@ -45,7 +45,7 @@ const SSOPage = () => {
                 history.replace('/login?error=sso_failed')
             }
         })
-    }, [])
+    }, [dispatch, history])
 
     return null
 }

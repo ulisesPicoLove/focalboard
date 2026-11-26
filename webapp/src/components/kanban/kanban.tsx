@@ -52,7 +52,7 @@ const vStrength = createVerticalStrength(Utils.isMobile() ? 60 : 250)
 
 const Kanban = (props: Props) => {
     const cardTemplates: Card[] = useAppSelector(getCurrentBoardTemplates)
-    const {board, activeView, cards, groupByProperty, visibleGroups, hiddenGroups} = props
+    const {board, activeView, cards, groupByProperty, visibleGroups, hiddenGroups, selectedCardIds} = props
     const [defaultTemplateID, setDefaultTemplateID] = useState<string>()
 
     useEffect(() => {
@@ -106,7 +106,6 @@ const Kanban = (props: Props) => {
     }, [activeView, visibleGroups])
 
     const onDropToColumn = useCallback(async (option: IPropertyOption, card?: Card, dstOption?: IPropertyOption) => {
-        const {selectedCardIds} = props
         const optionId = option ? option.id : undefined
 
         let draggedCardIds = selectedCardIds
@@ -127,11 +126,11 @@ const Kanban = (props: Props) => {
                     Utils.log(`ondrop. Card: ${draggedCard.title}, column: ${optionId}`)
                     const oldValue = draggedCard.fields.properties[groupByProperty!.id]
                     if (optionId !== oldValue) {
-                        awaits.push(mutator.changePropertyValue(props.board.id, draggedCard, groupByProperty!.id, optionId, description))
+                        awaits.push(mutator.changePropertyValue(board.id, draggedCard, groupByProperty!.id, optionId, description))
                     }
                 }
                 const newOrder = orderAfterMoveToColumn(draggedCardIds, optionId)
-                awaits.push(mutator.changeViewCardOrder(props.board.id, activeView.id, activeView.fields.cardOrder, newOrder, description))
+                awaits.push(mutator.changeViewCardOrder(board.id, activeView.id, activeView.fields.cardOrder, newOrder, description))
                 await Promise.all(awaits)
             })
         } else if (dstOption) {
@@ -155,16 +154,15 @@ const Kanban = (props: Props) => {
                 moveTo,
             }) as string[]
 
-            await mutator.changeViewVisibleOptionIds(props.board.id, activeView.id, activeView.fields.visibleOptionIds, visibleOptionIdsRearranged)
+            await mutator.changeViewVisibleOptionIds(board.id, activeView.id, activeView.fields.visibleOptionIds, visibleOptionIdsRearranged)
         }
-    }, [cards, visibleGroups, activeView.id, activeView.fields.cardOrder, groupByProperty, props.selectedCardIds])
+    }, [selectedCardIds, cards, orderAfterMoveToColumn, activeView.id, activeView.fields.cardOrder, activeView.fields.visibleOptionIds, groupByProperty, visibleGroups, board.id])
 
     const onDropToCard = useCallback(async (srcCard: Card, dstCard: Card) => {
         if (srcCard.id === dstCard.id || !groupByProperty) {
             return
         }
         Utils.log(`onDropToCard: ${dstCard.title}`)
-        const {selectedCardIds} = props
         const optionId = dstCard.fields.properties[groupByProperty.id]
 
         const draggedCardIds = Array.from(new Set(selectedCardIds).add(srcCard.id))
@@ -194,13 +192,13 @@ const Kanban = (props: Props) => {
                 Utils.log(`draggedCard: ${draggedCard.title}, column: ${optionId}`)
                 const oldOptionId = draggedCard.fields.properties[groupByProperty!.id]
                 if (optionId !== oldOptionId) {
-                    awaits.push(mutator.changePropertyValue(props.board.id, draggedCard, groupByProperty!.id, optionId, description))
+                    awaits.push(mutator.changePropertyValue(board.id, draggedCard, groupByProperty!.id, optionId, description))
                 }
             }
             await Promise.all(awaits)
-            await mutator.changeViewCardOrder(props.board.id, activeView.id, activeView.fields.cardOrder, cardOrder, description)
+            await mutator.changeViewCardOrder(board.id, activeView.id, activeView.fields.cardOrder, cardOrder, description)
         })
-    }, [cards, activeView.id, activeView.fields.cardOrder, groupByProperty, props.selectedCardIds])
+    }, [groupByProperty, selectedCardIds, cards, activeView.id, activeView.fields.cardOrder, board.id])
 
     const [showCalculationsMenu, setShowCalculationsMenu] = useState<Map<string, boolean>>(new Map<string, boolean>())
     const toggleOptions = (templateId: string, show: boolean) => {

@@ -49,7 +49,7 @@ const KanbanCard = (props: Props) => {
             return
         }
         mutator.deleteBlock(card, 'delete card')
-    }, [card, board.id])
+    }, [card])
 
     const confirmDialogProps: ConfirmationDialogBoxProps = useMemo(() => {
         return {
@@ -60,7 +60,7 @@ const KanbanCard = (props: Props) => {
                 setShowConfirmationDialogBox(false)
             },
         }
-    }, [handleDeleteCard])
+    }, [handleDeleteCard, intl])
 
     const handleDeleteButtonOnClick = useCallback(() => {
         // user trying to delete a card with blank name
@@ -73,11 +73,12 @@ const KanbanCard = (props: Props) => {
         setShowConfirmationDialogBox(true)
     }, [handleDeleteCard, card.title, card?.fields?.contentOrder?.length])
 
+    const {onClick} = props
     const handleOnClick = useCallback((e: React.MouseEvent) => {
-        if (props.onClick) {
-            props.onClick(e, card)
+        if (onClick) {
+            onClick(e, card)
         }
-    }, [props.onClick, card])
+    }, [onClick, card])
 
     return (
         <>

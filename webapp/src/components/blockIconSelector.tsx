@@ -20,9 +20,9 @@ const BlockIconSelector = (props: Props) => {
     const onSelectEmoji = useCallback((emoji: string) => {
         mutator.changeBlockIcon(block.boardId, block.id, block.fields.icon, emoji)
         document.body.click()
-    }, [block.id, block.fields.icon])
-    const onAddRandomIcon = useCallback(() => mutator.changeBlockIcon(block.boardId, block.id, block.fields.icon, BlockIcons.shared.randomIcon()), [block.id, block.fields.icon])
-    const onRemoveIcon = useCallback(() => mutator.changeBlockIcon(block.boardId, block.id, block.fields.icon, '', 'remove icon'), [block.id, block.fields.icon])
+    }, [block.boardId, block.id, block.fields.icon])
+    const onAddRandomIcon = useCallback(() => mutator.changeBlockIcon(block.boardId, block.id, block.fields.icon, BlockIcons.shared.randomIcon()), [block.boardId, block.id, block.fields.icon])
+    const onRemoveIcon = useCallback(() => mutator.changeBlockIcon(block.boardId, block.id, block.fields.icon, '', 'remove icon'), [block.boardId, block.id, block.fields.icon])
 
     if (!block.fields.icon) {
         return null

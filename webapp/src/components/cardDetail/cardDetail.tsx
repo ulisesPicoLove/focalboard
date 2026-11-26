@@ -104,7 +104,7 @@ const CardDetail = (props: Props): JSX.Element|null => {
         if (title !== card.title) {
             mutator.changeBlockTitle(props.board.id, card.id, card.title, title)
         }
-    }, [card.title, title])
+    }, [card.id, card.title, props.board.id, title])
     const canEditBoardCards = useHasCurrentBoardPermissions([Permission.ManageBoardCards])
     const canCommentBoardCards = useHasCurrentBoardPermissions([Permission.CommentBoardCards])
 
@@ -139,12 +139,12 @@ const CardDetail = (props: Props): JSX.Element|null => {
     const setRandomIcon = useCallback(() => {
         const newIcon = BlockIcons.shared.randomIcon()
         mutator.changeBlockIcon(props.board.id, card.id, card.fields.icon, newIcon)
-    }, [card.id, card.fields.icon])
+    }, [props.board.id, card.id, card.fields.icon])
 
     const dispatch = useAppDispatch()
     useEffect(() => {
         dispatch(setCurrentCard(card.id))
-    }, [card.id])
+    }, [card.id, dispatch])
 
     const blocks = useMemo(() => props.contents.flatMap((value: Block | Block[]): BlockData<any> => {
         const v: Block = Array.isArray(value) ? value[0] : value

@@ -26,7 +26,7 @@ const ShareBoardLoginButton = () => {
         } else {
             history.push(loginPath)
         }
-    }, [])
+    }, [history, loginPath])
 
     return (
         <div className='ShareBoardLoginButton'>

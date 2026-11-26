@@ -40,7 +40,7 @@ type Props = {
 }
 
 const Table = (props: Props): JSX.Element => {
-    const {board, cards, activeView, visibleGroups, groupByProperty, views} = props
+    const {board, cards, activeView, visibleGroups, groupByProperty, views, selectedCardIds} = props
     const isManualSort = activeView.fields.sortOptions?.length === 0
     const canEditBoardProperties = useHasCurrentBoardPermissions([Permission.ManageBoardProperties])
     const canEditCards = useHasCurrentBoardPermissions([Permission.ManageBoardCards])
@@ -63,7 +63,7 @@ const Table = (props: Props): JSX.Element => {
                 dispatch(updateView(activeView))
             }
         }
-    }, [activeView])
+    }, [activeView, board.id, dispatch])
 
     const hideGroup = useCallback((groupById: string): void => {
         const index: number = activeView.fields.collapsedOptionIds.indexOf(groupById)
@@ -79,7 +79,7 @@ const Table = (props: Props): JSX.Element => {
         mutator.performAsUndoGroup(async () => {
             await mutator.updateBlock(board.id, newView, activeView, 'hide group')
         })
-    }, [activeView])
+    }, [activeView, board.id])
 
     const onDropToGroupHeader = useCallback(async (option: IPropertyOption, dstOption?: IPropertyOption) => {
         if (dstOption) {
@@ -95,16 +95,10 @@ const Table = (props: Props): JSX.Element => {
 
             await mutator.changeViewVisibleOptionIds(board.id, activeView.id, activeView.fields.visibleOptionIds, visibleOptionIds)
         }
-    }, [activeView, visibleGroups])
-
-    const onDropToCard = useCallback((srcCard: Card, dstCard: Card) => {
-        Utils.log(`onDropToCard: ${dstCard.title}`)
-        onDropToGroup(srcCard, dstCard.fields.properties[activeView.fields.groupById!] as string, dstCard.id)
-    }, [activeView.fields.groupById, cards])
+    }, [activeView.fields.visibleOptionIds, activeView.id, board.id, visibleGroups])
 
     const onDropToGroup = useCallback((srcCard: Card, groupID: string, dstCardID: string) => {
         Utils.log(`onDropToGroup: ${srcCard.title}`)
-        const {selectedCardIds} = props
 
         const draggedCardIds = Array.from(new Set(selectedCardIds).add(srcCard.id))
         const description = draggedCardIds.length > 1 ? `drag ${draggedCardIds.length} cards` : 'drag card'
@@ -160,7 +154,12 @@ const Table = (props: Props): JSX.Element => {
                 await mutator.changeViewCardOrder(board.id, activeView.id, activeView.fields.cardOrder, cardOrder, description)
             })
         }
-    }, [activeView, cards, props.selectedCardIds, groupByProperty])
+    }, [selectedCardIds, activeView.fields.groupById, activeView.fields.cardOrder, activeView.id, isManualSort, cards, groupByProperty, board.id])
+
+    const onDropToCard = useCallback((srcCard: Card, dstCard: Card) => {
+        Utils.log(`onDropToCard: ${dstCard.title}`)
+        onDropToGroup(srcCard, dstCard.fields.properties[activeView.fields.groupById!] as string, dstCard.id)
+    }, [activeView.fields.groupById, onDropToGroup])
 
     const propertyNameChanged = useCallback(async (option: IPropertyOption, text: string): Promise<void> => {
         await mutator.changePropertyOptionValue(board.id, board.cardProperties, groupByProperty!, option, text)

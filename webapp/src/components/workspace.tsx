@@ -68,7 +68,7 @@ function CenterContent(props: Props) {
         }
         history.push(newPath)
         dispatch(setCurrentCard(cardId || ''))
-    }, [match, history])
+    }, [match.params, match.path, props.readonly, history, dispatch])
 
     useEffect(() => {
         const onConfigChangeHandler = (_: WSClient, config: ClientConfig) => {
@@ -79,7 +79,7 @@ function CenterContent(props: Props) {
         return () => {
             wsClient.removeOnConfigChange(onConfigChangeHandler)
         }
-    }, [match.params.boardId])
+    }, [dispatch, match.params.boardId])
 
     const templateSelector = (
         <BoardTemplateSelector

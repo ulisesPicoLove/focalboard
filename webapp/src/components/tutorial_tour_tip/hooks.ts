@@ -25,6 +25,9 @@ export function useMeasurePunchouts(elementIds: string[], additionalDeps: any[],
         window.addEventListener('resize', updateSize)
         return () =>
             window.removeEventListener('resize', updateSize)
+
+    // Subscribe once: updateSize is recreated on every render and only calls a stable state setter
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const channelPunchout = useMemo(() => {
@@ -57,6 +60,10 @@ export function useMeasurePunchouts(elementIds: string[], additionalDeps: any[],
             width: `${(maxX - minX) + (offset ? offset.width : 0)}px`,
             height: `${(maxY - minY) + (offset ? offset.height : 0)}px`,
         }
+
+    // size and elementsAvailable are not read here: they force a new measurement when the window
+    // is resized or the elements appear
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [...elementIds, ...additionalDeps, size, elementsAvailable])
     return channelPunchout
 }

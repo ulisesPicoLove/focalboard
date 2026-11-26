@@ -27,6 +27,9 @@ const ViewHeaderSearch = (): JSX.Element => {
     }
 
     const debouncedDispatchSearchText = useMemo(
+
+        // Create the debounced function once: dispatchSearchText changes on every render and a new debounce each time would never wait
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         () => debounce(dispatchSearchText, 200), [])
 
     useEffect(() => {

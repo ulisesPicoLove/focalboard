@@ -21,7 +21,7 @@ const RootPortal = (props: Props): JSX.Element => {
                 rootPortal.removeChild(el)
             }
         }
-    }, [])
+    }, [el, rootPortal])
 
     return ReactDOM.createPortal(props.children, el)  // eslint-disable-line
 }

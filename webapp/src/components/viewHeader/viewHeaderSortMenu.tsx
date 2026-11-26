@@ -38,7 +38,7 @@ const ViewHeaderSortMenu = (props: Props) => {
             ]
         }
         mutator.changeViewSortOptions(activeView.boardId, activeView.id, activeView.fields.sortOptions, newSortOptions)
-    }, [activeView.id, activeView.fields.sortOptions])
+    }, [activeView.fields.sortOptions, activeView.boardId, activeView.id])
 
     const onManualSort = useCallback(() => {
         // This sets the manual card order to the currently displayed order
@@ -51,7 +51,7 @@ const ViewHeaderSortMenu = (props: Props) => {
 
     const onRevertSort = useCallback(() => {
         mutator.changeViewSortOptions(activeView.boardId, activeView.id, activeView.fields.sortOptions, [])
-    }, [activeView.id, activeView.fields.sortOptions])
+    }, [activeView.boardId, activeView.id, activeView.fields.sortOptions])
 
     return (
         <MenuWrapper>

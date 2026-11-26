@@ -61,15 +61,17 @@ const TableRow = (props: Props) => {
         }
     }, [])
 
+    const {onClick: onCardClick} = props
     const onClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-        props.onClick && props.onClick(e, card)
-    }, [card, props.onClick])
+        onCardClick && onCardClick(e, card)
+    }, [card, onCardClick])
 
+    const {addCard, isLastCard} = props
     const onSaveWithEnter = useCallback(() => {
-        if (props.isLastCard) {
-            props.addCard(groupById ? card.fields.properties[groupById!] as string : '')
+        if (isLastCard) {
+            addCard(groupById ? card.fields.properties[groupById!] as string : '')
         }
-    }, [groupById && card.fields.properties[groupById!], props.isLastCard, props.addCard])
+    }, [addCard, isLastCard, groupById, card.fields.properties])
 
     const onSave = useCallback((saveType) => {
         if (card.title !== title) {
@@ -78,11 +80,11 @@ const TableRow = (props: Props) => {
                 onSaveWithEnter()
             }
         }
-    }, [card.title, title, onSaveWithEnter, board.id, card.id])
+    }, [card.title, card.id, title, props.board.id, onSaveWithEnter])
 
     const onTitleChange = useCallback((newTitle: string) => {
         setTitle(newTitle)
-    }, [title, setTitle])
+    }, [setTitle])
 
     const visiblePropertyTemplates = useMemo(() => (
         visiblePropertyIds.map((id) => board.cardProperties.find((t) => t.id === id)).filter((i) => i) as IPropertyTemplate[]
@@ -119,7 +121,7 @@ const TableRow = (props: Props) => {
             return
         }
         await mutator.deleteBlock(card, 'delete card')
-    }, [card, board.id])
+    }, [card])
 
     const confirmDialogProps: ConfirmationDialogBoxProps = useMemo(() => {
         return {
@@ -130,7 +132,7 @@ const TableRow = (props: Props) => {
                 setShowConfirmationDialogBox(false)
             },
         }
-    }, [handleDeleteCard])
+    }, [handleDeleteCard, intl])
 
     const handleDeleteButtonOnClick = useCallback(() => {
         // user trying to delete a card with blank name

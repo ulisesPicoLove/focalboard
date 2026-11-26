@@ -92,7 +92,7 @@ const Sidebar = (props: Props) => {
             wsClient.removeOnChange(categoryOnChangeHandler, 'category')
             wsClient.removeOnChange(blockCategoryOnChangeHandler, 'blockCategories')
         }
-    }, [])
+    }, [dispatch])
 
     const teamId = useAppSelector(getCurrentTeamId)
     const team = useAppSelector(getCurrentTeam)
@@ -195,7 +195,7 @@ const Sidebar = (props: Props) => {
         // optimistically updating the store to produce a lag-free UI
         await dispatch(updateCategoryOrder(newCategoryOrder))
         await octoClient.reorderSidebarCategories(team.id, newCategoryOrder)
-    }, [team, sidebarCategories])
+    }, [team, sidebarCategories, dispatch])
 
     const handleCategoryBoardDND = useCallback(async (result: DropResult) => {
         const {source, destination, draggableId} = result
@@ -252,7 +252,7 @@ const Sidebar = (props: Props) => {
             const reorderedBoardIDs = categoryBoardMetadata.map((m) => m.boardID)
             await octoClient.reorderSidebarCategoryBoards(team.id, toCategoryID, reorderedBoardIDs)
         }
-    }, [team, sidebarCategories])
+    }, [team, sidebarCategories, dispatch])
 
     const onDragEnd = useCallback(async (result: DropResult) => {
         const {destination, source, type} = result
@@ -279,7 +279,7 @@ const Sidebar = (props: Props) => {
 
         setDraggedItemID('')
         setIsCategoryBeingDragged(false)
-    }, [team, sidebarCategories])
+    }, [team, handleCategoryDND, handleCategoryBoardDND])
 
     const [draggedItemID, setDraggedItemID] = useState<string>('')
     const [isCategoryBeingDragged, setIsCategoryBeingDragged] = useState<boolean>(false)

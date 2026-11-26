@@ -72,6 +72,7 @@ type Props = {
 const CalendarFullView = React.lazy(() => import('./calendar/fullCalendar'))
 
 const CenterPanel = (props: Props) => {
+    const {groupByProperty, activeView, board, views, cards} = props
     const intl = useIntl()
     const [selectedCardIds, setSelectedCardIds] = useState<string[]>([])
     const [cardIdToFocusOnRender, setCardIdToFocusOnRender] = useState('')
@@ -108,7 +109,6 @@ const CenterPanel = (props: Props) => {
 
         if (selectedCardIds.length > 0) {
             // CTRL+D: Duplicate selected cards
-            const {board} = props
             if (selectedCardIds.length < 1) {
                 return
             }
@@ -157,16 +157,15 @@ const CenterPanel = (props: Props) => {
         }
     }, [selectedCardIds, props.readonly, props.cards])
 
+    const {showCard: showCardProp} = props
     const showCard = useCallback((cardId?: string) => {
         if (selectedCardIds.length > 0) {
             setSelectedCardIds([])
         }
-        props.showCard(cardId)
-    }, [props.showCard, selectedCardIds])
+        showCardProp(cardId)
+    }, [showCardProp, selectedCardIds.length])
 
     const addCard = useCallback(async (groupByOptionId?: string, show = false, properties: Record<string, string> = {}): Promise<void> => {
-        const {activeView, board, groupByProperty} = props
-
         const card = createCard()
 
         card.parentId = board.id
@@ -205,7 +204,7 @@ const CenterPanel = (props: Props) => {
             )
             await mutator.changeViewCardOrder(board.id, activeView.id, activeView.fields.cardOrder, [...activeView.fields.cardOrder, newCard.id], 'add-card')
         })
-    }, [props.activeView, props.board.id, props.board.cardProperties, props.groupByProperty, showCard])
+    }, [activeView, board, groupByProperty, dispatch, showCard])
 
     const addEmptyCardAndShow = useCallback(() => addCard('', true), [addCard])
 
@@ -234,7 +233,7 @@ const CenterPanel = (props: Props) => {
         if (patchedProps) {
             await dispatch(patchProps(patchedProps))
         }
-    }, [me?.id])
+    }, [dispatch, me?.id])
 
     const startBoardsTour = useCallback(async () => {
         if (!shouldStartBoardsTour()) {
@@ -256,8 +255,6 @@ const CenterPanel = (props: Props) => {
     }, [selectedCardIds])
 
     const addCardFromTemplate = useCallback(async (cardTemplateId: string, groupByOptionId?: string) => {
-        const {activeView, board, groupByProperty} = props
-
         const propertiesThatMeetFilters = CardFilter.propertiesThatMeetFilterGroup(activeView.fields.filter, board.cardProperties)
         if ((activeView.fields.viewType === 'board' || activeView.fields.viewType === 'table') && groupByProperty) {
             if (groupByOptionId) {
@@ -283,13 +280,11 @@ const CenterPanel = (props: Props) => {
                     showCard(undefined)
                 },
             )
-            await mutator.changeViewCardOrder(props.board.id, activeView.id, activeView.fields.cardOrder, [...activeView.fields.cardOrder, newCardId], 'add-card')
+            await mutator.changeViewCardOrder(board.id, activeView.id, activeView.fields.cardOrder, [...activeView.fields.cardOrder, newCardId], 'add-card')
         })
-    }, [props.board, props.activeView, showCard])
+    }, [activeView, board, groupByProperty, intl, dispatch, showCard])
 
     const addCardTemplate = useCallback(async () => {
-        const {board} = props
-
         const cardTemplate = createCard()
         cardTemplate.fields.isTemplate = true
         cardTemplate.parentId = board.id
@@ -307,15 +302,13 @@ const CenterPanel = (props: Props) => {
                 showCard(undefined)
             },
         )
-    }, [props.board, props.activeView, showCard])
+    }, [board, dispatch, showCard])
 
     const editCardTemplate = useCallback((cardTemplateId: string) => {
         showCard(cardTemplateId)
     }, [showCard])
 
     const cardClicked = useCallback((e: React.MouseEvent, card: Card): void => {
-        const {activeView, cards} = props
-
         if (e.shiftKey) {
             let newSelectedCardIds = [...selectedCardIds]
             if (newSelectedCardIds.length > 0 && (e.metaKey || e.ctrlKey)) {
@@ -345,27 +338,25 @@ const CenterPanel = (props: Props) => {
         }
 
         e.stopPropagation()
-    }, [selectedCardIds, props.activeView, props.cards, showCard])
+    }, [activeView, cards, selectedCardIds, showCard])
 
     const showShareButton = !props.readonly && me?.id !== 'single-user'
     const showShareLoginButton = props.readonly && me?.id !== 'single-user'
 
-    const {groupByProperty, activeView, board, views, cards} = props
-
-    const getUserDisplayName = (boardGroup: BoardGroup) => {
-        const user = boardUsers[boardGroup.option.id]
-        if (user) {
-            return Utils.getUserDisplayName(user, clientConfig.teammateNameDisplay)
-        } else if (boardGroup.option.id === 'undefined') {
-            return intl.formatMessage({
-                id: 'centerPanel.undefined',
-                defaultMessage: 'No {propertyName}',
-            }, {propertyName: groupByProperty?.name})
-        }
-        return intl.formatMessage({id: 'centerPanel.unknown-user', defaultMessage: 'Unknown user'})
-    }
-
     const {visible: visibleGroups, hidden: hiddenGroups} = useMemo(() => {
+        const getUserDisplayName = (boardGroup: BoardGroup) => {
+            const user = boardUsers[boardGroup.option.id]
+            if (user) {
+                return Utils.getUserDisplayName(user, clientConfig.teammateNameDisplay)
+            } else if (boardGroup.option.id === 'undefined') {
+                return intl.formatMessage({
+                    id: 'centerPanel.undefined',
+                    defaultMessage: 'No {propertyName}',
+                }, {propertyName: groupByProperty?.name})
+            }
+            return intl.formatMessage({id: 'centerPanel.unknown-user', defaultMessage: 'Unknown user'})
+        }
+
         const {visible: vg, hidden: hg} = getVisibleAndHiddenGroups(cards, activeView.fields.visibleOptionIds, activeView.fields.hiddenOptionIds, groupByProperty)
         if (groupByProperty?.type === 'createdBy' || groupByProperty?.type === 'updatedBy' || groupByProperty?.type === 'person') {
             if (boardUsers) {
@@ -378,7 +369,7 @@ const CenterPanel = (props: Props) => {
             }
         }
         return {visible: vg, hidden: hg}
-    }, [cards, activeView.fields.visibleOptionIds, activeView.fields.hiddenOptionIds, groupByProperty, boardUsers])
+    }, [cards, activeView.fields.visibleOptionIds, activeView.fields.hiddenOptionIds, groupByProperty, boardUsers, clientConfig.teammateNameDisplay, intl])
 
     return (
         <div

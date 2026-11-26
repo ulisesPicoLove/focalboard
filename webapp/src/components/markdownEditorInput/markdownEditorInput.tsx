@@ -106,7 +106,7 @@ const MarkdownEditorInput = (props: Props): ReactElement => {
         setSuggestions(mentions)
     }
 
-    const debouncedLoadSuggestion = useMemo(() => debounce(loadSuggestions, 200), [])
+    const debouncedLoadSuggestion = useMemo(() => debounce(loadSuggestions, 200), [loadSuggestions])
 
     useEffect(() => {
         // Get the ball rolling. Searching for empty string
@@ -215,6 +215,7 @@ const MarkdownEditorInput = (props: Props): ReactElement => {
         return getDefaultKeyBinding(e as any)
     }, [isEmojiPopoverOpen, isMentionPopoverOpen])
 
+    const {onEditorCancel} = props
     const handleKeyCommand = useCallback((command: string, currentState: EditorState): DraftHandleValue => {
         if (command === 'editor-blur') {
             ref.current?.blur()
@@ -236,14 +237,14 @@ const MarkdownEditorInput = (props: Props): ReactElement => {
         }
 
         if (command === 'backspace') {
-            if (props.onEditorCancel && editorState.getCurrentContent().getPlainText().length === 0) {
-                props.onEditorCancel()
+            if (onEditorCancel && editorState.getCurrentContent().getPlainText().length === 0) {
+                onEditorCancel()
                 return 'handled'
             }
         }
 
         return 'not-handled'
-    }, [props.onEditorCancel, editorState])
+    }, [onEditorStateChange, onEditorCancel, editorState])
 
     const onEditorStateBlur = useCallback(() => {
         if (confirmAddUser) {
@@ -251,7 +252,7 @@ const MarkdownEditorInput = (props: Props): ReactElement => {
         }
         const text = editorState.getCurrentContent().getPlainText()
         onBlur && onBlur(text)
-    }, [editorState.getCurrentContent().getPlainText(), onBlur, confirmAddUser])
+    }, [confirmAddUser, editorState, onBlur])
 
     const onMentionPopoverOpenChange = useCallback((open: boolean) => {
         setIsMentionPopoverOpen(open)
@@ -267,6 +268,10 @@ const MarkdownEditorInput = (props: Props): ReactElement => {
 
     const onSearchChange = useCallback(({value}: { value: string }) => {
         debouncedLoadSuggestion(value)
+
+    // Keep the debounced function that was current when the suggestions last changed: loadSuggestions
+    // is recreated on every render, and following it would create a new debounce per keystroke
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [suggestions])
 
     const className = 'MarkdownEditorInput'

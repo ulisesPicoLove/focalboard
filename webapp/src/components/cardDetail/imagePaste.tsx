@@ -58,7 +58,7 @@ export default function useImagePaste(boardId: string, cardId: string, contentOr
         }
 
         await mutator.insertBlocks(boardId, blocksToInsert, 'pasted images', afterRedo, beforeUndo)
-    }, [cardId, contentOrder, boardId])
+    }, [boardId, cardId, intl, contentOrder])
 
     const onDrop = useCallback((event: DragEvent): void => {
         if (event.dataTransfer) {

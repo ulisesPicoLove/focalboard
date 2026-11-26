@@ -31,14 +31,10 @@ const CalculationRow = (props: Props): JSX.Element => {
     }
 
     const [showOptions, setShowOptions] = useState<Map<string, boolean>>(new Map<string, boolean>())
-    const titleTemplate: IPropertyTemplate = {
-        id: Constants.titleColumnId,
-    } as IPropertyTemplate
-
     const visiblePropertyTemplates = useMemo(() => ([
-        titleTemplate,
+        {id: Constants.titleColumnId} as IPropertyTemplate,
         ...activeView.fields.visiblePropertyIds.map((id) => board.cardProperties.find((t) => t.id === id)).filter((i) => i) as IPropertyTemplate[],
-    ]), [board.cardProperties, activeView.fields.visiblePropertyIds])
+    ]), [activeView.fields.visiblePropertyIds, board.cardProperties])
 
     const selectedCalculations = activeView.fields.columnCalculations || []
 

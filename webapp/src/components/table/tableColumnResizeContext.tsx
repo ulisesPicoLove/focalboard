@@ -78,7 +78,7 @@ export const ColumnResizeProvider = (props: ColumnResizeProviderProps): ReactEle
         updateWidth: (columnId, width) => {
             onResizeColumn(columnId, width)
         },
-    }), [columnWidths, onResizeColumn])
+    }), [columnWidths, columns, onResizeColumn, updateWidth])
 
     return (
         <ColumnResizeContext.Provider value={contextValue}>

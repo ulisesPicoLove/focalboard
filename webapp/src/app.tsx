@@ -28,7 +28,7 @@ const App = (props: Props): JSX.Element => {
         dispatch(fetchLanguage())
         dispatch(fetchMe())
         dispatch(fetchClientConfig())
-    }, [])
+    }, [dispatch])
 
     return (
         <IntlProvider

@@ -74,6 +74,8 @@ const SearchDialog = (props: Props): JSX.Element => {
         setIsSearching(false)
     }
 
+    // Create the debounced function once: searchHandler changes on every render and a new debounce each time would never wait
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const debouncedSearchHandler = useMemo(() => debounce(searchHandler, 200), [])
 
     const emptyResult = results.length === 0 && !isSearching && searchQuery

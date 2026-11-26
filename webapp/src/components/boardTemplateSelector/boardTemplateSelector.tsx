@@ -72,7 +72,7 @@ const BoardTemplateSelector = (props: Props) => {
                 showBoard(template.id)
             },
         )
-    }, [showBoard])
+    }, [intl, showBoard])
 
     const unsortedTemplates = useAppSelector(getTemplates)
     const templates = useMemo(() => Object.values(unsortedTemplates).sort((a: Board, b: Board) => a.createAt - b.createAt), [unsortedTemplates])

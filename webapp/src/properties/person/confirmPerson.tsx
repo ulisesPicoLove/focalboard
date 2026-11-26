@@ -1,7 +1,7 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 
-import React, {useCallback, useState} from 'react'
+import React, {useCallback, useMemo, useState} from 'react'
 import {useIntl} from 'react-intl'
 
 import {ActionMeta, SingleValue, MultiValue} from 'react-select'
@@ -32,12 +32,15 @@ const ConfirmPerson = (props: PropertyProps): JSX.Element => {
     const changePropertyValue = useCallback((newValue) => mutator.changePropertyValue(board.id, card, propertyTemplate.id, newValue), [board.id, card, propertyTemplate.id])
     const emptyDisplayValue = props.showEmptyPlaceholder ? intl.formatMessage({id: 'ConfirmPerson.empty', defaultMessage: 'Empty'}) : ''
 
-    let userIDs: string[] = []
-    if (typeof propertyValue === 'string' && propertyValue !== '') {
-        userIDs.push(propertyValue as string)
-    } else if (Array.isArray(propertyValue) && propertyValue.length > 0) {
-        userIDs = propertyValue
-    }
+    const userIDs = useMemo((): string[] => {
+        if (typeof propertyValue === 'string' && propertyValue !== '') {
+            return [propertyValue as string]
+        }
+        if (Array.isArray(propertyValue) && propertyValue.length > 0) {
+            return propertyValue
+        }
+        return []
+    }, [propertyValue])
 
     const onChange = (items: SingleValue<IUser> | MultiValue<IUser>, action: ActionMeta<IUser>) => {
         if (Array.isArray(items)) {

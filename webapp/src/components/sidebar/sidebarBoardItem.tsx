@@ -138,7 +138,7 @@ const SidebarBoardItem = (props: Props) => {
         }
 
         Utils.showBoard(boardId, match, history)
-    }, [board.id])
+    }, [board.id, dispatch, history, match, props.categoryBoards.id])
 
     const showTemplatePicker = () => {
         // if the same board, reuse the match params

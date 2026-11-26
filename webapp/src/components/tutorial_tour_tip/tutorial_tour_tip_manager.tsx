@@ -75,7 +75,7 @@ const useTutorialTourTipManager = ({
                 await dispatch(patchProps(patchedProps))
             }
         },
-        [dispatch],
+        [currentUserId, dispatch],
     )
 
     const handleEventPropagationAndDefault = (e: React.MouseEvent | KeyboardEvent) => {
@@ -87,23 +87,11 @@ const useTutorialTourTipManager = ({
         }
     }
 
-    const handleKeyDown = useCallback((e: KeyboardEvent): void => {
-        if (Utils.isKeyPressed(e, KeyCodes.ENTER) && show) {
-            handleNext()
-        }
-    }, [show])
-
     useEffect(() => {
         if (autoTour) {
             setShow(true)
         }
     }, [autoTour])
-
-    useEffect(() => {
-        window.addEventListener('keydown', handleKeyDown)
-        return () =>
-            window.removeEventListener('keydown', handleKeyDown)
-    }, [])
 
     const handleHide = (): void => {
         setShow(false)
@@ -157,6 +145,18 @@ const useTutorialTourTipManager = ({
             handleSavePreferences(true)
         }
     }
+
+    const handleKeyDown = (e: KeyboardEvent): void => {
+        if (Utils.isKeyPressed(e, KeyCodes.ENTER) && show) {
+            handleNext()
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('keydown', handleKeyDown)
+        return () =>
+            window.removeEventListener('keydown', handleKeyDown)
+    })
 
     const handleSkipTutorial = (e: React.MouseEvent): void => {
         handleEventPropagationAndDefault(e)

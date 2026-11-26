@@ -26,9 +26,10 @@ type Props = {
 const TableRows = (props: Props): JSX.Element => {
     const {board, cards, activeView} = props
 
+    const {onCardClicked} = props
     const onClickRow = useCallback((e: React.MouseEvent<HTMLDivElement>, card: Card) => {
-        props.onCardClicked(e, card)
-    }, [props.onCardClicked])
+        onCardClicked(e, card)
+    }, [onCardClicked])
 
     return (
         <>

@@ -43,7 +43,7 @@ const MultiSelectProperty = (props: PropertyProps): JSX.Element => {
         mutator.insertPropertyOption(board.id, board.cardProperties, propertyTemplate, option, 'add property option').then(() => {
             mutator.changePropertyValue(board.id, card, propertyTemplate.id, currentValues.map((v: IPropertyOption) => v.id))
         })
-    }, [board, board.id, card, propertyTemplate])
+    }, [board, card, propertyTemplate])
 
     const values = Array.isArray(propertyValue) && propertyValue.length > 0 ? propertyValue.map((v) => propertyTemplate.options.find((o) => o!.id === v)).filter((v): v is IPropertyOption => Boolean(v)) : []
 

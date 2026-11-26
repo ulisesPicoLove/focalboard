@@ -88,7 +88,7 @@ const BoardPage = (props: Props): JSX.Element => {
         UserSettings.lastTeamId = teamId
         octoClient.teamId = teamId
         dispatch(setTeam(teamId))
-    }, [teamId])
+    }, [teamId, dispatch])
 
     const loadAction: (boardId: string) => any = useMemo(() => {
         if (props.readonly) {
@@ -170,7 +170,7 @@ const BoardPage = (props: Props): JSX.Element => {
         }
     }
 
-    const joinBoard = async (myUser: IUser, boardTeamId: string, boardId: string, allowAdmin: boolean) => {
+    const joinBoard = useCallback(async (myUser: IUser, boardTeamId: string, boardId: string, allowAdmin: boolean) => {
         const member = await octoClient.joinBoard(boardId, allowAdmin)
         if (!member) {
             if (myUser.permissions?.find((s) => s === 'manage_system' || s === 'manage_team')) {
@@ -187,7 +187,7 @@ const BoardPage = (props: Props): JSX.Element => {
             // set board as most recently viewed board
             UserSettings.setLastBoardID(boardTeamId, boardId)
         }
-    }
+    }, [dispatch])
 
     const loadOrJoinBoard = useCallback(async (myUser: IUser, boardTeamId: string, boardId: string) => {
         // and fetch its data
@@ -203,7 +203,7 @@ const BoardPage = (props: Props): JSX.Element => {
             teamId: boardTeamId,
             boardId,
         }))
-    }, [])
+    }, [dispatch, joinBoard])
 
     useEffect(() => {
         // Undo history belongs to one board: Ctrl+Z after switching boards must not

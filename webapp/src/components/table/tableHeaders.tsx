@@ -86,7 +86,7 @@ const TableHeaders = (props: Props): JSX.Element => {
         const newView = createBoardView(activeView)
         newView.fields.columnWidths = columnWidths
         mutator.updateBlock(board.id, newView, activeView, 'autosize column')
-    }, [activeView, board, cards])
+    }, [activeView, board.cardProperties, board.id, cards, columnResize, intl])
 
     const visiblePropertyTemplates = useMemo(() => (
         activeView.fields.visiblePropertyIds.map((id) => board.cardProperties.find((t) => t.id === id)).filter((i) => i) as IPropertyTemplate[]
@@ -98,7 +98,7 @@ const TableHeaders = (props: Props): JSX.Element => {
         // Move template to new index
         const destIndex = container ? activeView.fields.visiblePropertyIds.indexOf(container.id) : 0
         await mutator.changeViewVisiblePropertiesOrder(board.id, activeView, template, destIndex >= 0 ? destIndex : 0)
-    }, [board.id, activeView.fields.visiblePropertyIds])
+    }, [activeView, board.id])
 
     const titleSortOption = activeView.fields.sortOptions?.find((o) => o.propertyId === Constants.titleColumnId)
     let titleSorted: 'up' | 'down' | 'none' = 'none'

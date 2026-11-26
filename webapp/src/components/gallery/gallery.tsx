@@ -27,7 +27,7 @@ type Props = {
 }
 
 const Gallery = (props: Props): JSX.Element => {
-    const {activeView, board, cards} = props
+    const {activeView, board, cards, selectedCardIds} = props
     const visiblePropertyTemplates = useMemo(() => {
         return board.cardProperties.filter(
             (template: IPropertyTemplate) => activeView.fields.visiblePropertyIds.includes(template.id),
@@ -38,7 +38,6 @@ const Gallery = (props: Props): JSX.Element => {
 
     const onDropToCard = useCallback((srcCard: Card, dstCard: Card) => {
         Utils.log(`onDropToCard: ${dstCard.title}`)
-        const {selectedCardIds} = props
 
         const draggedCardIds = Array.from(new Set(selectedCardIds).add(srcCard.id))
         const description = draggedCardIds.length > 1 ? `drag ${draggedCardIds.length} cards` : 'drag card'
@@ -56,7 +55,7 @@ const Gallery = (props: Props): JSX.Element => {
         mutator.performAsUndoGroup(async () => {
             await mutator.changeViewCardOrder(board.id, activeView.id, activeView.fields.cardOrder, cardOrder, description)
         })
-    }, [cards.map((o) => o.id).join(','), board.id, activeView.id, activeView.fields.cardOrder, props.selectedCardIds])
+    }, [selectedCardIds, activeView.fields.cardOrder, activeView.id, cards, board.id])
 
     const visibleTitle = activeView.fields.visiblePropertyIds.includes(Constants.titleColumnId)
     const visibleBadges = activeView.fields.visiblePropertyIds.includes(Constants.badgesColumnId)

@@ -58,7 +58,7 @@ function GlobalErrorRedirect() {
             dispatch(setGlobalError(''))
             history.replace(`/error?id=${globalError}`)
         }
-    }, [globalError, history])
+    }, [globalError, history, dispatch])
 
     return null
 }
@@ -70,7 +70,7 @@ type Props = {
 const FocalboardRouter = (props: Props): JSX.Element => {
     const defaultHistory = useMemo(() => {
         return props.history ? null : createBrowserHistory({basename: Utils.getFrontendBaseURL()})
-    }, [])
+    }, [props.history])
     const browserHistory = (props.history || defaultHistory) as History<unknown>
 
     return (

@@ -70,7 +70,7 @@ function DateFilter(props: Props): JSX.Element {
             }
             mutator.changeViewFilter(view.boardId, view.id, view.fields.filter, filterGroup)
         }
-    }, [value, view.boardId, view.id, view.fields.filter])
+    }, [value, view.fields.filter, view.boardId, view.id, filter])
 
     const getDisplayDate = (date: Date | null | undefined) => {
         let displayDate = ''

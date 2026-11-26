@@ -102,17 +102,19 @@ const SidebarCategory = (props: Props) => {
         }
     }, [shouldViewManageCatergoriesTour])
 
+    const {activeBoardID, hideSidebar, onBoardTemplateSelectorClose} = props
     const showBoard = useCallback((boardId) => {
-        if (boardId === props.activeBoardID && props.onBoardTemplateSelectorClose) {
-            props.onBoardTemplateSelectorClose()
+        if (boardId === activeBoardID && onBoardTemplateSelectorClose) {
+            onBoardTemplateSelectorClose()
         }
         Utils.showBoard(boardId, match, history)
-        props.hideSidebar()
-    }, [match, history])
+        hideSidebar()
+    }, [activeBoardID, hideSidebar, onBoardTemplateSelectorClose, match, history])
 
+    const {activeViewID} = props
     const showView = useCallback((viewId, boardId) => {
-        if (viewId === props.activeViewID && props.onBoardTemplateSelectorClose) {
-            props.onBoardTemplateSelectorClose()
+        if (viewId === activeViewID && onBoardTemplateSelectorClose) {
+            onBoardTemplateSelectorClose()
         }
 
         // if the same board, reuse the match params
@@ -123,8 +125,8 @@ const SidebarCategory = (props: Props) => {
         }
         const newPath = generatePath(match.path, params)
         history.push(newPath)
-        props.hideSidebar()
-    }, [match, history])
+        hideSidebar()
+    }, [activeViewID, hideSidebar, onBoardTemplateSelectorClose, match.params, match.path, history])
 
     const isBoardVisible = (boardID: string, existingBoardMetadata?: CategoryBoardMetadata): boolean => {
         const categoryBoardMetadata = existingBoardMetadata || sidebarBoardMetadata.find((metadata) => metadata.boardID === boardID)
@@ -197,7 +199,7 @@ const SidebarCategory = (props: Props) => {
                 showBoard(deleteBoard.id)
             },
         )
-    }, [showBoard, deleteBoard, props.boards])
+    }, [deleteBoard, intl, props.boards, showBoard])
 
     const updateCategory = useCallback(async (value: boolean) => {
         const updatedCategory: Category = {

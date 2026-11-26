@@ -23,12 +23,13 @@ const MenuWrapper = (props: Props) => {
         throw new Error('MenuWrapper needs exactly 2 children')
     }
 
+    const {onToggle} = props
     const close = useCallback((): void => {
         if (open) {
             setOpen(false)
-            props.onToggle && props.onToggle(false)
+            onToggle && onToggle(false)
         }
-    }, [props.onToggle, open])
+    }, [open, onToggle])
 
     const closeOnBlur = useCallback((e: Event) => {
         if (e.target && node.current?.contains(e.target as Node)) {
@@ -48,8 +49,9 @@ const MenuWrapper = (props: Props) => {
         }
     }, [close, closeOnBlur])
 
+    const {disabled, stopPropagationOnToggle} = props
     const toggle = useCallback((e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
-        if (props.disabled) {
+        if (disabled) {
             return
         }
 
@@ -59,13 +61,13 @@ const MenuWrapper = (props: Props) => {
          * We need to refactor this so that the modal is explicitly closed on toggle, but for now I am aiming to preserve the existing logic
          * so as to not break other things
         **/
-        if (props.stopPropagationOnToggle) {
+        if (stopPropagationOnToggle) {
             e.preventDefault()
             e.stopPropagation()
         }
         setOpen(!open)
-        props.onToggle && props.onToggle(!open)
-    }, [props.onToggle, open, props.disabled])
+        onToggle && onToggle(!open)
+    }, [disabled, onToggle, stopPropagationOnToggle, open])
 
     useEffect(() => {
         if (open) {

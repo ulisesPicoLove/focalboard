@@ -33,7 +33,7 @@ function useResizable(liveOffset: OffsetCallback, finalOffset: OffsetCallback) {
             document.body.style.userSelect = ''
             finalOffset(state.current.lastOffset)
         }
-    }, [updateOffset])
+    }, [finalOffset, updateOffset])
 
     useEffect(() => stopResizing, [stopResizing])
 

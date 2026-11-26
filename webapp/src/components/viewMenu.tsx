@@ -31,19 +31,19 @@ type Props = {
 }
 
 const ViewMenu = (props: Props) => {
+    const {board, activeView, views, intl, readonly} = props
     const history = useHistory()
     const match = useRouteMatch()
 
     const showView = useCallback((viewId) => {
         let newPath = generatePath(match.path, {...match.params, viewId: viewId || ''})
-        if (props.readonly) {
+        if (readonly) {
             newPath += `?r=${Utils.getReadToken()}`
         }
         history.push(newPath)
-    }, [match, history])
+    }, [match.path, match.params, readonly, history])
 
     const handleDuplicateView = useCallback(() => {
-        const {activeView} = props
         Utils.log('duplicateView')
 
         const currentViewId = activeView.id
@@ -64,10 +64,9 @@ const ViewMenu = (props: Props) => {
                 showView(currentViewId)
             },
         )
-    }, [props.activeView, showView])
+    }, [activeView, showView])
 
     const handleDeleteView = useCallback(() => {
-        const {activeView, views} = props
         Utils.log('deleteView')
         const view = activeView
         const nextView = views.find((o) => o.id !== view.id)
@@ -75,20 +74,18 @@ const ViewMenu = (props: Props) => {
         if (nextView) {
             showView(nextView.id)
         }
-    }, [props.views, props.activeView, showView])
+    }, [activeView, views, showView])
 
     const handleViewClick = useCallback((id: string) => {
-        const {views} = props
         Utils.log('view ' + id)
         const view = views.find((o) => o.id === id)
         Utils.assert(view, `view not found: ${id}`)
         if (view) {
             showView(view.id)
         }
-    }, [props.views, showView])
+    }, [views, showView])
 
     const handleAddViewBoard = useCallback(() => {
-        const {board, activeView, intl} = props
         Utils.log('addview-board')
 
         const view = createBoardView()
@@ -111,11 +108,9 @@ const ViewMenu = (props: Props) => {
             async () => {
                 showView(oldViewId)
             })
-    }, [props.activeView, props.board, props.intl, showView])
+    }, [board, activeView, intl, showView])
 
     const handleAddViewTable = useCallback(() => {
-        const {board, activeView, intl} = props
-
         Utils.log('addview-table')
 
         const view = createBoardView()
@@ -142,11 +137,9 @@ const ViewMenu = (props: Props) => {
             async () => {
                 showView(oldViewId)
             })
-    }, [props.activeView, props.board, props.intl, showView])
+    }, [board, activeView, intl, showView])
 
     const handleAddViewGallery = useCallback(() => {
-        const {board, activeView, intl} = props
-
         Utils.log('addview-gallery')
 
         const view = createBoardView()
@@ -171,11 +164,9 @@ const ViewMenu = (props: Props) => {
             async () => {
                 showView(oldViewId)
             })
-    }, [props.board, props.activeView, props.intl, showView])
+    }, [board, activeView, intl, showView])
 
     const handleAddViewCalendar = useCallback(() => {
-        const {board, activeView, intl} = props
-
         Utils.log('addview-calendar')
 
         const view = createBoardView()
@@ -204,9 +195,7 @@ const ViewMenu = (props: Props) => {
             async () => {
                 showView(oldViewId)
             })
-    }, [props.board, props.activeView, props.intl, showView])
-
-    const {views, intl} = props
+    }, [board, activeView, intl, showView])
 
     const duplicateViewText = intl.formatMessage({
         id: 'View.DuplicateView',

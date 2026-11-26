@@ -68,7 +68,7 @@ function DateRange(props: PropertyProps): JSX.Element {
         if (value !== newValue) {
             setValue(newValue)
         }
-    }, [value, board.id, card, propertyTemplate.id])
+    }, [value])
 
     const getDisplayDate = (date: Date | null | undefined) => {
         let displayDate = ''

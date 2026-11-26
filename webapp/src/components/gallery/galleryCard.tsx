@@ -47,7 +47,7 @@ const GalleryCard = (props: Props) => {
 
     const handleDeleteCard = useCallback(() => {
         mutator.deleteBlock(card, 'delete card')
-    }, [card, board.id])
+    }, [card])
 
     const confirmDialogProps: ConfirmationDialogBoxProps = useMemo(() => {
         return {
@@ -58,7 +58,7 @@ const GalleryCard = (props: Props) => {
                 setShowConfirmationDialogBox(false)
             },
         }
-    }, [handleDeleteCard])
+    }, [handleDeleteCard, intl])
 
     const image: ContentBlock|undefined = useMemo(() => {
         for (let i = 0; i < contents.length; ++i) {

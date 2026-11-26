@@ -65,7 +65,7 @@ export const CardDetailProvider = (props: CardDetailProps): ReactElement => {
             const insertedBlock = await mutator.insertBlock(block.boardId, block, description, afterRedo, beforeUndo)
             setLastAddedBlock({id: insertedBlock.id, autoAdded: auto})
         })
-    }, [card.boardId, card.id, card.fields.contentOrder])
+    }, [card.boardId, card.id, card.fields.contentOrder, intl])
 
     const deleteBlock = useCallback(async (block: Block, index: number) => {
         const contentOrder = card.fields.contentOrder.slice()
@@ -75,7 +75,7 @@ export const CardDetailProvider = (props: CardDetailProps): ReactElement => {
             await mutator.deleteBlock(block, description)
             await mutator.changeCardContentOrder(card.boardId, card.id, card.fields.contentOrder, contentOrder, description)
         })
-    }, [card.boardId, card.id, card.fields.contentOrder])
+    }, [card.fields.contentOrder, card.boardId, card.id, intl])
 
     const contextValue = useMemo(() => ({
         card,

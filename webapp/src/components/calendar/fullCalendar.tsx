@@ -137,7 +137,7 @@ const CalendarFullView = (props: Props): JSX.Element|null => {
         }
         mutator.deleteBlock(cardItem, 'delete card')
         setShowConfirmationDialogBox(false)
-    }, [cardItem, board.id])
+    }, [cardItem])
 
     const confirmDialogProps: ConfirmationDialogBoxProps = useMemo(() => {
         return {
@@ -148,7 +148,7 @@ const CalendarFullView = (props: Props): JSX.Element|null => {
                 setShowConfirmationDialogBox(false)
             },
         }
-    }, [handleDeleteCard])
+    }, [handleDeleteCard, intl])
 
     const renderEventContent = (eventProps: EventContentArg): JSX.Element|null => {
         const {event} = eventProps
@@ -219,8 +219,9 @@ const CalendarFullView = (props: Props): JSX.Element|null => {
         if (card && dateDisplayProperty) {
             mutator.changePropertyValue(board.id, card, dateDisplayProperty.id, JSON.stringify(dateProperty))
         }
-    }, [cards, dateDisplayProperty])
+    }, [board.id, cards, dateDisplayProperty])
 
+    const {addCard} = props
     const onNewEvent = useCallback((args: {start: Date, end: Date}) => {
         let dateProperty: DateProperty
         if (args.start === args.end) {
@@ -237,8 +238,8 @@ const CalendarFullView = (props: Props): JSX.Element|null => {
             properties[dateDisplayProperty.id] = JSON.stringify(dateProperty)
         }
 
-        props.addCard(properties)
-    }, [props.addCard, dateDisplayProperty])
+        addCard(properties)
+    }, [dateDisplayProperty, addCard])
 
     const toolbar = useMemo(() => ({
         left: 'title',
@@ -250,7 +251,7 @@ const CalendarFullView = (props: Props): JSX.Element|null => {
         today: intl.formatMessage({id: 'calendar.today', defaultMessage: 'TODAY'}),
         month: intl.formatMessage({id: 'calendar.month', defaultMessage: 'Month'}),
         week: intl.formatMessage({id: 'calendar.week', defaultMessage: 'Week'}),
-    }), [])
+    }), [intl])
 
     const dayCellContent = useCallback((args: DayCellContentArg): JSX.Element|null => {
         return (
@@ -266,7 +267,7 @@ const CalendarFullView = (props: Props): JSX.Element|null => {
                 </div>
             </div>
         )
-    }, [dateDisplayProperty, canAddCards])
+    }, [canAddCards, onNewEvent])
 
     return (
         <div

@@ -29,14 +29,14 @@ const SelectProperty = (props: PropertyProps) => {
         mutator.insertPropertyOption(board.id, board.cardProperties, propertyTemplate, option, 'add property option').then(() => {
             mutator.changePropertyValue(board.id, card, propertyTemplate.id, option.id)
         })
-    }, [board, board.id, props.card, propertyTemplate.id])
+    }, [board.id, board.cardProperties, propertyTemplate, card])
 
     const emptyDisplayValue = props.showEmptyPlaceholder ? intl.formatMessage({id: 'PropertyValueElement.empty', defaultMessage: 'Empty'}) : ''
 
     const onChange = useCallback((newValue) => mutator.changePropertyValue(board.id, card, propertyTemplate.id, newValue), [board.id, card, propertyTemplate])
     const onChangeColor = useCallback((option: IPropertyOption, colorId: string) => mutator.changePropertyOptionColor(board.id, board.cardProperties, propertyTemplate, option, colorId), [board, propertyTemplate])
     const onDeleteOption = useCallback((option: IPropertyOption) => mutator.deletePropertyOption(board.id, board.cardProperties, propertyTemplate, option), [board, propertyTemplate])
-    const onDeleteValue = useCallback(() => mutator.changePropertyValue(board.id, card, propertyTemplate.id, ''), [card, propertyTemplate.id])
+    const onDeleteValue = useCallback(() => mutator.changePropertyValue(board.id, card, propertyTemplate.id, ''), [board.id, card, propertyTemplate.id])
 
     const option = propertyTemplate.options.find((o: IPropertyOption) => o.id === propertyValue)
     const propertyColorCssClassName = option?.color || ''

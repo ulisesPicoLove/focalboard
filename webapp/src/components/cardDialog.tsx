@@ -205,7 +205,7 @@ const CardDialog = (props: Props): JSX.Element => {
         const description = intl.formatMessage({id: 'AttachmentBlock.DeleteAction', defaultMessage: 'delete'})
         await mutator.deleteBlock(block, description)
         sendFlashMessage({content: intl.formatMessage({id: 'AttachmentBlock.delete', defaultMessage: 'Attachment Deleted Successfully.'}), severity: 'normal'})
-    }, [card?.boardId, card?.id, card?.fields.contentOrder])
+    }, [card, intl])
 
     const attachBtn = (): React.ReactNode => {
         return (
