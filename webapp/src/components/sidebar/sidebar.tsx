@@ -14,7 +14,7 @@ import HideSidebarIcon from '../../widgets/icons/hideSidebar'
 import ShowSidebarIcon from '../../widgets/icons/showSidebar'
 import {getCurrentBoard, getMySortedBoards} from '../../store/boards'
 import {useAppDispatch, useAppSelector} from '../../store/hooks'
-import {Utils} from '../../utils'
+import {CategoryBoardsOrder, Utils} from '../../utils'
 import {IUser} from '../../user'
 
 import './sidebar.scss'
@@ -27,6 +27,7 @@ import {
     getSidebarCategories,
     updateBoardCategories,
     updateCategories,
+    reorderCategoryBoards,
     updateCategoryBoardsOrder,
     updateCategoryOrder,
 } from '../../store/sidebar'
@@ -165,9 +166,17 @@ const Sidebar = (props: Props) => {
             dispatch(updateCategoryOrder(newCategoryOrder))
         }
 
+        const onCategoryBoardsReorderHandler = (_: WSClient, orders: CategoryBoardsOrder[]): void => {
+            for (const order of orders) {
+                dispatch(reorderCategoryBoards(order))
+            }
+        }
+
         websocketClient.addOnChange(onCategoryReorderHandler, 'categoryOrder')
+        websocketClient.addOnChange(onCategoryBoardsReorderHandler, 'categoryBoardsOrder')
         return () => {
             websocketClient.removeOnChange(onCategoryReorderHandler, 'categoryOrder')
+            websocketClient.removeOnChange(onCategoryBoardsReorderHandler, 'categoryBoardsOrder')
         }
     }, [teamId])
 

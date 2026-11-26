@@ -3,7 +3,7 @@
 
 import {ClientConfig} from './config/clientConfig'
 
-import {CategoryOrder, Utils, WSMessagePayloads} from './utils'
+import {CategoryBoardsOrder, CategoryOrder, Utils, WSMessagePayloads} from './utils'
 import {Block} from './blocks/block'
 import {Board, BoardMember} from './blocks/board'
 import {OctoUtils} from './octoUtils'
@@ -29,6 +29,10 @@ export type WSMessage = {
     member?: BoardMember
     timestamp?: number
     categoryOrder?: string[]
+
+    // The order of the boards of one category (these two keys come capitalized from the server)
+    CategoryId?: string
+    BoardOrder?: string[]
 }
 
 export const ACTION_UPDATE_BOARD = 'UPDATE_BOARD'
@@ -45,6 +49,7 @@ export const ACTION_UPDATE_CATEGORY = 'UPDATE_CATEGORY'
 export const ACTION_UPDATE_BOARD_CATEGORY = 'UPDATE_BOARD_CATEGORY'
 export const ACTION_UPDATE_SUBSCRIPTION = 'UPDATE_SUBSCRIPTION'
 export const ACTION_REORDER_CATEGORIES = 'REORDER_CATEGORIES'
+export const ACTION_REORDER_CATEGORY_BOARDS = 'REORDER_CATEGORY_BOARDS'
 
 type WSSubscriptionMsg = {
     action?: string
@@ -69,7 +74,7 @@ type OnErrorHandler = (client: WSClient, e: Event) => void
 type OnConfigChangeHandler = (client: WSClient, clientConfig: ClientConfig) => void
 type FollowChangeHandler = (client: WSClient, subscription: Subscription) => void
 
-export type ChangeHandlerType = 'block' | 'category' | 'blockCategories' | 'board' | 'boardMembers' | 'categoryOrder'
+export type ChangeHandlerType = 'block' | 'category' | 'blockCategories' | 'board' | 'boardMembers' | 'categoryOrder' | 'categoryBoardsOrder'
 
 type UpdatedData = {
     Blocks: Block[]
@@ -78,6 +83,7 @@ type UpdatedData = {
     Boards: Board[]
     BoardMembers: BoardMember[]
     CategoryOrder: string[]
+    CategoryBoardsOrder: CategoryBoardsOrder[]
 }
 
 type ChangeHandlers = {
@@ -87,6 +93,7 @@ type ChangeHandlers = {
     Board: OnChangeHandler[]
     BoardMember: OnChangeHandler[]
     CategoryReorder: OnChangeHandler[]
+    CategoryBoardsReorder: OnChangeHandler[]
 }
 
 type Subscriptions = {
@@ -101,7 +108,7 @@ class WSClient {
     state: 'init'|'open'|'close' = 'init'
     onStateChange: OnStateChangeHandler[] = []
     onReconnect: OnReconnectHandler[] = []
-    onChange: ChangeHandlers = {Block: [], Category: [], BoardCategory: [], Board: [], BoardMember: [], CategoryReorder: []}
+    onChange: ChangeHandlers = {Block: [], Category: [], BoardCategory: [], Board: [], BoardMember: [], CategoryReorder: [], CategoryBoardsReorder: []}
     onError: OnErrorHandler[] = []
     onConfigChange: OnConfigChangeHandler[] = []
     onFollowBlock: FollowChangeHandler = () => {}
@@ -115,7 +122,7 @@ class WSClient {
     // true after the connection dropped: once it is open again the clients must reload,
     // because changes sent while it was down are lost.
     private needsResync = false
-    private updatedData: UpdatedData = {Blocks: [], Categories: [], BoardCategories: [], Boards: [], BoardMembers: [], CategoryOrder: []}
+    private updatedData: UpdatedData = {Blocks: [], Categories: [], BoardCategories: [], Boards: [], BoardMembers: [], CategoryOrder: [], CategoryBoardsOrder: []}
     private updateTimeout?: NodeJS.Timeout
     private subscriptions: Subscriptions = {Teams: {}}
 
@@ -240,6 +247,9 @@ class WSClient {
         case 'categoryOrder':
             this.onChange.CategoryReorder.push(handler)
             break
+        case 'categoryBoardsOrder':
+            this.onChange.CategoryBoardsReorder.push(handler)
+            break
         }
     }
 
@@ -263,6 +273,9 @@ class WSClient {
             break
         case 'categoryOrder':
             haystack = this.onChange.CategoryReorder
+            break
+        case 'categoryBoardsOrder':
+            haystack = this.onChange.CategoryBoardsReorder
             break
         }
 
@@ -413,6 +426,9 @@ class WSClient {
                     this.updateSubscriptionHandler(message)
                     break
                 case ACTION_REORDER_CATEGORIES:
+                    this.updateHandler(message)
+                    break
+                case ACTION_REORDER_CATEGORY_BOARDS:
                     this.updateHandler(message)
                     break
                 default:
@@ -577,6 +593,11 @@ class WSClient {
             // Only the very latest one is sufficient to describe the
             // latest state of all sidebar categories.
             this.updatedData.CategoryOrder = (data as CategoryOrder)
+        } else if (type === 'categoryBoardsOrder') {
+            // Each message carries the whole order of one category, so only the
+            // latest one per category matters.
+            this.updatedData.CategoryBoardsOrder = this.updatedData.CategoryBoardsOrder.filter((o) => o.categoryID !== (data as CategoryBoardsOrder).categoryID)
+            this.updatedData.CategoryBoardsOrder.push(data as CategoryBoardsOrder)
         }
 
         if (this.updateTimeout) {
@@ -611,6 +632,10 @@ class WSClient {
         }
 
         Utils.log(`WSClient flush update categoryOrder: ${this.updatedData.CategoryOrder}`)
+
+        for (const order of this.updatedData.CategoryBoardsOrder) {
+            Utils.log(`WSClient flush update categoryBoardsOrder: ${order.categoryID}`)
+        }
     }
 
     private flushUpdateNotifications() {
@@ -640,6 +665,10 @@ class WSClient {
             handler(this, this.updatedData.CategoryOrder)
         }
 
+        for (const handler of this.onChange.CategoryBoardsReorder) {
+            handler(this, this.updatedData.CategoryBoardsOrder)
+        }
+
         this.updatedData = {
             Blocks: [],
             Categories: [],
@@ -647,6 +676,7 @@ class WSClient {
             Boards: [],
             BoardMembers: [],
             CategoryOrder: [],
+            CategoryBoardsOrder: [],
         }
     }
 
@@ -665,7 +695,7 @@ class WSClient {
             this.reopenTimer = undefined
         }
         this.needsResync = false
-        this.onChange = {Block: [], Category: [], BoardCategory: [], Board: [], BoardMember: [], CategoryReorder: []}
+        this.onChange = {Block: [], Category: [], BoardCategory: [], Board: [], BoardMember: [], CategoryReorder: [], CategoryBoardsReorder: []}
         this.onReconnect = []
         this.onStateChange = []
         this.onError = []

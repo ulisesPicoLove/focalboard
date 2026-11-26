@@ -78,4 +78,58 @@ describe('WSClient reconnection', () => {
 
         client.close()
     })
+
+    describe('category boards order', () => {
+        const send = (message: object) => last().onmessage?.({data: JSON.stringify(message)})
+
+        test('a REORDER_CATEGORY_BOARDS message reaches the handler', () => {
+            const client = new WSClient('http://localhost:8000')
+            client.teamId = '0'
+            client.open()
+            const handler = jest.fn()
+            client.addOnChange(handler, 'categoryBoardsOrder')
+
+            send({action: 'REORDER_CATEGORY_BOARDS', CategoryId: 'c1', BoardOrder: ['b2', 'b1'], teamId: '0'})
+            jest.advanceTimersByTime(200)
+
+            expect(handler).toBeCalledTimes(1)
+            expect(handler.mock.calls[0][1]).toEqual([{categoryID: 'c1', boardOrder: ['b2', 'b1']}])
+            client.close()
+        })
+
+        test('only the latest order of each category is delivered', () => {
+            const client = new WSClient('http://localhost:8000')
+            client.teamId = '0'
+            client.open()
+            const handler = jest.fn()
+            client.addOnChange(handler, 'categoryBoardsOrder')
+
+            send({action: 'REORDER_CATEGORY_BOARDS', CategoryId: 'c1', BoardOrder: ['a', 'b'], teamId: '0'})
+            send({action: 'REORDER_CATEGORY_BOARDS', CategoryId: 'c2', BoardOrder: ['x', 'y'], teamId: '0'})
+            send({action: 'REORDER_CATEGORY_BOARDS', CategoryId: 'c1', BoardOrder: ['b', 'a'], teamId: '0'})
+            jest.advanceTimersByTime(200)
+
+            expect(handler).toBeCalledTimes(1)
+            const orders = handler.mock.calls[0][1] as Array<{categoryID: string, boardOrder: string[]}>
+            expect(orders).toHaveLength(2)
+            expect(orders.find((o) => o.categoryID === 'c1')?.boardOrder).toEqual(['b', 'a'])
+            expect(orders.find((o) => o.categoryID === 'c2')?.boardOrder).toEqual(['x', 'y'])
+            client.close()
+        })
+
+        test('a removed handler is no longer called', () => {
+            const client = new WSClient('http://localhost:8000')
+            client.teamId = '0'
+            client.open()
+            const handler = jest.fn()
+            client.addOnChange(handler, 'categoryBoardsOrder')
+            client.removeOnChange(handler, 'categoryBoardsOrder')
+
+            send({action: 'REORDER_CATEGORY_BOARDS', CategoryId: 'c1', BoardOrder: ['a'], teamId: '0'})
+            jest.advanceTimersByTime(200)
+
+            expect(handler).not.toBeCalled()
+            client.close()
+        })
+    })
 })

@@ -174,6 +174,29 @@ const sidebarSlice = createSlice({
             // creating a new reference of array so redux knows it changed
             state.categoryAttributes = state.categoryAttributes.map((original, i) => (i === categoryIndex ? updatedCategory : original))
         },
+        reorderCategoryBoards: (state, action: PayloadAction<{categoryID: string, boardOrder: string[]}>) => {
+            const categoryIndex = state.categoryAttributes.findIndex((categoryBoards) => categoryBoards.id === action.payload.categoryID)
+            if (categoryIndex < 0) {
+                return
+            }
+
+            // The order comes from the server as board IDs: keep the hidden flag of each board,
+            // and keep at the end any board the message does not mention.
+            const category = state.categoryAttributes[categoryIndex]
+            const known = new Map(category.boardMetadata.map((metadata) => [metadata.boardID, metadata]))
+            const ordered: CategoryBoardMetadata[] = []
+            for (const boardID of action.payload.boardOrder) {
+                const metadata = known.get(boardID)
+                if (metadata) {
+                    ordered.push(metadata)
+                    known.delete(boardID)
+                }
+            }
+            ordered.push(...known.values())
+
+            const updatedCategory: CategoryBoards = {...category, boardMetadata: ordered, isNew: false}
+            state.categoryAttributes = state.categoryAttributes.map((original, i) => (i === categoryIndex ? updatedCategory : original))
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(fetchSidebarCategories.fulfilled, (state, action) => {
@@ -209,7 +232,7 @@ export function getCategoryOfBoard(boardID: string): (state: RootState) => Categ
 
 export const {reducer} = sidebarSlice
 
-export const {updateCategories, updateBoardCategories, updateCategoryOrder, updateCategoryBoardsOrder} = sidebarSlice.actions
+export const {updateCategories, updateBoardCategories, updateCategoryOrder, updateCategoryBoardsOrder, reorderCategoryBoards} = sidebarSlice.actions
 
 export {Category, CategoryBoards, BoardCategoryWebsocketData, CategoryBoardsReorderData, CategoryBoardMetadata}
 
