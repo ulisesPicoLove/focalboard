@@ -35,7 +35,7 @@ const ViewMenu = (props: Props) => {
     const match = useRouteMatch()
 
     const showView = useCallback((viewId) => {
-        let newPath = generatePath(Utils.getBoardPagePath(match.path), {...match.params, viewId: viewId || ''})
+        let newPath = generatePath(match.path, {...match.params, viewId: viewId || ''})
         if (props.readonly) {
             newPath += `?r=${Utils.getReadToken()}`
         }

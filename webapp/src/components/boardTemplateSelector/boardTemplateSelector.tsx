@@ -35,7 +35,6 @@ type Props = {
     title?: React.ReactNode
     description?: React.ReactNode
     onClose?: () => void
-    channelId?: string
 }
 
 const BoardTemplateSelector = (props: Props) => {
@@ -99,9 +98,7 @@ const BoardTemplateSelector = (props: Props) => {
     }
 
     const handleUseTemplate = async () => {
-        const boardsAndBlocks = await mutator.addBoardFromTemplate(currentTeam?.id || Constants.globalTeamId, intl, showBoard, () => showBoard(currentBoardId), activeTemplate.id, currentTeam?.id)
-        const board = boardsAndBlocks.boards[0]
-        await mutator.updateBoard({...board, channelId: props.channelId || ''}, board, 'linked channel')
+        await mutator.addBoardFromTemplate(currentTeam?.id || Constants.globalTeamId, intl, showBoard, () => showBoard(currentBoardId), activeTemplate.id, currentTeam?.id)
         if (activeTemplate.title === OnboardingBoardTitle) {
             resetTour()
         }
@@ -186,9 +183,7 @@ const BoardTemplateSelector = (props: Props) => {
                                 size={'medium'}
                                 icon={<CompassIcon icon='kanban'/>}
                                 onClick={async () => {
-                                    const boardsAndBlocks = await mutator.addEmptyBoard(currentTeam?.id || '', intl, showBoard, () => showBoard(currentBoardId))
-                                    const board = boardsAndBlocks.boards[0]
-                                    await mutator.updateBoard({...board, channelId: props.channelId || ''}, board, 'linked channel')
+                                    await mutator.addEmptyBoard(currentTeam?.id || '', intl, showBoard, () => showBoard(currentBoardId))
                                 }}
                             >
                                 <FormattedMessage

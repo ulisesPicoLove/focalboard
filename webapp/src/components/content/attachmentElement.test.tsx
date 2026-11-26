@@ -27,7 +27,6 @@ mockedOcto.getFileInfo.mockResolvedValue({
 const board = TestBlockFactory.createBoard()
 board.id = '1'
 board.teamId = 'team-id'
-board.channelId = 'channel_1'
 
 describe('component/content/FileBlock', () => {
     const defaultBlock: AttachmentBlock = {

@@ -234,7 +234,6 @@ describe('components/boardTemplateSelector/boardTemplateSelector', () => {
             expect(divEmptyboard).not.toBeNull()
             userEvent.click(divEmptyboard!)
             expect(mockedMutator.addEmptyBoard).toBeCalledTimes(1)
-            await waitFor(() => expect(mockedMutator.updateBoard).toBeCalledWith(newBoard, newBoard, 'linked channel'))
         })
         test('return BoardTemplateSelector and click delete template icon', async () => {
             const root = document.createElement('div')
@@ -300,38 +299,6 @@ describe('components/boardTemplateSelector/boardTemplateSelector', () => {
 
             await waitFor(() => expect(mockedMutator.addBoardFromTemplate).toBeCalledTimes(1))
             await waitFor(() => expect(mockedMutator.addBoardFromTemplate).toBeCalledWith(team1.id, expect.anything(), expect.anything(), expect.anything(), '1', team1.id))
-            await waitFor(() => expect(mockedMutator.updateBoard).toBeCalledWith(newBoard, newBoard, 'linked channel'))
-        })
-
-        test('return BoardTemplateSelector and click to add board from template with channelId', async () => {
-            const newBoard = createBoard({id: 'new-board'} as Board)
-            mockedMutator.addBoardFromTemplate.mockResolvedValue({boards: [newBoard], blocks: []})
-
-            render(wrapDNDIntl(
-                <ReduxProvider store={store}>
-                    <BoardTemplateSelector
-                        onClose={jest.fn()}
-                        channelId='test-channel'
-                    />
-                </ReduxProvider>
-                ,
-            ), {wrapper: MemoryRouter})
-            const divBoardToSelect = screen.getByText(template1Title).parentElement
-            expect(divBoardToSelect).not.toBeNull()
-
-            act(() => {
-                userEvent.click(divBoardToSelect!)
-            })
-
-            const useTemplateButton = screen.getByText('Use this template').parentElement
-            expect(useTemplateButton).not.toBeNull()
-            act(() => {
-                userEvent.click(useTemplateButton!)
-            })
-
-            await waitFor(() => expect(mockedMutator.addBoardFromTemplate).toBeCalledTimes(1))
-            await waitFor(() => expect(mockedMutator.addBoardFromTemplate).toBeCalledWith(team1.id, expect.anything(), expect.anything(), expect.anything(), '1', team1.id))
-            await waitFor(() => expect(mockedMutator.updateBoard).toBeCalledWith({...newBoard, channelId: 'test-channel'}, newBoard, 'linked channel'))
         })
 
         test('return BoardTemplateSelector and click to add board from global template', async () => {
@@ -358,7 +325,6 @@ describe('components/boardTemplateSelector/boardTemplateSelector', () => {
             })
             await waitFor(() => expect(mockedMutator.addBoardFromTemplate).toBeCalledTimes(1))
             await waitFor(() => expect(mockedMutator.addBoardFromTemplate).toBeCalledWith(team1.id, expect.anything(), expect.anything(), expect.anything(), 'global-1', team1.id))
-            await waitFor(() => expect(mockedMutator.updateBoard).toBeCalledWith(newBoard, newBoard, 'linked channel'))
         })
         test('should start product tour on choosing welcome template', async () => {
             const newBoard = createBoard({id: 'new-board'} as Board)
@@ -385,7 +351,6 @@ describe('components/boardTemplateSelector/boardTemplateSelector', () => {
 
             await waitFor(() => expect(mockedMutator.addBoardFromTemplate).toBeCalledTimes(1))
             await waitFor(() => expect(mockedMutator.addBoardFromTemplate).toBeCalledWith(team1.id, expect.anything(), expect.anything(), expect.anything(), '2', team1.id))
-            await waitFor(() => expect(mockedMutator.updateBoard).toBeCalledWith(newBoard, newBoard, 'linked channel'))
             expect(mockedOctoClient.patchUserConfig).toBeCalledWith('user-id-1', {
                 updatedFields: {
                     onboardingTourStarted: '1',

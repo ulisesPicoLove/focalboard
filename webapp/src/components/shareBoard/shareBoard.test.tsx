@@ -76,7 +76,6 @@ board.cardProperties = [
         ],
     },
 ]
-board.channelId = 'channel_1'
 
 const activeView = TestBlockFactory.createBoardView(board)
 activeView.id = 'view1'

@@ -9,6 +9,6 @@ export type ClientConfig = {
     teammateNameDisplay: string
     maxFileSize: number
 
-    // How users sign in: 'native', 'mattermost' or 'google'. Missing until the config is loaded.
+    // How users sign in: 'native' or 'google'. Missing until the config is loaded.
     authMode?: string
 }

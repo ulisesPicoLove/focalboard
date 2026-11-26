@@ -7,7 +7,6 @@ import {getBoards, getCurrentBoardId} from '../../store/boards'
 import {setCurrent as setCurrentView, getCurrentBoardViews} from '../../store/views'
 import {useAppSelector, useAppDispatch} from '../../store/hooks'
 import {UserSettings} from '../../userSettings'
-import {Utils} from '../../utils'
 import {getSidebarCategories} from '../../store/sidebar'
 import {Constants} from '../../constants'
 
@@ -48,7 +47,7 @@ const TeamToBoardAndViewRedirect = (): null => {
             }
 
             if (boardID) {
-                const newPath = generatePath(Utils.getBoardPagePath(match.path), {...match.params, boardId: boardID, viewID: undefined})
+                const newPath = generatePath(match.path, {...match.params, boardId: boardID, viewID: undefined})
                 history.replace(newPath)
 
                 // return from here because the loadBoardData() call
@@ -76,7 +75,7 @@ const TeamToBoardAndViewRedirect = (): null => {
             }
 
             if (viewID) {
-                const newPath = generatePath(Utils.getBoardPagePath(match.path), {...match.params, viewId: viewID})
+                const newPath = generatePath(match.path, {...match.params, viewId: viewID})
                 history.replace(newPath)
             }
         }

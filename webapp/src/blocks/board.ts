@@ -24,7 +24,6 @@ enum MemberRole {
 type Board = {
     id: string
     teamId: string
-    channelId?: string
     createdBy: string
     modifiedBy: string
     type: BoardTypes
@@ -128,7 +127,6 @@ function createBoard(board?: Board): Board {
     return {
         id: board?.id || Utils.createGuid(IDType.Board),
         teamId: board?.teamId || '',
-        channelId: board?.channelId || '',
         createdBy: board?.createdBy || '',
         modifiedBy: board?.modifiedBy || '',
         type: board?.type || BoardTypePrivate,

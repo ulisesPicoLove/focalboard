@@ -91,7 +91,7 @@ class OctoClient {
         localStorage.setItem('focalboardSessionId', value)
     }
 
-    constructor(serverUrl?: string, public teamId = Constants.globalTeamId, public channelId = Constants.noChannelID) {
+    constructor(serverUrl?: string, public teamId = Constants.globalTeamId) {
         this.serverUrl = serverUrl
     }
 
@@ -204,14 +204,6 @@ class OctoClient {
         let parameters = ''
         if (this.teamId !== Constants.globalTeamId) {
             parameters = `teamID=${this.teamId}`
-        }
-        if (this.channelId !== Constants.noChannelID) {
-            const channelClause = `channelID=${this.channelId}`
-            if (parameters) {
-                parameters += '&' + channelClause
-            } else {
-                parameters = channelClause
-            }
         }
         if (parameters) {
             path += '?' + parameters

@@ -61,7 +61,6 @@ import './boardPage.scss'
 
 type Props = {
     readonly?: boolean
-    new?: boolean
 }
 
 const BoardPage = (props: Props): JSX.Element => {
@@ -265,8 +264,7 @@ const BoardPage = (props: Props): JSX.Element => {
                             defaultMessage: 'You are about to join a private board without explicitly being added by the board admin. Are you sure you wish to join this private board?',
                         }),
                         confirmButtonText: intl.formatMessage({id: 'boardPage.confirm-join-button', defaultMessage: 'Join'}),
-                        destructive: true, //board.channelId !== '',
-
+                        destructive: true,
                         onConfirm: onConfirmJoin,
                         onClose: () => {
                             setShowJoinBoardDialog(false)
@@ -277,7 +275,7 @@ const BoardPage = (props: Props): JSX.Element => {
 
             {!showJoinBoardDialog &&
                 <div className='BoardPage'>
-                    {!props.new && <TeamToBoardAndViewRedirect/>}
+                    <TeamToBoardAndViewRedirect/>
                     <BackwardCompatibilityQueryParamsRedirect/>
                     <SetWindowTitleAndIcon/>
                     <UndoRedoHotKeys/>

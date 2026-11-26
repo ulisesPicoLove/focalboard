@@ -43,7 +43,7 @@ type Props = {
 
 function CenterContent(props: Props) {
     const isLoading = useAppSelector(isLoadingBoard)
-    const match = useRouteMatch<{boardId: string, viewId: string, cardId?: string, channelId?: string}>()
+    const match = useRouteMatch<{boardId: string, viewId: string, cardId?: string}>()
     const board = useAppSelector(getCurrentBoard)
     const cards = useAppSelector(getCurrentViewCardsSortedFilteredAndGrouped)
     const activeView = useAppSelector(getCurrentView)
@@ -62,7 +62,7 @@ function CenterContent(props: Props) {
 
     const showCard = useCallback((cardId?: string) => {
         const params = {...match.params, cardId}
-        let newPath = generatePath(Utils.getBoardPagePath(match.path), params)
+        let newPath = generatePath(match.path, params)
         if (props.readonly) {
             newPath += `?r=${Utils.getReadToken()}`
         }
@@ -95,16 +95,8 @@ function CenterContent(props: Props) {
                     defaultMessage='Add a board to the sidebar using any of the templates defined below or start from scratch.'
                 />
             }
-            channelId={match.params.channelId}
         />
     )
-
-    if (match.params.channelId) {
-        if (me?.is_guest) {
-            return <GuestNoBoards/>
-        }
-        return templateSelector
-    }
 
     if (board && !isBoardHidden() && activeView) {
         let property = groupByProperty

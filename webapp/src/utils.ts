@@ -662,17 +662,6 @@ class Utils {
         return window.navigator.userAgent
     }
 
-    static isDesktopApp(): boolean {
-        return Utils.userAgent().indexOf('Mattermost') !== -1 && Utils.userAgent().indexOf('Electron') !== -1
-    }
-
-    static getDesktopVersion(): string {
-        // use if the value window.desktop.version is not set yet
-        const regex = /Mattermost\/(\d+\.\d+\.\d+)/gm
-        const match = regex.exec(window.navigator.appVersion)?.[1] || ''
-        return match
-    }
-
     /**
      * Function to check how a version compares to another
      *
@@ -703,10 +692,6 @@ class Utils {
 
         // If all components are equal, then return true
         return 0
-    }
-
-    static isDesktop(): boolean {
-        return Utils.isDesktopApp() && (Utils.compareVersions(Utils.getDesktopVersion(), '5.0.0') <= 0)
     }
 
     static getReadToken(): string {
@@ -776,13 +761,6 @@ class Utils {
         return (Utils.isMac() && e.metaKey) || (!Utils.isMac() && e.ctrlKey && !e.altKey)
     }
 
-    static getBoardPagePath(currentPath: string) {
-        if (currentPath === '/team/:teamId/new/:channelId') {
-            return '/team/:teamId/:boardId?/:viewId?/:cardId?'
-        }
-        return currentPath
-    }
-
     static showBoard(
         boardId: string,
         match: routerMatch<{boardId: string, viewId?: string, cardId?: string, teamId?: string}>,
@@ -795,7 +773,7 @@ class Utils {
             params.viewId = undefined
             params.cardId = undefined
         }
-        const newPath = generatePath(Utils.getBoardPagePath(match.path), params)
+        const newPath = generatePath(match.path, params)
         history.push(newPath)
     }
 

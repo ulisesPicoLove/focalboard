@@ -49,7 +49,7 @@ const BoardSwitcherDialog = (props: Props): JSX.Element => {
         if (!me) {
             return
         }
-        const newPath = generatePath(Utils.getBoardPagePath(match.path), {...match.params, teamId, boardId, viewId: undefined})
+        const newPath = generatePath(match.path, {...match.params, teamId, boardId, viewId: undefined})
         history.push(newPath)
         props.onClose()
     }

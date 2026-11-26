@@ -25,7 +25,6 @@ jest.mock('../../utils')
 const board = TestBlockFactory.createBoard()
 board.id = boardId
 board.teamId = 'team-id'
-board.channelId = 'channel_1'
 
 describe('src/components/shareBoard/userPermissionsRow', () => {
     const me: IUser = {

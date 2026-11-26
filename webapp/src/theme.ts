@@ -3,7 +3,6 @@
 
 import {CSSObject} from '@emotion/serialize'
 import isEqual from 'lodash/isEqual'
-import color from 'color'
 
 let activeThemeName: string
 
@@ -174,33 +173,6 @@ export function setTheme(theme: Theme | null): Theme {
     document.documentElement.style.setProperty('--prop-red', consolidatedTheme.propRed)
 
     return consolidatedTheme
-}
-
-export function setMattermostTheme(theme: any): Theme {
-    if (!theme) {
-        return setTheme(defaultTheme)
-    }
-
-    document.documentElement.style.setProperty('--center-channel-bg-rgb', color(theme.centerChannelBg).rgb().array().join(', '))
-    document.documentElement.style.setProperty('--center-channel-color-rgb', color(theme.centerChannelColor).rgb().array().join(', '))
-    document.documentElement.style.setProperty('--button-bg-rgb', color(theme.buttonBg).rgb().array().join(', '))
-    document.documentElement.style.setProperty('--button-color-rgb', color(theme.buttonColor).rgb().array().join(', '))
-    document.documentElement.style.setProperty('--sidebar-bg-rgb', color(theme.sidebarBg).rgb().array().join(', '))
-    document.documentElement.style.setProperty('--sidebar-text-rgb', color(theme.sidebarText).rgb().array().join(', '))
-    document.documentElement.style.setProperty('--link-color-rgb', theme.linkColor)
-    document.documentElement.style.setProperty('--sidebar-text-active-border-rgb', color(theme.sidebarTextActiveBorder).rgb().array().join(', '))
-
-    return setTheme({
-        ...defaultTheme,
-        mainBg: color(theme.centerChannelBg).rgb().array().join(', '),
-        mainFg: color(theme.centerChannelColor).rgb().array().join(', '),
-        buttonBg: color(theme.buttonBg).rgb().array().join(', '),
-        buttonFg: color(theme.buttonColor).rgb().array().join(', '),
-        sidebarBg: color(theme.sidebarBg).rgb().array().join(', '),
-        sidebarFg: color(theme.sidebarColor || '#ffffff').rgb().array().join(', '),
-        sidebarTextActiveBorder: color(theme.sidebarTextActiveBorder).rgb().array().join(', '),
-        link: theme.linkColor,
-    })
 }
 
 function setActiveThemeName(consolidatedTheme: Theme, theme: Theme | null) {
