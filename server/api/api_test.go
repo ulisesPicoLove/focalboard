@@ -38,7 +38,6 @@ func TestErrorResponse(t *testing.T) {
 		// forbidden
 		{"ErrForbidden", model.NewErrForbidden("not enough permissions"), http.StatusForbidden, "not enough permissions"},
 		{"ErrPermission", model.NewErrPermission("not enough permissions"), http.StatusForbidden, "not enough permissions"},
-		{"ErrPatchUpdatesLimitedCards", model.ErrPatchUpdatesLimitedCards, http.StatusForbidden, "cards that are limited"},
 		{"ErrCategoryPermissionDenied", model.ErrCategoryPermissionDenied, http.StatusForbidden, "doesn't belong to user"},
 
 		// not found

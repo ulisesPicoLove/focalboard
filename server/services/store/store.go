@@ -10,8 +10,6 @@ import (
 	mmModel "github.com/mattermost/mattermost/server/public/model"
 )
 
-const CardLimitTimestampSystemKey = "card_limit_timestamp"
-
 // Store represents the abstraction of the data storage.
 type Store interface {
 	GetBlocks(opts model.QueryBlocksOptions) ([]*model.Block, error)
@@ -157,10 +155,6 @@ type Store interface {
 	GetTemplateBoards(teamID, userID string) ([]*model.Board, error)
 
 	// @withTransaction
-
-	GetUsedCardsCount() (int, error)
-	GetCardLimitTimestamp() (int64, error)
-	UpdateCardLimitTimestamp(cardLimit int) (int64, error)
 
 	DBType() string
 	DBVersion() string

@@ -13,8 +13,7 @@ import (
 )
 
 var (
-	ErrViewsLimitReached        = errors.New("views limit reached for board")
-	ErrPatchUpdatesLimitedCards = errors.New("patch updates cards that are limited")
+	ErrViewsLimitReached = errors.New("views limit reached for board")
 
 	ErrInsufficientLicense = errors.New("appropriate license required")
 
@@ -231,7 +230,6 @@ func IsErrUnauthorized(err error) bool {
 // IsErrForbidden returns true if `err` is or wraps one of:
 // - model.ErrForbidden
 // - model.ErrPermission
-// - model.ErrPatchUpdatesLimitedCards
 // - model.ErrorCategoryPermissionDenied.
 func IsErrForbidden(err error) bool {
 	if err == nil {
@@ -247,11 +245,6 @@ func IsErrForbidden(err error) bool {
 	// check if this is a model.ErrPermission
 	var p *ErrPermission
 	if errors.As(err, &p) {
-		return true
-	}
-
-	// check if this is a model.ErrPatchUpdatesLimitedCards
-	if errors.Is(err, ErrPatchUpdatesLimitedCards) {
 		return true
 	}
 
