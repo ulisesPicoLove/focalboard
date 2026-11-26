@@ -20,8 +20,6 @@ import {mockDOM, mockStateStore, wrapDNDIntl} from '../../testUtils'
 
 import client from '../../octoClient'
 
-import TelemetryClient from '../../telemetry/telemetryClient'
-
 import BoardTemplateSelector from './boardTemplateSelector'
 
 jest.mock('react-router-dom', () => {
@@ -42,9 +40,6 @@ jest.mock('../../octoClient', () => {
 })
 jest.mock('../../utils')
 jest.mock('../../mutator')
-
-jest.mock('../../telemetry/telemetryClient')
-const mockedTelemetry = mocked(TelemetryClient, true)
 
 describe('components/boardTemplateSelector/boardTemplateSelector', () => {
     const mockedMutator = mocked(Mutator, true)
@@ -363,7 +358,6 @@ describe('components/boardTemplateSelector/boardTemplateSelector', () => {
             })
             await waitFor(() => expect(mockedMutator.addBoardFromTemplate).toBeCalledTimes(1))
             await waitFor(() => expect(mockedMutator.addBoardFromTemplate).toBeCalledWith(team1.id, expect.anything(), expect.anything(), expect.anything(), 'global-1', team1.id))
-            await waitFor(() => expect(mockedTelemetry.trackEvent).toBeCalledWith('boards', 'createBoardViaTemplate', {boardTemplateId: 'template_id_global'}))
             await waitFor(() => expect(mockedMutator.updateBoard).toBeCalledWith(newBoard, newBoard, 'linked channel'))
         })
         test('should start product tour on choosing welcome template', async () => {
@@ -391,7 +385,6 @@ describe('components/boardTemplateSelector/boardTemplateSelector', () => {
 
             await waitFor(() => expect(mockedMutator.addBoardFromTemplate).toBeCalledTimes(1))
             await waitFor(() => expect(mockedMutator.addBoardFromTemplate).toBeCalledWith(team1.id, expect.anything(), expect.anything(), expect.anything(), '2', team1.id))
-            await waitFor(() => expect(mockedTelemetry.trackEvent).toBeCalledWith('boards', 'createBoardViaTemplate', {boardTemplateId: 'template_id_2'}))
             await waitFor(() => expect(mockedMutator.updateBoard).toBeCalledWith(newBoard, newBoard, 'linked channel'))
             expect(mockedOctoClient.patchUserConfig).toBeCalledWith('user-id-1', {
                 updatedFields: {

@@ -9,7 +9,6 @@ import {useAppSelector, useAppDispatch} from '../store/hooks'
 import {IUser, UserConfigPatch} from '../user'
 import {getMe, patchProps, getCardLimitSnoozeUntil, getCardHiddenWarningSnoozeUntil} from '../store/users'
 import {getCurrentBoardHiddenCardsCount, getCardHiddenWarning} from '../store/cards'
-import TelemetryClient, {TelemetryActions, TelemetryCategory} from '../telemetry/telemetryClient'
 import CheckIcon from '../widgets/icons/check'
 import NotificationBox from '../widgets/notificationBox/notificationBox'
 import octoClient from '../octoClient'
@@ -105,22 +104,13 @@ const CardLimitNotification = (props: Props) => {
         return () => null
     }, [show])
 
-    useEffect(() => {
-        if (show) {
-            TelemetryClient.trackEvent(TelemetryCategory, TelemetryActions.LimitCardLimitReached, {})
-        }
-    }, [show])
-
     const handleContactAdminClicked = useCallback(async () => {
-        TelemetryClient.trackEvent(TelemetryCategory, TelemetryActions.LimitCardCTAPerformed)
-
         await octoClient.notifyAdminUpgrade()
         setShowNotifyAdminSuccess(true)
     }, [me?.id])
 
     const onClick = useCallback(() => {
         (window as any).openPricingModal()({trackingLocation: 'boards > card_limit_notification_upgrade_to_a_paid_plan_click'})
-        TelemetryClient.trackEvent(TelemetryCategory, TelemetryActions.LimitCardLimitLinkOpen, {})
     }, [])
 
     const hasPermissionToUpgrade = me?.roles?.split(' ').indexOf('system_admin') !== -1

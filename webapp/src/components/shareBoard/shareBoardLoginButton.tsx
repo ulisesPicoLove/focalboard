@@ -6,7 +6,6 @@ import {FormattedMessage} from 'react-intl'
 import {generatePath, useRouteMatch, useHistory} from 'react-router-dom'
 
 import Button from '../../widgets/buttons/button'
-import TelemetryClient, {TelemetryActions, TelemetryCategory} from '../../telemetry/telemetryClient'
 import {Utils} from '../../utils'
 
 import './shareBoardLoginButton.scss'
@@ -22,7 +21,6 @@ const ShareBoardLoginButton = () => {
     const loginPath = '/login?' + redirectQueryParam
 
     const onLoginClick = useCallback(() => {
-        TelemetryClient.trackEvent(TelemetryCategory, TelemetryActions.ShareBoardLogin)
         if (Utils.isFocalboardLegacy()) {
             location.assign(loginPath)
         } else {

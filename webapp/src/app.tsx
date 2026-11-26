@@ -7,19 +7,15 @@ import {HTML5Backend} from 'react-dnd-html5-backend'
 import {TouchBackend} from 'react-dnd-touch-backend'
 import {History} from 'history'
 
-import TelemetryClient from './telemetry/telemetryClient'
-
 import {getMessages} from './i18n'
 import {FlashMessages} from './components/flashMessages'
 import NewVersionBanner from './components/newVersionBanner'
 import {Utils} from './utils'
-import {fetchMe, getMe} from './store/users'
+import {fetchMe} from './store/users'
 import {getLanguage, fetchLanguage} from './store/language'
 import {useAppSelector, useAppDispatch} from './store/hooks'
 import {fetchClientConfig} from './store/clientConfig'
 import FocalboardRouter from './router'
-
-import {IUser} from './user'
 
 type Props = {
     history?: History<unknown>
@@ -27,7 +23,6 @@ type Props = {
 
 const App = (props: Props): JSX.Element => {
     const language = useAppSelector<string>(getLanguage)
-    const me = useAppSelector<IUser|null>(getMe)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -35,12 +30,6 @@ const App = (props: Props): JSX.Element => {
         dispatch(fetchMe())
         dispatch(fetchClientConfig())
     }, [])
-
-    useEffect(() => {
-        if (me) {
-            TelemetryClient.setUser(me)
-        }
-    }, [me])
 
     return (
         <IntlProvider

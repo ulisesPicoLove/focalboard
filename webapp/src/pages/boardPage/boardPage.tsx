@@ -27,7 +27,7 @@ import {
     fetchBoardMembers,
     addMyBoardMemberships,
 } from '../../store/boards'
-import {getCurrentViewId, setCurrent as setCurrentView, updateViews} from '../../store/views'
+import {setCurrent as setCurrentView, updateViews} from '../../store/views'
 import undoManager from '../../undomanager'
 import ConfirmationDialog from '../../components/confirmationDialogBox'
 import {initialLoad, initialReadOnlyLoad, loadBoardData} from '../../store/initialLoad'
@@ -47,8 +47,6 @@ import {UserSettings} from '../../userSettings'
 
 import IconButton from '../../widgets/buttons/iconButton'
 import CloseIcon from '../../widgets/icons/close'
-
-import TelemetryClient, {TelemetryActions, TelemetryCategory} from '../../telemetry/telemetryClient'
 
 import {Constants} from '../../constants'
 
@@ -70,7 +68,6 @@ type Props = {
 const BoardPage = (props: Props): JSX.Element => {
     const intl = useIntl()
     const activeBoardId = useAppSelector(getCurrentBoardId)
-    const activeViewId = useAppSelector(getCurrentViewId)
     const dispatch = useAppDispatch()
     const match = useRouteMatch<{boardId: string, viewId: string, cardId?: string, teamId?: string}>()
     const [mobileWarningClosed, setMobileWarningClosed] = useState(UserSettings.mobileWarningClosed)
@@ -257,14 +254,6 @@ const BoardPage = (props: Props): JSX.Element => {
             handleUnhideBoard(match.params.boardId)
         }
     }, [me?.id, teamId, match.params.boardId])
-
-    if (props.readonly) {
-        useEffect(() => {
-            if (activeBoardId && activeViewId) {
-                TelemetryClient.trackEvent(TelemetryCategory, TelemetryActions.ViewSharedBoard, {board: activeBoardId, view: activeViewId})
-            }
-        }, [activeBoardId, activeViewId])
-    }
 
     return (
         <>

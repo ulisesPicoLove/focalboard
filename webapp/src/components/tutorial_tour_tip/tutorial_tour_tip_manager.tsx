@@ -11,7 +11,6 @@ import {getMe, getOnboardingTourStep, patchProps} from '../../store/users'
 import {UserConfigPatch} from '../../user'
 import octoClient from '../../octoClient'
 import {Utils, KeyCodes} from '../../utils'
-import TelemetryClient, {TelemetryCategory} from '../../telemetry/telemetryClient'
 
 export interface TutorialTourTipManager {
     show: boolean
@@ -41,7 +40,6 @@ export type TutorialTourTipManagerProps = {
 
 const useTutorialTourTipManager = ({
     autoTour,
-    telemetryTag,
     tutorialCategory,
     onNextNavigateTo,
     onPrevNavigateTo,
@@ -79,10 +77,6 @@ const useTutorialTourTipManager = ({
         },
         [dispatch],
     )
-
-    const trackEvent = useCallback((category, event, props?) => {
-        TelemetryClient.trackEvent(category, event, props)
-    }, [])
 
     const handleEventPropagationAndDefault = (e: React.MouseEvent | KeyboardEvent) => {
         if (stopPropagation) {
@@ -123,8 +117,6 @@ const useTutorialTourTipManager = ({
     const handleDismiss = (e: React.MouseEvent): void => {
         handleEventPropagationAndDefault(e)
         handleHide()
-        const tag = telemetryTag + '_skip'
-        trackEvent(TelemetryCategory, tag)
     }
 
     const handleSavePreferences = async (nextStep: boolean | number): Promise<void> => {
@@ -152,21 +144,12 @@ const useTutorialTourTipManager = ({
     const handlePrevious = (e: React.MouseEvent): void => {
         handleEventPropagationAndDefault(e)
 
-        if (telemetryTag) {
-            const tag = telemetryTag + '_previous'
-            trackEvent(TelemetryCategory, tag)
-        }
-
         handleSavePreferences(false)
     }
 
     const handleNext = (e?: React.MouseEvent): void => {
         if (e) {
             handleEventPropagationAndDefault(e)
-        }
-        if (telemetryTag) {
-            const tag = telemetryTag + '_next'
-            trackEvent(TelemetryCategory, tag)
         }
         if (getLastStep() === currentStep) {
             handleSavePreferences(FINISHED)
@@ -177,11 +160,6 @@ const useTutorialTourTipManager = ({
 
     const handleSkipTutorial = (e: React.MouseEvent): void => {
         handleEventPropagationAndDefault(e)
-
-        if (telemetryTag) {
-            const tag = telemetryTag + '_skip'
-            trackEvent(TelemetryCategory, tag)
-        }
 
         if (currentUserId) {
             savePreferences(currentUserId, FINISHED.toString())

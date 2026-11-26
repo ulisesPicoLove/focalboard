@@ -17,7 +17,6 @@ import {getTemplates, getCurrentBoardId} from '../../store/boards'
 import {getCurrentTeam, Team} from '../../store/teams'
 import {fetchGlobalTemplates, getGlobalTemplates} from '../../store/globalTemplates'
 import {useAppDispatch, useAppSelector} from '../../store/hooks'
-import TelemetryClient, {TelemetryActions, TelemetryCategory} from '../../telemetry/telemetryClient'
 
 import './boardTemplateSelector.scss'
 import {OnboardingBoardTitle} from '../cardDetail/cardDetail'
@@ -66,7 +65,6 @@ const BoardTemplateSelector = (props: Props) => {
     }, [octoClient.teamId])
 
     const onBoardTemplateDelete = useCallback((template: Board) => {
-        TelemetryClient.trackEvent(TelemetryCategory, TelemetryActions.DeleteBoardTemplate, {board: template.id})
         mutator.deleteBoard(
             template,
             intl.formatMessage({id: 'BoardTemplateSelector.delete-template', defaultMessage: 'Delete'}),
@@ -82,8 +80,6 @@ const BoardTemplateSelector = (props: Props) => {
     const allTemplates = globalTemplates.concat(templates)
 
     const resetTour = async () => {
-        TelemetryClient.trackEvent(TelemetryCategory, TelemetryActions.StartTour)
-
         if (!me) {
             return
         }
@@ -103,10 +99,6 @@ const BoardTemplateSelector = (props: Props) => {
     }
 
     const handleUseTemplate = async () => {
-        if (activeTemplate.teamId === '0') {
-            TelemetryClient.trackEvent(TelemetryCategory, TelemetryActions.CreateBoardViaTemplate, {boardTemplateId: activeTemplate.properties.trackingTemplateId as string, channelID: props.channelId})
-        }
-
         const boardsAndBlocks = await mutator.addBoardFromTemplate(currentTeam?.id || Constants.globalTeamId, intl, showBoard, () => showBoard(currentBoardId), activeTemplate.id, currentTeam?.id)
         const board = boardsAndBlocks.boards[0]
         await mutator.updateBoard({...board, channelId: props.channelId || ''}, board, 'linked channel')

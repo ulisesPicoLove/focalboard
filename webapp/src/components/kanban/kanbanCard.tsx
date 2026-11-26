@@ -7,7 +7,6 @@ import {Board, IPropertyTemplate} from '../../blocks/board'
 import {Card} from '../../blocks/card'
 import {useSortable} from '../../hooks/sortable'
 import mutator from '../../mutator'
-import TelemetryClient, {TelemetryActions, TelemetryCategory} from '../../telemetry/telemetryClient'
 import {Utils} from '../../utils'
 import MenuWrapper from '../../widgets/menuWrapper'
 import Tooltip from '../../widgets/tooltip'
@@ -49,7 +48,6 @@ const KanbanCard = (props: Props) => {
             Utils.assertFailure()
             return
         }
-        TelemetryClient.trackEvent(TelemetryCategory, TelemetryActions.DeleteCard, {board: board.id, card: card.id})
         mutator.deleteBlock(card, 'delete card')
     }, [card, board.id])
 
@@ -101,7 +99,6 @@ const KanbanCard = (props: Props) => {
                         boardId={card!.boardId}
                         onClickDelete={handleDeleteButtonOnClick}
                         onClickDuplicate={() => {
-                            TelemetryClient.trackEvent(TelemetryCategory, TelemetryActions.DuplicateCard, {board: board.id, card: card.id})
                             mutator.duplicateCard(
                                 card.id,
                                 board.id,

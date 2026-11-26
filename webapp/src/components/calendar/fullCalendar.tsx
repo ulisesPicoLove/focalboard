@@ -28,7 +28,6 @@ import ConfirmationDialogBox, {ConfirmationDialogBoxProps} from '../confirmation
 import './fullcalendar.scss'
 import MenuWrapper from '../../widgets/menuWrapper'
 import CardActionsMenu from '../cardActionsMenu/cardActionsMenu'
-import TelemetryClient, {TelemetryActions, TelemetryCategory} from '../../telemetry/telemetryClient'
 import CardActionsMenuIcon from '../cardActionsMenu/cardActionsMenuIcon'
 
 const oneDay = 60 * 60 * 24 * 1000
@@ -172,7 +171,6 @@ const CalendarFullView = (props: Props): JSX.Element|null => {
                             boardId={card.boardId}
                             onClickDelete={() => openConfirmationDialogBox(card)}
                             onClickDuplicate={() => {
-                                TelemetryClient.trackEvent(TelemetryCategory, TelemetryActions.DuplicateCard, {board: board.id, card: card.id})
                                 mutator.duplicateCard(card.id, board.id)
                             }}
                         />

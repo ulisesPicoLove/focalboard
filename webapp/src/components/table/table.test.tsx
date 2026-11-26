@@ -33,7 +33,6 @@ beforeEach(() => {
 
 jest.mock('../../mutator')
 jest.mock('../../utils')
-jest.mock('../../telemetry/telemetryClient')
 const mockedMutator = mocked(Mutator, true)
 
 describe('components/table/Table', () => {

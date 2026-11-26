@@ -27,8 +27,6 @@ import './sidebarSettingsMenu.scss'
 import CheckIcon from '../../widgets/icons/check'
 import {Constants} from '../../constants'
 
-import TelemetryClient, {TelemetryCategory, TelemetryActions} from '../../telemetry/telemetryClient'
-
 type Props = {
     activeTheme: string
 }
@@ -101,7 +99,6 @@ const SidebarSettingsMenu = (props: Props) => {
                             id='import_archive'
                             name={intl.formatMessage({id: 'Sidebar.import-archive', defaultMessage: 'Import archive'})}
                             onClick={async () => {
-                                TelemetryClient.trackEvent(TelemetryCategory, TelemetryActions.ImportArchive)
                                 Archiver.importFullArchive()
                             }}
                         />
@@ -112,7 +109,6 @@ const SidebarSettingsMenu = (props: Props) => {
                                     id={`${i.id}-import`}
                                     name={i.displayName}
                                     onClick={() => {
-                                        TelemetryClient.trackEvent(TelemetryCategory, i.telemetryName)
                                         window.open(i.href)
                                     }}
                                 />
@@ -124,7 +120,6 @@ const SidebarSettingsMenu = (props: Props) => {
                         name={intl.formatMessage({id: 'Sidebar.export-archive', defaultMessage: 'Export archive'})}
                         onClick={async () => {
                             if (currentTeam) {
-                                TelemetryClient.trackEvent(TelemetryCategory, TelemetryActions.ExportArchive)
                                 Archiver.exportFullArchive(currentTeam.id)
                             }
                         }}

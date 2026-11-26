@@ -10,7 +10,6 @@ import {useSortable} from '../../hooks/sortable'
 import mutator from '../../mutator'
 import {getCardContents} from '../../store/contents'
 import {useAppSelector} from '../../store/hooks'
-import TelemetryClient, {TelemetryActions, TelemetryCategory} from '../../telemetry/telemetryClient'
 import MenuWrapper from '../../widgets/menuWrapper'
 import Tooltip from '../../widgets/tooltip'
 import {CardDetailProvider} from '../cardDetail/cardDetailContext'
@@ -95,7 +94,6 @@ const GalleryCard = (props: Props) => {
                             boardId={card!.boardId}
                             onClickDelete={() => setShowConfirmationDialogBox(true)}
                             onClickDuplicate={() => {
-                                TelemetryClient.trackEvent(TelemetryCategory, TelemetryActions.DuplicateCard, {board: board.id, card: card.id})
                                 mutator.duplicateCard(card.id, board.id)
                             }}
                         />

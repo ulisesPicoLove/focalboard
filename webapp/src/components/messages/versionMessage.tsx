@@ -15,7 +15,6 @@ import {IUser, UserConfigPatch} from '../../user'
 import {getMe, patchProps, getVersionMessageCanceled, versionProperty} from '../../store/users'
 
 import CompassIcon from '../../widgets/icons/compassIcon'
-import TelemetryClient, {TelemetryCategory, TelemetryActions} from '../../telemetry/telemetryClient'
 
 import './versionMessage.scss'
 const helpURL = 'https://mattermost.com/pl/whats-new-boards/'
@@ -66,7 +65,6 @@ const VersionMessage = React.memo(() => {
                     size='xsmall'
                     emphasis='primary'
                     onClick={() => {
-                        TelemetryClient.trackEvent(TelemetryCategory, TelemetryActions.VersionMoreInfo)
                         window.open(helpURL)
                     }}
                 >

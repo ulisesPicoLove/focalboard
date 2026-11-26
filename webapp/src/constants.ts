@@ -1,8 +1,6 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 
-import {TelemetryActions} from './telemetry/telemetryClient'
-
 enum Permission {
     ManageBoardType = 'manage_board_type',
     DeleteBoard = 'delete_board',
@@ -45,31 +43,26 @@ class Constants {
         {
             id: 'trello',
             displayName: 'Trello',
-            telemetryName: TelemetryActions.ImportTrello,
             href: Constants.archiveHelpPage + '#import-from-trello',
         },
         {
             id: 'asana',
             displayName: 'Asana',
-            telemetryName: TelemetryActions.ImportAsana,
             href: Constants.archiveHelpPage + '#import-from-asana',
         },
         {
             id: 'notion',
             displayName: 'Notion',
-            telemetryName: TelemetryActions.ImportNotion,
             href: Constants.archiveHelpPage + '#import-from-notion',
         },
         {
             id: 'jira',
             displayName: 'Jira',
-            telemetryName: TelemetryActions.ImportJira,
             href: Constants.archiveHelpPage + '#import-from-jira',
         },
         {
             id: 'todoist',
             displayName: 'Todoist',
-            telemetryName: TelemetryActions.ImportTodoist,
             href: Constants.archiveHelpPage + '#import-from-todoist',
         },
     ]

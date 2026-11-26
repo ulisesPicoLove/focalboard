@@ -5,7 +5,6 @@ import React, {useState} from 'react'
 import {FormattedMessage} from 'react-intl'
 
 import Button from '../../widgets/buttons/button'
-import TelemetryClient, {TelemetryActions, TelemetryCategory} from '../../telemetry/telemetryClient'
 import {useAppSelector} from '../../store/hooks'
 import {getCurrentBoard} from '../../store/boards'
 import Globe from '../../widgets/icons/globe'
@@ -38,7 +37,6 @@ const ShareBoardButton = (props: Props) => {
                 emphasis='primary'
                 icon={iconForBoardType()}
                 onClick={() => {
-                    TelemetryClient.trackEvent(TelemetryCategory, TelemetryActions.ShareBoardOpenModal, {board: board.id})
                     setShowShareDialog(!showShareDialog)
                 }}
             >

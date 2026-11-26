@@ -34,8 +34,6 @@ import {Permission} from '../../constants'
 import GuestBadge from '../../widgets/guestBadge'
 import AdminBadge from '../../widgets/adminBadge/adminBadge'
 
-import TelemetryClient, {TelemetryActions, TelemetryCategory} from '../../telemetry/telemetryClient'
-
 import {getSelectBaseStyle} from '../../theme'
 import CompassIcon from '../../widgets/icons/compassIcon'
 import IconButton from '../../widgets/buttons/iconButton'
@@ -139,7 +137,6 @@ export default function ShareBoardDialog(props: Props): JSX.Element {
         const newSharing: ISharing = sharing || createSharingInfo()
         newSharing.id = boardId
         newSharing.enabled = isOn
-        TelemetryClient.trackEvent(TelemetryCategory, TelemetryActions.ShareBoard, {board: boardId, shareBoardEnabled: isOn})
         await client.setSharing(boardId, newSharing)
         await loadData()
     }
@@ -485,7 +482,6 @@ export default function ShareBoardDialog(props: Props): JSX.Element {
                                         />
                                     }
                                     onClick={() => {
-                                        TelemetryClient.trackEvent(TelemetryCategory, TelemetryActions.ShareLinkPublicCopy, {board: boardId})
                                         Utils.copyTextToClipboard(shareUrl.toString())
                                         setWasCopiedPublic(true)
                                         setWasCopiedInternal(false)
@@ -534,7 +530,6 @@ export default function ShareBoardDialog(props: Props): JSX.Element {
                             size='medium'
                             title={intl.formatMessage({id: 'ShareBoard.copyLink', defaultMessage: 'Copy link'})}
                             onClick={() => {
-                                TelemetryClient.trackEvent(TelemetryCategory, TelemetryActions.ShareLinkInternalCopy, {board: boardId})
                                 Utils.copyTextToClipboard(boardUrl.toString())
                                 setWasCopiedPublic(false)
                                 setWasCopiedInternal(true)

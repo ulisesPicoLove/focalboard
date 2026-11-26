@@ -22,7 +22,6 @@ import KanbanCard from './kanbanCard'
 
 jest.mock('../../mutator')
 jest.mock('../../utils')
-jest.mock('../../telemetry/telemetryClient')
 const mockedUtils = mocked(Utils, true)
 const mockedMutator = mocked(Mutator, true)
 

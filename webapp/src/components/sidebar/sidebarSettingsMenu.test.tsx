@@ -9,18 +9,11 @@ import {render, act} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import configureStore from 'redux-mock-store'
 
-import {mocked} from 'jest-mock'
-
 import {wrapIntl} from '../../testUtils'
 
 import {defaultThemeName} from '../../theme'
 
-import TelemetryClient, {TelemetryCategory, TelemetryActions} from '../../telemetry/telemetryClient'
-
 import SidebarSettingsMenu from './sidebarSettingsMenu'
-
-jest.mock('../../telemetry/telemetryClient')
-const mockedTelemetry = mocked(TelemetryClient, true)
 
 describe('components/sidebar/SidebarSettingsMenu', () => {
     const mockStore = configureStore([])
@@ -117,6 +110,5 @@ describe('components/sidebar/SidebarSettingsMenu', () => {
         expect(container).toMatchSnapshot()
 
         userEvent.click(container.querySelector('[aria-label="Asana"]') as Element)
-        expect(mockedTelemetry.trackEvent).toBeCalledWith(TelemetryCategory, TelemetryActions.ImportAsana)
     })
 })

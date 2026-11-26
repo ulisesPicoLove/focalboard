@@ -15,7 +15,6 @@ import {sendFlashMessage} from '../flashMessages'
 import {IUser} from '../../user'
 import {getMe} from '../../store/users'
 import {useAppSelector} from '../../store/hooks'
-import TelemetryClient, {TelemetryActions, TelemetryCategory} from '../../telemetry/telemetryClient'
 
 type Props = {
     cardId: string
@@ -32,13 +31,11 @@ export const CardActionsMenu = (props: Props): JSX.Element => {
     const intl = useIntl()
 
     const handleDeleteCard = () => {
-        TelemetryClient.trackEvent(TelemetryCategory, TelemetryActions.DeleteCard, {board: props.boardId, card: props.cardId})
         props.onClickDelete()
     }
 
     const handleDuplicateCard = () => {
         if (props.onClickDuplicate) {
-            TelemetryClient.trackEvent(TelemetryCategory, TelemetryActions.DuplicateCard, {board: props.boardId, card: props.cardId})
             props.onClickDuplicate()
         }
     }
