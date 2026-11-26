@@ -12,6 +12,7 @@ import PicoboardLogo from '../../widgets/icons/picoboardLogo'
 import Menu from '../../widgets/menu'
 import MenuWrapper from '../../widgets/menuWrapper'
 import {getMe, setMe} from '../../store/users'
+import {getAuthMode, googleAuthMode} from '../../store/clientConfig'
 import {useAppSelector, useAppDispatch} from '../../store/hooks'
 
 import ModalWrapper from '../modalWrapper'
@@ -29,6 +30,8 @@ const SidebarUserMenu = () => {
     const history = useHistory()
     const [showRegistrationLinkDialog, setShowRegistrationLinkDialog] = useState(false)
     const user = useAppSelector<IUser|null>(getMe)
+    const authMode = useAppSelector<string|undefined>(getAuthMode)
+    const passwordLogin = authMode !== googleAuthMode
     const intl = useIntl()
 
     return (
@@ -61,20 +64,24 @@ const SidebarUserMenu = () => {
                                     history.push('/login')
                                 }}
                             />
-                            <Menu.Text
-                                id='changePassword'
-                                name={intl.formatMessage({id: 'Sidebar.changePassword', defaultMessage: 'Change password'})}
-                                onClick={async () => {
-                                    history.push('/change_password')
-                                }}
-                            />
-                            <Menu.Text
-                                id='invite'
-                                name={intl.formatMessage({id: 'Sidebar.invite-users', defaultMessage: 'Invite users'})}
-                                onClick={async () => {
-                                    setShowRegistrationLinkDialog(true)
-                                }}
-                            />
+                            {passwordLogin &&
+                                <Menu.Text
+                                    id='changePassword'
+                                    name={intl.formatMessage({id: 'Sidebar.changePassword', defaultMessage: 'Change password'})}
+                                    onClick={async () => {
+                                        history.push('/change_password')
+                                    }}
+                                />
+                            }
+                            {passwordLogin &&
+                                <Menu.Text
+                                    id='invite'
+                                    name={intl.formatMessage({id: 'Sidebar.invite-users', defaultMessage: 'Invite users'})}
+                                    onClick={async () => {
+                                        setShowRegistrationLinkDialog(true)
+                                    }}
+                                />
+                            }
 
                             <Menu.Separator/>
                         </>}

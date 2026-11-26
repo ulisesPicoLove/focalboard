@@ -26,7 +26,10 @@ const clientConfigSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(fetchClientConfig.fulfilled, (state, action) => {
-            state.value = action.payload || {telemetry: false, telemetryid: '', enablePublicSharedBoards: false, teammateNameDisplay: ShowUsername, featureFlags: {}, maxFileSize: 0}
+            // A server that does not report the sign-in mode (an older one) or a config that cannot
+            // be loaded means password sign-in, rather than a blank login page.
+            const config = action.payload || {telemetry: false, telemetryid: '', enablePublicSharedBoards: false, teammateNameDisplay: ShowUsername, featureFlags: {}, maxFileSize: 0}
+            state.value = {...config, authMode: config.authMode || 'native'}
         })
     },
 })
@@ -36,4 +39,11 @@ export const {reducer} = clientConfigSlice
 
 export function getClientConfig(state: RootState): ClientConfig {
     return state.clientConfig.value
+}
+
+export const googleAuthMode = 'google'
+
+// The sign-in mode, or undefined while the client config has not been loaded yet.
+export function getAuthMode(state: RootState): string | undefined {
+    return state.clientConfig?.value?.authMode
 }

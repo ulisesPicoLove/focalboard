@@ -6,6 +6,7 @@ import {FormattedMessage} from 'react-intl'
 
 import {useAppDispatch, useAppSelector} from '../store/hooks'
 import {fetchMe, getLoggedIn} from '../store/users'
+import {getAuthMode, googleAuthMode} from '../store/clientConfig'
 
 import Button from '../widgets/buttons/button'
 import client from '../octoClient'
@@ -19,6 +20,7 @@ const RegisterPage = () => {
     const history = useHistory()
     const dispatch = useAppDispatch()
     const loggedIn = useAppSelector<boolean|null>(getLoggedIn)
+    const authMode = useAppSelector<string|undefined>(getAuthMode)
 
     const handleRegister = async (): Promise<void> => {
         const queryString = new URLSearchParams(window.location.search)
@@ -40,6 +42,11 @@ const RegisterPage = () => {
 
     if (loggedIn) {
         return <Redirect to={'/'}/>
+    }
+
+    // With Google sign-in there are no accounts to create by hand
+    if (authMode === googleAuthMode) {
+        return <Redirect to={'/login'}/>
     }
 
     return (

@@ -1,7 +1,7 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 import React, {useState} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 
 import Button from '../widgets/buttons/button'
 import client from '../octoClient'
@@ -9,6 +9,7 @@ import './changePasswordPage.scss'
 import {IUser} from '../user'
 import {useAppSelector} from '../store/hooks'
 import {getMe} from '../store/users'
+import {getAuthMode, googleAuthMode} from '../store/clientConfig'
 
 const ChangePasswordPage = () => {
     const [oldPassword, setOldPassword] = useState('')
@@ -16,6 +17,12 @@ const ChangePasswordPage = () => {
     const [errorMessage, setErrorMessage] = useState('')
     const [succeeded, setSucceeded] = useState(false)
     const user = useAppSelector<IUser|null>(getMe)
+    const authMode = useAppSelector<string|undefined>(getAuthMode)
+
+    // Accounts signed in with Google have no password to change
+    if (authMode === googleAuthMode) {
+        return <Redirect to={'/'}/>
+    }
 
     if (!user) {
         return (

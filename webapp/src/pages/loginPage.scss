@@ -65,4 +65,28 @@
     .error {
         color: #900000;
     }
+
+    &.LoginPage--sso {
+        height: 280px;
+        justify-content: center;
+        gap: 20px;
+
+        .google-signin {
+            min-width: 250px;
+            min-height: 44px;
+            gap: 10px;
+            border: 1px solid rgba(var(--center-channel-color-rgb), 0.24);
+
+            .GoogleLogo {
+                width: 18px;
+                height: 18px;
+                margin-right: 0;
+            }
+        }
+
+        .error {
+            max-width: 280px;
+            text-align: center;
+        }
+    }
 }

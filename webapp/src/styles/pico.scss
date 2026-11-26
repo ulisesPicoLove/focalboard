@@ -28,6 +28,21 @@
     --elevation-6: 0 16px 48px rgba(0, 0, 0, 0.6);
 }
 
+// Error text on the sign-in pages: the original dark red is unreadable on dark themes
+.LoginPage .error,
+.RegisterPage .error,
+.ChangePasswordPage .error {
+    color: #b3261e;
+}
+
+:root[data-pico-mode='dark'] {
+    .LoginPage .error,
+    .RegisterPage .error,
+    .ChangePasswordPage .error {
+        color: #f48fa1; // brand-pink, 8.9:1 on void
+    }
+}
+
 // Light themes: softer scrim and shadows
 :root[data-pico-mode='light'] {
     --pico-scrim: rgba(20, 24, 33, 0.4);

@@ -16,6 +16,7 @@ import ChangePasswordPage from './pages/changePasswordPage'
 import ErrorPage from './pages/errorPage'
 import LoginPage from './pages/loginPage'
 import RegisterPage from './pages/registerPage'
+import SSOPage from './pages/ssoPage'
 import {Utils} from './utils'
 import octoClient from './octoClient'
 import {setGlobalError, getGlobalError} from './store/globalError'
@@ -89,6 +90,9 @@ const FocalboardRouter = (props: Props): JSX.Element => {
                 </FBRoute>
                 <FBRoute path='/register'>
                     <RegisterPage/>
+                </FBRoute>
+                <FBRoute path='/sso'>
+                    <SSOPage/>
                 </FBRoute>
                 <FBRoute path='/change_password'>
                     <ChangePasswordPage/>
