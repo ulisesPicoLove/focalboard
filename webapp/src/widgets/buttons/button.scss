@@ -104,10 +104,10 @@
 
     &.emphasis--gray {
         background: transparent;
-        color: rgba(var(--center-channel-color-rgb), 0.64);
+        color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
 
         &:hover {
-            color: rgba(var(--center-channel-color-rgb), 0.72);
+            color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
             background: rgba(var(--center-channel-color-rgb), 0.08);
         }
 
@@ -128,7 +128,7 @@
 
     &.emphasis--default {
         &:hover {
-            color: rgba(var(--center-channel-color-rgb), 0.72);
+            color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
         }
     }
 

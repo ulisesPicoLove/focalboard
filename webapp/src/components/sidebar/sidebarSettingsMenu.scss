@@ -7,7 +7,7 @@
         height: 36px;
         align-items: center;
         padding-left: 20px;
-        color: rgba(var(--sidebar-text-rgb), 0.64);
+        color: rgba(var(--sidebar-text-rgb), var(--text-muted-alpha));
         font-weight: 400;
 
         &:hover {

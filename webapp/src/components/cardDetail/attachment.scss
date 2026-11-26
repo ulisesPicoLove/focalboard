@@ -17,7 +17,7 @@
     }
 
     .attachment-plus-icon {
-        color: rgba(var(--center-channel-color-rgb), 0.56);
+        color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
         cursor: pointer;
     }
 

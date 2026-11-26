@@ -40,10 +40,10 @@
             padding: 0 8px;
             height: 37px;
             font-weight: 600;
-            color: rgba(var(--center-channel-color-rgb), 0.56);
+            color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
 
             &:hover {
-                color: rgba(var(--center-channel-color-rgb), 0.72);
+                color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
             }
 
             &.tab-item--active {
@@ -153,7 +153,7 @@
 
         i {
             @include z-index(share-board-element);
-            color: rgba(var(--center-channel-color-rgb), 0.64);
+            color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
             position: relative;
             font-size: 18px;
         }

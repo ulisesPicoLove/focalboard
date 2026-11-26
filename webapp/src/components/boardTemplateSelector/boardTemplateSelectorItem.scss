@@ -8,7 +8,7 @@
     padding: 8px 16px;
     margin-bottom: 4px;
     border-radius: var(--default-rad);
-    color: rgba(var(--center-channel-color-rgb), 0.64);
+    color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
     height: 40px;
 
     .template-name {

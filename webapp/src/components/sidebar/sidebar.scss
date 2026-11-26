@@ -126,7 +126,7 @@
     }
 
     .IconButton {
-        color: rgba(var(--sidebar-text-rgb), 0.56);
+        color: rgba(var(--sidebar-text-rgb), var(--text-muted-alpha));
 
         &:hover {
             color: rgb(var(--sidebar-text-rgb));
@@ -152,7 +152,7 @@
         display: flex;
         padding: 0 16px 0 20px;
         cursor: pointer;
-        color: rgba(var(--sidebar-text-rgb), 0.64);
+        color: rgba(var(--sidebar-text-rgb), var(--text-muted-alpha));
         height: 36px;
         align-items: center;
 

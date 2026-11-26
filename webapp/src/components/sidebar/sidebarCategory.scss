@@ -33,7 +33,7 @@
 
         &.subitem {
             padding-left: 20px;
-            color: rgba(var(--sidebar-text-rgb), 0.64);
+            color: rgba(var(--sidebar-text-rgb), var(--text-muted-alpha));
             font-weight: 400;
         }
 
@@ -156,7 +156,7 @@
         text-overflow: ellipsis;
         display: flex;
         align-items: baseline;
-        color: rgba(var(--sidebar-text-rgb), 0.72);
+        color: rgba(var(--sidebar-text-rgb), var(--text-muted-alpha));
 
         &.category-title {
             font-size: 12px;
@@ -218,7 +218,7 @@
         margin: 0 16px;
         border-radius: 4px;
         opacity: 1;
-        color: rgba(var(--sidebar-text-rgb), 0.72);
+        color: rgba(var(--sidebar-text-rgb), var(--text-muted-alpha));
         font-size: 12px;
         line-height: 16px;
         gap: 12px;

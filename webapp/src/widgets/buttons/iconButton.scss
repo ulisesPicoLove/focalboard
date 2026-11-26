@@ -12,10 +12,10 @@
     align-items: center;
     justify-content: center;
     transition: all 100ms ease-out 0s;
-    color: rgba(var(--center-channel-color-rgb), 0.56);
+    color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
 
     &:hover {
-        color: rgba(var(--center-channel-color-rgb), 0.72);
+        color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
         background-color: rgba(var(--center-channel-color-rgb), 0.08);
     }
 
@@ -25,7 +25,7 @@
     }
 
     &.style--inverted {
-        color: rgba(var(--sidebar-text-rgb), 0.64);
+        color: rgba(var(--sidebar-text-rgb), var(--text-muted-alpha));
 
         &:hover {
             color: rgba(var(--sidebar-text-rgb), 1);

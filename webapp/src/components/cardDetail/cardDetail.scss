@@ -136,7 +136,7 @@
     .octo-propertyname {
         width: 150px;
         margin-right: 5px;
-        color: rgba(var(--center-channel-color-rgb), 0.6);
+        color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
 
         .Button {
             width: 100%;
@@ -170,7 +170,7 @@
 
             .Button {
                 opacity: 0;
-                color: rgba(var(--center-channel-color-rgb), 0.6);
+                color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
             }
         }
     }

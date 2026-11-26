@@ -18,13 +18,13 @@
 
     .subitem {
         padding-left: 20px;
-        color: rgba(var(--sidebar-text-rgb), 0.64);
+        color: rgba(var(--sidebar-text-rgb), var(--text-muted-alpha));
         font-weight: 400;
     }
 
     &.sidebar-view-item {
         padding-left: 42px;
-        color: rgba(var(--sidebar-text-rgb), 0.64);
+        color: rgba(var(--sidebar-text-rgb), var(--text-muted-alpha));
         font-weight: 400;
     }
 

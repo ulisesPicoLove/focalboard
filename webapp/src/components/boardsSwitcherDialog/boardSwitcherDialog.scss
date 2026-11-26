@@ -7,7 +7,7 @@
 
     .CompassIcon {
         font-size: 18px;
-        color: rgba(var(--center-channel-color-rgb), 0.56);
+        color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
     }
 
     span {
@@ -25,6 +25,6 @@
     .teamTitle {
         right: auto;
         margin-left: auto;
-        color: rgba(var(--center-channel-color-rgb), 0.56);
+        color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
     }
 }

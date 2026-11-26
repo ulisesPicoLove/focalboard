@@ -5,6 +5,9 @@
     --pico-font-sans: 'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif;
     --pico-font-mono: 'Space Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
+    // Secondary text: 4.5:1 or better on every theme (0.56 only reached 3.0 on the default theme)
+    --text-muted-alpha: 0.75;
+
     --pico-line: rgba(var(--center-channel-color-rgb), 0.1);
     --pico-glass: rgba(var(--center-channel-color-rgb), 0.04);
     --pico-surface: rgba(var(--center-channel-color-rgb), 0.03);
@@ -199,7 +202,7 @@
                     font-weight: 400;
                     letter-spacing: 0.14em;
                     text-transform: uppercase;
-                    color: rgba(var(--sidebar-text-rgb), 0.5);
+                    color: rgba(var(--sidebar-text-rgb), var(--text-muted-alpha));
                 }
             }
         }
@@ -226,7 +229,7 @@
             &.sidebar-view-item {
                 padding-left: 40px;
                 font-size: 12px;
-                color: rgba(var(--sidebar-text-rgb), 0.56);
+                color: rgba(var(--sidebar-text-rgb), var(--text-muted-alpha));
 
                 &.active {
                     background: transparent;
@@ -243,7 +246,7 @@
         .add-board,
         .SidebarSettingsMenu .menu-entry {
             font-size: 12px;
-            color: rgba(var(--sidebar-text-rgb), 0.56);
+            color: rgba(var(--sidebar-text-rgb), var(--text-muted-alpha));
         }
 
         input[type='text'],
@@ -271,7 +274,7 @@
         }
 
         .description {
-            color: rgba(var(--center-channel-color-rgb), 0.56);
+            color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
             font-size: 14px;
         }
     }
@@ -291,7 +294,7 @@
         font-size: 13px;
 
         .Button:not(.filled):not(.emphasis--primary) {
-            color: rgba(var(--center-channel-color-rgb), 0.64);
+            color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
             font-weight: 400;
 
             &:hover {
@@ -311,7 +314,7 @@
     .Kanban {
         .octo-board-header {
             padding: 24px 0 12px;
-            color: rgba(var(--center-channel-color-rgb), 0.56);
+            color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
         }
 
         .octo-board-header-cell {
@@ -332,7 +335,7 @@
             .KanbanCalculation .Button {
                 font-family: var(--pico-font-mono);
                 font-size: 11px;
-                color: rgba(var(--center-channel-color-rgb), 0.48);
+                color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
             }
 
             .Label {
@@ -410,7 +413,7 @@
             font-weight: 400;
             letter-spacing: 0.06em;
             text-transform: uppercase;
-            color: rgba(var(--center-channel-color-rgb), 0.56);
+            color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
         }
     }
 
@@ -445,7 +448,7 @@
             font-weight: 400;
             letter-spacing: 0.12em;
             text-transform: uppercase;
-            color: rgba(var(--center-channel-color-rgb), 0.56);
+            color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
         }
 
         .octo-propertyvalue {
@@ -502,7 +505,7 @@
                 text-align: left;
                 font-size: 13px;
                 line-height: 20px;
-                color: rgba(var(--center-channel-color-rgb), 0.56);
+                color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
                 border-left: 1px solid var(--pico-line);
                 padding-left: 24px;
                 margin: 0;
@@ -536,7 +539,7 @@
             font-size: 13px;
             font-weight: 400;
             border-radius: var(--pico-rad-md);
-            color: rgba(var(--center-channel-color-rgb), 0.64);
+            color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
 
             &:hover {
                 background: rgba(var(--center-channel-color-rgb), 0.05);
@@ -669,7 +672,7 @@
             font-weight: 400;
             letter-spacing: 0.12em;
             text-transform: uppercase;
-            color: rgba(var(--center-channel-color-rgb), 0.56);
+            color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
         }
 
         .fc-toolbar-title {
@@ -691,7 +694,7 @@
         .dateDisplay {
             font-weight: 400;
             font-size: 12px;
-            color: rgba(var(--center-channel-color-rgb), 0.64);
+            color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
         }
 
         .fc-day-other .dateDisplay {
@@ -750,7 +753,7 @@
             font-size: 11px;
             letter-spacing: 0.1em;
             text-transform: uppercase;
-            color: rgba(var(--center-channel-color-rgb), 0.56);
+            color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
             transition: border-color 300ms ease;
 
             &:hover {
@@ -816,7 +819,7 @@
             max-width: 360px;
             font-size: 13px;
             line-height: 20px;
-            color: rgba(var(--center-channel-color-rgb), 0.64);
+            color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
         }
     }
 
@@ -872,7 +875,7 @@
     .CardDetail .Menu .menu-title,
     .CardDetail .Menu .menu-header {
         font-weight: 500;
-        color: rgba(var(--center-channel-color-rgb), 0.64);
+        color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
     }
 
     // ------------------------------------------------------------------
@@ -929,7 +932,7 @@
             letter-spacing: 0.06em;
             line-height: 16px;
             text-transform: uppercase;
-            color: rgba(var(--center-channel-color-rgb), 0.56);
+            color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
         }
 
 

@@ -241,11 +241,11 @@
         width: fit-content;
 
         .octo-table-cell {
-            color: rgba(var(--center-channel-color-rgb), 0.6);
+            color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
             background: rgb(var(--center-channel-bg-rgb));
 
             .Label {
-                color: rgba(var(--center-channel-color-rgb), 0.6);
+                color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
             }
         }
     }
@@ -266,7 +266,7 @@
 
     .octo-table-footer {
         .octo-table-cell {
-            color: rgba(var(--center-channel-color-rgb), 0.6);
+            color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
             cursor: pointer;
             width: 100%;
             padding-left: 15px;
