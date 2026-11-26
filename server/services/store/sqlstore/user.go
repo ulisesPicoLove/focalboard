@@ -377,14 +377,6 @@ func (s *SQLStore) canSeeUser(db sq.BaseRunner, seerID string, seenID string) (b
 	return true, nil
 }
 
-func (s *SQLStore) sendMessage(db sq.BaseRunner, message, postType string, receipts []string) error {
-	return errUnsupportedOperation
-}
-
-func (s *SQLStore) postMessage(db sq.BaseRunner, message, postType string, channel string) error {
-	return errUnsupportedOperation
-}
-
 func (s *SQLStore) getUserTimezone(_ sq.BaseRunner, _ string) (string, error) {
 	return "", errUnsupportedOperation
 }

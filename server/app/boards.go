@@ -18,9 +18,6 @@ var (
 	ErrNewBoardCannotHaveID = errors.New("new board cannot have an ID")
 )
 
-const linkBoardMessage = "@%s linked the board [%s](%s) with this channel"
-const unlinkBoardMessage = "@%s unlinked the board [%s](%s) with this channel"
-
 var errNoDefaultCategoryFound = errors.New("no default category found for user")
 
 func (a *App) GetBoard(boardID string) (*model.Board, error) {
@@ -268,22 +265,9 @@ func (a *App) addBoardsToDefaultCategory(userID, teamID string, boards []*model.
 }
 
 func (a *App) PatchBoard(patch *model.BoardPatch, boardID, userID string) (*model.Board, error) {
-	var oldChannelID string
 	var isTemplate bool
-	var oldMembers []*model.BoardMember
 
-	if patch.Type != nil || patch.ChannelID != nil {
-		testChannel := ""
-		if patch.ChannelID != nil && *patch.ChannelID == "" {
-			var err error
-			oldMembers, err = a.GetMembersForBoard(boardID)
-			if err != nil {
-				a.logger.Error("Unable to get the board members", mlog.Err(err))
-			}
-		} else if patch.ChannelID != nil && *patch.ChannelID != "" {
-			testChannel = *patch.ChannelID
-		}
-
+	if patch.Type != nil {
 		board, err := a.store.GetBoard(boardID)
 		if model.IsErrNotFound(err) {
 			return nil, model.NewErrNotFound("board ID=" + boardID)
@@ -291,17 +275,7 @@ func (a *App) PatchBoard(patch *model.BoardPatch, boardID, userID string) (*mode
 		if err != nil {
 			return nil, err
 		}
-		oldChannelID = board.ChannelID
 		isTemplate = board.IsTemplate
-		if testChannel == "" {
-			testChannel = oldChannelID
-		}
-
-		if testChannel != "" {
-			if !a.permissions.HasPermissionToChannel(userID, testChannel, model.PermissionCreatePost) {
-				return nil, model.NewErrPermission("access denied to channel")
-			}
-		}
 	}
 
 	updatedBoard, err := a.store.PatchBoard(boardID, patch, userID)
@@ -309,53 +283,9 @@ func (a *App) PatchBoard(patch *model.BoardPatch, boardID, userID string) (*mode
 		return nil, err
 	}
 
-	// Post message to channel if linked/unlinked
-	if patch.ChannelID != nil {
-		var username string
-
-		user, err := a.store.GetUserByID(userID)
-		if err != nil {
-			a.logger.Error("Unable to get the board updater", mlog.Err(err))
-			username = "unknown"
-		} else {
-			username = user.Username
-		}
-
-		boardLink := utils.MakeBoardLink(a.config.ServerRoot, updatedBoard.TeamID, updatedBoard.ID)
-		title := updatedBoard.Title
-		if title == "" {
-			title = "Untitled board" // todo: localize this when server has i18n
-		}
-		if *patch.ChannelID != "" {
-			a.postChannelMessage(fmt.Sprintf(linkBoardMessage, username, title, boardLink), updatedBoard.ChannelID)
-		} else if *patch.ChannelID == "" {
-			a.postChannelMessage(fmt.Sprintf(unlinkBoardMessage, username, title, boardLink), oldChannelID)
-		}
-	}
-
 	// Broadcast Messages to affected users
 	a.blockChangeNotifier.Enqueue(func() error {
 		a.wsAdapter.BroadcastBoardChange(updatedBoard.TeamID, updatedBoard)
-
-		if patch.ChannelID != nil {
-			if *patch.ChannelID != "" {
-				members, err := a.GetMembersForBoard(updatedBoard.ID)
-				if err != nil {
-					a.logger.Error("Unable to get the board members", mlog.Err(err))
-				}
-				for _, member := range members {
-					if member.Synthetic {
-						a.wsAdapter.BroadcastMemberChange(updatedBoard.TeamID, member.BoardID, member)
-					}
-				}
-			} else {
-				for _, oldMember := range oldMembers {
-					if oldMember.Synthetic {
-						a.wsAdapter.BroadcastMemberDelete(updatedBoard.TeamID, boardID, oldMember.UserID)
-					}
-				}
-			}
-		}
 
 		if patch.Type != nil && isTemplate {
 			members, err := a.GetMembersForBoard(updatedBoard.ID)
@@ -368,13 +298,6 @@ func (a *App) PatchBoard(patch *model.BoardPatch, boardID, userID string) (*mode
 	})
 
 	return updatedBoard, nil
-}
-
-func (a *App) postChannelMessage(message, channelID string) {
-	err := a.store.PostMessage(message, "", channelID)
-	if err != nil {
-		a.logger.Error("Unable to post the link message to channel", mlog.Err(err))
-	}
 }
 
 // broadcastTeamUsers notifies the members of a team when a template changes its type

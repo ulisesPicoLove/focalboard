@@ -26,10 +26,6 @@ const (
 	blockChangeNotifierShutdownTimeout = time.Second * 10
 )
 
-type servicesAPI interface {
-	GetUsersFromProfiles(options *mm_model.UserGetOptions) ([]*mm_model.User, error)
-}
-
 type ReadCloseSeeker = filestore.ReadCloseSeeker
 
 type fileBackend interface {
@@ -51,7 +47,6 @@ type Services struct {
 	Logger           mlog.LoggerIFace
 	Permissions      permissions.PermissionsService
 	SkipTemplateInit bool
-	ServicesAPI      servicesAPI
 }
 
 type App struct {
@@ -67,7 +62,6 @@ type App struct {
 	logger              mlog.LoggerIFace
 	permissions         permissions.PermissionsService
 	blockChangeNotifier *utils.CallbackQueue
-	servicesAPI         servicesAPI
 
 	cardLimitMux sync.RWMutex
 	cardLimit    int
@@ -94,7 +88,6 @@ func New(config *config.Configuration, wsAdapter ws.Adapter, services Services) 
 		logger:              services.Logger,
 		permissions:         services.Permissions,
 		blockChangeNotifier: utils.NewCallbackQueue("blockChangeNotifier", blockChangeNotifierQueueSize, blockChangeNotifierPoolSize, services.Logger),
-		servicesAPI:         services.ServicesAPI,
 	}
 	app.initialize(services.SkipTemplateInit)
 	return app

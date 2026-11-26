@@ -423,11 +423,6 @@ func (s *SQLStore) GetCategory(id string) (*model.Category, error) {
 
 }
 
-func (s *SQLStore) GetChannel(teamID string, channelID string) (*mmModel.Channel, error) {
-	return s.getChannel(s.db, teamID, channelID)
-
-}
-
 func (s *SQLStore) GetFileInfo(id string) (*mmModel.FileInfo, error) {
 	return s.getFileInfo(s.db, id)
 
@@ -761,11 +756,6 @@ func (s *SQLStore) PatchUserPreferences(userID string, patch model.UserPreferenc
 
 }
 
-func (s *SQLStore) PostMessage(message string, postType string, channelID string) error {
-	return s.postMessage(s.db, message, postType, channelID)
-
-}
-
 func (s *SQLStore) RefreshSession(session *model.Session) error {
 	return s.refreshSession(s.db, session)
 
@@ -806,18 +796,8 @@ func (s *SQLStore) SearchBoardsForUserInTeam(teamID string, term string, userID 
 
 }
 
-func (s *SQLStore) SearchUserChannels(teamID string, userID string, query string) ([]*mmModel.Channel, error) {
-	return s.searchUserChannels(s.db, teamID, userID, query)
-
-}
-
 func (s *SQLStore) SearchUsersByTeam(teamID string, searchQuery string, asGuestID string, excludeBots bool, showEmail bool, showName bool) ([]*model.User, error) {
 	return s.searchUsersByTeam(s.db, teamID, searchQuery, asGuestID, excludeBots, showEmail, showName)
-
-}
-
-func (s *SQLStore) SendMessage(message string, postType string, receipts []string) error {
-	return s.sendMessage(s.db, message, postType, receipts)
 
 }
 

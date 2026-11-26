@@ -3,7 +3,6 @@ package server
 import (
 	"fmt"
 
-	"github.com/mattermost/focalboard/server/model"
 	"github.com/mattermost/focalboard/server/services/config"
 	"github.com/mattermost/focalboard/server/services/notify"
 	"github.com/mattermost/focalboard/server/services/permissions"
@@ -22,7 +21,6 @@ type Params struct {
 	WSAdapter          ws.Adapter
 	NotifyBackends     []notify.Backend
 	PermissionsService permissions.PermissionsService
-	ServicesAPI        model.ServicesAPI
 }
 
 func (p Params) CheckValid() error {

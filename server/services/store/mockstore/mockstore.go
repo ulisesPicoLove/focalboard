@@ -715,21 +715,6 @@ func (mr *MockStoreMockRecorder) GetCategory(arg0 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCategory", reflect.TypeOf((*MockStore)(nil).GetCategory), arg0)
 }
 
-// GetChannel mocks base method.
-func (m *MockStore) GetChannel(arg0, arg1 string) (*model0.Channel, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetChannel", arg0, arg1)
-	ret0, _ := ret[0].(*model0.Channel)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetChannel indicates an expected call of GetChannel.
-func (mr *MockStoreMockRecorder) GetChannel(arg0, arg1 interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetChannel", reflect.TypeOf((*MockStore)(nil).GetChannel), arg0, arg1)
-}
-
 // GetFileInfo mocks base method.
 func (m *MockStore) GetFileInfo(arg0 string) (*model0.FileInfo, error) {
 	m.ctrl.T.Helper()
@@ -1326,20 +1311,6 @@ func (mr *MockStoreMockRecorder) PatchUserPreferences(arg0, arg1 interface{}) *g
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PatchUserPreferences", reflect.TypeOf((*MockStore)(nil).PatchUserPreferences), arg0, arg1)
 }
 
-// PostMessage mocks base method.
-func (m *MockStore) PostMessage(arg0, arg1, arg2 string) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "PostMessage", arg0, arg1, arg2)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// PostMessage indicates an expected call of PostMessage.
-func (mr *MockStoreMockRecorder) PostMessage(arg0, arg1, arg2 interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PostMessage", reflect.TypeOf((*MockStore)(nil).PostMessage), arg0, arg1, arg2)
-}
-
 // RefreshSession mocks base method.
 func (m *MockStore) RefreshSession(arg0 *model.Session) error {
 	m.ctrl.T.Helper()
@@ -1457,21 +1428,6 @@ func (mr *MockStoreMockRecorder) SearchBoardsForUserInTeam(arg0, arg1, arg2 inte
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SearchBoardsForUserInTeam", reflect.TypeOf((*MockStore)(nil).SearchBoardsForUserInTeam), arg0, arg1, arg2)
 }
 
-// SearchUserChannels mocks base method.
-func (m *MockStore) SearchUserChannels(arg0, arg1, arg2 string) ([]*model0.Channel, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SearchUserChannels", arg0, arg1, arg2)
-	ret0, _ := ret[0].([]*model0.Channel)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// SearchUserChannels indicates an expected call of SearchUserChannels.
-func (mr *MockStoreMockRecorder) SearchUserChannels(arg0, arg1, arg2 interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SearchUserChannels", reflect.TypeOf((*MockStore)(nil).SearchUserChannels), arg0, arg1, arg2)
-}
-
 // SearchUsersByTeam mocks base method.
 func (m *MockStore) SearchUsersByTeam(arg0, arg1, arg2 string, arg3, arg4, arg5 bool) ([]*model.User, error) {
 	m.ctrl.T.Helper()
@@ -1485,20 +1441,6 @@ func (m *MockStore) SearchUsersByTeam(arg0, arg1, arg2 string, arg3, arg4, arg5 
 func (mr *MockStoreMockRecorder) SearchUsersByTeam(arg0, arg1, arg2, arg3, arg4, arg5 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SearchUsersByTeam", reflect.TypeOf((*MockStore)(nil).SearchUsersByTeam), arg0, arg1, arg2, arg3, arg4, arg5)
-}
-
-// SendMessage mocks base method.
-func (m *MockStore) SendMessage(arg0, arg1 string, arg2 []string) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SendMessage", arg0, arg1, arg2)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// SendMessage indicates an expected call of SendMessage.
-func (mr *MockStoreMockRecorder) SendMessage(arg0, arg1, arg2 interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMessage", reflect.TypeOf((*MockStore)(nil).SendMessage), arg0, arg1, arg2)
 }
 
 // SetBoardVisibility mocks base method.

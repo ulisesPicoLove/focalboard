@@ -147,10 +147,6 @@ type BoardPatch struct {
 	// required: false
 	ShowDescription *bool `json:"showDescription"`
 
-	// Indicates if the board shows the description on the interface
-	// required: false
-	ChannelID *string `json:"channelId"`
-
 	// The board updated properties
 	// required: false
 	UpdatedProperties map[string]interface{} `json:"updatedProperties"`
@@ -256,10 +252,6 @@ func (p *BoardPatch) Patch(board *Board) *Board {
 
 	if p.ShowDescription != nil {
 		board.ShowDescription = *p.ShowDescription
-	}
-
-	if p.ChannelID != nil {
-		board.ChannelID = *p.ChannelID
 	}
 
 	for key, property := range p.UpdatedProperties {

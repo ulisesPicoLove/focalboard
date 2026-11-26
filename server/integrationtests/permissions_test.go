@@ -573,49 +573,6 @@ func TestPermissionsPatchBoardMinimumRole(t *testing.T) {
 	runTestCases(t, ttCases, testData, clients)
 }
 
-func TestPermissionsPatchBoardChannelId(t *testing.T) {
-	patch := toJSON(t, map[string]string{"channelId": "valid-channel-id"})
-	ttCases := []TestCase{
-		{"/boards/{PRIVATE_BOARD_ID}", methodPatch, patch, userAnon, http.StatusUnauthorized, 0},
-		{"/boards/{PRIVATE_BOARD_ID}", methodPatch, patch, userNoTeamMember, http.StatusForbidden, 0},
-		{"/boards/{PRIVATE_BOARD_ID}", methodPatch, patch, userTeamMember, http.StatusForbidden, 0},
-		{"/boards/{PRIVATE_BOARD_ID}", methodPatch, patch, userViewer, http.StatusForbidden, 0},
-		{"/boards/{PRIVATE_BOARD_ID}", methodPatch, patch, userCommenter, http.StatusForbidden, 0},
-		{"/boards/{PRIVATE_BOARD_ID}", methodPatch, patch, userEditor, http.StatusForbidden, 0},
-		{"/boards/{PRIVATE_BOARD_ID}", methodPatch, patch, userAdmin, http.StatusOK, 1},
-
-		{"/boards/{PUBLIC_BOARD_ID}", methodPatch, patch, userAnon, http.StatusUnauthorized, 0},
-		{"/boards/{PUBLIC_BOARD_ID}", methodPatch, patch, userNoTeamMember, http.StatusForbidden, 0},
-		{"/boards/{PUBLIC_BOARD_ID}", methodPatch, patch, userTeamMember, http.StatusForbidden, 0},
-		{"/boards/{PUBLIC_BOARD_ID}", methodPatch, patch, userViewer, http.StatusForbidden, 0},
-		{"/boards/{PUBLIC_BOARD_ID}", methodPatch, patch, userCommenter, http.StatusForbidden, 0},
-		{"/boards/{PUBLIC_BOARD_ID}", methodPatch, patch, userEditor, http.StatusForbidden, 0},
-		{"/boards/{PUBLIC_BOARD_ID}", methodPatch, patch, userAdmin, http.StatusOK, 1},
-
-		{"/boards/{PRIVATE_TEMPLATE_ID}", methodPatch, patch, userAnon, http.StatusUnauthorized, 0},
-		{"/boards/{PRIVATE_TEMPLATE_ID}", methodPatch, patch, userNoTeamMember, http.StatusForbidden, 0},
-		{"/boards/{PRIVATE_TEMPLATE_ID}", methodPatch, patch, userTeamMember, http.StatusForbidden, 0},
-		{"/boards/{PRIVATE_TEMPLATE_ID}", methodPatch, patch, userViewer, http.StatusForbidden, 0},
-		{"/boards/{PRIVATE_TEMPLATE_ID}", methodPatch, patch, userCommenter, http.StatusForbidden, 0},
-		{"/boards/{PRIVATE_TEMPLATE_ID}", methodPatch, patch, userEditor, http.StatusForbidden, 0},
-		{"/boards/{PRIVATE_TEMPLATE_ID}", methodPatch, patch, userAdmin, http.StatusOK, 1},
-
-		{"/boards/{PUBLIC_TEMPLATE_ID}", methodPatch, patch, userAnon, http.StatusUnauthorized, 0},
-		{"/boards/{PUBLIC_TEMPLATE_ID}", methodPatch, patch, userNoTeamMember, http.StatusForbidden, 0},
-		{"/boards/{PUBLIC_TEMPLATE_ID}", methodPatch, patch, userTeamMember, http.StatusForbidden, 0},
-		{"/boards/{PUBLIC_TEMPLATE_ID}", methodPatch, patch, userViewer, http.StatusForbidden, 0},
-		{"/boards/{PUBLIC_TEMPLATE_ID}", methodPatch, patch, userCommenter, http.StatusForbidden, 0},
-		{"/boards/{PUBLIC_TEMPLATE_ID}", methodPatch, patch, userEditor, http.StatusForbidden, 0},
-		{"/boards/{PUBLIC_TEMPLATE_ID}", methodPatch, patch, userAdmin, http.StatusOK, 1},
-	}
-
-	th := SetupTestHelperLocalMode(t)
-	defer th.TearDown()
-	clients := setupLocalClients(th)
-	testData := setupData(t, th)
-	runTestCases(t, ttCases, testData, clients)
-}
-
 func TestPermissionsDeleteBoard(t *testing.T) {
 	ttCases := []TestCase{
 		{"/boards/{PRIVATE_BOARD_ID}", methodDelete, "", userAnon, http.StatusUnauthorized, 0},

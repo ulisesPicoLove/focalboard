@@ -9,12 +9,6 @@ import (
 	"github.com/mattermost/mattermost/server/public/shared/mlog"
 )
 
-// servicesAPI is the interface required my the Params to interact with the mattermost-server.
-// You can use plugin-api or product-api adapter implementations.
-type servicesAPI interface {
-	GetChannelByID(string) (*mmModel.Channel, error)
-}
-
 type Params struct {
 	DBType           string
 	ConnectionString string
@@ -24,7 +18,6 @@ type Params struct {
 	DB               *sql.DB
 	IsSingleUser     bool
 	NewMutexFn       MutexFactory
-	ServicesAPI      servicesAPI
 	SkipMigrations   bool
 	ConfigFn         func() *mmModel.Config
 }
