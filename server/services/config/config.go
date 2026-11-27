@@ -55,7 +55,11 @@ type Configuration struct {
 	SessionExpireTime  int64          `json:"session_expire_time" mapstructure:"session_expire_time"`
 	SessionRefreshTime int64          `json:"session_refresh_time" mapstructure:"session_refresh_time"`
 	// SessionMaxLifetime is the absolute lifetime of a session in seconds, however active it is.
-	SessionMaxLifetime       int64             `json:"session_max_lifetime" mapstructure:"session_max_lifetime"`
+	SessionMaxLifetime int64 `json:"session_max_lifetime" mapstructure:"session_max_lifetime"`
+	// LoginRateLimit is how many login, register and change-password requests one client
+	// address may make per minute (default 20). Raise it for automated tests, which log in on
+	// every test.
+	LoginRateLimit           int               `json:"login_rate_limit" mapstructure:"login_rate_limit"`
 	LocalOnly                bool              `json:"localonly" mapstructure:"localonly"`
 	EnableLocalMode          bool              `json:"enableLocalMode" mapstructure:"enableLocalMode"`
 	LocalModeSocketLocation  string            `json:"localModeSocketLocation" mapstructure:"localModeSocketLocation"`
@@ -106,6 +110,7 @@ func ReadConfigFile(configFilePath string) (*Configuration, error) {
 	viper.SetDefault("WebhookUpdate", nil)
 	viper.SetDefault("SessionExpireTime", 60*60*24*30) // 30 days session lifetime
 	viper.SetDefault("SessionRefreshTime", 60*60*5)    // 5 minutes session refresh
+	viper.SetDefault("LoginRateLimit", 20)
 	viper.SetDefault("LocalOnly", false)
 	viper.SetDefault("EnableLocalMode", false)
 	viper.SetDefault("LocalModeSocketLocation", "/var/tmp/focalboard_local.socket")

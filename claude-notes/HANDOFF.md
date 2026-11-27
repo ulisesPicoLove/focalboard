@@ -77,7 +77,7 @@ Resultado esperado al cierre de este traspaso: Go verde con `-race`, 18 de 18 pa
 
 - **Licencia (AGPL v3, sección 13) y repositorio privado:** con código modificado y uso por red hay que ofrecer el código fuente a los usuarios, aunque sean empleados. Pendiente de revisión legal; no se añadió el enlace "Source code" ni se cambió la visibilidad del repo. Ver la nota completa en la memoria del proyecto o en la sección 10 del reporte.
 - **Datos de SQLite a Postgres:** los datos viejos del contenedor (SQLite) no se migran solos.
-- **Cypress:** no se ha corrido la suite desde el rediseño; `MM-T4433` (arrastrar al borde del kanban) está en `it.skip` desde la actualización a Cypress 16.
+- **Cypress (27 de noviembre de 2026):** la suite corre (`npm run cypress:ci`, hace falta `make server` y `npm run pack` antes): 6 specs, 10 tests pasan y `MM-T4433` (arrastrar al borde del kanban) sigue en `it.skip` desde la actualización a Cypress 16. Se arreglaron tres cosas que la tenían rota: el botón ahora dice «Create empty board» (los textos de Mattermost se reescribieron), el editor de descripción y de comentarios ya no es un `combobox` (draft-js) sino un `textbox` «Text editor» (Lexical), y el limitador de login (20 por minuto y dirección, de la fase de seguridad) devolvía 429 porque Cypress inicia sesión en cada test; ahora es configurable con `login_rate_limit` en la configuración (0 o ausente = 20) y `webapp/cypress/config.json` lo sube a 100000.
 - **Índices únicos en `users`:** no existen; el alta SSO está serializada con un mutex, que solo protege una instancia.
 
 ## 8. Advertencias

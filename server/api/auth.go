@@ -22,7 +22,11 @@ import (
 func (a *API) registerAuthRoutes(r *mux.Router) {
 	// personal-server specific routes. These are not needed in plugin mode.
 	// Endpoints that check credentials are rate limited per client address.
-	loginLimiter := newRateLimiter(20, time.Minute)
+	loginLimit := a.app.GetConfig().LoginRateLimit
+	if loginLimit <= 0 {
+		loginLimit = 20
+	}
+	loginLimiter := newRateLimiter(loginLimit, time.Minute)
 	r.HandleFunc("/login", a.rateLimited(loginLimiter, a.handleLogin)).Methods("POST")
 	r.HandleFunc("/logout", a.sessionRequired(a.handleLogout)).Methods("POST")
 	r.HandleFunc("/register", a.rateLimited(loginLimiter, a.handleRegister)).Methods("POST")
