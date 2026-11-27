@@ -5,8 +5,6 @@ import React, {useCallback, useState, useMemo, useEffect} from 'react'
 
 import {FormattedMessage, injectIntl, IntlShape} from 'react-intl'
 
-import withScrolling, {createHorizontalStrength, createVerticalStrength} from 'react-dnd-scrolling'
-
 import {ActivationEvent} from '../../keyboardActivation'
 
 import {useAppSelector} from '../../store/hooks'
@@ -25,6 +23,8 @@ import {dragAndDropRearrange} from '../cardDetail/cardDetailContentsUtility'
 
 import {getCurrentBoardTemplates} from '../../store/cards'
 import BoardPermissionGate from '../permissions/boardPermissionGate'
+
+import DragScrollContainer, {createHorizontalStrength, createVerticalStrength} from './dragScroll'
 
 import KanbanCard from './kanbanCard'
 import KanbanColumn from './kanbanColumn'
@@ -49,7 +49,6 @@ type Props = {
     showCard: (cardId?: string) => void
 }
 
-const ScrollingComponent = withScrolling('div')
 const hStrength = createHorizontalStrength(Utils.isMobile() ? 60 : 250)
 const vStrength = createVerticalStrength(Utils.isMobile() ? 60 : 250)
 
@@ -228,7 +227,7 @@ const Kanban = (props: Props) => {
     }
 
     return (
-        <ScrollingComponent
+        <DragScrollContainer
             className='Kanban'
             horizontalStrength={hStrength}
             verticalStrength={vStrength}
@@ -352,7 +351,7 @@ const Kanban = (props: Props) => {
                         ))}
                     </div>}
             </div>
-        </ScrollingComponent>
+        </DragScrollContainer>
     )
 }
 
