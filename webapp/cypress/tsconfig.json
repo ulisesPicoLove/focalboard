@@ -3,11 +3,15 @@
     "compilerOptions": {
         "noEmit": true,
         "types": [
+            "node",
             "cypress",
             "cypress-real-events",
             "@testing-library/cypress"
         ]
     },
+    "exclude": [
+        "../node_modules"
+    ],
     "include": [
         "**/*.ts"
     ]

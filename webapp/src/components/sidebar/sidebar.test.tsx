@@ -1,7 +1,6 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 import React from 'react'
-import configureStore from 'redux-mock-store'
 
 import {createMemoryHistory} from 'history'
 import {Provider as ReduxProvider} from 'react-redux'
@@ -14,7 +13,7 @@ import {thunk} from 'redux-thunk'
 
 import {mocked} from 'jest-mock'
 
-import {mockMatchMedia, wrapIntl} from '../../testUtils'
+import {mockMatchMedia, mockStateStore, wrapIntl} from '../../testUtils'
 
 import {TestBlockFactory} from '../../test/testBlockFactory'
 import octoClient from '../../../../webapp/src/octoClient'
@@ -33,7 +32,7 @@ describe('components/sidebarSidebar', () => {
         jest.clearAllMocks()
     })
 
-    const mockStore = configureStore([thunk])
+    const mockStore = (state: unknown) => mockStateStore([thunk], state)
 
     const board = TestBlockFactory.createBoard()
     board.id = 'board1'

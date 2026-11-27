@@ -98,7 +98,7 @@ export const getLastCommentByCard = createSelector(
     (commentsByCard: {[key: string]: CommentBlock[]}|null): {[key: string]: CommentBlock} => {
         const lastCommentByCard: {[key: string]: CommentBlock} = {}
         Object.keys(commentsByCard || {}).forEach((cardId) => {
-            const last = commentsByCard?.[cardId]?.at(-1)
+            const last = commentsByCard?.[cardId]?.slice(-1)[0]
             if (last) {
                 lastCommentByCard[cardId] = last
             }

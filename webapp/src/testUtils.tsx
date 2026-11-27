@@ -77,7 +77,8 @@ export function mockMatchMedia(result: {matches: boolean}): void {
 }
 
 export function mockStateStore(middleware: Middleware[], state: unknown): MockStoreEnhanced<unknown, unknown> {
-    const mockStore = configureStore(middleware)
+    // redux-mock-store still types its middleware for redux 4 (AnyAction), redux 5 uses UnknownAction
+    const mockStore = configureStore(middleware as Parameters<typeof configureStore>[0])
     return mockStore(state)
 }
 

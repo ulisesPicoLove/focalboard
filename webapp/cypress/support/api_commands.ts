@@ -3,7 +3,6 @@
 
 import {Board} from '../../src/blocks/board'
 import {UserConfigPatch} from '../../src/user'
-import {versionProperty} from '../../src/store/users'
 
 Cypress.Commands.add('apiRegisterUser', (data: Cypress.UserData, token?: string, failOnError?: boolean) => {
     return cy.request({
@@ -66,6 +65,9 @@ const deleteBoards = (ids: string[]) => {
         return
     }
     const [id, ...other] = ids
+    if (id === undefined) {
+        return
+    }
     cy.apiDeleteBoard(id).then(() => deleteBoards(other))
 }
 
@@ -87,7 +89,6 @@ Cypress.Commands.add('apiSkipTour', (userID: string) => {
     const body: UserConfigPatch = {
         updatedFields: {
             welcomePageViewed: '1',
-            [versionProperty]: 'true',
         },
     }
 

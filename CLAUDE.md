@@ -21,7 +21,7 @@ Setup: `make prebuild` (runs `npm install` in `webapp/`).
   - Single Go test: `cd server && FOCALBOARD_UNIT_TESTING=1 go test -tags 'json1 sqlite3' -run TestName ./path/to/pkg`
   - Store tests run against a DB chosen by `FOCALBOARD_STORE_TEST_DB_TYPE` (sqlite default; postgres otherwise).
 - Server lint: `make server-lint` (golangci-lint). Regenerate mocks: `make generate` (mockgen v1.6.0). Regenerate API spec/clients: `make swagger`.
-- Webapp (from `webapp/`): `npm run check` (eslint + stylelint), `npm run fix`, `npm run test` (jest; single test: `npx jest path/to/file.test.ts -t "name"`), `npm run updatesnapshot`, `npm run i18n-extract` after adding/changing `formatjs` messages (updates `i18n/en.json`).
+- Webapp (from `webapp/`): `npm run check` (tsc + eslint + stylelint; `npm run typecheck` solo tsc), `npm run fix`, `npm run test` (jest; single test: `npx jest path/to/file.test.ts -t "name"`), `npm run updatesnapshot`, `npm run i18n-extract` after adding/changing `formatjs` messages (updates `i18n/en.json`).
 - Cypress: `npm run cypress:ci` (starts `bin/focalboard-server` from `webapp/cypress` on port 8088 — build the server first).
 - `make ci` approximates CI: webapp lint/jest/cypress + all server tests.
 

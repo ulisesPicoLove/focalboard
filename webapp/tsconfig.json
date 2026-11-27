@@ -2,11 +2,13 @@
     "compilerOptions": {
         "jsx": "react",
         "target": "es2019",
+        "lib": ["dom", "dom.iterable", "es2022"],
         "module": "commonjs",
         "esModuleInterop": true,
         "noImplicitAny": true,
         "strict": true,
         "noUncheckedIndexedAccess": true,
+        "skipLibCheck": true,
         "strictNullChecks": true,
         "forceConsistentCasingInFileNames": true,
         "sourceMap": true,
@@ -22,6 +24,8 @@
     ],
     "exclude": [
         ".git",
+        "cypress",
+        "cypress.config.ts",
         "**/node_modules/*",
         "dist",
         "pack"
