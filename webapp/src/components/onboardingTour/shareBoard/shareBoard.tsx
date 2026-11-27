@@ -7,8 +7,6 @@ import {FormattedMessage} from 'react-intl'
 import {useMeasurePunchouts} from '../../tutorial_tour_tip/hooks'
 
 import './shareBoard.scss'
-import {Utils} from '../../../utils'
-import shareBoard from '../../../../static/share.gif'
 
 import {BoardTourSteps, TOUR_BOARD} from '../index'
 import TourTipRenderer from '../tourTipRenderer/tourTipRenderer'
@@ -23,15 +21,11 @@ const ShareBoardTourStep = (): React.JSX.Element | null => {
     const screen = (
         <FormattedMessage
             id='OnboardingTour.ShareBoard.Body'
-            defaultMessage='You can share your board internally, within your team, or publish it publicly for visibility outside of your organization.'
+            defaultMessage='Share your board with your teammates: add them as members and copy the link to send it to them.'
         />
     )
 
     const punchout = useMeasurePunchouts(['.ShareBoardButton > button'], [])
-
-    if (!BoardTourSteps.SHARE_BOARD) {
-        return null
-    }
 
     return (
         <TourTipRenderer
@@ -45,7 +39,6 @@ const ShareBoardTourStep = (): React.JSX.Element | null => {
             classname='ShareBoardTourStep'
             telemetryTag='tourPoint2b'
             placement={'bottom-end'}
-            imageURL={Utils.buildURL(shareBoard, true)}
             hideBackdrop={true}
         />
     )

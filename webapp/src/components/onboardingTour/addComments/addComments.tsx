@@ -7,8 +7,6 @@ import {FormattedMessage} from 'react-intl'
 import {useMeasurePunchouts} from '../../tutorial_tour_tip/hooks'
 
 import './add_comments.scss'
-import {Utils} from '../../../utils'
-import addComment from '../../../../static/comment.gif'
 
 import {CardTourSteps, TOUR_CARD} from '../index'
 import TourTipRenderer from '../tourTipRenderer/tourTipRenderer'
@@ -23,7 +21,7 @@ const AddCommentTourStep = (): React.JSX.Element | null => {
     const screen = (
         <FormattedMessage
             id='OnboardingTour.AddComments.Body'
-            defaultMessage='You can comment on issues, and even @mention your teammates to get their attention.'
+            defaultMessage='You can comment on cards, and even @mention your teammates to get their attention.'
         />
     )
 
@@ -41,7 +39,6 @@ const AddCommentTourStep = (): React.JSX.Element | null => {
             classname='AddCommentTourStep'
             telemetryTag='tourPoint2b'
             placement={'right-end'}
-            imageURL={Utils.buildURL(addComment, true)}
             hideBackdrop={true}
         />
     )

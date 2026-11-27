@@ -2358,16 +2358,6 @@ exports[`src/components/workspace show add new view tooltip 1`] = `
                   href="#"
                 />
               </div>
-              <div
-                class="tutorial-tour-tip__circular-ring"
-              >
-                <a
-                  aria-label="Go to step 3"
-                  class="tutorial-tour-tip__circle"
-                  data-screen="2"
-                  href="#"
-                />
-              </div>
             </div>
             <div
               class="tutorial-tour-tip__btn-ctr"

@@ -12,8 +12,7 @@ export const CardTourSteps = {
 
 export const BoardTourSteps = {
     ADD_VIEW: 0,
-    COPY_LINK: 1,
-    SHARE_BOARD: 2,
+    SHARE_BOARD: 1,
 } as const
 
 export const SidebarTourSteps = {

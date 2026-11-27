@@ -42,14 +42,6 @@ exports[`components/onboardingTour/addComments/AddViewTourStep after hover 1`] =
           Go here to create a new view to organise your board using different layouts.
         </div>
         <div
-          class="tutorial-tour-tip__image"
-        >
-          <img
-            alt=""
-            src="http://localhost/test-file-stub"
-          />
-        </div>
-        <div
           class="tutorial-tour-tip__footer"
         >
           <div
@@ -76,16 +68,6 @@ exports[`components/onboardingTour/addComments/AddViewTourStep after hover 1`] =
                   aria-label="Go to step 2"
                   class="tutorial-tour-tip__circle"
                   data-screen="1"
-                  href="#"
-                />
-              </div>
-              <div
-                class="tutorial-tour-tip__circular-ring"
-              >
-                <a
-                  aria-label="Go to step 3"
-                  class="tutorial-tour-tip__circle"
-                  data-screen="2"
                   href="#"
                 />
               </div>

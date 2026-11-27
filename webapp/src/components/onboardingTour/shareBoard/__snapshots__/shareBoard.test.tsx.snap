@@ -39,15 +39,7 @@ exports[`components/onboardingTour/addComments/ShareBoardTourStep after hover 1`
         <div
           class="tutorial-tour-tip__body"
         >
-          You can share your board internally, within your team, or publish it publicly for visibility outside of your organization.
-        </div>
-        <div
-          class="tutorial-tour-tip__image"
-        >
-          <img
-            alt=""
-            src="http://localhost/test-file-stub"
-          />
+          Share your board with your teammates: add them as members and copy the link to send it to them.
         </div>
         <div
           class="tutorial-tour-tip__footer"
@@ -69,23 +61,13 @@ exports[`components/onboardingTour/addComments/ShareBoardTourStep after hover 1`
                 />
               </div>
               <div
-                class="tutorial-tour-tip__circular-ring"
-              >
-                <a
-                  aria-label="Go to step 2"
-                  class="tutorial-tour-tip__circle"
-                  data-screen="1"
-                  href="#"
-                />
-              </div>
-              <div
                 class="tutorial-tour-tip__circular-ring tutorial-tour-tip__circular-ring-active"
               >
                 <a
                   aria-current="step"
-                  aria-label="Go to step 3"
+                  aria-label="Go to step 2"
                   class="tutorial-tour-tip__circle active"
-                  data-screen="2"
+                  data-screen="1"
                   href="#"
                 />
               </div>
