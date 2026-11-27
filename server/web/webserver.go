@@ -91,14 +91,23 @@ func (ws *Server) AddRoutes(rs RoutedService) {
 func (ws *Server) registerRoutes() {
 	ws.Router().PathPrefix("/static").Handler(http.StripPrefix(ws.basePrefix+"/static/", http.FileServer(http.Dir(filepath.Join(ws.rootPath, "static")))))
 	ws.Router().PathPrefix("/").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		nonce, err := newNonce()
+		if err != nil {
+			ws.logger.Log(errorOrWarn(), "Unable to create the nonce of the index.html file", mlog.Err(err))
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+		w.Header().Set("Content-Security-Policy", contentSecurityPolicy(nonce, r.Host))
+		w.Header().Set("X-Content-Type-Options", "nosniff")
+		w.Header().Set("Referrer-Policy", "same-origin")
 		indexTemplate, err := template.New("index").ParseFiles(path.Join(ws.rootPath, "index.html"))
 		if err != nil {
 			ws.logger.Log(errorOrWarn(), "Unable to serve the index.html file", mlog.Err(err))
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
-		err = indexTemplate.ExecuteTemplate(w, "index.html", map[string]string{"BaseURL": ws.baseURL})
+		err = indexTemplate.ExecuteTemplate(w, "index.html", map[string]string{"BaseURL": ws.baseURL, "Nonce": nonce})
 		if err != nil {
 			ws.logger.Log(errorOrWarn(), "Unable to serve the index.html file", mlog.Err(err))
 			w.WriteHeader(http.StatusInternalServerError)

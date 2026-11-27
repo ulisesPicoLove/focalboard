@@ -1,7 +1,8 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 import React, {useRef, useEffect} from 'react'
-import {marked} from 'marked'
+
+import {Utils} from '../../../../utils'
 
 import {BlockInputProps, ContentType} from '../types'
 
@@ -13,13 +14,12 @@ const Quote: ContentType = {
     slashCommand: '/quote',
     prefix: '> ',
     Display: (props: BlockInputProps) => {
-        const renderer = new marked.Renderer()
-        const html = marked('> ' + props.value, {renderer, breaks: true})
+        const html = Utils.htmlFromMarkdown('> ' + props.value)
         return (
             <div
                 className='Quote'
                 data-testid='quote'
-                dangerouslySetInnerHTML={{__html: html.trim()}}
+                dangerouslySetInnerHTML={{__html: html}}
             />
         )
     },

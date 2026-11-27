@@ -126,9 +126,7 @@ exports[`components/blocksEditor/blocksEditor should match snapshot with blocks 
           class="content"
         >
           <div>
-            <h1
-              id="title"
-            >
+            <h1>
               Title
             </h1>
           </div>

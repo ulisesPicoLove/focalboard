@@ -1,7 +1,8 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 import React, {useRef, useEffect} from 'react'
-import {marked} from 'marked'
+
+import {Utils} from '../../../../utils'
 
 import {BlockInputProps, ContentType} from '../types'
 
@@ -15,11 +16,10 @@ const H2: ContentType = {
     runSlashCommand: (): void => {},
     editable: true,
     Display: (props: BlockInputProps) => {
-        const renderer = new marked.Renderer()
-        const html = marked('## ' + props.value, {renderer, breaks: true})
+        const html = Utils.htmlFromMarkdown('## ' + props.value)
         return (
             <div
-                dangerouslySetInnerHTML={{__html: html.trim()}}
+                dangerouslySetInnerHTML={{__html: html}}
             />
         )
     },

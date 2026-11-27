@@ -1,7 +1,8 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 import React, {useRef, useEffect} from 'react'
-import {marked} from 'marked'
+
+import {Utils} from '../../../../utils'
 
 import {BlockInputProps, ContentType} from '../types'
 
@@ -21,8 +22,7 @@ const Checkbox: ContentType<ValueType> = {
     runSlashCommand: (): void => {},
     editable: true,
     Display: (props: BlockInputProps<ValueType>) => {
-        const renderer = new marked.Renderer()
-        const html = marked(props.value.value || '', {renderer, breaks: true})
+        const html = Utils.htmlFromMarkdown(props.value.value || '')
         return (
             <div className='CheckboxView'>
                 <input
@@ -36,7 +36,7 @@ const Checkbox: ContentType<ValueType> = {
                     onClick={(e) => e.stopPropagation()}
                 />
                 <div
-                    dangerouslySetInnerHTML={{__html: html.trim()}}
+                    dangerouslySetInnerHTML={{__html: html}}
                 />
             </div>
         )

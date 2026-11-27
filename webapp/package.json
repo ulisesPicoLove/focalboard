@@ -38,6 +38,7 @@
 		"@tippyjs/react": "4.2.6",
 		"classnames": "^2.5.1",
 		"color": "^4.2.1",
+		"dompurify": "3.4.18",
 		"emoji-mart": "^3.0.1",
 		"lexical": "0.20.0",
 		"lodash": "^4.17.21",

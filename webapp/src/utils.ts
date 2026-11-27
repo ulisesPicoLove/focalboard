@@ -19,6 +19,7 @@ import {WSMessage} from './wsclient'
 import {BoardCategoryWebsocketData, Category} from './store/sidebar'
 import {UserSettings} from './userSettings'
 import {relativeTime} from './dateLocale'
+import {sanitizeHtml} from './sanitizeHtml'
 
 declare let window: IAppWindow
 
@@ -329,8 +330,7 @@ class Utils {
                 'target="_blank" ' +
                 'rel="noreferrer" ' +
                 `href="${Utils.safeLinkHref(href || '')}" ` +
-                `title="${title || ''}" ` +
-                `onclick="${(window.openInNewBrowser ? ' openInNewBrowser && openInNewBrowser(event.target.href);' : '')}"` +
+                `title="${title || ''}"` +
             '>' + contents + '</a>'
         }
 
@@ -343,7 +343,7 @@ class Utils {
 
     static htmlFromMarkdownWithRenderer(text: string, renderer: marked.Renderer): string {
         const html = marked(text.replace(/</g, '&lt;'), {renderer, breaks: true})
-        return html.trim()
+        return sanitizeHtml(html.trim())
     }
 
     static countCheckboxesInMarkdown(text: string): {total: number, checked: number} {

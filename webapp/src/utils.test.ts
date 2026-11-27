@@ -49,14 +49,7 @@ describe('utils', () => {
 
     describe('htmlFromMarkdown', () => {
         test('should not allow XSS on links href on the webapp', () => {
-            expect(Utils.htmlFromMarkdown('[]("xss-attack="true"other="whatever)')).toBe('<p><a target="_blank" rel="noreferrer" href="%22xss-attack=%22true%22other=%22whatever" title="" onclick=""></a></p>')
-        })
-
-        test('should not allow XSS on links href on the desktop app', () => {
-            window.openInNewBrowser = () => null
-            const expectedHtml = '<p><a target="_blank" rel="noreferrer" href="%22xss-attack=%22true%22other=%22whatever" title="" onclick=" openInNewBrowser && openInNewBrowser(event.target.href);"></a></p>'
-            expect(Utils.htmlFromMarkdown('[]("xss-attack="true"other="whatever)')).toBe(expectedHtml)
-            window.openInNewBrowser = null
+            expect(Utils.htmlFromMarkdown('[]("xss-attack="true"other="whatever)')).toBe('<p><a target="_blank" rel="noreferrer noopener" href="%22xss-attack=%22true%22other=%22whatever" title=""></a></p>')
         })
 
         test('should neutralize dangerous link schemes', () => {
@@ -80,13 +73,13 @@ describe('utils', () => {
         })
 
         test('should encode links', () => {
-            expect(Utils.htmlFromMarkdown('https://example.com?title=August<1>2022')).toBe('<p><a target="_blank" rel="noreferrer" href="https://example.com?title=August&lt;1%3E2022" title="" onclick="">https://example.com?title=August&lt;1&gt;2022</a></p>')
-            expect(Utils.htmlFromMarkdown('[Duck Duck Go](https://duckduckgo.com "The best search engine\'s for <privacy>")')).toBe('<p><a target="_blank" rel="noreferrer" href="https://duckduckgo.com" title="The best search engine&#39;s for &lt;privacy&gt;" onclick="">Duck Duck Go</a></p>')
+            expect(Utils.htmlFromMarkdown('https://example.com?title=August<1>2022')).toBe('<p><a target="_blank" rel="noreferrer noopener" href="https://example.com?title=August<1%3E2022" title="">https://example.com?title=August&lt;1&gt;2022</a></p>')
+            expect(Utils.htmlFromMarkdown('[Duck Duck Go](https://duckduckgo.com "The best search engine\'s for <privacy>")')).toBe('<p><a target="_blank" rel="noreferrer noopener" href="https://duckduckgo.com" title="The best search engine\'s for <privacy>">Duck Duck Go</a></p>')
         })
 
         test('should not double encode title and href', () => {
-            expect(Utils.htmlFromMarkdown('https://example.com?title=August%201%20-%202022')).toBe('<p><a target="_blank" rel="noreferrer" href="https://example.com?title=August%201%20-%202022" title="" onclick="">https://example.com?title=August%201%20-%202022</a></p>')
-            expect(Utils.htmlFromMarkdown('[Duck Duck Go](https://duckduckgo.com "The best search engine#39;s for &lt;privacy&gt;")')).toBe('<p><a target="_blank" rel="noreferrer" href="https://duckduckgo.com" title="The best search engine#39;s for &lt;privacy&gt;" onclick="">Duck Duck Go</a></p>')
+            expect(Utils.htmlFromMarkdown('https://example.com?title=August%201%20-%202022')).toBe('<p><a target="_blank" rel="noreferrer noopener" href="https://example.com?title=August%201%20-%202022" title="">https://example.com?title=August%201%20-%202022</a></p>')
+            expect(Utils.htmlFromMarkdown('[Duck Duck Go](https://duckduckgo.com "The best search engine#39;s for &lt;privacy&gt;")')).toBe('<p><a target="_blank" rel="noreferrer noopener" href="https://duckduckgo.com" title="The best search engine#39;s for <privacy>">Duck Duck Go</a></p>')
         })
     })
 

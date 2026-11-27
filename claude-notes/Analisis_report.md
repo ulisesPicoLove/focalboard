@@ -36,7 +36,7 @@ Balance acumulado de `main` a `chore/phase2-cleanup`: **596 archivos cambiados, 
 | S1 | Inyección SQL por ID de categoría | **Corregido** (Fase 0) | `CASE WHEN` parametrizado, ID validado en el modelo, IDs inlineados en `blocks.go` validados; tests de regresión |
 | S2 | Carrera de datos en websockets | **Corregido** (Fase 0) | `RLock` y copias en `ws/server.go`; pasa con `-race` |
 | S3 | `go-sqlite3` v2.0.3 retractado | **Corregido** (Fase 0 y 2) | Ahora v1.14.22; al salir `server/v8` ya no hace falta el `exclude` |
-| S4 | Enlaces `javascript:` en markdown | **Corregido** (Fase 0), con pendiente | Solo `http`, `https` y `mailto`; `decodeURI` seguro. **Pendiente:** DOMPurify y una Content-Security-Policy (añaden una dependencia: decisión tuya) |
+| S4 | Enlaces `javascript:` en markdown | **Corregido** (Fase 0), con pendiente | Solo `http`, `https` y `mailto`; `decodeURI` seguro. **Hecho después (27 de noviembre de 2026):** DOMPurify y una Content-Security-Policy con nonce; ver `HANDOFF.md` |
 | S5 | Secretos en el log de arranque | **Corregido** (Fase 0) | Se ocultan cadena de BD, `secret` y claves S3; el websocket ya no registra tokens |
 | S6 | `authMode: mattermost` confía en una cabecera | **Corregido** (Fase 0 y 2) | `authMode` se valida al arrancar (solo `native` o `google`) y el modo plugin se borró del código |
 | S7 | Sin límites de tamaño ni de tiempo | **Corregido** (Fase 1) | JSON 10 MiB, zip 500 MiB, archivos dentro del zip y subidas a `maxfilesize` (50 MiB por defecto), timeouts HTTP, límite de lectura y deadline de escritura en websocket |

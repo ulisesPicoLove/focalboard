@@ -37,9 +37,7 @@ exports[`components/blocksEditor/blockContent should match snapshot 1`] = `
       class="content"
     >
       <div>
-        <h1
-          id="title"
-        >
+        <h1>
           Title
         </h1>
       </div>

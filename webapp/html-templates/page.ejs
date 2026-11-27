@@ -7,7 +7,7 @@
 
     <title><%= htmlWebpackPlugin.options.title %></title>
 
-    <script>window.baseURL = '{{.BaseURL}}'</script>
+    <script nonce="{{.Nonce}}">window.baseURL = '{{.BaseURL}}'</script>
     <link rel="icon" href="{{.BaseURL}}/static/favicon.svg?v=2" />
 </head>
 
