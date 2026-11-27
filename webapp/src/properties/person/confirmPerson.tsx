@@ -34,7 +34,7 @@ const ConfirmPerson = (props: PropertyProps): React.JSX.Element => {
 
     const userIDs = useMemo((): string[] => {
         if (typeof propertyValue === 'string' && propertyValue !== '') {
-            return [propertyValue as string]
+            return [propertyValue]
         }
         if (Array.isArray(propertyValue) && propertyValue.length > 0) {
             return propertyValue

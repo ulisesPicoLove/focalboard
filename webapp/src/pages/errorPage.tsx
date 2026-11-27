@@ -23,7 +23,7 @@ const ErrorPage = () => {
         if (typeof path === 'function') {
             url = path(queryParams)
         } else if (path) {
-            url = path as string
+            url = path
         }
         if (url === window.location.origin) {
             window.location.href = url

@@ -56,7 +56,7 @@ export abstract class PropertyType {
         if (typeof displayValue === 'string') {
             return `"${encodeText(displayValue)}"`
         } else if (Array.isArray(displayValue)) {
-            return `"${encodeText((displayValue as string[]).join('|'))}"`
+            return `"${encodeText((displayValue).join('|'))}"`
         }
         return ''
     }

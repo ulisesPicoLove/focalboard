@@ -38,7 +38,7 @@ export default class MultiSelectProperty extends PropertyType {
         if (!displayValue) {
             return 0
         }
-        const displayValues = displayValue as string[]
+        const displayValues = displayValue
         let result = 0
         displayValues.forEach((v) => {
             result += Utils.getTextWidth(v.toUpperCase(), fontDescriptor) + (perItemPadding || 0)

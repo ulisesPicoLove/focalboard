@@ -73,7 +73,7 @@ const TableHeaders = (props: Props): React.JSX.Element => {
                 thisLen = Utils.getTextWidth(card.title, columnFontPadding.fontDescriptor) + columnFontPadding.padding
             } else if (template) {
                 const property = propsRegistry.get(template.type)
-                property.valueLength(card.fields.properties[columnID], card, template as IPropertyTemplate, intl, columnFontPadding.fontDescriptor, perItemPadding)
+                property.valueLength(card.fields.properties[columnID], card, template, intl, columnFontPadding.fontDescriptor, perItemPadding)
                 thisLen += columnFontPadding.padding
             }
             if (thisLen > longestSize) {

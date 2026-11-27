@@ -188,7 +188,7 @@ class WSClient {
     }
 
     resetSubscriptions() {
-        this.subscriptions = {Teams: {}} as Subscriptions
+        this.subscriptions = {Teams: {}}
     }
 
     // this function sends the necessary commands for the connection
@@ -232,7 +232,7 @@ class WSClient {
 
     // the handlers of one kind of change; the list of each kind only holds handlers for that kind
     private handlersFor<K extends ChangeHandlerType>(type: K): Array<OnChangeHandler<K>> {
-        return this.onChange[type] as Array<OnChangeHandler<K>>
+        return this.onChange[type]
     }
 
     addOnChange<K extends ChangeHandlerType>(handler: OnChangeHandler<K>, type: K): void {

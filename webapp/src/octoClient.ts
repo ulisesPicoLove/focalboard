@@ -105,6 +105,16 @@ class OctoClient {
         }
     }
 
+    // The same for an object that has no sensible empty default: undefined when the body is null or malformed
+    private async getJsonOrUndefined<T>(response: Response): Promise<T | undefined> {
+        try {
+            const value = await response.json()
+            return value || undefined
+        } catch {
+            return undefined
+        }
+    }
+
     async login(username: string, password: string): Promise<boolean> {
         const path = '/api/v2/login'
         const body = JSON.stringify({username, password, type: 'normal'})
@@ -149,8 +159,7 @@ class OctoClient {
             return null
         }
 
-        const json = (await this.getJson(response, {})) as ClientConfig
-        return json
+        return (await this.getJsonOrUndefined<ClientConfig>(response)) ?? null
     }
 
     async register(email: string, username: string, password: string, token?: string): Promise<{code: number, json: {error?: string}}> {
@@ -212,7 +221,7 @@ class OctoClient {
         if (response.status !== 200) {
             return undefined
         }
-        const user = (await this.getJson(response, {})) as IUser
+        const user = await this.getJsonOrUndefined<IUser>(response)
         return user
     }
 
@@ -222,7 +231,7 @@ class OctoClient {
         if (response.status !== 200) {
             return []
         }
-        const members = (await this.getJson(response, [])) as BoardMember[]
+        const members = await this.getJson<BoardMember[]>(response, [])
         return members
     }
 
@@ -232,7 +241,7 @@ class OctoClient {
         if (response.status !== 200) {
             return undefined
         }
-        const user = (await this.getJson(response, {})) as IUser
+        const user = await this.getJsonOrUndefined<IUser>(response)
         return user
     }
 
@@ -249,7 +258,7 @@ class OctoClient {
             return []
         }
 
-        return (await this.getJson(response, [])) as IUser[]
+        return this.getJson<IUser[]>(response, [])
     }
 
     async getMyConfig(): Promise<UserPreference[] | undefined> {
@@ -263,7 +272,7 @@ class OctoClient {
             return undefined
         }
 
-        return (await this.getJson(response, [])) as UserPreference[]
+        return this.getJson<UserPreference[]>(response, [])
     }
 
     async patchUserConfig(userID: string, patch: UserConfigPatch): Promise<UserPreference[] | undefined> {
@@ -279,7 +288,7 @@ class OctoClient {
             return undefined
         }
 
-        return (await this.getJson(response, {})) as UserPreference[]
+        return this.getJsonOrUndefined<UserPreference[]>(response)
     }
 
     async exportBoardArchive(boardID: string): Promise<Response> {
@@ -346,7 +355,7 @@ class OctoClient {
         if (response.status !== 200) {
             return []
         }
-        const blocks = (await this.getJson(response, [])) as Block[]
+        const blocks = await this.getJson<Block[]>(response, [])
         return this.fixBlocks(blocks)
     }
 
@@ -355,7 +364,7 @@ class OctoClient {
         if (response.status !== 200) {
             return []
         }
-        const boards = (await this.getJson(response, [])) as Board[]
+        const boards = await this.getJson<Board[]>(response, [])
         return boards
     }
 
@@ -364,7 +373,7 @@ class OctoClient {
         if (response.status !== 200) {
             return []
         }
-        const boardMembers = (await this.getJson(response, [])) as BoardMember[]
+        const boardMembers = await this.getJson<BoardMember[]>(response, [])
         return boardMembers
     }
 
@@ -671,9 +680,9 @@ class OctoClient {
         let fileInfo: FileInfo = {}
 
         if (response.status === 200) {
-            fileInfo = this.getJson(response, {}) as FileInfo
+            fileInfo = await this.getJson<FileInfo>(response, {})
         } else if (response.status === 400) {
-            fileInfo = await this.getJson(response, {}) as FileInfo
+            fileInfo = await this.getJson<FileInfo>(response, {})
         }
 
         return fileInfo
@@ -692,7 +701,7 @@ class OctoClient {
             const blob = await response.blob()
             fileInfo.url = URL.createObjectURL(blob)
         } else if (response.status === 400) {
-            fileInfo = await this.getJson(response, {}) as FileInfo
+            fileInfo = await this.getJson<FileInfo>(response, {})
         }
 
         return fileInfo
@@ -727,7 +736,7 @@ class OctoClient {
         if (response.status !== 200) {
             return []
         }
-        return (await this.getJson(response, [])) as IUser[]
+        return this.getJson<IUser[]>(response, [])
     }
 
     async getTeamUsersList(userIds: string[], teamId: string): Promise<IUser[] | []> {
@@ -743,7 +752,7 @@ class OctoClient {
             return []
         }
 
-        return (await this.getJson(response, [])) as IUser[]
+        return this.getJson<IUser[]>(response, [])
     }
 
     async searchTeamUsers(searchQuery: string, excludeBots?: boolean): Promise<IUser[]> {
@@ -755,7 +764,7 @@ class OctoClient {
         if (response.status !== 200) {
             return []
         }
-        return (await this.getJson(response, [])) as IUser[]
+        return this.getJson<IUser[]>(response, [])
     }
 
     async getTeamTemplates(teamId?: string): Promise<Board[]> {
@@ -823,7 +832,7 @@ class OctoClient {
             return undefined
         }
 
-        return this.getJson<Block[]>(response, [] as Block[])
+        return this.getJson<Block[]>(response, [])
     }
 
     async getBlocksForBoard(teamId: string, boardId: string): Promise<Board[]> {
@@ -870,7 +879,7 @@ class OctoClient {
             return []
         }
 
-        return (await this.getJson(response, [])) as CategoryBoards[]
+        return this.getJson<CategoryBoards[]>(response, [])
     }
 
     async createSidebarCategory(category: Category): Promise<Response> {
@@ -914,7 +923,7 @@ class OctoClient {
             return []
         }
 
-        return (await this.getJson(response, [])) as string[]
+        return this.getJson<string[]>(response, [])
     }
 
     async reorderSidebarCategoryBoards(teamID: string, categoryID: string, newBoardsOrder: string[]): Promise<string[]> {
@@ -930,7 +939,7 @@ class OctoClient {
             return []
         }
 
-        return (await this.getJson(response, [])) as string[]
+        return this.getJson<string[]>(response, [])
     }
 
     async moveBoardToCategory(teamID: string, boardID: string, toCategoryID: string, fromCategoryID: string): Promise<Response> {
@@ -958,7 +967,7 @@ class OctoClient {
             return []
         }
 
-        return (await this.getJson(response, [])) as Board[]
+        return this.getJson<Board[]>(response, [])
     }
 
     async searchLinkableBoards(teamID: string, query: string): Promise<Board[]> {
@@ -972,7 +981,7 @@ class OctoClient {
             return []
         }
 
-        return (await this.getJson(response, [])) as Board[]
+        return this.getJson<Board[]>(response, [])
     }
 
     async searchAll(query: string): Promise<Board[]> {
@@ -986,7 +995,7 @@ class OctoClient {
             return []
         }
 
-        return (await this.getJson(response, [])) as Board[]
+        return this.getJson<Board[]>(response, [])
     }
 
     async getUserBlockSubscriptions(userId: string): Promise<Subscription[]> {
@@ -996,7 +1005,7 @@ class OctoClient {
             return []
         }
 
-        return (await this.getJson(response, [])) as Subscription[]
+        return this.getJson<Subscription[]>(response, [])
     }
 
     // onboarding
@@ -1010,7 +1019,7 @@ class OctoClient {
             return undefined
         }
 
-        return (await this.getJson(response, {})) as PrepareOnboardingResponse
+        return this.getJsonOrUndefined<PrepareOnboardingResponse>(response)
     }
 
     async notifyAdminUpgrade(): Promise<void> {
@@ -1028,8 +1037,8 @@ class OctoClient {
             return undefined
         }
 
-        const stats = (await this.getJson(response, {})) as BoardSiteStatistics
-        Utils.log(`Site Statistics: cards=${stats.card_count}   boards=${stats.board_count}`)
+        const stats = await this.getJsonOrUndefined<BoardSiteStatistics>(response)
+        Utils.log(`Site Statistics: cards=${stats?.card_count}   boards=${stats?.board_count}`)
         return stats
     }
 
@@ -1041,7 +1050,7 @@ class OctoClient {
             return undefined
         }
 
-        return (await this.getJson(response, {})) as TopBoardResponse
+        return this.getJsonOrUndefined<TopBoardResponse>(response)
     }
 
     async getTeamTopBoards(timeRange: string, page: number, perPage: number, teamId: string): Promise<TopBoardResponse | undefined> {
@@ -1051,7 +1060,7 @@ class OctoClient {
             return undefined
         }
 
-        return (await this.getJson(response, {})) as TopBoardResponse
+        return this.getJsonOrUndefined<TopBoardResponse>(response)
     }
 
     async moveBlockTo(blockId: string, where: 'before'|'after', dstBlockId: string): Promise<Response> {

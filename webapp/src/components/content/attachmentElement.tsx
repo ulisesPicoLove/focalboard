@@ -82,7 +82,7 @@ const AttachmentElement = (props: Props): React.JSX.Element|null => {
     useEffect(() => {
         if (fileInfo.extension) {
             const getFileIcon = (fileExt: string) => {
-                const extType = (Object.keys(Files) as string[]).find((key) => Files[key]?.find((ext) => ext === fileExt))
+                const extType = Object.keys(Files).find((key) => Files[key]?.find((ext) => ext === fileExt))
                 setFileIcon((extType && FileIcons[extType]) || 'file-generic-outline-large')
             }
             getFileIcon(fileInfo.extension.substring(1))

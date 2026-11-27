@@ -344,7 +344,7 @@ function ShareBoardDialogContent(props: Props & {board: Board}): React.JSX.Eleme
                             placeholder={board.isTemplate ? intl.formatMessage({id: 'ShareTemplate.searchPlaceholder', defaultMessage: 'Search for people'}) : intl.formatMessage({id: 'ShareBoard.searchPlaceholder', defaultMessage: 'Search for people'})}
                             onChange={(newValue) => {
                                 if (newValue) {
-                                    addUser(newValue as IUser)
+                                    addUser(newValue)
                                     setSelectedUser(null)
                                 }
                             }}

@@ -76,7 +76,7 @@ function getPersonGroups(cards: Card[], groupByProperty: IPropertyTemplate, hidd
     const hiddenGroups: BoardGroup[] = []
     const visibleGroups: BoardGroup[] = []
     Object.entries(groups).forEach(([key, value]) => {
-        const propertyOption = {id: key, value: key, color: ''} as IPropertyOption
+        const propertyOption = {id: key, value: key, color: ''}
         if (hiddenOptionIds.find((e) => e === key)) {
             hiddenGroups.push({option: propertyOption, cards: value})
         } else {

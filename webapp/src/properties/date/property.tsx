@@ -32,7 +32,7 @@ export default class DateProperty extends DatePropertyType {
                 displayValue = Utils.displayDate(new Date(parseInt(propertyValue, 10)), intl)
             } else {
                 try {
-                    const dateValue = JSON.parse(propertyValue as string)
+                    const dateValue = JSON.parse(propertyValue)
                     if (dateValue.from) {
                         displayValue = Utils.displayDate(new Date(dateValue.from), intl)
                     }

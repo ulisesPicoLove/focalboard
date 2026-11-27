@@ -35,7 +35,7 @@ function FBRoute(props: RouteProps) {
                 return null
             }
             if (props.getOriginalPath) {
-                let redirectUrl = '/' + Utils.buildURL(props.getOriginalPath!(match))
+                let redirectUrl = '/' + Utils.buildURL(props.getOriginalPath(match))
                 if (redirectUrl.indexOf('//') === 0) {
                     redirectUrl = redirectUrl.slice(1)
                 }

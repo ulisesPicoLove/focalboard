@@ -71,7 +71,7 @@ const TableRow = (props: Props) => {
     const {addCard, isLastCard} = props
     const onSaveWithEnter = useCallback(() => {
         if (isLastCard) {
-            addCard(groupById ? card.fields.properties[groupById!] as string : '')
+            addCard(groupById ? card.fields.properties[groupById] as string : '')
         }
     }, [addCard, isLastCard, groupById, card.fields.properties])
 

@@ -83,10 +83,10 @@ class CardFilter {
                 value = card.modifiedBy
             } else if (template && template.type === 'createdTime') {
                 value = card.createAt.toString()
-                dateValue = this.createDatePropertyFromString(value as string)
+                dateValue = this.createDatePropertyFromString(value)
             } else if (template && template.type === 'updatedTime') {
                 value = card.updateAt.toString()
-                dateValue = this.createDatePropertyFromString(value as string)
+                dateValue = this.createDatePropertyFromString(value)
             }
         }
 
