@@ -127,6 +127,15 @@ func (rd *ChangePasswordRequest) IsValid() error {
 	return isValidPassword(rd.NewPassword)
 }
 
+// ValidatePassword returns an error unless password is acceptable for a new password: not empty
+// and at least MinimumPasswordLength characters.
+func ValidatePassword(password string) error {
+	if password == "" {
+		return NewErrAuthParam("password is required")
+	}
+	return isValidPassword(password)
+}
+
 func isValidPassword(password string) error {
 	if len(password) < MinimumPasswordLength {
 		return NewErrAuthParam(fmt.Sprintf("password must be at least %d characters", MinimumPasswordLength))

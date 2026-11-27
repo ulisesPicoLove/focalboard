@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
-	"strings"
 
 	"github.com/gorilla/mux"
 	"github.com/mattermost/focalboard/server/model"
@@ -38,8 +37,8 @@ func (a *API) handleAdminSetPassword(w http.ResponseWriter, r *http.Request) {
 	defer a.audit.LogRecord(audit.LevelAuth, auditRec)
 	auditRec.AddMeta("username", username)
 
-	if !strings.Contains(requestData.Password, "") {
-		a.errorResponse(w, r, model.NewErrBadRequest("password is required"))
+	if err = model.ValidatePassword(requestData.Password); err != nil {
+		a.errorResponse(w, r, err)
 		return
 	}
 
