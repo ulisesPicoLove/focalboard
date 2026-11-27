@@ -85,8 +85,7 @@ const Option = (props: Pick<SelectOptionProps<SelectOption, false>, 'data'>): Re
                     >
 
                         {
-                            calculationToProperties.get(data.value) &&
-                            calculationToProperties.get(data.value)!.map((property) => (
+                            calculationToProperties.get(data.value)?.map((property) => (
                                 <div
                                     key={property.id}
                                     className={`drops ${data.activeProperty.id === property.id ? 'active' : ''}`}

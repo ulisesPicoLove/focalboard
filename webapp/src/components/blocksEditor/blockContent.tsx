@@ -49,8 +49,8 @@ function BlockContent(props: Props) {
                 }
             },
             collect: (monitor) => ({
-                isOver: Boolean(monitor.isOver()) && (monitor.getItem() as BlockData).id! !== block.id,
-                draggingUp: (monitor.getItem() as BlockData)?.id && contentOrder.indexOf((monitor.getItem() as BlockData).id!) > contentOrder.indexOf(block.id || ''),
+                isOver: Boolean(monitor.isOver()) && (monitor.getItem() as BlockData).id !== block.id,
+                draggingUp: (monitor.getItem() as BlockData)?.id && contentOrder.indexOf((monitor.getItem() as BlockData).id ?? '') > contentOrder.indexOf(block.id || ''),
             }),
         }),
         [block, props.onMove, contentOrder],

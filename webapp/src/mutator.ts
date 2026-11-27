@@ -18,6 +18,7 @@ import rawOctoClient from './octoClient'
 import {sendFlashMessage} from './components/flashMessages'
 import undoManager from './undomanager'
 import {Utils, IDType} from './utils'
+import {required} from './typeHelpers'
 import {UserSettings} from './userSettings'
 import {Category} from './store/sidebar'
 
@@ -139,12 +140,12 @@ class Mutator {
         return undoManager.perform(
             async () => {
                 await Promise.all(
-                    updatePatches.map((patch, i) => octoClient.patchBlock(boardId, newBlocks[i]!.id, patch)),
+                    updatePatches.map((patch, i) => octoClient.patchBlock(boardId, required(newBlocks[i], `block ${i}`).id, patch)),
                 )
             },
             async () => {
                 await Promise.all(
-                    undoPatches.map((patch, i) => octoClient.patchBlock(boardId, newBlocks[i]!.id, patch)),
+                    undoPatches.map((patch, i) => octoClient.patchBlock(boardId, required(newBlocks[i], `block ${i}`).id, patch)),
                 )
             },
             description,
@@ -502,7 +503,7 @@ class Mutator {
             Utils.assertFailure(`Cannot find template with id: ${propertyId}`)
             return
         }
-        const srcTemplate = newBoard.cardProperties[index]!
+        const srcTemplate = required(newBoard.cardProperties[index], `property ${propertyId}`)
         const newTemplate: IPropertyTemplate = {
             id: Utils.createGuid(IDType.BlockID),
             name: `${srcTemplate.name} copy`,
@@ -613,7 +614,7 @@ class Mutator {
         Utils.assert(oldCardProperties.includes(template))
 
         const newCardProperties: IPropertyTemplate[] = cloneDeep(oldCardProperties)
-        const newTemplate = newCardProperties.find((o: IPropertyTemplate) => o.id === template.id)!
+        const newTemplate = required(newCardProperties.find((o: IPropertyTemplate) => o.id === template.id), `property ${template.id}`)
         newTemplate.options.push(option)
 
         await this.updateBoardCardProperties(boardId, oldCardProperties, newCardProperties, description)
@@ -621,7 +622,7 @@ class Mutator {
 
     async deletePropertyOption(boardId: string, oldCardProperties: IPropertyTemplate[], template: IPropertyTemplate, option: IPropertyOption) {
         const newCardProperties: IPropertyTemplate[] = cloneDeep(oldCardProperties)
-        const newTemplate = newCardProperties.find((o: IPropertyTemplate) => o.id === template.id)!
+        const newTemplate = required(newCardProperties.find((o: IPropertyTemplate) => o.id === template.id), `property ${template.id}`)
         newTemplate.options = newTemplate.options.filter((o) => o.id !== option.id)
 
         await this.updateBoardCardProperties(boardId, oldCardProperties, newCardProperties, 'delete option')
@@ -632,7 +633,7 @@ class Mutator {
         Utils.log(`srcIndex: ${srcIndex}, destIndex: ${destIndex}`)
 
         const newCardProperties: IPropertyTemplate[] = cloneDeep(oldCardProperties)
-        const newTemplate = newCardProperties.find((o: IPropertyTemplate) => o.id === template.id)!
+        const newTemplate = required(newCardProperties.find((o: IPropertyTemplate) => o.id === template.id), `property ${template.id}`)
         newTemplate.options.splice(destIndex, 0, ...newTemplate.options.splice(srcIndex, 1))
 
         await this.updateBoardCardProperties(boardId, oldCardProperties, newCardProperties, 'reorder option')
@@ -640,8 +641,8 @@ class Mutator {
 
     async changePropertyOptionValue(boardId: string, oldCardProperties: IPropertyTemplate[], propertyTemplate: IPropertyTemplate, option: IPropertyOption, value: string) {
         const newCardProperties: IPropertyTemplate[] = cloneDeep(oldCardProperties)
-        const newTemplate = newCardProperties.find((o: IPropertyTemplate) => o.id === propertyTemplate.id)!
-        const newOption = newTemplate.options.find((o) => o.id === option.id)!
+        const newTemplate = required(newCardProperties.find((o: IPropertyTemplate) => o.id === propertyTemplate.id), `property ${propertyTemplate.id}`)
+        const newOption = required(newTemplate.options.find((o) => o.id === option.id), `option ${option.id}`)
         newOption.value = value
 
         await this.updateBoardCardProperties(boardId, oldCardProperties, newCardProperties, 'rename option')
@@ -651,8 +652,8 @@ class Mutator {
 
     async changePropertyOptionColor(boardId: string, oldCardProperties: IPropertyTemplate[], template: IPropertyTemplate, option: IPropertyOption, color: string) {
         const newCardProperties: IPropertyTemplate[] = cloneDeep(oldCardProperties)
-        const newTemplate = newCardProperties.find((o: IPropertyTemplate) => o.id === template.id)!
-        const newOption = newTemplate.options.find((o) => o.id === option.id)!
+        const newTemplate = required(newCardProperties.find((o: IPropertyTemplate) => o.id === template.id), `property ${template.id}`)
+        const newOption = required(newTemplate.options.find((o) => o.id === option.id), `option ${option.id}`)
         newOption.color = color
         await this.updateBoardCardProperties(boardId, oldCardProperties, newCardProperties, 'rename option')
     }
@@ -681,7 +682,7 @@ class Mutator {
 
         const oldBoard: Board = board
         const newBoard = createBoard(board)
-        const newTemplate = newBoard.cardProperties.find((o: IPropertyTemplate) => o.id === propertyTemplate.id)!
+        const newTemplate = required(newBoard.cardProperties.find((o: IPropertyTemplate) => o.id === propertyTemplate.id), `property ${propertyTemplate.id}`)
 
         if (propertyTemplate.type !== newType) {
             newTemplate.options = []

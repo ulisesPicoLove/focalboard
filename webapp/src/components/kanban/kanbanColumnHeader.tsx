@@ -99,13 +99,13 @@ export default function KanbanColumnHeader(props: Props): React.JSX.Element {
                     title={intl.formatMessage({
                         id: 'BoardComponent.no-property-title',
                         defaultMessage: 'Items with an empty {property} property will go here. This column cannot be removed.',
-                    }, {property: groupByProperty!.name})}
+                    }, {property: groupByProperty?.name})}
                 >
                     <FormattedMessage
                         id='BoardComponent.no-property'
                         defaultMessage='No {property}'
                         values={{
-                            property: groupByProperty!.name,
+                            property: groupByProperty?.name,
                         }}
                     />
                 </Label>}
@@ -176,7 +176,7 @@ export default function KanbanColumnHeader(props: Props): React.JSX.Element {
                                             id='delete'
                                             icon={<DeleteIcon/>}
                                             name={intl.formatMessage({id: 'BoardComponent.delete', defaultMessage: 'Delete'})}
-                                            onClick={() => mutator.deletePropertyOption(board.id, board.cardProperties, groupByProperty!, group.option)}
+                                            onClick={() => groupByProperty && mutator.deletePropertyOption(board.id, board.cardProperties, groupByProperty, group.option)}
                                         />
                                         <Menu.Separator/>
                                         {Object.entries(Constants.menuColors).map(([key, color]) => (
@@ -184,7 +184,7 @@ export default function KanbanColumnHeader(props: Props): React.JSX.Element {
                                                 key={key}
                                                 id={key}
                                                 name={color}
-                                                onClick={() => mutator.changePropertyOptionColor(board.id, board.cardProperties, groupByProperty!, group.option, key)}
+                                                onClick={() => groupByProperty && mutator.changePropertyOptionColor(board.id, board.cardProperties, groupByProperty, group.option, key)}
                                             />
                                         ))}
                                     </>}

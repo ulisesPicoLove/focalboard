@@ -92,9 +92,12 @@ export const optionDisplayNameString = (option: Option, intl: IntlShape): string
     }
 }
 
+// The options every property type has
+export const commonOptions: Option[] = [Options.none, Options.count, Options.countEmpty, Options.countNotEmpty, Options.percentEmpty,
+    Options.percentNotEmpty, Options.countValue, Options.countUniqueValue]
+
 export const optionsByType: Map<string, Option[]> = new Map([
-    ['common', [Options.none, Options.count, Options.countEmpty, Options.countNotEmpty, Options.percentEmpty,
-        Options.percentNotEmpty, Options.countValue, Options.countUniqueValue]],
+    ['common', commonOptions],
     ['checkbox', [Options.countChecked, Options.countUnchecked, Options.percentChecked, Options.percentUnchecked]],
     ['number', [Options.sum, Options.average, Options.median, Options.min, Options.max, Options.range]],
     ['date', [Options.earliest, Options.latest, Options.dateRange]],

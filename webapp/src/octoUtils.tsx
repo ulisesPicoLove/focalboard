@@ -18,6 +18,7 @@ import {createH3Block} from './blocks/h3Block'
 import {FilterCondition} from './blocks/filterClause'
 import {createAttachmentBlock} from './blocks/attachmentBlock'
 import {Utils, isDefined} from './utils'
+import {required} from './typeHelpers'
 
 class OctoUtils {
     static hydrateBlock(block: Block): Block {
@@ -69,10 +70,10 @@ class OctoUtils {
 
         // Determine the new boardId if needed
         let newBoardId: string
-        const sourceBlock = blocks.find((block) => block.id === sourceBlockId)!
+        const sourceBlock = required(blocks.find((block) => block.id === sourceBlockId), `block ${sourceBlockId}`)
         if (sourceBlock.boardId === sourceBlock.id) {
             // Special case: when duplicating a tree from root, remap all the descendant boardIds
-            const newSourceRootBlock = newBlocks.find((block) => block.id === newSourceBlockId)!
+            const newSourceRootBlock = required(newBlocks.find((block) => block.id === newSourceBlockId), `block ${newSourceBlockId}`)
             newBoardId = newSourceRootBlock.id
         }
 
@@ -112,7 +113,7 @@ class OctoUtils {
             }
         })
 
-        const newSourceBlock = newBlocks.find((block) => block.id === newSourceBlockId)!
+        const newSourceBlock = required(newBlocks.find((block) => block.id === newSourceBlockId), `block ${newSourceBlockId}`)
         return [newBlocks, newSourceBlock, idMap]
     }
 

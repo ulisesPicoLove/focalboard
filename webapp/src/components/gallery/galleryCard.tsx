@@ -97,8 +97,8 @@ const GalleryCard = (props: Props) => {
                     >
                         <CardActionsMenuIcon/>
                         <CardActionsMenu
-                            cardId={card!.id}
-                            boardId={card!.boardId}
+                            cardId={card.id}
+                            boardId={card.boardId}
                             onClickDelete={() => setShowConfirmationDialogBox(true)}
                             onClickDuplicate={() => {
                                 mutator.duplicateCard(card.id, board.id)

@@ -5,6 +5,7 @@ import React from 'react'
 import {
     CalculationOptions,
     CommonCalculationOptionProps,
+    commonOptions,
     optionsByType,
 } from '../../calculations/options'
 import {IPropertyTemplate, PropertyTypeEnum} from '../../../blocks/board'
@@ -31,17 +32,18 @@ const noop = () => undefined
 
 export const KanbanCalculationOptions = (props: Props): React.JSX.Element => {
     const options: OptionProps[] = []
+    const activeProperty = props.property
 
     // Show common options, first,
     // followed by type-specific functions
-    optionsByType.get('common')!.forEach((typeOption) => {
-        if (typeOption.value !== 'none') {
+    commonOptions.forEach((typeOption) => {
+        if (activeProperty && typeOption.value !== 'none') {
             options.push({
                 ...typeOption,
                 cardProperties: props.cardProperties,
                 onChange: props.onChange,
                 activeValue: props.value,
-                activeProperty: props.property!,
+                activeProperty,
             })
         }
     })
@@ -49,7 +51,7 @@ export const KanbanCalculationOptions = (props: Props): React.JSX.Element => {
     const seen: Record<string, boolean> = {}
     props.cardProperties.forEach((property) => {
         // skip already processed property types
-        if (seen[getEquivalentPropertyType(property.type)]) {
+        if (!activeProperty || seen[getEquivalentPropertyType(property.type)]) {
             return
         }
 
@@ -60,7 +62,7 @@ export const KanbanCalculationOptions = (props: Props): React.JSX.Element => {
                     cardProperties: props.cardProperties,
                     onChange: props.onChange,
                     activeValue: props.value,
-                    activeProperty: props.property!,
+                    activeProperty,
                 })
             })
 

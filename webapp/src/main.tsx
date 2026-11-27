@@ -44,7 +44,12 @@ const MainApp = () => {
     )
 }
 
-createRoot(document.getElementById('focalboard-app')!).render(
+const rootElement = document.getElementById('focalboard-app')
+if (!rootElement) {
+    throw new Error('The page has no #focalboard-app element to render into')
+}
+
+createRoot(rootElement).render(
     <ReduxProvider store={store}>
         <MainApp/>
     </ReduxProvider>,

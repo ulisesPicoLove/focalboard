@@ -113,8 +113,8 @@ const KanbanCard = (props: Props) => {
                 >
                     <CardActionsMenuIcon/>
                     <CardActionsMenu
-                        cardId={card!.id}
-                        boardId={card!.boardId}
+                        cardId={card.id}
+                        boardId={card.boardId}
                         onClickDelete={handleDeleteButtonOnClick}
                         onClickDuplicate={() => {
                             mutator.duplicateCard(

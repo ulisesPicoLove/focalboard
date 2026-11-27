@@ -187,6 +187,7 @@ describe('src/components/kanban/kanbanColumnHeader', () => {
         render(wrapDNDIntl(
             <ReduxProvider store={store}>
                 <KanbanColumnHeader
+                    groupByProperty={board.cardProperties[0]}
                     board={board}
                     activeView={activeView}
                     group={{
@@ -216,6 +217,7 @@ describe('src/components/kanban/kanbanColumnHeader', () => {
         render(wrapDNDIntl(
             <ReduxProvider store={store}>
                 <KanbanColumnHeader
+                    groupByProperty={board.cardProperties[0]}
                     board={board}
                     activeView={activeView}
                     group={{

@@ -188,7 +188,9 @@ const SidebarBoardItem = (props: Props) => {
             }
 
             if (visibleBoardID === null) {
-                UserSettings.setLastBoardID(match.params.teamId!, null)
+                if (match.params.teamId) {
+                    UserSettings.setLastBoardID(match.params.teamId, null)
+                }
                 showTemplatePicker()
             } else {
                 props.showBoard(visibleBoardID)

@@ -139,7 +139,7 @@ const TableGroupHeaderRow = (props: Props): React.JSX.Element => {
                                         id='delete'
                                         icon={<DeleteIcon/>}
                                         name={intl.formatMessage({id: 'BoardComponent.delete', defaultMessage: 'Delete'})}
-                                        onClick={() => mutator.deletePropertyOption(board.id, board.cardProperties, groupByProperty!, group.option)}
+                                        onClick={() => groupByProperty && mutator.deletePropertyOption(board.id, board.cardProperties, groupByProperty, group.option)}
                                     />
                                     <Menu.Separator/>
                                     {Object.entries(Constants.menuColors).map(([key, color]) => (
@@ -147,7 +147,7 @@ const TableGroupHeaderRow = (props: Props): React.JSX.Element => {
                                             key={key}
                                             id={key}
                                             name={color}
-                                            onClick={() => mutator.changePropertyOptionColor(board.id, board.cardProperties, groupByProperty!, group.option, key)}
+                                            onClick={() => groupByProperty && mutator.changePropertyOptionColor(board.id, board.cardProperties, groupByProperty, group.option, key)}
                                         />
                                     ))}
                                 </>}

@@ -21,7 +21,7 @@ function BlocksEditor(props: Props) {
     const [nextType, setNextType] = useState<string>('')
     const [editing, setEditing] = useState<BlockData|null>(null)
     const [afterBlock, setAfterBlock] = useState<BlockData|null>(null)
-    const contentOrder = useMemo(() => props.blocks.filter((b) => b.id).map((b) => b.id!), [props.blocks])
+    const contentOrder = useMemo(() => props.blocks.flatMap((b) => (b.id ? [b.id] : [])), [props.blocks])
     return (
         <div
             className='BlocksEditor'

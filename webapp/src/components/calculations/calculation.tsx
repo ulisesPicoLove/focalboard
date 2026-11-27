@@ -37,7 +37,7 @@ type Props = {
 
 const Calculation = (props: Props): React.JSX.Element => {
     const value = props.value || Options.none.value
-    const valueOption = optionByValue(value)
+    const valueOption = optionByValue(value) ?? Options.none
     const intl = useIntl()
     const columnResize = useColumnResize()
 
@@ -76,7 +76,7 @@ const Calculation = (props: Props): React.JSX.Element => {
             }
 
             <span className='calculationLabel'>
-                {optionDisplayNameString(valueOption!, intl)}
+                {optionDisplayNameString(valueOption, intl)}
             </span>
 
             {

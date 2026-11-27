@@ -190,7 +190,10 @@ class Utils {
     static getElementById(elementId: string): HTMLElement {
         const element = document.getElementById(elementId)
         Utils.assert(element, `getElementById "${elementId}$`)
-        return element!
+        if (!element) {
+            throw new Error(`There is no element with id "${elementId}"`)
+        }
+        return element
     }
 
     static htmlEncode(text: string): string {

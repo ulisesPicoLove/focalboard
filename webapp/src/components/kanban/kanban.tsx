@@ -80,11 +80,17 @@ const Kanban = (props: Props) => {
     const visibleBadges = activeView.fields.visiblePropertyIds.includes(Constants.badgesColumnId)
 
     const propertyNameChanged = useCallback(async (option: IPropertyOption, text: string): Promise<void> => {
-        await mutator.changePropertyOptionValue(board.id, board.cardProperties, groupByProperty!, option, text)
+        if (!groupByProperty) {
+            return
+        }
+        await mutator.changePropertyOptionValue(board.id, board.cardProperties, groupByProperty, option, text)
     }, [board, groupByProperty])
 
     const addGroupClicked = useCallback(async () => {
         Utils.log('onAddGroupClicked')
+        if (!groupByProperty) {
+            return
+        }
 
         const option: IPropertyOption = {
             id: Utils.createGuid(IDType.BlockID),
@@ -92,7 +98,7 @@ const Kanban = (props: Props) => {
             color: 'propColorDefault',
         }
 
-        await mutator.insertPropertyOption(board.id, board.cardProperties, groupByProperty!, option, 'add group')
+        await mutator.insertPropertyOption(board.id, board.cardProperties, groupByProperty, option, 'add group')
     }, [board, groupByProperty])
 
     const orderAfterMoveToColumn = useCallback((cardIds: string[], columnId?: string): string[] => {
@@ -115,6 +121,10 @@ const Kanban = (props: Props) => {
 
     const onDropToColumn = useCallback(async (option: IPropertyOption, card?: Card, dstOption?: IPropertyOption) => {
         const optionId = option ? option.id : undefined
+        if (!groupByProperty) {
+            return
+        }
+        const groupById = groupByProperty.id
 
         let draggedCardIds = selectedCardIds
         if (card) {
@@ -132,9 +142,9 @@ const Kanban = (props: Props) => {
                 const awaits = []
                 for (const draggedCard of draggedCards) {
                     Utils.log(`ondrop. Card: ${draggedCard.title}, column: ${optionId}`)
-                    const oldValue = draggedCard.fields.properties[groupByProperty!.id]
+                    const oldValue = draggedCard.fields.properties[groupById]
                     if (optionId !== oldValue) {
-                        awaits.push(mutator.changePropertyValue(board.id, draggedCard, groupByProperty!.id, optionId, description))
+                        awaits.push(mutator.changePropertyValue(board.id, draggedCard, groupById, optionId, description))
                     }
                 }
                 const newOrder = orderAfterMoveToColumn(draggedCardIds, optionId)
@@ -180,7 +190,8 @@ const Kanban = (props: Props) => {
             return
         }
         Utils.log(`onDropToCard: ${dstCard.title}`)
-        const optionId = dstCard.fields.properties[groupByProperty.id]
+        const groupById = groupByProperty.id
+        const optionId = dstCard.fields.properties[groupById]
 
         const draggedCardIds = Array.from(new Set(selectedCardIds).add(srcCard.id))
 
@@ -196,7 +207,7 @@ const Kanban = (props: Props) => {
         const isDraggingDown = cardOrder.indexOf(srcCard.id) <= cardOrder.indexOf(dstCard.id)
         cardOrder = cardOrder.filter((id) => !draggedCardIds.includes(id))
         let destIndex = cardOrder.indexOf(dstCard.id)
-        if (srcCard.fields.properties[groupByProperty!.id] === optionId && isDraggingDown) {
+        if (srcCard.fields.properties[groupById] === optionId && isDraggingDown) {
             // If the cards are in the same column and dragging down, drop after the target dstCard
             destIndex += 1
         }
@@ -207,9 +218,9 @@ const Kanban = (props: Props) => {
             const awaits = []
             for (const draggedCard of draggedCards) {
                 Utils.log(`draggedCard: ${draggedCard.title}, column: ${optionId}`)
-                const oldOptionId = draggedCard.fields.properties[groupByProperty!.id]
+                const oldOptionId = draggedCard.fields.properties[groupById]
                 if (optionId !== oldOptionId) {
-                    awaits.push(mutator.changePropertyValue(board.id, draggedCard, groupByProperty!.id, optionId, description))
+                    awaits.push(mutator.changePropertyValue(board.id, draggedCard, groupById, optionId, description))
                 }
             }
             await Promise.all(awaits)

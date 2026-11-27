@@ -63,11 +63,8 @@ const useTutorialTourTipManager = ({
             const patch: UserConfigPatch = {
                 updatedFields: {
                     onboardingTourStep: stepValue,
+                    ...(tourCategory ? {tourCategory} : {}),
                 },
-            }
-
-            if (tourCategory) {
-                patch.updatedFields!.tourCategory = tourCategory
             }
 
             const patchedProps = await octoClient.patchUserConfig(currentUserId, patch)

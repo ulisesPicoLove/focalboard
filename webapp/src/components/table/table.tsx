@@ -105,7 +105,8 @@ const Table = (props: Props): React.JSX.Element => {
         const draggedCardIds = Array.from(new Set(selectedCardIds).add(srcCard.id))
         const description = draggedCardIds.length > 1 ? `drag ${draggedCardIds.length} cards` : 'drag card'
 
-        if (activeView.fields.groupById !== undefined) {
+        if (activeView.fields.groupById !== undefined && groupByProperty) {
+            const groupById = groupByProperty.id
             const cardsById: { [key: string]: Card } = cards.reduce((acc: { [key: string]: Card }, card: Card): { [key: string]: Card } => {
                 acc[card.id] = card
                 return acc
@@ -118,11 +119,11 @@ const Table = (props: Props): React.JSX.Element => {
                 for (const draggedCard of draggedCards) {
                     Utils.log(`draggedCard: ${draggedCard.title}, column: ${draggedCard.fields.properties}`)
                     Utils.log(`droppedColumn:  ${groupID}`)
-                    const oldOptionId = draggedCard.fields.properties[groupByProperty!.id]
+                    const oldOptionId = draggedCard.fields.properties[groupById]
                     Utils.log(`ondrop. oldValue: ${oldOptionId}`)
 
                     if (groupID !== oldOptionId) {
-                        awaits.push(mutator.changePropertyValue(board.id, draggedCard, groupByProperty!.id, groupID, description))
+                        awaits.push(mutator.changePropertyValue(board.id, draggedCard, groupById, groupID, description))
                     }
                 }
                 await Promise.all(awaits)
@@ -160,11 +161,18 @@ const Table = (props: Props): React.JSX.Element => {
 
     const onDropToCard = useCallback((srcCard: Card, dstCard: Card) => {
         Utils.log(`onDropToCard: ${dstCard.title}`)
-        onDropToGroup(srcCard, dstCard.fields.properties[activeView.fields.groupById!] as string, dstCard.id)
+        const {groupById} = activeView.fields
+        if (groupById === undefined) {
+            return
+        }
+        onDropToGroup(srcCard, dstCard.fields.properties[groupById] as string, dstCard.id)
     }, [activeView.fields.groupById, onDropToGroup])
 
     const propertyNameChanged = useCallback(async (option: IPropertyOption, text: string): Promise<void> => {
-        await mutator.changePropertyOptionValue(board.id, board.cardProperties, groupByProperty!, option, text)
+        if (!groupByProperty) {
+            return
+        }
+        await mutator.changePropertyOptionValue(board.id, board.cardProperties, groupByProperty, option, text)
     }, [board, groupByProperty])
 
     return (
