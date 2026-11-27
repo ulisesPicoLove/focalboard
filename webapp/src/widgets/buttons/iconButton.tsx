@@ -13,6 +13,9 @@ type Props = {
     size?: string
     inverted?: boolean
     onMouseDown?: (e: React.MouseEvent<HTMLButtonElement>) => void
+
+    // For buttons that open or close something: tells assistive technology which state it is in
+    expanded?: boolean
 }
 
 function IconButton(props: Props): React.JSX.Element {
@@ -31,6 +34,7 @@ function IconButton(props: Props): React.JSX.Element {
             className={Utils.generateClassName(classNames)}
             title={props.title}
             aria-label={props.title}
+            aria-expanded={props.expanded}
         >
             {props.icon}
         </button>

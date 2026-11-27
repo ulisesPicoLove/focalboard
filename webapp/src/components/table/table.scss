@@ -238,6 +238,11 @@
     .octo-table-row {
         display: flex;
         flex-direction: row;
+
+        // rows of a collapsed group (the class comes from tableRow.tsx)
+        &.hidden {
+            display: none;
+        }
     }
 
     .octo-table-header {

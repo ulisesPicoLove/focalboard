@@ -194,3 +194,36 @@ test('should match snapshot, edit title', async () => {
 
     expect(container).toMatchSnapshot()
 })
+
+describe('the collapse button', () => {
+    const renderHeader = (collapsed: boolean) => {
+        const activeView = TestBlockFactory.createBoardView(board)
+        activeView.fields.collapsedOptionIds = collapsed ? [boardTreeGroup.option.id] : []
+        return render(
+            <Wrapper>
+                <TableGroupHeaderRowElement
+                    board={board}
+                    activeView={activeView}
+                    group={boardTreeGroup}
+                    readonly={false}
+                    hideGroup={jest.fn()}
+                    addCard={jest.fn()}
+                    propertyNameChanged={jest.fn()}
+                    onDrop={jest.fn()}
+                />
+            </Wrapper>,
+        )
+    }
+
+    test('says it is expanded and offers to collapse', () => {
+        const {getByRole} = renderHeader(false)
+        const button = getByRole('button', {name: 'Collapse group'})
+        expect(button).toHaveAttribute('aria-expanded', 'true')
+    })
+
+    test('says it is collapsed and offers to expand', () => {
+        const {getByRole} = renderHeader(true)
+        const button = getByRole('button', {name: 'Expand group'})
+        expect(button).toHaveAttribute('aria-expanded', 'false')
+    })
+})

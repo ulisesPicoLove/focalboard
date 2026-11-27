@@ -276,6 +276,8 @@
   "TableComponent.add-icon": "Add icon",
   "TableComponent.name": "Name",
   "TableComponent.plus-new": "+ New",
+  "TableGroupHeaderRow.collapse": "Collapse group",
+  "TableGroupHeaderRow.expand": "Expand group",
   "TableHeaderMenu.delete": "Delete",
   "TableHeaderMenu.duplicate": "Duplicate",
   "TableHeaderMenu.hide": "Hide",

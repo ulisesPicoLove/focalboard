@@ -12,7 +12,10 @@ exports[`should match snapshot on read only 1`] = `
       style="width: 100px;"
     >
       <button
+        aria-expanded="true"
+        aria-label="Collapse group"
         class="IconButton octo-table-cell__expand readonly"
+        title="Collapse group"
         type="button"
       >
         <i
@@ -56,7 +59,10 @@ exports[`should match snapshot with Group 1`] = `
       style="width: 100px;"
     >
       <button
+        aria-expanded="true"
+        aria-label="Collapse group"
         class="IconButton octo-table-cell__expand "
+        title="Collapse group"
         type="button"
       >
         <i
@@ -121,7 +127,10 @@ exports[`should match snapshot, add new 1`] = `
       style="width: 100px;"
     >
       <button
+        aria-expanded="true"
+        aria-label="Collapse group"
         class="IconButton octo-table-cell__expand "
+        title="Collapse group"
         type="button"
       >
         <i
@@ -186,7 +195,10 @@ exports[`should match snapshot, edit title 1`] = `
       style="width: 100px;"
     >
       <button
+        aria-expanded="true"
+        aria-label="Collapse group"
         class="IconButton octo-table-cell__expand "
+        title="Collapse group"
         type="button"
       >
         <i
@@ -251,7 +263,10 @@ exports[`should match snapshot, hide group 1`] = `
       style="width: 100px;"
     >
       <button
+        aria-expanded="false"
+        aria-label="Expand group"
         class="IconButton octo-table-cell__expand "
+        title="Expand group"
         type="button"
       >
         <i
@@ -316,7 +331,10 @@ exports[`should match snapshot, no groups 1`] = `
       style="width: 100px;"
     >
       <button
+        aria-expanded="true"
+        aria-label="Collapse group"
         class="IconButton octo-table-cell__expand "
+        title="Collapse group"
         type="button"
       >
         <i

@@ -867,7 +867,10 @@ exports[`components/centerPanel return centerPanel and click on new card to edit
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -926,7 +929,10 @@ exports[`components/centerPanel return centerPanel and click on new card to edit
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -1136,7 +1142,10 @@ exports[`components/centerPanel return centerPanel and click on new card to edit
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -1390,7 +1399,10 @@ exports[`components/centerPanel return centerPanel and press touch 1 with readon
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand readonly"
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -1427,7 +1439,10 @@ exports[`components/centerPanel return centerPanel and press touch 1 with readon
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand readonly"
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -1558,7 +1573,10 @@ exports[`components/centerPanel return centerPanel and press touch 1 with readon
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand readonly"
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -1929,7 +1947,10 @@ exports[`components/centerPanel return centerPanel and press touch ctrl+d for on
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -1988,7 +2009,10 @@ exports[`components/centerPanel return centerPanel and press touch ctrl+d for on
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -2198,7 +2222,10 @@ exports[`components/centerPanel return centerPanel and press touch ctrl+d for on
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -2590,7 +2617,10 @@ exports[`components/centerPanel return centerPanel and press touch del for one c
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -2649,7 +2679,10 @@ exports[`components/centerPanel return centerPanel and press touch del for one c
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -2859,7 +2892,10 @@ exports[`components/centerPanel return centerPanel and press touch del for one c
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -3251,7 +3287,10 @@ exports[`components/centerPanel return centerPanel and press touch esc for one c
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -3310,7 +3349,10 @@ exports[`components/centerPanel return centerPanel and press touch esc for one c
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -3520,7 +3562,10 @@ exports[`components/centerPanel return centerPanel and press touch esc for one c
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -3912,7 +3957,10 @@ exports[`components/centerPanel return centerPanel and press touch esc for one c
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -3971,7 +4019,10 @@ exports[`components/centerPanel return centerPanel and press touch esc for one c
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -4181,7 +4232,10 @@ exports[`components/centerPanel return centerPanel and press touch esc for one c
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -4573,7 +4627,10 @@ exports[`components/centerPanel return centerPanel and press touch esc for two c
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -4632,7 +4689,10 @@ exports[`components/centerPanel return centerPanel and press touch esc for two c
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -4842,7 +4902,10 @@ exports[`components/centerPanel return centerPanel and press touch esc for two c
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -5234,7 +5297,10 @@ exports[`components/centerPanel return centerPanel and press touch esc for two c
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -5293,7 +5359,10 @@ exports[`components/centerPanel return centerPanel and press touch esc for two c
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -5503,7 +5572,10 @@ exports[`components/centerPanel return centerPanel and press touch esc for two c
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -5895,7 +5967,10 @@ exports[`components/centerPanel return centerPanel and press touch esc for two c
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -5954,7 +6029,10 @@ exports[`components/centerPanel return centerPanel and press touch esc for two c
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -6164,7 +6242,10 @@ exports[`components/centerPanel return centerPanel and press touch esc for two c
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -6556,7 +6637,10 @@ exports[`components/centerPanel return centerPanel and select one card and click
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -6615,7 +6699,10 @@ exports[`components/centerPanel return centerPanel and select one card and click
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -6825,7 +6912,10 @@ exports[`components/centerPanel return centerPanel and select one card and click
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -7217,7 +7307,10 @@ exports[`components/centerPanel return centerPanel and select one card and click
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -7276,7 +7369,10 @@ exports[`components/centerPanel return centerPanel and select one card and click
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -7486,7 +7582,10 @@ exports[`components/centerPanel return centerPanel and select one card and click
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -9203,7 +9302,10 @@ exports[`components/centerPanel should match snapshot for Table 1`] = `
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -9262,7 +9364,10 @@ exports[`components/centerPanel should match snapshot for Table 1`] = `
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i
@@ -9399,7 +9504,10 @@ exports[`components/centerPanel should match snapshot for Table 1`] = `
                 style="width: 100px;"
               >
                 <button
+                  aria-expanded="true"
+                  aria-label="Collapse group"
                   class="IconButton octo-table-cell__expand "
+                  title="Collapse group"
                   type="button"
                 >
                   <i

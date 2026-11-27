@@ -50,7 +50,8 @@ const TableGroupHeaderRow = (props: Props): React.JSX.Element => {
     if (isOver) {
         className += ' dragover'
     }
-    if (activeView.fields.collapsedOptionIds.indexOf(group.option.id || 'undefined') < 0) {
+    const isExpanded = activeView.fields.collapsedOptionIds.indexOf(group.option.id || 'undefined') < 0
+    if (isExpanded) {
         className += ' expanded'
     }
 
@@ -75,6 +76,10 @@ const TableGroupHeaderRow = (props: Props): React.JSX.Element => {
                         />}
                     onClick={() => (props.readonly ? {} : props.hideGroup(group.option.id || 'undefined'))}
                     className={`octo-table-cell__expand ${props.readonly ? 'readonly' : ''}`}
+                    expanded={isExpanded}
+                    title={isExpanded ?
+                        intl.formatMessage({id: 'TableGroupHeaderRow.collapse', defaultMessage: 'Collapse group'}) :
+                        intl.formatMessage({id: 'TableGroupHeaderRow.expand', defaultMessage: 'Expand group'})}
                 />
 
                 {!group.option.id &&
