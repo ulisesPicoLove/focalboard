@@ -51,6 +51,8 @@ import mutator from '../../mutator'
 
 import {Board} from '../../blocks/board'
 
+import {displayedBoardIDs, insertIntoCategory, reorderWithinCategory} from './categoryBoardsOrder'
+
 import SidebarCategory from './sidebarCategory'
 import SidebarSettingsMenu from './sidebarSettingsMenu'
 import SidebarUserMenu from './sidebarUserMenu'
@@ -233,9 +235,13 @@ const Sidebar = (props: Props) => {
                 return
             }
 
-            const categoryBoardMetadata = [...toSidebarCategory.boardMetadata]
-            categoryBoardMetadata.splice(source.index, 1)
-            categoryBoardMetadata.splice(destination.index, 0, toSidebarCategory.boardMetadata[source.index])
+            // the indexes are positions among the boards that are shown, not in the whole list of the category
+            const categoryBoardMetadata = reorderWithinCategory(
+                toSidebarCategory.boardMetadata,
+                displayedBoardIDs(toSidebarCategory, boards),
+                source.index,
+                destination.index,
+            )
 
             dispatch(updateCategoryBoardsOrder({categoryID: toCategoryID, boardsMetadata: categoryBoardMetadata}))
 
@@ -256,9 +262,19 @@ const Sidebar = (props: Props) => {
                 return
             }
 
-            const categoryBoardMetadata = [...toSidebarCategory.boardMetadata]
-            const fromCategoryBoardMetadata = fromSidebarCategory.boardMetadata[source.index]
-            categoryBoardMetadata.splice(destination.index, 0, fromCategoryBoardMetadata)
+            const fromBoardID = displayedBoardIDs(fromSidebarCategory, boards)[source.index]
+            const fromCategoryBoardMetadata = fromSidebarCategory.boardMetadata.find((metadata) => metadata.boardID === fromBoardID)
+            if (!fromCategoryBoardMetadata) {
+                Utils.logError(`dragged board not found in its category. boardID: ${fromBoardID}`)
+                return
+            }
+
+            const categoryBoardMetadata = insertIntoCategory(
+                toSidebarCategory.boardMetadata,
+                displayedBoardIDs(toSidebarCategory, boards),
+                fromCategoryBoardMetadata,
+                destination.index,
+            )
 
             // optimistically updating the store to create a lag-free UI.
             await dispatch(updateCategoryBoardsOrder({categoryID: toCategoryID, boardsMetadata: categoryBoardMetadata}))
@@ -269,7 +285,7 @@ const Sidebar = (props: Props) => {
             const reorderedBoardIDs = categoryBoardMetadata.map((m) => m.boardID)
             await octoClient.reorderSidebarCategoryBoards(team.id, toCategoryID, reorderedBoardIDs)
         }
-    }, [team, sidebarCategories, dispatch])
+    }, [team, sidebarCategories, boards, dispatch])
 
     const onDragEnd = useCallback(async (result: DropResult) => {
         const {destination, source, type} = result
