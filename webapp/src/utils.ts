@@ -34,7 +34,15 @@ export const TEAM_ADMIN_ROLE = 'team_admin'
 export type CategoryOrder = string[]
 export type CategoryBoardsOrder = {categoryID: string, boardOrder: string[]}
 
-export type WSMessagePayloads = Block | Category | BoardCategoryWebsocketData[] | BoardType | BoardMember | null | CategoryOrder | CategoryBoardsOrder
+// A change that arrived from the server, tagged with the kind of change it is
+export type WSUpdate =
+    {type: 'block', data: Block} |
+    {type: 'category', data: Category} |
+    {type: 'blockCategories', data: BoardCategoryWebsocketData[]} |
+    {type: 'board', data: BoardType} |
+    {type: 'boardMembers', data: BoardMember} |
+    {type: 'categoryOrder', data: CategoryOrder} |
+    {type: 'categoryBoardsOrder', data: CategoryBoardsOrder}
 
 // eslint-disable-next-line no-shadow
 enum IDType {
@@ -630,23 +638,23 @@ class Utils {
         return window.location.pathname.includes('/plugins/focalboard')
     }
 
-    static fixWSData(message: WSMessage): [WSMessagePayloads, ChangeHandlerType] {
+    static fixWSData(message: WSMessage): WSUpdate | null {
         if (message.block) {
-            return [this.fixBlock(message.block), 'block']
+            return {type: 'block', data: this.fixBlock(message.block)}
         } else if (message.board) {
-            return [this.fixBoard(message.board), 'board']
+            return {type: 'board', data: this.fixBoard(message.board)}
         } else if (message.category) {
-            return [message.category, 'category']
+            return {type: 'category', data: message.category}
         } else if (message.blockCategories) {
-            return [message.blockCategories, 'blockCategories']
+            return {type: 'blockCategories', data: message.blockCategories}
         } else if (message.member) {
-            return [message.member, 'boardMembers']
+            return {type: 'boardMembers', data: message.member}
         } else if (message.categoryOrder) {
-            return [message.categoryOrder, 'categoryOrder']
+            return {type: 'categoryOrder', data: message.categoryOrder}
         } else if (message.CategoryId && message.BoardOrder) {
-            return [{categoryID: message.CategoryId, boardOrder: message.BoardOrder}, 'categoryBoardsOrder']
+            return {type: 'categoryBoardsOrder', data: {categoryID: message.CategoryId, boardOrder: message.BoardOrder}}
         }
-        return [null, 'block']
+        return null
     }
 
     static fixBlock(block: Block): Block {

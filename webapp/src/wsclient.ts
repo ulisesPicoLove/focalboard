@@ -3,7 +3,7 @@
 
 import {ClientConfig} from './config/clientConfig'
 
-import {CategoryBoardsOrder, CategoryOrder, Utils, WSMessagePayloads} from './utils'
+import {CategoryBoardsOrder, Utils, WSUpdate} from './utils'
 import {Block} from './blocks/block'
 import {Board, BoardMember} from './blocks/board'
 import {OctoUtils} from './octoUtils'
@@ -409,9 +409,9 @@ class WSClient {
             return
         }
 
-        const [data, type] = Utils.fixWSData(message)
-        if (data) {
-            this.queueUpdateNotification(data, type)
+        const update = Utils.fixWSData(message)
+        if (update) {
+            this.queueUpdateNotification(update)
         }
     }
 
@@ -524,38 +524,48 @@ class WSClient {
         this.sendCommand(command)
     }
 
-    private queueUpdateNotification(data: WSMessagePayloads, type: ChangeHandlerType) {
-        if (!data) {
-            return
-        }
-
+    private queueUpdateNotification(update: WSUpdate) {
         // Remove existing queued update
-        if (type === 'block') {
-            this.updatedData.Blocks = this.updatedData.Blocks.filter((o) => o.id !== (data as Block).id)
-            this.updatedData.Blocks.push(OctoUtils.hydrateBlock(data as Block))
-        } else if (type === 'category') {
-            this.updatedData.Categories = this.updatedData.Categories.filter((c) => c.id !== (data as Category).id)
-            this.updatedData.Categories.push(data as Category)
-        } else if (type === 'blockCategories') {
-            this.updatedData.BoardCategories = this.updatedData.BoardCategories.filter((b) => !(data as BoardCategoryWebsocketData[]).find((boardCategory) => boardCategory.boardID === b.boardID))
-            this.updatedData.BoardCategories.push(...(data as BoardCategoryWebsocketData[]))
-        } else if (type === 'board') {
-            this.updatedData.Boards = this.updatedData.Boards.filter((b) => b.id !== (data as Board).id)
-            this.updatedData.Boards.push(data as Board)
-        } else if (type === 'boardMembers') {
-            this.updatedData.BoardMembers = this.updatedData.BoardMembers.filter((m) => m.userId !== (data as BoardMember).userId || m.boardId !== (data as BoardMember).boardId)
-            this.updatedData.BoardMembers.push(data as BoardMember)
-        } else if (type === 'categoryOrder') {
+        switch (update.type) {
+        case 'block':
+            this.updatedData.Blocks = this.updatedData.Blocks.filter((o) => o.id !== update.data.id)
+            this.updatedData.Blocks.push(OctoUtils.hydrateBlock(update.data))
+            break
+        case 'category':
+            this.updatedData.Categories = this.updatedData.Categories.filter((c) => c.id !== update.data.id)
+            this.updatedData.Categories.push(update.data)
+            break
+        case 'blockCategories': {
+            const incoming = update.data
+            this.updatedData.BoardCategories = this.updatedData.BoardCategories.filter((b) => !incoming.find((boardCategory) => boardCategory.boardID === b.boardID))
+            this.updatedData.BoardCategories.push(...incoming)
+            break
+        }
+        case 'board':
+            this.updatedData.Boards = this.updatedData.Boards.filter((b) => b.id !== update.data.id)
+            this.updatedData.Boards.push(update.data)
+            break
+        case 'boardMembers': {
+            const member = update.data
+            this.updatedData.BoardMembers = this.updatedData.BoardMembers.filter((m) => m.userId !== member.userId || m.boardId !== member.boardId)
+            this.updatedData.BoardMembers.push(member)
+            break
+        }
+        case 'categoryOrder':
             // Since each update contains the whole state of all
             // categories, we don't need to keep accumulating all updates.
             // Only the very latest one is sufficient to describe the
             // latest state of all sidebar categories.
-            this.updatedData.CategoryOrder = (data as CategoryOrder)
-        } else if (type === 'categoryBoardsOrder') {
+            this.updatedData.CategoryOrder = update.data
+            break
+        case 'categoryBoardsOrder': {
             // Each message carries the whole order of one category, so only the
             // latest one per category matters.
-            this.updatedData.CategoryBoardsOrder = this.updatedData.CategoryBoardsOrder.filter((o) => o.categoryID !== (data as CategoryBoardsOrder).categoryID)
-            this.updatedData.CategoryBoardsOrder.push(data as CategoryBoardsOrder)
+            const order = update.data
+            this.updatedData.CategoryBoardsOrder = this.updatedData.CategoryBoardsOrder.filter((o) => o.categoryID !== order.categoryID)
+            this.updatedData.CategoryBoardsOrder.push(order)
+            break
+        }
         }
 
         if (this.updateTimeout) {
