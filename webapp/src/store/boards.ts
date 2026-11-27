@@ -35,7 +35,7 @@ export const fetchBoardMembers = createStateThunk(
     'boardMembers/fetch',
     async ({teamId, boardId}: {teamId: string, boardId: string}, thunkAPI) => {
         const members = await client.getBoardMembers(teamId, boardId)
-        const users = [] as IUser[]
+        const users: IUser[] = []
         const userIDs = members.map((member) => member.userId)
 
         const usersData = await client.getTeamUsersList(userIDs, teamId)

@@ -18,7 +18,7 @@ import rawOctoClient from './octoClient'
 import {sendFlashMessage} from './components/flashMessages'
 import undoManager from './undomanager'
 import {Utils, IDType} from './utils'
-import {required} from './typeHelpers'
+import {asText, required} from './typeHelpers'
 import {UserSettings} from './userSettings'
 import {CategoryDraft} from './store/sidebar'
 
@@ -128,8 +128,8 @@ class Mutator {
             throw new Error('new and old blocks must have the same length when updating blocks')
         }
 
-        const updatePatches = [] as BlockPatch[]
-        const undoPatches = [] as BlockPatch[]
+        const updatePatches: BlockPatch[] = []
+        const undoPatches: BlockPatch[] = []
 
         newBlocks.forEach((newBlock, i) => {
             const [updatePatch, undoPatch] = createPatchesFromBlocks(newBlock, oldBlocks[i] as Block)
@@ -745,7 +745,7 @@ class Mutator {
             } else if (isNewTypeSelectOrMulti) { // if the new type is either select or multiselect - old type is other
                 // Map values to new template option IDs
                 for (const card of cards) {
-                    const oldValue = card.fields.properties[propertyTemplate.id] as string
+                    const oldValue = asText(card.fields.properties[propertyTemplate.id])
                     if (oldValue) {
                         let option = newTemplate.options.find((o: IPropertyOption) => o.value === oldValue)
                         if (!option) {
@@ -768,7 +768,7 @@ class Mutator {
             } else if (isNewTypePersonOrMulti) { // if the new type is either person or multiperson - old type is other
                 // Clear old values
                 for (const card of cards) {
-                    const oldValue = card.fields.properties[propertyTemplate.id] as string
+                    const oldValue = asText(card.fields.properties[propertyTemplate.id])
                     if (oldValue) {
                         const newCard = createCard(card)
                         delete newCard.fields.properties[propertyTemplate.id]

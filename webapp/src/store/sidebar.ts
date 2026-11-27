@@ -219,13 +219,13 @@ const sidebarSlice = createSlice({
             state.categoryAttributes = action.payload || []
             state.hiddenBoardIDs = state.categoryAttributes.flatMap(
                 (ca) => {
-                    return ca.boardMetadata.reduce((collector, m) => {
+                    return ca.boardMetadata.reduce<string[]>((collector, m) => {
                         if (m.hidden) {
                             collector.push(m.boardID)
                         }
 
                         return collector
-                    }, [] as string[])
+                    }, [])
                 },
             )
         })

@@ -261,8 +261,8 @@ function createPatchesFromBoards(newBoard: Board, oldBoard: Board): [BoardPatch,
 }
 
 function createPatchesFromBoardsAndBlocks(updatedBoard: Board, oldBoard: Board, updatedBlockIDs: string[], updatedBlocks: Block[], oldBlocks: Block[]): [BoardsAndBlocksPatch, BoardsAndBlocksPatch] {
-    const blockUpdatePatches = [] as BlockPatch[]
-    const blockUndoPatches = [] as BlockPatch[]
+    const blockUpdatePatches: BlockPatch[] = []
+    const blockUndoPatches: BlockPatch[] = []
     updatedBlocks.forEach((newBlock, i) => {
         const [updatePatch, undoPatch] = createPatchesFromBlocks(newBlock, oldBlocks[i] as Block)
         blockUpdatePatches.push(updatePatch)

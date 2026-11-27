@@ -3,7 +3,7 @@
 
 import {createSlice, PayloadAction, createSelector} from '@reduxjs/toolkit'
 
-import {CommentBlock} from '../blocks/commentBlock'
+import {CommentBlock, isCommentBlock} from '../blocks/commentBlock'
 
 import {loadBoardData, initialReadOnlyLoad} from './initialLoad'
 
@@ -49,10 +49,10 @@ const commentsSlice = createSlice({
             state.comments = {}
             state.commentsByCard = {}
             for (const block of action.payload.blocks) {
-                if (block.type === 'comment') {
-                    state.comments[block.id] = block as CommentBlock
+                if (isCommentBlock(block)) {
+                    state.comments[block.id] = block
                     const siblings = state.commentsByCard[block.parentId] ?? []
-                    siblings.push(block as CommentBlock)
+                    siblings.push(block)
                     state.commentsByCard[block.parentId] = siblings
                 }
             }
@@ -62,10 +62,10 @@ const commentsSlice = createSlice({
             state.comments = {}
             state.commentsByCard = {}
             for (const block of action.payload.blocks) {
-                if (block.type === 'comment') {
-                    state.comments[block.id] = block as CommentBlock
+                if (isCommentBlock(block)) {
+                    state.comments[block.id] = block
                     const siblings = state.commentsByCard[block.parentId] ?? []
-                    siblings.push(block as CommentBlock)
+                    siblings.push(block)
                     state.commentsByCard[block.parentId] = siblings
                 }
             }

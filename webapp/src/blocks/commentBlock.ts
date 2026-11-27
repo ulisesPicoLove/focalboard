@@ -13,4 +13,8 @@ function createCommentBlock(block?: Block): CommentBlock {
     }
 }
 
-export {CommentBlock, createCommentBlock}
+function isCommentBlock(block: Block): block is CommentBlock {
+    return block.type === 'comment'
+}
+
+export {CommentBlock, createCommentBlock, isCommentBlock}

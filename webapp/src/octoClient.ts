@@ -127,7 +127,7 @@ class OctoClient {
             return false
         }
 
-        const responseJson = (await this.getJson(response, {})) as {token?: string}
+        const responseJson = await this.getJson<{token?: string}>(response, {})
         if (responseJson.token) {
             localStorage.setItem('focalboardSessionId', responseJson.token)
             return true
@@ -170,7 +170,7 @@ class OctoClient {
             headers: this.headers(),
             body,
         })
-        const json = (await this.getJson(response, {})) as {error?: string}
+        const json = await this.getJson<{error?: string}>(response, {})
         return {code: response.status, json}
     }
 
@@ -182,7 +182,7 @@ class OctoClient {
             headers: this.headers(),
             body,
         })
-        const json = (await this.getJson(response, {})) as {error?: string}
+        const json = await this.getJson<{error?: string}>(response, {})
         return {code: response.status, json}
     }
 
@@ -520,7 +520,7 @@ class OctoClient {
             return undefined
         }
 
-        return this.getJson<BoardMember>(response, {} as BoardMember)
+        return this.getJsonOrUndefined<BoardMember>(response)
     }
 
     async joinBoard(boardId: string, allowAdmin: boolean): Promise<BoardMember|undefined> {
@@ -538,7 +538,7 @@ class OctoClient {
             return undefined
         }
 
-        return this.getJson<BoardMember>(response, {} as BoardMember)
+        return this.getJsonOrUndefined<BoardMember>(response)
     }
 
     async updateBoardMember(member: BoardMemberDraft): Promise<Response> {
@@ -792,7 +792,7 @@ class OctoClient {
             return undefined
         }
 
-        return this.getJson<Board>(response, {} as Board)
+        return this.getJsonOrUndefined<Board>(response)
     }
 
     async duplicateBoard(boardID: string, asTemplate: boolean, toTeam?: string): Promise<BoardsAndBlocks | undefined> {
@@ -814,7 +814,7 @@ class OctoClient {
             return undefined
         }
 
-        return this.getJson<BoardsAndBlocks>(response, {} as BoardsAndBlocks)
+        return this.getJsonOrUndefined<BoardsAndBlocks>(response)
     }
 
     async duplicateBlock(boardID: string, blockID: string, asTemplate: boolean): Promise<Block[] | undefined> {

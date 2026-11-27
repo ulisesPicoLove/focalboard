@@ -27,4 +27,8 @@ function createAttachmentBlock(block?: Block): AttachmentBlock {
     }
 }
 
-export {AttachmentBlock, createAttachmentBlock}
+function isAttachmentBlock(block: Block): block is AttachmentBlock {
+    return block.type === 'attachment'
+}
+
+export {AttachmentBlock, createAttachmentBlock, isAttachmentBlock}

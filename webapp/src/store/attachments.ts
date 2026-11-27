@@ -3,7 +3,7 @@
 
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 
-import {AttachmentBlock} from '../blocks/attachmentBlock'
+import {AttachmentBlock, isAttachmentBlock} from '../blocks/attachmentBlock'
 
 import {loadBoardData, initialReadOnlyLoad} from './initialLoad'
 
@@ -50,10 +50,10 @@ const attachmentSlice = createSlice({
             state.attachments = {}
             state.attachmentsByCard = {}
             for (const block of action.payload.blocks) {
-                if (block.type === 'attachment') {
-                    state.attachments[block.id] = block as AttachmentBlock
+                if (isAttachmentBlock(block)) {
+                    state.attachments[block.id] = block
                     const siblings = state.attachmentsByCard[block.parentId] ?? []
-                    siblings.push(block as AttachmentBlock)
+                    siblings.push(block)
                     state.attachmentsByCard[block.parentId] = siblings
                 }
             }
@@ -63,10 +63,10 @@ const attachmentSlice = createSlice({
             state.attachments = {}
             state.attachmentsByCard = {}
             for (const block of action.payload.blocks) {
-                if (block.type === 'attachment') {
-                    state.attachments[block.id] = block as AttachmentBlock
+                if (isAttachmentBlock(block)) {
+                    state.attachments[block.id] = block
                     const siblings = state.attachmentsByCard[block.parentId] ?? []
-                    siblings.push(block as AttachmentBlock)
+                    siblings.push(block)
                     state.attachmentsByCard[block.parentId] = siblings
                 }
             }
