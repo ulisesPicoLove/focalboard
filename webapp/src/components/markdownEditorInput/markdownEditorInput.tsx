@@ -36,7 +36,7 @@ import {IUser} from '../../user'
 import {getBoardUsersList, getMe} from '../../store/users'
 import {useHasPermissions} from '../../hooks/permissions'
 import {Permission} from '../../constants'
-import {BoardMember, BoardTypeOpen, MemberRole} from '../../blocks/board'
+import {BoardTypeOpen, MemberRole} from '../../blocks/board'
 import mutator from '../../mutator'
 import ConfirmAddUserForNotifications from '../confirmAddUserForNotifications'
 import RootPortal from '../rootPortal'
@@ -243,7 +243,7 @@ const MarkdownEditorInput = (props: Props): ReactElement => {
             schemeEditor: newRole === MemberRole.Admin || newRole === MemberRole.Editor,
             schemeCommenter: newRole === MemberRole.Admin || newRole === MemberRole.Editor || newRole === MemberRole.Commenter,
             schemeViewer: newRole === MemberRole.Admin || newRole === MemberRole.Editor || newRole === MemberRole.Commenter || newRole === MemberRole.Viewer,
-        } as BoardMember
+        }
 
         setConfirmAddUser(null)
         editorRef.current?.focus()

@@ -160,7 +160,7 @@ const Kanban = (props: Props) => {
             const dstBlockX = visibleOptionIds.indexOf(dstOption.id)
 
             // Here aboveRow means to the left while belowRow means to the right
-            const moveTo = (srcBlockX > dstBlockX ? 'aboveRow' : 'belowRow') as Position
+            const moveTo: Position = srcBlockX > dstBlockX ? 'aboveRow' : 'belowRow'
 
             const visibleOptionIdsRearranged = dragAndDropRearrange({
                 contentOrder: visibleOptionIds,
@@ -171,7 +171,7 @@ const Kanban = (props: Props) => {
                 srcBlockId: option.id,
                 dstBlockId: dstOption.id,
                 moveTo,
-            }) as string[]
+            }).flat()
 
             await mutator.changeViewVisibleOptionIds(board.id, activeView.id, activeView.fields.visibleOptionIds, visibleOptionIdsRearranged)
         }

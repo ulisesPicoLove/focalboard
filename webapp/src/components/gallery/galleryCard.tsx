@@ -64,11 +64,11 @@ const GalleryCard = (props: Props) => {
     }, [handleDeleteCard, intl])
 
     const image: ContentBlock|undefined = useMemo(() => {
-        for (let i = 0; i < contents.length; ++i) {
-            if (Array.isArray(contents[i])) {
-                return (contents[i] as ContentBlock[]).find((c) => c.type === 'image')
-            } else if ((contents[i] as ContentBlock).type === 'image') {
-                return contents[i] as ContentBlock
+        for (const content of contents) {
+            if (Array.isArray(content)) {
+                return content.find((c) => c.type === 'image')
+            } else if (content.type === 'image') {
+                return content
             }
         }
         return undefined

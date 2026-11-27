@@ -1,14 +1,14 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 import {Block, BlockPatch, FileInfo} from './blocks/block'
-import {Board, BoardsAndBlocks, BoardsAndBlocksPatch, BoardPatch, BoardMember} from './blocks/board'
+import {Board, BoardsAndBlocks, BoardsAndBlocksPatch, BoardPatch, BoardMember, BoardMemberDraft} from './blocks/board'
 import {ISharing} from './blocks/sharing'
 import {OctoUtils} from './octoUtils'
 import {IUser, UserConfigPatch, UserPreference} from './user'
 import {Utils} from './utils'
 import {ClientConfig} from './config/clientConfig'
 import {UserSettings} from './userSettings'
-import {Category, CategoryBoards} from './store/sidebar'
+import {CategoryBoards, CategoryDraft} from './store/sidebar'
 import {Team} from './store/teams'
 import {Subscription} from './wsclient'
 import {PrepareOnboardingResponse} from './onboardingTour'
@@ -506,7 +506,7 @@ class OctoClient {
     }
 
     // BoardMember
-    async createBoardMember(member: Partial<BoardMember>): Promise<BoardMember|undefined> {
+    async createBoardMember(member: BoardMemberDraft): Promise<BoardMember|undefined> {
         Utils.log(`createBoardMember: user ${member.userId} and board ${member.boardId}`)
 
         const body = JSON.stringify(member)
@@ -541,7 +541,7 @@ class OctoClient {
         return this.getJson<BoardMember>(response, {} as BoardMember)
     }
 
-    async updateBoardMember(member: BoardMember): Promise<Response> {
+    async updateBoardMember(member: BoardMemberDraft): Promise<Response> {
         Utils.log(`udpateBoardMember: user ${member.userId} and board ${member.boardId}`)
 
         const body = JSON.stringify(member)
@@ -552,7 +552,7 @@ class OctoClient {
         })
     }
 
-    async deleteBoardMember(member: BoardMember): Promise<Response> {
+    async deleteBoardMember(member: BoardMemberDraft): Promise<Response> {
         Utils.log(`deleteBoardMember: user ${member.userId} and board ${member.boardId}`)
 
         return apiFetch(this.getBaseURL() + `/api/v2/boards/${member.boardId}/members/${member.userId}`, {
@@ -882,7 +882,7 @@ class OctoClient {
         return this.getJson<CategoryBoards[]>(response, [])
     }
 
-    async createSidebarCategory(category: Category): Promise<Response> {
+    async createSidebarCategory(category: CategoryDraft): Promise<Response> {
         const path = `/api/v2/teams/${category.teamID}/categories`
         const body = JSON.stringify(category)
         return apiFetch(this.getBaseURL() + path, {
@@ -900,7 +900,7 @@ class OctoClient {
         })
     }
 
-    async updateSidebarCategory(category: Category): Promise<Response> {
+    async updateSidebarCategory(category: CategoryDraft): Promise<Response> {
         const path = `/api/v2/teams/${category.teamID}/categories/${category.id}`
         const body = JSON.stringify(category)
         return apiFetch(this.getBaseURL() + path, {

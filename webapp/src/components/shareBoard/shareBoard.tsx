@@ -175,7 +175,7 @@ function ShareBoardDialogContent(props: Props & {board: Board}): React.JSX.Eleme
             schemeEditor: minimumRole === MemberRole.Editor,
             schemeCommenter: minimumRole === MemberRole.Editor || minimumRole === MemberRole.Commenter,
             schemeViewer: minimumRole === MemberRole.Editor || minimumRole === MemberRole.Commenter || minimumRole === MemberRole.Viewer,
-        } as BoardMember
+        }
         mutator.createBoardMember(newMember)
     }
 
@@ -185,11 +185,11 @@ function ShareBoardDialogContent(props: Props & {board: Board}): React.JSX.Eleme
             return
         }
 
-        const newMember = {
+        const newMember: Partial<BoardMember> & {boardId: string, userId: string} = {
             boardId: member.boardId,
             userId: member.userId,
             roles: member.roles,
-        } as BoardMember
+        }
 
         switch (newPermission) {
         case MemberRole.Admin:

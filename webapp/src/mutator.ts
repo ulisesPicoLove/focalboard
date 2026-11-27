@@ -7,7 +7,7 @@ import cloneDeep from 'lodash/cloneDeep'
 
 import {BlockIcons} from './blockIcons'
 import {Block, BlockPatch, createPatchesFromBlocks} from './blocks/block'
-import {Board, BoardMember, BoardsAndBlocks, IPropertyOption, IPropertyTemplate, PropertyTypeEnum, createBoard, createPatchesFromBoards, createPatchesFromBoardsAndBlocks, createCardPropertiesPatches} from './blocks/board'
+import {Board, BoardMember, BoardMemberDraft, BoardsAndBlocks, IPropertyOption, IPropertyTemplate, PropertyTypeEnum, createBoard, createPatchesFromBoards, createPatchesFromBoardsAndBlocks, createCardPropertiesPatches} from './blocks/board'
 import {BoardView, ISortOption, createBoardView, KanbanCalculationFields} from './blocks/boardView'
 import {Card, CardFields, createCard} from './blocks/card'
 import {ContentBlock} from './blocks/contentBlock'
@@ -20,7 +20,7 @@ import undoManager from './undomanager'
 import {Utils, IDType} from './utils'
 import {required} from './typeHelpers'
 import {UserSettings} from './userSettings'
-import {Category} from './store/sidebar'
+import {CategoryDraft} from './store/sidebar'
 
 /* eslint-disable max-lines */
 import {UserConfigPatch, UserPreference} from './user'
@@ -385,7 +385,7 @@ class Mutator {
 
     // Board Members
 
-    async createBoardMember(member: BoardMember, description = 'create board member'): Promise<void> {
+    async createBoardMember(member: BoardMemberDraft, description = 'create board member'): Promise<void> {
         await undoManager.perform(
             async () => {
                 await octoClient.createBoardMember(member)
@@ -398,7 +398,7 @@ class Mutator {
         )
     }
 
-    async updateBoardMember(newMember: BoardMember, oldMember: BoardMember, description = 'update board member'): Promise<void> {
+    async updateBoardMember(newMember: BoardMemberDraft, oldMember: BoardMember, description = 'update board member'): Promise<void> {
         await undoManager.perform(
             async () => {
                 await octoClient.updateBoardMember(newMember)
@@ -411,7 +411,7 @@ class Mutator {
         )
     }
 
-    async deleteBoardMember(member: BoardMember, description = 'delete board member'): Promise<void> {
+    async deleteBoardMember(member: BoardMemberDraft, description = 'delete board member'): Promise<void> {
         await undoManager.perform(
             async () => {
                 await octoClient.deleteBoardMember(member)
@@ -983,7 +983,7 @@ class Mutator {
         return this.unhideViewColumns(boardId, view, [columnOptionId])
     }
 
-    async createCategory(category: Category): Promise<void> {
+    async createCategory(category: CategoryDraft): Promise<void> {
         await octoClient.createSidebarCategory(category)
     }
 
@@ -991,7 +991,7 @@ class Mutator {
         await octoClient.deleteSidebarCategory(teamID, categoryID)
     }
 
-    async updateCategory(category: Category): Promise<void> {
+    async updateCategory(category: CategoryDraft): Promise<void> {
         await octoClient.updateSidebarCategory(category)
     }
 

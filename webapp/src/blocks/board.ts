@@ -68,6 +68,9 @@ type BoardMember = {
     synthetic: boolean
 }
 
+// What the client sends when it adds or changes a member: the server fills in the rest
+type BoardMemberDraft = Pick<BoardMember, 'boardId' | 'userId'> & Partial<BoardMember>
+
 type BoardsAndBlocks = {
     boards: Board[]
     blocks: Block[]
@@ -289,6 +292,7 @@ export {
     Board,
     BoardPatch,
     BoardMember,
+    BoardMemberDraft,
     BoardsAndBlocks,
     BoardsAndBlocksPatch,
     PropertyTypeEnum,

@@ -96,6 +96,7 @@ const ContentBlockWithDragAndDrop = (props: ContentBlockWithDragAndDropProps) =>
     const [, isOver2,, itemRef2] = useSortableWithGrip('content', {block: props.block, cords: {x: props.x}}, true, (src, dst) => moveBlock(props.card, src, dst, props.intl, 'belowRow'))
 
     if (Array.isArray(props.block)) {
+        const rowBlocks = props.block
         return (
             <div >
                 <div
@@ -107,13 +108,13 @@ const ContentBlockWithDragAndDrop = (props: ContentBlockWithDragAndDropProps) =>
                     style={{display: 'flex'}}
                 >
 
-                    {props.block.map((b, y) => (
+                    {rowBlocks.map((b, y) => (
                         <ContentBlock
                             key={b.id}
                             block={b}
                             card={props.card}
                             readonly={props.readonly}
-                            width={(1 / (props.block as ContentBlockType[]).length) * 100}
+                            width={(1 / rowBlocks.length) * 100}
                             onDrop={(src, dst, moveTo) => moveBlock(props.card, src, dst, props.intl, moveTo)}
                             cords={{x: props.x, y}}
                         />

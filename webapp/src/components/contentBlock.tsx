@@ -117,8 +117,9 @@ const ContentBlock = (props: Props): React.JSX.Element => {
                                 onClick={() => {
                                     const description = intl.formatMessage({id: 'ContentBlock.DeleteAction', defaultMessage: 'delete'})
 
-                                    if (colIndex > -1) {
-                                        (contentOrder[index] as string[]).splice(colIndex, 1)
+                                    const colRow = contentOrder[index]
+                                    if (colIndex > -1 && Array.isArray(colRow)) {
+                                        colRow.splice(colIndex, 1)
                                     } else {
                                         contentOrder.splice(index, 1)
                                     }

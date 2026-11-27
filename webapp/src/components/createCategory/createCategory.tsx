@@ -8,7 +8,7 @@ import {useIntl} from 'react-intl'
 import {keyboardActivation} from '../../keyboardActivation'
 
 import {IUser} from '../../user'
-import {Category} from '../../store/sidebar'
+import {CategoryDraft} from '../../store/sidebar'
 import {getCurrentTeam} from '../../store/teams'
 import mutator from '../../mutator'
 import {useAppSelector} from '../../store/hooks'
@@ -57,20 +57,20 @@ const CreateCategory = (props: Props): React.JSX.Element => {
         }
 
         if (props.renameModal) {
-            const category: Category = {
+            const category: CategoryDraft = {
                 name: categoryName,
                 id: props.boardCategoryId,
                 userID: me.id,
                 teamID,
-            } as Category
+            }
 
             await mutator.updateCategory(category)
         } else {
-            const category: Category = {
+            const category: CategoryDraft = {
                 name: categoryName,
                 userID: me.id,
                 teamID,
-            } as Category
+            }
 
             await mutator.createCategory(category)
         }

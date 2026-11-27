@@ -30,6 +30,9 @@ interface CategoryBoardMetadata {
     hidden: boolean
 }
 
+// What the client sends when it creates or renames a category: the server fills in the rest
+type CategoryDraft = Pick<Category, 'name' | 'userID' | 'teamID'> & Partial<Category>
+
 interface CategoryBoards extends Category {
     boardMetadata: CategoryBoardMetadata[]
 }
@@ -247,5 +250,5 @@ export const {reducer} = sidebarSlice
 
 export const {updateCategories, updateBoardCategories, updateCategoryOrder, updateCategoryBoardsOrder, reorderCategoryBoards} = sidebarSlice.actions
 
-export {Category, CategoryBoards, BoardCategoryWebsocketData, CategoryBoardsReorderData, CategoryBoardMetadata}
+export {Category, CategoryDraft, CategoryBoards, BoardCategoryWebsocketData, CategoryBoardsReorderData, CategoryBoardMetadata}
 

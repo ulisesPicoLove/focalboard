@@ -10,7 +10,7 @@ import {IUser} from '../../user'
 import mutator from '../../mutator'
 import {useAppSelector} from '../../store/hooks'
 import {getBoardUsers, getMe} from '../../store/users'
-import {BoardMember, BoardTypeOpen, MemberRole} from '../../blocks/board'
+import {BoardTypeOpen, MemberRole} from '../../blocks/board'
 
 import {PropertyProps} from '../types'
 import {useHasPermissions} from '../../hooks/permissions'
@@ -83,7 +83,7 @@ const ConfirmPerson = (props: PropertyProps): React.JSX.Element => {
             schemeEditor: newRole === MemberRole.Admin || newRole === MemberRole.Editor,
             schemeCommenter: newRole === MemberRole.Admin || newRole === MemberRole.Editor || newRole === MemberRole.Commenter,
             schemeViewer: newRole === MemberRole.Admin || newRole === MemberRole.Editor || newRole === MemberRole.Commenter || newRole === MemberRole.Viewer,
-        } as BoardMember
+        }
 
         setConfirmAddUser(null)
         await mutator.createBoardMember(newMember)

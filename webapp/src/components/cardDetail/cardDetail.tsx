@@ -315,19 +315,17 @@ const CardDetail = (props: Props): React.JSX.Element|null => {
                         onBlockMoved={async (block: BlockData, beforeBlock: BlockData|null, afterBlock: BlockData|null): Promise<void> => {
                             if (block.id) {
                                 const idx = card.fields.contentOrder.indexOf(block.id)
-                                let sourceBlockId: string
-                                let sourceWhere: 'after'|'before'
                                 if (idx === -1) {
                                     Utils.logError('Unable to find the block id in the order of the current block')
                                     return
                                 }
-                                if (idx === 0) {
-                                    sourceBlockId = card.fields.contentOrder[1] as string
-                                    sourceWhere = 'before'
-                                } else {
-                                    sourceBlockId = card.fields.contentOrder[idx - 1] as string
-                                    sourceWhere = 'after'
+                                const neighbor = card.fields.contentOrder[idx === 0 ? 1 : idx - 1]
+                                const neighborId = Array.isArray(neighbor) ? neighbor[0] : neighbor
+                                if (!neighborId) {
+                                    return
                                 }
+                                const sourceBlockId: string = neighborId
+                                const sourceWhere: 'after'|'before' = idx === 0 ? 'before' : 'after'
                                 if (afterBlock && afterBlock.id) {
                                     await mutator.moveContentBlock(block.id, afterBlock.id, 'after', sourceBlockId, sourceWhere, intl.formatMessage({id: 'ContentBlock.moveBlock', defaultMessage: 'move card content'}))
                                     return

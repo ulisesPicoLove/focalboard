@@ -36,13 +36,14 @@ const BoardTemplateSelectorPreview = (props: Props) => {
             setActiveTemplateCards([])
             octoClient.getAllBlocks(activeTemplate.id).then((blocks) => {
                 if (isSubscribed) {
-                    const cards = blocks.filter((b) => b.type === 'card')
-                    const views = blocks.filter((b) => b.type === 'view').sort((a, b) => a.title.localeCompare(b.title))
-                    if (views.length > 0) {
-                        setActiveView(views[0] as BoardView)
+                    const cards = blocks.filter((b): b is Card => b.type === 'card')
+                    const views = blocks.filter((b): b is BoardView => b.type === 'view').sort((a, b) => a.title.localeCompare(b.title))
+                    const [firstView] = views
+                    if (firstView) {
+                        setActiveView(firstView)
                     }
                     if (cards.length > 0) {
-                        setActiveTemplateCards(cards as Card[])
+                        setActiveTemplateCards(cards)
                     }
                 }
             })
