@@ -108,7 +108,6 @@ func (a *API) RegisterRoutes(r *mux.Router) {
 	a.registerContentBlocksRoutes(apiv2)
 
 	// V3 routes
-	a.registerCardsRoutes(apiv2)
 
 	// System routes are outside the /api/v2 path
 	a.registerSystemRoutes(r)

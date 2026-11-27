@@ -13,116 +13,11 @@ import (
 
 func (a *API) registerUsersRoutes(r *mux.Router) {
 	// Users APIs
-	r.HandleFunc("/users", a.sessionRequired(a.handleGetUsersList)).Methods("POST")
 	r.HandleFunc("/users/me", a.sessionRequired(a.handleGetMe)).Methods("GET")
 	r.HandleFunc("/users/me/memberships", a.sessionRequired(a.handleGetMyMemberships)).Methods("GET")
 	r.HandleFunc("/users/{userID}", a.sessionRequired(a.handleGetUser)).Methods("GET")
 	r.HandleFunc("/users/{userID}/config", a.sessionRequired(a.handleUpdateUserConfig)).Methods(http.MethodPut)
 	r.HandleFunc("/users/me/config", a.sessionRequired(a.handleGetUserPreferences)).Methods(http.MethodGet)
-}
-
-func (a *API) handleGetUsersList(w http.ResponseWriter, r *http.Request) {
-	// swagger:operation POST /users getUsersList
-	//
-	// Returns a user[]
-	//
-	// ---
-	// produces:
-	// - application/json
-	// parameters:
-	// - name: userID
-	//   in: path
-	//   description: User ID
-	//   required: true
-	//   type: string
-	// security:
-	// - BearerAuth: []
-	// responses:
-	//   '200':
-	//     description: success
-	//     schema:
-	//       "$ref": "#/definitions/User"
-	//   default:
-	//     description: internal error
-	//     schema:
-	//       "$ref": "#/definitions/ErrorResponse"
-
-	requestBody, err := io.ReadAll(r.Body)
-	if err != nil {
-		a.errorResponse(w, r, err)
-		return
-	}
-
-	var userIDs []string
-	if err = json.Unmarshal(requestBody, &userIDs); err != nil {
-		a.errorResponse(w, r, err)
-		return
-	}
-
-	auditRec := a.makeAuditRecord(r, "getUsersList", audit.Fail)
-	defer a.audit.LogRecord(audit.LevelAuth, auditRec)
-
-	var users []*model.User
-	var error error
-
-	if len(userIDs) == 0 {
-		a.errorResponse(w, r, model.NewErrBadRequest("User IDs are empty"))
-		return
-	}
-
-	if userIDs[0] == model.SingleUser {
-		ws, rootErr := a.app.GetRootTeam()
-		if rootErr != nil {
-			a.errorResponse(w, r, rootErr)
-			return
-		}
-		now := utils.GetMillis()
-		user := &model.User{
-			ID:       model.SingleUser,
-			Username: model.SingleUser,
-			Email:    model.SingleUser,
-			CreateAt: ws.UpdateAt,
-			UpdateAt: now,
-		}
-		users = append(users, user)
-	} else {
-		users, error = a.app.GetUsersList(userIDs)
-		if error != nil {
-			a.errorResponse(w, r, error)
-			return
-		}
-	}
-
-	ctx := r.Context()
-	session := ctx.Value(sessionContextKey).(*model.Session)
-	isSystemAdmin := a.permissions.HasPermissionTo(session.UserID, model.PermissionManageSystem)
-
-	sanitizedUsers := make([]*model.User, 0)
-	for _, user := range users {
-		canSeeUser, err2 := a.app.CanSeeUser(session.UserID, user.ID)
-		if err2 != nil {
-			a.errorResponse(w, r, err2)
-			return
-		}
-		if !canSeeUser {
-			continue
-		}
-		if user.ID == session.UserID {
-			user.Sanitize(map[string]bool{})
-		} else {
-			a.app.SanitizeProfile(user, isSystemAdmin)
-		}
-		sanitizedUsers = append(sanitizedUsers, user)
-	}
-
-	usersList, err := json.Marshal(sanitizedUsers)
-	if err != nil {
-		a.errorResponse(w, r, err)
-		return
-	}
-
-	jsonStringResponse(w, http.StatusOK, string(usersList))
-	auditRec.Success()
 }
 
 func (a *API) handleGetMe(w http.ResponseWriter, r *http.Request) {

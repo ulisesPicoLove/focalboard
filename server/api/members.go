@@ -18,7 +18,6 @@ func (a *API) registerMembersRoutes(r *mux.Router) {
 	r.HandleFunc("/boards/{boardID}/members/{userID}", a.sessionRequired(a.handleUpdateMember)).Methods("PUT")
 	r.HandleFunc("/boards/{boardID}/members/{userID}", a.sessionRequired(a.handleDeleteMember)).Methods("DELETE")
 	r.HandleFunc("/boards/{boardID}/join", a.sessionRequired(a.handleJoinBoard)).Methods("POST")
-	r.HandleFunc("/boards/{boardID}/leave", a.sessionRequired(a.handleLeaveBoard)).Methods("POST")
 }
 
 func (a *API) handleGetMembersForBoard(w http.ResponseWriter, r *http.Request) {
@@ -300,74 +299,6 @@ func (a *API) handleJoinBoard(w http.ResponseWriter, r *http.Request) {
 
 	// response
 	jsonBytesResponse(w, http.StatusOK, data)
-
-	auditRec.Success()
-}
-
-func (a *API) handleLeaveBoard(w http.ResponseWriter, r *http.Request) {
-	// swagger:operation POST /boards/{boardID}/leave leaveBoard
-	//
-	// Remove your own membership from a board
-	//
-	// ---
-	// produces:
-	// - application/json
-	// parameters:
-	// - name: boardID
-	//   in: path
-	//   description: Board ID
-	//   required: true
-	//   type: string
-	// security:
-	// - BearerAuth: []
-	// responses:
-	//   '200':
-	//     description: success
-	//   '404':
-	//     description: board not found
-	//   '403':
-	//     description: access denied
-	//   default:
-	//     description: internal error
-	//     schema:
-	//       "$ref": "#/definitions/ErrorResponse"
-
-	userID := getUserID(r)
-	if userID == "" {
-		a.errorResponse(w, r, model.NewErrBadRequest("invalid session"))
-		return
-	}
-
-	boardID := mux.Vars(r)["boardID"]
-
-	if !a.permissions.HasPermissionToBoard(userID, boardID, model.PermissionViewBoard) {
-		a.errorResponse(w, r, model.NewErrPermission("access denied to board"))
-		return
-	}
-
-	board, err := a.app.GetBoard(boardID)
-	if err != nil {
-		a.errorResponse(w, r, err)
-		return
-	}
-
-	auditRec := a.makeAuditRecord(r, "leaveBoard", audit.Fail)
-	defer a.audit.LogRecord(audit.LevelModify, auditRec)
-	auditRec.AddMeta("boardID", boardID)
-	auditRec.AddMeta("addedUserID", userID)
-
-	err = a.app.DeleteBoardMember(boardID, userID)
-	if err != nil {
-		a.errorResponse(w, r, err)
-		return
-	}
-
-	a.logger.Debug("LeaveBoard",
-		mlog.String("boardID", board.ID),
-		mlog.String("addedUserID", userID),
-	)
-
-	jsonStringResponse(w, http.StatusOK, "{}")
 
 	auditRec.Success()
 }

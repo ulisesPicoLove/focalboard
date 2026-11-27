@@ -177,10 +177,6 @@ func (c *Client) GetJoinBoardRoute(boardID string) string {
 	return fmt.Sprintf("%s/%s/join", c.GetBoardsRoute(), boardID)
 }
 
-func (c *Client) GetLeaveBoardRoute(boardID string) string {
-	return fmt.Sprintf("%s/%s/join", c.GetBoardsRoute(), boardID)
-}
-
 func (c *Client) GetBlocksRoute(boardID string) string {
 	return fmt.Sprintf("%s/blocks", c.GetBoardRoute(boardID))
 }
@@ -191,14 +187,6 @@ func (c *Client) GetAllBlocksRoute(boardID string) string {
 
 func (c *Client) GetBoardsAndBlocksRoute() string {
 	return "/boards-and-blocks"
-}
-
-func (c *Client) GetCardsRoute() string {
-	return "/cards"
-}
-
-func (c *Client) GetCardRoute(cardID string) string {
-	return fmt.Sprintf("%s/%s", c.GetCardsRoute(), cardID)
 }
 
 func (c *Client) GetTeam(teamID string) (*model.Team, *Response) {
@@ -319,78 +307,6 @@ func (c *Client) DeleteBlock(boardID, blockID string, disableNotify bool) (bool,
 //
 // Cards
 //
-
-func (c *Client) CreateCard(boardID string, card *model.Card, disableNotify bool) (*model.Card, *Response) {
-	var queryParams string
-	if disableNotify {
-		queryParams = "?" + disableNotifyQueryParam
-	}
-	r, err := c.DoAPIPost(c.GetBoardRoute(boardID)+"/cards"+queryParams, toJSON(card))
-	if err != nil {
-		return nil, BuildErrorResponse(r, err)
-	}
-	defer closeBody(r)
-
-	var cardNew *model.Card
-	if err := json.NewDecoder(r.Body).Decode(&cardNew); err != nil {
-		return nil, BuildErrorResponse(r, err)
-	}
-
-	return cardNew, BuildResponse(r)
-}
-
-func (c *Client) GetCards(boardID string, page int, perPage int) ([]*model.Card, *Response) {
-	url := fmt.Sprintf("%s/cards?page=%d&per_page=%d", c.GetBoardRoute(boardID), page, perPage)
-	r, err := c.DoAPIGet(url, "")
-	if err != nil {
-		return nil, BuildErrorResponse(r, err)
-	}
-
-	defer closeBody(r)
-
-	var cards []*model.Card
-	if err := json.NewDecoder(r.Body).Decode(&cards); err != nil {
-		return nil, BuildErrorResponse(r, err)
-	}
-
-	return cards, BuildResponse(r)
-}
-
-func (c *Client) PatchCard(cardID string, cardPatch *model.CardPatch, disableNotify bool) (*model.Card, *Response) {
-	var queryParams string
-	if disableNotify {
-		queryParams = "?" + disableNotifyQueryParam
-	}
-	r, err := c.DoAPIPatch(c.GetCardRoute(cardID)+queryParams, toJSON(cardPatch))
-	if err != nil {
-		return nil, BuildErrorResponse(r, err)
-	}
-
-	defer closeBody(r)
-
-	var cardNew *model.Card
-	if err := json.NewDecoder(r.Body).Decode(&cardNew); err != nil {
-		return nil, BuildErrorResponse(r, err)
-	}
-
-	return cardNew, BuildResponse(r)
-}
-
-func (c *Client) GetCard(cardID string) (*model.Card, *Response) {
-	r, err := c.DoAPIGet(c.GetCardRoute(cardID), "")
-	if err != nil {
-		return nil, BuildErrorResponse(r, err)
-	}
-
-	defer closeBody(r)
-
-	var card *model.Card
-	if err := json.NewDecoder(r.Body).Decode(&card); err != nil {
-		return nil, BuildErrorResponse(r, err)
-	}
-
-	return card, BuildResponse(r)
-}
 
 //
 // Boards and blocks.
@@ -742,16 +658,6 @@ func (c *Client) AddMemberToBoard(member *model.BoardMember) (*model.BoardMember
 
 func (c *Client) JoinBoard(boardID string) (*model.BoardMember, *Response) {
 	r, err := c.DoAPIPost(c.GetJoinBoardRoute(boardID), "")
-	if err != nil {
-		return nil, BuildErrorResponse(r, err)
-	}
-	defer closeBody(r)
-
-	return model.BoardMemberFromJSON(r.Body), BuildResponse(r)
-}
-
-func (c *Client) LeaveBoard(boardID string) (*model.BoardMember, *Response) {
-	r, err := c.DoAPIPost(c.GetLeaveBoardRoute(boardID), "")
 	if err != nil {
 		return nil, BuildErrorResponse(r, err)
 	}

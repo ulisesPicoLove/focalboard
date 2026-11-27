@@ -5,7 +5,6 @@ import (
 	"crypto/rand"
 	"testing"
 
-	"github.com/mattermost/focalboard/server/client"
 	"github.com/mattermost/focalboard/server/model"
 	"github.com/mattermost/focalboard/server/utils"
 	"github.com/stretchr/testify/require"
@@ -162,33 +161,6 @@ func TestGetUser(t *testing.T) {
 		user, resp := th.Client.GetUser("nonexistid")
 		require.Error(t, resp.Error)
 		require.Nil(t, user)
-	})
-}
-
-func TestGetUserList(t *testing.T) {
-	th := SetupTestHelper(t).InitBasic()
-	defer th.TearDown()
-
-	user1 := th.GetUser1()
-	user2 := th.GetUser2()
-
-	t.Run("a signed-in user gets the users that were asked for", func(t *testing.T) {
-		users, resp := th.Client.GetUserList([]string{user1.ID, user2.ID})
-		require.NoError(t, resp.Error)
-		require.Len(t, users, 2)
-	})
-
-	t.Run("an unknown id makes the whole request fail with 404", func(t *testing.T) {
-		users, resp := th.Client.GetUserList([]string{user1.ID, "does-not-exist"})
-		require.Error(t, resp.Error)
-		require.Equal(t, 404, resp.StatusCode)
-		require.Nil(t, users)
-	})
-
-	t.Run("an anonymous caller is rejected", func(t *testing.T) {
-		anon := client.NewClient(th.Server.Config().ServerRoot, "")
-		_, resp := anon.GetUserList([]string{user1.ID})
-		require.Error(t, resp.Error)
 	})
 }
 

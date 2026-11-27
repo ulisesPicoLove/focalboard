@@ -22,6 +22,8 @@ var (
 
 	ErrBoardMemberIsLastAdmin = errors.New("cannot leave a board with no admins")
 
+	ErrBoardIDMismatch = errors.New("Board IDs do not match")
+
 	ErrRequestEntityTooLarge = errors.New("request entity too large")
 
 	ErrInvalidBoardSearchField = errors.New("invalid board search field")

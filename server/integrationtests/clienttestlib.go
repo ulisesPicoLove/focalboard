@@ -2,7 +2,6 @@ package integrationtests
 
 import (
 	"errors"
-	"fmt"
 	"net/http"
 	"os"
 	"testing"
@@ -375,23 +374,6 @@ func (th *TestHelper) CreateCategory(category model.Category) *model.Category {
 func (th *TestHelper) UpdateCategoryBoard(teamID, categoryID, boardID string) {
 	response := th.Client.UpdateCategoryBoard(teamID, categoryID, boardID)
 	th.CheckOK(response)
-}
-
-func (th *TestHelper) CreateBoardAndCards(teamdID string, boardType model.BoardType, numCards int) (*model.Board, []*model.Card) {
-	board := th.CreateBoard(teamdID, boardType)
-	cards := make([]*model.Card, 0, numCards)
-	for i := 0; i < numCards; i++ {
-		card := &model.Card{
-			Title:        fmt.Sprintf("test card %d", i+1),
-			ContentOrder: []string{utils.NewID(utils.IDTypeBlock), utils.NewID(utils.IDTypeBlock), utils.NewID(utils.IDTypeBlock)},
-			Icon:         "😱",
-			Properties:   th.MakeCardProps(5),
-		}
-		newCard, resp := th.Client.CreateCard(board.ID, card, true)
-		th.CheckOK(resp)
-		cards = append(cards, newCard)
-	}
-	return board, cards
 }
 
 func (th *TestHelper) MakeCardProps(count int) map[string]any {

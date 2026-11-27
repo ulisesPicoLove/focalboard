@@ -25,12 +25,6 @@ definitions:
             BoardsAndBlocks is used to operate over boards and blocks at the
             same time
         x-go-package: github.com/mattermost/focalboard/server/model
-    Card:
-        title: Card represents a group of content blocks and properties.
-        x-go-package: github.com/mattermost/focalboard/server/model
-    CardPatch:
-        description: CardPatch is a patch for modifying cards
-        x-go-package: github.com/mattermost/focalboard/server/model
     Category:
         description: Category is a board category
         x-go-package: github.com/mattermost/focalboard/server/model
@@ -522,71 +516,6 @@ paths:
                         $ref: '#/definitions/ErrorResponse'
             security:
                 - BearerAuth: []
-    /boards/{boardID}/cards:
-        get:
-            operationId: getCards
-            parameters:
-                - description: Board ID
-                  in: path
-                  name: boardID
-                  required: true
-                  type: string
-                - description: The page to select (default=0)
-                  in: query
-                  name: page
-                  type: integer
-                - description: Number of cards to return per page(default=100)
-                  in: query
-                  name: per_page
-                  type: integer
-            produces:
-                - application/json
-            responses:
-                "200":
-                    description: success
-                    schema:
-                        items:
-                            $ref: '#/definitions/Card'
-                        type: array
-                default:
-                    description: internal error
-                    schema:
-                        $ref: '#/definitions/ErrorResponse'
-            security:
-                - BearerAuth: []
-            summary: Fetches cards for the specified board.
-        post:
-            operationId: createCard
-            parameters:
-                - description: Board ID
-                  in: path
-                  name: boardID
-                  required: true
-                  type: string
-                - description: the card to create
-                  in: body
-                  name: Body
-                  required: true
-                  schema:
-                    $ref: '#/definitions/Card'
-                - description: Disables notifications (for bulk data inserting)
-                  in: query
-                  name: disable_notify
-                  type: bool
-            produces:
-                - application/json
-            responses:
-                "200":
-                    description: success
-                    schema:
-                        $ref: '#/definitions/Card'
-                default:
-                    description: internal error
-                    schema:
-                        $ref: '#/definitions/ErrorResponse'
-            security:
-                - BearerAuth: []
-            summary: Creates a new card for the specified board.
     /boards/{boardID}/duplicate:
         post:
             description: Returns the new created board and all the blocks
@@ -629,31 +558,6 @@ paths:
                     description: success
                     schema:
                         $ref: '#/definitions/BoardMember'
-                "403":
-                    description: access denied
-                "404":
-                    description: board not found
-                default:
-                    description: internal error
-                    schema:
-                        $ref: '#/definitions/ErrorResponse'
-            security:
-                - BearerAuth: []
-    /boards/{boardID}/leave:
-        post:
-            description: Remove your own membership from a board
-            operationId: leaveBoard
-            parameters:
-                - description: Board ID
-                  in: path
-                  name: boardID
-                  required: true
-                  type: string
-            produces:
-                - application/json
-            responses:
-                "200":
-                    description: success
                 "403":
                     description: access denied
                 "404":
@@ -877,62 +781,6 @@ paths:
                         $ref: '#/definitions/ErrorResponse'
             security:
                 - BearerAuth: []
-    /cards/{cardID}:
-        get:
-            operationId: getCard
-            parameters:
-                - description: Card ID
-                  in: path
-                  name: cardID
-                  required: true
-                  type: string
-            produces:
-                - application/json
-            responses:
-                "200":
-                    description: success
-                    schema:
-                        $ref: '#/definitions/Card'
-                default:
-                    description: internal error
-                    schema:
-                        $ref: '#/definitions/ErrorResponse'
-            security:
-                - BearerAuth: []
-            summary: Fetches the specified card.
-    /cards/{cardID}/cards:
-        patch:
-            operationId: patchCard
-            parameters:
-                - description: Card ID
-                  in: path
-                  name: cardID
-                  required: true
-                  type: string
-                - description: the card patch
-                  in: body
-                  name: Body
-                  required: true
-                  schema:
-                    $ref: '#/definitions/CardPatch'
-                - description: Disables notifications (for bulk data patching)
-                  in: query
-                  name: disable_notify
-                  type: bool
-            produces:
-                - application/json
-            responses:
-                "200":
-                    description: success
-                    schema:
-                        $ref: '#/definitions/Card'
-                default:
-                    description: internal error
-                    schema:
-                        $ref: '#/definitions/ErrorResponse'
-            security:
-                - BearerAuth: []
-            summary: Patches the specified card.
     /clientConfig:
         get:
             description: Returns the client configuration
@@ -1538,29 +1386,6 @@ paths:
                         items:
                             $ref: '#/definitions/User'
                         type: array
-                default:
-                    description: internal error
-                    schema:
-                        $ref: '#/definitions/ErrorResponse'
-            security:
-                - BearerAuth: []
-    /users:
-        post:
-            description: Returns a user[]
-            operationId: getUsersList
-            parameters:
-                - description: User ID
-                  in: path
-                  name: userID
-                  required: true
-                  type: string
-            produces:
-                - application/json
-            responses:
-                "200":
-                    description: success
-                    schema:
-                        $ref: '#/definitions/User'
                 default:
                     description: internal error
                     schema:
