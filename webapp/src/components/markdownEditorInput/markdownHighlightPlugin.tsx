@@ -45,6 +45,9 @@ function piecesFromSegments(lines: Segment[][]): Piece[] {
 function samePieces(a: Piece[], b: Piece[]): boolean {
     return a.length === b.length && a.every((piece, i) => {
         const other = b[i]
+        if (!other) {
+            return false
+        }
         if (piece.kind === 'break' || other.kind === 'break') {
             return piece.kind === other.kind
         }
@@ -55,8 +58,7 @@ function samePieces(a: Piece[], b: Piece[]): boolean {
 // Offset of a point in the paragraph text, counting each line break as one character
 function offsetOf(nodes: LexicalNode[], point: PointType): number | null {
     let offset = 0
-    for (let i = 0; i < nodes.length; i++) {
-        const node = nodes[i]
+    for (const [i, node] of nodes.entries()) {
         if (point.type === 'text' && node.getKey() === point.key) {
             return offset + point.offset
         }

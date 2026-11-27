@@ -83,7 +83,7 @@ export default function RootInput(props: Props) {
                 }
             }}
             onBlur={() => {
-                const command = props.value.trimStart().split(' ')[0]
+                const command = props.value.trimStart().split(' ')[0] ?? ''
                 const block = registry.getBySlashCommandPrefix(command)
                 if (command === '' || !block) {
                     props.onSave(props.value, 'text')
@@ -100,7 +100,7 @@ export default function RootInput(props: Props) {
                     props.onChange('')
                 }
                 if (e.key === 'Enter') {
-                    const command = props.value.trimStart().split(' ')[0]
+                    const command = props.value.trimStart().split(' ')[0] ?? ''
                     const block = registry.getBySlashCommandPrefix(command)
                     if (command === '' || !block) {
                         e.preventDefault()

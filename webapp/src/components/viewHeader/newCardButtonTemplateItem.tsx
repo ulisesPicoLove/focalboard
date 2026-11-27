@@ -28,7 +28,7 @@ const NewCardButtonTemplateItem = (props: Props) => {
     const {cardTemplate} = props
     const intl = useIntl()
     const displayName = cardTemplate.title || intl.formatMessage({id: 'ViewHeader.untitled', defaultMessage: 'Untitled'})
-    const isDefaultTemplate = currentView.fields.defaultTemplateId === cardTemplate.id
+    const isDefaultTemplate = currentView?.fields.defaultTemplateId === cardTemplate.id
     const boardId = useAppSelector(getCurrentBoardId)
 
     return (
@@ -50,7 +50,9 @@ const NewCardButtonTemplateItem = (props: Props) => {
                             id='default'
                             name={intl.formatMessage({id: 'ViewHeader.set-default-template', defaultMessage: 'Set as default'})}
                             onClick={async () => {
-                                await mutator.setDefaultTemplate(boardId, currentView.id, currentView.fields.defaultTemplateId, cardTemplate.id)
+                                if (currentView) {
+                                    await mutator.setDefaultTemplate(boardId, currentView.id, currentView.fields.defaultTemplateId, cardTemplate.id)
+                                }
                             }}
                         />
                         <Menu.Text
@@ -67,7 +69,7 @@ const NewCardButtonTemplateItem = (props: Props) => {
                             name={intl.formatMessage({id: 'ViewHeader.delete-template', defaultMessage: 'Delete'})}
                             onClick={async () => {
                                 await mutator.performAsUndoGroup(async () => {
-                                    if (currentView.fields.defaultTemplateId === cardTemplate.id) {
+                                    if (currentView && currentView.fields.defaultTemplateId === cardTemplate.id) {
                                         await mutator.clearDefaultTemplate(boardId, currentView.id, currentView.fields.defaultTemplateId)
                                     }
                                     await mutator.deleteBlock(cardTemplate, 'delete card template')

@@ -71,7 +71,7 @@ function createBlock(block?: Block): Block {
 // createPatchesFromBlocks creates two BlockPatch instances, one that
 // contains the delta to update the block and another one for the undo
 // action, in case it happens
-function createPatchesFromBlocks(newBlock: Block, oldBlock: Block): BlockPatch[] {
+function createPatchesFromBlocks(newBlock: Block, oldBlock: Block): [BlockPatch, BlockPatch] {
     const newDeletedFields = difference(Object.keys(newBlock.fields), Object.keys(oldBlock.fields))
     const newUpdatedFields = changedEntries(oldBlock.fields, newBlock.fields)
     const newUpdatedData = changedProperties(oldBlock, newBlock, ['fields'])

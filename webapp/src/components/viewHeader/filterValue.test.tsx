@@ -45,7 +45,7 @@ const filter: FilterClause = {
 describe('components/viewHeader/filterValue', () => {
     beforeEach(() => {
         jest.clearAllMocks()
-        board.cardProperties[0].options = [{id: 'Status', value: 'Status', color: ''}]
+        board.cardProperties[0]!.options = [{id: 'Status', value: 'Status', color: ''}]
         activeView.fields.filter.filters = [filter]
     })
     test('return filterValue', () => {
@@ -56,7 +56,7 @@ describe('components/viewHeader/filterValue', () => {
                         view={activeView}
                         filter={filter}
                         template={board.cardProperties[0]}
-                        propertyType={propsRegistry.get(board.cardProperties[0].type)}
+                        propertyType={propsRegistry.get(board.cardProperties[0]!.type)}
                     />
                 </ReduxProvider>,
             ),
@@ -73,14 +73,14 @@ describe('components/viewHeader/filterValue', () => {
                         view={activeView}
                         filter={filter}
                         template={board.cardProperties[0]}
-                        propertyType={propsRegistry.get(board.cardProperties[0].type)}
+                        propertyType={propsRegistry.get(board.cardProperties[0]!.type)}
                     />
                 </ReduxProvider>,
             ),
         )
         const buttonElement = screen.getByRole('button', {name: 'menuwrapper'})
         userEvent.click(buttonElement)
-        const switchStatus = screen.getAllByText('Status')[1]
+        const switchStatus = screen.getAllByText('Status')[1]!
         userEvent.click(switchStatus)
         expect(mockedMutator.changeViewFilter).toBeCalledTimes(1)
         expect(container).toMatchSnapshot()
@@ -95,14 +95,14 @@ describe('components/viewHeader/filterValue', () => {
                         view={activeView}
                         filter={filter}
                         template={board.cardProperties[0]}
-                        propertyType={propsRegistry.get(board.cardProperties[0].type)}
+                        propertyType={propsRegistry.get(board.cardProperties[0]!.type)}
                     />
                 </ReduxProvider>,
             ),
         )
         const buttonElement = screen.getByRole('button', {name: 'menuwrapper'})
         userEvent.click(buttonElement)
-        const switchStatus = screen.getAllByText('Status')[0]
+        const switchStatus = screen.getAllByText('Status')[0]!
         userEvent.click(switchStatus)
         expect(mockedMutator.changeViewFilter).toBeCalledTimes(1)
         expect(container).toMatchSnapshot()
@@ -117,7 +117,7 @@ describe('components/viewHeader/filterValue', () => {
                         view={activeView}
                         filter={filter}
                         template={board.cardProperties[0]}
-                        propertyType={propsRegistry.get(board.cardProperties[0].type)}
+                        propertyType={propsRegistry.get(board.cardProperties[0]!.type)}
                     />
                 </ReduxProvider>,
             ),

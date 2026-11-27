@@ -26,15 +26,17 @@ type Props = {
 
 function KanbanCalculation(props: Props): React.JSX.Element {
     const intl = useIntl()
+    const calculate = Calculations[props.value]
+    const calculated = calculate ? calculate(props.cards, props.property, intl) : ''
 
     return (
         <div className='KanbanCalculation'>
             <Button
                 onClick={() => (props.menuOpen ? props.onMenuClose : props.onMenuOpen)()}
                 onBlur={props.onMenuClose}
-                title={Calculations[props.value] ? Calculations[props.value](props.cards, props.property, intl) : ''}
+                title={calculated}
             >
-                {Calculations[props.value] ? Calculations[props.value](props.cards, props.property, intl) : ''}
+                {calculated}
             </Button>
 
             {

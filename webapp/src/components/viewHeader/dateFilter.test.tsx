@@ -133,7 +133,7 @@ describe('components/viewHeader/dateFilter', () => {
         userEvent.click(dayDisplay)
 
         const day = getByText('15')
-        const modal = getByTitle('Close').children[0]
+        const modal = getByTitle('Close').children[0]!
         userEvent.click(day)
         userEvent.click(modal)
 
@@ -167,7 +167,7 @@ describe('components/viewHeader/dateFilter', () => {
         userEvent.click(dayDisplay)
 
         const clear = getByText('Clear')
-        const modal = getByTitle('Close').children[0]
+        const modal = getByTitle('Close').children[0]!
         userEvent.click(clear)
         userEvent.click(modal)
 
@@ -200,7 +200,7 @@ describe('components/viewHeader/dateFilter', () => {
         userEvent.type(input, '{selectall}{delay}07/15/2021{enter}')
 
         const July15 = new Date(Date.UTC(2021, 6, 15, 12))
-        const modal = getByTitle('Close').children[0]
+        const modal = getByTitle('Close').children[0]!
         userEvent.click(modal)
 
         const newFilterGroup = createFilterGroup(activeView.fields.filter)
@@ -235,7 +235,7 @@ describe('components/viewHeader/dateFilter', () => {
         userEvent.click(dayDisplay)
 
         const day = getByText('Today')
-        const modal = getByTitle('Close').children[0]
+        const modal = getByTitle('Close').children[0]!
         userEvent.click(day)
         userEvent.click(modal)
 

@@ -28,10 +28,12 @@ export const dragAndDropRearrange =
 
         // Delete Src Block
         if (copySrcBlockY > -1) {
-            (newContentOrder[copySrcBlockX] as string[]).splice(copySrcBlockY, 1)
+            const srcRow = newContentOrder[copySrcBlockX] as string[]
+            srcRow.splice(copySrcBlockY, 1)
 
-            if (newContentOrder[copySrcBlockX].length === 1 && copySrcBlockX !== copyDstBlockX) {
-                newContentOrder.splice(copySrcBlockX, 1, newContentOrder[copySrcBlockX][0])
+            const [onlyBlock] = srcRow
+            if (srcRow.length === 1 && onlyBlock !== undefined && copySrcBlockX !== copyDstBlockX) {
+                newContentOrder.splice(copySrcBlockX, 1, onlyBlock)
             }
         } else {
             newContentOrder.splice(copySrcBlockX, 1)

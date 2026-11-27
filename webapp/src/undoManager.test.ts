@@ -89,7 +89,7 @@ test('Basic undo/redo response dependant', async () => {
     expect(undoManager.canRedo).toBe(false)
     expect(blocks).not.toHaveProperty('1')
     expect(blocks).toHaveProperty('2')
-    expect(blocks[2].id).toEqual(2)
+    expect(blocks[2]!.id).toEqual(2)
 
     // when undoing, the undo manager has saved the new id internally
     // and it removes the right block

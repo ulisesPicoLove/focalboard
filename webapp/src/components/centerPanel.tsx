@@ -318,7 +318,7 @@ const CenterPanel = (props: Props) => {
                 // Cmd+Shift+Click: Extend the selection
                 const orderedCardIds = cards.map((o) => o.id)
                 const lastCardId = newSelectedCardIds[newSelectedCardIds.length - 1]
-                const srcIndex = orderedCardIds.indexOf(lastCardId)
+                const srcIndex = lastCardId === undefined ? -1 : orderedCardIds.indexOf(lastCardId)
                 const destIndex = orderedCardIds.indexOf(card.id)
                 const newCardIds = (srcIndex < destIndex) ? orderedCardIds.slice(srcIndex, destIndex + 1) : orderedCardIds.slice(destIndex, srcIndex + 1)
                 for (const newCardId of newCardIds) {

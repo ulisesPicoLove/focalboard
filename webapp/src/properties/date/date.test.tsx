@@ -101,7 +101,7 @@ describe('properties/dateRange', () => {
         userEvent.click(dayDisplay)
 
         const day = getByText('15')
-        const modal = getByTitle('Close').children[0]
+        const modal = getByTitle('Close').children[0]!
         userEvent.click(day)
         userEvent.click(modal)
 
@@ -139,7 +139,7 @@ describe('properties/dateRange', () => {
         const twentieth = Date.UTC(date.getFullYear(), date.getMonth(), 20, 12)
 
         const end = getByText('20')
-        const modal = getByTitle('Close').children[0]
+        const modal = getByTitle('Close').children[0]!
         userEvent.click(end)
         userEvent.click(modal)
 
@@ -167,7 +167,7 @@ describe('properties/dateRange', () => {
         userEvent.click(dayDisplay)
 
         const clear = getByText('Clear')
-        const modal = getByTitle('Close').children[0]
+        const modal = getByTitle('Close').children[0]!
         userEvent.click(clear)
         userEvent.click(modal)
 
@@ -203,7 +203,7 @@ describe('properties/dateRange', () => {
 
         const July15 = new Date(Date.UTC(2021, 6, 15, 12))
         const July20 = new Date(Date.UTC(2021, 6, 20, 12))
-        const modal = getByTitle('Close').children[0]
+        const modal = getByTitle('Close').children[0]!
 
         userEvent.click(modal)
 
@@ -242,7 +242,7 @@ describe('properties/dateRange', () => {
 
         const July15 = new Date(Date.UTC(2021, 6, 15, 12))
         const July20 = new Date(Date.UTC(2021, 6, 20, 12))
-        const modal = getByTitle('Close').children[0]
+        const modal = getByTitle('Close').children[0]!
 
         userEvent.click(modal)
 
@@ -276,7 +276,7 @@ describe('properties/dateRange', () => {
         userEvent.type(fromInput, '{selectall}07/15/2021{delay}{esc}')
         userEvent.type(toInput, '{selectall}07/20/2021{delay}{esc}')
 
-        const modal = getByTitle('Close').children[0]
+        const modal = getByTitle('Close').children[0]!
         userEvent.click(modal)
 
         // const retVal = {from: '2021-06-15', to: '2021-06-20'}
@@ -309,7 +309,7 @@ describe('properties/dateRange', () => {
         userEvent.click(dayDisplay)
 
         const day = getByText('Today')
-        const modal = getByTitle('Close').children[0]
+        const modal = getByTitle('Close').children[0]!
         userEvent.click(day)
         userEvent.click(modal)
 

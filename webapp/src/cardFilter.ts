@@ -120,7 +120,7 @@ class CardFilter {
                 return true
             }
             if (dateValue !== undefined) {
-                const numericFilter = parseInt(filter.values[0], 10)
+                const numericFilter = parseInt(filter.values[0] ?? '', 10)
                 if (template && (template.type === 'createdTime' || template.type === 'updatedTime')) {
                     // createdTime and updatedTime include the time
                     // So to check if create and/or updated "is" date.
@@ -142,44 +142,44 @@ class CardFilter {
             if (filter.values.length === 0) {
                 return true
             }
-            return (value as string || '').includes(filter.values[0]?.toLowerCase())
+            return (value as string || '').includes(filter.values[0]?.toLowerCase() ?? '')
         }
         case 'notContains': {
             if (filter.values.length === 0) {
                 return true
             }
-            return !(value as string || '').includes(filter.values[0]?.toLowerCase())
+            return !(value as string || '').includes(filter.values[0]?.toLowerCase() ?? '')
         }
         case 'startsWith': {
             if (filter.values.length === 0) {
                 return true
             }
-            return (value as string || '').startsWith(filter.values[0]?.toLowerCase())
+            return (value as string || '').startsWith(filter.values[0]?.toLowerCase() ?? '')
         }
         case 'notStartsWith': {
             if (filter.values.length === 0) {
                 return true
             }
-            return !(value as string || '').startsWith(filter.values[0]?.toLowerCase())
+            return !(value as string || '').startsWith(filter.values[0]?.toLowerCase() ?? '')
         }
         case 'endsWith': {
             if (filter.values.length === 0) {
                 return true
             }
-            return (value as string || '').endsWith(filter.values[0]?.toLowerCase())
+            return (value as string || '').endsWith(filter.values[0]?.toLowerCase() ?? '')
         }
         case 'notEndsWith': {
             if (filter.values.length === 0) {
                 return true
             }
-            return !(value as string || '').endsWith(filter.values[0]?.toLowerCase())
+            return !(value as string || '').endsWith(filter.values[0]?.toLowerCase() ?? '')
         }
         case 'isBefore': {
             if (filter.values.length === 0) {
                 return true
             }
             if (dateValue !== undefined) {
-                const numericFilter = parseInt(filter.values[0], 10)
+                const numericFilter = parseInt(filter.values[0] ?? '', 10)
                 if (template && (template.type === 'createdTime' || template.type === 'updatedTime')) {
                     // createdTime and updatedTime include the time
                     // So to check if create and/or updated "isBefore" date.
@@ -199,7 +199,7 @@ class CardFilter {
                 return true
             }
             if (dateValue !== undefined) {
-                const numericFilter = parseInt(filter.values[0], 10)
+                const numericFilter = parseInt(filter.values[0] ?? '', 10)
                 if (template && (template.type === 'createdTime' || template.type === 'updatedTime')) {
                     // createdTime and updatedTime include the time
                     // So to check if create and/or updated "isAfter" date.
@@ -283,8 +283,8 @@ class CardFilter {
         }
         case 'isNotEmpty': {
             if (template.type === 'select') {
-                if (template.options.length > 0) {
-                    const option = template.options[0]
+                const option = template.options[0]
+                if (option) {
                     return {id: filterClause.propertyId, value: option.id}
                 }
                 return {id: filterClause.propertyId}

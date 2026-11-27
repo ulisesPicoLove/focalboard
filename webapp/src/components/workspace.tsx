@@ -57,7 +57,7 @@ function CenterContent(props: Props) {
     const hiddenBoardIDs = useAppSelector(getHiddenBoardIDs)
 
     const isBoardHidden = () => {
-        return hiddenBoardIDs.includes(board.id)
+        return board !== undefined && hiddenBoardIDs.includes(board.id)
     }
 
     const showCard = useCallback((cardId?: string) => {

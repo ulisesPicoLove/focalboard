@@ -131,7 +131,7 @@ class Mutator {
         const undoPatches = [] as BlockPatch[]
 
         newBlocks.forEach((newBlock, i) => {
-            const [updatePatch, undoPatch] = createPatchesFromBlocks(newBlock, oldBlocks[i])
+            const [updatePatch, undoPatch] = createPatchesFromBlocks(newBlock, oldBlocks[i] as Block)
             updatePatches.push(updatePatch)
             undoPatches.push(undoPatch)
         })
@@ -139,12 +139,12 @@ class Mutator {
         return undoManager.perform(
             async () => {
                 await Promise.all(
-                    updatePatches.map((patch, i) => octoClient.patchBlock(boardId, newBlocks[i].id, patch)),
+                    updatePatches.map((patch, i) => octoClient.patchBlock(boardId, newBlocks[i]!.id, patch)),
                 )
             },
             async () => {
                 await Promise.all(
-                    undoPatches.map((patch, i) => octoClient.patchBlock(boardId, newBlocks[i].id, patch)),
+                    undoPatches.map((patch, i) => octoClient.patchBlock(boardId, newBlocks[i]!.id, patch)),
                 )
             },
             description,
@@ -502,7 +502,7 @@ class Mutator {
             Utils.assertFailure(`Cannot find template with id: ${propertyId}`)
             return
         }
-        const srcTemplate = newBoard.cardProperties[index]
+        const srcTemplate = newBoard.cardProperties[index]!
         const newTemplate: IPropertyTemplate = {
             id: Utils.createGuid(IDType.BlockID),
             name: `${srcTemplate.name} copy`,
@@ -543,7 +543,7 @@ class Mutator {
 
         const srcIndex = templates.indexOf(template)
         Utils.log(`srcIndex: ${srcIndex}, destIndex: ${destIndex}`)
-        newValue.splice(destIndex, 0, newValue.splice(srcIndex, 1)[0])
+        newValue.splice(destIndex, 0, ...newValue.splice(srcIndex, 1))
 
         const newBoard = createBoard(board)
         newBoard.cardProperties = newValue
@@ -633,7 +633,7 @@ class Mutator {
 
         const newCardProperties: IPropertyTemplate[] = cloneDeep(oldCardProperties)
         const newTemplate = newCardProperties.find((o: IPropertyTemplate) => o.id === template.id)!
-        newTemplate.options.splice(destIndex, 0, newTemplate.options.splice(srcIndex, 1)[0])
+        newTemplate.options.splice(destIndex, 0, ...newTemplate.options.splice(srcIndex, 1))
 
         await this.updateBoardCardProperties(boardId, oldCardProperties, newCardProperties, 'reorder option')
     }
@@ -705,7 +705,8 @@ class Mutator {
             if (isOldTypeSelectOrMulti || isOldTypePersonOrMulti) {
                 for (const card of cards) {
                     // if array get first value, if exists
-                    const oldValue = Array.isArray(card.fields.properties[propertyTemplate.id]) ? (card.fields.properties[propertyTemplate.id].length > 0 && card.fields.properties[propertyTemplate.id][0] as string) : card.fields.properties[propertyTemplate.id] as string
+                    const cardValue = card.fields.properties[propertyTemplate.id]
+                    const oldValue = Array.isArray(cardValue) ? cardValue[0] : cardValue
                     if (oldValue) {
                         let newValue: string | undefined
                         if (isOldTypePersonOrMulti) {
@@ -856,7 +857,7 @@ class Mutator {
         const srcIndex = oldVisiblePropertyIds.indexOf(template.id)
         Utils.log(`srcIndex: ${srcIndex}, destIndex: ${destIndex}`)
 
-        newOrder.splice(destIndex, 0, newOrder.splice(srcIndex, 1)[0])
+        newOrder.splice(destIndex, 0, ...newOrder.splice(srcIndex, 1))
 
         await undoManager.perform(
             async () => {
@@ -1103,7 +1104,10 @@ class Mutator {
                 const boardsAndBlocks = await octoClient.duplicateBoard(boardId, asTemplate, toTeam)
                 if (boardsAndBlocks) {
                     updateAllBoardsAndBlocks(boardsAndBlocks.boards, boardsAndBlocks.blocks)
-                    await afterRedo?.(boardsAndBlocks.boards[0]?.id)
+                    const newBoardId = boardsAndBlocks.boards[0]?.id
+                    if (newBoardId) {
+                        await afterRedo?.(newBoardId)
+                    }
                 }
                 return boardsAndBlocks
             },

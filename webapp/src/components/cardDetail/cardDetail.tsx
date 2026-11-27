@@ -153,8 +153,11 @@ const CardDetail = (props: Props): React.JSX.Element|null => {
         dispatch(setCurrentCard(card.id))
     }, [card.id, dispatch])
 
-    const blocks = useMemo(() => props.contents.flatMap((value: Block | Block[]): BlockData => {
-        const v: Block = Array.isArray(value) ? value[0] : value
+    const blocks = useMemo(() => props.contents.flatMap((value: Block | Block[]): BlockData[] => {
+        const v: Block | undefined = Array.isArray(value) ? value[0] : value
+        if (!v) {
+            return []
+        }
 
         // what the server saved for a content block is not checked: read the fields these kinds use
         const fields = (v?.fields ?? {}) as {fileId?: string, filename?: string, value?: boolean}
@@ -175,11 +178,11 @@ const CardDetail = (props: Props): React.JSX.Element|null => {
             }
         }
 
-        return {
-            id: v?.id,
+        return [{
+            id: v.id,
             value: data,
-            contentType: v?.type,
-        }
+            contentType: v.type,
+        }]
     }), [props.contents])
 
     if (!card) {

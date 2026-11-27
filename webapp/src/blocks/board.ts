@@ -193,7 +193,7 @@ function isPropertyEqual(propA: IPropertyTemplate, propB: IPropertyTemplate): bo
 // createCardPropertiesPatches creates two BoardPatch instances, one that
 // contains the delta to update the board cardProperties and another one for
 // the undo action, in case it happens
-function createCardPropertiesPatches(newCardProperties: IPropertyTemplate[], oldCardProperties: IPropertyTemplate[]): BoardPatch[] {
+function createCardPropertiesPatches(newCardProperties: IPropertyTemplate[], oldCardProperties: IPropertyTemplate[]): [BoardPatch, BoardPatch] {
     const newDeletedCardProperties = getPropertiesDifference(newCardProperties, oldCardProperties)
     const oldDeletedCardProperties = getPropertiesDifference(oldCardProperties, newCardProperties)
     const newUpdatedCardProperties: IPropertyTemplate[] = []
@@ -226,7 +226,7 @@ function createCardPropertiesPatches(newCardProperties: IPropertyTemplate[], old
 // createPatchesFromBoards creates two BoardPatch instances, one that
 // contains the delta to update the board and another one for the undo
 // action, in case it happens
-function createPatchesFromBoards(newBoard: Board, oldBoard: Board): BoardPatch[] {
+function createPatchesFromBoards(newBoard: Board, oldBoard: Board): [BoardPatch, BoardPatch] {
     const newProperties = newBoard.properties || {}
     const oldProperties = oldBoard.properties || {}
     const notPatched: Array<keyof Board> = ['properties', 'cardProperties']
@@ -257,11 +257,11 @@ function createPatchesFromBoards(newBoard: Board, oldBoard: Board): BoardPatch[]
     ]
 }
 
-function createPatchesFromBoardsAndBlocks(updatedBoard: Board, oldBoard: Board, updatedBlockIDs: string[], updatedBlocks: Block[], oldBlocks: Block[]): BoardsAndBlocksPatch[] {
+function createPatchesFromBoardsAndBlocks(updatedBoard: Board, oldBoard: Board, updatedBlockIDs: string[], updatedBlocks: Block[], oldBlocks: Block[]): [BoardsAndBlocksPatch, BoardsAndBlocksPatch] {
     const blockUpdatePatches = [] as BlockPatch[]
     const blockUndoPatches = [] as BlockPatch[]
     updatedBlocks.forEach((newBlock, i) => {
-        const [updatePatch, undoPatch] = createPatchesFromBlocks(newBlock, oldBlocks[i])
+        const [updatePatch, undoPatch] = createPatchesFromBlocks(newBlock, oldBlocks[i] as Block)
         blockUpdatePatches.push(updatePatch)
         blockUndoPatches.push(undoPatch)
     })

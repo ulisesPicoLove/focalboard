@@ -192,7 +192,7 @@ describe('components/cardDialog', () => {
             ))
             container = result.container
         })
-        const buttonMenu = screen.getAllByRole('button', {name: 'menuwrapper'})[0]
+        const buttonMenu = screen.getAllByRole('button', {name: 'menuwrapper'})[0]!
         userEvent.click(buttonMenu)
         expect(container).toMatchSnapshot()
     })
@@ -213,7 +213,7 @@ describe('components/cardDialog', () => {
                 </ReduxProvider>,
             ))
         })
-        const buttonMenu = screen.getAllByRole('button', {name: 'menuwrapper'})[0]
+        const buttonMenu = screen.getAllByRole('button', {name: 'menuwrapper'})[0]!
         userEvent.click(buttonMenu)
         const buttonDelete = screen.getByRole('button', {name: 'Delete'})
         userEvent.click(buttonDelete)
@@ -251,7 +251,7 @@ describe('components/cardDialog', () => {
             container = result.container
         })
 
-        const buttonMenu = screen.getAllByRole('button', {name: 'menuwrapper'})[0]
+        const buttonMenu = screen.getAllByRole('button', {name: 'menuwrapper'})[0]!
         userEvent.click(buttonMenu)
         const buttonDelete = screen.getByRole('button', {name: 'Delete'})
         userEvent.click(buttonDelete)
@@ -286,7 +286,7 @@ describe('components/cardDialog', () => {
                 </ReduxProvider>,
             ))
         })
-        const buttonMenu = screen.getAllByRole('button', {name: 'menuwrapper'})[0]
+        const buttonMenu = screen.getAllByRole('button', {name: 'menuwrapper'})[0]!
         userEvent.click(buttonMenu)
         const buttonTemplate = screen.getByRole('button', {name: 'New template from card'})
         userEvent.click(buttonTemplate)
@@ -310,7 +310,7 @@ describe('components/cardDialog', () => {
                 </ReduxProvider>,
             ))
         })
-        const buttonMenu = screen.getAllByRole('button', {name: 'menuwrapper'})[0]
+        const buttonMenu = screen.getAllByRole('button', {name: 'menuwrapper'})[0]!
         userEvent.click(buttonMenu)
         const buttonCopy = screen.getByRole('button', {name: 'Copy link'})
         userEvent.click(buttonCopy)

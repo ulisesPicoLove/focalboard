@@ -41,8 +41,7 @@ function BlocksEditor(props: Props) {
                         if (editing?.id === b.id) {
                             break
                         }
-                        const blockType = registry.get(b.contentType)
-                        if (blockType.editable) {
+                        if (registry.get(b.contentType)?.editable) {
                             prevBlock = b
                         }
                     }
@@ -63,8 +62,7 @@ function BlocksEditor(props: Props) {
                     let breakNext = false
                     for (const b of props.blocks) {
                         if (breakNext) {
-                            const blockType = registry.get(b.contentType)
-                            if (blockType.editable) {
+                            if (registry.get(b.contentType)?.editable) {
                                 nextBlock = b
                                 break
                             }
@@ -95,7 +93,7 @@ function BlocksEditor(props: Props) {
                             setAfterBlock={setAfterBlock}
                             onSave={async (b) => {
                                 const newBlock = await props.onBlockModified(b)
-                                setNextType(registry.get(b.contentType).nextType || '')
+                                setNextType(registry.get(b.contentType)?.nextType || '')
                                 setAfterBlock(newBlock)
                                 return newBlock
                             }}
@@ -107,7 +105,7 @@ function BlocksEditor(props: Props) {
                                 initialContentType={nextType}
                                 onSave={async (b) => {
                                     const newBlock = await props.onBlockCreated(b, afterBlock)
-                                    setNextType(registry.get(b.contentType).nextType || '')
+                                    setNextType(registry.get(b.contentType)?.nextType || '')
                                     setAfterBlock(newBlock)
                                     return newBlock
                                 }}

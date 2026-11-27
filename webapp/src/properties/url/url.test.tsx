@@ -30,7 +30,7 @@ describe('properties/link', () => {
 
     const board = TestBlockFactory.createBoard()
     const card = TestBlockFactory.createCard()
-    const propertyTemplate = board.cardProperties[0]
+    const propertyTemplate = board.cardProperties[0]!
     const baseData = {
         property: new UrlProperty(),
         card,

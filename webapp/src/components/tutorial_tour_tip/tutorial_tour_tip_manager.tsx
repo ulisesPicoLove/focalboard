@@ -47,7 +47,7 @@ const useTutorialTourTipManager = ({
     preventDefault,
 }: TutorialTourTipManagerProps): TutorialTourTipManager => {
     const [show, setShow] = useState(false)
-    const tourSteps = TourCategoriesMapToSteps[tutorialCategory]
+    const tourSteps = TourCategoriesMapToSteps[tutorialCategory] ?? {}
 
     // Function to save the tutorial step in redux store start here which needs to be modified
     const dispatch = useDispatch()
@@ -193,7 +193,7 @@ const useTutorialTourTipManager = ({
             tourCategory = currentTourCategory
         } else {
             stepValue = 0
-            tourCategory = TOUR_ORDER[i + 1]
+            tourCategory = TOUR_ORDER[i + 1] ?? currentTourCategory
         }
 
         return savePreferences(currentUserId, stepValue.toString(), tourCategory)

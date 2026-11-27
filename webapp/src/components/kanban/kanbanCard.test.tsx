@@ -225,7 +225,7 @@ describe('src/components/kanban/kanbanCard', () => {
         expect(onClick.mock.calls[0][1]).toBe(card)
 
         // keys pressed inside the card (for example in its menu) do not open it
-        fireEvent.keyDown(within(cardElement).getAllByRole('button')[0], {key: 'Enter'})
+        fireEvent.keyDown(within(cardElement).getAllByRole('button')[0]!, {key: 'Enter'})
         expect(onClick).toBeCalledTimes(1)
     })
 
@@ -250,7 +250,7 @@ describe('src/components/kanban/kanbanCard', () => {
             </ReduxProvider>,
         ), {wrapper: MemoryRouter})
 
-        userEvent.click(screen.getAllByRole('button', {name: 'menuwrapper'})[0])
+        userEvent.click(screen.getAllByRole('button', {name: 'menuwrapper'})[0]!)
         fireEvent.keyDown(screen.getByRole('button', {name: 'Move to'}), {key: 'Enter'})
 
         // the column the card is already in cannot be chosen

@@ -18,7 +18,7 @@ type ViewsState = {
 }
 
 // This update ensure that we are not regenerating that fields all the time
-const smartViewUpdate = (oldView: BoardView, newView: BoardView) => {
+const smartViewUpdate = (oldView: BoardView | undefined, newView: BoardView) => {
     if (!oldView) {
         return newView
     }
@@ -112,8 +112,9 @@ export const getViewsByBoard = createSelector(
     (views) => {
         const result: {[key: string]: BoardView[]} = {}
         Object.values(views).forEach((view) => {
-            if (result[view.parentId]) {
-                result[view.parentId].push(view)
+            const siblings = result[view.parentId]
+            if (siblings) {
+                siblings.push(view)
             } else {
                 result[view.parentId] = [view]
             }

@@ -174,7 +174,7 @@ const MarkdownEditorInput = (props: Props): ReactElement => {
     const boardUsers = useAppSelector<IUser[]>(getBoardUsersList)
     const board = useAppSelector(getCurrentBoard)
     const clientConfig = useAppSelector<ClientConfig>(getClientConfig)
-    const allowManageBoardRoles = useHasPermissions(board.teamId, board.id, [Permission.ManageBoardRoles])
+    const allowManageBoardRoles = useHasPermissions(board?.teamId ?? '', board?.id ?? '', [Permission.ManageBoardRoles])
     const [confirmAddUser, setConfirmAddUser] = useState<IUser|null>(null)
     const me = useAppSelector<IUser|null>(getMe)
 
@@ -231,6 +231,9 @@ const MarkdownEditorInput = (props: Props): ReactElement => {
     }, [debouncedLoadSuggestions])
 
     const addUser = useCallback(async (userId: string, role: string) => {
+        if (!board) {
+            return
+        }
         const newRole = role || MemberRole.Viewer
         const newMember = {
             boardId: board.id,
@@ -394,7 +397,7 @@ const MarkdownEditorInput = (props: Props): ReactElement => {
                 <RootPortal>
                     <ConfirmAddUserForNotifications
                         allowManageBoardRoles={allowManageBoardRoles}
-                        minimumRole={board.minimumRole}
+                        minimumRole={board?.minimumRole ?? MemberRole.None}
                         user={confirmAddUser}
                         onConfirm={addUser}
                         onClose={() => {

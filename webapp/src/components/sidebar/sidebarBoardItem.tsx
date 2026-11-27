@@ -118,7 +118,10 @@ const SidebarBoardItem = (props: Props) => {
             return
         }
 
-        const boardId = blocksAndBoards.boards[0].id
+        const boardId = blocksAndBoards.boards[0]?.id
+        if (!boardId) {
+            return
+        }
 
         // If the source board is in a custom category, set the new board in
         // the same category. Even though the server does this as well on its side,

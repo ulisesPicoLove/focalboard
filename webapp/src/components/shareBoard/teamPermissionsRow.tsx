@@ -33,11 +33,15 @@ async function updateBoardType(board: Board, newType: string, newMinimumRole: Me
     await mutator.updateBoard(newBoard, board, 'update board type')
 }
 
-const TeamPermissionsRow = (): React.JSX.Element => {
+const TeamPermissionsRow = (): React.JSX.Element | null => {
     const intl = useIntl()
     const team = useAppSelector(getCurrentTeam)
     const board = useAppSelector(getCurrentBoard)
     const [changeRoleConfirmation, setChangeRoleConfirmation] = useState<MemberRole|null>(null)
+
+    if (!board) {
+        return null
+    }
 
     const onChangeRole = async () => {
         if (changeRoleConfirmation !== null) {

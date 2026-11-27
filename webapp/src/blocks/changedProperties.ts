@@ -17,8 +17,9 @@ export function changedProperties<T extends object>(from: T, to: T, ignore: Read
 export function changedEntries<V>(from: Readonly<Record<string, V>>, to: Readonly<Record<string, V>>): Record<string, V> {
     const changed: Record<string, V> = {}
     for (const key of Object.keys(to)) {
-        if (from[key] !== to[key]) {
-            changed[key] = to[key]
+        const value = to[key] as V
+        if (from[key] !== value) {
+            changed[key] = value
         }
     }
     return changed

@@ -19,7 +19,7 @@ describe('components/kanban/calculations/Option', () => {
             cardProperties: board.cardProperties,
             onChange: () => {},
             activeValue: 'count',
-            activeProperty: board.cardProperties[1],
+            activeProperty: board.cardProperties[1]!,
         }
         const component = <Option data={data}/>
 

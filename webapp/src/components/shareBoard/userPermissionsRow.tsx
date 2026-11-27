@@ -30,7 +30,7 @@ type Props = {
     onUpdateBoardMember: (member: BoardMember, permission: string) => void
 }
 
-const UserPermissionsRow = (props: Props): React.JSX.Element => {
+const UserPermissionsRow = (props: Props): React.JSX.Element | null => {
     const intl = useIntl()
     const board = useAppSelector(getCurrentBoard)
     const {user, member, isMe, teammateNameDisplay} = props
@@ -48,6 +48,9 @@ const UserPermissionsRow = (props: Props): React.JSX.Element => {
     }
 
     const menuWrapperRef = useRef<HTMLDivElement>(null)
+    if (!board) {
+        return null
+    }
 
     return (
         <div

@@ -210,9 +210,9 @@ describe('src/components/workspace', () => {
         const {container} = result
         await act(async () => {
             jest.runOnlyPendingTimers()
-            const cardElements = container!.querySelectorAll('.KanbanCard')
+            const cardElements = container.querySelectorAll('.KanbanCard')
             expect(cardElements).toBeDefined()
-            const cardElement = cardElements[0]
+            const cardElement = cardElements[0]!
             userEvent.click(cardElement)
         })
         expect(container).toMatchSnapshot()
@@ -227,9 +227,9 @@ describe('src/components/workspace', () => {
         const {container} = result
         await act(async () => {
             jest.runOnlyPendingTimers()
-            const cardElements = container!.querySelectorAll('.KanbanCard')
+            const cardElements = container.querySelectorAll('.KanbanCard')
             expect(cardElements).toBeDefined()
-            const cardElement = cardElements[0]
+            const cardElement = cardElements[0]!
             userEvent.click(cardElement)
         })
         expect(container).toMatchSnapshot()

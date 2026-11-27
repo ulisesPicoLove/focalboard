@@ -35,8 +35,8 @@ export function useMeasurePunchouts(elementIds: string[], additionalDeps: React.
         let minY = Number.MAX_SAFE_INTEGER
         let maxX = Number.MIN_SAFE_INTEGER
         let maxY = Number.MIN_SAFE_INTEGER
-        for (let i = 0; i < elementIds.length; i++) {
-            const rectangle = document.querySelector(elementIds[i])?.getBoundingClientRect()
+        for (const elementId of elementIds) {
+            const rectangle = document.querySelector(elementId)?.getBoundingClientRect()
             if (!rectangle) {
                 return null
             }

@@ -207,7 +207,7 @@ describe('components/cardDetail/CardDetailProperties', () => {
         expect(mockedMutator.insertPropertyTemplate).toHaveBeenCalledTimes(1)
 
         const args = mockedMutator.insertPropertyTemplate.mock.calls[0]
-        const template = args[3]
+        const template = args![3]
         expect(template).toBeTruthy()
         expect(template!.name).toMatch(/number/i)
         expect(template!.type).toBe('number')
@@ -219,7 +219,7 @@ describe('components/cardDetail/CardDetailProperties', () => {
 
         openDeleteConfirmationDialog(container)
 
-        const propertyTemplate = board.cardProperties[0]
+        const propertyTemplate = board.cardProperties[0]!
 
         const confirmButton = result.getByTitle('Delete')
         expect(confirmButton).toBeDefined()

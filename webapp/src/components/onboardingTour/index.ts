@@ -10,17 +10,17 @@ export const CardTourSteps = {
     ADD_DESCRIPTION: 2,
 }
 
-export const BoardTourSteps: {[key: string]: number} = {
+export const BoardTourSteps = {
     ADD_VIEW: 0,
     COPY_LINK: 1,
     SHARE_BOARD: 2,
-}
+} as const
 
-export const SidebarTourSteps: {[key: string]: number} = {
+export const SidebarTourSteps = {
     SIDE_BAR: 0,
     MANAGE_CATEGORIES: 1,
     SEARCH_FOR_BOARDS: 2,
-}
+} as const
 
 export const FINISHED = 999
 

@@ -156,8 +156,8 @@ describe('components/cardDetail/cardDetailContents', () => {
             container = result.container
         })
 
-        const drag = container!.querySelectorAll('.dnd-handle')[0]
-        const drop = container!.querySelectorAll('.addToRow')[4]
+        const drag = container!.querySelectorAll('.dnd-handle')[0]!
+        const drop = container!.querySelectorAll('.addToRow')[4]!
 
         fireEvent.dragStart(drag)
         fireEvent.dragEnter(drop)
@@ -185,8 +185,8 @@ describe('components/cardDetail/cardDetailContents', () => {
             container = result.container
         })
 
-        const drag = container!.querySelectorAll('.dnd-handle')[0]
-        const drop = container!.querySelectorAll('.addToRow')[4]
+        const drag = container!.querySelectorAll('.dnd-handle')[0]!
+        const drop = container!.querySelectorAll('.addToRow')[4]!
 
         fireEvent.dragStart(drag)
         fireEvent.dragEnter(drop)
@@ -214,8 +214,8 @@ describe('components/cardDetail/cardDetailContents', () => {
             container = result.container
         })
 
-        const drag = container!.querySelectorAll('.dnd-handle')[1]
-        const drop = container!.querySelectorAll('.addToRow')[2]
+        const drag = container!.querySelectorAll('.dnd-handle')[1]!
+        const drop = container!.querySelectorAll('.addToRow')[2]!
 
         fireEvent.dragStart(drag)
         fireEvent.dragEnter(drop)

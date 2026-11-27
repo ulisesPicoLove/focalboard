@@ -20,7 +20,7 @@ import Tooltip from '../../widgets/tooltip'
 import mutator from '../../mutator'
 
 import {ISharing} from '../../blocks/sharing'
-import {BoardMember, MemberRole} from '../../blocks/board'
+import {Board, BoardMember, MemberRole} from '../../blocks/board'
 
 import client from '../../octoClient'
 import Dialog from '../dialog'
@@ -92,7 +92,21 @@ function isLastAdmin(members: BoardMember[]) {
     return true
 }
 
-export default function ShareBoardDialog(props: Props): React.JSX.Element {
+// The dialog shares the current board: without one there is nothing to show
+export default function ShareBoardDialog(props: Props): React.JSX.Element | null {
+    const board = useAppSelector(getCurrentBoard)
+    if (!board) {
+        return null
+    }
+    return (
+        <ShareBoardDialogContent
+            {...props}
+            board={board}
+        />
+    )
+}
+
+function ShareBoardDialogContent(props: Props & {board: Board}): React.JSX.Element {
     const [wasCopiedPublic, setWasCopiedPublic] = useState(false)
     const [wasCopiedInternal, setWasCopiedInternal] = useState(false)
     const [sharing, setSharing] = useState<ISharing|undefined>(undefined)
@@ -101,7 +115,7 @@ export default function ShareBoardDialog(props: Props): React.JSX.Element {
 
     // members of the current board
     const members = useAppSelector<{[key: string]: BoardMember}>(getCurrentBoardMembers)
-    const board = useAppSelector(getCurrentBoard)
+    const {board} = props
     const boardId = board.id
     const boardUsers = useAppSelector<IUser[]>(getBoardUsersList)
     const me = useAppSelector<IUser|null>(getMe)
@@ -307,8 +321,9 @@ export default function ShareBoardDialog(props: Props): React.JSX.Element {
                             cacheOptions={true}
                             filterOption={(o) => {
                                 // render non-explicit members
-                                if (members[o.value]) {
-                                    return members[o.value].synthetic
+                                const existing = members[o.value]
+                                if (existing) {
+                                    return existing.synthetic
                                 }
 
                                 // not a member, definitely render
@@ -341,17 +356,15 @@ export default function ShareBoardDialog(props: Props): React.JSX.Element {
                 <TeamPermissionsRow/>
 
                 {boardUsers.map((user) => {
-                    if (!members[user.id]) {
-                        return null
-                    }
-                    if (members[user.id].synthetic) {
+                    const member = members[user.id]
+                    if (!member || member.synthetic) {
                         return null
                     }
                     return (
                         <UserPermissionsRow
                             key={user.id}
                             user={user}
-                            member={members[user.id]}
+                            member={member}
                             teammateNameDisplay={me?.props?.teammateNameDisplay || clientConfig.teammateNameDisplay}
                             onDeleteBoardMember={onDeleteBoardMember}
                             onUpdateBoardMember={onUpdateBoardMember}

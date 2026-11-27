@@ -24,7 +24,7 @@ describe('components/propertyValueElement', () => {
                 board={board}
                 readOnly={false}
                 card={card}
-                propertyTemplate={propertyTemplate || board.cardProperties[0]}
+                propertyTemplate={propertyTemplate || board.cardProperties[0]!}
                 showEmptyPlaceholder={true}
             />,
         )
@@ -40,7 +40,7 @@ describe('components/propertyValueElement', () => {
                 board={board}
                 readOnly={true}
                 card={card}
-                propertyTemplate={propertyTemplate || board.cardProperties[0]}
+                propertyTemplate={propertyTemplate || board.cardProperties[0]!}
                 showEmptyPlaceholder={true}
             />,
         )

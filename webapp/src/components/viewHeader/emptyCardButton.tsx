@@ -31,7 +31,7 @@ const EmptyCardButton = (props: Props) => {
             icon={<CardIcon/>}
             id='empty-template'
             name={intl.formatMessage({id: 'ViewHeader.empty-card', defaultMessage: 'Empty card'})}
-            className={currentView.fields.defaultTemplateId ? '' : 'bold-menu-text'}
+            className={currentView?.fields.defaultTemplateId ? '' : 'bold-menu-text'}
             onClick={() => {
                 props.addCard()
             }}
@@ -47,7 +47,9 @@ const EmptyCardButton = (props: Props) => {
                                 defaultMessage: 'Set as default',
                             })}
                             onClick={async () => {
-                                await mutator.clearDefaultTemplate(boardId, currentView.id, currentView.fields.defaultTemplateId)
+                                if (currentView) {
+                                    await mutator.clearDefaultTemplate(boardId, currentView.id, currentView.fields.defaultTemplateId)
+                                }
                             }}
                         />
                     </Menu>

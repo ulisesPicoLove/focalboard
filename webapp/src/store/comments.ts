@@ -22,27 +22,22 @@ const commentsSlice = createSlice({
             for (const comment of action.payload) {
                 if (comment.deleteAt === 0) {
                     state.comments[comment.id] = comment
-                    if (!state.commentsByCard[comment.parentId]) {
+                    const siblings = state.commentsByCard[comment.parentId]
+                    if (!siblings) {
                         state.commentsByCard[comment.parentId] = [comment]
-                        return
+                        continue
                     }
-                    for (let i = 0; i < state.commentsByCard[comment.parentId].length; i++) {
-                        if (state.commentsByCard[comment.parentId][i].id === comment.id) {
-                            state.commentsByCard[comment.parentId][i] = comment
-                            return
-                        }
+                    const existing = siblings.findIndex((c) => c.id === comment.id)
+                    if (existing === -1) {
+                        siblings.push(comment)
+                    } else {
+                        siblings[existing] = comment
                     }
-                    state.commentsByCard[comment.parentId].push(comment)
                 } else {
                     const parentId = state.comments[comment.id]?.parentId
-                    if (!state.commentsByCard[parentId]) {
-                        delete state.comments[comment.id]
-                        return
-                    }
-                    for (let i = 0; i < state.commentsByCard[parentId].length; i++) {
-                        if (state.commentsByCard[parentId][i].id === comment.id) {
-                            state.commentsByCard[parentId].splice(i, 1)
-                        }
+                    const siblings = parentId === undefined ? undefined : state.commentsByCard[parentId]
+                    if (parentId !== undefined && siblings) {
+                        state.commentsByCard[parentId] = siblings.filter((c) => c.id !== comment.id)
                     }
                     delete state.comments[comment.id]
                 }
@@ -56,8 +51,9 @@ const commentsSlice = createSlice({
             for (const block of action.payload.blocks) {
                 if (block.type === 'comment') {
                     state.comments[block.id] = block as CommentBlock
-                    state.commentsByCard[block.parentId] = state.commentsByCard[block.parentId] || []
-                    state.commentsByCard[block.parentId].push(block as CommentBlock)
+                    const siblings = state.commentsByCard[block.parentId] ?? []
+                    siblings.push(block as CommentBlock)
+                    state.commentsByCard[block.parentId] = siblings
                 }
             }
             Object.values(state.commentsByCard).forEach((comment) => comment.sort((a, b) => a.createAt - b.createAt))
@@ -68,8 +64,9 @@ const commentsSlice = createSlice({
             for (const block of action.payload.blocks) {
                 if (block.type === 'comment') {
                     state.comments[block.id] = block as CommentBlock
-                    state.commentsByCard[block.parentId] = state.commentsByCard[block.parentId] || []
-                    state.commentsByCard[block.parentId].push(block as CommentBlock)
+                    const siblings = state.commentsByCard[block.parentId] ?? []
+                    siblings.push(block as CommentBlock)
+                    state.commentsByCard[block.parentId] = siblings
                 }
             }
             Object.values(state.commentsByCard).forEach((comment) => comment.sort((a, b) => a.createAt - b.createAt))
@@ -92,7 +89,7 @@ export function getCardComments(cardId: string): (state: RootState) => CommentBl
 export function getLastCardComment(cardId: string): (state: RootState) => CommentBlock|undefined {
     return (state: RootState): CommentBlock|undefined => {
         const comments = state.comments?.commentsByCard && state.comments.commentsByCard[cardId]
-        return comments?.[comments?.length - 1]
+        return comments?.[comments.length - 1]
     }
 }
 
@@ -101,9 +98,9 @@ export const getLastCommentByCard = createSelector(
     (commentsByCard: {[key: string]: CommentBlock[]}|null): {[key: string]: CommentBlock} => {
         const lastCommentByCard: {[key: string]: CommentBlock} = {}
         Object.keys(commentsByCard || {}).forEach((cardId) => {
-            if (commentsByCard && commentsByCard[cardId]) {
-                const comments = commentsByCard[cardId]
-                lastCommentByCard[cardId] = comments?.[comments?.length - 1]
+            const last = commentsByCard?.[cardId]?.at(-1)
+            if (last) {
+                lastCommentByCard[cardId] = last
             }
         })
         return lastCommentByCard

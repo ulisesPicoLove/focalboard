@@ -22,32 +22,23 @@ const contentsSlice = createSlice({
         updateContents: (state, action: PayloadAction<ContentBlock[]>) => {
             for (const content of action.payload) {
                 if (content.deleteAt === 0) {
-                    let existsInParent = false
                     state.contents[content.id] = content
-                    if (!state.contentsByCard[content.parentId]) {
+                    const siblings = state.contentsByCard[content.parentId]
+                    if (!siblings) {
                         state.contentsByCard[content.parentId] = [content]
-                        return
+                        continue
                     }
-                    for (let i = 0; i < state.contentsByCard[content.parentId].length; i++) {
-                        if (state.contentsByCard[content.parentId][i].id === content.id) {
-                            state.contentsByCard[content.parentId][i] = content
-                            existsInParent = true
-                            break
-                        }
-                    }
-                    if (!existsInParent) {
-                        state.contentsByCard[content.parentId].push(content)
+                    const existing = siblings.findIndex((c) => c.id === content.id)
+                    if (existing === -1) {
+                        siblings.push(content)
+                    } else {
+                        siblings[existing] = content
                     }
                 } else {
                     const parentId = state.contents[content.id]?.parentId
-                    if (!state.contentsByCard[parentId]) {
-                        delete state.contents[content.id]
-                        return
-                    }
-                    for (let i = 0; i < state.contentsByCard[parentId].length; i++) {
-                        if (state.contentsByCard[parentId][i].id === content.id) {
-                            state.contentsByCard[parentId].splice(i, 1)
-                        }
+                    const siblings = parentId === undefined ? undefined : state.contentsByCard[parentId]
+                    if (parentId !== undefined && siblings) {
+                        state.contentsByCard[parentId] = siblings.filter((c) => c.id !== content.id)
                     }
                     delete state.contents[content.id]
                 }
@@ -61,9 +52,10 @@ const contentsSlice = createSlice({
             for (const block of action.payload.blocks) {
                 if (block.type !== 'board' && block.type !== 'view' && block.type !== 'comment') {
                     state.contents[block.id] = block as ContentBlock
-                    state.contentsByCard[block.parentId] = state.contentsByCard[block.parentId] || []
-                    state.contentsByCard[block.parentId].push(block as ContentBlock)
-                    state.contentsByCard[block.parentId].sort((a, b) => a.createAt - b.createAt)
+                    const siblings = state.contentsByCard[block.parentId] ?? []
+                    siblings.push(block as ContentBlock)
+                    siblings.sort((a, b) => a.createAt - b.createAt)
+                    state.contentsByCard[block.parentId] = siblings
                 }
             }
         })
@@ -73,9 +65,10 @@ const contentsSlice = createSlice({
             for (const block of action.payload.blocks) {
                 if (block.type !== 'board' && block.type !== 'view' && block.type !== 'comment') {
                     state.contents[block.id] = block as ContentBlock
-                    state.contentsByCard[block.parentId] = state.contentsByCard[block.parentId] || []
-                    state.contentsByCard[block.parentId].push(block as ContentBlock)
-                    state.contentsByCard[block.parentId].sort((a, b) => a.createAt - b.createAt)
+                    const siblings = state.contentsByCard[block.parentId] ?? []
+                    siblings.push(block as ContentBlock)
+                    siblings.sort((a, b) => a.createAt - b.createAt)
+                    state.contentsByCard[block.parentId] = siblings
                 }
             }
         })

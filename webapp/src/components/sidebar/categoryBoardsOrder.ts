@@ -34,7 +34,10 @@ export function reorderWithinCategory(metadata: CategoryBoardMetadata[], display
 
     const result = [...metadata]
     slots.forEach((slot, k) => {
-        result[slot] = moved[k]
+        const placed = moved[k]
+        if (placed) {
+            result[slot] = placed
+        }
     })
     return result
 }

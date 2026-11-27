@@ -26,7 +26,7 @@ const board = TestBlockFactory.createBoard()
 const activeView = TestBlockFactory.createBoardView(board)
 
 const filter: FilterClause = {
-    propertyId: board.cardProperties[0].id,
+    propertyId: board.cardProperties[0]!.id,
     condition: 'includes',
     values: ['Status'],
 }
@@ -48,7 +48,7 @@ const store = mockStateStore([], state)
 describe('components/viewHeader/filterComponent', () => {
     beforeEach(() => {
         jest.clearAllMocks()
-        board.cardProperties[0].options = [{id: 'Status', value: 'Status', color: ''}]
+        board.cardProperties[0]!.options = [{id: 'Status', value: 'Status', color: ''}]
         activeView.fields.filter.filters = [filter]
     })
     test('return filterComponent', () => {
@@ -63,7 +63,7 @@ describe('components/viewHeader/filterComponent', () => {
                 </ReduxProvider>,
             ),
         )
-        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[0]
+        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[0]!
         userEvent.click(buttonElement)
         expect(container).toMatchSnapshot()
     })
@@ -79,7 +79,7 @@ describe('components/viewHeader/filterComponent', () => {
                 </ReduxProvider>,
             ),
         )
-        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[0]
+        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[0]!
         userEvent.click(buttonElement)
         expect(container).toMatchSnapshot()
         const buttonAdd = screen.getByText('+ Add filter')
@@ -100,7 +100,7 @@ describe('components/viewHeader/filterComponent', () => {
                 </ReduxProvider>,
             ),
         )
-        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[0]
+        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[0]!
         userEvent.click(buttonElement)
         expect(container).toMatchSnapshot()
         const buttonStatus = screen.getByRole('button', {name: 'Status'})
@@ -120,7 +120,7 @@ describe('components/viewHeader/filterComponent', () => {
                 </ReduxProvider>,
             ),
         )
-        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[1]
+        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[1]!
         userEvent.click(buttonElement)
         expect(container).toMatchSnapshot()
         const buttonNotInclude = screen.getByRole('button', {name: 'is empty'})

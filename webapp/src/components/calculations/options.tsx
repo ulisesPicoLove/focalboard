@@ -11,6 +11,7 @@ import {useIntl, IntlShape} from 'react-intl'
 import {getSelectBaseStyle} from '../../theme'
 import ChevronUp from '../../widgets/icons/chevronUp'
 import {IPropertyTemplate} from '../../blocks/board'
+import {dictionaryOf} from '../../typeHelpers'
 
 export type Option = {
     label: string
@@ -18,7 +19,7 @@ export type Option = {
     displayName: string
 }
 
-export const Options: Record<string, Option> = {
+export const Options = dictionaryOf<Option>()({
     none: {value: 'none', label: 'None', displayName: 'Calculate'},
     count: {value: 'count', label: 'Count', displayName: 'Count'},
     countEmpty: {value: 'countEmpty', label: 'Count Empty', displayName: 'Empty'},
@@ -40,7 +41,10 @@ export const Options: Record<string, Option> = {
     earliest: {value: 'earliest', label: 'Earliest Date', displayName: 'Earliest'},
     latest: {value: 'latest', label: 'Latest Date', displayName: 'Latest'},
     dateRange: {value: 'dateRange', label: 'Date Range', displayName: 'Range'},
-}
+})
+
+// The option with this value, if there is one (the value comes from the stored view settings)
+export const optionByValue = (value: string): Option | undefined => (Options as Record<string, Option | undefined>)[value]
 
 export const optionLabelString = (option: Option, intl: IntlShape): string => {
     switch (option.value) {
@@ -182,7 +186,7 @@ export const CalculationOptions = (props: BaseCalculationOptionProps): React.JSX
     return (
         <Select<Option, false>
             styles={styles}
-            value={Options[props.value]}
+            value={optionByValue(props.value)}
             isMulti={false}
             isClearable={true}
             name={'calculation_options'}

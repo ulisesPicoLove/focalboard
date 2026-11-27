@@ -34,11 +34,11 @@ export function list() {
     return Object.values(blocks)
 }
 
-export function get(name: string): ContentType<ContentValue> {
+export function get(name: string): ContentType<ContentValue> | undefined {
     return blocks[name]
 }
 
-export function getByPrefix(prefix: string): ContentType<ContentValue> {
+export function getByPrefix(prefix: string): ContentType<ContentValue> | undefined {
     return blocksByPrefix[prefix]
 }
 
@@ -51,7 +51,7 @@ export function isSubPrefix(text: string): boolean {
     return false
 }
 
-export function getBySlashCommand(slashCommand: string): ContentType<ContentValue> {
+export function getBySlashCommand(slashCommand: string): ContentType<ContentValue> | undefined {
     return blocksBySlashCommand[slashCommand]
 }
 

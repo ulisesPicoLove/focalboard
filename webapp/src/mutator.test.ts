@@ -45,7 +45,7 @@ describe('Mutator', () => {
 
         expect(newBlocks).toHaveLength(1)
 
-        const duplicatedCard = newBlocks[0]
+        const duplicatedCard = newBlocks[0]!
         expect(duplicatedCard.type).toBe('card')
         expect(duplicatedCard.id).toBe(newCardID)
         expect(duplicatedCard.fields.icon).toBe(card.fields.icon)

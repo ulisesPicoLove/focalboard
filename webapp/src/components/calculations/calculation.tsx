@@ -16,7 +16,7 @@ import {useColumnResize} from '../table/tableColumnResizeContext'
 
 import {Constants} from '../../constants'
 
-import {CommonCalculationOptionProps, Options, optionDisplayNameString} from './options'
+import {CommonCalculationOptionProps, Options, optionByValue, optionDisplayNameString} from './options'
 
 import Calculations from './calculations'
 
@@ -37,7 +37,7 @@ type Props = {
 
 const Calculation = (props: Props): React.JSX.Element => {
     const value = props.value || Options.none.value
-    const valueOption = Options[value]
+    const valueOption = optionByValue(value)
     const intl = useIntl()
     const columnResize = useColumnResize()
 

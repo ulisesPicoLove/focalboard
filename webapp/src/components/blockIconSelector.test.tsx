@@ -101,7 +101,7 @@ describe('components/blockIconSelector', () => {
 
         // the picker is lazy loaded
         const allButtonThumbUp = await findAllByRole('button', {name: /thumbsup/i})
-        userEvent.click(allButtonThumbUp[0])
+        userEvent.click(allButtonThumbUp[0]!)
         expect(mockedMutator.changeBlockIcon).toBeCalledTimes(1)
         expect(mockedMutator.changeBlockIcon).toBeCalledWith(card.boardId, card.id, card.fields.icon, '👍')
     })

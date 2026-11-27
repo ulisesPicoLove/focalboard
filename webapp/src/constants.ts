@@ -1,6 +1,8 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 
+import {dictionaryOf} from './typeHelpers'
+
 enum Permission {
     ManageBoardType = 'manage_board_type',
     DeleteBoard = 'delete_board',
@@ -155,7 +157,7 @@ class Constants {
         },
     ]
 
-    static readonly keyCodes: {[key: string]: [string, number]} = {
+    static readonly keyCodes = dictionaryOf<[string, number]>()({
         COMPOSING: ['Composing', 229],
         ESC: ['Esc', 27],
         UP: ['Up', 38],
@@ -187,7 +189,7 @@ class Constants {
         X: ['x', 88],
         Y: ['y', 89],
         Z: ['z', 90],
-    }
+    })
 
     static readonly globalTeamId = '0'
 

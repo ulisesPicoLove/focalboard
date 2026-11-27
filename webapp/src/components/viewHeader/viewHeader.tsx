@@ -27,7 +27,6 @@ import {
 import {
     BoardTourSteps,
     TOUR_BOARD,
-    TourCategoriesMapToSteps,
 } from '../onboardingTour'
 import {OnboardingBoardTitle} from '../cardDetail/cardDetail'
 import AddViewTourStep from '../onboardingTour/addView/add_view'
@@ -102,14 +101,6 @@ const ViewHeader = (props: Props) => {
             }, 800)
         }
     }, [showTourBaseCondition])
-
-    useEffect(() => {
-        if (!BoardTourSteps.SHARE_BOARD) {
-            BoardTourSteps.SHARE_BOARD = 2
-        }
-
-        TourCategoriesMapToSteps[TOUR_BOARD] = BoardTourSteps
-    }, [])
 
     const showAddViewTourStep = showTourBaseCondition && delayComplete
 

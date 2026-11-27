@@ -11,7 +11,7 @@ import {createBoardView, BoardView} from '../../blocks/boardView'
 import {Card} from '../../blocks/card'
 import {Constants, Permission} from '../../constants'
 import mutator from '../../mutator'
-import {Utils} from '../../utils'
+import {Utils, isDefined} from '../../utils'
 import {useAppDispatch} from '../../store/hooks'
 import {updateView} from '../../store/views'
 import {useHasCurrentBoardPermissions} from '../../hooks/permissions'
@@ -92,7 +92,7 @@ const Table = (props: Props): React.JSX.Element => {
             const srcIndex = visibleOptionIds.indexOf(dstOption.id)
             const destIndex = visibleOptionIds.indexOf(option.id)
 
-            visibleOptionIds.splice(srcIndex, 0, visibleOptionIds.splice(destIndex, 1)[0])
+            visibleOptionIds.splice(srcIndex, 0, ...visibleOptionIds.splice(destIndex, 1))
             Utils.log(`ondrop. updated visibleoptionids: ${visibleOptionIds}`)
 
             await mutator.changeViewVisibleOptionIds(board.id, activeView.id, activeView.fields.visibleOptionIds, visibleOptionIds)
@@ -110,7 +110,7 @@ const Table = (props: Props): React.JSX.Element => {
                 acc[card.id] = card
                 return acc
             }, {})
-            const draggedCards: Card[] = draggedCardIds.map((o: string) => cardsById[o])
+            const draggedCards: Card[] = draggedCardIds.map((o: string) => cardsById[o]).filter(isDefined)
 
             mutator.performAsUndoGroup(async () => {
                 // Update properties of dragged cards

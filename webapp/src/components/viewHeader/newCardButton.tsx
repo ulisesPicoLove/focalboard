@@ -59,7 +59,7 @@ const NewCardButton = (props: Props): React.JSX.Element => {
                 </>}
 
                 {cardTemplates.map((cardTemplate) => {
-                    if (cardTemplate.id === currentView.fields.defaultTemplateId) {
+                    if (currentView && cardTemplate.id === currentView.fields.defaultTemplateId) {
                         defaultTemplateID = currentView.fields.defaultTemplateId
                     }
                     return (

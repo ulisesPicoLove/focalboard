@@ -54,7 +54,7 @@ function findDelimiters(text: string, styleRanges: Range[], delimiterRegex: RegE
 function mark(flags: number[], ranges: Range[], flag: number): void {
     for (const [start, end] of ranges) {
         for (let i = start; i <= end && i < flags.length; i++) {
-            flags[i] |= flag
+            flags[i] = (flags[i] ?? 0) | flag
         }
     }
 }
@@ -96,10 +96,10 @@ function codeBlockLines(lines: string[]): boolean[] {
     const inCode = lines.map(() => false)
     let i = 0
     while (i < lines.length) {
-        if (fenceRegex.test(lines[i])) {
+        if (fenceRegex.test(lines[i] ?? '')) {
             let close = -1
             for (let j = i + 1; j < lines.length; j++) {
-                if (fenceRegex.test(lines[j])) {
+                if (fenceRegex.test(lines[j] ?? '')) {
                     close = j
                     break
                 }
@@ -191,7 +191,7 @@ function highlightLine(text: string, line: {heading: number, code: boolean}): Se
     let start = 0
     for (let i = 1; i <= text.length; i++) {
         if (i === text.length || flags[i] !== flags[start]) {
-            segments.push({text: text.substring(start, i), style: cssFor(flags[start], line)})
+            segments.push({text: text.substring(start, i), style: cssFor(flags[start] ?? 0, line)})
             start = i
         }
     }
@@ -203,7 +203,7 @@ export function highlightMarkdown(text: string): Segment[][] {
     const lines = text.split('\n')
     const inCode = codeBlockLines(lines)
     return lines.map((lineText, i) => {
-        const heading = inCode[i] ? 0 : (headingRegex.exec(lineText)?.[1].length || 0)
-        return highlightLine(lineText, {heading, code: inCode[i]})
+        const heading = inCode[i] ? 0 : (headingRegex.exec(lineText)?.[1]?.length || 0)
+        return highlightLine(lineText, {heading, code: Boolean(inCode[i])})
     })
 }

@@ -50,7 +50,9 @@ function intBetween(min: number, max: number, value: number): number {
 function pointOf(event: Event): Point {
     if (event.type === 'touchmove') {
         const touch = (event as TouchEvent).changedTouches[0]
-        return {x: touch.clientX, y: touch.clientY}
+        if (touch) {
+            return {x: touch.clientX, y: touch.clientY}
+        }
     }
     const mouse = event as MouseEvent
     return {x: mouse.clientX, y: mouse.clientY}

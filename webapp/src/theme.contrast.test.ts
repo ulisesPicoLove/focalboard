@@ -10,12 +10,12 @@ function channel(value: number): number {
 
 function luminance(rgb: string): number {
     const [r, g, b] = rgb.split(',').map((v) => parseInt(v.trim(), 10))
-    return (0.2126 * channel(r)) + (0.7152 * channel(g)) + (0.0722 * channel(b))
+    return (0.2126 * channel(r!)) + (0.7152 * channel(g!)) + (0.0722 * channel(b!))
 }
 
 function contrast(a: string, b: string): number {
     const [light, dark] = [luminance(a), luminance(b)].sort((x, y) => y - x)
-    return (light + 0.05) / (dark + 0.05)
+    return (light! + 0.05) / (dark! + 0.05)
 }
 
 describe('theme contrast (WCAG AA, 4.5:1)', () => {

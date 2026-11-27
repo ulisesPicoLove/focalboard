@@ -6,6 +6,7 @@
         "esModuleInterop": true,
         "noImplicitAny": true,
         "strict": true,
+        "noUncheckedIndexedAccess": true,
         "strictNullChecks": true,
         "forceConsistentCasingInFileNames": true,
         "sourceMap": true,

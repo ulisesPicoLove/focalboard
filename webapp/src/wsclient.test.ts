@@ -40,7 +40,7 @@ describe('WSClient reconnection', () => {
         // far more than the 10 attempts it used to stop after
         for (let i = 0; i < 25; i++) {
             const before = FakeWebSocket.instances.length
-            last().onclose?.({code: 1006, reason: ''})
+            last()!.onclose?.({code: 1006, reason: ''})
             jest.advanceTimersByTime(30000)
             expect(FakeWebSocket.instances.length).toBe(before + 1)
         }
@@ -53,15 +53,15 @@ describe('WSClient reconnection', () => {
         const onReconnect = jest.fn()
         client.addOnReconnect(onReconnect)
         client.open()
-        last().onopen?.()
+        last()!.onopen?.()
         expect(onReconnect).not.toHaveBeenCalled() // first connection is not a reconnection
 
-        last().onclose?.({code: 1006, reason: ''})
+        last()!.onclose?.({code: 1006, reason: ''})
         jest.advanceTimersByTime(3000)
         expect(FakeWebSocket.instances.length).toBe(2)
         expect(onReconnect).not.toHaveBeenCalled() // retry started, still not connected
 
-        last().onopen?.()
+        last()!.onopen?.()
         expect(onReconnect).toHaveBeenCalledTimes(1)
 
         client.close()
@@ -70,7 +70,7 @@ describe('WSClient reconnection', () => {
     test('reconnects right away when the network comes back', () => {
         const client = new WSClient('http://localhost:8000')
         client.open()
-        last().onclose?.({code: 1006, reason: ''})
+        last()!.onclose?.({code: 1006, reason: ''})
         expect(FakeWebSocket.instances.length).toBe(1)
 
         window.dispatchEvent(new Event('online'))
@@ -80,7 +80,7 @@ describe('WSClient reconnection', () => {
     })
 
     describe('category boards order', () => {
-        const send = (message: object) => last().onmessage?.({data: JSON.stringify(message)})
+        const send = (message: object) => last()!.onmessage?.({data: JSON.stringify(message)})
 
         test('a REORDER_CATEGORY_BOARDS message reaches the handler', () => {
             const client = new WSClient('http://localhost:8000')

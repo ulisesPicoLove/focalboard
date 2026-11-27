@@ -70,8 +70,10 @@ const Image: ContentType<FileInfo> = {
                     type='file'
                     accept='image/*'
                     onChange={(e) => {
-                        const file = (e.currentTarget?.files || [])[0]
-                        props.onSave({file})
+                        const file = e.currentTarget?.files?.[0]
+                        if (file) {
+                            props.onSave({file})
+                        }
                     }}
                 />
             </div>

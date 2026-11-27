@@ -156,7 +156,7 @@ describe('properties/multiSelect', () => {
 
         userEvent.click(screen.getByTestId(nonEditableMultiSelectTestId))
 
-        userEvent.click(screen.getAllByRole('button', {name: /clear/i})[0])
+        userEvent.click(screen.getAllByRole('button', {name: /clear/i})[0]!)
 
         expect(mockedMutator.changePropertyValue).toHaveBeenCalledWith(board.id, card, propertyTemplate.id, ['multi-option-2'])
         expectOptionsMenuToBeVisible(propertyTemplate)
@@ -258,7 +258,7 @@ describe('properties/multiSelect', () => {
 
         userEvent.click(screen.getByTestId(nonEditableMultiSelectTestId))
 
-        userEvent.click(screen.getAllByRole('button', {name: /open menu/i})[0])
+        userEvent.click(screen.getAllByRole('button', {name: /open menu/i})[0]!)
 
         userEvent.click(screen.getByRole('button', {name: /delete/i}))
 
@@ -288,7 +288,7 @@ describe('properties/multiSelect', () => {
 
         userEvent.click(screen.getByTestId(nonEditableMultiSelectTestId))
 
-        userEvent.click(screen.getAllByRole('button', {name: /open menu/i})[0])
+        userEvent.click(screen.getAllByRole('button', {name: /open menu/i})[0]!)
 
         userEvent.click(screen.getByRole('button', {name: new RegExp(newColorValue, 'i')}))
 

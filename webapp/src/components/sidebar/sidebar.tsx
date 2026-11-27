@@ -207,7 +207,7 @@ const Sidebar = (props: Props) => {
         newCategories.splice(source.index, 1)
 
         // add it to new index
-        newCategories.splice(destination.index, 0, categories[source.index])
+        newCategories.splice(destination.index, 0, ...categories.slice(source.index, source.index + 1))
 
         const newCategoryOrder = newCategories.map((category) => category.id)
 

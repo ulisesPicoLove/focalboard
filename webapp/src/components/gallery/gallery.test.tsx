@@ -83,7 +83,7 @@ describe('src/components/gallery/Gallery', () => {
                 />
             </ReduxProvider>,
         ))
-        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[0]
+        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[0]!
         userEvent.click(buttonElement)
         expect(container).toMatchSnapshot()
     })
@@ -102,7 +102,7 @@ describe('src/components/gallery/Gallery', () => {
                 />
             </ReduxProvider>,
         ))
-        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[0]
+        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[0]!
         userEvent.click(buttonElement)
         expect(container).toMatchSnapshot()
     })
@@ -160,8 +160,8 @@ describe('src/components/gallery/Gallery', () => {
             </ReduxProvider>,
         ))
         const allGalleryCard = container.querySelectorAll('.GalleryCard')
-        const drag = allGalleryCard[0]
-        const drop = allGalleryCard[1]
+        const drag = allGalleryCard[0]!
+        const drop = allGalleryCard[1]!
         fireEvent.dragStart(drag)
         fireEvent.dragEnter(drop)
         fireEvent.dragOver(drop)

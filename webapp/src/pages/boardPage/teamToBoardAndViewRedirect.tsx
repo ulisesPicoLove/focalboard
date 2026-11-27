@@ -21,7 +21,7 @@ const TeamToBoardAndViewRedirect = (): null => {
     const teamId = match.params.teamId || UserSettings.lastTeamId || Constants.globalTeamId
 
     useEffect(() => {
-        let boardID = match.params.boardId
+        let boardID: string | undefined = match.params.boardId
         if (!match.params.boardId) {
             // first preference is for last visited board
             boardID = UserSettings.lastBoardId[teamId]
@@ -57,21 +57,23 @@ const TeamToBoardAndViewRedirect = (): null => {
             }
         }
 
-        let viewID = match.params.viewId
+        let viewID: string | undefined = match.params.viewId
 
         // when a view isn't open,
         // but the data is available, try opening a view
         if ((!viewID || viewID === '0') && boardId && boardId === match.params.boardId && boardViews && boardViews.length > 0) {
             // most recent view gets the first preference
-            viewID = UserSettings.lastViewId[boardID]
+            viewID = UserSettings.lastViewId[boardId]
             if (viewID) {
-                UserSettings.setLastViewId(boardID, viewID)
+                UserSettings.setLastViewId(boardId, viewID)
                 dispatch(setCurrentView(viewID))
             } else if (boardViews.length > 0) {
                 // if most recent view is unavailable, pick the first view
-                viewID = boardViews[0].id
-                UserSettings.setLastViewId(boardID, viewID)
-                dispatch(setCurrentView(viewID))
+                viewID = boardViews[0]?.id
+                if (viewID) {
+                    UserSettings.setLastViewId(boardId, viewID)
+                    dispatch(setCurrentView(viewID))
+                }
             }
 
             if (viewID) {

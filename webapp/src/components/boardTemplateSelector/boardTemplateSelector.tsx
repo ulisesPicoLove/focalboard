@@ -101,13 +101,16 @@ const BoardTemplateSelector = (props: Props) => {
     }
 
     const handleUseTemplate = async () => {
+        if (!activeTemplate) {
+            return
+        }
         await mutator.addBoardFromTemplate(currentTeam?.id || Constants.globalTeamId, intl, showBoard, () => showBoard(currentBoardId), activeTemplate.id, currentTeam?.id)
         if (activeTemplate.title === OnboardingBoardTitle) {
             resetTour()
         }
     }
 
-    const [activeTemplate, setActiveTemplate] = useState<Board>(allTemplates[0])
+    const [activeTemplate, setActiveTemplate] = useState<Board | undefined>(allTemplates[0])
 
     useEffect(() => {
         if (!activeTemplate) {
@@ -201,7 +204,7 @@ const BoardTemplateSelector = (props: Props) => {
                     </div>
                     <div className='templates-content'>
                         <div className='template-preview-box'>
-                            <BoardTemplateSelectorPreview activeTemplate={activeTemplate}/>
+                            <BoardTemplateSelectorPreview activeTemplate={activeTemplate ?? null}/>
                         </div>
                         <div className='buttons'>
                             <Button

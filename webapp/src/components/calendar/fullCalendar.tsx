@@ -157,6 +157,9 @@ const CalendarFullView = (props: Props): React.JSX.Element|null => {
     const renderEventContent = (eventProps: EventContentArg): React.JSX.Element|null => {
         const {event} = eventProps
         const card = cards.find((o) => o.id === event.id) || cards[0]
+        if (!card) {
+            return null
+        }
 
         return (
             <>

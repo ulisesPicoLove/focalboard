@@ -17,7 +17,7 @@ import {createH2Block} from './blocks/h2Block'
 import {createH3Block} from './blocks/h3Block'
 import {FilterCondition} from './blocks/filterClause'
 import {createAttachmentBlock} from './blocks/attachmentBlock'
-import {Utils} from './utils'
+import {Utils, isDefined} from './utils'
 
 class OctoUtils {
     static hydrateBlock(block: Block): Block {
@@ -91,13 +91,24 @@ class OctoUtils {
             // Remap manual card order
             if (newBlock.type === 'view') {
                 const view = newBlock as BoardView
-                view.fields.cardOrder = view.fields.cardOrder.map((o) => idMap[o])
+                view.fields.cardOrder = view.fields.cardOrder.map((o) => idMap[o]).filter(isDefined)
             }
 
             // Remap card content order
             if (newBlock.type === 'card') {
                 const card = newBlock as Card
-                card.fields.contentOrder = card.fields.contentOrder.map((o) => (Array.isArray(o) ? o.map((o2) => idMap[o2]) : idMap[o]))
+                const contentOrder: Array<string | string[]> = []
+                for (const o of card.fields.contentOrder) {
+                    if (Array.isArray(o)) {
+                        contentOrder.push(o.map((o2) => idMap[o2]).filter(isDefined))
+                    } else {
+                        const mapped = idMap[o]
+                        if (mapped !== undefined) {
+                            contentOrder.push(mapped)
+                        }
+                    }
+                }
+                card.fields.contentOrder = contentOrder
             }
         })
 

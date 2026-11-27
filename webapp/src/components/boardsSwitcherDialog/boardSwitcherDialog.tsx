@@ -70,7 +70,7 @@ const BoardSwitcherDialog = (props: Props): React.JSX.Element => {
         setRefs(refs)
         return items.map((item, i) => {
             const resultTitle = item.title || untitledBoardTitle
-            const teamTitle = teamsById[item.teamId].title
+            const teamTitle = teamsById[item.teamId]?.title
             setIDs((prevIDs) => ({
                 ...prevIDs,
                 [i]: [item.teamId, item.id],
@@ -94,14 +94,16 @@ const BoardSwitcherDialog = (props: Props): React.JSX.Element => {
     const handleEnterKeyPress = (e: KeyboardEvent) => {
         if (Utils.isKeyPressed(e, Constants.keyCodes.ENTER) && selected > -1) {
             e.preventDefault()
-            const [teamId, id] = IDs[selected]
-            selectBoard(teamId, id)
+            const ids = IDs[selected]
+            if (ids) {
+                selectBoard(...ids)
+            }
         }
     }
 
     useEffect(() => {
         if (selected >= 0) {
-            refs.current[selected].current?.parentElement?.focus()
+            refs.current[selected]?.current?.parentElement?.focus()
         }
 
         document.addEventListener('keydown', handleEnterKeyPress)

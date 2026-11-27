@@ -15,7 +15,7 @@ import {Board, IPropertyOption, IPropertyTemplate, BoardGroup} from '../../block
 import {Card} from '../../blocks/card'
 import {BoardView} from '../../blocks/boardView'
 import mutator from '../../mutator'
-import {Utils, IDType} from '../../utils'
+import {Utils, IDType, isDefined} from '../../utils'
 import Button from '../../widgets/buttons/button'
 import {Constants, Permission} from '../../constants'
 
@@ -102,7 +102,10 @@ const Kanban = (props: Props) => {
         if (!columnCards || columnCards.length === 0) {
             return cardOrder
         }
-        const lastCardId = columnCards[columnCards.length - 1].id
+        const lastCardId = columnCards[columnCards.length - 1]?.id
+        if (lastCardId === undefined) {
+            return cardOrder
+        }
         const setOfIds = new Set(cardIds)
         cardOrder = cardOrder.filter((id) => !setOfIds.has(id))
         const lastCardIndex = cardOrder.indexOf(lastCardId)
@@ -124,7 +127,7 @@ const Kanban = (props: Props) => {
                     acc[c.id] = c
                     return acc
                 }, {})
-                const draggedCards: Card[] = draggedCardIds.map((o: string) => cardsById[o]).filter((c) => c)
+                const draggedCards: Card[] = draggedCardIds.map((o: string) => cardsById[o]).filter(isDefined)
                 const description = draggedCards.length > 1 ? `drag ${draggedCards.length} cards` : 'drag card'
                 const awaits = []
                 for (const draggedCard of draggedCards) {
@@ -188,7 +191,7 @@ const Kanban = (props: Props) => {
             acc[card.id] = card
             return acc
         }, {})
-        const draggedCards: Card[] = draggedCardIds.map((o: string) => cardsById[o]).filter((c) => c)
+        const draggedCards: Card[] = draggedCardIds.map((o: string) => cardsById[o]).filter(isDefined)
         let cardOrder = cards.map((o) => o.id)
         const isDraggingDown = cardOrder.indexOf(srcCard.id) <= cardOrder.indexOf(dstCard.id)
         cardOrder = cardOrder.filter((id) => !draggedCardIds.includes(id))

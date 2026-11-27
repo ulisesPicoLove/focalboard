@@ -39,10 +39,11 @@ export async function loadMessages(lang: string): Promise<Messages> {
 export function getCurrentLanguage(): string {
     let lang = UserSettings.language
     if (!lang) {
+        const baseLanguage = navigator.language.split(/[-_]/)[0]
         if (supportedLanguages.includes(navigator.language)) {
             lang = navigator.language
-        } else if (supportedLanguages.includes(navigator.language.split(/[-_]/)[0])) {
-            lang = navigator.language.split(/[-_]/)[0]
+        } else if (baseLanguage && supportedLanguages.includes(baseLanguage)) {
+            lang = baseLanguage
         } else {
             lang = 'en'
         }

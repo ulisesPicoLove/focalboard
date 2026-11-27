@@ -4,6 +4,7 @@
 import React from 'react'
 
 import {Block} from '../../blocks/block'
+import {isDefined} from '../../utils'
 import {useAppSelector} from '../../store/hooks'
 import {getLastCardContent} from '../../store/contents'
 import {getLastCardComment} from '../../store/comments'
@@ -12,15 +13,13 @@ import Person from '../person/person'
 import {PropertyProps} from '../types'
 
 const LastModifiedBy = (props: PropertyProps): React.JSX.Element => {
-    const lastContent = useAppSelector(getLastCardContent(props.card.id || '')) as Block
-    const lastComment = useAppSelector(getLastCardComment(props.card.id)) as Block
+    const lastContent = useAppSelector(getLastCardContent(props.card.id || ''))
+    const lastComment = useAppSelector(getLastCardComment(props.card.id))
 
     let latestBlock: Block = props.card
     if (props.board) {
-        const allBlocks: Block[] = [props.card, lastContent, lastComment]
-        const sortedBlocks = allBlocks.sort((a, b) => b.updateAt - a.updateAt)
-
-        latestBlock = sortedBlocks.length > 0 ? sortedBlocks[0] : latestBlock
+        const allBlocks: Block[] = [props.card, lastContent, lastComment].filter(isDefined)
+        latestBlock = allBlocks.reduce((latest, block) => (block.updateAt > latest.updateAt ? block : latest), latestBlock)
     }
 
     return (

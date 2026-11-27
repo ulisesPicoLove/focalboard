@@ -102,11 +102,12 @@ export const updateMembersEnsuringBoardsAndUsers = createStateThunk(
 )
 
 export const updateMembersHandler = (state: BoardsState, action: PayloadAction<BoardMember[]>) => {
-    if (action.payload.length === 0) {
+    const first = action.payload[0]
+    if (!first) {
         return
     }
 
-    const boardId = action.payload[0].boardId
+    const boardId = first.boardId
     const boardMembers = state.membersInBoards[boardId] || {}
 
     for (const member of action.payload) {
@@ -118,7 +119,7 @@ export const updateMembersHandler = (state: BoardsState, action: PayloadAction<B
     }
 
     for (const member of action.payload) {
-        if (state.myBoardMemberships[member.boardId] && state.myBoardMemberships[member.boardId].userId === member.userId) {
+        if (state.myBoardMemberships[member.boardId]?.userId === member.userId) {
             if (!member.schemeAdmin && !member.schemeEditor && !member.schemeViewer && !member.schemeCommenter) {
                 delete state.myBoardMemberships[member.boardId]
             } else {
@@ -207,13 +208,12 @@ const boardsSlice = createSlice({
             })
         })
         builder.addCase(fetchBoardMembers.fulfilled, (state, action) => {
-            if (action.payload.length === 0) {
-                return
-            }
-
             // all members should belong to the same boardId, so we
             // get it from the first one
-            const boardId = action.payload[0].boardId
+            const boardId = action.payload[0]?.boardId
+            if (boardId === undefined) {
+                return
+            }
             const boardMembersMap = action.payload.reduce((acc: {[key: string]: BoardMember}, val: BoardMember) => {
                 acc[val.userId] = val
                 return acc

@@ -32,7 +32,7 @@ describe('components/cardBadges', () => {
    `.replace(/\n\s+/gm, '\n')
     const comments = Array.from(Array<CommentBlock>(3), () => TestBlockFactory.createComment(card))
     const checkboxes = Array.from(Array<CheckboxBlock>(4), () => TestBlockFactory.createCheckbox(card))
-    checkboxes[2].fields.value = true
+    checkboxes[2]!.fields.value = true
 
     const state: Partial<RootState> = {
         cards: {

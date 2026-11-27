@@ -9,10 +9,16 @@ import {Utils} from '../../utils'
 import {humanizeDuration} from '../../dateLocale'
 import {Constants} from '../../constants'
 import {DateProperty} from '../../properties/date/date'
+import {dictionaryOf} from '../../typeHelpers'
 
 const ROUNDED_DECIMAL_PLACES = 2
 
-function getCardProperty(card: Card, property: IPropertyTemplate): string | string[] | number {
+// The value of the property of the card as a number (NaN when the card or the value is missing)
+function numericProperty(card: Card | undefined, property: IPropertyTemplate): number {
+    return card ? parseFloat(getCardProperty(card, property) as string) : NaN
+}
+
+function getCardProperty(card: Card, property: IPropertyTemplate): string | string[] | number | undefined {
     if (property.id === Constants.titleColumnId) {
         return card.title
     }
@@ -182,11 +188,11 @@ function median(cards: readonly Card[], property: IPropertyTemplate): string {
     let result: number
 
     if (sorted.length % 2 === 0) {
-        const val1 = parseFloat(getCardProperty(sorted[sorted.length / 2], property) as string)
-        const val2 = parseFloat(getCardProperty(sorted[(sorted.length / 2) - 1], property) as string)
+        const val1 = numericProperty(sorted[sorted.length / 2], property)
+        const val2 = numericProperty(sorted[(sorted.length / 2) - 1], property)
         result = (val1 + val2) / 2
     } else {
-        result = parseFloat(getCardProperty(sorted[Math.floor(sorted.length / 2)], property) as string)
+        result = numericProperty(sorted[Math.floor(sorted.length / 2)], property)
     }
 
     return String(Utils.roundTo(result, ROUNDED_DECIMAL_PLACES))
@@ -264,7 +270,7 @@ function latestEpoch(cards: readonly Card[], property: IPropertyTemplate): numbe
     return result
 }
 
-function getTimestampsFromPropertyValue(value: number | string | string[]): number[] {
+function getTimestampsFromPropertyValue(value: number | string | string[] | undefined): number[] {
     if (typeof value === 'number') {
         return [value]
     }
@@ -294,7 +300,9 @@ function dateRange(cards: readonly Card[], property: IPropertyTemplate, intl: In
     return humanizeDuration(resultLatest - resultEarliest, intl.locale)
 }
 
-const Calculations: Record<string, (cards: readonly Card[], property: IPropertyTemplate, intl: IntlShape) => string> = {
+type Calculation = (cards: readonly Card[], property: IPropertyTemplate, intl: IntlShape) => string
+
+const calculations = dictionaryOf<Calculation>()({
     count,
     countEmpty,
     countNotEmpty,
@@ -315,6 +323,9 @@ const Calculations: Record<string, (cards: readonly Card[], property: IPropertyT
     earliest,
     latest,
     dateRange,
-}
+})
+
+// The calculation stored in a view is a plain string: the ones that exist are known, any other one is undefined
+const Calculations: typeof calculations & Record<string, Calculation | undefined> = calculations
 
 export default Calculations

@@ -173,7 +173,7 @@ describe('components/boardTemplateSelector/boardTemplateSelectorPreview', () => 
     test('should match snapshot', async () => {
         const {container} = render(wrapDNDIntl(
             <ReduxProvider store={store}>
-                <BoardTemplateSelectorPreview activeTemplate={(store.getState() as {boards: {templates: Board[]}}).boards.templates[0]}/>
+                <BoardTemplateSelectorPreview activeTemplate={(store.getState() as {boards: {templates: Board[]}}).boards.templates[0] ?? null}/>
             </ReduxProvider>
             ,
         ))

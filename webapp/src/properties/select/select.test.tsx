@@ -53,7 +53,7 @@ describe('properties/select', () => {
 
     it('shows the selected option', () => {
         const propertyTemplate = selectPropertyTemplate()
-        const option = propertyTemplate.options[0]
+        const option = propertyTemplate.options[0]!
 
         const {container} = render(wrapIntl(
             <Select
@@ -97,7 +97,7 @@ describe('properties/select', () => {
 
     it('shows the menu with options when preview is clicked', () => {
         const propertyTemplate = selectPropertyTemplate()
-        const selected = propertyTemplate.options[1]
+        const selected = propertyTemplate.options[1]!
 
         render(wrapIntl(
             <Select
@@ -127,7 +127,7 @@ describe('properties/select', () => {
 
     it('can select the option from menu', () => {
         const propertyTemplate = selectPropertyTemplate()
-        const optionToSelect = propertyTemplate.options[2]
+        const optionToSelect = propertyTemplate.options[2]!
 
         render(wrapIntl(
             <Select
@@ -150,7 +150,7 @@ describe('properties/select', () => {
 
     it('can clear the selected option', () => {
         const propertyTemplate = selectPropertyTemplate()
-        const selected = propertyTemplate.options[1]
+        const selected = propertyTemplate.options[1]!
 
         render(wrapIntl(
             <Select
@@ -175,7 +175,7 @@ describe('properties/select', () => {
 
     it('can create new option', () => {
         const propertyTemplate = selectPropertyTemplate()
-        const initialOption = propertyTemplate.options[0]
+        const initialOption = propertyTemplate.options[0]!
         const newOption = 'new-option'
 
         render(wrapIntl(

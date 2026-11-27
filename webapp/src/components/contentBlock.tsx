@@ -124,8 +124,10 @@ const ContentBlock = (props: Props): React.JSX.Element => {
                                     }
 
                                     // If only one item in the row, convert form an array item to normal item ( [item] => item )
-                                    if (Array.isArray(contentOrder[index]) && contentOrder[index].length === 1) {
-                                        contentOrder[index] = contentOrder[index][0]
+                                    const row = contentOrder[index]
+                                    const onlyItem = Array.isArray(row) && row.length === 1 ? row[0] : undefined
+                                    if (onlyItem !== undefined) {
+                                        contentOrder[index] = onlyItem
                                     }
 
                                     mutator.performAsUndoGroup(async () => {

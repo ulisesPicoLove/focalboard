@@ -131,7 +131,7 @@ export const lightTheme = {
 
 // True when an 'r, g, b' string is closer to black than to white.
 function isDarkRgb(rgb: string): boolean {
-    const [r, g, b] = rgb.split(',').map((v) => parseInt(v.trim(), 10))
+    const [r = 0, g = 0, b = 0] = rgb.split(',').map((v) => parseInt(v.trim(), 10))
     return ((0.299 * r) + (0.587 * g) + (0.114 * b)) < 128
 }
 

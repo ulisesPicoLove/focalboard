@@ -24,12 +24,12 @@ describe('store/sidebar reorderCategoryBoards', () => {
 
     test('puts the boards in the order the server sent', () => {
         const state = reducer(initial, reorderCategoryBoards({categoryID: 'c1', boardOrder: ['c', 'a', 'b']}))
-        expect(state.categoryAttributes[0].boardMetadata.map((m) => m.boardID)).toEqual(['c', 'a', 'b'])
+        expect(state.categoryAttributes[0]!.boardMetadata.map((m) => m.boardID)).toEqual(['c', 'a', 'b'])
     })
 
     test('keeps the hidden flag of each board', () => {
         const state = reducer(initial, reorderCategoryBoards({categoryID: 'c1', boardOrder: ['b', 'c', 'a']}))
-        expect(state.categoryAttributes[0].boardMetadata).toEqual([
+        expect(state.categoryAttributes[0]!.boardMetadata).toEqual([
             {boardID: 'b', hidden: true},
             {boardID: 'c', hidden: false},
             {boardID: 'a', hidden: false},
@@ -38,7 +38,7 @@ describe('store/sidebar reorderCategoryBoards', () => {
 
     test('boards the message does not mention stay, at the end, and unknown ones are ignored', () => {
         const state = reducer(initial, reorderCategoryBoards({categoryID: 'c1', boardOrder: ['c', 'not-here']}))
-        expect(state.categoryAttributes[0].boardMetadata.map((m) => m.boardID)).toEqual(['c', 'a', 'b'])
+        expect(state.categoryAttributes[0]!.boardMetadata.map((m) => m.boardID)).toEqual(['c', 'a', 'b'])
     })
 
     test('other categories are untouched and an unknown category changes nothing', () => {

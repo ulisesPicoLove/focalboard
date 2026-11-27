@@ -26,7 +26,7 @@ class UndoManager {
         if (this.index < 0) {
             return 0
         }
-        return this.commands[this.index].checkpoint
+        return this.commands[this.index]?.checkpoint ?? 0
     }
 
     get undoDescription(): string | undefined {
@@ -103,7 +103,7 @@ class UndoManager {
         let checkpoint: number
         if (isDiscardable) {
             checkpoint =
-                this.commands.length > 1 ? this.commands[this.commands.length - 1].checkpoint : 0
+                this.commands.length > 1 ? (this.commands[this.commands.length - 1]?.checkpoint ?? 0) : 0
         } else {
             checkpoint = Date.now()
         }
@@ -149,7 +149,7 @@ class UndoManager {
                 await this.execute(command, 'undo')
                 this.index -= 1
                 command = this.commands[this.index]
-            } while (this.index >= 0 && currentGroupId === command.groupId)
+            } while (command && currentGroupId === command.groupId)
         } else {
             await this.execute(command, 'undo')
             this.index -= 1
@@ -178,7 +178,7 @@ class UndoManager {
                 await this.execute(command, 'redo')
                 this.index += 1
                 command = this.commands[this.index + 1]
-            } while (this.index < this.commands.length - 1 && currentGroupId === command.groupId)
+            } while (command && currentGroupId === command.groupId)
         } else {
             await this.execute(command, 'redo')
             this.index += 1

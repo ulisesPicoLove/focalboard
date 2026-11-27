@@ -46,7 +46,7 @@ export function parseInputDate(text: string, locale: string): Date | undefined {
     const order = dateFieldOrder(safeLocale(locale))
     const fields: Record<string, number> = {}
     order.forEach((field, i) => {
-        fields[field] = parseInt(numbers[i], 10)
+        fields[field] = parseInt(numbers[i] ?? '', 10)
     })
     const {day, month, year} = fields
     if (!day || !month || !year || year < 100) {

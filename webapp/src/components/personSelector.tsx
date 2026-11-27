@@ -11,7 +11,7 @@ import {ActionMeta, MultiValue, SingleValue} from 'react-select'
 import {getSelectBaseStyle} from '../theme'
 import {IUser} from '../user'
 import {IAppWindow} from '../types'
-import {Utils} from '../utils'
+import {Utils, isDefined} from '../utils'
 import {useAppSelector} from '../store/hooks'
 import {getBoardUsers, getBoardUsersList, getMe} from '../store/users'
 
@@ -109,7 +109,7 @@ const PersonSelector = (props: Props): React.JSX.Element => {
 
     let users: IUser[] = []
     if (Object.keys(boardUsersById).length > 0) {
-        users = userIDs.map((id) => boardUsersById[id])
+        users = userIDs.map((id) => boardUsersById[id]).filter(isDefined)
     }
 
     const loadOptions = useCallback(async (value: string) => {

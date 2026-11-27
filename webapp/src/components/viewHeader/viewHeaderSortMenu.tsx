@@ -84,7 +84,7 @@ const ViewHeaderSortMenu = (props: Props) => {
                     let rightIcon: React.JSX.Element | undefined
                     if (activeView.fields.sortOptions?.length > 0) {
                         const sortOption = activeView.fields.sortOptions[0]
-                        if (sortOption.propertyId === option.id) {
+                        if (sortOption?.propertyId === option.id) {
                             rightIcon = sortOption.reversed ? <SortDownIcon/> : <SortUpIcon/>
                         }
                     }

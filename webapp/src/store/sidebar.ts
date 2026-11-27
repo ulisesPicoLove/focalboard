@@ -83,11 +83,14 @@ const sidebarSlice = createSlice({
                     state.categoryAttributes.splice(index, 1)
                 } else {
                     // else all, update the category
-                    state.categoryAttributes[index] = {
-                        ...state.categoryAttributes[index],
-                        name: updatedCategory.name,
-                        updateAt: updatedCategory.updateAt,
-                        isNew: false,
+                    const current = state.categoryAttributes[index]
+                    if (current) {
+                        state.categoryAttributes[index] = {
+                            ...current,
+                            name: updatedCategory.name,
+                            updateAt: updatedCategory.updateAt,
+                            isNew: false,
+                        }
                     }
                 }
             })
@@ -99,12 +102,16 @@ const sidebarSlice = createSlice({
             action.payload.forEach((boardCategory) => {
                 for (let i = 0; i < state.categoryAttributes.length; i++) {
                     const categoryAttribute = state.categoryAttributes[i]
+                    if (!categoryAttribute) {
+                        continue
+                    }
 
                     if (categoryAttribute.id === boardCategory.categoryID) {
                         const categoryBoardMetadataIndex = categoryAttribute.boardMetadata.findIndex((boardMetadata) => boardMetadata.boardID === boardCategory.boardID)
                         if (categoryBoardMetadataIndex >= 0) {
                             categoryAttribute.boardMetadata[categoryBoardMetadataIndex] = {
                                 ...categoryAttribute.boardMetadata[categoryBoardMetadataIndex],
+                                boardID: boardCategory.boardID,
                                 hidden: boardCategory.hidden,
                             }
                         } else {
@@ -165,6 +172,9 @@ const sidebarSlice = createSlice({
             }
 
             const category = state.categoryAttributes[categoryIndex]
+            if (!category) {
+                return
+            }
             const updatedCategory: CategoryBoards = {
                 ...category,
                 boardMetadata: action.payload.boardsMetadata,
@@ -183,6 +193,9 @@ const sidebarSlice = createSlice({
             // The order comes from the server as board IDs: keep the hidden flag of each board,
             // and keep at the end any board the message does not mention.
             const category = state.categoryAttributes[categoryIndex]
+            if (!category) {
+                return
+            }
             const known = new Map(category.boardMetadata.map((metadata) => [metadata.boardID, metadata]))
             const ordered: CategoryBoardMetadata[] = []
             for (const boardID of action.payload.boardOrder) {

@@ -35,7 +35,7 @@ describe('components/table/TableHeaderMenu', () => {
                     activeView={view}
                     cards={[]}
                     views={[view, view2]}
-                    template={board.cardProperties[0]}
+                    template={board.cardProperties[0]!}
                     onDrop={jest.fn()}
                     onAutoSizeColumn={onAutoSizeColumn}
                 />

@@ -401,7 +401,7 @@ describe('components/centerPanel', () => {
 
             const kanbanCardElements = container.querySelectorAll('.KanbanCard')
             expect(kanbanCardElements).not.toBeNull()
-            const kanbanCardElement = kanbanCardElements[0]
+            const kanbanCardElement = kanbanCardElements[0]!
             userEvent.click(kanbanCardElement)
             expect(container).toMatchSnapshot()
             expect(mockedShowCard).toBeCalledWith(card1.id)

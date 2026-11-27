@@ -191,10 +191,11 @@ const SidebarCategory = (props: Props) => {
                     nextBoardId = deleteBoardIndex + 1 === props.boards.length ? deleteBoardIndex - 1 : deleteBoardIndex + 1
                 }
 
-                if (nextBoardId) {
+                const nextBoard = nextBoardId === undefined ? undefined : props.boards[nextBoardId]
+                if (nextBoard) {
                 // This delay is needed because WSClient has a default 100 ms notification delay before updates
                     setTimeout(() => {
-                        showBoard(props.boards[nextBoardId as number].id)
+                        showBoard(nextBoard.id)
                     }, 120)
                 }
             },

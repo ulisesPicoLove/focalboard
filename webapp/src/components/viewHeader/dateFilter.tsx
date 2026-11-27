@@ -42,7 +42,7 @@ function DateFilter(props: Props): React.JSX.Element {
 
     let dateValue: Date | undefined
     if (filterValue && filterValue.length > 0) {
-        dateValue = new Date(parseInt(filterValue[0], 10))
+        dateValue = new Date(parseInt(filterValue[0] ?? '', 10))
     }
 
     const [value, setValue] = useState(dateValue)

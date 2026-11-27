@@ -49,7 +49,12 @@ enum IDType {
     BlockID = 'a',
 }
 
-export const KeyCodes: Record<string, [string, number]> = {
+// Type guard for filtering out the holes of a lookup: `ids.map((id) => byId[id]).filter(isDefined)`
+export function isDefined<T>(value: T | null | undefined): value is T {
+    return value !== null && value !== undefined
+}
+
+export const KeyCodes: {ENTER: [string, number], COMPOSING: [string, number]} = {
     ENTER: ['Enter', 13],
     COMPOSING: ['Composing', 229],
 }
@@ -303,7 +308,7 @@ class Utils {
         // eslint-disable-next-line no-control-regex
         const normalized = decoded.replace(/[\u0000-\u001f\u007f\s]/g, '')
         const scheme = (/^([a-z][a-z0-9+.-]*):/i).exec(normalized)
-        if (scheme && !['http', 'https', 'mailto'].includes(scheme[1].toLowerCase())) {
+        if (scheme && !['http', 'https', 'mailto'].includes((scheme[1] ?? '').toLowerCase())) {
             return '#'
         }
 
@@ -393,7 +398,7 @@ class Utils {
     // Errors
 
     static assertValue(valueObject: Record<string, unknown>): void {
-        const name = Object.keys(valueObject)[0]
+        const name = Object.keys(valueObject)[0] ?? ''
         const value = valueObject[name]
         if (!value) {
             Utils.logError(`ASSERT VALUE [${name}]`)
@@ -455,7 +460,7 @@ class Utils {
         link.rel = 'shortcut icon'
         link.href = `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">${icon}</text></svg>`
         document.querySelectorAll("link[rel*='icon']").forEach((n) => n.remove())
-        document.getElementsByTagName('head')[0].appendChild(link)
+        document.head.appendChild(link)
     }
 
     // URL
@@ -497,8 +502,10 @@ class Utils {
         input.type = 'file'
         input.accept = accept
         input.onchange = async () => {
-            const file = input.files![0]
-            onSelect?.(file)
+            const file = input.files?.[0]
+            if (file) {
+                onSelect?.(file)
+            }
         }
 
         input.style.display = 'none'
@@ -533,7 +540,7 @@ class Utils {
     }
 
     static arrayMove<T>(arr: T[], srcIndex: number, destIndex: number): void {
-        arr.splice(destIndex, 0, arr.splice(srcIndex, 1)[0])
+        arr.splice(destIndex, 0, ...arr.splice(srcIndex, 1))
     }
 
     // Clipboard
@@ -682,8 +689,8 @@ class Utils {
         const versionBNumber = (versionB || '').split('.').filter((x) => (/^[0-9]+$/).exec(x) !== null)
 
         for (let i = 0; i < Math.max(versionANumber.length, versionBNumber.length); i++) {
-            const a = parseInt(versionANumber[i], 10) || 0
-            const b = parseInt(versionBNumber[i], 10) || 0
+            const a = parseInt(versionANumber[i] ?? '', 10) || 0
+            const b = parseInt(versionBNumber[i] ?? '', 10) || 0
             if (a > b) {
                 return -1
             }

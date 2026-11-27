@@ -49,10 +49,10 @@ export function useModalFocus(containerRef: React.RefObject<HTMLElement | null>)
         const active = document.activeElement
         if (e.shiftKey && (active === first || active === container)) {
             e.preventDefault()
-            last.focus()
+            last?.focus()
         } else if (!e.shiftKey && active === last) {
             e.preventDefault()
-            first.focus()
+            first?.focus()
         }
     }
 }

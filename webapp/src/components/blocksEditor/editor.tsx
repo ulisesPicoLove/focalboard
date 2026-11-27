@@ -28,7 +28,7 @@ export default function Editor(props: Props) {
                 setValue('')
                 setCurrentBlockType(block)
             } else if (value !== '' && !contentBlocks.isSubPrefix(value) && !value.startsWith('/')) {
-                setCurrentBlockType(contentBlocks.get('text'))
+                setCurrentBlockType(contentBlocks.get('text') ?? null)
             }
         }
     }, [value, currentBlockType])

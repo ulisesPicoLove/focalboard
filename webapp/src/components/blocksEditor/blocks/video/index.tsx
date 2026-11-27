@@ -65,8 +65,10 @@ const Video: ContentType<FileInfo> = {
                 type='file'
                 accept='video/*'
                 onChange={(e) => {
-                    const file = (e.currentTarget?.files || [])[0]
-                    props.onSave({file, filename: file.name})
+                    const file = e.currentTarget?.files?.[0]
+                    if (file) {
+                        props.onSave({file, filename: file.name})
+                    }
                 }}
             />
         )

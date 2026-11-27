@@ -31,7 +31,7 @@ describe('properties/number', () => {
     beforeEach(() => {
         board = TestBlockFactory.createBoard()
         card = TestBlockFactory.createCard()
-        propertyTemplate = board.cardProperties[0]
+        propertyTemplate = board.cardProperties[0]!
 
         baseProps = {
             property: new NumberProperty(),

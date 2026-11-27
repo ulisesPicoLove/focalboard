@@ -60,7 +60,7 @@ const App = (props: Props): React.JSX.Element => {
 
     return (
         <IntlProvider
-            locale={language.split(/[_]/)[0]}
+            locale={language.split(/[_]/)[0] ?? language}
             messages={messages}
         >
             <DndProvider backend={Utils.isMobile() ? TouchBackend : HTML5Backend}>

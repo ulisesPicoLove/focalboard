@@ -25,26 +25,26 @@ const mockedMutator = mocked(mutator, true)
 
 const board = TestBlockFactory.createBoard()
 const activeView = TestBlockFactory.createBoardView(board)
-board.cardProperties[1].type = 'checkbox'
-board.cardProperties[2].type = 'text'
-board.cardProperties[3].type = 'date'
+board.cardProperties[1]!.type = 'checkbox'
+board.cardProperties[2]!.type = 'text'
+board.cardProperties[3]!.type = 'date'
 const statusFilter: FilterClause = {
-    propertyId: board.cardProperties[0].id,
+    propertyId: board.cardProperties[0]!.id,
     condition: 'includes',
     values: ['Status'],
 }
 const booleanFilter: FilterClause = {
-    propertyId: board.cardProperties[1].id,
+    propertyId: board.cardProperties[1]!.id,
     condition: 'isSet',
     values: [],
 }
 const textFilter: FilterClause = {
-    propertyId: board.cardProperties[2].id,
+    propertyId: board.cardProperties[2]!.id,
     condition: 'contains',
     values: [],
 }
 const dateFilter: FilterClause = {
-    propertyId: board.cardProperties[3].id,
+    propertyId: board.cardProperties[3]!.id,
     condition: 'is',
     values: [],
 }
@@ -68,7 +68,7 @@ const mockedConditionClicked = jest.fn()
 describe('components/viewHeader/filterEntry', () => {
     beforeEach(() => {
         jest.clearAllMocks()
-        board.cardProperties[0].options = [{id: 'Status', value: 'Status', color: ''}]
+        board.cardProperties[0]!.options = [{id: 'Status', value: 'Status', color: ''}]
         activeView.fields.filter.filters = [statusFilter]
     })
     test('return filterEntry', () => {
@@ -84,7 +84,7 @@ describe('components/viewHeader/filterEntry', () => {
                 </ReduxProvider>,
             ),
         )
-        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[0]
+        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[0]!
         userEvent.click(buttonElement)
         expect(container).toMatchSnapshot()
     })
@@ -104,7 +104,7 @@ describe('components/viewHeader/filterEntry', () => {
             ),
         )
         expect(container).toMatchSnapshot()
-        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[1]
+        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[1]!
         userEvent.click(buttonElement)
         expect(container).toMatchSnapshot()
     })
@@ -124,7 +124,7 @@ describe('components/viewHeader/filterEntry', () => {
             ),
         )
         expect(container).toMatchSnapshot()
-        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[1]
+        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[1]!
         userEvent.click(buttonElement)
         expect(container).toMatchSnapshot()
     })
@@ -144,7 +144,7 @@ describe('components/viewHeader/filterEntry', () => {
             ),
         )
         expect(container).toMatchSnapshot()
-        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[1]
+        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[1]!
         userEvent.click(buttonElement)
         expect(container).toMatchSnapshot()
     })
@@ -163,7 +163,7 @@ describe('components/viewHeader/filterEntry', () => {
                 </ReduxProvider>,
             ),
         )
-        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[0]
+        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[0]!
         userEvent.click(buttonElement)
         expect(container).toMatchSnapshot()
         const buttonStatus = screen.getByRole('button', {name: 'Status'})
@@ -183,10 +183,10 @@ describe('components/viewHeader/filterEntry', () => {
                 </ReduxProvider>,
             ),
         )
-        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[1]
+        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[1]!
         userEvent.click(buttonElement)
         expect(container).toMatchSnapshot()
-        const buttonIncludes = screen.getAllByRole('button', {name: 'includes'})[1]
+        const buttonIncludes = screen.getAllByRole('button', {name: 'includes'})[1]!
         userEvent.click(buttonIncludes)
         expect(mockedConditionClicked).toBeCalledTimes(1)
     })
@@ -203,7 +203,7 @@ describe('components/viewHeader/filterEntry', () => {
                 </ReduxProvider>,
             ),
         )
-        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[1]
+        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[1]!
         userEvent.click(buttonElement)
         expect(container).toMatchSnapshot()
         const buttonNotInclude = screen.getByRole('button', {name: 'doesn\'t include'})
@@ -223,7 +223,7 @@ describe('components/viewHeader/filterEntry', () => {
                 </ReduxProvider>,
             ),
         )
-        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[1]
+        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[1]!
         userEvent.click(buttonElement)
         expect(container).toMatchSnapshot()
         const buttonEmpty = screen.getByRole('button', {name: 'is empty'})
@@ -243,7 +243,7 @@ describe('components/viewHeader/filterEntry', () => {
                 </ReduxProvider>,
             ),
         )
-        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[1]
+        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[1]!
         userEvent.click(buttonElement)
         expect(container).toMatchSnapshot()
         const buttonNotEmpty = screen.getByRole('button', {name: 'is not empty'})
@@ -263,11 +263,11 @@ describe('components/viewHeader/filterEntry', () => {
                 </ReduxProvider>,
             ),
         )
-        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[1]
+        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[1]!
         userEvent.click(buttonElement)
         expect(container).toMatchSnapshot()
         const allButton = screen.getAllByRole('button')
-        userEvent.click(allButton[allButton.length - 1])
+        userEvent.click(allButton[allButton.length - 1]!)
         expect(mockedMutator.changeViewFilter).toBeCalledTimes(1)
     })
     test('return filterEntry and click on different property type', () => {
@@ -284,7 +284,7 @@ describe('components/viewHeader/filterEntry', () => {
                 </ReduxProvider>,
             ),
         )
-        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[0]
+        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[0]!
         userEvent.click(buttonElement)
         expect(container).toMatchSnapshot()
         const buttonDate = screen.getByRole('button', {name: 'Property 3'})
@@ -308,7 +308,7 @@ describe('components/viewHeader/filterEntry', () => {
                 </ReduxProvider>,
             ),
         )
-        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[0]
+        const buttonElement = screen.getAllByRole('button', {name: 'menuwrapper'})[0]!
         userEvent.click(buttonElement)
         expect(container).toMatchSnapshot()
         const buttonDate = screen.getByRole('button', {name: 'Property 3'})
@@ -318,7 +318,7 @@ describe('components/viewHeader/filterEntry', () => {
             {operation: 'and', filters: [booleanFilter]},
             {operation: 'and',
                 filters: [{
-                    propertyId: board.cardProperties[3].id,
+                    propertyId: board.cardProperties[3]!.id,
                     condition: 'isSet',
                     values: [],
                 }]})

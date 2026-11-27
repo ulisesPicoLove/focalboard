@@ -108,7 +108,7 @@ describe('components/viewTitle', () => {
             container = result.container
         })
         expect(container).toMatchSnapshot()
-        const hideDescriptionButton = screen.getAllByRole('button')[0]
+        const hideDescriptionButton = screen.getAllByRole('button')[0]!
         userEvent.click(hideDescriptionButton)
         expect(mockedMutator.showBoardDescription).toBeCalledTimes(1)
     })
@@ -128,7 +128,7 @@ describe('components/viewTitle', () => {
             container = result.container
         })
         expect(container).toMatchSnapshot()
-        const showDescriptionButton = screen.getAllByRole('button')[0]
+        const showDescriptionButton = screen.getAllByRole('button')[0]!
         userEvent.click(showDescriptionButton)
         expect(mockedMutator.showBoardDescription).toBeCalledTimes(1)
     })
@@ -148,7 +148,7 @@ describe('components/viewTitle', () => {
             container = result.container
         })
         expect(container).toMatchSnapshot()
-        const randomIconButton = screen.getAllByRole('button')[0]
+        const randomIconButton = screen.getAllByRole('button')[0]!
         userEvent.click(randomIconButton)
         expect(mockedMutator.changeBoardIcon).toBeCalledTimes(1)
     })
@@ -164,7 +164,7 @@ describe('components/viewTitle', () => {
                 </ReduxProvider>,
             ))
         })
-        const titleInput = screen.getAllByRole('textbox')[0]
+        const titleInput = screen.getAllByRole('textbox')[0]!
         userEvent.type(titleInput, 'other title')
         fireEvent.blur(titleInput)
         expect(mockedMutator.changeBoardTitle).toBeCalledTimes(1)
