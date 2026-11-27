@@ -5,6 +5,7 @@ import {Block, createBlock} from './block'
 
 type CheckboxBlock = ContentBlock & {
     type: 'checkbox'
+    fields: {value?: boolean}
 }
 
 function createCheckboxBlock(block?: Block): CheckboxBlock {

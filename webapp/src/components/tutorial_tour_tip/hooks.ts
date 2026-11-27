@@ -14,7 +14,7 @@ type PunchoutOffset = {
     height: number
 }
 
-export function useMeasurePunchouts(elementIds: string[], additionalDeps: any[], offset?: PunchoutOffset): TutorialTourTipPunchout | null | undefined {
+export function useMeasurePunchouts(elementIds: string[], additionalDeps: React.DependencyList, offset?: PunchoutOffset): TutorialTourTipPunchout | null | undefined {
     const elementsAvailable = useElementAvailable(elementIds)
     const [size, setSize] = useState<DOMRect>()
     const updateSize = throttle(() => {

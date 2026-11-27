@@ -14,11 +14,13 @@ type AttachmentBlock = Block & {
 }
 
 function createAttachmentBlock(block?: Block): AttachmentBlock {
+    // older blocks called the file id "attachmentId"
+    const fields = (block?.fields ?? {}) as Partial<AttachmentBlockFields> & {attachmentId?: string}
     return {
         ...createBlock(block),
         type: 'attachment',
         fields: {
-            fileId: block?.fields.attachmentId || block?.fields.fileId || '',
+            fileId: fields.attachmentId || fields.fileId || '',
         },
         isUploading: false,
         uploadingPercent: 0,

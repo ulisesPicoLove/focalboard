@@ -20,8 +20,33 @@ export type ContentType<ValueType = string> = {
     nextType?: string
 }
 
-export type BlockData<ValueType = string> = {
+export type BlockData<ValueType = ContentValue> = {
     id?: string
     value: ValueType
     contentType: string
 }
+
+// The values a content block can hold: text for most blocks, a file for image, attachment
+// and video, and a text with a flag for a checkbox
+export type FileValue = {
+    file: string | File
+    filename?: string
+    width?: number
+    align?: 'left' | 'center' | 'right'
+}
+
+export type CheckboxValue = {
+    value: string
+    checked: boolean
+}
+
+export type ContentValue = string | FileValue | CheckboxValue
+
+export function isFileValue(value: ContentValue | undefined): value is FileValue {
+    return typeof value === 'object' && value !== null && 'file' in value
+}
+
+export function isCheckboxValue(value: ContentValue | undefined): value is CheckboxValue {
+    return typeof value === 'object' && value !== null && 'checked' in value
+}
+

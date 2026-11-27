@@ -9,6 +9,8 @@ import React from 'react'
 import {MemoryRouter} from 'react-router'
 import {mocked} from 'jest-mock'
 
+import {IAppWindow} from '../../types'
+
 import {IUser} from '../../user'
 import {ISharing} from '../../blocks/sharing'
 import {TestBlockFactory} from '../../test/testBlockFactory'
@@ -121,7 +123,7 @@ categoryAttribute1.name = 'Category 1'
 categoryAttribute1.boardMetadata = [{boardID: board.id, hidden: false}]
 
 describe('src/components/shareBoard/shareBoard', () => {
-    const w = (window as any)
+    const w = (window as IAppWindow)
     const oldBaseURL = w.baseURL
 
     const state = {

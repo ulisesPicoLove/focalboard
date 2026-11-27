@@ -15,10 +15,10 @@ const EmojiPicker = React.lazy(() => import('../widgets/emojiPicker'))
 
 type Props = {
     readonly?: boolean
-    iconElement: any
-    onAddRandomIcon: any
-    onSelectEmoji: any
-    onRemoveIcon: any
+    iconElement: React.ReactNode
+    onAddRandomIcon: () => void
+    onSelectEmoji: (emoji: string) => void
+    onRemoveIcon: () => void
 }
 
 const IconSelector = React.memo((props: Props) => {

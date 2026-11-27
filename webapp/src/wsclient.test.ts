@@ -18,17 +18,17 @@ class FakeWebSocket {
 }
 
 describe('WSClient reconnection', () => {
-    const realWebSocket = (global as any).WebSocket
+    const realWebSocket = globalThis.WebSocket
 
     beforeEach(() => {
         jest.useFakeTimers()
-        FakeWebSocket.instances = [];
-        (global as any).WebSocket = FakeWebSocket
+        FakeWebSocket.instances = []
+        globalThis.WebSocket = FakeWebSocket as unknown as typeof WebSocket
     })
 
     afterEach(() => {
-        jest.useRealTimers();
-        (global as any).WebSocket = realWebSocket
+        jest.useRealTimers()
+        globalThis.WebSocket = realWebSocket
     })
 
     const last = () => FakeWebSocket.instances[FakeWebSocket.instances.length - 1]

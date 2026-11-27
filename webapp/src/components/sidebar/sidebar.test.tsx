@@ -109,9 +109,7 @@ describe('components/sidebarSidebar', () => {
     })
 
     test('sidebar expect hidden', () => {
-        const customGlobal = global as any
-
-        customGlobal.innerWidth = 500
+        Object.assign(window, {innerWidth: 500})
 
         const localCategoryAttribute = TestBlockFactory.createCategoryBoards()
         localCategoryAttribute.id = 'category1'
@@ -173,7 +171,7 @@ describe('components/sidebarSidebar', () => {
         const showSidebar = container.querySelector('button > .ShowSidebarIcon')
         expect(showSidebar).toBeDefined()
 
-        customGlobal.innerWidth = 1024
+        Object.assign(window, {innerWidth: 1024})
     })
 
     test('dont show hidden boards', () => {

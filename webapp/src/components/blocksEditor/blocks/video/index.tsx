@@ -75,7 +75,7 @@ const Video: ContentType<FileInfo> = {
 
 Video.runSlashCommand = (changeType: (contentType: ContentType<FileInfo>) => void, changeValue: (value: FileInfo) => void): void => {
     changeType(Video)
-    changeValue({} as any)
+    changeValue({file: '', filename: ''})
 }
 
 export default Video

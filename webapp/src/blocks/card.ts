@@ -15,10 +15,12 @@ type Card = Block & {
 }
 
 function createCard(block?: Block): Card {
+    // What the server saved is not checked: read it as a partial card and fill the defaults below
+    const fields = (block?.fields ?? {}) as Partial<CardFields>
     const contentOrder: Array<string|string[]> = []
-    const contentIds = block?.fields?.contentOrder?.filter((id: any) => id !== null)
+    const contentIds = fields.contentOrder?.filter((id) => id !== null)
 
-    if (contentIds?.length > 0) {
+    if (contentIds && contentIds.length > 0) {
         for (const contentId of contentIds) {
             if (typeof contentId === 'string') {
                 contentOrder.push(contentId)
@@ -31,12 +33,12 @@ function createCard(block?: Block): Card {
         ...createBlock(block),
         type: 'card',
         fields: {
-            icon: block?.fields.icon || '',
-            properties: {...(block?.fields.properties || {})},
+            icon: fields.icon || '',
+            properties: {...(fields.properties || {})},
             contentOrder,
-            isTemplate: block?.fields.isTemplate || false,
+            isTemplate: fields.isTemplate || false,
         },
     }
 }
 
-export {Card, createCard}
+export {Card, CardFields, createCard}

@@ -9,7 +9,7 @@ import {BlockIcons} from './blockIcons'
 import {Block, BlockPatch, createPatchesFromBlocks} from './blocks/block'
 import {Board, BoardMember, BoardsAndBlocks, IPropertyOption, IPropertyTemplate, PropertyTypeEnum, createBoard, createPatchesFromBoards, createPatchesFromBoardsAndBlocks, createCardPropertiesPatches} from './blocks/board'
 import {BoardView, ISortOption, createBoardView, KanbanCalculationFields} from './blocks/boardView'
-import {Card, createCard} from './blocks/card'
+import {Card, CardFields, createCard} from './blocks/card'
 import {ContentBlock} from './blocks/contentBlock'
 import {CommentBlock} from './blocks/commentBlock'
 import {AttachmentBlock} from './blocks/attachmentBlock'
@@ -1039,7 +1039,7 @@ class Mutator {
         afterRedo?: (newCardId: string) => Promise<void>,
         beforeUndo?: () => Promise<void>,
     ): Promise<[Block[], string]> {
-        return undoManager.perform(
+        return undoManager.perform<[Block[], string]>(
             async () => {
                 const blocks = await octoClient.duplicateBlock(boardId, cardId, asTemplate)
                 const newRootBlock = blocks && blocks[0]
@@ -1065,7 +1065,7 @@ class Mutator {
                 const patch = {
                     updatedFields: {
                         icon: newRootBlock.fields.icon,
-                        properties: {...newRootBlock.fields.properties, ...propertyOverrides},
+                        properties: {...(newRootBlock.fields as Partial<CardFields>).properties, ...propertyOverrides},
                     },
                     title: newRootBlock.title,
                 }
@@ -1076,7 +1076,9 @@ class Mutator {
                 }
                 return [blocks, newRootBlock.id]
             },
-            async (newBlocks: Block[]) => {
+
+            // undo gets what redo returned: the duplicated blocks and the id of the card
+            async ([newBlocks]: [Block[], string]) => {
                 await beforeUndo?.()
                 const newRootBlock = newBlocks && newBlocks[0]
                 if (newRootBlock) {
@@ -1095,7 +1097,7 @@ class Mutator {
         afterRedo?: (newBoardId: string) => Promise<void>,
         beforeUndo?: () => Promise<void>,
         toTeam?: string,
-    ): Promise<BoardsAndBlocks> {
+    ): Promise<BoardsAndBlocks | undefined> {
         return undoManager.perform(
             async () => {
                 const boardsAndBlocks = await octoClient.duplicateBoard(boardId, asTemplate, toTeam)
@@ -1105,8 +1107,12 @@ class Mutator {
                 }
                 return boardsAndBlocks
             },
-            async (boardsAndBlocks: BoardsAndBlocks) => {
+            async (boardsAndBlocks: BoardsAndBlocks | undefined) => {
                 await beforeUndo?.()
+                if (!boardsAndBlocks) {
+                    // the duplicate was never created, so there is nothing to remove
+                    return
+                }
                 const awaits = []
                 for (const block of boardsAndBlocks.blocks) {
                     awaits.push(octoClient.deleteBlock(block.boardId, block.id))
@@ -1141,7 +1147,7 @@ class Mutator {
         beforeUndo: () => Promise<void>,
         boardTemplateId: string,
         toTeam?: string,
-    ): Promise<BoardsAndBlocks> {
+    ): Promise<BoardsAndBlocks | undefined> {
         const asTemplate = false
         const actionDescription = intl.formatMessage({id: 'Mutator.new-board-from-template', defaultMessage: 'new board from template'})
         return mutator.duplicateBoard(boardTemplateId, actionDescription, asTemplate, afterRedo, beforeUndo, toTeam)

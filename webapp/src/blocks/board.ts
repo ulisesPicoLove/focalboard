@@ -6,6 +6,7 @@ import difference from 'lodash/difference'
 import {Utils, IDType} from '../utils'
 
 import {Block, BlockPatch, createPatchesFromBlocks} from './block'
+import {changedEntries, changedProperties} from './changedProperties'
 import {Card} from './card'
 
 const BoardTypeOpen = 'O'
@@ -49,10 +50,8 @@ type BoardPatch = {
     description?: string
     icon?: string
     showDescription?: boolean
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    updatedProperties?: Record<string, any>
+    updatedProperties?: Record<string, string | string[]>
     deletedProperties?: string[]
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     updatedCardProperties?: IPropertyTemplate[]
     deletedCardProperties?: string[]
 }
@@ -165,8 +164,8 @@ function getPropertiesDifference(propsA: IPropertyTemplate[], propsB: IPropertyT
 // isPropertyEqual checks that both the contents of the property and
 // its options are equal
 function isPropertyEqual(propA: IPropertyTemplate, propB: IPropertyTemplate): boolean {
-    for (const val of Object.keys(propA)) {
-        if (val !== 'options' && (propA as any)[val] !== (propB as any)[val]) {
+    for (const key of Object.keys(propA) as Array<keyof IPropertyTemplate>) {
+        if (key !== 'options' && propA[key] !== propB[key]) {
             return false
         }
     }
@@ -181,8 +180,8 @@ function isPropertyEqual(propA: IPropertyTemplate, propB: IPropertyTemplate): bo
             return false
         }
 
-        for (const val of Object.keys(opt)) {
-            if ((opt as any)[val] !== (optionB as any)[val]) {
+        for (const key of Object.keys(opt) as Array<keyof IPropertyOption>) {
+            if (opt[key] !== optionB[key]) {
                 return false
             }
         }
@@ -228,41 +227,17 @@ function createCardPropertiesPatches(newCardProperties: IPropertyTemplate[], old
 // contains the delta to update the board and another one for the undo
 // action, in case it happens
 function createPatchesFromBoards(newBoard: Board, oldBoard: Board): BoardPatch[] {
-    const newDeletedProperties = difference(Object.keys(newBoard.properties || {}), Object.keys(oldBoard.properties || {}))
+    const newProperties = newBoard.properties || {}
+    const oldProperties = oldBoard.properties || {}
+    const notPatched: Array<keyof Board> = ['properties', 'cardProperties']
 
-    const newUpdatedProperties: Record<string, any> = {}
-    Object.keys(newBoard.properties || {}).forEach((val) => {
-        if (oldBoard.properties[val] !== newBoard.properties[val]) {
-            newUpdatedProperties[val] = newBoard.properties[val]
-        }
-    })
+    const newDeletedProperties = difference(Object.keys(newProperties), Object.keys(oldProperties))
+    const newUpdatedProperties = changedEntries(oldProperties, newProperties)
+    const newData = changedProperties(oldBoard, newBoard, notPatched)
 
-    const newData: Record<string, any> = {}
-    Object.keys(newBoard).forEach((val) => {
-        if (val !== 'properties' &&
-            val !== 'cardProperties' &&
-            (oldBoard as any)[val] !== (newBoard as any)[val]) {
-            newData[val] = (newBoard as any)[val]
-        }
-    })
-
-    const oldDeletedProperties = difference(Object.keys(oldBoard.properties || {}), Object.keys(newBoard.properties || {}))
-
-    const oldUpdatedProperties: Record<string, any> = {}
-    Object.keys(oldBoard.properties || {}).forEach((val) => {
-        if (newBoard.properties[val] !== oldBoard.properties[val]) {
-            oldUpdatedProperties[val] = oldBoard.properties[val]
-        }
-    })
-
-    const oldData: Record<string, any> = {}
-    Object.keys(oldBoard).forEach((val) => {
-        if (val !== 'properties' &&
-            val !== 'cardProperties' &&
-            (newBoard as any)[val] !== (oldBoard as any)[val]) {
-            oldData[val] = (oldBoard as any)[val]
-        }
-    })
+    const oldDeletedProperties = difference(Object.keys(oldProperties), Object.keys(newProperties))
+    const oldUpdatedProperties = changedEntries(newProperties, oldProperties)
+    const oldData = changedProperties(newBoard, oldBoard, notPatched)
 
     const [cardPropertiesPatch, cardPropertiesUndoPatch] = createCardPropertiesPatches(newBoard.cardProperties, oldBoard.cardProperties)
 

@@ -2,7 +2,7 @@
 // See LICENSE.txt for license information.
 import React from 'react'
 
-import Select, {components, DropdownIndicatorProps} from 'react-select'
+import Select, {components, DropdownIndicatorProps, GroupBase, SelectComponentsConfig} from 'react-select'
 
 import {CSSObject} from '@emotion/serialize'
 
@@ -164,21 +164,23 @@ export type CommonCalculationOptionProps = {
     value: string
     menuOpen: boolean
     onClose?: () => void
-    components?: {[key: string]: (props: any) => React.JSX.Element}
-    onChange: (data: any) => void
+    onChange: (data: string) => void
     property?: IPropertyTemplate
 }
 
 // Props used by the base calculation option component
 type BaseCalculationOptionProps = CommonCalculationOptionProps & {
     options: Option[]
+
+    // replacements for parts of the select
+    components?: SelectComponentsConfig<Option, false, GroupBase<Option>>
 }
 
 export const CalculationOptions = (props: BaseCalculationOptionProps): React.JSX.Element => {
     const intl = useIntl()
 
     return (
-        <Select
+        <Select<Option, false>
             styles={styles}
             value={Options[props.value]}
             isMulti={false}

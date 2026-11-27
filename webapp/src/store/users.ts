@@ -145,6 +145,11 @@ export const getOnboardingTourStarted = createSelector(
     },
 )
 
+// The value of a preference as text; the one map-valued preference (hiddenBoardIDs) is not text
+function preferenceText(preference: UserPreference | undefined): string {
+    return typeof preference?.value === 'string' ? preference.value : ''
+}
+
 export const getOnboardingTourStep = createSelector(
     getMyConfig,
     (myConfig): string => {
@@ -152,12 +157,12 @@ export const getOnboardingTourStep = createSelector(
             return ''
         }
 
-        return myConfig.onboardingTourStep?.value
+        return preferenceText(myConfig.onboardingTourStep)
     },
 )
 
 export const getOnboardingTourCategory = createSelector(
     getMyConfig,
-    (myConfig): string => (myConfig.tourCategory ? myConfig.tourCategory.value : ''),
+    (myConfig): string => preferenceText(myConfig.tourCategory),
 )
 

@@ -4,11 +4,12 @@ import React, {ReactElement} from 'react'
 import {FormattedMessage} from 'react-intl'
 
 import {IUser} from '../../../user'
+import {IAppWindow} from '../../../types'
 import GuestBadge from '../../../widgets/guestBadge'
 
 import './entryComponent.scss'
 
-const BotBadge = (window as any).Components?.BotBadge
+const BotBadge = (window as IAppWindow).Components?.BotBadge
 
 export type MentionUser = {
     user: IUser

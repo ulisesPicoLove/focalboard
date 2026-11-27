@@ -1,12 +1,14 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
+// What the manager stores. Commands are of many kinds, so the value that redo returns and
+// undo receives is kept as unknown here; perform() is generic and keeps each pair consistent.
 interface UndoCommand {
     checkpoint: number
-    undo: (value?: any) => Promise<void>
-    redo: () => Promise<void>
+    undo: (value?: unknown) => Promise<void>
+    redo: () => Promise<unknown>
     description?: string
     groupId?: string
-    value?: any
+    value?: unknown
 }
 
 //
@@ -66,26 +68,29 @@ class UndoManager {
         return this
     }
 
-    async perform(
-        redo: () => Promise<any>,
-        undo: (value?: any) => Promise<void>,
+    // Runs `redo` and remembers how to undo it. Whatever redo returns is what undo is given.
+    async perform<ValueType = void>(
+        redo: () => Promise<ValueType>,
+        undo: (value: ValueType) => Promise<void>,
         description?: string,
         groupId?: string,
         isDiscardable = false,
-    ): Promise<any> {
+    ): Promise<ValueType> {
         const value = await redo()
-        this.registerUndo({undo, redo}, description, groupId, value, isDiscardable)
+
+        // undo only ever receives the value that this same redo returned (see execute())
+        this.registerUndo({undo: undo as (value?: unknown) => Promise<void>, redo}, description, groupId, value, isDiscardable)
         return value
     }
 
     registerUndo(
         command: {
-            undo: (value?: any) => Promise<void>
-            redo: () => Promise<void>
+            undo: (value?: unknown) => Promise<void>
+            redo: () => Promise<unknown>
         },
         description?: string,
         groupId?: string,
-        value?: any,
+        value?: unknown,
         isDiscardable = false,
     ): UndoManager {
         if (this.isExecuting) {

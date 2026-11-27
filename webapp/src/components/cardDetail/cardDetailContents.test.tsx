@@ -140,7 +140,7 @@ describe('components/cardDetail/cardDetailContents', () => {
 
     test('should match snapshot after drag and drop event', async () => {
         const contents = [TestBlockFactory.createDivider(card), [TestBlockFactory.createDivider(card), TestBlockFactory.createDivider(card)]]
-        card.fields.contentOrder = contents.map((content) => (Array.isArray(content) ? content.map((c) => c.id) : (content as any).id))
+        card.fields.contentOrder = contents.map((content) => (Array.isArray(content) ? content.map((c) => c.id) : content.id))
         const component = wrap((
             <CardDetailContents
                 id='test-id'
@@ -169,7 +169,7 @@ describe('components/cardDetail/cardDetailContents', () => {
 
     test('should match snapshot after drag and drop event 2', async () => {
         const contents = [TestBlockFactory.createDivider(card), TestBlockFactory.createDivider(card)]
-        card.fields.contentOrder = contents.map((content) => (Array.isArray(content) ? content.map((c) => c.id) : (content as any).id))
+        card.fields.contentOrder = contents.map((content) => (Array.isArray(content) ? content.map((c) => c.id) : content.id))
         const component = wrap((
             <CardDetailContents
                 id='test-id'
@@ -198,7 +198,7 @@ describe('components/cardDetail/cardDetailContents', () => {
 
     test('should match snapshot after drag and drop event 3', async () => {
         const contents = [TestBlockFactory.createDivider(card), TestBlockFactory.createDivider(card)]
-        card.fields.contentOrder = contents.map((content) => (Array.isArray(content) ? content.map((c) => c.id) : (content as any).id))
+        card.fields.contentOrder = contents.map((content) => (Array.isArray(content) ? content.map((c) => c.id) : content.id))
         const component = wrap((
             <CardDetailContents
                 id='test-id'

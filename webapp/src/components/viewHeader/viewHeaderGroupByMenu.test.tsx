@@ -16,6 +16,7 @@ import mutator from '../../mutator'
 
 import {wrapIntl, mockStateStore} from '../../testUtils'
 import {IPropertyOption} from '../../blocks/board'
+import {Card} from '../../blocks/card'
 
 import ViewHeaderGroupByMenu from './viewHeaderGroupByMenu'
 
@@ -53,7 +54,7 @@ const card3 = TestBlockFactory.createCard(board)
 card3.fields.properties = {[property.id]: 'property_value_id_3'}
 
 describe('components/viewHeader/viewHeaderGroupByMenu', () => {
-    let state: any
+    let state: {cards: {templates: Card[], cards: Card[]}} & Record<string, unknown>
     let store: MockStoreEnhanced<unknown, unknown>
 
     const setDefaultOptions = () => {

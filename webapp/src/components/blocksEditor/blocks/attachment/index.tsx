@@ -79,7 +79,7 @@ const Attachment: ContentType<FileInfo> = {
 
 Attachment.runSlashCommand = (changeType: (contentType: ContentType<FileInfo>) => void, changeValue: (value: FileInfo) => void): void => {
     changeType(Attachment)
-    changeValue({} as any)
+    changeValue({file: '', filename: ''})
 }
 
 export default Attachment

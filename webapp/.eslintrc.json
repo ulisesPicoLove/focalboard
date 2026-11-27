@@ -117,8 +117,8 @@
         "@stylistic/member-delimiter-style": [2, {"multiline": {"delimiter": "none"}, "singleline": {"delimiter": "comma"}}],
         "@stylistic/type-annotation-spacing": 2,
 
-        // v8 made these errors; they were warnings or off before
-        "@typescript-eslint/no-explicit-any": 1,
+        // v8 made these errors; they were warnings or off before (no-explicit-any stays an error: the code has none left)
+        "@typescript-eslint/no-explicit-any": 2,
         "@typescript-eslint/no-unused-expressions": 0,
         "@typescript-eslint/no-require-imports": 1,
         "no-empty-function": 0,

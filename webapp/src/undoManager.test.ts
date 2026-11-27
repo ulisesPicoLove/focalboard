@@ -53,16 +53,17 @@ test('Basic undo/redo response dependant', async () => {
     expect(undoManager.currentCheckpoint).toBe(0)
 
     const blockIds = [2, 1]
-    const blocks: Record<string, any> = {}
+    type SampleBlock = {id: number, title: string}
+    const blocks: Record<string, SampleBlock> = {}
 
     const newBlock = await undoManager.perform(
         async () => {
-            const responseId = blockIds.pop() // every time we run the action a new ID is obtained
-            const block: Record<string, any> = {id: responseId, title: 'Sample'}
+            const responseId = blockIds.pop() as number // every time we run the action a new ID is obtained
+            const block: SampleBlock = {id: responseId, title: 'Sample'}
             blocks[block.id] = block
             return block
         },
-        async (block: Record<string, any>) => {
+        async (block: SampleBlock) => {
             delete blocks[block.id]
         },
         'test',

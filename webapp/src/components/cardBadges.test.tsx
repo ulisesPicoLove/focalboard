@@ -89,7 +89,7 @@ describe('components/cardBadges', () => {
 
     it('should not render again when unrelated store state changes', () => {
         // a plain store whose state we can change, unlike the mocked one
-        const liveStore = createStore((current: any = state, action: {type: string, value?: number}) => {
+        const liveStore = createStore((current: typeof state = state, action: {type: string, value?: number}) => {
             return action.type === 'unrelated' ? {...current, unrelated: action.value} : current
         })
         let commits = 0

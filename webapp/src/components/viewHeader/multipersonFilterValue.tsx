@@ -4,8 +4,6 @@
 import React from 'react'
 import {useIntl} from 'react-intl'
 
-import {MultiValue} from 'react-select'
-
 import {Utils} from '../../utils'
 import mutator from '../../mutator'
 import {BoardView} from '../../blocks/boardView'
@@ -37,7 +35,14 @@ const MultiPersonFilterValue = (props: Props): React.JSX.Element => {
             emptyDisplayValue={emptyDisplayValue}
             showMe={true}
             closeMenuOnSelect={false}
-            onChange={(items: MultiValue<IUser>, action) => {
+            onChange={(items, action) => {
+                // this selector is multiple, so it reports a list; a single value is treated as a list of one
+                let selected: readonly IUser[] = []
+                if (Array.isArray(items)) {
+                    selected = items
+                } else if (items) {
+                    selected = [items as IUser]
+                }
                 const filterIndex = view.fields.filter.filters.indexOf(filter)
                 Utils.assert(filterIndex >= 0, "Can't find filter")
 
@@ -46,11 +51,11 @@ const MultiPersonFilterValue = (props: Props): React.JSX.Element => {
                 Utils.assert(newFilter, `No filter at index ${filterIndex}`)
 
                 if (action.action === 'select-option') {
-                    newFilter.values = items.map((a) => a.id)
+                    newFilter.values = selected.map((a) => a.id)
                 } else if (action.action === 'clear') {
                     newFilter.values = []
                 } else if (action.action === 'remove-value') {
-                    newFilter.values = items.filter((a) => a.id !== action.removedValue.id).map((b) => b.id) || []
+                    newFilter.values = selected.filter((a) => a.id !== action.removedValue.id).map((b) => b.id)
                 }
                 mutator.changeViewFilter(view.boardId, view.id, view.fields.filter, filterGroup)
             }}

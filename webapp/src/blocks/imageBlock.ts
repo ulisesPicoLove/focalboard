@@ -13,11 +13,12 @@ type ImageBlock = ContentBlock & {
 }
 
 function createImageBlock(block?: Block): ImageBlock {
+    const fields = (block?.fields ?? {}) as Partial<ImageBlockFields>
     return {
         ...createBlock(block),
         type: 'image',
         fields: {
-            fileId: block?.fields.fileId || '',
+            fileId: fields.fileId || '',
         },
     }
 }

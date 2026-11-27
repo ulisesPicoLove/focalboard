@@ -1,6 +1,6 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
-import React, {useEffect, useState, useMemo, useCallback} from 'react'
+import React, {useEffect, useState, useCallback} from 'react'
 import {batch} from 'react-redux'
 import {FormattedMessage, useIntl} from 'react-intl'
 import {useRouteMatch, useHistory} from 'react-router-dom'
@@ -90,13 +90,13 @@ const BoardPage = (props: Props): React.JSX.Element => {
         dispatch(setTeam(teamId))
     }, [teamId, dispatch])
 
-    const loadAction: (boardId: string) => any = useMemo(() => {
-        // initialLoad takes no argument, initialReadOnlyLoad takes the board id; both are dispatched with it
+    // A shared (read-only) page loads the one board it shows; the normal page loads everything the person can see
+    const loadInitialData = useCallback((boardId: string) => {
         if (props.readonly) {
-            return initialReadOnlyLoad as unknown as (boardId: string) => any
+            return dispatch(initialReadOnlyLoad(boardId))
         }
-        return initialLoad as unknown as (boardId: string) => any
-    }, [props.readonly])
+        return dispatch(initialLoad())
+    }, [dispatch, props.readonly])
 
     useWebsockets(teamId, (wsClient) => {
         const incrementalBlockUpdate = (_: WSClient, blocks: Block[]) => {
@@ -135,7 +135,7 @@ const BoardPage = (props: Props): React.JSX.Element => {
         }
 
         const dispatchLoadAction = () => {
-            dispatch(loadAction(match.params.boardId))
+            loadInitialData(match.params.boardId)
         }
 
         Utils.log('useWEbsocket adding onChange handler')
@@ -183,8 +183,8 @@ const BoardPage = (props: Props): React.JSX.Element => {
             dispatch(setGlobalError('board-not-found'))
             return
         }
-        const result: any = await dispatch(loadBoardData(boardId))
-        if (result.payload.blocks.length > 0 && myUser.id) {
+        const result = await dispatch(loadBoardData(boardId))
+        if (loadBoardData.fulfilled.match(result) && result.payload.blocks.length > 0 && myUser.id) {
             // set board as most recently viewed board
             UserSettings.setLastBoardID(boardTeamId, boardId)
         }
@@ -192,7 +192,11 @@ const BoardPage = (props: Props): React.JSX.Element => {
 
     const loadOrJoinBoard = useCallback(async (myUser: IUser, boardTeamId: string, boardId: string) => {
         // and fetch its data
-        const result: any = await dispatch(loadBoardData(boardId))
+        const result = await dispatch(loadBoardData(boardId))
+        if (!loadBoardData.fulfilled.match(result)) {
+            // the board could not be loaded: nothing to join or remember
+            return
+        }
         if (result.payload.blocks.length === 0 && myUser.id) {
             joinBoard(myUser, boardTeamId, boardId, false)
         } else {
@@ -213,7 +217,7 @@ const BoardPage = (props: Props): React.JSX.Element => {
     }, [match.params.boardId])
 
     useEffect(() => {
-        dispatch(loadAction(match.params.boardId))
+        loadInitialData(match.params.boardId)
 
         if (match.params.boardId) {
             // set the active board
@@ -229,7 +233,7 @@ const BoardPage = (props: Props): React.JSX.Element => {
             }
         }
 
-    // Load when the team, board, view or user changes; loadAction and dispatch are not triggers
+    // Load when the team, board, view or user changes; loadInitialData and dispatch are not triggers
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [teamId, match.params.boardId, viewId, me?.id])
 

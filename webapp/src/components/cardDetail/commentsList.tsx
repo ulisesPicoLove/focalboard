@@ -39,7 +39,7 @@ const CommentsList = (props: Props) => {
         if (commentText) {
             const {cardId, boardId} = props
             Utils.log(`Send comment: ${commentText}`)
-            Utils.assertValue(cardId)
+            Utils.assertValue({cardId})
 
             const comment = createCommentBlock()
             comment.parentId = cardId

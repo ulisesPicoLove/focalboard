@@ -28,6 +28,7 @@ const ImageElement = (props: Props): React.JSX.Element|null => {
     const [fileInfo, setFileInfo] = useState<FileInfo>({})
 
     const {block} = props
+    const {fileId} = createImageBlock(block).fields
     const intl = useIntl()
     const [altText, setAltText] = useState(block.title)
 
@@ -39,13 +40,13 @@ const ImageElement = (props: Props): React.JSX.Element|null => {
     useEffect(() => {
         if (!imageDataUrl) {
             const loadImage = async () => {
-                const fileURL = await octoClient.getFileAsDataUrl(block.boardId, props.block.fields.fileId)
+                const fileURL = await octoClient.getFileAsDataUrl(block.boardId, fileId)
                 setImageDataUrl(fileURL.url || '')
                 setFileInfo(fileURL)
             }
             loadImage()
         }
-    }, [block.boardId, props.block.fields.fileId, imageDataUrl])
+    }, [block.boardId, fileId, imageDataUrl])
 
     if (fileInfo.archived) {
         return (

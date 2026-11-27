@@ -6,7 +6,7 @@ import {MockStoreEnhanced} from 'redux-mock-store'
 
 import {Provider as ReduxProvider} from 'react-redux'
 
-import {IPropertyTemplate} from '../../blocks/board'
+import {Board, IPropertyTemplate} from '../../blocks/board'
 import {mockDOM, mockStateStore, wrapDNDIntl} from '../../testUtils'
 
 import {TestBlockFactory} from '../../test/testBlockFactory'
@@ -173,7 +173,7 @@ describe('components/boardTemplateSelector/boardTemplateSelectorPreview', () => 
     test('should match snapshot', async () => {
         const {container} = render(wrapDNDIntl(
             <ReduxProvider store={store}>
-                <BoardTemplateSelectorPreview activeTemplate={(store.getState() as any).boards.templates[0]}/>
+                <BoardTemplateSelectorPreview activeTemplate={(store.getState() as {boards: {templates: Board[]}}).boards.templates[0]}/>
             </ReduxProvider>
             ,
         ))

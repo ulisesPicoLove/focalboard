@@ -22,7 +22,7 @@ import {relativeTime} from './dateLocale'
 
 declare let window: IAppWindow
 
-const imageURLForUser = typeof window === 'undefined' ? undefined : (window as any).Components?.imageURLForUser
+const imageURLForUser = typeof window === 'undefined' ? undefined : window.Components?.imageURLForUser
 const IconClass = 'octo-icon'
 const OpenButtonClass = 'open-button'
 const SpacerClass = 'octo-spacer'
@@ -392,7 +392,7 @@ class Utils {
 
     // Errors
 
-    static assertValue(valueObject: any): void {
+    static assertValue(valueObject: Record<string, unknown>): void {
         const name = Object.keys(valueObject)[0]
         const value = valueObject[name]
         if (!value) {
@@ -400,7 +400,7 @@ class Utils {
         }
     }
 
-    static assert(condition: any, tag = ''): void {
+    static assert(condition: unknown, tag = ''): void {
         /// #!if ENV !== "production"
         if (!condition) {
             Utils.logError(`ASSERT [${tag ?? new Error().stack}]`)
@@ -510,7 +510,7 @@ class Utils {
 
     // Arrays
 
-    static arraysEqual(a: readonly any[], b: readonly any[]): boolean {
+    static arraysEqual(a: readonly unknown[], b: readonly unknown[]): boolean {
         if (a === b) {
             return true
         }
@@ -532,7 +532,7 @@ class Utils {
         return true
     }
 
-    static arrayMove(arr: any[], srcIndex: number, destIndex: number): void {
+    static arrayMove<T>(arr: T[], srcIndex: number, destIndex: number): void {
         arr.splice(destIndex, 0, arr.splice(srcIndex, 1)[0])
     }
 
@@ -730,7 +730,7 @@ class Utils {
     }
 
     static uuid(): string {
-        return (window as any).URL.createObjectURL(new Blob([])).substr(-36)
+        return URL.createObjectURL(new Blob([])).substr(-36)
     }
 
     static isKeyPressed(event: KeyboardEvent, key: [string, number]): boolean {

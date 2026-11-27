@@ -4,6 +4,9 @@ import React from 'react'
 import {
     Redirect,
     Route,
+    RouteChildrenProps,
+    RouteComponentProps,
+    match as RouteMatch,
 } from 'react-router-dom'
 
 import {Utils} from './utils'
@@ -13,19 +16,24 @@ import {useAppSelector} from './store/hooks'
 type RouteProps = {
     path: string|string[]
     exact?: boolean
-    render?: (props: any) => React.ReactElement
+    render?: (props: RouteComponentProps) => React.ReactElement
     component?: React.ComponentType
     children?: React.ReactElement
-    getOriginalPath?: (match: any) => string
+    getOriginalPath?: (match: RouteMatch<Record<string, string | undefined>>) => string
     loginRequired?: boolean
 }
 
 function FBRoute(props: RouteProps) {
     const loggedIn = useAppSelector<boolean|null>(getLoggedIn)
-    let redirect: any = null
+    let redirect: ((routeProps: RouteChildrenProps<Record<string, string | undefined>>) => React.ReactElement | null) | null = null
 
-    if (redirect === null && loggedIn === false && props.loginRequired) {
-        redirect = ({match}: any) => {
+    if (loggedIn === false && props.loginRequired) {
+        // eslint-disable-next-line react/prop-types -- a render callback of the router, not a component with props
+        redirect = ({match}) => {
+            // inside a Switch only the route that matches is rendered, so there is always a match
+            if (!match) {
+                return null
+            }
             if (props.getOriginalPath) {
                 let redirectUrl = '/' + Utils.buildURL(props.getOriginalPath!(match))
                 if (redirectUrl.indexOf('//') === 0) {

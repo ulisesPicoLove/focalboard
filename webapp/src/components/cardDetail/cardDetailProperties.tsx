@@ -88,8 +88,8 @@ const CardDetailProperties = (props: Props) => {
                 setShowConfirmationDialog(false)
                 try {
                     await mutator.changePropertyTypeAndName(board, cards, propertyTemplate, newType.type, newName)
-                } catch (err: any) {
-                    Utils.logError(`Error Changing Property And Name:${propertyTemplate.name}: ${err?.toString()}`)
+                } catch (err) {
+                    Utils.logError(`Error Changing Property And Name:${propertyTemplate.name}: ${String(err)}`)
                 }
                 sendFlashMessage({content: intl.formatMessage({id: 'CardDetailProperty.property-changed', defaultMessage: 'Changed property successfully!'}), severity: 'high'})
             },
@@ -116,8 +116,8 @@ const CardDetailProperties = (props: Props) => {
                 try {
                     await mutator.deleteProperty(board, views, cards, propertyTemplate.id)
                     sendFlashMessage({content: intl.formatMessage({id: 'CardDetailProperty.property-deleted', defaultMessage: 'Deleted {propertyName} successfully!'}, {propertyName: deletingPropName}), severity: 'high'})
-                } catch (err: any) {
-                    Utils.logError(`Error Deleting Property!: Could Not delete Property -" + ${deletingPropName} ${err?.toString()}`)
+                } catch (err) {
+                    Utils.logError(`Error Deleting Property!: Could Not delete Property -" + ${deletingPropName} ${String(err)}`)
                 }
             },
 

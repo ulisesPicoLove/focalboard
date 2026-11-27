@@ -7,11 +7,11 @@ import {CSSObject} from '@emotion/serialize'
 import {getSelectBaseStyle} from '../../theme'
 
 import * as registry from './blocks/'
-import {ContentType} from './blocks/types'
+import {ContentType, ContentValue} from './blocks/types'
 
 type Props = {
-    onChange: (value: string) => void
-    onChangeType: (blockType: ContentType) => void
+    onChange: (value: ContentValue) => void
+    onChangeType: (blockType: ContentType<ContentValue>) => void
     onSave: (value: string, blockType: string) => void
     value: string
 }
@@ -62,9 +62,9 @@ export default function RootInput(props: Props) {
             menuPortalTarget={document.getElementById('focalboard-root-portal')}
             menuPosition={'fixed'}
             options={registry.list()}
-            getOptionValue={(ct: ContentType) => ct.slashCommand}
-            getOptionLabel={(ct: ContentType) => ct.slashCommand + ' Creates a new ' + ct.displayName + ' block.'}
-            filterOption={(option: any, inputValue: string): boolean => {
+            getOptionValue={(ct: ContentType<ContentValue>) => ct.slashCommand}
+            getOptionLabel={(ct: ContentType<ContentValue>) => ct.slashCommand + ' Creates a new ' + ct.displayName + ' block.'}
+            filterOption={(option: {value: string}, inputValue: string): boolean => {
                 return inputValue.startsWith(option.value) || option.value.startsWith(inputValue)
             }}
             inputValue={props.value}
@@ -76,7 +76,7 @@ export default function RootInput(props: Props) {
                     setShowMenu(false)
                 }
             }}
-            onChange={(ct: ContentType|null) => {
+            onChange={(ct: ContentType<ContentValue>|null) => {
                 if (ct) {
                     const args = props.value.split(' ').slice(1)
                     ct.runSlashCommand(props.onChangeType, props.onChange, ...args)

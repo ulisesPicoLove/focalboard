@@ -127,16 +127,16 @@ export class UserSettings {
         UserSettings.set(UserSettingKey.RandomIcons, JSON.stringify(newValue))
     }
 
-    static getEmojiMartSetting(key: string): any {
+    static getEmojiMartSetting(key: string): unknown {
         const prefixed = `emoji-mart.${key}`
-        Utils.assert((Object as any).values(UserSettingKey).includes(prefixed))
+        Utils.assert(Object.values(UserSettingKey).includes(prefixed as UserSettingKey))
         const json = UserSettings.get(prefixed as UserSettingKey)
         return json ? JSON.parse(json) : null
     }
 
-    static setEmojiMartSetting(key: string, value: any): void {
+    static setEmojiMartSetting(key: string, value: unknown): void {
         const prefixed = `emoji-mart.${key}`
-        Utils.assert((Object as any).values(UserSettingKey).includes(prefixed))
+        Utils.assert(Object.values(UserSettingKey).includes(prefixed as UserSettingKey))
         UserSettings.set(prefixed as UserSettingKey, JSON.stringify(value))
     }
 
@@ -196,7 +196,7 @@ function importUserSettings(json: string): string[] {
     return importedKeys
 }
 
-function parseUserSettings(json: string): any {
+function parseUserSettings(json: string): Record<string, unknown> | undefined {
     try {
         return JSON.parse(json)
     } catch (e) {

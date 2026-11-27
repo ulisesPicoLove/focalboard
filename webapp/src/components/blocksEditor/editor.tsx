@@ -3,7 +3,7 @@
 import React, {useState, useEffect} from 'react'
 
 import * as contentBlocks from './blocks/'
-import {ContentType, BlockData} from './blocks/types'
+import {ContentType, ContentValue, BlockData} from './blocks/types'
 import RootInput from './rootInput'
 
 import './editor.scss'
@@ -12,16 +12,17 @@ type Props = {
     boardId?: string
     onSave: (block: BlockData) => Promise<BlockData|null>
     id?: string
-    initialValue?: string
+    initialValue?: ContentValue
     initialContentType?: string
 }
 
 export default function Editor(props: Props) {
-    const [value, setValue] = useState(props.initialValue || '')
-    const [currentBlockType, setCurrentBlockType] = useState<ContentType|null>(contentBlocks.get(props.initialContentType || '') || null)
+    // text while typing, or a file or checkbox value once a block of that kind was chosen
+    const [value, setValue] = useState<ContentValue>(props.initialValue ?? '')
+    const [currentBlockType, setCurrentBlockType] = useState<ContentType<ContentValue>|null>(contentBlocks.get(props.initialContentType || '') || null)
 
     useEffect(() => {
-        if (!currentBlockType) {
+        if (!currentBlockType && typeof value === 'string') {
             const block = contentBlocks.getByPrefix(value)
             if (block) {
                 setValue('')
@@ -40,7 +41,7 @@ export default function Editor(props: Props) {
                 <RootInput
                     onChange={setValue}
                     onChangeType={setCurrentBlockType}
-                    value={value}
+                    value={typeof value === 'string' ? value : ''}
                     onSave={async (val: string, blockType: string) => {
                         if (blockType === null && val === '') {
                             return
@@ -58,7 +59,7 @@ export default function Editor(props: Props) {
                         setValue('')
                         setCurrentBlockType(null)
                     }}
-                    onSave={async (val: string) => {
+                    onSave={async (val: ContentValue) => {
                         const newBlock = await props.onSave({value: val, contentType: currentBlockType.name, id: props.id})
                         setValue('')
                         const createdContentType = contentBlocks.get(newBlock?.contentType || '')

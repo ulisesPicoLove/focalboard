@@ -19,7 +19,7 @@ type Props = {
     children: React.ReactNode
     position?: 'top' | 'bottom' | 'left' | 'right' | 'auto'
     fixed?: boolean
-    parentRef?: React.RefObject<any>
+    parentRef?: React.RefObject<HTMLElement | null>
 }
 
 export default class Menu extends React.PureComponent<Props> {

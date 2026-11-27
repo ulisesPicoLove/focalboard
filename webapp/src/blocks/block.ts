@@ -5,6 +5,8 @@ import difference from 'lodash/difference'
 
 import {Utils} from '../utils'
 
+import {changedEntries, changedProperties} from './changedProperties'
+
 const contentBlockTypes = ['text', 'image', 'divider', 'checkbox', 'h1', 'h2', 'h3', 'list-item', 'attachment', 'quote', 'video'] as const
 
 // ToDo: remove type board
@@ -17,8 +19,7 @@ interface BlockPatch {
     schema?: number
     type?: BlockTypes
     title?: string
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    updatedFields?: Record<string, any>
+    updatedFields?: Record<string, unknown>
     deletedFields?: string[]
     deleteAt?: number
 }
@@ -33,8 +34,7 @@ interface Block {
     schema: number
     type: BlockTypes
     title: string
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    fields: Record<string, any>
+    fields: Record<string, unknown>
 
     createAt: number
     updateAt: number
@@ -73,32 +73,12 @@ function createBlock(block?: Block): Block {
 // action, in case it happens
 function createPatchesFromBlocks(newBlock: Block, oldBlock: Block): BlockPatch[] {
     const newDeletedFields = difference(Object.keys(newBlock.fields), Object.keys(oldBlock.fields))
-    const newUpdatedFields: Record<string, any> = {}
-    const newUpdatedData: Record<string, any> = {}
-    Object.keys(newBlock.fields).forEach((val) => {
-        if (oldBlock.fields[val] !== newBlock.fields[val]) {
-            newUpdatedFields[val] = newBlock.fields[val]
-        }
-    })
-    Object.keys(newBlock).forEach((val) => {
-        if (val !== 'fields' && (oldBlock as any)[val] !== (newBlock as any)[val]) {
-            newUpdatedData[val] = (newBlock as any)[val]
-        }
-    })
+    const newUpdatedFields = changedEntries(oldBlock.fields, newBlock.fields)
+    const newUpdatedData = changedProperties(oldBlock, newBlock, ['fields'])
 
     const oldDeletedFields = difference(Object.keys(oldBlock.fields), Object.keys(newBlock.fields))
-    const oldUpdatedFields: Record<string, any> = {}
-    const oldUpdatedData: Record<string, any> = {}
-    Object.keys(oldBlock.fields).forEach((val) => {
-        if (oldBlock.fields[val] !== newBlock.fields[val]) {
-            oldUpdatedFields[val] = oldBlock.fields[val]
-        }
-    })
-    Object.keys(oldBlock).forEach((val) => {
-        if (val !== 'fields' && (oldBlock as any)[val] !== (newBlock as any)[val]) {
-            oldUpdatedData[val] = (oldBlock as any)[val]
-        }
-    })
+    const oldUpdatedFields = changedEntries(newBlock.fields, oldBlock.fields)
+    const oldUpdatedData = changedProperties(newBlock, oldBlock, ['fields'])
 
     return [
         {

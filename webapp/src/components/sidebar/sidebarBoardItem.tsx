@@ -114,7 +114,7 @@ const SidebarBoardItem = (props: Props) => {
             },
         )
 
-        if (blocksAndBoards.boards.length === 0) {
+        if (!blocksAndBoards || blocksAndBoards.boards.length === 0) {
             return
         }
 

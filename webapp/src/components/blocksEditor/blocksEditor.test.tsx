@@ -14,7 +14,7 @@ import BlocksEditor from './blocksEditor'
 describe('components/blocksEditor/blocksEditor', () => {
     beforeEach(mockDOM)
 
-    const blocks: Array<BlockData<any>> = [
+    const blocks: BlockData[] = [
         {id: '1', value: 'Title', contentType: 'h1'},
         {id: '2', value: 'Sub title', contentType: 'h2'},
         {id: '3', value: 'Sub sub title', contentType: 'h3'},

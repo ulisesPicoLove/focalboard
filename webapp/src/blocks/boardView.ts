@@ -34,24 +34,26 @@ type BoardView = Block & {
 }
 
 function createBoardView(block?: Block): BoardView {
+    // What the server saved is not checked: read it as a partial view and fill the defaults below
+    const fields = (block?.fields ?? {}) as Partial<BoardViewFields>
     return {
         ...createBlock(block),
         type: 'view',
         fields: {
-            viewType: block?.fields.viewType || 'board',
-            groupById: block?.fields.groupById,
-            dateDisplayPropertyId: block?.fields.dateDisplayPropertyId,
-            sortOptions: block?.fields.sortOptions?.map((o: ISortOption) => ({...o})) || [],
-            visiblePropertyIds: block?.fields.visiblePropertyIds?.slice() || [],
-            visibleOptionIds: block?.fields.visibleOptionIds?.slice() || [],
-            hiddenOptionIds: block?.fields.hiddenOptionIds?.slice() || [],
-            collapsedOptionIds: block?.fields.collapsedOptionIds?.slice() || [],
-            filter: createFilterGroup(block?.fields.filter),
-            cardOrder: block?.fields.cardOrder?.slice() || [],
-            columnWidths: {...(block?.fields.columnWidths || {})},
-            columnCalculations: {...(block?.fields.columnCalculations) || {}},
-            kanbanCalculations: {...(block?.fields.kanbanCalculations) || {}},
-            defaultTemplateId: block?.fields.defaultTemplateId || '',
+            viewType: fields.viewType || 'board',
+            groupById: fields.groupById,
+            dateDisplayPropertyId: fields.dateDisplayPropertyId,
+            sortOptions: fields.sortOptions?.map((o) => ({...o})) || [],
+            visiblePropertyIds: fields.visiblePropertyIds?.slice() || [],
+            visibleOptionIds: fields.visibleOptionIds?.slice() || [],
+            hiddenOptionIds: fields.hiddenOptionIds?.slice() || [],
+            collapsedOptionIds: fields.collapsedOptionIds?.slice() || [],
+            filter: createFilterGroup(fields.filter),
+            cardOrder: fields.cardOrder?.slice() || [],
+            columnWidths: {...(fields.columnWidths || {})},
+            columnCalculations: {...(fields.columnCalculations || {})},
+            kanbanCalculations: {...(fields.kanbanCalculations || {})},
+            defaultTemplateId: fields.defaultTemplateId || '',
         },
     }
 }

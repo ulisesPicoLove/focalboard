@@ -47,6 +47,7 @@ import {getCurrentBoard} from '../../store/boards'
 import octoClient from '../../octoClient'
 
 import {Utils} from '../../utils'
+import {IAppWindow} from '../../types'
 import {ClientConfig} from '../../config/clientConfig'
 import {getClientConfig} from '../../store/clientConfig'
 
@@ -55,7 +56,7 @@ import MarkdownHighlightPlugin from './markdownHighlightPlugin'
 import TypeaheadMenu from './typeaheadMenu'
 import {EmojiMatch, searchEmojis} from './emojiSearch'
 
-const imageURLForUser = (window as any).Components?.imageURLForUser
+const imageURLForUser = (window as IAppWindow).Components?.imageURLForUser
 
 class MentionOption extends MenuOption {
     constructor(readonly mention: MentionUser) {

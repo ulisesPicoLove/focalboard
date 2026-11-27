@@ -6,10 +6,11 @@ import {useIntl} from 'react-intl'
 import Select from 'react-select/async'
 import {CSSObject} from '@emotion/serialize'
 
-import {ActionMeta} from 'react-select'
+import {ActionMeta, MultiValue, SingleValue} from 'react-select'
 
 import {getSelectBaseStyle} from '../theme'
 import {IUser} from '../user'
+import {IAppWindow} from '../types'
 import {Utils} from '../utils'
 import {useAppSelector} from '../store/hooks'
 import {getBoardUsers, getBoardUsersList, getMe} from '../store/users'
@@ -23,7 +24,7 @@ import {PropertyType} from '../properties/types'
 
 import './personSelector.scss'
 
-const imageURLForUser = (window as any).Components?.imageURLForUser
+const imageURLForUser = (window as IAppWindow).Components?.imageURLForUser
 
 type Props = {
     readOnly: boolean
@@ -34,7 +35,7 @@ type Props = {
     isMulti: boolean
     closeMenuOnSelect?: boolean
     showMe?: boolean
-    onChange: (items: any, action: ActionMeta<IUser>) => void
+    onChange: (items: MultiValue<IUser> | SingleValue<IUser>, action: ActionMeta<IUser>) => void
 }
 
 const selectStyles = {
@@ -80,7 +81,7 @@ const PersonSelector = (props: Props): React.JSX.Element => {
     const boardUsersKey = Object.keys(boardUsersById) ? Utils.hashCode(JSON.stringify(Object.keys(boardUsersById))) : 0
     const me = useAppSelector<IUser|null>(getMe)
 
-    const formatOptionLabel = (user: any): React.JSX.Element => {
+    const formatOptionLabel = (user: IUser | null): React.JSX.Element => {
         if (!user) {
             return <div/>
         }

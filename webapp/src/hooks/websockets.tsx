@@ -4,7 +4,7 @@ import {useEffect} from 'react'
 
 import wsClient, {WSClient} from '../wsclient'
 
-export const useWebsockets = (teamId: string, fn: (wsClient: WSClient) => () => void, deps: any[] = []): void => {
+export const useWebsockets = (teamId: string, fn: (wsClient: WSClient) => () => void, deps: React.DependencyList = []): void => {
     useEffect(() => {
         if (!teamId) {
             return () => {}

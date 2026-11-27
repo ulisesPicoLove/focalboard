@@ -1,6 +1,6 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
-import {ContentType} from './types'
+import {ContentType, ContentValue} from './types'
 import H1 from './h1'
 import H2 from './h2'
 import H3 from './h3'
@@ -15,27 +15,30 @@ import Quote from './quote'
 import Video from './video'
 import Checkbox from './checkbox'
 
-const blocks: {[key: string]: ContentType} = {}
-const blocksByPrefix: {[key: string]: ContentType} = {}
-const blocksBySlashCommand: {[key: string]: ContentType} = {}
+const blocks: {[key: string]: ContentType<ContentValue>} = {}
+const blocksByPrefix: {[key: string]: ContentType<ContentValue>} = {}
+const blocksBySlashCommand: {[key: string]: ContentType<ContentValue>} = {}
 
-export function register(contentType: ContentType<any>) {
-    blocks[contentType.name] = contentType
+// The registry holds content types whose values differ (text, file info...) and hands them out by
+// name, so each one is stored as the general type and callers handle the value they asked for.
+export function register<ValueType>(contentType: ContentType<ValueType>) {
+    const stored = contentType as unknown as ContentType<ContentValue>
+    blocks[contentType.name] = stored
     if (contentType.prefix !== '') {
-        blocksByPrefix[contentType.prefix] = contentType
+        blocksByPrefix[contentType.prefix] = stored
     }
-    blocksBySlashCommand[contentType.slashCommand] = contentType
+    blocksBySlashCommand[contentType.slashCommand] = stored
 }
 
 export function list() {
     return Object.values(blocks)
 }
 
-export function get(name: string): ContentType {
+export function get(name: string): ContentType<ContentValue> {
     return blocks[name]
 }
 
-export function getByPrefix(prefix: string): ContentType {
+export function getByPrefix(prefix: string): ContentType<ContentValue> {
     return blocksByPrefix[prefix]
 }
 
@@ -48,11 +51,11 @@ export function isSubPrefix(text: string): boolean {
     return false
 }
 
-export function getBySlashCommand(slashCommand: string): ContentType {
+export function getBySlashCommand(slashCommand: string): ContentType<ContentValue> {
     return blocksBySlashCommand[slashCommand]
 }
 
-export function getBySlashCommandPrefix(slashCommandPrefix: string): ContentType|null {
+export function getBySlashCommandPrefix(slashCommandPrefix: string): ContentType<ContentValue>|null {
     for (const ct of list()) {
         if (ct.slashCommand.startsWith(slashCommandPrefix)) {
             return ct

@@ -8,8 +8,9 @@ interface IUser {
     nickname: string
     firstname: string
     lastname: string
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    props: Record<string, any>
+
+    // extra settings of the person; the only one the app reads is how names are shown
+    props: {teammateNameDisplay?: string, [key: string]: unknown}
     create_at: number
     update_at: number
     is_bot: boolean
@@ -35,11 +36,12 @@ function parseUserProps(props: UserPreference[]): Record<string, UserPreference>
     props.forEach((prop) => {
         const processedProp = prop
         if (prop.name === 'hiddenBoardIDs') {
-            const hiddenBoardIDs = JSON.parse(processedProp.value)
-            processedProp.value = {}
-            hiddenBoardIDs.forEach((boardID: string) => {
-                processedProp.value[boardID] = true
+            const hiddenBoardIDs: string[] = JSON.parse(processedProp.value as string)
+            const hidden: Record<string, boolean> = {}
+            hiddenBoardIDs.forEach((boardID) => {
+                hidden[boardID] = true
             })
+            processedProp.value = hidden
         }
         processedProps[processedProp.name] = processedProp
     })
@@ -51,7 +53,9 @@ interface UserPreference {
     user_id: string
     category: string
     name: string
-    value: any
+
+    // a string as the server keeps it; for hiddenBoardIDs it is turned into a map of board id to true
+    value: string | Record<string, boolean>
 }
 
 export {

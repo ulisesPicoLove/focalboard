@@ -12,7 +12,7 @@ import {IPropertyTemplate, PropertyTypeEnum} from '../../../blocks/board'
 import './calculationOption.scss'
 import {Option, OptionProps} from './kanbanOption'
 
-type Props = CommonCalculationOptionProps & {
+type Props = Omit<CommonCalculationOptionProps, 'onChange'> & {
     cardProperties: IPropertyTemplate[]
     onChange: (data: {calculation: string, propertyId: string}) => void
 }
@@ -26,6 +26,8 @@ const equivalentPropertyType = new Map<PropertyTypeEnum, PropertyTypeEnum>([
 export function getEquivalentPropertyType(propertyType: PropertyTypeEnum): PropertyTypeEnum {
     return equivalentPropertyType.get(propertyType) || propertyType
 }
+
+const noop = () => undefined
 
 export const KanbanCalculationOptions = (props: Props): React.JSX.Element => {
     const options: OptionProps[] = []
@@ -70,7 +72,9 @@ export const KanbanCalculationOptions = (props: Props): React.JSX.Element => {
             value={props.value}
             menuOpen={props.menuOpen}
             onClose={props.onClose}
-            onChange={props.onChange}
+
+            // each option reports its own choice (calculation and property); the select's plain value change is not used
+            onChange={noop}
             property={props.property}
             options={options}
             components={{Option}}

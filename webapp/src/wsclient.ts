@@ -67,7 +67,18 @@ export interface Subscription {
     deleteAt?: number
 }
 
-type OnChangeHandler = (client: WSClient, items: any[]) => void
+// What each kind of change delivers, as a list
+type ChangeItems = {
+    block: Block
+    category: Category
+    blockCategories: BoardCategoryWebsocketData
+    board: Board
+    boardMembers: BoardMember
+    categoryOrder: string
+    categoryBoardsOrder: CategoryBoardsOrder
+}
+
+type OnChangeHandler<K extends ChangeHandlerType = ChangeHandlerType> = (client: WSClient, items: Array<ChangeItems[K]>) => void
 type OnReconnectHandler = (client: WSClient) => void
 type OnStateChangeHandler = (client: WSClient, state: 'init' | 'open' | 'close') => void
 type OnErrorHandler = (client: WSClient, e: Event) => void
@@ -86,15 +97,7 @@ type UpdatedData = {
     CategoryBoardsOrder: CategoryBoardsOrder[]
 }
 
-type ChangeHandlers = {
-    Block: OnChangeHandler[]
-    Category: OnChangeHandler[]
-    BoardCategory: OnChangeHandler[]
-    Board: OnChangeHandler[]
-    BoardMember: OnChangeHandler[]
-    CategoryReorder: OnChangeHandler[]
-    CategoryBoardsReorder: OnChangeHandler[]
-}
+type ChangeHandlers = {[K in ChangeHandlerType]: Array<OnChangeHandler<K>>}
 
 type Subscriptions = {
     Teams: Record<string, number>
@@ -108,7 +111,7 @@ class WSClient {
     state: 'init'|'open'|'close' = 'init'
     onStateChange: OnStateChangeHandler[] = []
     onReconnect: OnReconnectHandler[] = []
-    onChange: ChangeHandlers = {Block: [], Category: [], BoardCategory: [], Board: [], BoardMember: [], CategoryReorder: [], CategoryBoardsReorder: []}
+    onChange: ChangeHandlers = {block: [], category: [], blockCategories: [], board: [], boardMembers: [], categoryOrder: [], categoryBoardsOrder: []}
     onError: OnErrorHandler[] = []
     onConfigChange: OnConfigChangeHandler[] = []
     onFollowBlock: FollowChangeHandler = () => {}
@@ -227,62 +230,17 @@ class WSClient {
         this.sendCommand(command)
     }
 
-    addOnChange(handler: OnChangeHandler, type: ChangeHandlerType): void {
-        switch (type) {
-        case 'block':
-            this.onChange.Block.push(handler)
-            break
-        case 'category':
-            this.onChange.Category.push(handler)
-            break
-        case 'blockCategories':
-            this.onChange.BoardCategory.push(handler)
-            break
-        case 'board':
-            this.onChange.Board.push(handler)
-            break
-        case 'boardMembers':
-            this.onChange.BoardMember.push(handler)
-            break
-        case 'categoryOrder':
-            this.onChange.CategoryReorder.push(handler)
-            break
-        case 'categoryBoardsOrder':
-            this.onChange.CategoryBoardsReorder.push(handler)
-            break
-        }
+    // the handlers of one kind of change; the list of each kind only holds handlers for that kind
+    private handlersFor<K extends ChangeHandlerType>(type: K): Array<OnChangeHandler<K>> {
+        return this.onChange[type] as Array<OnChangeHandler<K>>
     }
 
-    removeOnChange(needle: OnChangeHandler, type: ChangeHandlerType): void {
-        let haystack = []
-        switch (type) {
-        case 'block':
-            haystack = this.onChange.Block
-            break
-        case 'blockCategories':
-            haystack = this.onChange.BoardCategory
-            break
-        case 'board':
-            haystack = this.onChange.Board
-            break
-        case 'boardMembers':
-            haystack = this.onChange.BoardMember
-            break
-        case 'category':
-            haystack = this.onChange.Category
-            break
-        case 'categoryOrder':
-            haystack = this.onChange.CategoryReorder
-            break
-        case 'categoryBoardsOrder':
-            haystack = this.onChange.CategoryBoardsReorder
-            break
-        }
+    addOnChange<K extends ChangeHandlerType>(handler: OnChangeHandler<K>, type: K): void {
+        this.handlersFor(type).push(handler)
+    }
 
-        if (!haystack) {
-            return
-        }
-
+    removeOnChange<K extends ChangeHandlerType>(needle: OnChangeHandler<K>, type: K): void {
+        const haystack = this.handlersFor(type)
         const index = haystack.indexOf(needle)
         if (index !== -1) {
             haystack.splice(index, 1)
@@ -641,31 +599,31 @@ class WSClient {
     private flushUpdateNotifications() {
         this.logUpdateNotification()
 
-        for (const handler of this.onChange.Block) {
+        for (const handler of this.onChange.block) {
             handler(this, this.updatedData.Blocks)
         }
 
-        for (const handler of this.onChange.Category) {
+        for (const handler of this.onChange.category) {
             handler(this, this.updatedData.Categories)
         }
 
-        for (const handler of this.onChange.BoardCategory) {
+        for (const handler of this.onChange.blockCategories) {
             handler(this, this.updatedData.BoardCategories)
         }
 
-        for (const handler of this.onChange.Board) {
+        for (const handler of this.onChange.board) {
             handler(this, this.updatedData.Boards)
         }
 
-        for (const handler of this.onChange.BoardMember) {
+        for (const handler of this.onChange.boardMembers) {
             handler(this, this.updatedData.BoardMembers)
         }
 
-        for (const handler of this.onChange.CategoryReorder) {
+        for (const handler of this.onChange.categoryOrder) {
             handler(this, this.updatedData.CategoryOrder)
         }
 
-        for (const handler of this.onChange.CategoryBoardsReorder) {
+        for (const handler of this.onChange.categoryBoardsOrder) {
             handler(this, this.updatedData.CategoryBoardsOrder)
         }
 
@@ -695,7 +653,7 @@ class WSClient {
             this.reopenTimer = undefined
         }
         this.needsResync = false
-        this.onChange = {Block: [], Category: [], BoardCategory: [], Board: [], BoardMember: [], CategoryReorder: [], CategoryBoardsReorder: []}
+        this.onChange = {block: [], category: [], blockCategories: [], board: [], boardMembers: [], categoryOrder: [], categoryBoardsOrder: []}
         this.onReconnect = []
         this.onStateChange = []
         this.onError = []
@@ -703,11 +661,7 @@ class WSClient {
         try {
             ws?.close()
         } catch {
-            try {
-                (ws as any)?.websocket?.close()
-            } catch {
-                Utils.log('WSClient unable to close the websocket')
-            }
+            Utils.log('WSClient unable to close the websocket')
         }
     }
 }

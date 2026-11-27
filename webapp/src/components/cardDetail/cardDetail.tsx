@@ -22,12 +22,13 @@ import CompassIcon from '../../widgets/icons/compassIcon'
 import BlockIconSelector from '../blockIconSelector'
 
 import {useAppDispatch, useAppSelector} from '../../store/hooks'
+import type {AppDispatch} from '../../store'
 import {updateCards, setCurrent as setCurrentCard} from '../../store/cards'
 import {updateContents} from '../../store/contents'
 import {Permission} from '../../constants'
 import {useHasCurrentBoardPermissions} from '../../hooks/permissions'
 import BlocksEditor from '../blocksEditor/blocksEditor'
-import {BlockData} from '../blocksEditor/blocks/types'
+import {BlockData, ContentValue, isCheckboxValue, isFileValue} from '../blocksEditor/blocks/types'
 import {ClientConfig} from '../../config/clientConfig'
 import {getClientConfig} from '../../store/clientConfig'
 
@@ -59,7 +60,7 @@ type Props = {
     addAttachment: () => void
 }
 
-async function addBlockNewEditor(card: Card, intl: IntlShape, title: string, fields: any, contentType: ContentBlockTypes, afterBlockId: string, dispatch: any): Promise<Block> {
+async function addBlockNewEditor(card: Card, intl: IntlShape, title: string, fields: Record<string, unknown>, contentType: ContentBlockTypes, afterBlockId: string | undefined, dispatch: AppDispatch): Promise<Block> {
     const block = createBlock()
     block.parentId = card.id
     block.boardId = card.boardId
@@ -152,34 +153,25 @@ const CardDetail = (props: Props): React.JSX.Element|null => {
         dispatch(setCurrentCard(card.id))
     }, [card.id, dispatch])
 
-    const blocks = useMemo(() => props.contents.flatMap((value: Block | Block[]): BlockData<any> => {
+    const blocks = useMemo(() => props.contents.flatMap((value: Block | Block[]): BlockData => {
         const v: Block = Array.isArray(value) ? value[0] : value
 
-        let data: any = v?.title
+        // what the server saved for a content block is not checked: read the fields these kinds use
+        const fields = (v?.fields ?? {}) as {fileId?: string, filename?: string, value?: boolean}
+
+        let data: ContentValue = v?.title
         if (v?.type === 'image') {
-            data = {
-                file: v?.fields.fileId,
-            }
+            data = {file: fields.fileId ?? ''}
         }
 
-        if (v?.type === 'attachment') {
-            data = {
-                file: v?.fields.fileId,
-                filename: v?.fields.filename,
-            }
-        }
-
-        if (v?.type === 'video') {
-            data = {
-                file: v?.fields.fileId,
-                filename: v?.fields.filename,
-            }
+        if (v?.type === 'attachment' || v?.type === 'video') {
+            data = {file: fields.fileId ?? '', filename: fields.filename}
         }
 
         if (v?.type === 'checkbox') {
             data = {
                 value: v?.title,
-                checked: v?.fields.value,
+                checked: Boolean(fields.value),
             }
         }
 
@@ -274,22 +266,24 @@ const CardDetail = (props: Props): React.JSX.Element|null => {
                     <BlocksEditor
                         boardId={card.boardId}
                         blocks={blocks}
-                        onBlockCreated={async (block: any, afterBlock: any): Promise<BlockData|null> => {
+                        onBlockCreated={async (block: BlockData, afterBlock?: BlockData): Promise<BlockData|null> => {
                             if (block.contentType === 'text' && block.value === '') {
                                 return null
                             }
+                            const contentType = block.contentType as ContentBlockTypes
                             let newBlock: Block
-                            if (block.contentType === 'checkbox') {
-                                newBlock = await addBlockNewEditor(card, intl, block.value.value, {value: block.value.checked}, block.contentType, afterBlock?.id, dispatch)
-                            } else if (block.contentType === 'image' || block.contentType === 'attachment' || block.contentType === 'video') {
-                                const newFileId = await octoClient.uploadFile(card.boardId, block.value.file)
-                                newBlock = await addBlockNewEditor(card, intl, '', {fileId: newFileId, filename: block.value.filename}, block.contentType, afterBlock?.id, dispatch)
+                            if (contentType === 'checkbox' && isCheckboxValue(block.value)) {
+                                newBlock = await addBlockNewEditor(card, intl, block.value.value, {value: block.value.checked}, contentType, afterBlock?.id, dispatch)
+                            } else if ((contentType === 'image' || contentType === 'attachment' || contentType === 'video') && isFileValue(block.value)) {
+                                // a File still has to be uploaded; a string is the id of a file that already is
+                                const newFileId = block.value.file instanceof File ? await octoClient.uploadFile(card.boardId, block.value.file) : block.value.file
+                                newBlock = await addBlockNewEditor(card, intl, '', {fileId: newFileId, filename: block.value.filename}, contentType, afterBlock?.id, dispatch)
                             } else {
-                                newBlock = await addBlockNewEditor(card, intl, block.value, {}, block.contentType, afterBlock?.id, dispatch)
+                                newBlock = await addBlockNewEditor(card, intl, typeof block.value === 'string' ? block.value : '', {}, contentType, afterBlock?.id, dispatch)
                             }
                             return {...block, id: newBlock.id}
                         }}
-                        onBlockModified={async (block: any): Promise<BlockData<any>|null> => {
+                        onBlockModified={async (block: BlockData): Promise<BlockData|null> => {
                             const originalContentBlock = props.contents.flatMap((b) => b).find((b) => b.id === block.id)
                             if (!originalContentBlock) {
                                 return null
@@ -301,12 +295,14 @@ const CardDetail = (props: Props): React.JSX.Element|null => {
                                 mutator.deleteBlock(originalContentBlock, description)
                                 return null
                             }
+
+                            // only text and checkbox blocks change here; a file block keeps its title
                             const newBlock = {
                                 ...originalContentBlock,
-                                title: block.value,
+                                title: typeof block.value === 'string' ? block.value : originalContentBlock.title,
                             }
 
-                            if (block.contentType === 'checkbox') {
+                            if (block.contentType === 'checkbox' && isCheckboxValue(block.value)) {
                                 newBlock.title = block.value.value
                                 newBlock.fields = {...newBlock.fields, value: block.value.checked}
                             }

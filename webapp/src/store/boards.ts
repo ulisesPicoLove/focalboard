@@ -28,9 +28,12 @@ type BoardsState = {
     myBoardMemberships: {[key: string]: BoardMember}
 }
 
-export const fetchBoardMembers = createAsyncThunk(
+// thunks that read the store know its state type
+const createStateThunk = createAsyncThunk.withTypes<{state: RootState}>()
+
+export const fetchBoardMembers = createStateThunk(
     'boardMembers/fetch',
-    async ({teamId, boardId}: {teamId: string, boardId: string}, thunkAPI: any) => {
+    async ({teamId, boardId}: {teamId: string, boardId: string}, thunkAPI) => {
         const members = await client.getBoardMembers(teamId, boardId)
         const users = [] as IUser[]
         const userIDs = members.map((member) => member.userId)
@@ -43,9 +46,9 @@ export const fetchBoardMembers = createAsyncThunk(
     },
 )
 
-export const updateMembersEnsuringBoardsAndUsers = createAsyncThunk(
+export const updateMembersEnsuringBoardsAndUsers = createStateThunk(
     'updateMembersEnsuringBoardsAndUsers',
-    async (members: BoardMember[], thunkAPI: any) => {
+    async (members: BoardMember[], thunkAPI) => {
         const me = thunkAPI.getState().users.me
         if (me) {
             // ensure the boards for the new memberships get loaded or removed

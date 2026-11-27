@@ -55,7 +55,7 @@ const CheckboxElement = (props: Props) => {
                     const newBlock = createCheckboxBlock(block)
                     newBlock.fields.value = !active
                     newBlock.title = title
-                    setActive(newBlock.fields.value)
+                    setActive(!active)
                     mutator.updateBlock(block.boardId, newBlock, block, intl.formatMessage({id: 'ContentBlock.editCardCheckbox', defaultMessage: 'toggled-checkbox'}))
                 }}
             />

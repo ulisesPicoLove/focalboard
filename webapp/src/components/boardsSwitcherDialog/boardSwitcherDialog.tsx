@@ -1,6 +1,6 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
-import React, {ReactNode, useRef, createRef, useState, useEffect, MutableRefObject} from 'react'
+import React, {ReactNode, useRef, createRef, useState, useEffect, MutableRefObject, RefObject} from 'react'
 
 import './boardSwitcherDialog.scss'
 import {useIntl} from 'react-intl'
@@ -24,10 +24,10 @@ type Props = {
 
 const BoardSwitcherDialog = (props: Props): React.JSX.Element => {
     const [selected, setSelected] = useState<number>(-1)
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const [refs, setRefs] = useState<MutableRefObject<any>>(useRef([]))
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const [IDs, setIDs] = useState<any>({})
+    const [refs, setRefs] = useState<MutableRefObject<Array<RefObject<HTMLDivElement | null>>>>(useRef([]))
+
+    // team id and board id of each result, by its position in the list
+    const [IDs, setIDs] = useState<Record<number, [string, string]>>({})
     const intl = useIntl()
     const team = useAppSelector(getCurrentTeam)
     const me = useAppSelector(getMe)
@@ -66,13 +66,12 @@ const BoardSwitcherDialog = (props: Props): React.JSX.Element => {
 
         const items = await octoClient.searchAll(query)
         const untitledBoardTitle = intl.formatMessage({id: 'ViewTitle.untitled-board', defaultMessage: 'Untitled board'})
-        refs.current = items.map((_, i) => refs.current[i] ?? createRef())
+        refs.current = items.map((_, i) => refs.current[i] ?? createRef<HTMLDivElement>())
         setRefs(refs)
         return items.map((item, i) => {
             const resultTitle = item.title || untitledBoardTitle
             const teamTitle = teamsById[item.teamId].title
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            setIDs((prevIDs: any) => ({
+            setIDs((prevIDs) => ({
                 ...prevIDs,
                 [i]: [item.teamId, item.id],
             }))
@@ -102,7 +101,7 @@ const BoardSwitcherDialog = (props: Props): React.JSX.Element => {
 
     useEffect(() => {
         if (selected >= 0) {
-            refs.current[selected].current.parentElement.focus()
+            refs.current[selected].current?.parentElement?.focus()
         }
 
         document.addEventListener('keydown', handleEnterKeyPress)
