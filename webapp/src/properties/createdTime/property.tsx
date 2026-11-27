@@ -14,7 +14,7 @@ import CreatedTime from './createdTime'
 export default class CreatedAtProperty extends DatePropertyType {
     Editor = CreatedTime
     name = 'Created At'
-    type = 'createdTime' as PropertyTypeEnum
+    type: PropertyTypeEnum = 'createdTime'
     isReadOnly = true
     displayName = (intl: IntlShape) => intl.formatMessage({id: 'PropertyType.CreatedTime', defaultMessage: 'Created time'})
     calculationOptions = [Options.none, Options.count, Options.countEmpty,

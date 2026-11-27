@@ -16,3 +16,8 @@ export function required<T>(value: T | null | undefined, what: string): T {
     }
     return value
 }
+
+// Type guard for dropping the holes of a lookup: `ids.map((id) => byId[id]).filter(isDefined)`
+export function isDefined<T>(value: T | null | undefined): value is T {
+    return value !== null && value !== undefined
+}

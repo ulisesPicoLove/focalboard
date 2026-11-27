@@ -14,6 +14,10 @@ function isAFilterGroupInstance(object: (FilterClause | FilterGroup)): object is
     return 'operation' in object && 'filters' in object
 }
 
+function isAFilterClause(object: (FilterClause | FilterGroup)): object is FilterClause {
+    return !isAFilterGroupInstance(object)
+}
+
 function createFilterGroup(o?: FilterGroup): FilterGroup {
     let filters: Array<FilterClause | FilterGroup> = []
     if (o?.filters) {
@@ -30,4 +34,4 @@ function createFilterGroup(o?: FilterGroup): FilterGroup {
     }
 }
 
-export {FilterGroup, FilterGroupOperation, createFilterGroup, isAFilterGroupInstance}
+export {FilterGroup, FilterGroupOperation, createFilterGroup, isAFilterGroupInstance, isAFilterClause}

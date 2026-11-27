@@ -54,8 +54,11 @@ const FilterEntry = (props: Props): React.JSX.Element => {
                             const filterIndex = view.fields.filter.filters.indexOf(filter)
                             Utils.assert(filterIndex >= 0, "Can't find filter")
                             const filterGroup = createFilterGroup(view.fields.filter)
-                            const newFilter = filterGroup.filters[filterIndex] as FilterClause
+                            const newFilter = filterGroup.filters[filterIndex]
                             Utils.assert(newFilter, `No filter at index ${filterIndex}`)
+                            if (!newFilter || isAFilterGroupInstance(newFilter)) {
+                                return
+                            }
                             if (newFilter.propertyId !== optionId) {
                                 newFilter.propertyId = optionId
                                 newFilter.values = []
@@ -72,8 +75,11 @@ const FilterEntry = (props: Props): React.JSX.Element => {
                                 const filterIndex = view.fields.filter.filters.indexOf(filter)
                                 Utils.assert(filterIndex >= 0, "Can't find filter")
                                 const filterGroup = createFilterGroup(view.fields.filter)
-                                const newFilter = filterGroup.filters[filterIndex] as FilterClause
+                                const newFilter = filterGroup.filters[filterIndex]
                                 Utils.assert(newFilter, `No filter at index ${filterIndex}`)
+                                if (!newFilter || isAFilterGroupInstance(newFilter)) {
+                                    return
+                                }
                                 if (newFilter.propertyId !== optionId) {
                                     newFilter.propertyId = optionId
                                     newFilter.condition = OctoUtils.filterConditionValidOrDefault(propsRegistry.get(o.type).filterValueType, newFilter.condition)

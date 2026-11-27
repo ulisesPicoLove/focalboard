@@ -12,10 +12,10 @@ import Select from './select'
 export default class SelectProperty extends PropertyType {
     Editor = Select
     name = 'Select'
-    type = 'select' as PropertyTypeEnum
+    type: PropertyTypeEnum = 'select'
     canGroup = true
     canFilter = true
-    filterValueType = 'options' as FilterValueType
+    filterValueType: FilterValueType = 'options'
 
     displayName = (intl: IntlShape) => intl.formatMessage({id: 'PropertyType.Select', defaultMessage: 'Select'})
 

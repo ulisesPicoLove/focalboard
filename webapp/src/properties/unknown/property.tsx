@@ -8,6 +8,6 @@ import {PropertyType, PropertyTypeEnum} from '../types'
 export default class UnkownProperty extends PropertyType {
     Editor = Text
     name = 'Text'
-    type = 'unknown' as PropertyTypeEnum
+    type: PropertyTypeEnum = 'unknown'
     displayName = (intl: IntlShape) => intl.formatMessage({id: 'PropertyType.Unknown', defaultMessage: 'Unknown'})
 }

@@ -4,7 +4,7 @@
 import React from 'react'
 
 import {Block} from '../../blocks/block'
-import {isDefined} from '../../utils'
+import {isDefined} from '../../typeHelpers'
 import {useAppSelector} from '../../store/hooks'
 import {getLastCardContent} from '../../store/contents'
 import {getLastCardComment} from '../../store/comments'

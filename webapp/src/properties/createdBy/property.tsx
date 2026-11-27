@@ -9,10 +9,10 @@ import CreatedBy from './createdBy'
 export default class CreatedByProperty extends PropertyType {
     Editor = CreatedBy
     name = 'Created By'
-    type = 'createdBy' as PropertyTypeEnum
+    type: PropertyTypeEnum = 'createdBy'
     isReadOnly = true
     displayName = (intl: IntlShape) => intl.formatMessage({id: 'PropertyType.CreatedBy', defaultMessage: 'Created by'})
     canFilter = true
-    filterValueType = 'person' as FilterValueType
+    filterValueType: FilterValueType = 'person'
     canGroup = true
 }

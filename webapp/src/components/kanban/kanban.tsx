@@ -15,7 +15,8 @@ import {Board, IPropertyOption, IPropertyTemplate, BoardGroup} from '../../block
 import {Card} from '../../blocks/card'
 import {BoardView} from '../../blocks/boardView'
 import mutator from '../../mutator'
-import {Utils, IDType, isDefined} from '../../utils'
+import {Utils, IDType} from '../../utils'
+import {isDefined} from '../../typeHelpers'
 import Button from '../../widgets/buttons/button'
 import {Constants, Permission} from '../../constants'
 

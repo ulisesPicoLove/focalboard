@@ -12,6 +12,7 @@ import Calculation from '../../calculations/calculation'
 import {BoardView} from '../../../blocks/boardView'
 import {Card} from '../../../blocks/card'
 import {Options} from '../../calculations/options'
+import {isDefined} from '../../../typeHelpers'
 
 import {TableCalculationOptions} from './tableCalculationOptions'
 
@@ -33,7 +34,7 @@ const CalculationRow = (props: Props): React.JSX.Element => {
     const [showOptions, setShowOptions] = useState<Map<string, boolean>>(new Map<string, boolean>())
     const visiblePropertyTemplates = useMemo(() => ([
         {id: Constants.titleColumnId} as IPropertyTemplate,
-        ...activeView.fields.visiblePropertyIds.map((id) => board.cardProperties.find((t) => t.id === id)).filter((i) => i) as IPropertyTemplate[],
+        ...activeView.fields.visiblePropertyIds.map((id) => board.cardProperties.find((t) => t.id === id)).filter(isDefined),
     ]), [activeView.fields.visiblePropertyIds, board.cardProperties])
 
     const selectedCalculations = activeView.fields.columnCalculations || []

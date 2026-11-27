@@ -19,7 +19,7 @@ const timeZoneOffset = (date: number): number => {
 export default class DateProperty extends DatePropertyType {
     Editor = DateComponent
     name = 'Date'
-    type = 'date' as PropertyTypeEnum
+    type: PropertyTypeEnum = 'date'
     displayName = (intl: IntlShape) => intl.formatMessage({id: 'PropertyType.Date', defaultMessage: 'Date'})
     calculationOptions = [Options.none, Options.count, Options.countEmpty,
         Options.countNotEmpty, Options.percentEmpty, Options.percentNotEmpty,

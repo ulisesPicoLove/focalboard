@@ -4,7 +4,7 @@ import React from 'react'
 import {FormattedMessage} from 'react-intl'
 
 import {FilterClause, FilterCondition, createFilterClause} from '../../blocks/filterClause'
-import {createFilterGroup, isAFilterGroupInstance} from '../../blocks/filterGroup'
+import {createFilterGroup, isAFilterClause, isAFilterGroupInstance} from '../../blocks/filterGroup'
 import {Board, IPropertyTemplate} from '../../blocks/board'
 import {BoardView} from '../../blocks/boardView'
 import mutator from '../../mutator'
@@ -32,9 +32,12 @@ const FilterComponent = (props: Props): React.JSX.Element => {
         Utils.assert(filterIndex >= 0, "Can't find filter")
 
         const filterGroup = createFilterGroup(activeView.fields.filter)
-        const newFilter = filterGroup.filters[filterIndex] as FilterClause
+        const newFilter = filterGroup.filters[filterIndex]
 
         Utils.assert(newFilter, `No filter at index ${filterIndex}`)
+        if (!newFilter || isAFilterGroupInstance(newFilter)) {
+            return
+        }
         if (newFilter.condition !== optionId) {
             newFilter.condition = optionId as FilterCondition
             mutator.changeViewFilter(board.id, activeView.id, activeView.fields.filter, filterGroup)
@@ -44,7 +47,7 @@ const FilterComponent = (props: Props): React.JSX.Element => {
     const addFilterClicked = () => {
         const {board, activeView} = props
 
-        const filters = activeView.fields.filter?.filters.filter((o) => !isAFilterGroupInstance(o)) as FilterClause[] || []
+        const filters = activeView.fields.filter?.filters.filter(isAFilterClause) || []
         const filterGroup = createFilterGroup(activeView.fields.filter)
         const filter = createFilterClause()
 
@@ -62,7 +65,7 @@ const FilterComponent = (props: Props): React.JSX.Element => {
 
     const {board, activeView} = props
 
-    const filters: FilterClause[] = activeView.fields.filter?.filters.filter((o) => !isAFilterGroupInstance(o)) as FilterClause[] || []
+    const filters: FilterClause[] = activeView.fields.filter?.filters.filter(isAFilterClause) || []
 
     return (
         <Modal

@@ -49,11 +49,6 @@ enum IDType {
     BlockID = 'a',
 }
 
-// Type guard for filtering out the holes of a lookup: `ids.map((id) => byId[id]).filter(isDefined)`
-export function isDefined<T>(value: T | null | undefined): value is T {
-    return value !== null && value !== undefined
-}
-
 export const KeyCodes: {ENTER: [string, number], COMPOSING: [string, number]} = {
     ENTER: ['Enter', 13],
     COMPOSING: ['Composing', 229],

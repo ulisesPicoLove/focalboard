@@ -7,7 +7,7 @@ import {useIntl} from 'react-intl'
 import {PropertyType} from '../../properties/types'
 import {IPropertyTemplate} from '../../blocks/board'
 import {FilterClause} from '../../blocks/filterClause'
-import {createFilterGroup} from '../../blocks/filterGroup'
+import {createFilterGroup, isAFilterGroupInstance} from '../../blocks/filterGroup'
 import {BoardView} from '../../blocks/boardView'
 import mutator from '../../mutator'
 import {Utils} from '../../utils'
@@ -56,8 +56,11 @@ const FilterValue = (props: Props): React.JSX.Element|null => {
                     Utils.assert(filterIndex >= 0, "Can't find filter")
 
                     const filterGroup = createFilterGroup(view.fields.filter)
-                    const newFilter = filterGroup.filters[filterIndex] as FilterClause
+                    const newFilter = filterGroup.filters[filterIndex]
                     Utils.assert(newFilter, `No filter at index ${filterIndex}`)
+                    if (!newFilter || isAFilterGroupInstance(newFilter)) {
+                        return
+                    }
 
                     newFilter.values = [value]
                     mutator.changeViewFilter(view.boardId, view.id, view.fields.filter, filterGroup)
@@ -114,8 +117,11 @@ const FilterValue = (props: Props): React.JSX.Element|null => {
                             Utils.assert(filterIndex >= 0, "Can't find filter")
 
                             const filterGroup = createFilterGroup(view.fields.filter)
-                            const newFilter = filterGroup.filters[filterIndex] as FilterClause
+                            const newFilter = filterGroup.filters[filterIndex]
                             Utils.assert(newFilter, `No filter at index ${filterIndex}`)
+                            if (!newFilter || isAFilterGroupInstance(newFilter)) {
+                                return
+                            }
                             if (filter.values.includes(o.id)) {
                                 newFilter.values = newFilter.values.filter((id) => id !== optionId)
                                 mutator.changeViewFilter(view.boardId, view.id, view.fields.filter, filterGroup)

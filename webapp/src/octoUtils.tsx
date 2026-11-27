@@ -17,8 +17,8 @@ import {createH2Block} from './blocks/h2Block'
 import {createH3Block} from './blocks/h3Block'
 import {FilterCondition} from './blocks/filterClause'
 import {createAttachmentBlock} from './blocks/attachmentBlock'
-import {Utils, isDefined} from './utils'
-import {required} from './typeHelpers'
+import {Utils} from './utils'
+import {isDefined, required} from './typeHelpers'
 
 class OctoUtils {
     static hydrateBlock(block: Block): Block {

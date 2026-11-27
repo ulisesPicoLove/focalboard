@@ -4,7 +4,7 @@ import React, {useEffect, useRef, useState, useMemo, useCallback} from 'react'
 import {FormattedMessage, useIntl} from 'react-intl'
 
 import {Card} from '../../blocks/card'
-import {Board, IPropertyTemplate} from '../../blocks/board'
+import {Board} from '../../blocks/board'
 import {Constants} from '../../constants'
 import mutator from '../../mutator'
 import Button from '../../widgets/buttons/button'
@@ -12,6 +12,7 @@ import Editable from '../../widgets/editable'
 import {useSortable} from '../../hooks/sortable'
 
 import {Utils} from '../../utils'
+import {isDefined} from '../../typeHelpers'
 
 import PropertyValueElement from '../propertyValueElement'
 import MenuWrapper from '../../widgets/menuWrapper'
@@ -89,7 +90,7 @@ const TableRow = (props: Props) => {
     }, [setTitle])
 
     const visiblePropertyTemplates = useMemo(() => (
-        visiblePropertyIds.map((id) => board.cardProperties.find((t) => t.id === id)).filter((i) => i) as IPropertyTemplate[]
+        visiblePropertyIds.map((id) => board.cardProperties.find((t) => t.id === id)).filter(isDefined)
     ), [board.cardProperties, visiblePropertyIds])
 
     let className = props.isSelected ? 'TableRow octo-table-row selected' : 'TableRow octo-table-row'

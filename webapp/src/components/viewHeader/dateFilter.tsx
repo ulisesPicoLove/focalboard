@@ -20,7 +20,7 @@ import 'react-day-picker/lib/style.css'
 import './dateFilter.scss'
 
 import {FilterClause} from '../../blocks/filterClause'
-import {createFilterGroup} from '../../blocks/filterGroup'
+import {createFilterGroup, isAFilterGroupInstance} from '../../blocks/filterGroup'
 
 export type DateProperty = {
     from?: number
@@ -57,8 +57,11 @@ function DateFilter(props: Props): React.JSX.Element {
             Utils.assert(filterIndex >= 0, "Can't find filter")
 
             const filterGroup = createFilterGroup(view.fields.filter)
-            const newFilter = filterGroup.filters[filterIndex] as FilterClause
+            const newFilter = filterGroup.filters[filterIndex]
             Utils.assert(newFilter, `No filter at index ${filterIndex}`)
+            if (!newFilter || isAFilterGroupInstance(newFilter)) {
+                return
+            }
 
             newFilter.values = []
             if (adjustedValue) {

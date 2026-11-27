@@ -9,7 +9,7 @@ import mutator from '../../mutator'
 import {BoardView} from '../../blocks/boardView'
 
 import {FilterClause} from '../../blocks/filterClause'
-import {createFilterGroup} from '../../blocks/filterGroup'
+import {createFilterGroup, isAFilterGroupInstance} from '../../blocks/filterGroup'
 
 import PersonSelector from '../personSelector'
 import {IUser} from '../../user'
@@ -47,8 +47,11 @@ const MultiPersonFilterValue = (props: Props): React.JSX.Element => {
                 Utils.assert(filterIndex >= 0, "Can't find filter")
 
                 const filterGroup = createFilterGroup(view.fields.filter)
-                const newFilter = filterGroup.filters[filterIndex] as FilterClause
+                const newFilter = filterGroup.filters[filterIndex]
                 Utils.assert(newFilter, `No filter at index ${filterIndex}`)
+                if (!newFilter || isAFilterGroupInstance(newFilter)) {
+                    return
+                }
 
                 if (action.action === 'select-option') {
                     newFilter.values = selected.map((a) => a.id)

@@ -10,7 +10,7 @@ import NumberProp from './number'
 export default class NumberProperty extends PropertyType {
     Editor = NumberProp
     name = 'Number'
-    type = 'number' as PropertyTypeEnum
+    type: PropertyTypeEnum = 'number'
     displayName = (intl: IntlShape) => intl.formatMessage({id: 'PropertyType.Number', defaultMessage: 'Number'})
     calculationOptions = [Options.none, Options.count, Options.countEmpty,
         Options.countNotEmpty, Options.percentEmpty, Options.percentNotEmpty,

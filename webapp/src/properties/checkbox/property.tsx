@@ -9,8 +9,8 @@ import Checkbox from './checkbox'
 export default class CheckboxProperty extends PropertyType {
     Editor = Checkbox
     name = 'Checkbox'
-    type = 'checkbox' as PropertyTypeEnum
+    type: PropertyTypeEnum = 'checkbox'
     displayName = (intl: IntlShape) => intl.formatMessage({id: 'PropertyType.Checkbox', defaultMessage: 'Checkbox'})
     canFilter = true
-    filterValueType = 'boolean' as FilterValueType
+    filterValueType: FilterValueType = 'boolean'
 }

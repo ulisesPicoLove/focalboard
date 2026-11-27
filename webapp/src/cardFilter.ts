@@ -7,7 +7,7 @@ import {DateProperty} from './properties/date/date'
 import {IPropertyTemplate} from './blocks/board'
 import {Card} from './blocks/card'
 import {FilterClause} from './blocks/filterClause'
-import {FilterGroup, isAFilterGroupInstance} from './blocks/filterGroup'
+import {FilterGroup, isAFilterClause, isAFilterGroupInstance} from './blocks/filterGroup'
 import {Utils} from './utils'
 
 const halfDay = 12 * 60 * 60 * 1000
@@ -231,14 +231,15 @@ class CardFilter {
             return {}
         }
 
-        const filters = filterGroup.filters.filter((o) => !isAFilterGroupInstance(o))
-        if (filters.length < 1) {
+        const filters = filterGroup.filters.filter(isAFilterClause)
+        const [firstFilter] = filters
+        if (!firstFilter) {
             return {}
         }
 
         if (filterGroup.operation === 'or') {
             // Just need to meet the first clause
-            const property = this.propertyThatMeetsFilterClause(filters[0] as FilterClause, templates)
+            const property = this.propertyThatMeetsFilterClause(firstFilter, templates)
             const result: Record<string, string> = {}
             if (property.value) {
                 result[property.id] = property.value
@@ -249,7 +250,7 @@ class CardFilter {
         // And: Need to meet all clauses
         const result: Record<string, string> = {}
         filters.forEach((filterClause) => {
-            const property = this.propertyThatMeetsFilterClause(filterClause as FilterClause, templates)
+            const property = this.propertyThatMeetsFilterClause(filterClause, templates)
             if (property.value) {
                 result[property.id] = property.value
             }

@@ -10,6 +10,7 @@ import {Card} from '../../blocks/card'
 import {Constants} from '../../constants'
 import mutator from '../../mutator'
 import {Utils} from '../../utils'
+import {isDefined} from '../../typeHelpers'
 import propsRegistry from '../../properties'
 
 import './table.scss'
@@ -89,7 +90,7 @@ const TableHeaders = (props: Props): React.JSX.Element => {
     }, [activeView, board.cardProperties, board.id, cards, columnResize, intl])
 
     const visiblePropertyTemplates = useMemo(() => (
-        activeView.fields.visiblePropertyIds.map((id) => board.cardProperties.find((t) => t.id === id)).filter((i) => i) as IPropertyTemplate[]
+        activeView.fields.visiblePropertyIds.map((id) => board.cardProperties.find((t) => t.id === id)).filter(isDefined)
     ), [board.cardProperties, activeView.fields.visiblePropertyIds])
 
     const onDropToColumn = useCallback(async (template: IPropertyTemplate, container: IPropertyTemplate) => {

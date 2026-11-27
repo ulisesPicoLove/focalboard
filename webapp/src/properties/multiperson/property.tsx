@@ -9,8 +9,8 @@ import MultiPerson from './multiperson'
 export default class MultiPersonProperty extends PropertyType {
     Editor = MultiPerson
     name = 'MultiPerson'
-    type = 'multiPerson' as PropertyTypeEnum
+    type: PropertyTypeEnum = 'multiPerson'
     displayName = (intl: IntlShape) => intl.formatMessage({id: 'PropertyType.MultiPerson', defaultMessage: 'Multi person'})
     canFilter = true
-    filterValueType = 'person' as FilterValueType
+    filterValueType: FilterValueType = 'person'
 }

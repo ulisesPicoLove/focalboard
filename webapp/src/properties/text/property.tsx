@@ -9,8 +9,8 @@ import Text from './text'
 export default class TextProperty extends PropertyType {
     Editor = Text
     name = 'Text'
-    type = 'text' as PropertyTypeEnum
+    type: PropertyTypeEnum = 'text'
     displayName = (intl: IntlShape) => intl.formatMessage({id: 'PropertyType.Text', defaultMessage: 'Text'})
     canFilter = true
-    filterValueType = 'text' as FilterValueType
+    filterValueType: FilterValueType = 'text'
 }
