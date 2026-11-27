@@ -2548,28 +2548,6 @@ func TestPermissionsDeleteSubscription(t *testing.T) {
 	runTestCases(t, ttCases, testData, clients)
 }
 
-func TestPermissionsOnboard(t *testing.T) {
-	ttCases := []TestCase{
-		{"/teams/test-team/onboard", methodPost, "", userAnon, http.StatusUnauthorized, 0},
-		{"/teams/test-team/onboard", methodPost, "", userNoTeamMember, http.StatusOK, 1},
-		{"/teams/test-team/onboard", methodPost, "", userTeamMember, http.StatusOK, 1},
-		{"/teams/test-team/onboard", methodPost, "", userViewer, http.StatusOK, 1},
-		{"/teams/test-team/onboard", methodPost, "", userCommenter, http.StatusOK, 1},
-		{"/teams/test-team/onboard", methodPost, "", userEditor, http.StatusOK, 1},
-		{"/teams/test-team/onboard", methodPost, "", userAdmin, http.StatusOK, 1},
-	}
-
-	th := SetupTestHelperLocalMode(t)
-	defer th.TearDown()
-	clients := setupLocalClients(th)
-	testData := setupData(t, th)
-
-	err := th.Server.App().InitTemplates()
-	require.NoError(t, err, "InitTemplates should not fail")
-
-	runTestCases(t, ttCases, testData, clients)
-}
-
 func TestPermissionsBoardArchiveExport(t *testing.T) {
 	ttCases := []TestCase{
 		{"/boards/{PUBLIC_BOARD_ID}/archive/export", methodGet, "", userAnon, http.StatusUnauthorized, 0},

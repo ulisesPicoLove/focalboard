@@ -1247,36 +1247,6 @@ paths:
             security:
                 - BearerAuth: []
             summary: Gets subscriptions for a user.
-    /team/{teamID}/onboard:
-        post:
-            operationId: onboard
-            parameters:
-                - description: Team ID
-                  in: path
-                  name: teamID
-                  required: true
-                  type: string
-            produces:
-                - application/json
-            responses:
-                "200":
-                    description: success
-                    schema:
-                        properties:
-                            boardID:
-                                description: Board ID
-                                type: string
-                            teamID:
-                                description: Team ID
-                                type: string
-                        type: object
-                default:
-                    description: internal error
-                    schema:
-                        $ref: '#/definitions/ErrorResponse'
-            security:
-                - BearerAuth: []
-            summary: Onboards a user on Boards.
     /teams:
         get:
             description: Returns information of all the teams

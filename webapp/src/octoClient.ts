@@ -11,11 +11,7 @@ import {UserSettings} from './userSettings'
 import {CategoryBoards, CategoryDraft} from './store/sidebar'
 import {Team} from './store/teams'
 import {Subscription} from './wsclient'
-import {PrepareOnboardingResponse} from './onboardingTour'
 import {Constants} from './constants'
-
-import {TopBoardResponse} from './insights'
-import {BoardSiteStatistics} from './statistics'
 
 //
 // OctoClient is the client interface to the server APIs
@@ -1006,61 +1002,6 @@ class OctoClient {
         }
 
         return this.getJson<Subscription[]>(response, [])
-    }
-
-    // onboarding
-    async prepareOnboarding(teamId: string): Promise<PrepareOnboardingResponse | undefined> {
-        const path = `/api/v2/teams/${teamId}/onboard`
-        const response = await apiFetch(this.getBaseURL() + path, {
-            headers: this.headers(),
-            method: 'POST',
-        })
-        if (response.status !== 200) {
-            return undefined
-        }
-
-        return this.getJsonOrUndefined<PrepareOnboardingResponse>(response)
-    }
-
-    async notifyAdminUpgrade(): Promise<void> {
-        const path = `${this.teamPath()}/notifyadminupgrade`
-        await apiFetch(this.getBaseURL() + path, {
-            headers: this.headers(),
-            method: 'POST',
-        })
-    }
-
-    async getSiteStatistics(): Promise<BoardSiteStatistics | undefined> {
-        const path = '/api/v2/statistics'
-        const response = await apiFetch(this.getBaseURL() + path, {headers: this.headers()})
-        if (response.status !== 200) {
-            return undefined
-        }
-
-        const stats = await this.getJsonOrUndefined<BoardSiteStatistics>(response)
-        Utils.log(`Site Statistics: cards=${stats?.card_count}   boards=${stats?.board_count}`)
-        return stats
-    }
-
-    // insights
-    async getMyTopBoards(timeRange: string, page: number, perPage: number, teamId: string): Promise<TopBoardResponse | undefined> {
-        const path = `/api/v2/users/me/boards/insights?time_range=${timeRange}&page=${page}&per_page=${perPage}&team_id=${teamId}`
-        const response = await apiFetch(this.getBaseURL() + path, {headers: this.headers()})
-        if (response.status !== 200) {
-            return undefined
-        }
-
-        return this.getJsonOrUndefined<TopBoardResponse>(response)
-    }
-
-    async getTeamTopBoards(timeRange: string, page: number, perPage: number, teamId: string): Promise<TopBoardResponse | undefined> {
-        const path = `/api/v2/teams/${teamId}/boards/insights?time_range=${timeRange}&page=${page}&per_page=${perPage}`
-        const response = await apiFetch(this.getBaseURL() + path, {headers: this.headers()})
-        if (response.status !== 200) {
-            return undefined
-        }
-
-        return this.getJsonOrUndefined<TopBoardResponse>(response)
     }
 
     async moveBlockTo(blockId: string, where: 'before'|'after', dstBlockId: string): Promise<Response> {
