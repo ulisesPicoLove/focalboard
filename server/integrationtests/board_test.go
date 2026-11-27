@@ -1418,7 +1418,6 @@ func TestUpdateMember(t *testing.T) {
 		require.Len(t, members, 1)
 		require.True(t, members[0].SchemeAdmin)
 	})
-
 }
 
 func TestDeleteMember(t *testing.T) {
@@ -1856,7 +1855,7 @@ func TestDuplicateBoard(t *testing.T) {
 		for _, categoryBoard := range userCategoryBoards {
 			for _, boardMetadata := range categoryBoard.BoardMetadata {
 				if boardMetadata.BoardID == duplicateBoard.ID {
-					duplicateBoardCategoryID = categoryBoard.Category.ID
+					duplicateBoardCategoryID = categoryBoard.ID
 				}
 			}
 		}

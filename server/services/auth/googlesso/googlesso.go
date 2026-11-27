@@ -306,7 +306,8 @@ func (p *Provider) Complete(ctx context.Context, w http.ResponseWriter, r *http.
 }
 
 func (p *Provider) cookie(value string, maxAge int) *http.Cookie {
-	return &http.Cookie{
+	// Secure follows the scheme of the configured server root: plain http only in local development.
+	return &http.Cookie{ //nolint:gosec // G124: Secure is p.cfg.SecureCookie
 		Name:     CookieName,
 		Value:    value,
 		Path:     p.cfg.CookiePath,

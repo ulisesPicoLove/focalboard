@@ -47,62 +47,6 @@ func (a *App) getBoardForBlock(blockID string) (*model.Board, error) {
 	return board, nil
 }
 
-func (a *App) getBoardHistory(boardID string, latest bool) (*model.Board, error) {
-	opts := model.QueryBoardHistoryOptions{
-		Limit:      1,
-		Descending: latest,
-	}
-	boards, err := a.store.GetBoardHistory(boardID, opts)
-	if err != nil {
-		return nil, fmt.Errorf("could not get history for board: %w", err)
-	}
-	if len(boards) == 0 {
-		return nil, nil
-	}
-
-	return boards[0], nil
-}
-
-func (a *App) getBoardDescendantModifiedInfo(boardID string, latest bool) (int64, string, error) {
-	board, err := a.getBoardHistory(boardID, latest)
-	if err != nil {
-		return 0, "", err
-	}
-	if board == nil {
-		return 0, "", fmt.Errorf("history not found for board: %w", err)
-	}
-
-	var timestamp int64
-	modifiedBy := board.ModifiedBy
-	if latest {
-		timestamp = board.UpdateAt
-	} else {
-		timestamp = board.CreateAt
-	}
-
-	// use block_history to fetch blocks in case they were deleted and no longer exist in blocks table.
-	opts := model.QueryBlockHistoryOptions{
-		Limit:      1,
-		Descending: latest,
-	}
-	blocks, err := a.store.GetBlockHistoryDescendants(boardID, opts)
-	if err != nil {
-		return 0, "", fmt.Errorf("could not get blocks history descendants for board: %w", err)
-	}
-	if len(blocks) > 0 {
-		// Compare the board history info with the descendant block info, if it exists
-		block := blocks[0]
-		if latest && block.UpdateAt > timestamp {
-			timestamp = block.UpdateAt
-			modifiedBy = block.ModifiedBy
-		} else if !latest && block.CreateAt < timestamp {
-			timestamp = block.CreateAt
-			modifiedBy = block.ModifiedBy
-		}
-	}
-	return timestamp, modifiedBy, nil
-}
-
 func (a *App) setBoardCategoryFromSource(sourceBoardID, destinationBoardID, userID, teamID string, asTemplate bool) error {
 	// find source board's category ID for the user
 	userCategoryBoards, err := a.GetUserCategoryBoards(userID, teamID)
@@ -316,9 +260,10 @@ func (a *App) broadcastTeamUsers(teamID, boardID string, boardType model.BoardTy
 			}
 		}
 		if !isMember {
-			if boardType == model.BoardTypePrivate {
+			switch boardType {
+			case model.BoardTypePrivate:
 				a.wsAdapter.BroadcastMemberDelete(teamID, boardID, user.ID)
-			} else if boardType == model.BoardTypeOpen {
+			case model.BoardTypeOpen:
 				a.wsAdapter.BroadcastMemberChange(teamID, boardID, &model.BoardMember{UserID: user.ID, BoardID: boardID, SchemeViewer: true, Synthetic: true})
 			}
 		}

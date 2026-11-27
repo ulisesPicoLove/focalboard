@@ -84,7 +84,7 @@ type Store interface {
 
 	UpsertTeamSignupToken(team model.Team) error
 	UpsertTeamSettings(team model.Team) error
-	GetTeam(ID string) (*model.Team, error)
+	GetTeam(id string) (*model.Team, error)
 	GetTeamsForUser(userID string) ([]*model.Team, error)
 	GetAllTeams() ([]*model.Team, error)
 	GetTeamCount() (int64, error)

@@ -18,7 +18,7 @@ type Service struct {
 // NewMetricsServer factory method to create a new prometheus server.
 func NewMetricsServer(address string, metricsService *Metrics, logger mlog.LoggerIFace) *Service {
 	return &Service{
-		&http.Server{ //nolint:gosec
+		&http.Server{
 			Addr:              address,
 			ReadHeaderTimeout: 10 * time.Second,
 			Handler: promhttp.HandlerFor(metricsService.registry, promhttp.HandlerOpts{
@@ -30,10 +30,10 @@ func NewMetricsServer(address string, metricsService *Metrics, logger mlog.Logge
 
 // Run will start the prometheus server.
 func (h *Service) Run() error {
-	return errors.Wrap(h.Server.ListenAndServe(), "prometheus ListenAndServe")
+	return errors.Wrap(h.ListenAndServe(), "prometheus ListenAndServe")
 }
 
 // Shutdown will shutdown the prometheus server.
 func (h *Service) Shutdown() error {
-	return errors.Wrap(h.Server.Close(), "prometheus Close")
+	return errors.Wrap(h.Close(), "prometheus Close")
 }

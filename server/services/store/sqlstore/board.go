@@ -679,8 +679,9 @@ func (s *SQLStore) searchBoardsForUser(db sq.BaseRunner, term string, searchFiel
 			// This should later be upgraded to industrial-strength
 			// word tokenizer, that uses much more than space
 			// to break words.
-			conditions := sq.And{}
-			for _, word := range strings.Split(strings.TrimSpace(term), " ") {
+			words := strings.Split(strings.TrimSpace(term), " ")
+			conditions := make(sq.And, 0, len(words))
+			for _, word := range words {
 				conditions = append(conditions, sq.Like{"lower(b.title)": "%" + strings.ToLower(word) + "%"})
 			}
 			query = query.Where(conditions)
@@ -724,9 +725,10 @@ func (s *SQLStore) searchBoardsForUserInTeam(db sq.BaseRunner, teamID, term, use
 		// word tokenizer, that uses much more than space
 		// to break words.
 
-		conditions := sq.And{}
+		words := strings.Split(strings.TrimSpace(term), " ")
+		conditions := make(sq.And, 0, len(words))
 
-		for _, word := range strings.Split(strings.TrimSpace(term), " ") {
+		for _, word := range words {
 			conditions = append(conditions, sq.Like{"lower(b.title)": "%" + strings.ToLower(word) + "%"})
 		}
 

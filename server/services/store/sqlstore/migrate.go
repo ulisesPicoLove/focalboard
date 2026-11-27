@@ -50,7 +50,10 @@ func (s *SQLStore) getMigrationConnection() (*sql.DB, error) {
 	}
 	*settings.DriverName = s.dbType
 
-	db, _ := sqlUtils.SetupConnection(s.logger, "master", connectionString, &settings, s.dbPingAttempts)
+	db, err := sqlUtils.SetupConnection(s.logger, "master", connectionString, &settings, s.dbPingAttempts)
+	if err != nil {
+		return nil, err
+	}
 
 	return db, nil
 }

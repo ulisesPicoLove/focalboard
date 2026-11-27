@@ -123,8 +123,7 @@ func (s *SQLStore) isSchemaMigrationNeeded() (bool, error) {
 			"TABLE_NAME": s.tablePrefix + "schema_migrations",
 		})
 
-	switch s.dbType {
-	case model.PostgresDBType:
+	if s.dbType == model.PostgresDBType {
 		query = query.Where("table_schema = current_schema()")
 	}
 
@@ -295,7 +294,8 @@ func (s *SQLStore) useNewSchemaTable() error {
 }
 
 func (s *SQLStore) deleteOldSchemaMigrationTable() error {
-	query := "DROP TABLE IF EXISTS " + s.tablePrefix + "schema_migrations_old_temp"
+	// the table prefix comes from the server configuration, not from a request
+	query := "DROP TABLE IF EXISTS " + s.tablePrefix + "schema_migrations_old_temp" //nolint:gosec // G202
 	if _, err := s.db.Exec(query); err != nil {
 		s.logger.Error("failed to delete old temp schema migrations table", mlog.Err(err))
 		return err

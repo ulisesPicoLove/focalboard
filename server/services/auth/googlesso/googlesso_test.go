@@ -59,7 +59,7 @@ func begin(t *testing.T, p *Provider, f *fakeidp.Server, redirect string) (url.V
 	return q, cookie
 }
 
-func callback(p *Provider, cookie *http.Cookie, query url.Values) (*Claims, string, error, *httptest.ResponseRecorder) { //nolint:revive
+func callback(p *Provider, cookie *http.Cookie, query url.Values) (*Claims, string, error, *httptest.ResponseRecorder) { //nolint:staticcheck
 	req := httptest.NewRequest(http.MethodGet, "/oauth/google/callback?"+query.Encode(), nil)
 	if cookie != nil {
 		req.AddCookie(cookie)

@@ -699,7 +699,6 @@ func TestPermissionsDuplicateBoard(t *testing.T) {
 		testData := setupData(t, th)
 		runTestCases(t, ttCases, testData, clients)
 	})
-
 }
 
 func TestPermissionsGetBoardBlocks(t *testing.T) {

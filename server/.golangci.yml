@@ -1,32 +1,25 @@
+version: "2"
+
 run:
   timeout: 5m
   modules-download-mode: readonly
-  skip-dirs:
-    - services/store/sqlstore/migrations
 
-linters-settings:
-  gofmt:
-    simplify: true
-  govet:
-    check-shadowing: true
-    enable-all: true
-    disable:
-      - fieldalignment
-  lll:
-    line-length: 180
-  dupl:
-    threshold: 200
-  revive:
-    enableAllRules: true
-    rules:
-      - name: exported
-        disabled: true
-
-linters:
-  disable-all: true
+formatters:
   enable:
     - gofmt
     - goimports
+  settings:
+    gofmt:
+      simplify: true
+  exclusions:
+    paths:
+      - services/store/sqlstore/migrations
+
+# goconst and err113 are off: the SQL builders repeat column and type names by nature, and the
+# configuration and validation errors carry their own text and are never compared.
+linters:
+  default: none
+  enable:
     - ineffassign
     - unparam
     - errcheck
@@ -35,7 +28,6 @@ linters:
     - durationcheck
     - errorlint
     - exhaustive
-    - exportloopref
     - gosec
     - makezero
     - staticcheck
@@ -43,22 +35,48 @@ linters:
     - asciicheck
     - dogsled
     - dupl
-    - goconst
     - gocritic
     - godot
-    - err113
     - goheader
     - revive
     - nakedret
-    - gomodguard
+    - gomodguard_v2
     - goprintffuncname
-    - gosimple
     - lll
     - misspell
     - nolintlint
-    - stylecheck
-    - typecheck
     - unconvert
     - unused
     - whitespace
     - gocyclo
+  settings:
+    govet:
+      enable-all: true
+      disable:
+        - fieldalignment
+    lll:
+      line-length: 180
+    dupl:
+      threshold: 200
+    revive:
+      rules:
+        - name: exported
+          disabled: true
+  exclusions:
+    # what golangci-lint v1 excluded by default
+    presets:
+      - comments
+      - std-error-handling
+      - common-false-positives
+      - legacy
+    rules:
+      # tests repeat literals, build errors on the spot, ignore values of helpers and use
+      # throwaway credentials and cookies
+      - path: (_test\.go|services/store/storetests/)
+        linters:
+          - dogsled
+          - prealloc
+          - gosec
+          - unparam
+    paths:
+      - services/store/sqlstore/migrations

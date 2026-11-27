@@ -45,7 +45,9 @@ func (a *API) handleGoogleLogin(w http.ResponseWriter, r *http.Request) {
 	}
 
 	setNoStore(w)
-	http.Redirect(w, r, authURL, http.StatusFound)
+	// authURL is the identity provider's authorization endpoint. The "r" parameter only travels in
+	// the state, which Complete checks is a local path before redirecting to it.
+	http.Redirect(w, r, authURL, http.StatusFound) //nolint:gosec // G710, see above
 }
 
 // handleGoogleCallback finishes the sign-in. On success the browser is sent to the web app's

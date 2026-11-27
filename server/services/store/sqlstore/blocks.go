@@ -70,7 +70,7 @@ func (s *SQLStore) getBlocks(db sq.BaseRunner, opts model.QueryBlocksOptions) ([
 	}
 
 	if opts.Page != 0 {
-		query = query.Offset(uint64(opts.Page * opts.PerPage))
+		query = query.Offset(pageOffset(opts.Page, opts.PerPage))
 	}
 
 	if opts.PerPage > 0 {
@@ -698,7 +698,7 @@ func (s *SQLStore) getBlockHistoryNewestChildren(db sq.BaseRunner, parentID stri
 		InnerJoin("("+subQuery+") AS sub ON bh.id=sub.id AND bh.insert_at=sub.max_insert_at", subArgs...)
 
 	if opts.Page != 0 {
-		query = query.Offset(uint64(opts.Page * opts.PerPage))
+		query = query.Offset(pageOffset(opts.Page, opts.PerPage))
 	}
 
 	if opts.PerPage > 0 {
@@ -1118,4 +1118,12 @@ func (s *SQLStore) undeleteBlockChildren(db sq.BaseRunner, boardID string, paren
 	s.logger.Debug("undeleteBlockChildren - insertHistoryQuery", mlog.Int("rows_affected", rowsAffected))
 
 	return nil
+}
+
+// pageOffset is how many rows to skip to reach a page; a negative page or size skips none.
+func pageOffset(page, perPage int) uint64 {
+	if page <= 0 || perPage <= 0 {
+		return 0
+	}
+	return uint64(page) * uint64(perPage)
 }
