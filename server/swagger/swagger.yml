@@ -14,17 +14,8 @@ definitions:
     Board:
         description: Board groups a set of blocks and its layout
         x-go-package: github.com/mattermost/focalboard/server/model
-    BoardInsight:
-        description: BoardInsight gives insight into activities in a Board
-        x-go-package: github.com/mattermost/focalboard/server/model
     BoardMember:
         description: BoardMember stores the information of the membership of a user on a board
-        x-go-package: github.com/mattermost/focalboard/server/model
-    BoardMemberHistoryEntry:
-        description: BoardMemberHistoryEntry stores the information of the membership of a user on a board
-        x-go-package: github.com/mattermost/focalboard/server/model
-    BoardMetadata:
-        description: BoardMetadata contains metadata for a Board
         x-go-package: github.com/mattermost/focalboard/server/model
     BoardPatch:
         description: BoardPatch is a patch for modify boards
@@ -33,14 +24,6 @@ definitions:
         description: |-
             BoardsAndBlocks is used to operate over boards and blocks at the
             same time
-        x-go-package: github.com/mattermost/focalboard/server/model
-    BoardsCloudLimits:
-        description: |-
-            BoardsCloudLimits is the representation of the limits for the
-            Boards server
-        x-go-package: github.com/mattermost/focalboard/server/model
-    BoardsStatistics:
-        description: BoardsStatistics is the representation of the statistics for the Boards server
         x-go-package: github.com/mattermost/focalboard/server/model
     Card:
         title: Card represents a group of content blocks and properties.
@@ -77,11 +60,6 @@ definitions:
     LoginResponse:
         description: LoginResponse is a login response
         x-go-package: github.com/mattermost/focalboard/server/model
-    NotificationHint:
-        description: |-
-            NotificationHint provides a hint that a block has been modified and has subscribers that
-            should be notified.
-        x-go-package: github.com/mattermost/focalboard/server/model
     PatchBoardsAndBlocks:
         description: |-
             PatchBoardsAndBlocks is used to patch multiple boards and blocks on
@@ -92,9 +70,6 @@ definitions:
         x-go-package: github.com/mattermost/focalboard/server/model
     Sharing:
         description: Sharing is sharing information for a root block
-        x-go-package: github.com/mattermost/focalboard/server/model
-    Subscriber:
-        description: Subscriber is an entity (e.g. user, channel) that can subscribe to events from boards, cards, etc
         x-go-package: github.com/mattermost/focalboard/server/model
     Subscription:
         title: Subscription is a subscription to a board, card, etc, for a user or channel.
@@ -121,27 +96,6 @@ info:
     title: Focalboard Server
     version: 2.0.0
 paths:
-    /api/v2/teams/{teamID}/notifyadminupgrade:
-        get:
-            operationId: handleNotifyAdminUpgrade
-            parameters:
-                - description: Team ID
-                  in: path
-                  name: teamID
-                  required: true
-                  type: string
-            produces:
-                - application/json
-            responses:
-                "200":
-                    description: success
-                default:
-                    description: internal error
-                    schema:
-                        $ref: '#/definitions/ErrorResponse'
-            security:
-                - BearerAuth: []
-            summary: Notifies admins for upgrade request.
     /boards:
         post:
             description: Creates a new board
@@ -826,33 +780,6 @@ paths:
                         $ref: '#/definitions/ErrorResponse'
             security:
                 - BearerAuth: []
-    /boards/{boardID}/metadata:
-        get:
-            description: Returns a board's metadata
-            operationId: getBoardMetadata
-            parameters:
-                - description: Board ID
-                  in: path
-                  name: boardID
-                  required: true
-                  type: string
-            produces:
-                - application/json
-            responses:
-                "200":
-                    description: success
-                    schema:
-                        $ref: '#/definitions/BoardMetadata'
-                "404":
-                    description: board not found
-                "501":
-                    description: required license not found
-                default:
-                    description: internal error
-                    schema:
-                        $ref: '#/definitions/ErrorResponse'
-            security:
-                - BearerAuth: []
     /boards/{boardID}/sharing:
         get:
             description: Returns sharing information for a board
@@ -1066,23 +993,6 @@ paths:
                 "200":
                     description: success
             summary: Responds with `Hello` if the web service is running.
-    /limits:
-        get:
-            operationId: cloudLimits
-            produces:
-                - application/json
-            responses:
-                "200":
-                    description: success
-                    schema:
-                        $ref: '#/definitions/BoardsCloudLimits'
-                default:
-                    description: internal error
-                    schema:
-                        $ref: '#/definitions/ErrorResponse'
-            security:
-                - BearerAuth: []
-            summary: Fetches the cloud limits of the server.
     /login:
         post:
             description: Login user
@@ -1155,23 +1065,6 @@ paths:
                     description: internal error
                     schema:
                         $ref: '#/definitions/ErrorResponse'
-    /statistics:
-        get:
-            operationId: handleStatistics
-            produces:
-                - application/json
-            responses:
-                "200":
-                    description: success
-                    schema:
-                        $ref: '#/definitions/BoardStatistics'
-                default:
-                    description: internal error
-                    schema:
-                        $ref: '#/definitions/ErrorResponse'
-            security:
-                - BearerAuth: []
-            summary: Fetches the statistic  of the server.
     /subscriptions:
         post:
             operationId: createSubscription
@@ -1399,82 +1292,10 @@ paths:
                         $ref: '#/definitions/ErrorResponse'
             security:
                 - BearerAuth: []
-    /teams/{teamID}/boards/insights:
-        get:
-            description: Returns team boards insights
-            operationId: handleTeamBoardsInsights
-            parameters:
-                - description: Team ID
-                  in: path
-                  name: teamID
-                  required: true
-                  type: string
-                - description: duration of data to calculate insights for
-                  in: query
-                  name: time_range
-                  required: true
-                  type: string
-                - description: page offset for top boards
-                  in: query
-                  name: page
-                  required: true
-                  type: string
-                - description: limit for boards in a page.
-                  in: query
-                  name: per_page
-                  required: true
-                  type: string
-            produces:
-                - application/json
-            responses:
-                "200":
-                    description: success
-                    schema:
-                        items:
-                            $ref: '#/definitions/BoardInsight'
-                        type: array
-                default:
-                    description: internal error
-                    schema:
-                        $ref: '#/definitions/ErrorResponse'
-            security:
-                - BearerAuth: []
     /teams/{teamID}/boards/search:
         get:
             description: Returns the boards that match with a search term in the team
             operationId: searchBoards
-            parameters:
-                - description: Team ID
-                  in: path
-                  name: teamID
-                  required: true
-                  type: string
-                - description: The search term. Must have at least one character
-                  in: query
-                  name: q
-                  required: true
-                  type: string
-            produces:
-                - application/json
-            responses:
-                "200":
-                    description: success
-                    schema:
-                        items:
-                            $ref: '#/definitions/Board'
-                        type: array
-                default:
-                    description: internal error
-                    schema:
-                        $ref: '#/definitions/ErrorResponse'
-            security:
-                - BearerAuth: []
-    /teams/{teamID}/boards/search/linkable:
-        get:
-            description: |-
-                Returns the boards that match with a search term in the team and the
-                user has permission to manage members
-            operationId: searchLinkableBoards
             parameters:
                 - description: Team ID
                   in: path
@@ -1638,65 +1459,6 @@ paths:
             responses:
                 "200":
                     description: success
-                default:
-                    description: internal error
-                    schema:
-                        $ref: '#/definitions/ErrorResponse'
-            security:
-                - BearerAuth: []
-    /teams/{teamID}/channels:
-        get:
-            description: Returns the user available channels
-            operationId: searchMyChannels
-            parameters:
-                - description: Team ID
-                  in: path
-                  name: teamID
-                  required: true
-                  type: string
-                - description: string to filter channels list
-                  in: query
-                  name: search
-                  type: string
-            produces:
-                - application/json
-            responses:
-                "200":
-                    description: success
-                    schema:
-                        items:
-                            $ref: '#/definitions/Channel'
-                        type: array
-                default:
-                    description: internal error
-                    schema:
-                        $ref: '#/definitions/ErrorResponse'
-            security:
-                - BearerAuth: []
-    /teams/{teamID}/channels/{channelID}:
-        get:
-            description: Returns the requested channel
-            operationId: getChannel
-            parameters:
-                - description: Team ID
-                  in: path
-                  name: teamID
-                  required: true
-                  type: string
-                - description: Channel ID
-                  in: path
-                  name: channelID
-                  required: true
-                  type: string
-            produces:
-                - application/json
-            responses:
-                "200":
-                    description: success
-                    schema:
-                        items:
-                            $ref: '#/definitions/Channel'
-                        type: array
                 default:
                     description: internal error
                     schema:
@@ -1897,46 +1659,6 @@ paths:
                     description: success
                     schema:
                         $ref: '#/definitions/User'
-                default:
-                    description: internal error
-                    schema:
-                        $ref: '#/definitions/ErrorResponse'
-            security:
-                - BearerAuth: []
-    /users/me/boards/insights:
-        get:
-            description: Returns user boards insights
-            operationId: getUserBoardsInsights
-            parameters:
-                - description: Team ID
-                  in: path
-                  name: teamID
-                  required: true
-                  type: string
-                - description: duration of data to calculate insights for
-                  in: query
-                  name: time_range
-                  required: true
-                  type: string
-                - description: page offset for top boards
-                  in: query
-                  name: page
-                  required: true
-                  type: string
-                - description: limit for boards in a page.
-                  in: query
-                  name: per_page
-                  required: true
-                  type: string
-            produces:
-                - application/json
-            responses:
-                "200":
-                    description: success
-                    schema:
-                        items:
-                            $ref: '#/definitions/BoardInsight'
-                        type: array
                 default:
                     description: internal error
                     schema:

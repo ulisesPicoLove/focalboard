@@ -241,22 +241,6 @@ class OctoClient {
         return user
     }
 
-    async getUsersList(userIds: string[]): Promise<IUser[] | []> {
-        const path = '/api/v2/users'
-        const body = JSON.stringify(userIds)
-        const response = await apiFetch(this.getBaseURL() + path, {
-            headers: this.headers(),
-            method: 'POST',
-            body,
-        })
-
-        if (response.status !== 200) {
-            return []
-        }
-
-        return this.getJson<IUser[]>(response, [])
-    }
-
     async getMyConfig(): Promise<UserPreference[] | undefined> {
         const path = '/api/v2/users/me/config'
         const response = await apiFetch(this.getBaseURL() + path, {
@@ -311,30 +295,6 @@ class OctoClient {
             headers,
             body: formData,
         })
-    }
-
-    async getBlocksWithParent(parentId: string, type?: string): Promise<Block[]> {
-        let path: string
-        if (type) {
-            path = this.teamPath() + `/blocks?parent_id=${encodeURIComponent(parentId)}&type=${encodeURIComponent(type)}`
-        } else {
-            path = this.teamPath() + `/blocks?parent_id=${encodeURIComponent(parentId)}`
-        }
-        return this.getBlocksWithPath(path)
-    }
-
-    async getBlocksWithType(type: string): Promise<Block[]> {
-        const path = this.teamPath() + `/blocks?type=${encodeURIComponent(type)}`
-        return this.getBlocksWithPath(path)
-    }
-
-    async getBlocksWithBlockID(blockID: string, boardID: string, optionalReadToken?: string): Promise<Block[]> {
-        let path = `/api/v2/boards/${boardID}/blocks?block_id=${blockID}`
-        const readToken = optionalReadToken || Utils.getReadToken()
-        if (readToken) {
-            path += `&read_token=${readToken}`
-        }
-        return this.getBlocksWithPath(path)
     }
 
     async getAllBlocks(boardID: string): Promise<Block[]> {
@@ -392,20 +352,6 @@ class OctoClient {
             headers: this.headers(),
             body,
         })
-    }
-
-    async patchBlocks(blocks: Block[], blockPatches: BlockPatch[]): Promise<Response> {
-        Utils.log(`patchBlocks: ${blocks.length} blocks`)
-        const blockIds = blocks.map((block) => block.id)
-        const body = JSON.stringify({block_ids: blockIds, block_patches: blockPatches})
-
-        const path = this.getBaseURL() + this.teamPath() + '/blocks'
-        const response = apiFetch(path, {
-            method: 'PATCH',
-            headers: this.headers(),
-            body,
-        })
-        return response
     }
 
     async deleteBlock(boardId: string, blockId: string): Promise<Response> {
@@ -723,18 +669,6 @@ class OctoClient {
         return this.getJson<Team[]>(response, [])
     }
 
-    async getTeamUsers(excludeBots?: boolean): Promise<IUser[]> {
-        let path = this.teamPath() + '/users'
-        if (excludeBots) {
-            path += '?exclude_bots=true'
-        }
-        const response = await apiFetch(this.getBaseURL() + path, {headers: this.headers()})
-        if (response.status !== 200) {
-            return []
-        }
-        return this.getJson<IUser[]>(response, [])
-    }
-
     async getTeamUsersList(userIds: string[], teamId: string): Promise<IUser[] | []> {
         const path = this.teamPath(teamId) + '/users'
         const body = JSON.stringify(userIds)
@@ -829,11 +763,6 @@ class OctoClient {
         }
 
         return this.getJson<Block[]>(response, [])
-    }
-
-    async getBlocksForBoard(teamId: string, boardId: string): Promise<Board[]> {
-        const path = this.teamPath(teamId) + `/boards/${boardId}`
-        return this.getBoardsWithPath(path)
     }
 
     async getBoardMembers(teamId: string, boardId: string): Promise<BoardMember[]> {
@@ -954,20 +883,6 @@ class OctoClient {
 
     async search(teamID: string, query: string): Promise<Board[]> {
         const url = `${this.teamPath(teamID)}/boards/search?q=${encodeURIComponent(query)}`
-        const response = await apiFetch(this.getBaseURL() + url, {
-            method: 'GET',
-            headers: this.headers(),
-        })
-
-        if (response.status !== 200) {
-            return []
-        }
-
-        return this.getJson<Board[]>(response, [])
-    }
-
-    async searchLinkableBoards(teamID: string, query: string): Promise<Board[]> {
-        const url = `${this.teamPath(teamID)}/boards/search/linkable?q=${encodeURIComponent(query)}`
         const response = await apiFetch(this.getBaseURL() + url, {
             method: 'GET',
             headers: this.headers(),
