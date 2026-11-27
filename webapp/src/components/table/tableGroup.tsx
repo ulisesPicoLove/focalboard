@@ -13,6 +13,8 @@ import {Board, IPropertyOption, IPropertyTemplate, BoardGroup} from '../../block
 import {BoardView} from '../../blocks/boardView'
 import {Card} from '../../blocks/card'
 
+import {MoveTarget} from '../cardActionsMenu/cardMoveItems'
+
 import TableGroupHeaderRow from './tableGroupHeaderRow'
 import TableRows from './tableRows'
 
@@ -32,6 +34,9 @@ type Props = {
     onDropToGroupHeader: (srcOption: IPropertyOption, dstOption?: IPropertyOption) => void
     onDropToCard: (srcCard: Card, dstCard: Card) => void
     onDropToGroup: (srcCard: Card, groupID: string, dstCardID: string) => void
+    onMoveCard?: (card: Card, offset: -1 | 1, shownCards: readonly Card[]) => void
+    moveTargets?: MoveTarget[]
+    onMoveToGroup?: (card: Card, groupId: string) => void
 }
 
 const TableGroup = (props: Props): React.JSX.Element => {
@@ -87,6 +92,9 @@ const TableGroup = (props: Props): React.JSX.Element => {
                 addCard={props.addCard}
                 onCardClicked={props.onCardClicked}
                 onDrop={props.onDropToCard}
+                onMove={props.onMoveCard}
+                moveTargets={props.moveTargets}
+                onMoveToGroup={props.onMoveToGroup}
             />}
         </div>
     )

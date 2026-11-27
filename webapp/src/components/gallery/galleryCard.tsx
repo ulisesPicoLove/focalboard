@@ -24,6 +24,7 @@ import CardBadges from '../cardBadges'
 import CardActionsMenu from '../cardActionsMenu/cardActionsMenu'
 import ConfirmationDialogBox, {ConfirmationDialogBoxProps} from '../confirmationDialogBox'
 import CardActionsMenuIcon from '../cardActionsMenu/cardActionsMenuIcon'
+import {cardMoveItems} from '../cardActionsMenu/cardMoveItems'
 
 type Props = {
     board: Board
@@ -36,6 +37,11 @@ type Props = {
     readonly: boolean
     isManualSort: boolean
     onDrop: (srcCard: Card, dstCard: Card) => void
+
+    // "Move earlier" and "Move later" (manual order only)
+    canMoveEarlier?: boolean
+    canMoveLater?: boolean
+    onMove?: (card: Card, offset: -1 | 1) => void
 }
 
 const GalleryCard = (props: Props) => {
@@ -103,7 +109,15 @@ const GalleryCard = (props: Props) => {
                             onClickDuplicate={() => {
                                 mutator.duplicateCard(card.id, board.id)
                             }}
-                        />
+                        >
+                            {cardMoveItems({
+                                intl,
+                                inGrid: true,
+                                onMove: props.isManualSort ? (offset) => props.onMove?.(card, offset) : undefined,
+                                canMoveBack: Boolean(props.canMoveEarlier),
+                                canMoveForward: Boolean(props.canMoveLater),
+                            })}
+                        </CardActionsMenu>
                     </MenuWrapper>
                 }
 

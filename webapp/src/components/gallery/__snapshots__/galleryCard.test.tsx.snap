@@ -156,7 +156,50 @@ exports[`src/components/gallery/GalleryCard with a comment content should match 
                 />
               </div>
             </div>
-            <div />
+            <div>
+              <div
+                aria-disabled="true"
+                aria-label="Move earlier"
+                class="MenuOption TextOption menu-option menu-option--disabled"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="menu-option__content"
+                >
+                  <div
+                    class="menu-name"
+                  >
+                    Move earlier
+                  </div>
+                </div>
+                <div
+                  class="noicon"
+                />
+              </div>
+            </div>
+            <div>
+              <div
+                aria-disabled="true"
+                aria-label="Move later"
+                class="MenuOption TextOption menu-option menu-option--disabled"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="menu-option__content"
+                >
+                  <div
+                    class="menu-name"
+                  >
+                    Move later
+                  </div>
+                </div>
+                <div
+                  class="noicon"
+                />
+              </div>
+            </div>
           </div>
           <div
             class="menu-spacer hideOnWidescreen"
@@ -333,7 +376,50 @@ exports[`src/components/gallery/GalleryCard with an image content should match s
                 />
               </div>
             </div>
-            <div />
+            <div>
+              <div
+                aria-disabled="true"
+                aria-label="Move earlier"
+                class="MenuOption TextOption menu-option menu-option--disabled"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="menu-option__content"
+                >
+                  <div
+                    class="menu-name"
+                  >
+                    Move earlier
+                  </div>
+                </div>
+                <div
+                  class="noicon"
+                />
+              </div>
+            </div>
+            <div>
+              <div
+                aria-disabled="true"
+                aria-label="Move later"
+                class="MenuOption TextOption menu-option menu-option--disabled"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="menu-option__content"
+                >
+                  <div
+                    class="menu-name"
+                  >
+                    Move later
+                  </div>
+                </div>
+                <div
+                  class="noicon"
+                />
+              </div>
+            </div>
           </div>
           <div
             class="menu-spacer hideOnWidescreen"
@@ -551,7 +637,50 @@ exports[`src/components/gallery/GalleryCard with many contents should match snap
                 />
               </div>
             </div>
-            <div />
+            <div>
+              <div
+                aria-disabled="true"
+                aria-label="Move earlier"
+                class="MenuOption TextOption menu-option menu-option--disabled"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="menu-option__content"
+                >
+                  <div
+                    class="menu-name"
+                  >
+                    Move earlier
+                  </div>
+                </div>
+                <div
+                  class="noicon"
+                />
+              </div>
+            </div>
+            <div>
+              <div
+                aria-disabled="true"
+                aria-label="Move later"
+                class="MenuOption TextOption menu-option menu-option--disabled"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="menu-option__content"
+                >
+                  <div
+                    class="menu-name"
+                  >
+                    Move later
+                  </div>
+                </div>
+                <div
+                  class="noicon"
+                />
+              </div>
+            </div>
           </div>
           <div
             class="menu-spacer hideOnWidescreen"
@@ -732,7 +861,50 @@ exports[`src/components/gallery/GalleryCard with many images content should matc
                 />
               </div>
             </div>
-            <div />
+            <div>
+              <div
+                aria-disabled="true"
+                aria-label="Move earlier"
+                class="MenuOption TextOption menu-option menu-option--disabled"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="menu-option__content"
+                >
+                  <div
+                    class="menu-name"
+                  >
+                    Move earlier
+                  </div>
+                </div>
+                <div
+                  class="noicon"
+                />
+              </div>
+            </div>
+            <div>
+              <div
+                aria-disabled="true"
+                aria-label="Move later"
+                class="MenuOption TextOption menu-option menu-option--disabled"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="menu-option__content"
+                >
+                  <div
+                    class="menu-name"
+                  >
+                    Move later
+                  </div>
+                </div>
+                <div
+                  class="noicon"
+                />
+              </div>
+            </div>
           </div>
           <div
             class="menu-spacer hideOnWidescreen"
@@ -1166,7 +1338,50 @@ exports[`src/components/gallery/GalleryCard without block content should match s
                 />
               </div>
             </div>
-            <div />
+            <div>
+              <div
+                aria-disabled="true"
+                aria-label="Move earlier"
+                class="MenuOption TextOption menu-option menu-option--disabled"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="menu-option__content"
+                >
+                  <div
+                    class="menu-name"
+                  >
+                    Move earlier
+                  </div>
+                </div>
+                <div
+                  class="noicon"
+                />
+              </div>
+            </div>
+            <div>
+              <div
+                aria-disabled="true"
+                aria-label="Move later"
+                class="MenuOption TextOption menu-option menu-option--disabled"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="menu-option__content"
+                >
+                  <div
+                    class="menu-name"
+                  >
+                    Move later
+                  </div>
+                </div>
+                <div
+                  class="noicon"
+                />
+              </div>
+            </div>
           </div>
           <div
             class="menu-spacer hideOnWidescreen"

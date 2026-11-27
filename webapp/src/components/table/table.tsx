@@ -1,6 +1,6 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
-import React, {useCallback} from 'react'
+import React, {useCallback, useMemo} from 'react'
 
 import {FormattedMessage} from 'react-intl'
 
@@ -12,6 +12,7 @@ import {Card} from '../../blocks/card'
 import {Constants, Permission} from '../../constants'
 import mutator from '../../mutator'
 import {Utils} from '../../utils'
+import {moveCardAmong} from '../../cardOrder'
 import {asText, isDefined} from '../../typeHelpers'
 import {useAppDispatch} from '../../store/hooks'
 import {updateView} from '../../store/views'
@@ -160,6 +161,22 @@ const Table = (props: Props): React.JSX.Element => {
         }
     }, [selectedCardIds, activeView.fields.groupById, activeView.fields.cardOrder, activeView.id, isManualSort, cards, groupByProperty, board.id])
 
+    // "Move up" and "Move down" in the menu of a row: one place inside its group (manual order only)
+    const onMoveCard = useCallback((card: Card, offset: -1 | 1, shownCards: readonly Card[]) => {
+        const savedOrder = Array.from(new Set([...activeView.fields.cardOrder, ...cards.map((c) => c.id)]))
+        const cardOrder = moveCardAmong(savedOrder, shownCards.map((c) => c.id), card.id, offset)
+        if (!cardOrder) {
+            return
+        }
+        mutator.performAsUndoGroup(async () => {
+            await mutator.changeViewCardOrder(board.id, activeView.id, activeView.fields.cardOrder, cardOrder, 'move card')
+        })
+    }, [activeView.fields.cardOrder, activeView.id, cards, board.id])
+
+    // "Move to" a group, in the menu of a row
+    const moveTargets = useMemo(() => visibleGroups.map((group) => ({id: group.option.id, name: group.option.value})), [visibleGroups])
+    const onMoveToGroup = useCallback((card: Card, groupId: string) => onDropToGroup(card, groupId, ''), [onDropToGroup])
+
     const onDropToCard = useCallback((srcCard: Card, dstCard: Card) => {
         Utils.log(`onDropToCard: ${dstCard.title}`)
         const {groupById} = activeView.fields
@@ -213,6 +230,9 @@ const Table = (props: Props): React.JSX.Element => {
                                 onDropToGroupHeader={onDropToGroupHeader}
                                 onDropToCard={onDropToCard}
                                 onDropToGroup={onDropToGroup}
+                                onMoveCard={onMoveCard}
+                                moveTargets={moveTargets}
+                                onMoveToGroup={onMoveToGroup}
                             />)
                     })
                         }
@@ -230,6 +250,7 @@ const Table = (props: Props): React.JSX.Element => {
                             addCard={props.addCard}
                             onCardClicked={props.onCardClicked}
                             onDrop={onDropToCard}
+                            onMove={onMoveCard}
                         />
                         }
                     </div>

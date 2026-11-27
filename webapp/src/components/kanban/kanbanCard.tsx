@@ -19,7 +19,7 @@ import './kanbanCard.scss'
 import CardBadges from '../cardBadges'
 import CardActionsMenu from '../cardActionsMenu/cardActionsMenu'
 import CardActionsMenuIcon from '../cardActionsMenu/cardActionsMenuIcon'
-import Menu from '../../widgets/menu'
+import {cardMoveItems, MoveTarget} from '../cardActionsMenu/cardMoveItems'
 
 export const OnboardingCardClassName = 'onboardingCard'
 
@@ -39,11 +39,11 @@ type Props = {
     columnId?: string
     moveTargets?: MoveTarget[]
     onMoveToColumn?: (card: Card, optionId: string) => void
-}
 
-export type MoveTarget = {
-    id: string
-    name: string
+    // Position inside the column, for "Move up" and "Move down" (manual order only)
+    canMoveUp?: boolean
+    canMoveDown?: boolean
+    onMove?: (card: Card, offset: -1 | 1) => void
 }
 
 const KanbanCard = (props: Props) => {
@@ -133,24 +133,15 @@ const KanbanCard = (props: Props) => {
                             )
                         }}
                     >
-                        {props.moveTargets && props.onMoveToColumn && props.moveTargets.length > 1 &&
-                            <Menu.SubMenu
-                                id='move-to'
-                                name={intl.formatMessage({id: 'KanbanCard.move-to', defaultMessage: 'Move to'})}
-                                position='left'
-                            >
-                                {props.moveTargets.map((target) => (
-                                    <Menu.Text
-                                        key={target.id || 'empty'}
-                                        id={`move-to-${target.id || 'empty'}`}
-                                        name={target.name}
-                                        check={target.id === props.columnId}
-                                        disabled={target.id === props.columnId}
-                                        onClick={() => props.onMoveToColumn!(card, target.id)}
-                                    />
-                                ))}
-                            </Menu.SubMenu>
-                        }
+                        {cardMoveItems({
+                            intl,
+                            onMove: props.isManualSort ? (offset) => props.onMove?.(card, offset) : undefined,
+                            canMoveBack: Boolean(props.canMoveUp),
+                            canMoveForward: Boolean(props.canMoveDown),
+                            targets: props.moveTargets,
+                            currentTargetId: props.columnId,
+                            onMoveToTarget: props.onMoveToColumn && ((targetId) => props.onMoveToColumn?.(card, targetId)),
+                        })}
                     </CardActionsMenu>
                 </MenuWrapper>
                 }

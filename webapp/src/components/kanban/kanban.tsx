@@ -25,6 +25,8 @@ import {dragAndDropRearrange} from '../cardDetail/cardDetailContentsUtility'
 import {getCurrentBoardTemplates} from '../../store/cards'
 import BoardPermissionGate from '../permissions/boardPermissionGate'
 
+import {moveCardAmong} from '../../cardOrder'
+
 import DragScrollContainer, {createHorizontalStrength, createVerticalStrength} from './dragScroll'
 
 import KanbanCard from './kanbanCard'
@@ -186,6 +188,18 @@ const Kanban = (props: Props) => {
         }
     }, [visibleGroups, onDropToColumn])
 
+    // "Move up" and "Move down" in the menu of a card: one place inside its column
+    const onMoveCard = useCallback((card: Card, offset: -1 | 1, shownCards: readonly Card[]) => {
+        const savedOrder = Array.from(new Set([...activeView.fields.cardOrder, ...cards.map((c) => c.id)]))
+        const cardOrder = moveCardAmong(savedOrder, shownCards.map((c) => c.id), card.id, offset)
+        if (!cardOrder) {
+            return
+        }
+        mutator.performAsUndoGroup(async () => {
+            await mutator.changeViewCardOrder(board.id, activeView.id, activeView.fields.cardOrder, cardOrder, 'move card')
+        })
+    }, [activeView.fields.cardOrder, activeView.id, cards, board.id])
+
     const onDropToCard = useCallback(async (srcCard: Card, dstCard: Card) => {
         if (srcCard.id === dstCard.id || !groupByProperty) {
             return
@@ -311,7 +325,7 @@ const Kanban = (props: Props) => {
                         key={group.option.id || 'empty'}
                         onDrop={(card: Card) => onDropToColumn(group.option, card)}
                     >
-                        {group.cards.map((card) => (
+                        {group.cards.map((card, index) => (
                             <KanbanCard
                                 card={card}
                                 board={board}
@@ -327,6 +341,9 @@ const Kanban = (props: Props) => {
                                 columnId={group.option.id}
                                 moveTargets={moveTargets}
                                 onMoveToColumn={onMoveCardToColumn}
+                                canMoveUp={index > 0}
+                                canMoveDown={index < group.cards.length - 1}
+                                onMove={(movedCard, offset) => onMoveCard(movedCard, offset, group.cards)}
                             />
                         ))}
                         {!props.readonly &&

@@ -12,6 +12,7 @@ import {Card} from '../../blocks/card'
 import {Board, IPropertyTemplate} from '../../blocks/board'
 import {BoardView} from '../../blocks/boardView'
 import mutator from '../../mutator'
+import {moveCardAmong} from '../../cardOrder'
 import {Utils} from '../../utils'
 
 import BoardPermissionGate from '../permissions/boardPermissionGate'
@@ -60,13 +61,26 @@ const Gallery = (props: Props): React.JSX.Element => {
         })
     }, [selectedCardIds, activeView.fields.cardOrder, activeView.id, cards, board.id])
 
+    // "Move earlier" and "Move later" in the menu of a card
+    const shownCards = useMemo(() => cards.filter((c) => c.boardId === board.id), [cards, board.id])
+    const onMoveCard = useCallback((card: Card, offset: -1 | 1) => {
+        const savedOrder = Array.from(new Set([...activeView.fields.cardOrder, ...cards.map((c) => c.id)]))
+        const cardOrder = moveCardAmong(savedOrder, shownCards.map((c) => c.id), card.id, offset)
+        if (!cardOrder) {
+            return
+        }
+        mutator.performAsUndoGroup(async () => {
+            await mutator.changeViewCardOrder(board.id, activeView.id, activeView.fields.cardOrder, cardOrder, 'move card')
+        })
+    }, [activeView.fields.cardOrder, activeView.id, cards, shownCards, board.id])
+
     const visibleTitle = activeView.fields.visiblePropertyIds.includes(Constants.titleColumnId)
     const visibleBadges = activeView.fields.visiblePropertyIds.includes(Constants.badgesColumnId)
 
     return (
 
         <div className='Gallery'>
-            {cards.filter((c) => c.boardId === board.id).map((card) => {
+            {shownCards.map((card, index) => {
                 return (
                     <GalleryCard
                         key={card.id + card.updateAt}
@@ -80,6 +94,9 @@ const Gallery = (props: Props): React.JSX.Element => {
                         readonly={props.readonly}
                         onDrop={onDropToCard}
                         isManualSort={isManualSort}
+                        canMoveEarlier={index > 0}
+                        canMoveLater={index < shownCards.length - 1}
+                        onMove={onMoveCard}
                     />
                 )
             })}

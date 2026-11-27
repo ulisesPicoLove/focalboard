@@ -22,6 +22,7 @@ import OptionsIcon from '../../widgets/icons/options'
 import Tooltip from '../../widgets/tooltip'
 import ConfirmationDialogBox, {ConfirmationDialogBoxProps} from '../confirmationDialogBox'
 import CardActionsMenu from '../cardActionsMenu/cardActionsMenu'
+import {cardMoveItems, MoveTarget} from '../cardActionsMenu/cardMoveItems'
 
 import {useColumnResize} from './tableColumnResizeContext'
 
@@ -43,6 +44,13 @@ type Props = {
     addCard: (groupByOptionId?: string) => Promise<void>
     onClick?: (e: React.MouseEvent<HTMLDivElement>, card: Card) => void
     onDrop: (srcCard: Card, dstCard: Card) => void
+
+    // Position inside its group, and the groups, for the "Move up", "Move down" and "Move to" items
+    canMoveUp?: boolean
+    canMoveDown?: boolean
+    onMove?: (card: Card, offset: -1 | 1) => void
+    moveTargets?: MoveTarget[]
+    onMoveToGroup?: (card: Card, groupId: string) => void
 }
 
 const TableRow = (props: Props) => {
@@ -216,7 +224,17 @@ const TableRow = (props: Props) => {
                                     },
                                 )
                             }}
-                        />
+                        >
+                            {cardMoveItems({
+                                intl,
+                                onMove: isManualSort ? (offset) => props.onMove?.(card, offset) : undefined,
+                                canMoveBack: Boolean(props.canMoveUp),
+                                canMoveForward: Boolean(props.canMoveDown),
+                                targets: isGrouped ? props.moveTargets : undefined,
+                                currentTargetId: groupById ? asText(card.fields.properties[groupById]) : undefined,
+                                onMoveToTarget: props.onMoveToGroup && ((groupId) => props.onMoveToGroup?.(card, groupId)),
+                            })}
+                        </CardActionsMenu>
                     </MenuWrapper>
                 )}
 

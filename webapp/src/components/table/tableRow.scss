@@ -49,6 +49,25 @@
         }
     }
 
+    // keyboard users never hover: the "Open" button and the row actions appear when something in
+    // the row has focus
+    &:focus-within {
+        .open-button {
+            display: block;
+        }
+
+        .action-cell {
+            @include z-index(table-row-action-cell);
+            position: relative;
+            align-items: center;
+            visibility: visible;
+        }
+
+        .octo-table-cell-btn {
+            visibility: visible;
+        }
+    }
+
     &.readonly:hover {
         margin-left: unset;
     }

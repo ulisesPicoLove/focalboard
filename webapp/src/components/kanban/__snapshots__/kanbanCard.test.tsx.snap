@@ -125,7 +125,6 @@ exports[`src/components/kanban/kanbanCard return kanbanCard and click on copy li
                 />
               </div>
             </div>
-            <div />
           </div>
           <div
             class="menu-spacer hideOnWidescreen"
@@ -307,7 +306,6 @@ exports[`src/components/kanban/kanbanCard return kanbanCard and click on delete 
                 />
               </div>
             </div>
-            <div />
           </div>
           <div
             class="menu-spacer hideOnWidescreen"
@@ -489,7 +487,6 @@ exports[`src/components/kanban/kanbanCard return kanbanCard and click on duplica
                 />
               </div>
             </div>
-            <div />
           </div>
           <div
             class="menu-spacer hideOnWidescreen"
