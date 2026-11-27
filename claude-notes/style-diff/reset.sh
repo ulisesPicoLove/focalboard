@@ -1,7 +1,8 @@
 #!/bin/bash
 # Restart the test server with a fresh database and the same sample boards
 SP=/private/tmp/claude-501/-Users-ulises-Documents-picolove-focalboard/79fa0b03-0ddc-46de-8f00-60362a242416/scratchpad
-PID=$(ps -eo pid,comm | grep 'bin/focalboard-server' | grep -v grep | awk '{print $1}')
+# only the test server (started with --config): never touch another focalboard-server that is running
+PID=$(ps -eo pid,args | grep 'focalboard-server --config' | grep -v grep | awk '{print $1}')
 [ -n "$PID" ] && kill $PID && sleep 2
 rm -rf $SP/srv/test.db* $SP/srv/files
 cd $SP/srv && (nohup /Users/ulises/Documents/picolove/focalboard/bin/focalboard-server --config $SP/srv/config.json > server.log 2>&1 &)
