@@ -33,8 +33,21 @@ jobs:
       - uses: actions/setup-go@d35c59abb061a4a6fb18e82ac0862c26744d6ab5
         with:
           go-version-file: focalboard/server/go.mod
+      # Not the project's install.sh: it picks the checksum of the .sbom.json file, which has the
+      # same name plus a suffix, and the verification of a good download fails.
       - name: set up golangci-lint
-        run: curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v2.15.0
+        env:
+          GOLANGCI_LINT_VERSION: 2.15.0
+        run: |
+          base="https://github.com/golangci/golangci-lint/releases/download/v${GOLANGCI_LINT_VERSION}"
+          archive="golangci-lint-${GOLANGCI_LINT_VERSION}-linux-amd64.tar.gz"
+          curl -sSfL -o "/tmp/${archive}" "${base}/${archive}"
+          want=$(curl -sSfL "${base}/golangci-lint-${GOLANGCI_LINT_VERSION}-checksums.txt" | grep " ${archive}\$" | awk '{print $1}')
+          test -n "${want}"
+          echo "${want}  /tmp/${archive}" | sha256sum -c -
+          tar -xzf "/tmp/${archive}" -C /tmp
+          install -m 0755 "/tmp/golangci-lint-${GOLANGCI_LINT_VERSION}-linux-amd64/golangci-lint" "$(go env GOPATH)/bin/golangci-lint"
+          golangci-lint --version
       - name: lint
         run: |
           cd focalboard
