@@ -12,7 +12,7 @@ import {Card} from '../../blocks/card'
 import {Constants, Permission} from '../../constants'
 import mutator from '../../mutator'
 import {Utils} from '../../utils'
-import {isDefined} from '../../typeHelpers'
+import {asText, isDefined} from '../../typeHelpers'
 import {useAppDispatch} from '../../store/hooks'
 import {updateView} from '../../store/views'
 import {useHasCurrentBoardPermissions} from '../../hooks/permissions'
@@ -166,7 +166,7 @@ const Table = (props: Props): React.JSX.Element => {
         if (groupById === undefined) {
             return
         }
-        onDropToGroup(srcCard, dstCard.fields.properties[groupById] as string, dstCard.id)
+        onDropToGroup(srcCard, asText(dstCard.fields.properties[groupById]), dstCard.id)
     }, [activeView.fields.groupById, onDropToGroup])
 
     const propertyNameChanged = useCallback(async (option: IPropertyOption, text: string): Promise<void> => {

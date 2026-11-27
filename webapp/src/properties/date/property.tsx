@@ -10,6 +10,8 @@ import {Utils} from '../../utils'
 
 import {PropertyTypeEnum, DatePropertyType} from '../types'
 
+import {asText} from '../../typeHelpers'
+
 import DateComponent, {createDatePropertyFromString} from './date'
 
 const timeZoneOffset = (date: number): number => {
@@ -49,7 +51,7 @@ export default class DateProperty extends DatePropertyType {
     }
 
     getDateFrom = (value: string | string[] | undefined) => {
-        const dateProperty = createDatePropertyFromString(value as string)
+        const dateProperty = createDatePropertyFromString(asText(value))
         if (!dateProperty.from) {
             return undefined
         }
@@ -61,7 +63,7 @@ export default class DateProperty extends DatePropertyType {
     }
 
     getDateTo = (value: string | string[] | undefined) => {
-        const dateProperty = createDatePropertyFromString(value as string)
+        const dateProperty = createDatePropertyFromString(asText(value))
         if (!dateProperty.to) {
             return undefined
         }

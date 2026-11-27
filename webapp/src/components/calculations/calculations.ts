@@ -9,13 +9,13 @@ import {Utils} from '../../utils'
 import {humanizeDuration} from '../../dateLocale'
 import {Constants} from '../../constants'
 import {DateProperty} from '../../properties/date/date'
-import {dictionaryOf} from '../../typeHelpers'
+import {asList, asText, dictionaryOf} from '../../typeHelpers'
 
 const ROUNDED_DECIMAL_PLACES = 2
 
 // The value of the property of the card as a number (NaN when the card or the value is missing)
 function numericProperty(card: Card | undefined, property: IPropertyTemplate): number {
-    return card ? parseFloat(getCardProperty(card, property) as string) : NaN
+    return card ? parseFloat(asText(getCardProperty(card, property))) : NaN
 }
 
 function getCardProperty(card: Card, property: IPropertyTemplate): string | string[] | number | undefined {
@@ -87,7 +87,7 @@ function countValueHelper(cards: readonly Card[], property: IPropertyTemplate): 
     if (property.type === 'multiSelect') {
         cardsWithValue(cards, property).
             forEach((card) => {
-                values += (getCardProperty(card, property) as string[]).length
+                values += asList(getCardProperty(card, property)).length
             })
     } else {
         values = cardsWithValue(cards, property).length
@@ -133,7 +133,7 @@ function countUniqueValue(cards: readonly Card[], property: IPropertyTemplate): 
         }
 
         if (property.type === 'multiSelect') {
-            (value as string[]).forEach((v) => valueMap.set(v, true))
+            asList(value).forEach((v) => valueMap.set(v, true))
         } else {
             valueMap.set(String(value), true)
         }
@@ -147,7 +147,7 @@ function sum(cards: readonly Card[], property: IPropertyTemplate): string {
 
     cardsWithValue(cards, property).
         forEach((card) => {
-            result += parseFloat(getCardProperty(card, property) as string)
+            result += parseFloat(asText(getCardProperty(card, property)))
         })
 
     return String(Utils.roundTo(result, ROUNDED_DECIMAL_PLACES))
@@ -175,8 +175,8 @@ function median(cards: readonly Card[], property: IPropertyTemplate): string {
                 return -1
             }
 
-            const aValue = parseFloat(getCardProperty(a, property) as string || '0')
-            const bValue = parseFloat(getCardProperty(b, property) as string || '0')
+            const aValue = parseFloat(asText(getCardProperty(a, property)) || '0')
+            const bValue = parseFloat(asText(getCardProperty(b, property)) || '0')
 
             return aValue - bValue
         })
@@ -205,7 +205,7 @@ function min(cards: readonly Card[], property: IPropertyTemplate): string {
             return
         }
 
-        const value = parseFloat(getCardProperty(card, property) as string)
+        const value = parseFloat(asText(getCardProperty(card, property)))
         result = Math.min(result, value)
     })
 
@@ -219,7 +219,7 @@ function max(cards: readonly Card[], property: IPropertyTemplate): string {
             return
         }
 
-        const value = parseFloat(getCardProperty(card, property) as string)
+        const value = parseFloat(asText(getCardProperty(card, property)))
         result = Math.max(result, value)
     })
 

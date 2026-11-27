@@ -9,6 +9,7 @@ import {Card} from './blocks/card'
 import {FilterClause} from './blocks/filterClause'
 import {FilterGroup, isAFilterClause, isAFilterGroupInstance} from './blocks/filterGroup'
 import {Utils} from './utils'
+import {asText} from './typeHelpers'
 
 const halfDay = 12 * 60 * 60 * 1000
 
@@ -74,7 +75,7 @@ class CardFilter {
         const template = templates.find((o) => o.id === filter.propertyId)
         let dateValue: DateProperty | undefined
         if (template?.type === 'date') {
-            dateValue = this.createDatePropertyFromString(value as string)
+            dateValue = this.createDatePropertyFromString(asText(value))
         }
         if (!value && template) {
             if (template.type === 'createdBy') {
@@ -142,37 +143,37 @@ class CardFilter {
             if (filter.values.length === 0) {
                 return true
             }
-            return (value as string || '').includes(filter.values[0]?.toLowerCase() ?? '')
+            return asText(value).includes(filter.values[0]?.toLowerCase() ?? '')
         }
         case 'notContains': {
             if (filter.values.length === 0) {
                 return true
             }
-            return !(value as string || '').includes(filter.values[0]?.toLowerCase() ?? '')
+            return !asText(value).includes(filter.values[0]?.toLowerCase() ?? '')
         }
         case 'startsWith': {
             if (filter.values.length === 0) {
                 return true
             }
-            return (value as string || '').startsWith(filter.values[0]?.toLowerCase() ?? '')
+            return asText(value).startsWith(filter.values[0]?.toLowerCase() ?? '')
         }
         case 'notStartsWith': {
             if (filter.values.length === 0) {
                 return true
             }
-            return !(value as string || '').startsWith(filter.values[0]?.toLowerCase() ?? '')
+            return !asText(value).startsWith(filter.values[0]?.toLowerCase() ?? '')
         }
         case 'endsWith': {
             if (filter.values.length === 0) {
                 return true
             }
-            return (value as string || '').endsWith(filter.values[0]?.toLowerCase() ?? '')
+            return asText(value).endsWith(filter.values[0]?.toLowerCase() ?? '')
         }
         case 'notEndsWith': {
             if (filter.values.length === 0) {
                 return true
             }
-            return !(value as string || '').endsWith(filter.values[0]?.toLowerCase() ?? '')
+            return !asText(value).endsWith(filter.values[0]?.toLowerCase() ?? '')
         }
         case 'isBefore': {
             if (filter.values.length === 0) {

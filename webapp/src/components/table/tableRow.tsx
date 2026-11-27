@@ -12,7 +12,7 @@ import Editable from '../../widgets/editable'
 import {useSortable} from '../../hooks/sortable'
 
 import {Utils} from '../../utils'
-import {isDefined} from '../../typeHelpers'
+import {asText, isDefined} from '../../typeHelpers'
 
 import PropertyValueElement from '../propertyValueElement'
 import MenuWrapper from '../../widgets/menuWrapper'
@@ -72,7 +72,7 @@ const TableRow = (props: Props) => {
     const {addCard, isLastCard} = props
     const onSaveWithEnter = useCallback(() => {
         if (isLastCard) {
-            addCard(groupById ? card.fields.properties[groupById] as string : '')
+            addCard(groupById ? asText(card.fields.properties[groupById]) : '')
         }
     }, [addCard, isLastCard, groupById, card.fields.properties])
 
@@ -99,7 +99,7 @@ const TableRow = (props: Props) => {
     }
     if (isGrouped) {
         const groupID = groupById || ''
-        let groupValue = card.fields.properties[groupID] as string || 'undefined'
+        let groupValue = asText(card.fields.properties[groupID]) || 'undefined'
         if (groupValue === 'undefined') {
             const template = board.cardProperties.find((p) => p.id === groupById) //templates.find((o) => o.id === groupById)
             if (template && template.type === 'createdBy') {

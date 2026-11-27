@@ -21,3 +21,20 @@ export function required<T>(value: T | null | undefined, what: string): T {
 export function isDefined<T>(value: T | null | undefined): value is T {
     return value !== null && value !== undefined
 }
+
+// A property value is stored as text, a number (timestamps) or a list (multi-select, person...),
+// whichever the property type says. These read it as the kind a caller needs, with an empty value
+// when the stored one is of another kind or missing, instead of asserting the kind.
+export function asText(value: unknown): string {
+    if (typeof value === 'string') {
+        return value
+    }
+    return typeof value === 'number' ? String(value) : ''
+}
+
+export function asList(value: unknown): string[] {
+    if (Array.isArray(value)) {
+        return value
+    }
+    return typeof value === 'string' && value !== '' ? [value] : []
+}

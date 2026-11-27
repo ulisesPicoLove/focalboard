@@ -5,12 +5,13 @@ import React from 'react'
 
 import {PropertyProps} from '../types'
 import BaseTextEditor from '../baseTextEditor'
+import {asText} from '../../typeHelpers'
 
 const Number = (props: PropertyProps): React.JSX.Element => {
     return (
         <BaseTextEditor
             {...props}
-            validator={() => props.propertyValue === '' || !isNaN(parseInt(props.propertyValue as string, 10))}
+            validator={() => props.propertyValue === '' || !isNaN(parseInt(asText(props.propertyValue), 10))}
         />
     )
 }

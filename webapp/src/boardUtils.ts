@@ -2,6 +2,7 @@
 // See LICENSE.txt for license information.
 import {Card} from './blocks/card'
 import {IPropertyTemplate, IPropertyOption, BoardGroup} from './blocks/board'
+import {asText} from './typeHelpers'
 
 function groupCardsByOptions(cards: Card[], optionIds: string[], groupByProperty?: IPropertyTemplate): BoardGroup[] {
     const groups = []
@@ -62,7 +63,7 @@ export function getVisibleAndHiddenGroups(cards: Card[], visibleOptionIds: strin
 
 function getPersonGroups(cards: Card[], groupByProperty: IPropertyTemplate, hiddenOptionIds: string[]): {visible: BoardGroup[], hidden: BoardGroup[]} {
     const groups = cards.reduce((unique: {[key: string]: Card[]}, item: Card): {[key: string]: Card[]} => {
-        let key = item.fields.properties[groupByProperty.id] as string
+        let key = asText(item.fields.properties[groupByProperty.id])
         if (groupByProperty?.type === 'createdBy') {
             key = item.createdBy
         } else if (groupByProperty?.type === 'updatedBy') {

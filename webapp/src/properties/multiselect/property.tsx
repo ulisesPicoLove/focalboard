@@ -8,6 +8,8 @@ import {Utils} from '../../utils'
 
 import {PropertyType, PropertyTypeEnum, FilterValueType} from '../types'
 
+import {asList} from '../../typeHelpers'
+
 import MultiSelect from './multiselect'
 
 export default class MultiSelectProperty extends PropertyType {
@@ -30,7 +32,7 @@ export default class MultiSelectProperty extends PropertyType {
 
     exportValue = (value: string | string[] | undefined, card: Card, template: IPropertyTemplate): string => {
         const displayValue = this.displayValue(value, card, template)
-        return ((displayValue as unknown || []) as string[]).join('|')
+        return asList(displayValue).join('|')
     }
 
     valueLength = (value: string | string[] | undefined, card: Card, template: IPropertyTemplate, _: IntlShape, fontDescriptor: string, perItemPadding?: number): number => {

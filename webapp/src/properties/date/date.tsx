@@ -20,6 +20,7 @@ import 'react-day-picker/lib/style.css'
 import './date.scss'
 
 import {PropertyProps} from '../types'
+import {asText} from '../../typeHelpers'
 
 export type DateProperty = {
     from?: number
@@ -81,7 +82,7 @@ function DateRange(props: PropertyProps): React.JSX.Element {
         return new Date(date).getTimezoneOffset() * 60 * 1000
     }
 
-    const dateProperty = useMemo(() => createDatePropertyFromString(value as string), [value])
+    const dateProperty = useMemo(() => createDatePropertyFromString(asText(value)), [value])
     const [showDialog, setShowDialog] = useState(false)
 
     // Keep dateProperty as UTC,

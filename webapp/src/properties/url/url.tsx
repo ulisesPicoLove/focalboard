@@ -16,11 +16,12 @@ import {sendFlashMessage} from '../../components/flashMessages'
 import {PropertyProps} from '../types'
 
 import './url.scss'
+import {asText} from '../../typeHelpers'
 
 const URLProperty = (props: PropertyProps): React.JSX.Element => {
     const [value, setValue] = useState(props.card.fields.properties[props.propertyTemplate?.id || ''] || '')
     const [isEditing, setIsEditing] = useState(false)
-    const isEmpty = !(props.propertyValue as string)?.trim()
+    const isEmpty = !asText(props.propertyValue).trim()
     const showEditable = !props.readOnly && (isEditing || isEmpty)
     const editableRef = useRef<Focusable>(null)
     const intl = useIntl()
@@ -62,7 +63,7 @@ const URLProperty = (props: PropertyProps): React.JSX.Element => {
                     className={props.property.valueClassName(props.readOnly)}
                     ref={editableRef}
                     placeholderText={emptyDisplayValue}
-                    value={value as string}
+                    value={asText(value)}
                     autoExpand={true}
                     readonly={props.readOnly}
                     onChange={setValue}
@@ -82,7 +83,7 @@ const URLProperty = (props: PropertyProps): React.JSX.Element => {
                             return true
                         }
                         const urlRegexp = /(((.+:(?:\/\/)?)?(?:[-;:&=+$,\w]+@)?[A-Za-z0-9.-]+|(?:www\.|[-;:&=+$,\w]+@)[A-Za-z0-9.-]+)((?:\/[+~%/.\w\-_]*)?\??(?:[-+=&;%@.\w_]*)#?(?:[.!/\\\w]*))?)/
-                        return urlRegexp.test(value as string)
+                        return urlRegexp.test(asText(value))
                     }}
                 />
             </div>
@@ -93,7 +94,7 @@ const URLProperty = (props: PropertyProps): React.JSX.Element => {
         <div className={`URLProperty ${props.property.valueClassName(props.readOnly)}`}>
             <a
                 className='link'
-                href={Utils.ensureProtocol((props.propertyValue as string).trim())}
+                href={Utils.ensureProtocol(asText(props.propertyValue).trim())}
                 target='_blank'
                 rel='noreferrer'
                 onClick={(event) => event.stopPropagation()}
@@ -113,7 +114,7 @@ const URLProperty = (props: PropertyProps): React.JSX.Element => {
                 icon={<DuplicateIcon/>}
                 onClick={(e) => {
                     e.stopPropagation()
-                    Utils.copyTextToClipboard(props.propertyValue as string)
+                    Utils.copyTextToClipboard(asText(props.propertyValue))
                     sendFlashMessage({content: intl.formatMessage({id: 'URLProperty.copiedLink', defaultMessage: 'Copied!'}), severity: 'high'})
                 }}
             />
