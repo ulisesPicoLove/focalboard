@@ -51,7 +51,7 @@
     }
 
     &.no-views {
-        color: rgba(var(--sidebar-text-rgb), 0.4);
+        color: rgba(var(--sidebar-text-rgb), var(--text-muted-alpha));
 
         &:hover {
             background-color: rgba(var(--sidebar-bg-rgb));

@@ -17,11 +17,11 @@
     }
 
     .EntryComponent__display-name {
-        opacity: 0.56;
+        opacity: var(--text-muted-alpha);
     }
 
     .EntryComponent__hint {
         margin-left: 12px;
-        opacity: 0.56;
+        opacity: var(--text-muted-alpha);
     }
 }

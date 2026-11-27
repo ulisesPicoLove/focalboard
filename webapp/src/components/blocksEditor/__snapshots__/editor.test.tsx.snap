@@ -85,7 +85,7 @@ exports[`components/blocksEditor/editor should match snapshot on empty 1`] = `
           class="css-1neafsd"
         >
           <div
-            class="css-1jqq78o-placeholder"
+            class="css-mod95n-placeholder"
             id="react-select-2-placeholder"
           >
             Introduce your text or your slash command

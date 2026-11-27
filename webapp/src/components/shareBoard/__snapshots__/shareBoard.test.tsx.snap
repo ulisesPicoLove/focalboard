@@ -73,7 +73,7 @@ exports[`src/components/shareBoard/shareBoard return shareBoard and click Copy l
                   class="css-1neafsd"
                 >
                   <div
-                    class="css-1jqq78o-placeholder"
+                    class="css-mod95n-placeholder"
                     id="react-select-4-placeholder"
                   >
                     Search for people
@@ -288,7 +288,7 @@ exports[`src/components/shareBoard/shareBoard return shareBoard and click Copy l
                   class="css-1neafsd"
                 >
                   <div
-                    class="css-1jqq78o-placeholder"
+                    class="css-mod95n-placeholder"
                     id="react-select-4-placeholder"
                   >
                     Search for people
@@ -503,7 +503,7 @@ exports[`src/components/shareBoard/shareBoard return shareBoard and click Regene
                   class="css-1neafsd"
                 >
                   <div
-                    class="css-1jqq78o-placeholder"
+                    class="css-mod95n-placeholder"
                     id="react-select-5-placeholder"
                   >
                     Search for people
@@ -745,7 +745,7 @@ exports[`src/components/shareBoard/shareBoard return shareBoard and click Select
                   class="css-1neafsd"
                 >
                   <div
-                    class="css-1jqq78o-placeholder"
+                    class="css-mod95n-placeholder"
                     id="react-select-10-placeholder"
                   >
                     Search for people
@@ -963,7 +963,7 @@ exports[`src/components/shareBoard/shareBoard return shareBoard and click Select
                   class="css-1neafsd"
                 >
                   <div
-                    class="css-1jqq78o-placeholder"
+                    class="css-mod95n-placeholder"
                     id="react-select-10-placeholder"
                   >
                     Search for people
@@ -1276,7 +1276,7 @@ exports[`src/components/shareBoard/shareBoard return shareBoard and click Select
                   class="css-1neafsd"
                 >
                   <div
-                    class="css-1jqq78o-placeholder"
+                    class="css-mod95n-placeholder"
                     id="react-select-11-placeholder"
                   >
                     Search for people
@@ -1494,7 +1494,7 @@ exports[`src/components/shareBoard/shareBoard return shareBoard and click Select
                   class="css-1neafsd"
                 >
                   <div
-                    class="css-1jqq78o-placeholder"
+                    class="css-mod95n-placeholder"
                     id="react-select-11-placeholder"
                   >
                     Search for people
@@ -1825,7 +1825,7 @@ exports[`src/components/shareBoard/shareBoard return shareBoard template and cli
                   class="css-1neafsd"
                 >
                   <div
-                    class="css-1jqq78o-placeholder"
+                    class="css-mod95n-placeholder"
                     id="react-select-13-placeholder"
                   >
                     Search for people
@@ -1992,7 +1992,7 @@ exports[`src/components/shareBoard/shareBoard return shareBoard template and cli
                   class="css-1neafsd"
                 >
                   <div
-                    class="css-1jqq78o-placeholder"
+                    class="css-mod95n-placeholder"
                     id="react-select-13-placeholder"
                   >
                     Search for people
@@ -2254,7 +2254,7 @@ exports[`src/components/shareBoard/shareBoard return shareBoard, and click switc
                   class="css-1neafsd"
                 >
                   <div
-                    class="css-1jqq78o-placeholder"
+                    class="css-mod95n-placeholder"
                     id="react-select-6-placeholder"
                   >
                     Search for people
@@ -2496,7 +2496,7 @@ exports[`src/components/shareBoard/shareBoard return shareBoardComponent and cli
                   class="css-1neafsd"
                 >
                   <div
-                    class="css-1jqq78o-placeholder"
+                    class="css-mod95n-placeholder"
                     id="react-select-7-placeholder"
                   >
                     Search for people
@@ -2738,7 +2738,7 @@ exports[`src/components/shareBoard/shareBoard should match snapshot 1`] = `
                   class="css-1neafsd"
                 >
                   <div
-                    class="css-1jqq78o-placeholder"
+                    class="css-mod95n-placeholder"
                     id="react-select-2-placeholder"
                   >
                     Search for people
@@ -2953,7 +2953,7 @@ exports[`src/components/shareBoard/shareBoard should match snapshot with sharing
                   class="css-1neafsd"
                 >
                   <div
-                    class="css-1jqq78o-placeholder"
+                    class="css-mod95n-placeholder"
                     id="react-select-3-placeholder"
                   >
                     Search for people
@@ -3168,7 +3168,7 @@ exports[`src/components/shareBoard/shareBoard should match snapshot with sharing
                   class="css-1neafsd"
                 >
                   <div
-                    class="css-1jqq78o-placeholder"
+                    class="css-mod95n-placeholder"
                     id="react-select-9-placeholder"
                   >
                     Search for people
@@ -3383,7 +3383,7 @@ exports[`src/components/shareBoard/shareBoard should match snapshot with sharing
                   class="css-1neafsd"
                 >
                   <div
-                    class="css-1jqq78o-placeholder"
+                    class="css-mod95n-placeholder"
                     id="react-select-8-placeholder"
                   >
                     Search for people
@@ -3598,7 +3598,7 @@ exports[`src/components/shareBoard/shareBoard should match snapshot, with templa
                   class="css-1neafsd"
                 >
                   <div
-                    class="css-1jqq78o-placeholder"
+                    class="css-mod95n-placeholder"
                     id="react-select-12-placeholder"
                   >
                     Search for people

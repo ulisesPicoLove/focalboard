@@ -14,7 +14,7 @@
     max-width: 100%;
 
     &.empty {
-        color: rgba(var(--center-channel-color-rgb), 0.4);
+        color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
         padding: 1px;
         text-transform: none;
         font-weight: normal;

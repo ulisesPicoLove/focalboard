@@ -5,7 +5,7 @@
     padding: 12px;
     display: flex;
     flex-direction: row;
-    color: rgba(var(--center-channel-color-rgb), 0.4);
+    color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
 
 
     .CompassIcon.icon-file-image-broken-outline.BrokenFile {

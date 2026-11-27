@@ -176,7 +176,7 @@ exports[`properties/multiperson not readonly not existing user 1`] = `
         class="react-select__value-container react-select__value-container--is-multi css-xwc5uq"
       >
         <div
-          class="react-select__placeholder css-1jqq78o-placeholder"
+          class="react-select__placeholder css-mod95n-placeholder"
           id="react-select-2-placeholder"
         >
           Empty

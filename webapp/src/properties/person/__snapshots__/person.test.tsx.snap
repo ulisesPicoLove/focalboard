@@ -23,7 +23,7 @@ exports[`properties/person not readOnly not existing user 1`] = `
         class="react-select__value-container css-xwc5uq"
       >
         <div
-          class="react-select__placeholder css-1jqq78o-placeholder"
+          class="react-select__placeholder css-mod95n-placeholder"
           id="react-select-2-placeholder"
         >
           Empty

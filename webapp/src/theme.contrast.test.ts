@@ -8,8 +8,16 @@ function channel(value: number): number {
     return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4
 }
 
+// 'r, g, b' or '#rrggbb'
+function parseColour(colour: string): number[] {
+    if (colour.startsWith('#')) {
+        return [1, 3, 5].map((i) => parseInt(colour.slice(i, i + 2), 16))
+    }
+    return colour.split(',').map((v) => parseInt(v.trim(), 10))
+}
+
 function luminance(rgb: string): number {
-    const [r, g, b] = rgb.split(',').map((v) => parseInt(v.trim(), 10))
+    const [r, g, b] = parseColour(rgb)
     return (0.2126 * channel(r!)) + (0.7152 * channel(g!)) + (0.0722 * channel(b!))
 }
 
@@ -31,5 +39,9 @@ describe('theme contrast (WCAG AA, 4.5:1)', () => {
 
     test.each(Object.entries(themes))('%s: accent colour used as text on the page', (_name, theme) => {
         expect(contrast(theme.buttonBg, theme.mainBg)).toBeGreaterThanOrEqual(4.5)
+    })
+
+    test.each(Object.entries(themes))('%s: links on the page', (_name, theme) => {
+        expect(contrast(theme.link, theme.mainBg)).toBeGreaterThanOrEqual(4.5)
     })
 })

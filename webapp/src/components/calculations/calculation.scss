@@ -20,7 +20,7 @@
         }
 
         &.hovered {
-            opacity: 0.64;
+            opacity: var(--text-muted-alpha);
         }
 
         &.menuOpen {

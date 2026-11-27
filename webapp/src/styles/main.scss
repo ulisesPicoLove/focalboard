@@ -68,7 +68,7 @@ html {
         width: 100%;
         height: 1px;
         border: 0;
-        color: rgba(var(--center-channel-color-rgb), 0.09);
+        color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
         background-color: rgba(var(--center-channel-color-rgb), 0.09);
         margin-bottom: 8px;
     }
@@ -146,7 +146,7 @@ html {
         color: rgb(var(--center-channel-color-rgb));
 
         &.empty {
-            color: rgba(var(--center-channel-color-rgb), 0.4);
+            color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
         }
 
         .IconButton.delete-value {
@@ -171,7 +171,7 @@ html {
     }
 
     .octo-placeholder {
-        color: rgba(var(--center-channel-color-rgb), 0.4);
+        color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
     }
 
     [contentEditable='true'] {
@@ -181,7 +181,7 @@ html {
     [contentEditable='true']:empty::before {
         content: attr(placeholder);
         display: block;
-        color: rgba(var(--center-channel-color-rgb), 0.4);
+        color: rgba(var(--center-channel-color-rgb), var(--text-muted-alpha));
     }
 
     .octo-propertyvalue.Editable.active,

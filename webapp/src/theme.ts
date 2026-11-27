@@ -47,7 +47,8 @@ export const defaultTheme = {
     sidebarTextActiveBorder: '93, 137, 243',
     sidebarWhiteLogo: 'true',
 
-    link: '93, 137, 234',
+    // 5.9:1 on white (the old 93, 137, 234 was 3.4:1)
+    link: '28, 88, 217',
     linkVisited: '#551a8b',
 
     propDefault: '#fff',
@@ -69,7 +70,9 @@ export const darkTheme = {
 
     mainBg: '55, 53, 47',
     mainFg: '220, 220, 220',
-    buttonBg: '80, 170, 221',
+
+    // 5.9:1 on the dark page and 4.8:1 or more on its raised surfaces (the old 80, 170, 221 was 3.9:1 on them)
+    buttonBg: '110, 188, 235',
 
     // dark text: white on this light blue is only 2.6:1, this is 7.1:1
     buttonFg: '20, 20, 25',
@@ -78,7 +81,8 @@ export const darkTheme = {
     sidebarTextActiveBorder: '102, 185, 167',
     sidebarWhiteLogo: 'true',
 
-    link: '#0090ff',
+    // 4.9:1 on the dark page (the old #0090ff was 3.8:1)
+    link: '#4aa8ff',
     linkVisited: 'hsla(270, 68%, 70%, 1.0)',
 
     propDefault: 'hsla(0, 100%, 100%, 0.08)',
@@ -127,6 +131,9 @@ export const lightTheme = {
     sidebarFg: '55, 53, 47',
     sidebarTextActiveBorder: '87, 158, 255',
     sidebarWhiteLogo: 'false',
+
+    // same blue as the button, 5.4:1 on white
+    link: '0, 111, 170',
 }
 
 // True when an 'r, g, b' string is closer to black than to white.
@@ -288,6 +295,10 @@ export function getSelectBaseStyle() {
             paddingTop: 0,
             marginBottom: 0,
             marginTop: 0,
+        }),
+        placeholder: (provided: CSSObject): CSSObject => ({
+            ...provided,
+            color: 'rgba(var(--center-channel-color-rgb), var(--text-muted-alpha))',
         }),
         menuList: (provided: CSSObject): CSSObject => ({
             ...provided,

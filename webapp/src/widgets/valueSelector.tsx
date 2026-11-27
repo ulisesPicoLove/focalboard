@@ -131,7 +131,7 @@ const valueSelectorStyle = {
     }),
     placeholder: (provided: CSSObject): CSSObject => ({
         ...provided,
-        color: 'rgba(var(--center-channel-color-rgb), 0.4)',
+        color: 'rgba(var(--center-channel-color-rgb), var(--text-muted-alpha))',
     }),
     multiValue: (provided: CSSObject): CSSObject => ({
         ...provided,

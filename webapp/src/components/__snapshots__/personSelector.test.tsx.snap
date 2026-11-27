@@ -140,7 +140,7 @@ exports[`properties/person not readOnly, show me 1`] = `
         class="react-select__value-container css-xwc5uq"
       >
         <div
-          class="react-select__placeholder css-1jqq78o-placeholder"
+          class="react-select__placeholder css-mod95n-placeholder"
           id="react-select-7-placeholder"
         >
           Empty
@@ -306,7 +306,7 @@ exports[`properties/person not readOnly, show me 2`] = `
         class="react-select__value-container css-xwc5uq"
       >
         <div
-          class="react-select__placeholder css-1jqq78o-placeholder"
+          class="react-select__placeholder css-mod95n-placeholder"
           id="react-select-7-placeholder"
         >
           Empty
@@ -455,7 +455,7 @@ exports[`properties/person not readOnly, show modal 1`] = `
         class="react-select__value-container css-xwc5uq"
       >
         <div
-          class="react-select__placeholder css-1jqq78o-placeholder"
+          class="react-select__placeholder css-mod95n-placeholder"
           id="react-select-4-placeholder"
         >
           Empty
@@ -553,7 +553,7 @@ exports[`properties/person not readOnly, show modal 2`] = `
         class="react-select__value-container css-xwc5uq"
       >
         <div
-          class="react-select__placeholder css-1jqq78o-placeholder"
+          class="react-select__placeholder css-mod95n-placeholder"
           id="react-select-4-placeholder"
         >
           Empty
