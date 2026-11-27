@@ -55,13 +55,6 @@ exports[`components/viewHeader/filterComponent return filterComponent 1`] = `
                     tabindex="0"
                   >
                     <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
-                    <div
                       class="menu-option__content"
                     >
                       <div
@@ -82,13 +75,6 @@ exports[`components/viewHeader/filterComponent return filterComponent 1`] = `
                     role="button"
                     tabindex="0"
                   >
-                    <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
                     <div
                       class="menu-option__content"
                     >
@@ -111,13 +97,6 @@ exports[`components/viewHeader/filterComponent return filterComponent 1`] = `
                     tabindex="0"
                   >
                     <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
-                    <div
                       class="menu-option__content"
                     >
                       <div
@@ -139,13 +118,6 @@ exports[`components/viewHeader/filterComponent return filterComponent 1`] = `
                     tabindex="0"
                   >
                     <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
-                    <div
                       class="menu-option__content"
                     >
                       <div
@@ -166,13 +138,6 @@ exports[`components/viewHeader/filterComponent return filterComponent 1`] = `
                     role="button"
                     tabindex="0"
                   >
-                    <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
                     <div
                       class="menu-option__content"
                     >
@@ -200,13 +165,6 @@ exports[`components/viewHeader/filterComponent return filterComponent 1`] = `
                   role="button"
                   tabindex="0"
                 >
-                  <div
-                    class="d-flex"
-                  >
-                    <div
-                      class="noicon"
-                    />
-                  </div>
                   <div
                     class="menu-option__content"
                   >
@@ -333,13 +291,6 @@ exports[`components/viewHeader/filterComponent return filterComponent and add Fi
                     tabindex="0"
                   >
                     <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
-                    <div
                       class="menu-option__content"
                     >
                       <div
@@ -360,13 +311,6 @@ exports[`components/viewHeader/filterComponent return filterComponent and add Fi
                     role="button"
                     tabindex="0"
                   >
-                    <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
                     <div
                       class="menu-option__content"
                     >
@@ -389,13 +333,6 @@ exports[`components/viewHeader/filterComponent return filterComponent and add Fi
                     tabindex="0"
                   >
                     <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
-                    <div
                       class="menu-option__content"
                     >
                       <div
@@ -417,13 +354,6 @@ exports[`components/viewHeader/filterComponent return filterComponent and add Fi
                     tabindex="0"
                   >
                     <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
-                    <div
                       class="menu-option__content"
                     >
                       <div
@@ -444,13 +374,6 @@ exports[`components/viewHeader/filterComponent return filterComponent and add Fi
                     role="button"
                     tabindex="0"
                   >
-                    <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
                     <div
                       class="menu-option__content"
                     >
@@ -478,13 +401,6 @@ exports[`components/viewHeader/filterComponent return filterComponent and add Fi
                   role="button"
                   tabindex="0"
                 >
-                  <div
-                    class="d-flex"
-                  >
-                    <div
-                      class="noicon"
-                    />
-                  </div>
                   <div
                     class="menu-option__content"
                   >
@@ -625,13 +541,6 @@ exports[`components/viewHeader/filterComponent return filterComponent and click 
                     tabindex="0"
                   >
                     <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
-                    <div
                       class="menu-option__content"
                     >
                       <div
@@ -650,13 +559,6 @@ exports[`components/viewHeader/filterComponent return filterComponent and click 
                     role="button"
                     tabindex="0"
                   >
-                    <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
                     <div
                       class="menu-option__content"
                     >
@@ -677,13 +579,6 @@ exports[`components/viewHeader/filterComponent return filterComponent and click 
                     tabindex="0"
                   >
                     <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
-                    <div
                       class="menu-option__content"
                     >
                       <div
@@ -702,13 +597,6 @@ exports[`components/viewHeader/filterComponent return filterComponent and click 
                     role="button"
                     tabindex="0"
                   >
-                    <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
                     <div
                       class="menu-option__content"
                     >
@@ -742,13 +630,6 @@ exports[`components/viewHeader/filterComponent return filterComponent and click 
                   role="button"
                   tabindex="0"
                 >
-                  <div
-                    class="d-flex"
-                  >
-                    <div
-                      class="noicon"
-                    />
-                  </div>
                   <div
                     class="menu-option__content"
                   >
@@ -861,13 +742,6 @@ exports[`components/viewHeader/filterComponent return filterComponent and filter
                     tabindex="0"
                   >
                     <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
-                    <div
                       class="menu-option__content"
                     >
                       <div
@@ -888,13 +762,6 @@ exports[`components/viewHeader/filterComponent return filterComponent and filter
                     role="button"
                     tabindex="0"
                   >
-                    <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
                     <div
                       class="menu-option__content"
                     >
@@ -917,13 +784,6 @@ exports[`components/viewHeader/filterComponent return filterComponent and filter
                     tabindex="0"
                   >
                     <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
-                    <div
                       class="menu-option__content"
                     >
                       <div
@@ -945,13 +805,6 @@ exports[`components/viewHeader/filterComponent return filterComponent and filter
                     tabindex="0"
                   >
                     <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
-                    <div
                       class="menu-option__content"
                     >
                       <div
@@ -972,13 +825,6 @@ exports[`components/viewHeader/filterComponent return filterComponent and filter
                     role="button"
                     tabindex="0"
                   >
-                    <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
                     <div
                       class="menu-option__content"
                     >
@@ -1006,13 +852,6 @@ exports[`components/viewHeader/filterComponent return filterComponent and filter
                   role="button"
                   tabindex="0"
                 >
-                  <div
-                    class="d-flex"
-                  >
-                    <div
-                      class="noicon"
-                    />
-                  </div>
                   <div
                     class="menu-option__content"
                   >

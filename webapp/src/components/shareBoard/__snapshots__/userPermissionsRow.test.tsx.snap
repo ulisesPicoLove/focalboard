@@ -195,13 +195,6 @@ exports[`src/components/shareBoard/userPermissionsRow should match snapshot 1`] 
                   tabindex="0"
                 >
                   <div
-                    class="d-flex"
-                  >
-                    <div
-                      class="noicon"
-                    />
-                  </div>
-                  <div
                     class="menu-option__content"
                   >
                     <div
@@ -228,13 +221,6 @@ exports[`src/components/shareBoard/userPermissionsRow should match snapshot 1`] 
                 role="button"
                 tabindex="0"
               >
-                <div
-                  class="d-flex"
-                >
-                  <div
-                    class="noicon"
-                  />
-                </div>
                 <div
                   class="menu-option__content"
                 >
@@ -452,13 +438,6 @@ exports[`src/components/shareBoard/userPermissionsRow should match snapshot in p
                   tabindex="0"
                 >
                   <div
-                    class="d-flex"
-                  >
-                    <div
-                      class="noicon"
-                    />
-                  </div>
-                  <div
                     class="menu-option__content"
                   >
                     <div
@@ -485,13 +464,6 @@ exports[`src/components/shareBoard/userPermissionsRow should match snapshot in p
                 role="button"
                 tabindex="0"
               >
-                <div
-                  class="d-flex"
-                >
-                  <div
-                    class="noicon"
-                  />
-                </div>
                 <div
                   class="menu-option__content"
                 >
@@ -678,13 +650,6 @@ exports[`src/components/shareBoard/userPermissionsRow should match snapshot in t
                   tabindex="0"
                 >
                   <div
-                    class="d-flex"
-                  >
-                    <div
-                      class="noicon"
-                    />
-                  </div>
-                  <div
                     class="menu-option__content"
                   >
                     <div
@@ -711,13 +676,6 @@ exports[`src/components/shareBoard/userPermissionsRow should match snapshot in t
                 role="button"
                 tabindex="0"
               >
-                <div
-                  class="d-flex"
-                >
-                  <div
-                    class="noicon"
-                  />
-                </div>
                 <div
                   class="menu-option__content"
                 >
@@ -944,13 +902,6 @@ exports[`src/components/shareBoard/userPermissionsRow should match snapshot-admi
                   tabindex="0"
                 >
                   <div
-                    class="d-flex"
-                  >
-                    <div
-                      class="noicon"
-                    />
-                  </div>
-                  <div
                     class="menu-option__content"
                   >
                     <div
@@ -977,13 +928,6 @@ exports[`src/components/shareBoard/userPermissionsRow should match snapshot-admi
                 role="button"
                 tabindex="0"
               >
-                <div
-                  class="d-flex"
-                >
-                  <div
-                    class="noicon"
-                  />
-                </div>
                 <div
                   class="menu-option__content"
                 >

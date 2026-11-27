@@ -224,13 +224,6 @@ Object {
                 tabindex="0"
               >
                 <div
-                  class="d-flex"
-                >
-                  <div
-                    class="noicon"
-                  />
-                </div>
-                <div
                   class="menu-option__content"
                 >
                   <div
@@ -469,13 +462,6 @@ Object {
               tabindex="0"
             >
               <div
-                class="d-flex"
-              >
-                <div
-                  class="noicon"
-                />
-              </div>
-              <div
                 class="menu-option__content"
               >
                 <div
@@ -684,13 +670,6 @@ Object {
                 tabindex="0"
               >
                 <div
-                  class="d-flex"
-                >
-                  <div
-                    class="noicon"
-                  />
-                </div>
-                <div
                   class="menu-option__content"
                 >
                   <div
@@ -841,13 +820,6 @@ Object {
               role="button"
               tabindex="0"
             >
-              <div
-                class="d-flex"
-              >
-                <div
-                  class="noicon"
-                />
-              </div>
               <div
                 class="menu-option__content"
               >

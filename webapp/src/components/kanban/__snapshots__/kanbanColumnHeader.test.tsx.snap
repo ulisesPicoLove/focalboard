@@ -323,13 +323,6 @@ exports[`src/components/kanban/kanbanColumnHeader return kanbanColumnHeader and 
               tabindex="0"
             >
               <div
-                class="d-flex"
-              >
-                <div
-                  class="noicon"
-                />
-              </div>
-              <div
                 class="menu-option__content"
               >
                 <div

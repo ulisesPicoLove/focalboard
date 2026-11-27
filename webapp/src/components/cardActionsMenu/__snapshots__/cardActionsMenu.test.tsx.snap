@@ -90,13 +90,6 @@ exports[`components/cardActionsMenu should match snapshot 1`] = `
           tabindex="0"
         >
           <div
-            class="d-flex"
-          >
-            <div
-              class="noicon"
-            />
-          </div>
-          <div
             class="menu-option__content"
           >
             <div
@@ -206,13 +199,6 @@ exports[`components/cardActionsMenu should match snapshot w/ children prop 1`] =
           role="button"
           tabindex="0"
         >
-          <div
-            class="d-flex"
-          >
-            <div
-              class="noicon"
-            />
-          </div>
           <div
             class="menu-option__content"
           >
@@ -351,13 +337,6 @@ exports[`components/cardActionsMenu should match snapshot w/ onClickDuplicate pr
           role="button"
           tabindex="0"
         >
-          <div
-            class="d-flex"
-          >
-            <div
-              class="noicon"
-            />
-          </div>
           <div
             class="menu-option__content"
           >

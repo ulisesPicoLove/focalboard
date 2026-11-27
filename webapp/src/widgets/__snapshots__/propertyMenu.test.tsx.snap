@@ -76,13 +76,6 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     tabindex="0"
                   >
                     <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
-                    <div
                       class="menu-option__content"
                     >
                       <div
@@ -101,13 +94,6 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     role="button"
                     tabindex="0"
                   >
-                    <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
                     <div
                       class="menu-option__content"
                     >
@@ -128,13 +114,6 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     tabindex="0"
                   >
                     <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
-                    <div
                       class="menu-option__content"
                     >
                       <div
@@ -153,13 +132,6 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     role="button"
                     tabindex="0"
                   >
-                    <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
                     <div
                       class="menu-option__content"
                     >
@@ -180,13 +152,6 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     tabindex="0"
                   >
                     <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
-                    <div
                       class="menu-option__content"
                     >
                       <div
@@ -205,13 +170,6 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     role="button"
                     tabindex="0"
                   >
-                    <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
                     <div
                       class="menu-option__content"
                     >
@@ -232,13 +190,6 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     tabindex="0"
                   >
                     <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
-                    <div
                       class="menu-option__content"
                     >
                       <div
@@ -257,13 +208,6 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     role="button"
                     tabindex="0"
                   >
-                    <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
                     <div
                       class="menu-option__content"
                     >
@@ -284,13 +228,6 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     tabindex="0"
                   >
                     <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
-                    <div
                       class="menu-option__content"
                     >
                       <div
@@ -309,13 +246,6 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     role="button"
                     tabindex="0"
                   >
-                    <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
                     <div
                       class="menu-option__content"
                     >
@@ -336,13 +266,6 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     tabindex="0"
                   >
                     <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
-                    <div
                       class="menu-option__content"
                     >
                       <div
@@ -361,13 +284,6 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     role="button"
                     tabindex="0"
                   >
-                    <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
                     <div
                       class="menu-option__content"
                     >
@@ -388,13 +304,6 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     tabindex="0"
                   >
                     <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
-                    <div
                       class="menu-option__content"
                     >
                       <div
@@ -414,13 +323,6 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     tabindex="0"
                   >
                     <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
-                    <div
                       class="menu-option__content"
                     >
                       <div
@@ -439,13 +341,6 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     role="button"
                     tabindex="0"
                   >
-                    <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
                     <div
                       class="menu-option__content"
                     >
@@ -473,13 +368,6 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
                     tabindex="0"
                   >
                     <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
-                    <div
                       class="menu-option__content"
                     >
                       <div
@@ -504,13 +392,6 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
             role="button"
             tabindex="0"
           >
-            <div
-              class="d-flex"
-            >
-              <div
-                class="noicon"
-              />
-            </div>
             <div
               class="menu-option__content"
             >
@@ -538,13 +419,6 @@ exports[`widgets/PropertyMenu should match snapshot 1`] = `
           role="button"
           tabindex="0"
         >
-          <div
-            class="d-flex"
-          >
-            <div
-              class="noicon"
-            />
-          </div>
           <div
             class="menu-option__content"
           >

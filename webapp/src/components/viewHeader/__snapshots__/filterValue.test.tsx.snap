@@ -81,13 +81,6 @@ exports[`components/viewHeader/filterValue return filterValue 1`] = `
             tabindex="0"
           >
             <div
-              class="d-flex"
-            >
-              <div
-                class="noicon"
-              />
-            </div>
-            <div
               class="menu-option__content"
             >
               <div
@@ -171,13 +164,6 @@ exports[`components/viewHeader/filterValue return filterValue and click Status 1
             tabindex="0"
           >
             <div
-              class="d-flex"
-            >
-              <div
-                class="noicon"
-              />
-            </div>
-            <div
               class="menu-option__content"
             >
               <div
@@ -260,13 +246,6 @@ exports[`components/viewHeader/filterValue return filterValue and click Status w
             role="button"
             tabindex="0"
           >
-            <div
-              class="d-flex"
-            >
-              <div
-                class="noicon"
-              />
-            </div>
             <div
               class="menu-option__content"
             >

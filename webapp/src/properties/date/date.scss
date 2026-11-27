@@ -219,3 +219,18 @@
         background-color: rgba(var(--body-color), 0.2);
     }
 }
+
+// The date text lines up with the other values of the card (a 3px inset like an empty value) and
+// is cut with an ellipsis when its column is narrower than the date.
+.focalboard-body {
+    .DateRange .Button {
+        padding: 0 3px;
+        overflow: hidden;
+
+        > span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+}

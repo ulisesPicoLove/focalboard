@@ -193,13 +193,6 @@ exports[`components/cardDetail/cardDetailContentsMenu return cardDetailContentsM
               tabindex="0"
             >
               <div
-                class="d-flex"
-              >
-                <div
-                  class="noicon"
-                />
-              </div>
-              <div
                 class="menu-option__content"
               >
                 <div
@@ -412,13 +405,6 @@ exports[`components/cardDetail/cardDetailContentsMenu return cardDetailContentsM
               role="button"
               tabindex="0"
             >
-              <div
-                class="d-flex"
-              >
-                <div
-                  class="noicon"
-                />
-              </div>
               <div
                 class="menu-option__content"
               >

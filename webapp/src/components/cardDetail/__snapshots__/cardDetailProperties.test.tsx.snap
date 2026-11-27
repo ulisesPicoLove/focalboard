@@ -316,13 +316,6 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   tabindex="0"
                 >
                   <div
-                    class="d-flex"
-                  >
-                    <div
-                      class="noicon"
-                    />
-                  </div>
-                  <div
                     class="menu-option__content"
                   >
                     <div
@@ -341,13 +334,6 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   role="button"
                   tabindex="0"
                 >
-                  <div
-                    class="d-flex"
-                  >
-                    <div
-                      class="noicon"
-                    />
-                  </div>
                   <div
                     class="menu-option__content"
                   >
@@ -368,13 +354,6 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   tabindex="0"
                 >
                   <div
-                    class="d-flex"
-                  >
-                    <div
-                      class="noicon"
-                    />
-                  </div>
-                  <div
                     class="menu-option__content"
                   >
                     <div
@@ -393,13 +372,6 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   role="button"
                   tabindex="0"
                 >
-                  <div
-                    class="d-flex"
-                  >
-                    <div
-                      class="noicon"
-                    />
-                  </div>
                   <div
                     class="menu-option__content"
                   >
@@ -420,13 +392,6 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   tabindex="0"
                 >
                   <div
-                    class="d-flex"
-                  >
-                    <div
-                      class="noicon"
-                    />
-                  </div>
-                  <div
                     class="menu-option__content"
                   >
                     <div
@@ -445,13 +410,6 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   role="button"
                   tabindex="0"
                 >
-                  <div
-                    class="d-flex"
-                  >
-                    <div
-                      class="noicon"
-                    />
-                  </div>
                   <div
                     class="menu-option__content"
                   >
@@ -472,13 +430,6 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   tabindex="0"
                 >
                   <div
-                    class="d-flex"
-                  >
-                    <div
-                      class="noicon"
-                    />
-                  </div>
-                  <div
                     class="menu-option__content"
                   >
                     <div
@@ -497,13 +448,6 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   role="button"
                   tabindex="0"
                 >
-                  <div
-                    class="d-flex"
-                  >
-                    <div
-                      class="noicon"
-                    />
-                  </div>
                   <div
                     class="menu-option__content"
                   >
@@ -524,13 +468,6 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   tabindex="0"
                 >
                   <div
-                    class="d-flex"
-                  >
-                    <div
-                      class="noicon"
-                    />
-                  </div>
-                  <div
                     class="menu-option__content"
                   >
                     <div
@@ -549,13 +486,6 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   role="button"
                   tabindex="0"
                 >
-                  <div
-                    class="d-flex"
-                  >
-                    <div
-                      class="noicon"
-                    />
-                  </div>
                   <div
                     class="menu-option__content"
                   >
@@ -576,13 +506,6 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   tabindex="0"
                 >
                   <div
-                    class="d-flex"
-                  >
-                    <div
-                      class="noicon"
-                    />
-                  </div>
-                  <div
                     class="menu-option__content"
                   >
                     <div
@@ -601,13 +524,6 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   role="button"
                   tabindex="0"
                 >
-                  <div
-                    class="d-flex"
-                  >
-                    <div
-                      class="noicon"
-                    />
-                  </div>
                   <div
                     class="menu-option__content"
                   >
@@ -628,13 +544,6 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   tabindex="0"
                 >
                   <div
-                    class="d-flex"
-                  >
-                    <div
-                      class="noicon"
-                    />
-                  </div>
-                  <div
                     class="menu-option__content"
                   >
                     <div
@@ -654,13 +563,6 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   tabindex="0"
                 >
                   <div
-                    class="d-flex"
-                  >
-                    <div
-                      class="noicon"
-                    />
-                  </div>
-                  <div
                     class="menu-option__content"
                   >
                     <div
@@ -679,13 +581,6 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                   role="button"
                   tabindex="0"
                 >
-                  <div
-                    class="d-flex"
-                  >
-                    <div
-                      class="noicon"
-                    />
-                  </div>
                   <div
                     class="menu-option__content"
                   >
@@ -713,13 +608,6 @@ exports[`components/cardDetail/CardDetailProperties should show property types m
                 role="button"
                 tabindex="0"
               >
-                <div
-                  class="d-flex"
-                >
-                  <div
-                    class="noicon"
-                  />
-                </div>
                 <div
                   class="menu-option__content"
                 >

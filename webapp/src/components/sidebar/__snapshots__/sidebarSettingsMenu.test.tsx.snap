@@ -60,13 +60,6 @@ exports[`components/sidebar/SidebarSettingsMenu imports menu open should match s
                         tabindex="0"
                       >
                         <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
-                        <div
                           class="menu-option__content"
                         >
                           <div
@@ -85,13 +78,6 @@ exports[`components/sidebar/SidebarSettingsMenu imports menu open should match s
                         role="button"
                         tabindex="0"
                       >
-                        <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
                         <div
                           class="menu-option__content"
                         >
@@ -112,13 +98,6 @@ exports[`components/sidebar/SidebarSettingsMenu imports menu open should match s
                         tabindex="0"
                       >
                         <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
-                        <div
                           class="menu-option__content"
                         >
                           <div
@@ -137,13 +116,6 @@ exports[`components/sidebar/SidebarSettingsMenu imports menu open should match s
                         role="button"
                         tabindex="0"
                       >
-                        <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
                         <div
                           class="menu-option__content"
                         >
@@ -164,13 +136,6 @@ exports[`components/sidebar/SidebarSettingsMenu imports menu open should match s
                         tabindex="0"
                       >
                         <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
-                        <div
                           class="menu-option__content"
                         >
                           <div
@@ -189,13 +154,6 @@ exports[`components/sidebar/SidebarSettingsMenu imports menu open should match s
                         role="button"
                         tabindex="0"
                       >
-                        <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
                         <div
                           class="menu-option__content"
                         >
@@ -223,13 +181,6 @@ exports[`components/sidebar/SidebarSettingsMenu imports menu open should match s
                         tabindex="0"
                       >
                         <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
-                        <div
                           class="menu-option__content"
                         >
                           <div
@@ -254,13 +205,6 @@ exports[`components/sidebar/SidebarSettingsMenu imports menu open should match s
                 role="button"
                 tabindex="0"
               >
-                <div
-                  class="d-flex"
-                >
-                  <div
-                    class="noicon"
-                  />
-                </div>
                 <div
                   class="menu-option__content"
                 >
@@ -358,13 +302,6 @@ exports[`components/sidebar/SidebarSettingsMenu imports menu open should match s
               role="button"
               tabindex="0"
             >
-              <div
-                class="d-flex"
-              >
-                <div
-                  class="noicon"
-                />
-              </div>
               <div
                 class="menu-option__content"
               >
@@ -440,13 +377,6 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                 tabindex="0"
               >
                 <div
-                  class="d-flex"
-                >
-                  <div
-                    class="noicon"
-                  />
-                </div>
-                <div
                   class="menu-option__content"
                 >
                   <div
@@ -496,13 +426,6 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         tabindex="0"
                       >
                         <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
-                        <div
                           class="menu-option__content"
                         >
                           <div
@@ -528,13 +451,6 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         tabindex="0"
                       >
                         <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
-                        <div
                           class="menu-option__content"
                         >
                           <div
@@ -553,13 +469,6 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         role="button"
                         tabindex="0"
                       >
-                        <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
                         <div
                           class="menu-option__content"
                         >
@@ -580,13 +489,6 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         tabindex="0"
                       >
                         <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
-                        <div
                           class="menu-option__content"
                         >
                           <div
@@ -605,13 +507,6 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         role="button"
                         tabindex="0"
                       >
-                        <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
                         <div
                           class="menu-option__content"
                         >
@@ -632,13 +527,6 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         tabindex="0"
                       >
                         <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
-                        <div
                           class="menu-option__content"
                         >
                           <div
@@ -657,13 +545,6 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         role="button"
                         tabindex="0"
                       >
-                        <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
                         <div
                           class="menu-option__content"
                         >
@@ -684,13 +565,6 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         tabindex="0"
                       >
                         <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
-                        <div
                           class="menu-option__content"
                         >
                           <div
@@ -709,13 +583,6 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         role="button"
                         tabindex="0"
                       >
-                        <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
                         <div
                           class="menu-option__content"
                         >
@@ -736,13 +603,6 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         tabindex="0"
                       >
                         <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
-                        <div
                           class="menu-option__content"
                         >
                           <div
@@ -761,13 +621,6 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         role="button"
                         tabindex="0"
                       >
-                        <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
                         <div
                           class="menu-option__content"
                         >
@@ -788,13 +641,6 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         tabindex="0"
                       >
                         <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
-                        <div
                           class="menu-option__content"
                         >
                           <div
@@ -813,13 +659,6 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         role="button"
                         tabindex="0"
                       >
-                        <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
                         <div
                           class="menu-option__content"
                         >
@@ -840,13 +679,6 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         tabindex="0"
                       >
                         <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
-                        <div
                           class="menu-option__content"
                         >
                           <div
@@ -865,13 +697,6 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         role="button"
                         tabindex="0"
                       >
-                        <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
                         <div
                           class="menu-option__content"
                         >
@@ -892,13 +717,6 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         tabindex="0"
                       >
                         <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
-                        <div
                           class="menu-option__content"
                         >
                           <div
@@ -917,13 +735,6 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         role="button"
                         tabindex="0"
                       >
-                        <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
                         <div
                           class="menu-option__content"
                         >
@@ -950,13 +761,6 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
                         role="button"
                         tabindex="0"
                       >
-                        <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
                         <div
                           class="menu-option__content"
                         >
@@ -1036,13 +840,6 @@ exports[`components/sidebar/SidebarSettingsMenu languages menu open should match
               role="button"
               tabindex="0"
             >
-              <div
-                class="d-flex"
-              >
-                <div
-                  class="noicon"
-                />
-              </div>
               <div
                 class="menu-option__content"
               >
@@ -1138,13 +935,6 @@ exports[`components/sidebar/SidebarSettingsMenu settings menu open should match 
                 tabindex="0"
               >
                 <div
-                  class="d-flex"
-                >
-                  <div
-                    class="noicon"
-                  />
-                </div>
-                <div
                   class="menu-option__content"
                 >
                   <div
@@ -1241,13 +1031,6 @@ exports[`components/sidebar/SidebarSettingsMenu settings menu open should match 
               role="button"
               tabindex="0"
             >
-              <div
-                class="d-flex"
-              >
-                <div
-                  class="noicon"
-                />
-              </div>
               <div
                 class="menu-option__content"
               >
@@ -1323,13 +1106,6 @@ exports[`components/sidebar/SidebarSettingsMenu theme menu open should match sna
                 tabindex="0"
               >
                 <div
-                  class="d-flex"
-                >
-                  <div
-                    class="noicon"
-                  />
-                </div>
-                <div
                   class="menu-option__content"
                 >
                   <div
@@ -1401,13 +1177,6 @@ exports[`components/sidebar/SidebarSettingsMenu theme menu open should match sna
                         tabindex="0"
                       >
                         <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
-                        <div
                           class="menu-option__content"
                         >
                           <div
@@ -1426,13 +1195,6 @@ exports[`components/sidebar/SidebarSettingsMenu theme menu open should match sna
                         role="button"
                         tabindex="0"
                       >
-                        <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
                         <div
                           class="menu-option__content"
                         >
@@ -1459,13 +1221,6 @@ exports[`components/sidebar/SidebarSettingsMenu theme menu open should match sna
                         tabindex="0"
                       >
                         <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
-                        <div
                           class="menu-option__content"
                         >
                           <div
@@ -1485,13 +1240,6 @@ exports[`components/sidebar/SidebarSettingsMenu theme menu open should match sna
                         tabindex="0"
                       >
                         <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
-                        <div
                           class="menu-option__content"
                         >
                           <div
@@ -1510,13 +1258,6 @@ exports[`components/sidebar/SidebarSettingsMenu theme menu open should match sna
                         role="button"
                         tabindex="0"
                       >
-                        <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
                         <div
                           class="menu-option__content"
                         >
@@ -1543,13 +1284,6 @@ exports[`components/sidebar/SidebarSettingsMenu theme menu open should match sna
                         role="button"
                         tabindex="0"
                       >
-                        <div
-                          class="d-flex"
-                        >
-                          <div
-                            class="noicon"
-                          />
-                        </div>
                         <div
                           class="menu-option__content"
                         >
@@ -1607,13 +1341,6 @@ exports[`components/sidebar/SidebarSettingsMenu theme menu open should match sna
               role="button"
               tabindex="0"
             >
-              <div
-                class="d-flex"
-              >
-                <div
-                  class="noicon"
-                />
-              </div>
               <div
                 class="menu-option__content"
               >

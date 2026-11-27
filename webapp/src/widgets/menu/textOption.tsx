@@ -43,7 +43,8 @@ function TextOption(props: TextOptionProps): React.JSX.Element {
             onClick={activate}
             {...keyboardActivation(activate)}
         >
-            <div className={`${check ? 'd-flex menu-option__check' : 'd-flex'}`}>{icon ? <div className='menu-option__icon'>{icon}</div> : <div className='noicon'/>}</div>
+            {(icon || check) &&
+                <div className={`${check ? 'd-flex menu-option__check' : 'd-flex'}`}>{icon ? <div className='menu-option__icon'>{icon}</div> : <div className='noicon'/>}</div>}
             <div className='menu-option__content'>
                 <div className='menu-name'>{name}</div>
                 {subText && <div className='menu-subtext text-75 mt-1'>{subText}</div>}

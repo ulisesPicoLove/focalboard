@@ -35,13 +35,6 @@ exports[`components/viewHeader/viewHeaderActionsMenu return menu 1`] = `
                 tabindex="0"
               >
                 <div
-                  class="d-flex"
-                >
-                  <div
-                    class="noicon"
-                  />
-                </div>
-                <div
                   class="menu-option__content"
                 >
                   <div
@@ -62,13 +55,6 @@ exports[`components/viewHeader/viewHeaderActionsMenu return menu 1`] = `
                 role="button"
                 tabindex="0"
               >
-                <div
-                  class="d-flex"
-                >
-                  <div
-                    class="noicon"
-                  />
-                </div>
                 <div
                   class="menu-option__content"
                 >
@@ -96,13 +82,6 @@ exports[`components/viewHeader/viewHeaderActionsMenu return menu 1`] = `
               role="button"
               tabindex="0"
             >
-              <div
-                class="d-flex"
-              >
-                <div
-                  class="noicon"
-                />
-              </div>
               <div
                 class="menu-option__content"
               >
@@ -159,13 +138,6 @@ exports[`components/viewHeader/viewHeaderActionsMenu return menu and verify call
                 tabindex="0"
               >
                 <div
-                  class="d-flex"
-                >
-                  <div
-                    class="noicon"
-                  />
-                </div>
-                <div
                   class="menu-option__content"
                 >
                   <div
@@ -186,13 +158,6 @@ exports[`components/viewHeader/viewHeaderActionsMenu return menu and verify call
                 role="button"
                 tabindex="0"
               >
-                <div
-                  class="d-flex"
-                >
-                  <div
-                    class="noicon"
-                  />
-                </div>
                 <div
                   class="menu-option__content"
                 >
@@ -220,13 +185,6 @@ exports[`components/viewHeader/viewHeaderActionsMenu return menu and verify call
               role="button"
               tabindex="0"
             >
-              <div
-                class="d-flex"
-              >
-                <div
-                  class="noicon"
-                />
-              </div>
               <div
                 class="menu-option__content"
               >
@@ -283,13 +241,6 @@ exports[`components/viewHeader/viewHeaderActionsMenu return menu and verify call
                 tabindex="0"
               >
                 <div
-                  class="d-flex"
-                >
-                  <div
-                    class="noicon"
-                  />
-                </div>
-                <div
                   class="menu-option__content"
                 >
                   <div
@@ -310,13 +261,6 @@ exports[`components/viewHeader/viewHeaderActionsMenu return menu and verify call
                 role="button"
                 tabindex="0"
               >
-                <div
-                  class="d-flex"
-                >
-                  <div
-                    class="noicon"
-                  />
-                </div>
                 <div
                   class="menu-option__content"
                 >
@@ -344,13 +288,6 @@ exports[`components/viewHeader/viewHeaderActionsMenu return menu and verify call
               role="button"
               tabindex="0"
             >
-              <div
-                class="d-flex"
-              >
-                <div
-                  class="noicon"
-                />
-              </div>
               <div
                 class="menu-option__content"
               >

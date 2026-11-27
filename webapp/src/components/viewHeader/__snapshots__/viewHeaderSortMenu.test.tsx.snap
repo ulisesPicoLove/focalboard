@@ -32,13 +32,6 @@ exports[`components/viewHeader/viewHeaderSortMenu return sort menu 1`] = `
               tabindex="0"
             >
               <div
-                class="d-flex"
-              >
-                <div
-                  class="noicon"
-                />
-              </div>
-              <div
                 class="menu-option__content"
               >
                 <div
@@ -57,13 +50,6 @@ exports[`components/viewHeader/viewHeaderSortMenu return sort menu 1`] = `
               role="button"
               tabindex="0"
             >
-              <div
-                class="d-flex"
-              >
-                <div
-                  class="noicon"
-                />
-              </div>
               <div
                 class="menu-option__content"
               >
@@ -89,13 +75,6 @@ exports[`components/viewHeader/viewHeaderSortMenu return sort menu 1`] = `
               tabindex="0"
             >
               <div
-                class="d-flex"
-              >
-                <div
-                  class="noicon"
-                />
-              </div>
-              <div
                 class="menu-option__content"
               >
                 <div
@@ -117,13 +96,6 @@ exports[`components/viewHeader/viewHeaderSortMenu return sort menu 1`] = `
               tabindex="0"
             >
               <div
-                class="d-flex"
-              >
-                <div
-                  class="noicon"
-                />
-              </div>
-              <div
                 class="menu-option__content"
               >
                 <div
@@ -144,13 +116,6 @@ exports[`components/viewHeader/viewHeaderSortMenu return sort menu 1`] = `
               role="button"
               tabindex="0"
             >
-              <div
-                class="d-flex"
-              >
-                <div
-                  class="noicon"
-                />
-              </div>
               <div
                 class="menu-option__content"
               >
@@ -182,13 +147,6 @@ exports[`components/viewHeader/viewHeaderSortMenu return sort menu 1`] = `
               tabindex="0"
             >
               <div
-                class="d-flex"
-              >
-                <div
-                  class="noicon"
-                />
-              </div>
-              <div
                 class="menu-option__content"
               >
                 <div
@@ -209,13 +167,6 @@ exports[`components/viewHeader/viewHeaderSortMenu return sort menu 1`] = `
               role="button"
               tabindex="0"
             >
-              <div
-                class="d-flex"
-              >
-                <div
-                  class="noicon"
-                />
-              </div>
               <div
                 class="menu-option__content"
               >
@@ -243,13 +194,6 @@ exports[`components/viewHeader/viewHeaderSortMenu return sort menu 1`] = `
             role="button"
             tabindex="0"
           >
-            <div
-              class="d-flex"
-            >
-              <div
-                class="noicon"
-              />
-            </div>
             <div
               class="menu-option__content"
             >

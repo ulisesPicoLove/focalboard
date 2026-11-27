@@ -76,13 +76,6 @@ exports[`src/components/kanban/kanbanHiddenColumnItem return kanbanHiddenColumnI
               tabindex="0"
             >
               <div
-                class="d-flex"
-              >
-                <div
-                  class="noicon"
-                />
-              </div>
-              <div
                 class="menu-option__content"
               >
                 <div
@@ -186,13 +179,6 @@ exports[`src/components/kanban/kanbanHiddenColumnItem return kanbanHiddenColumnI
               role="button"
               tabindex="0"
             >
-              <div
-                class="d-flex"
-              >
-                <div
-                  class="noicon"
-                />
-              </div>
               <div
                 class="menu-option__content"
               >

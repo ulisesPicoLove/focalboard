@@ -186,13 +186,6 @@ exports[`components/contentBlock return commentBlock and click on menuwrapper 1`
                   tabindex="0"
                 >
                   <div
-                    class="d-flex"
-                  >
-                    <div
-                      class="noicon"
-                    />
-                  </div>
-                  <div
                     class="menu-option__content"
                   >
                     <div

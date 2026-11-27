@@ -140,13 +140,6 @@ exports[`src/components/kanban/kanbanCard return kanbanCard and click on copy li
               tabindex="0"
             >
               <div
-                class="d-flex"
-              >
-                <div
-                  class="noicon"
-                />
-              </div>
-              <div
                 class="menu-option__content"
               >
                 <div
@@ -329,13 +322,6 @@ exports[`src/components/kanban/kanbanCard return kanbanCard and click on delete 
               tabindex="0"
             >
               <div
-                class="d-flex"
-              >
-                <div
-                  class="noicon"
-                />
-              </div>
-              <div
                 class="menu-option__content"
               >
                 <div
@@ -517,13 +503,6 @@ exports[`src/components/kanban/kanbanCard return kanbanCard and click on duplica
               role="button"
               tabindex="0"
             >
-              <div
-                class="d-flex"
-              >
-                <div
-                  class="noicon"
-                />
-              </div>
               <div
                 class="menu-option__content"
               >

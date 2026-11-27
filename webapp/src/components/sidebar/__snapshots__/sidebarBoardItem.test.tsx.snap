@@ -342,13 +342,6 @@ exports[`components/sidebarBoardItem sidebar board item 1`] = `
                     tabindex="0"
                   >
                     <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
-                    <div
                       class="menu-option__content"
                     >
                       <div
@@ -596,13 +589,6 @@ exports[`components/sidebarBoardItem sidebar board item for guest 1`] = `
                     role="button"
                     tabindex="0"
                   >
-                    <div
-                      class="d-flex"
-                    >
-                      <div
-                        class="noicon"
-                      />
-                    </div>
                     <div
                       class="menu-option__content"
                     >

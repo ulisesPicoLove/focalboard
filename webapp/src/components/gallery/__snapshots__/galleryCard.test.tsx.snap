@@ -171,13 +171,6 @@ exports[`src/components/gallery/GalleryCard with a comment content should match 
               tabindex="0"
             >
               <div
-                class="d-flex"
-              >
-                <div
-                  class="noicon"
-                />
-              </div>
-              <div
                 class="menu-option__content"
               >
                 <div
@@ -354,13 +347,6 @@ exports[`src/components/gallery/GalleryCard with an image content should match s
               role="button"
               tabindex="0"
             >
-              <div
-                class="d-flex"
-              >
-                <div
-                  class="noicon"
-                />
-              </div>
               <div
                 class="menu-option__content"
               >
@@ -580,13 +566,6 @@ exports[`src/components/gallery/GalleryCard with many contents should match snap
               tabindex="0"
             >
               <div
-                class="d-flex"
-              >
-                <div
-                  class="noicon"
-                />
-              </div>
-              <div
                 class="menu-option__content"
               >
                 <div
@@ -767,13 +746,6 @@ exports[`src/components/gallery/GalleryCard with many images content should matc
               role="button"
               tabindex="0"
             >
-              <div
-                class="d-flex"
-              >
-                <div
-                  class="noicon"
-                />
-              </div>
               <div
                 class="menu-option__content"
               >
@@ -1208,13 +1180,6 @@ exports[`src/components/gallery/GalleryCard without block content should match s
               role="button"
               tabindex="0"
             >
-              <div
-                class="d-flex"
-              >
-                <div
-                  class="noicon"
-                />
-              </div>
               <div
                 class="menu-option__content"
               >
