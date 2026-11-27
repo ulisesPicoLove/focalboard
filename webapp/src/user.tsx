@@ -36,7 +36,7 @@ function parseUserProps(props: UserPreference[]): Record<string, UserPreference>
     props.forEach((prop) => {
         const processedProp = prop
         if (prop.name === 'hiddenBoardIDs') {
-            const hiddenBoardIDs: string[] = JSON.parse(processedProp.value as string)
+            const hiddenBoardIDs: string[] = typeof processedProp.value === 'string' ? JSON.parse(processedProp.value) : []
             const hidden: Record<string, boolean> = {}
             hiddenBoardIDs.forEach((boardID) => {
                 hidden[boardID] = true

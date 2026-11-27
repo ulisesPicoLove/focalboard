@@ -4,7 +4,7 @@
 import {createSlice, PayloadAction, createSelector} from '@reduxjs/toolkit'
 import isEqual from 'lodash/isEqual'
 
-import {BoardView, createBoardView} from '../blocks/boardView'
+import {BoardView, createBoardView, isBoardView} from '../blocks/boardView'
 import {Utils} from '../utils'
 
 import {initialReadOnlyLoad, loadBoardData} from './initialLoad'
@@ -80,16 +80,16 @@ const viewsSlice = createSlice({
         builder.addCase(initialReadOnlyLoad.fulfilled, (state, action) => {
             state.views = {}
             for (const block of action.payload.blocks) {
-                if (block.type === 'view') {
-                    state.views[block.id] = block as BoardView
+                if (isBoardView(block)) {
+                    state.views[block.id] = block
                 }
             }
         })
         builder.addCase(loadBoardData.fulfilled, (state, action) => {
             state.views = {}
             for (const block of action.payload.blocks) {
-                if (block.type === 'view') {
-                    state.views[block.id] = block as BoardView
+                if (isBoardView(block)) {
+                    state.views[block.id] = block
                 }
             }
         })

@@ -3,7 +3,7 @@
 
 import {createSlice, PayloadAction, createSelector} from '@reduxjs/toolkit'
 
-import {Card} from '../blocks/card'
+import {Card, isCard} from '../blocks/card'
 import {IUser} from '../user'
 import {Board} from '../blocks/board'
 import {BoardView} from '../blocks/boardView'
@@ -62,10 +62,10 @@ const cardsSlice = createSlice({
             state.cards = {}
             state.templates = {}
             for (const block of action.payload.blocks) {
-                if (block.type === 'card' && block.fields.isTemplate) {
-                    state.templates[block.id] = block as Card
-                } else if (block.type === 'card' && !block.fields.isTemplate) {
-                    state.cards[block.id] = block as Card
+                if (isCard(block) && block.fields.isTemplate) {
+                    state.templates[block.id] = block
+                } else if (isCard(block) && !block.fields.isTemplate) {
+                    state.cards[block.id] = block
                 }
             }
         })
@@ -73,10 +73,10 @@ const cardsSlice = createSlice({
             state.cards = {}
             state.templates = {}
             for (const block of action.payload.blocks) {
-                if (block.type === 'card' && block.fields.isTemplate) {
-                    state.templates[block.id] = block as Card
-                } else if (block.type === 'card' && !block.fields.isTemplate) {
-                    state.cards[block.id] = block as Card
+                if (isCard(block) && block.fields.isTemplate) {
+                    state.templates[block.id] = block
+                } else if (isCard(block) && !block.fields.isTemplate) {
+                    state.cards[block.id] = block
                 }
             }
         })

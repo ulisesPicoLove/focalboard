@@ -20,6 +20,10 @@ export enum UserSettingKey {
     NameFormat = 'nameFormat'
 }
 
+function isUserSettingKey(key: string): key is UserSettingKey {
+    return Object.values<string>(UserSettingKey).includes(key)
+}
+
 export class UserSettings {
     static get(key: UserSettingKey): string | null {
         return localStorage.getItem(key)
@@ -129,15 +133,21 @@ export class UserSettings {
 
     static getEmojiMartSetting(key: string): unknown {
         const prefixed = `emoji-mart.${key}`
-        Utils.assert(Object.values(UserSettingKey).includes(prefixed as UserSettingKey))
-        const json = UserSettings.get(prefixed as UserSettingKey)
+        if (!isUserSettingKey(prefixed)) {
+            Utils.assertFailure(`${prefixed} is not a user setting`)
+            return null
+        }
+        const json = UserSettings.get(prefixed)
         return json ? JSON.parse(json) : null
     }
 
     static setEmojiMartSetting(key: string, value: unknown): void {
         const prefixed = `emoji-mart.${key}`
-        Utils.assert(Object.values(UserSettingKey).includes(prefixed as UserSettingKey))
-        UserSettings.set(prefixed as UserSettingKey, JSON.stringify(value))
+        if (!isUserSettingKey(prefixed)) {
+            Utils.assertFailure(`${prefixed} is not a user setting`)
+            return
+        }
+        UserSettings.set(prefixed, JSON.stringify(value))
     }
 
     static get mobileWarningClosed(): boolean {
@@ -184,9 +194,9 @@ function importUserSettings(json: string): string[] {
     }
     const importedKeys = []
     for (const [key, value] of Object.entries(settings)) {
-        if (Object.values(UserSettingKey).includes(key as UserSettingKey)) {
+        if (isUserSettingKey(key)) {
             if (value) {
-                localStorage.setItem(key, value as string)
+                localStorage.setItem(key, String(value))
             } else {
                 localStorage.removeItem(key)
             }

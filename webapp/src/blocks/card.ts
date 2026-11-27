@@ -41,4 +41,9 @@ function createCard(block?: Block): Card {
     }
 }
 
-export {Card, CardFields, createCard}
+// The type tag the server saves with each block says which kind it is
+function isCard(block: Block): block is Card {
+    return block.type === 'card'
+}
+
+export {isCard, Card, CardFields, createCard}

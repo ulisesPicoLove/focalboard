@@ -5,8 +5,8 @@ import {IntlShape} from 'react-intl'
 
 import {FilterValueType} from './properties/types'
 import {Block, createBlock} from './blocks/block'
-import {BoardView, createBoardView} from './blocks/boardView'
-import {Card, createCard} from './blocks/card'
+import {createBoardView, isBoardView} from './blocks/boardView'
+import {createCard, isCard} from './blocks/card'
 import {createCommentBlock} from './blocks/commentBlock'
 import {createCheckboxBlock} from './blocks/checkboxBlock'
 import {createDividerBlock} from './blocks/dividerBlock'
@@ -90,14 +90,14 @@ class OctoUtils {
             }
 
             // Remap manual card order
-            if (newBlock.type === 'view') {
-                const view = newBlock as BoardView
+            if (isBoardView(newBlock)) {
+                const view = newBlock
                 view.fields.cardOrder = view.fields.cardOrder.map((o) => idMap[o]).filter(isDefined)
             }
 
             // Remap card content order
-            if (newBlock.type === 'card') {
-                const card = newBlock as Card
+            if (isCard(newBlock)) {
+                const card = newBlock
                 const contentOrder: Array<string | string[]> = []
                 for (const o of card.fields.contentOrder) {
                     if (Array.isArray(o)) {

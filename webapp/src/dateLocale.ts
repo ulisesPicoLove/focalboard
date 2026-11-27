@@ -93,6 +93,7 @@ export const dayPickerLocaleUtils: LocaleUtils = {
     formatDate: (date, _format, locale = 'en') => new Intl.DateTimeFormat(safeLocale(locale), {year: 'numeric', month: '2-digit', day: '2-digit'}).format(date),
 
     // react-day-picker only calls this from DayPickerInput; the app's own inputs use parseInputDate
+    // (the typings say Date, the library accepts undefined for text that is not a date)
     parseDate: (text, _format, locale = 'en') => parseInputDate(text, locale) as Date,
 }
 
